@@ -24,14 +24,14 @@ const Post = (props) => {
 
 	const renderPostContent = () => {
 		const imageUrls = post.images.map((image) => image.imageUrl);
-		console.log("Post: renderPostContent", imageUrls[2]);
+		console.log("Post: renderPostContent", post.author.fullname);
 
 		return (
 			<View style={styles.listItemBody}>
 				<Carousel
 					loop
 					width={width}
-					data={[...new Array(1).keys()]}
+					data={[...new Array(5).keys()]}
 					onSnapToItem={(index) => console.log("current index:", index)}
 					renderItem={({ index }) => (
 						<View
@@ -51,16 +51,14 @@ const Post = (props) => {
 	return (
 		<View>
 			<View style={styles.listItemHeader}>
-				<View style={styles.listItemAuthorAvatarContainer}></View>
-				<Text style={styles.listItemAuthorName}>{post.author.fullname}</Text>
-				{!isFollowHidden && (
-					<>
-						<View style={styles.listItemDot}></View>
-						<TouchableOpacity onPress={onFollowClicked}>
-							<Text style={styles.listItemFollow}>{post.hasFollowed ? "Followed" : "Follow"}</Text>
-						</TouchableOpacity>
-					</>
-				)}
+				<View style={styles.avatar}>
+					<Image style={styles.avatarFace} source={post.author.avatar}></Image>
+				</View>
+
+				<View>
+					<Text style={styles.listItemAuthorName}>{post.author.fullname}</Text>
+					<Text style={styles.listItemFollow}>Project Manager</Text>
+				</View>
 			</View>
 			{renderPostContent()}
 			<View style={styles.listItemFooter}>
@@ -81,17 +79,10 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		padding: 8
 	},
-	listItemAuthorAvatarContainer: {
-		alignItems: "center",
-		borderRadius: 48 / 2,
-		borderWidth: 2,
-		borderColor: "red",
-		display: "flex",
-		height: 48,
-		justifyContent: "center",
-		marginRight: 12,
-		width: 48
+	avatar: {
+		marginRight: 12
 	},
+	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
 	listItemAuthorAvatar: {
 		borderRadius: 42 / 2,
 		height: 38,
