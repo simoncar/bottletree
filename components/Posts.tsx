@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Post from "./Post";
-import { Image } from "expo-image";
 const user = {
 	id: "1",
 	username: "johndoe"
@@ -103,7 +102,7 @@ const instagramPosts = [
 		timestamp: "May 30, 2023"
 	},
 	{
-		id: 2,
+		id: 3,
 		author: [
 			{
 				id: 1,

@@ -31,7 +31,7 @@ const Post = (props) => {
 				<Carousel
 					loop
 					width={width}
-					data={[...new Array(3).keys()]}
+					data={[...new Array(1).keys()]}
 					onSnapToItem={(index) => console.log("current index:", index)}
 					renderItem={({ index }) => (
 						<View
