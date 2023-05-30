@@ -1,8 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
+import { View, Dimensions, Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { Image } from "expo-image";
+import Carousel from "react-native-reanimated-carousel";
 
 const blurhash = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
+const { width } = Dimensions.get("window");
 
 const Post = (props) => {
 	const { post, toggleLike, toggleFollow, onItemClicked, isFollowHidden } = props;
@@ -20,17 +23,33 @@ const Post = (props) => {
 	};
 
 	const renderPostContent = () => {
+		const imageUrls = post.images.map((image) => image.imageUrl);
+		console.log("Post: renderPostContent", imageUrls[2]);
+
 		return (
 			<View style={styles.listItemBody}>
-				<Image style={styles.image} source={require("../assets/images/IMG_4072.jpg")} />
+				<Carousel
+					loop
+					width={width}
+					data={[...new Array(3).keys()]}
+					onSnapToItem={(index) => console.log("current index:", index)}
+					renderItem={({ index }) => (
+						<View
+							style={{
+								flex: 1,
+								borderWidth: 0,
+								justifyContent: "center"
+							}}>
+							<Image style={styles.image} source={imageUrls[index]}></Image>
+						</View>
+					)}
+				/>
 			</View>
 		);
-
-		return <></>;
 	};
 
 	return (
-		<TouchableOpacity style={styles.listItem} onPress={clickItem}>
+		<View>
 			<View style={styles.listItemHeader}>
 				<View style={styles.listItemAuthorAvatarContainer}></View>
 				<Text style={styles.listItemAuthorName}>{post.author.fullname}</Text>
@@ -47,12 +66,11 @@ const Post = (props) => {
 			<View style={styles.listItemFooter}>
 				<TouchableOpacity onPress={onHeartClicked}></TouchableOpacity>
 			</View>
-		</TouchableOpacity>
+		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	listItem: { flex: 1, width: "100%" },
 	image: {
 		flex: 1,
 		width: "100%",
