@@ -4,6 +4,10 @@ import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import Posts from "../../components/Posts";
 
+import { demoData } from "../../lib/demoData";
+
+demoData();
+
 export default function TabOneScreen() {
 	return (
 		<View style={styles.container}>
