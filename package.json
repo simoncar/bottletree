@@ -23,6 +23,7 @@
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "expo-system-ui": "~2.2.1",
+    "expo-updates": "~0.16.4",
     "expo-web-browser": "~12.1.1",
     "firebase": "^9.22.1",
     "react": "18.2.0",
