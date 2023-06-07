@@ -1,6 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
+import { BigText } from "../../components/StyledText";
 
 import Colors from "../../constants/Colors";
 
@@ -24,6 +25,8 @@ export default function TabLayout() {
 				options={{
 					title: "",
 					tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+					headerTitle: () => <BigText style={{ fontSize: 28 }}> Buildergram</BigText>,
+					headerTitleAlign: "left",
 					headerRight: () => (
 						<Link href="/modal" asChild>
 							<Pressable>
