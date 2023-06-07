@@ -9,7 +9,13 @@ export default function ModalScreen() {
 	const isPresented = navigation.canGoBack();
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Off The Bench Apps</Text>
+			<Text style={styles.title}>Projects</Text>
+			<View style={styles.projectList}>
+				<Text style={styles.project}>- 106 Jolimont Road</Text>
+				<Text style={styles.project}>- 33 Queen Street</Text>
+				<Text style={styles.project}>- Plaza 222 - Level 44</Text>
+			</View>
+
 			<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
 			<Link href="../">Ok</Link>
@@ -23,12 +29,20 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center",
-		justifyContent: "center"
+		alignItems: "center"
 	},
 	title: {
 		fontSize: 20,
-		fontWeight: "bold"
+		fontWeight: "bold",
+		marginBottom: 20
+	},
+	projectList: {
+		alignContent: "flex-start"
+	},
+
+	project: {
+		fontSize: 18,
+		marginBottom: 5
 	},
 	separator: {
 		marginVertical: 30,
