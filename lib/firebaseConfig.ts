@@ -12,13 +12,14 @@ const firebaseConfig = {
 	appId: `${fbConfig.appId}`
 };
 
+
 console.log("firebaseConfig", firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 const database = getFirestore();
 
-connectFirestoreEmulator(database, "localhost", 8080);
+//connectFirestoreEmulator(database, "localhost", 8080);
 
-console.log("connectFirestoreEmulator");
+//console.log("connectFirestoreEmulator");
 
 export { database };

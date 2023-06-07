@@ -3516,3 +3516,2449 @@ INFO: channel closed
 [debug] [2023-06-01T08:28:33.172Z] Jun 01, 2023 10:28:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
  {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:28:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:29:26.481Z] Jun 01, 2023 10:29:26 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed
+INFO: Websocket client disconnected
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:29:26 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler channelClosed\nINFO: Websocket client disconnected\n"}}
+[debug] [2023-06-01T08:29:33.215Z] Jun 01, 2023 10:29:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:29:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:30:08.965Z] Jun 01, 2023 10:30:08 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:30:08 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:30:33.245Z] Jun 01, 2023 10:30:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:30:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:31:33.313Z] Jun 01, 2023 10:31:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:31:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:09.650Z] Jun 01, 2023 10:32:09 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:09 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:09.772Z] Jun 01, 2023 10:32:09 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:09 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:10.137Z] Jun 01, 2023 10:32:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:20.114Z] Jun 01, 2023 10:32:20 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:20 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:21.122Z] Jun 01, 2023 10:32:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:21.163Z] Jun 01, 2023 10:32:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:32:21.211Z] Jun 01, 2023 10:32:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:32:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:33:11.202Z] Jun 01, 2023 10:33:11 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:33:11 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:33:11.237Z] Jun 01, 2023 10:33:11 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:33:11 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:33:11.255Z] Jun 01, 2023 10:33:11 AM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:33:11 AM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-06-01T08:33:21.247Z] Jun 01, 2023 10:33:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:33:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:33:21.401Z] Jun 01, 2023 10:33:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:33:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:33:21.403Z] Jun 01, 2023 10:33:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:33:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:34:21.283Z] Jun 01, 2023 10:34:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:34:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:35:21.319Z] Jun 01, 2023 10:35:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:35:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:36:21.341Z] Jun 01, 2023 10:36:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:36:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:37:21.368Z] Jun 01, 2023 10:37:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:37:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:38:21.411Z] Jun 01, 2023 10:38:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:38:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:39:21.457Z] Jun 01, 2023 10:39:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:39:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:40:21.493Z] Jun 01, 2023 10:40:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:40:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:41:21.522Z] Jun 01, 2023 10:41:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:41:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:42:21.540Z] Jun 01, 2023 10:42:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:42:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:43:59.773Z] Jun 01, 2023 10:43:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:43:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:44:59.804Z] Jun 01, 2023 10:44:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:44:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:45:59.834Z] Jun 01, 2023 10:45:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:45:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:46:59.872Z] Jun 01, 2023 10:46:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:46:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:47:59.901Z] Jun 01, 2023 10:47:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:47:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:48:59.931Z] Jun 01, 2023 10:48:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:48:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:49:59.966Z] Jun 01, 2023 10:49:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:49:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:50:59.995Z] Jun 01, 2023 10:50:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:50:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:52:21.841Z] Jun 01, 2023 10:52:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:52:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:53:21.875Z] Jun 01, 2023 10:53:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:53:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:54:21.911Z] Jun 01, 2023 10:54:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:54:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:55:21.958Z] Jun 01, 2023 10:55:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:55:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:56:21.994Z] Jun 01, 2023 10:56:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:56:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:57:22.032Z] Jun 01, 2023 10:57:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:57:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:58:22.066Z] Jun 01, 2023 10:58:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:58:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T08:59:22.102Z] Jun 01, 2023 10:59:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 10:59:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:00:38.559Z] Jun 01, 2023 11:00:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:00:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:01:38.590Z] Jun 01, 2023 11:01:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:01:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:02:54.310Z] Jun 01, 2023 11:02:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:02:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:03:54.349Z] Jun 01, 2023 11:03:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:03:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:04:54.375Z] Jun 01, 2023 11:04:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:04:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:05:54.414Z] Jun 01, 2023 11:05:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:05:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:06:54.448Z] Jun 01, 2023 11:06:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:06:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:07:54.503Z] Jun 01, 2023 11:07:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:07:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:08:54.529Z] Jun 01, 2023 11:08:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:08:54 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:10:02.707Z] Jun 01, 2023 11:10:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:10:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:11:10.599Z] Jun 01, 2023 11:11:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:11:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:12:10.624Z] Jun 01, 2023 11:12:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:12:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:13:10.660Z] Jun 01, 2023 11:13:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:13:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:14:10.689Z] Jun 01, 2023 11:14:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:14:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:15:30.047Z] Jun 01, 2023 11:15:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:15:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:16:30.110Z] Jun 01, 2023 11:16:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:16:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:17:30.139Z] Jun 01, 2023 11:17:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:17:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:18:30.176Z] Jun 01, 2023 11:18:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:18:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:19:30.199Z] Jun 01, 2023 11:19:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:19:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:20:23.362Z] Jun 01, 2023 11:20:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:20:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:21:23.392Z] Jun 01, 2023 11:21:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:21:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:22:23.418Z] Jun 01, 2023 11:22:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:22:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:23:23.440Z] Jun 01, 2023 11:23:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:23:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:24:23.465Z] Jun 01, 2023 11:24:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:24:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:25:23.496Z] Jun 01, 2023 11:25:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:25:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:26:23.546Z] Jun 01, 2023 11:26:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:26:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:27:23.597Z] Jun 01, 2023 11:27:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:27:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:28:23.638Z] Jun 01, 2023 11:28:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:28:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:29:23.684Z] Jun 01, 2023 11:29:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:29:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:30:23.727Z] Jun 01, 2023 11:30:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:30:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:31:23.760Z] Jun 01, 2023 11:31:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:31:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:32:23.795Z] Jun 01, 2023 11:32:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:32:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:33:23.825Z] Jun 01, 2023 11:33:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:33:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:35:01.557Z] Jun 01, 2023 11:35:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:35:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:36:01.593Z] Jun 01, 2023 11:36:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:36:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:37:01.635Z] Jun 01, 2023 11:37:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:37:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:38:01.665Z] Jun 01, 2023 11:38:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:38:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:39:01.702Z] Jun 01, 2023 11:39:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:39:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:40:01.742Z] Jun 01, 2023 11:40:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:40:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:41:01.769Z] Jun 01, 2023 11:41:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:41:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:42:01.808Z] Jun 01, 2023 11:42:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:42:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:43:01.842Z] Jun 01, 2023 11:43:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:43:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:44:01.864Z] Jun 01, 2023 11:44:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:44:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:45:01.907Z] Jun 01, 2023 11:45:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:45:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:46:01.941Z] Jun 01, 2023 11:46:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:46:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:47:01.970Z] Jun 01, 2023 11:47:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:47:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:48:02.006Z] Jun 01, 2023 11:48:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:48:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:49:02.047Z] Jun 01, 2023 11:49:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:49:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:50:02.096Z] Jun 01, 2023 11:50:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:50:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:51:02.130Z] Jun 01, 2023 11:51:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:51:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:52:02.158Z] Jun 01, 2023 11:52:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:52:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:53:02.189Z] Jun 01, 2023 11:53:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:53:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:54:02.211Z] Jun 01, 2023 11:54:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:54:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:55:02.244Z] Jun 01, 2023 11:55:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:55:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:56:02.280Z] Jun 01, 2023 11:56:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:56:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:57:02.303Z] Jun 01, 2023 11:57:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:57:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:58:02.336Z] Jun 01, 2023 11:58:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:58:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T09:59:02.366Z] Jun 01, 2023 11:59:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 11:59:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:00:02.401Z] Jun 01, 2023 12:00:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:00:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:01:02.440Z] Jun 01, 2023 12:01:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:01:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:02:02.472Z] Jun 01, 2023 12:02:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:02:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:03:25.288Z] Jun 01, 2023 12:03:25 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:03:25 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:04:14.670Z] Jun 01, 2023 12:04:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:04:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:05:14.704Z] Jun 01, 2023 12:05:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:05:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:06:14.737Z] Jun 01, 2023 12:06:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:06:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:07:14.773Z] Jun 01, 2023 12:07:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:07:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:08:14.807Z] Jun 01, 2023 12:08:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:08:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:09:14.837Z] Jun 01, 2023 12:09:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:09:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:10:14.872Z] Jun 01, 2023 12:10:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:10:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:11:14.909Z] Jun 01, 2023 12:11:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:11:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:12:14.950Z] Jun 01, 2023 12:12:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:12:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:13:14.998Z] Jun 01, 2023 12:13:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:13:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:14:15.048Z] Jun 01, 2023 12:14:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:14:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:15:15.077Z] Jun 01, 2023 12:15:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:15:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:16:15.130Z] Jun 01, 2023 12:16:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:16:15 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:17:33.665Z] Jun 01, 2023 12:17:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:17:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:18:33.707Z] Jun 01, 2023 12:18:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 01, 2023 12:18:33 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-01T10:19:24.061Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2023-06-01T10:19:24.118Z] *** shutting down gRPC server since JVM is shutting down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n"}}
+[debug] [2023-06-01T10:19:24.137Z] *** server shut down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down\n"}}
+[info] i  auth: Stopping Authentication Emulator {"metadata":{"emulator":{"name":"auth"},"message":"Stopping Authentication Emulator"}}
+[debug] [2023-06-01T10:19:24.650Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.655Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.655Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.657Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.660Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.662Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.662Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.663Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.663Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.667Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.669Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.673Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.674Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.675Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.675Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.676Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.676Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.677Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.679Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.682Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.682Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.682Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.683Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.683Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.684Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.684Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.685Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.689Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.690Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.690Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.690Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.691Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.693Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.693Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.693Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.694Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.694Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.695Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.695Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.695Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.696Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.696Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.697Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.697Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.697Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.698Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.698Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.698Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.699Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.699Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.699Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.700Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.700Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.701Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.702Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.702Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.703Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.703Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.704Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.719Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.720Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.720Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  storage: Stopping Storage Emulator {"metadata":{"emulator":{"name":"storage"},"message":"Stopping Storage Emulator"}}
+[debug] [2023-06-01T10:19:24.749Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.751Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.752Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.753Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.753Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.754Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.754Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.755Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.756Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.756Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.757Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.757Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.757Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.758Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.758Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.759Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.759Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.760Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.760Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  hub: Stopping emulator hub {"metadata":{"emulator":{"name":"hub"},"message":"Stopping emulator hub"}}
+[debug] [2023-06-01T10:19:24.770Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.772Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.772Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.773Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.774Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.774Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.774Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.775Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.775Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.775Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.776Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.776Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.776Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.777Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.777Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.778Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.778Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.778Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.779Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  logging: Stopping Logging Emulator {"metadata":{"emulator":{"name":"logging"},"message":"Stopping Logging Emulator"}}
+[debug] [2023-06-01T10:19:24.816Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.819Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.820Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.820Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.820Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.821Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.821Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.821Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.821Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.822Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.822Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.822Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.823Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.823Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.823Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.823Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.824Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.824Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.824Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.829Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.831Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.832Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.832Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.832Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.833Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.833Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.833Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.833Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.834Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.835Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.835Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.836Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.836Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.837Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.837Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.838Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.842Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.845Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.853Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.855Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.855Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.855Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.856Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.856Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.857Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.857Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.857Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.858Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.858Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.858Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.859Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-06-01T10:19:24.859Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:160:15)
+    at writeGeneric (node:internal/stream_base_commons:151:3)
+    at WriteStream.Socket._writeGeneric (node:net:817:11)
+    at WriteStream.Socket._write (node:net:829:8)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at WriteStream.Writable.write (node:internal/streams/writable:334:10)
+    at Console.log (/Users/simon/.cache/firebase/tools/lib/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/Users/simon/.cache/firebase/tools/lib/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/Users/simon/.cache/firebase/tools/lib/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[debug] [2023-06-05T12:08:27.518Z] ----------------------------------------------------------------------
+[debug] [2023-06-05T12:08:27.519Z] Command:       /usr/local/bin/firebase /Users/simon/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase emulators:start
+[debug] [2023-06-05T12:08:27.520Z] CLI Version:   12.2.1
+[debug] [2023-06-05T12:08:27.520Z] Platform:      darwin
+[debug] [2023-06-05T12:08:27.521Z] Node Version:  v16.16.0
+[debug] [2023-06-05T12:08:27.524Z] Time:          Mon Jun 05 2023 14:08:27 GMT+0200 (Central European Summer Time)
+[debug] [2023-06-05T12:08:27.524Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-06-05T12:08:27.530Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-06-05T12:08:27.637Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-06-05T12:08:27.638Z] > authorizing via signed-in user (simoncar@gmail.com)
+[debug] [2023-06-05T12:08:27.944Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-06-05T12:08:27.947Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-06-05T12:08:28.044Z] java version "20.0.1" 2023-04-18
+
+[debug] [2023-06-05T12:08:28.046Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
+Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
+
+[debug] [2023-06-05T12:08:28.054Z] Parsed Java major version: 20
+[info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
+[debug] [2023-06-05T12:08:29.191Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-06-05T12:08:29.192Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-06-05T12:08:29.193Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-06-05T12:08:29.193Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-06-05T12:08:29.193Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-06-05T12:08:29.194Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-06-05T12:08:29.215Z] [hub] writing locator at /var/folders/16/n843v14n5px6sg7rph_97b2m0000gn/T/hub-builder-403d5.json
+[debug] [2023-06-05T12:08:29.230Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-06-05T12:08:29.230Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-06-05T12:08:29.230Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/simon/.cache/firebase/emulators/cloud-firestore-emulator-v1.17.4.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","builder-403d5","--rules","/Users/simon/code/bottletree/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/simon/.cache/firebase/emulators/cloud-firestore-emulator-v1.17.4.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"builder-403d5\",\"--rules\",\"/Users/simon/code/bottletree/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2023-06-05T12:08:30.686Z] Jun 05, 2023 2:08:30 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:08:30 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2023-06-05T12:08:30.713Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2023-06-05T12:08:30.713Z] 127.0.0.1:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-06-05T12:08:35.747Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-06-05T12:08:36.889Z] Temp file directory for storage emulator: /var/folders/16/n843v14n5px6sg7rph_97b2m0000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/16/n843v14n5px6sg7rph_97b2m0000gn/T/firebase/storage/blobs"}}
+[debug] [2023-06-05T12:08:36.917Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-06-05T12:08:36.919Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-06-05T12:08:36.919Z] Starting Emulator UI with command {"binary":"node","args":["/Users/simon/.cache/firebase/emulators/ui-v1.11.6/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/simon/.cache/firebase/emulators/ui-v1.11.6/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-06-05T12:08:37.122Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-06-05T12:08:37.126Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-06-05T12:09:23.396Z] Jun 05, 2023 2:09:23 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:09:23 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-05T12:09:27.316Z] Jun 05, 2023 2:09:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:09:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-05T12:09:27.401Z] Jun 05, 2023 2:09:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:09:27 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-05T12:10:28.313Z] Jun 05, 2023 2:10:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:10:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-05T12:10:28.333Z] Jun 05, 2023 2:10:28 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:10:28 PM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose\nINFO: channel closed\n"}}
+[debug] [2023-06-05T12:11:36.887Z] Jun 05, 2023 2:11:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:11:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-06-05T12:11:37.163Z] Jun 05, 2023 2:11:37 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jun 05, 2023 2:11:37 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}

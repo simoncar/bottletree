@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.simoncar.bottletree"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +28,11 @@
     "web": {
       "bundler": "metro",
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c4340333-f23a-41cb-a647-97dee3bc0a01"
+      }
     }
   }
 }
