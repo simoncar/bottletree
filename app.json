@@ -17,7 +17,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.simoncar.bottletree"
+      "bundleIdentifier": "com.simoncar.bottletree",
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {

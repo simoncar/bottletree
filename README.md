@@ -12,3 +12,4 @@ eas build --platform ios
 eas submit -p ios
 
 eas update --branch preview --message "Updating the app"
+eas update --branch production --message "Updating the app"
