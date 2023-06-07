@@ -14,6 +14,7 @@ const instagramPosts = [
 			id: 1,
 			username: "johndoe",
 			fullname: "John Doe",
+			role: "Builder",
 			avatar:
 				"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA.."
 		},
@@ -54,6 +55,7 @@ const instagramPosts = [
 			id: 1,
 			username: "johndoe",
 			fullname: "John Doe",
+			role: "Builder",
 			avatar:
 				"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA.."
 		},
@@ -109,6 +111,7 @@ const instagramPosts = [
 			id: 1,
 			username: "johndoe",
 			fullname: "John Doe",
+			role: "Builder",
 			avatar:
 				"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA.."
 		},
@@ -129,6 +132,48 @@ const instagramPosts = [
 			{
 				imageUrl:
 					"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.06.08%20PM.png?alt=media&token=4b45d612-2fb0-4abb-bf7c-82b1a5ec01c8&_gl=1*13xka9t*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQ0OC4wLjAuMA.."
+			}
+		],
+		localImage: "../assets/imagesTemp/IMG_4072.jpg",
+		caption: "Exploring the city streets. #urbanlife",
+		likes: 876,
+		comments: [
+			{
+				username: "johndoe",
+				comment: "Love this cityscape! 🏙️"
+			},
+			{
+				username: "marysmith",
+				comment: "What a vibrant city! 🔥"
+			}
+		],
+		timestamp: "May 30, 2023"
+	},
+	{
+		id: 4,
+		author: {
+			id: 1,
+			username: "tapman",
+			fullname: "Tony Tap",
+			role: "Plumber",
+			avatar: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Ftap.png?alt=media&token=594bc8d0-4764-4d6d-8c0d-049a9041dca2"
+		},
+		username: "tapman",
+		images: [
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps2.jpeg?alt=media&token=24059fd6-a6af-4562-932d-4d2eeea5606b"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps3.jpeg?alt=media&token=b1657897-de6b-4535-98ce-6646cfcbb66b"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps4.jpeg?alt=media&token=d52b54ba-9b64-4890-be3a-8ebcd42ab5b3"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps5.jpeg?alt=media&token=7e11f9ce-4708-4182-9d18-36794f60465a"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps1.jpeg?alt=media&token=1d9bb74f-afda-4e80-9735-e819fa9366d9"
 			}
 		],
 		localImage: "../assets/imagesTemp/IMG_4072.jpg",
@@ -208,7 +253,7 @@ const Posts = (props) => {
 
 const styles = StyleSheet.create({
 	list: {
-		backgroundColor: "#fff",
+		backgroundColor: "#000",
 		flex: 1,
 		width: "100%",
 		paddingTop: 4

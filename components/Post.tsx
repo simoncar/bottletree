@@ -31,6 +31,9 @@ const Post = (props) => {
 				<Carousel
 					loop
 					width={width}
+					panGestureHandlerProps={{
+						activeOffsetX: [-10, 10]
+					}}
 					data={[...new Array(5).keys()]}
 					onSnapToItem={(index) => console.log("current index:", index)}
 					renderItem={({ index }) => (
@@ -57,7 +60,7 @@ const Post = (props) => {
 
 				<View>
 					<Text style={styles.listItemAuthorName}>{post.author.fullname}</Text>
-					<Text style={styles.listItemFollow}>Project Manager</Text>
+					<Text style={styles.listItemFollow}>{post.author.role}</Text>
 				</View>
 			</View>
 			{renderPostContent()}
@@ -90,8 +93,8 @@ const styles = StyleSheet.create({
 	},
 	listItemAuthorName: {
 		fontSize: 16,
-		fontWeight: "bold",
-		marginRight: 12
+		marginRight: 12,
+		color: "#fff"
 	},
 	listItemDot: {
 		backgroundColor: "#000",
@@ -103,8 +106,7 @@ const styles = StyleSheet.create({
 	},
 	listItemFollow: {
 		fontSize: 16,
-		fontWeight: "bold",
-		color: "#3B82F6"
+		color: "lightgray"
 	},
 	listItemBody: {
 		flex: 1,
