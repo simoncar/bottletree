@@ -40,11 +40,15 @@ const instagramPosts = [
 		comments: [
 			{
 				username: "janedoe",
-				comment: "Wow, amazing shot! 😍"
+				comment: "What a great start 😍"
+			},
+			{
+				username: "janedoe",
+				comment: "Making progress! 🙌🏽"
 			},
 			{
 				username: "marysmith",
-				comment: "I wish I could be there right now! 🌞"
+				comment: "Monday the kitchen fitout people will come to measure up"
 			}
 		],
 		timestamp: "May 29, 2023"
@@ -96,11 +100,11 @@ const instagramPosts = [
 		comments: [
 			{
 				username: "johndoe",
-				comment: "Love this cityscape! 🏙️"
+				comment: "Finished product is amazing! 🏙️"
 			},
 			{
 				username: "marysmith",
-				comment: "What a vibrant city! 🔥"
+				comment: "Nice and clean"
 			}
 		],
 		timestamp: "May 30, 2023"
@@ -140,11 +144,11 @@ const instagramPosts = [
 		comments: [
 			{
 				username: "johndoe",
-				comment: "Love this cityscape! 🏙️"
+				comment: "Great energy! 🏙️"
 			},
 			{
 				username: "marysmith",
-				comment: "What a vibrant city! 🔥"
+				comment: "I like the angle of the Solar Panels"
 			}
 		],
 		timestamp: "May 30, 2023"
@@ -182,11 +186,11 @@ const instagramPosts = [
 		comments: [
 			{
 				username: "johndoe",
-				comment: "Love this cityscape! 🏙️"
+				comment: "Looks like a great place for a tap"
 			},
 			{
 				username: "marysmith",
-				comment: "What a vibrant city! 🔥"
+				comment: "That does not look like the tap I ordered"
 			}
 		],
 		timestamp: "May 30, 2023"

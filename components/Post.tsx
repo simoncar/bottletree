@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Dimensions, Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
+import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { Image } from "expo-image";
 import Carousel from "react-native-reanimated-carousel";
 
@@ -24,7 +24,6 @@ const Post = (props) => {
 
 	const renderPostContent = () => {
 		const imageUrls = post.images.map((image) => image.imageUrl);
-		console.log("Post: renderPostContent", post.author.fullname);
 
 		return (
 			<View style={styles.listItemBody}>
@@ -51,6 +50,28 @@ const Post = (props) => {
 		);
 	};
 
+	<View style={{ flexDirection: "row" }}>
+		<Text style={{ flex: 1, flexWrap: "wrap" }}> You miss fdddddd dddddddd You miss fdd</Text>
+	</View>;
+
+	const renderPostComments = () => {
+		const comments = post.comments.map((comment) => comment);
+		console.log("Post: renderPostContent", comments);
+		return (
+			<View style={styles.commentsOverall}>
+				<FlatList
+					data={comments}
+					renderItem={({ item }) => (
+						<View style={styles.commentView}>
+							<Text style={styles.commentUserName}>{item.username} </Text>
+							<Text style={styles.commentText}>{item.comment}</Text>
+						</View>
+					)}
+				/>
+			</View>
+		);
+	};
+
 	return (
 		<View>
 			<View style={styles.listItemHeader}>
@@ -65,6 +86,8 @@ const Post = (props) => {
 			</View>
 			{renderPostContent()}
 			<View style={styles.listItemFooter}>
+				{renderPostComments()}
+
 				<TouchableOpacity onPress={onHeartClicked}></TouchableOpacity>
 			</View>
 		</View>
@@ -106,6 +129,25 @@ const styles = StyleSheet.create({
 	},
 	listItemFollow: {
 		fontSize: 16,
+		color: "lightgray"
+	},
+	commentView: {
+		paddingBottom: 8,
+		flexWrap: "wrap",
+		flexDirection: "row"
+	},
+	commentsOverall: {
+		fontSize: 14,
+		color: "lightgray",
+		flexWrap: "wrap"
+	},
+	commentUserName: {
+		fontSize: 14,
+		color: "lightgray",
+		fontWeight: "bold"
+	},
+	commentText: {
+		fontSize: 14,
 		color: "lightgray"
 	},
 	listItemBody: {
