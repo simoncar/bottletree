@@ -25,7 +25,7 @@ export default function TabLayout() {
 				options={{
 					title: "",
 					tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-					headerTitle: () => <BigText style={{ fontSize: 28 }}> Buildergram</BigText>,
+					headerTitle: () => <BigText style={{ fontSize: 28 }}>One Build</BigText>,
 					headerTitleAlign: "left",
 					headerRight: () => (
 						<Link href="/modal" asChild>
