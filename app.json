@@ -2,10 +2,10 @@
 	"expo": {
 		"name": "One Build",
 		"slug": "bottletree",
-		"version": "1.0.0",
+		"version": "1.0.2",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
-		"scheme": "myapp",
+		"scheme": "bottletree",
 		"userInterfaceStyle": "automatic",
 		"splash": {
 			"image": "./assets/images/splash.png",
@@ -25,7 +25,8 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/images/adaptive-icon.png",
 				"backgroundColor": "#F9D96C"
-			}
+			},
+			"versionCode": 4
 		},
 		"web": {
 			"bundler": "metro",

@@ -4,6 +4,7 @@ import { Pressable, useColorScheme } from "react-native";
 import { BigText } from "../../components/StyledText";
 
 import Colors from "../../constants/Colors";
+import { View } from "../../components/Themed";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -28,9 +29,11 @@ export default function TabLayout() {
 					headerTitle: () => <BigText style={{ fontSize: 28 }}>One Build</BigText>,
 					headerTitleAlign: "left",
 					headerRight: () => (
-						<Link href="/modal" asChild>
-							<Pressable>{({ pressed }) => <FontAwesome5 name="hammer" size={25} color={Colors[colorScheme ?? "light"].text} style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }} />}</Pressable>
-						</Link>
+						<View>
+							<Link href="/modal" asChild>
+								<Pressable>{({ pressed }) => <FontAwesome5 name="hammer" size={25} color={Colors[colorScheme ?? "light"].text} style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }} />}</Pressable>
+							</Link>
+						</View>
 					)
 				}}
 			/>
