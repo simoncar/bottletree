@@ -1,4 +1,4 @@
-import { database } from "./firebaseConfig";
+import { db } from "./firebaseConfig";
 
 // POSTS
 // author
@@ -18,7 +18,7 @@ export const demoData = async () => {
 	console.log("demoData");
 
 	try {
-		const docRef = await addDoc(collection(database, "users"), {
+		const docRef = await addDoc(collection(db, "users"), {
 			first: "Ada",
 			last: "Lovelace",
 			born: 1815
