@@ -68,6 +68,9 @@ const Post = (props) => {
 						</View>
 					)}
 				/>
+				<View style={styles.commentView}>
+					<Text style={styles.timestamp}>{post.timestamp}</Text>
+				</View>
 			</View>
 		);
 	};
@@ -148,6 +151,10 @@ const styles = StyleSheet.create({
 	},
 	commentText: {
 		fontSize: 14,
+		color: "lightgray"
+	},
+	timestamp: {
+		fontSize: 12,
 		color: "lightgray"
 	},
 	listItemBody: {

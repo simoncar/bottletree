@@ -18,9 +18,19 @@ export default class AgendaScreen extends Component<State> {
 	render() {
 		return (
 			<Agenda
-				items={this.state.items}
+				items={{
+					"2023-06-10": [{ name: "Build Started" }, { name: "Plans Approved" }, { name: "Team arrive morning to prepare site" }],
+					"2023-06-11": [{ name: "Foundations" }],
+					"2023-06-12": [{ name: "Slab" }],
+					"2023-06-13": [{ name: "Walls" }],
+					"2023-06-14": [{ name: "Roof" }],
+					"2023-06-15": [{ name: "Deadline Taps Order" }],
+					"2023-06-16": [{ name: "Plumbing" }],
+					"2023-06-17": [{ name: "Doors" }],
+					"2023-06-18": [{ name: "Move In" }]
+				}}
 				loadItemsForMonth={this.loadItems}
-				selected={"2023-05-16"}
+				selected={"2023-06-10"}
 				renderItem={this.renderItem}
 				rowHasChanged={this.rowHasChanged}
 				showClosingKnob={true}
@@ -42,38 +52,6 @@ export default class AgendaScreen extends Component<State> {
 			/>
 		);
 	}
-
-	loadItems = (day: DateData) => {
-		const items = this.state.items || {};
-
-		setTimeout(() => {
-			for (let i = -15; i < 85; i++) {
-				const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-				const strTime = this.timeToString(time);
-
-				if (!items[strTime]) {
-					items[strTime] = [];
-
-					const numItems = Math.floor(Math.random() * 3 + 1);
-					for (let j = 0; j < numItems; j++) {
-						items[strTime].push({
-							name: "Item for " + strTime + " #" + j,
-							height: Math.max(50, Math.floor(Math.random() * 150)),
-							day: strTime
-						});
-					}
-				}
-			}
-
-			const newItems: AgendaSchedule = {};
-			Object.keys(items).forEach((key) => {
-				newItems[key] = items[key];
-			});
-			this.setState({
-				items: newItems
-			});
-		}, 1000);
-	};
 
 	renderItem = (reservation: AgendaEntry, isFirst: boolean) => {
 		const fontSize = isFirst ? 16 : 14;
