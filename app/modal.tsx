@@ -9,7 +9,11 @@ export default function ModalScreen() {
 	const isPresented = navigation.canGoBack();
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Projects</Text>
+			<View style={styles.projectList}>
+				<Text style={styles.project}>- 106 Jolimont Road</Text>
+				<Text style={styles.project}>- 33 Queen Street</Text>
+				<Text style={styles.project}>- Plaza 222 - Level 44</Text>
+			</View>
 			<View style={styles.projectList}>
 				<Text style={styles.project}>- 106 Jolimont Road</Text>
 				<Text style={styles.project}>- 33 Queen Street</Text>
@@ -31,6 +35,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center"
 	},
+
 	title: {
 		fontSize: 20,
 		fontWeight: "bold",

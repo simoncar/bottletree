@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Post from "./Post";
-import Update from "./Update";
+import Project from "./Project";
 const user = {
 	id: "1",
 	username: "johndoe"
@@ -251,7 +251,7 @@ const Posts = (props) => {
 
 	return (
 		<View style={styles.list}>
-			<Update />
+			<Project />
 			<FlatList numColumns={isGrid ? 3 : 1} data={posts} renderItem={renderItems} keyExtractor={(item, index) => getKey(item)} />
 		</View>
 	);
