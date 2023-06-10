@@ -8,6 +8,7 @@ const Update = (props) => {
 		onItemClicked(post);
 	};
 	let [version, setVersion] = useState(0);
+	console.log("installed version : ", Constants.expoConfig?.ios?.buildNumber);
 
 	const docRef = doc(db, "about", "version");
 	getDoc(docRef)
@@ -23,17 +24,25 @@ const Update = (props) => {
 		.catch((error) => {
 			console.log("Error getting document:", error);
 		});
-
-	if (Constants.expoConfig?.ios?.buildNumber != version.toString()) {
-		return (
-			<View style={{ padding: 20 }}>
-				<TouchableOpacity style={{ backgroundColor: "#E4E6C3", padding: 10, borderRadius: 100 }}>
-					<Text style={styles.updateText}>Test Version {version}</Text>
-				</TouchableOpacity>
-			</View>
-		);
-	} else {
-		return null;
+	if (Constants.expoConfig?.ios?.buildNumber != undefined) {
+		var installed = parseInt(Constants.expoConfig?.ios?.buildNumber);
+		if (parseInt(Constants.expoConfig?.ios?.buildNumber) != version) {
+			return (
+				<View style={{ padding: 20 }}>
+					<TouchableOpacity style={{ backgroundColor: "#E4E6C3", padding: 10, borderRadius: 100 }}>
+						<Text style={styles.updateText}>Check for App Updates</Text>
+					</TouchableOpacity>
+				</View>
+			);
+		} else {
+			return (
+				<View style={{ padding: 20 }}>
+					<TouchableOpacity style={{ backgroundColor: "#E4E6C3", padding: 10, borderRadius: 100 }}>
+						<Text style={styles.updateText}>Check for App Updates</Text>
+					</TouchableOpacity>
+				</View>
+			);
+		}
 	}
 };
 
