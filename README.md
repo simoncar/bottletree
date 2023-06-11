@@ -13,3 +13,6 @@ eas submit -p ios
 
 eas update --branch preview --message "Updating the app"
 eas update --branch production --message "Updating the app"
+
+
+npx expo start --offline

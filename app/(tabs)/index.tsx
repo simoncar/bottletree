@@ -6,7 +6,7 @@ import Posts from "../../components/Posts";
 
 import { demoData } from "../../lib/demoData";
 
-//demoData();
+demoData();
 
 export default function TabOneScreen() {
 	return (

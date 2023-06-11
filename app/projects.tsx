@@ -1,12 +1,56 @@
-import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import { Link, useNavigation } from "expo-router";
-import React from "react";
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
+import { Platform, StyleSheet, TouchableOpacity } from "react-native";
+import { db } from "../lib/firebaseConfig";
+import { QuerySnapshot, collection, getDocs } from "firebase/firestore";
+import { ShortList } from "../components/sComponent";
+
 import { Text, View } from "../components/Themed";
+import { getProjects } from "../lib/APIprojects";
 
 export default function ModalScreen() {
+	const [projectsList, setProjectsList] = useState([]);
+	const [projects, setProjects] = useState("");
+	const [loading, setLoading] = useState(true);
+
 	const navigation = useNavigation();
 	const isPresented = navigation.canGoBack();
+
+	const projectsRead = (projectsDB) => {
+		//domainsSetter(JSON.stringify(projectsDB));
+		setProjects(projectsDB);
+		console.log("Callback projectsRead", projectsDB);
+	};
+
+	useEffect(() => {
+		const unsubscribe = getProjects(projectsRead);
+		console.log("useEffect: Getting Projects");
+
+		return () => {
+			unsubscribe;
+		};
+	}, []);
+
+	useEffect(() => {
+		if (projects !== "" && loading === true) {
+			//setProjectsList(JSON.parse(projects));
+			setLoading(false);
+			console.log("Loading Set to FaLSe");
+			console.log("useEffect [projects]");
+		}
+	}, [projects]);
+
+	function readProjects() {
+		//const querySnapshot =
+
+		getDocs(collection(db, "projects")).then((querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				// doc.data() is never undefined for query doc snapshots
+				console.log("Reading Projects: ", doc.id, " => ", doc.data());
+			});
+		});
+	}
 
 	function renderRow(title: string) {
 		return (
@@ -18,13 +62,16 @@ export default function ModalScreen() {
 		);
 	}
 
+	readProjects();
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.projectList}>
-				{renderRow("106 Jolimont Road")}
-				{renderRow("33 Queen Street")}
-				{renderRow("Plaza 222 - Level 44")}
-				{renderRow("106 Jolimont Road")}
+				{loading === false && (
+					<View style={styles.card}>
+						<ShortList data={projects} renderItem={renderRow} />
+					</View>
+				)}
 			</View>
 
 			<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -83,12 +130,6 @@ const styles = StyleSheet.create({
 	},
 	rightChevron: {
 		marginHorizontal: 8
-	},
-	separator: {
-		backgroundColor: "#CED0CE",
-		height: 1,
-		marginTop: 30,
-		width: "100%"
 	},
 	subtitle: {
 		color: "#777777"

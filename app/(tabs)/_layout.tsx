@@ -30,7 +30,7 @@ export default function TabLayout() {
 					headerTitleAlign: "left",
 					headerRight: () => (
 						<View>
-							<Link href="/modal" asChild>
+							<Link href="/projects" asChild>
 								<Pressable>{({ pressed }) => <FontAwesome5 name="hammer" size={25} color={Colors[colorScheme ?? "light"].text} style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }} />}</Pressable>
 							</Link>
 						</View>

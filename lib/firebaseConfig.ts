@@ -17,7 +17,7 @@ console.log("firebaseConfig", firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-//connectFirestoreEmulator(database, "localhost", 8080);
+connectFirestoreEmulator(db, "localhost", 8080);
 
 //console.log("connectFirestoreEmulator");
 

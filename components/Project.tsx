@@ -8,7 +8,7 @@ import { Link, Tabs } from "expo-router";
 
 const Project = (props) => {
 	const colorScheme = useColorScheme();
-
+	let aaa = 1;	 
 	const clickItem = () => {
 		onItemClicked(post);
 	};
@@ -30,7 +30,7 @@ const Project = (props) => {
 			console.log("Error getting document:", error);
 		});
 	return (
-		<Link href="/modal" asChild>
+		<Link href="/projects" asChild>
 			<Pressable>
 				<View style={styles.outerView}>
 					<View style={styles.innerView}>
@@ -45,12 +45,23 @@ const Project = (props) => {
 	);
 };
 
+
 const styles = StyleSheet.create({
 	updateText: {
 		fontSize: 16,
 		marginRight: 12
 	},
+	updateddddText: {
+		fontSize: 16,
+		marginRight: 12
+	},
 	rightChevron: {
+		marginHorizontal: 8
+	},
+	ddddddcccfffddddd: {
+		marginHorizontal: 8
+	},
+		ddddddcdddccfffddddd: {
 		marginHorizontal: 8
 	},
 	innerView: {
@@ -70,3 +81,6 @@ const styles = StyleSheet.create({
 });
 
 export default Project;
+function onItemClicked(post: any) {
+	throw new Error("Function not implemented.");
+}
