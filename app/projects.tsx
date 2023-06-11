@@ -42,8 +42,6 @@ export default function ModalScreen() {
 	}, [projects]);
 
 	function readProjects() {
-		//const querySnapshot =
-
 		getDocs(collection(db, "projects")).then((querySnapshot) => {
 			querySnapshot.forEach((doc) => {
 				// doc.data() is never undefined for query doc snapshots
@@ -52,11 +50,11 @@ export default function ModalScreen() {
 		});
 	}
 
-	function renderRow(title: string) {
+	function renderRow(data: any) {
 		return (
-			<TouchableOpacity>
+			<TouchableOpacity key={data.key}>
 				<View style={styles.outerView}>
-					<Text style={styles.project}>{title || ""}</Text>
+					<Text style={styles.project}>{data.title || ""}</Text>
 				</View>
 			</TouchableOpacity>
 		);

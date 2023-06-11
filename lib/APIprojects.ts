@@ -2,7 +2,7 @@ import { db } from "./firebaseConfig";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 interface IProject {
-	//key: string;
+	key: string;
 	title: string;
 }
 
@@ -15,7 +15,10 @@ export async function getProjects(callback: projectsRead) {
 	const unsubscribe = onSnapshot(q, (querySnapshot) => {
 		const projects: IProject[] = [];
 		querySnapshot.forEach((doc) => {
-			projects.push(doc.data().title);
+			projects.push({
+				key: doc.id,
+				title: doc.data().title
+			});
 		});
 		console.log("Current Projects: ", projects.join(", "));
 		callback(projects);
