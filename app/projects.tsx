@@ -72,7 +72,7 @@ export default function ModalScreen() {
 			<TouchableOpacity key={"add"}>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
-						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }} />}</Pressable>
+						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
 					</View>
 					<Text style={styles.project}>Add project</Text>
 				</View>
@@ -119,7 +119,10 @@ const styles = StyleSheet.create({
 		marginBottom: 5
 	},
 	avatar: {
-		marginRight: 12
+		textAlign: "center",
+		marginRight: 12,
+		width: 50,
+		alignItems: "center"
 	},
 	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
 	separator: {
@@ -137,11 +140,11 @@ const styles = StyleSheet.create({
 
 	outerView: {
 		borderBottomColor: "#CED0CE",
-		borderBottomWidth: StyleSheet.hairlineWidth,
 		flexDirection: "row",
 		paddingVertical: 8,
 		alignItems: "center",
-		padding: 8
+		padding: 8,
+		height: 80
 	},
 	outerViewLast: {
 		alignItems: "center",
