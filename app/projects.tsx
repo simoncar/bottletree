@@ -1,13 +1,16 @@
 import { Link, useNavigation } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { Platform, StyleSheet, TouchableOpacity } from "react-native";
+import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
 import { db } from "../lib/firebaseConfig";
+import { Image } from "expo-image";
 import { QuerySnapshot, collection, getDocs } from "firebase/firestore";
 import { ShortList } from "../components/sComponent";
 
 import { Text, View } from "../components/Themed";
 import { getProjects } from "../lib/APIprojects";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Colors from "../constants/Colors";
 
 export default function ModalScreen() {
 	const [projectsList, setProjectsList] = useState([]);
@@ -16,6 +19,7 @@ export default function ModalScreen() {
 
 	const navigation = useNavigation();
 	const isPresented = navigation.canGoBack();
+	const colorScheme = useColorScheme();
 
 	const projectsRead = (projectsDB) => {
 		//domainsSetter(JSON.stringify(projectsDB));
@@ -54,7 +58,23 @@ export default function ModalScreen() {
 		return (
 			<TouchableOpacity key={data.key}>
 				<View style={styles.outerView}>
+					<View style={styles.avatar}>
+						<Image style={styles.avatarFace} source={data.icon}></Image>
+					</View>
 					<Text style={styles.project}>{data.title || ""}</Text>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+
+	function renderAdd() {
+		return (
+			<TouchableOpacity key={"add"}>
+				<View style={styles.outerView}>
+					<View style={styles.avatar}>
+						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }} />}</Pressable>
+					</View>
+					<Text style={styles.project}>Add project</Text>
 				</View>
 			</TouchableOpacity>
 		);
@@ -70,11 +90,8 @@ export default function ModalScreen() {
 						<ShortList data={projects} renderItem={renderRow} />
 					</View>
 				)}
+				<View style={styles.card}>{renderAdd()}</View>
 			</View>
-
-			<View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
-			<Link href="../">Ok</Link>
 
 			{/* Use a light status bar on iOS to account for the black space above the modal */}
 			<StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
@@ -85,7 +102,7 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center"
+		width: "100%"
 	},
 
 	title: {
@@ -101,6 +118,10 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		marginBottom: 5
 	},
+	avatar: {
+		marginRight: 12
+	},
+	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
 	separator: {
 		marginVertical: 30,
 		height: 1,
@@ -118,7 +139,9 @@ const styles = StyleSheet.create({
 		borderBottomColor: "#CED0CE",
 		borderBottomWidth: StyleSheet.hairlineWidth,
 		flexDirection: "row",
-		paddingVertical: 8
+		paddingVertical: 8,
+		alignItems: "center",
+		padding: 8
 	},
 	outerViewLast: {
 		alignItems: "center",

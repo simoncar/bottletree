@@ -1,9 +1,11 @@
+import iconSet from "@expo/vector-icons/build/FontAwesome5";
 import { db } from "./firebaseConfig";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 interface IProject {
 	key: string;
 	title: string;
+	icon: string;
 }
 
 type projectsRead = (projects: IProject[]) => void;
@@ -17,7 +19,8 @@ export async function getProjects(callback: projectsRead) {
 		querySnapshot.forEach((doc) => {
 			projects.push({
 				key: doc.id,
-				title: doc.data().title
+				title: doc.data().title,
+				icon: doc.data().icon
 			});
 		});
 		console.log("Current Projects: ", projects.join(", "));
