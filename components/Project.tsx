@@ -7,8 +7,9 @@ import Constants from "expo-constants";
 import { Link, Tabs } from "expo-router";
 
 const Project = (props) => {
+	const { project, title } = props;
 	const colorScheme = useColorScheme();
-	let aaa = 1;	 
+	let aaa = 1;
 	const clickItem = () => {
 		onItemClicked(post);
 	};
@@ -34,7 +35,7 @@ const Project = (props) => {
 			<Pressable>
 				<View style={styles.outerView}>
 					<View style={styles.innerView}>
-						<Text style={styles.updateText}>106 Jolimont Road</Text>
+						<Text style={styles.updateText}>{title}</Text>
 					</View>
 					<View style={styles.rightChevron}>
 						<FontAwesome5 name="angle-down" size={25} />
@@ -44,7 +45,6 @@ const Project = (props) => {
 		</Link>
 	);
 };
-
 
 const styles = StyleSheet.create({
 	updateText: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 	ddddddcccfffddddd: {
 		marginHorizontal: 8
 	},
-		ddddddcdddccfffddddd: {
+	ddddddcdddccfffddddd: {
 		marginHorizontal: 8
 	},
 	innerView: {

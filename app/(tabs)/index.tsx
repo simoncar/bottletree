@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
-import Posts from "../../components/Posts";
+import { Posts } from "../../components/Posts";
 
 import { demoData } from "../../lib/demoData";
 
@@ -11,7 +11,7 @@ demoData();
 export default function TabOneScreen() {
 	return (
 		<View style={styles.container}>
-			<Posts authorId={null} postCategory={null} isGrid={false} />
+			<Posts project="73JwAXeOEhLXUggpVKK9" isGrid={false} />
 		</View>
 	);
 }

@@ -1,4 +1,4 @@
-import { Link, useNavigation } from "expo-router";
+import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
@@ -18,6 +18,10 @@ export default function ModalScreen() {
 	const [loading, setLoading] = useState(true);
 
 	const navigation = useNavigation();
+	const router = useRouter();
+	const params = useLocalSearchParams();
+	const { id = 42, other } = params;
+
 	const isPresented = navigation.canGoBack();
 	const colorScheme = useColorScheme();
 
@@ -56,12 +60,26 @@ export default function ModalScreen() {
 
 	function renderRow(data: any) {
 		return (
-			<TouchableOpacity key={data.key}>
+			<TouchableOpacity
+				key={data.key}
+				onPress={() => {
+					/* 1. Navigate to the Details route with params */
+					router.push({
+						pathname: "/",
+						params: {
+							project: data.key,
+							title: data.title
+						}
+					});
+				}}>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
 						<Image style={styles.avatarFace} source={data.icon}></Image>
 					</View>
-					<Text style={styles.project}>{data.title || ""}</Text>
+					<View>
+						<Text style={styles.project}>{data.title || ""}</Text>
+						<Text style={styles.projectId}>ID: {data.key || ""}</Text>
+					</View>
 				</View>
 			</TouchableOpacity>
 		);
@@ -117,6 +135,11 @@ const styles = StyleSheet.create({
 	project: {
 		fontSize: 18,
 		marginBottom: 5
+	},
+	projectId: {
+		fontSize: 12,
+		marginBottom: 5,
+		color: "#777777"
 	},
 	avatar: {
 		textAlign: "center",

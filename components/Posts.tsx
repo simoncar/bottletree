@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useLocalSearchParams } from "expo-router";
+
 import Post from "./Post";
 import Project from "./Project";
+
 const user = {
 	id: "1",
 	username: "johndoe"
@@ -11,6 +13,7 @@ const user = {
 const instagramPosts = [
 	{
 		id: 1,
+		project: "73JwAXeOEhLXUggpVKK9",
 		author: {
 			id: 1,
 			username: "johndoe",
@@ -56,6 +59,7 @@ const instagramPosts = [
 	},
 	{
 		id: 2,
+		project: "73JwAXeOEhLXUggpVKK9",
 		author: {
 			id: 1,
 			username: "johndoe",
@@ -112,6 +116,51 @@ const instagramPosts = [
 	},
 	{
 		id: 3,
+		project: "H0lXilYE5g3zrMKJIDAk",
+		author: {
+			id: 1,
+			username: "johndoe",
+			fullname: "John Doe",
+			role: "Builder",
+			avatar:
+				"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA.."
+		},
+		username: "janedoe",
+		images: [
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7"
+			},
+			{
+				imageUrl:
+					"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.05.58%20PM.png?alt=media&token=35645c96-05d4-4ffc-95e4-0b805ae91981&_gl=1*1aa7ivb*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQzOS4wLjAuMA.."
+			},
+			{
+				imageUrl:
+					"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.06.03%20PM.png?alt=media&token=2bc77844-84cd-40c0-876e-591e58d05c38&_gl=1*5mtze6*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQ0NC4wLjAuMA.."
+			},
+			{
+				imageUrl:
+					"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.06.08%20PM.png?alt=media&token=4b45d612-2fb0-4abb-bf7c-82b1a5ec01c8&_gl=1*13xka9t*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQ0OC4wLjAuMA.."
+			}
+		],
+		localImage: "../assets/imagesTemp/IMG_4072.jpg",
+		caption: "Exploring the city streets. #urbanlife",
+		likes: 876,
+		comments: [
+			{
+				username: "johndoe",
+				comment: "Great energy! 🏙️"
+			},
+			{
+				username: "marysmith",
+				comment: "I like the angle of the Solar Panels"
+			}
+		],
+		timestamp: "May 30, 2023"
+	},
+	{
+		id: 4,
+		project: "H0lXilYE5g3zrMKJIDAk",
 		author: {
 			id: 1,
 			username: "johndoe",
@@ -155,7 +204,8 @@ const instagramPosts = [
 		timestamp: "May 30, 2023"
 	},
 	{
-		id: 4,
+		id: 5,
+		project: "H0lXilYE5g3zrMKJIDAk",
 		author: {
 			id: 1,
 			username: "tapman",
@@ -198,15 +248,17 @@ const instagramPosts = [
 	}
 ];
 
-const Posts = (props) => {
-	const { authorId, postCategory, isGrid } = props;
+export const Posts = (props) => {
+	const { project2, isGrid } = props;
 
 	const [posts, setPosts] = useState();
+	//const [project, setProject] = useState();
+	//const [title, setTitle] = useState();
 
-	const navigation = useNavigation();
+	const { project, title } = useLocalSearchParams();
 
-	useEffect(() => {
-		loadPosts();
+	useEffect((project) => {
+		loadPosts(project);
 		console.log("Posts: useEffect");
 
 		return () => {
@@ -216,21 +268,30 @@ const Posts = (props) => {
 		};
 	}, []);
 
-	const loadPosts = () => {
-		setPosts(instagramPosts);
+	useEffect(() => {
+		loadPosts(project);
+		console.log("Posts: useEffect", project);
+		//setTitle(title);
+		//setProject(project);
 
-		// const postsRef = databaseRef(database, "posts");
-		// databaseOnValue(postsRef, async (snapshot) => {
-		// 	const values = snapshot.val();
-		// 	if (values) {
-		// 		const keys = Object.keys(values);
-		// 		const posts = keys.map((key) => values[key]);
-		// 		const transformedPosts = await transformPosts(posts);
-		// 		setPosts(() => transformedPosts);
-		// 	} else {
-		// 		setPosts(() => []);
-		// 	}
-		// });
+		console.log("TITLE : " + title);
+
+		return () => {
+			// setPosts([]);
+			// const postsRef = databaseRef(database, "posts");
+			// databaseOff(postsRef);
+		};
+	}, [project]);
+
+	const loadPosts = (project: string) => {
+		const filteredPosts = instagramPosts.filter((post) => {
+			return post.project === project;
+		});
+
+		// Log the filtered posts to the console
+		console.log(filteredPosts);
+
+		setPosts(filteredPosts);
 	};
 
 	const toggleLike = async (post) => {};
@@ -251,7 +312,7 @@ const Posts = (props) => {
 
 	return (
 		<View style={styles.list}>
-			<Project />
+			<Project project={project} title={title} />
 			<FlatList numColumns={isGrid ? 3 : 1} data={posts} renderItem={renderItems} keyExtractor={(item, index) => getKey(item)} />
 		</View>
 	);
@@ -262,8 +323,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#000",
 		flex: 1,
 		width: "100%",
-		paddingTop: 4
+		paddingTop: 4,
+		padding: 10
 	}
 });
-
-export default Posts;
