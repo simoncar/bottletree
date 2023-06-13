@@ -92,7 +92,10 @@ export default function ModalScreen() {
 					<View style={styles.avatar}>
 						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
 					</View>
-					<Text style={styles.project}>Add project</Text>
+					<View>
+						<Text style={styles.project}>Add project</Text>
+						<Text style={styles.project}>(Not enabled yet)</Text>
+					</View>
 				</View>
 			</TouchableOpacity>
 		);

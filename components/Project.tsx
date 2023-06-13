@@ -35,7 +35,7 @@ const Project = (props) => {
 			<Pressable>
 				<View style={styles.outerView}>
 					<View style={styles.innerView}>
-						<Text style={styles.updateText}>{title}</Text>
+						<Text style={styles.updateText}>{title || "Select Project"}</Text>
 					</View>
 					<View style={styles.rightChevron}>
 						<FontAwesome5 name="angle-down" size={25} />

@@ -245,8 +245,84 @@ const instagramPosts = [
 			}
 		],
 		timestamp: "May 30, 2023"
+	},
+	{
+		id: 6,
+		project: "TasX4GYjvOeRsAicmJGJ",
+		author: {
+			id: 1,
+			username: "carpenter",
+			fullname: "Colin",
+			role: "Carpenter",
+			avatar: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Ftap.png?alt=media&token=594bc8d0-4764-4d6d-8c0d-049a9041dca2"
+		},
+		username: "carpenter",
+		images: [
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fbeachhouse.jpeg?alt=media&token=38227b43-ffad-48a1-9b3c-9d5d5c85f38a"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps3.jpeg?alt=media&token=b1657897-de6b-4535-98ce-6646cfcbb66b"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps4.jpeg?alt=media&token=d52b54ba-9b64-4890-be3a-8ebcd42ab5b3"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps5.jpeg?alt=media&token=7e11f9ce-4708-4182-9d18-36794f60465a"
+			},
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Ftaps%2Ftaps1.jpeg?alt=media&token=1d9bb74f-afda-4e80-9735-e819fa9366d9"
+			}
+		],
+		localImage: "../assets/imagesTemp/IMG_4072.jpg",
+		caption: "Exploring the city streets. #urbanlife",
+		likes: 876,
+		comments: [
+			{
+				username: "carpenter",
+				comment: "Install outside deck please"
+			},
+			{
+				username: "marysmith",
+				comment: "House is a bit small so we extended with a deck"
+			}
+		],
+		timestamp: "May 30, 2023"
+	},
+	{
+		id: 7,
+		project: "TasX4GYjvOeRsAicmJGJ",
+		author: {
+			id: 1,
+			username: "carpenter",
+			fullname: "Colin",
+			role: "Carpenter",
+			avatar: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FcarpentarAvatar.png?alt=media&token=2160e66d-78bc-4cf0-97f8-601989f68fbb"
+		},
+		username: "carpenter",
+		images: [
+			{
+				imageUrl: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fdeck.jpeg?alt=media&token=e22299ae-6be8-4fb2-8bd9-6b24de539b65"
+			}
+		],
+		localImage: "../assets/imagesTemp/IMG_4072.jpg",
+		caption: "Exploring the city streets. #urbanlife",
+		likes: 876,
+		comments: [
+			{
+				username: "carpenter",
+				comment: "I finished, Is this deck ok?"
+			},
+			{
+				username: "marysmith",
+				comment: "It's a bit small"
+			}
+		],
+		timestamp: "May 30, 2023"
 	}
 ];
+
+//
 
 export const Posts = (props) => {
 	const { project2, isGrid } = props;
