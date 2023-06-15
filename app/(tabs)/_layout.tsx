@@ -49,7 +49,7 @@ export default function TabLayout() {
 			/>
 
 			<Tabs.Screen
-				name="two"
+				name="add"
 				options={{
 					title: "",
 					headerTitle: () => <BigText style={{ fontSize: 28 }}>Add</BigText>,
