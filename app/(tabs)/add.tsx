@@ -5,7 +5,6 @@ import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
-import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import { db, storage } from "../../lib/firebaseConfig";
 import * as Crypto from "expo-crypto";
@@ -81,9 +80,7 @@ export default function addPhoto() {
 			uploadTask.on(
 				"state_changed",
 				(snapshot) => {
-					// Observe state change events such as progress, pause, and resume
-					// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-					const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					const uploadProgress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 					console.log("Upload is " + uploadProgress + "% done");
 					setProgress(uploadProgress);
 					switch (snapshot.state) {
