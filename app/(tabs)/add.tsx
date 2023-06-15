@@ -1,6 +1,5 @@
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
-
 import { StoryEntity, StoryState } from "../../lib/interfaces";
 import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -40,23 +39,12 @@ export default function addPhoto() {
 	const pickImage = async () => {
 		var d = new Date();
 
-		console.log("PICK IMAGEs");
-		// No permissions request is necessary for launching the image library
 		let result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
-			//allowsEditing: true,
-			//aspect: [4, 3],
 			quality: 1
 		});
 
-		console.log("REsult:", result);
-
 		if (!result.canceled) {
-			console.log("NOT CANCELLED:");
-			//setImage(result.assets[0].uri);
-
-			//this.setState({ cameraIcon: "hour-glass" });
-
 			var fileToUpload = "";
 			var mime = "";
 
@@ -69,16 +57,12 @@ export default function addPhoto() {
 			setImage(fileToUpload);
 			mime = "image/jpeg";
 
-			console.log("CCCC");
 			const blob = await new Promise((resolve, reject) => {
 				const xhr = new XMLHttpRequest();
-				console.log("DDD");
 				xhr.onload = function () {
 					resolve(xhr.response);
-					console.log("EEE");
 				};
 				xhr.onerror = function (e) {
-					console.log("FFFF");
 					reject(new TypeError("Network request failed"));
 				};
 				xhr.responseType = "blob";
@@ -87,12 +71,9 @@ export default function addPhoto() {
 			});
 
 			const UUID = Crypto.randomUUID();
-			console.log("Your UUID: " + UUID);
-			console.log("Filename: " + d.getUTCFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + UUID);
 
-			const fileName = "images/" + d.getUTCFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + UUID;
+			const fileName = "posts/" + d.getUTCFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + UUID;
 
-			//const storageRef = ref(storage, "random/" + d.getUTCFullYear() + ("0" + (d.getMonth() + 1)).slice(-2)) + UUID;
 			const storageRef = ref(storage, fileName);
 
 			const uploadTask = uploadBytesResumable(storageRef, blob);
@@ -119,30 +100,11 @@ export default function addPhoto() {
 				},
 				() => {
 					// Handle successful uploads on complete
-					// For instance, get the download URL: https://firebasestorage.googleapis.com/...
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log("File available at", downloadURL);
 					});
 				}
 			);
-
-			// uploadBytes(storageRef, blob)
-			// 	.then((snapshot) => {
-			// 		return snapshot.ref.getDownloadURL(); // Will return a promise with the download link
-			// 	})
-			// 	.then((downloadURL) => {
-			// 		console.log(`Successfully uploaded file and got download link - ${downloadURL}`);
-			// 		this.setState({ photo1: downloadURL });
-			// 		return downloadURL;
-			// 	})
-			// 	.catch((error) => {
-			// 		// Use to signal error if something goes wrong.
-			// 		console.log(`Failed to upload file and get link - ${error}`);
-			// 	});
-
-			// // We're done with the blob, close and release it
-			// blob.close();
-			// //this.setState({ cameraIcon: "camera" });
 		}
 	};
 

@@ -2,7 +2,7 @@
 	"expo": {
 		"name": "One Build",
 		"slug": "bottletree",
-		"version": "1.0.4",
+		"version": "1.0.5",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
 		"scheme": "bottletree",
@@ -16,7 +16,7 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.simoncar.bottletree",
-			"buildNumber": "6",
+			"buildNumber": "7",
 			"config": {
 				"usesNonExemptEncryption": false
 			}
@@ -47,9 +47,10 @@
 			[
 				"expo-image-picker",
 				{
-					"photosPermission": "The app accesses your photos to share with the project team."
+					"photosPermission": "The app accesses your photos to share the images your select with the project team."
 				}
-			]
+			],
+			"sentry-expo"
 		]
 	}
 }
