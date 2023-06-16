@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { Image } from "expo-image";
 import Carousel from "react-native-reanimated-carousel";
@@ -9,6 +9,7 @@ const { width } = Dimensions.get("window");
 
 const Post = (props) => {
 	const { post, toggleLike, toggleFollow, onItemClicked, isFollowHidden } = props;
+	//const [myList, setMyList] = useState([]);
 
 	const onHeartClicked = () => {
 		toggleLike(post);
@@ -23,7 +24,7 @@ const Post = (props) => {
 	};
 
 	const renderPostContent = () => {
-		const imageUrls = post.images.map((image) => image.imageUrl);
+		imageUrls = post.images && post.images.map((image) => image);
 
 		return (
 			<View style={styles.listItemBody}>
@@ -33,7 +34,7 @@ const Post = (props) => {
 					panGestureHandlerProps={{
 						activeOffsetX: [-10, 10]
 					}}
-					data={[...new Array(5).keys()]}
+					data={imageUrls}
 					onSnapToItem={(index) => console.log("current index:", index)}
 					renderItem={({ index }) => (
 						<View
@@ -75,22 +76,37 @@ const Post = (props) => {
 		);
 	};
 
-	return (
-		<View>
-			<View style={styles.listItemHeader}>
+	function renderAvatar(post) {
+		if (undefined != post.author && undefined != post.author.avatar && post.author.avatar.length > 0) {
+			return (
 				<View style={styles.avatar}>
 					<Image style={styles.avatarFace} source={post.author.avatar}></Image>
 				</View>
-
+			);
+		} else {
+			return <View style={styles.avatar}></View>;
+		}
+	}
+	function renderFullname(post) {
+		if (undefined != post.author && undefined != post.author.fullname && post.author.fullname.length > 0) {
+			return (
 				<View>
 					<Text style={styles.listItemAuthorName}>{post.author.fullname}</Text>
-					<Text style={styles.listItemFollow}>{post.author.role}</Text>
 				</View>
+			);
+		} else {
+			return <View style={styles.avatar}></View>;
+		}
+	}
+
+	return (
+		<View>
+			<View style={styles.listItemHeader}>
+				{renderAvatar(post)}
+				{renderFullname(post)}
 			</View>
 			{renderPostContent()}
 			<View style={styles.listItemFooter}>
-				{renderPostComments()}
-
 				<TouchableOpacity onPress={onHeartClicked}></TouchableOpacity>
 			</View>
 		</View>

@@ -26,14 +26,13 @@ export default function ModalScreen() {
 	const colorScheme = useColorScheme();
 
 	const projectsRead = (projectsDB) => {
-		//domainsSetter(JSON.stringify(projectsDB));
 		setProjects(projectsDB);
-		console.log("Callback projectsRead", projectsDB);
+		//console.log("Callback projectsRead", projectsDB);
 	};
 
 	useEffect(() => {
 		const unsubscribe = getProjects(projectsRead);
-		console.log("useEffect: Getting Projects");
+		//console.log("useEffect: Getting Projects");
 
 		return () => {
 			unsubscribe;
@@ -44,8 +43,8 @@ export default function ModalScreen() {
 		if (projects !== "" && loading === true) {
 			//setProjectsList(JSON.parse(projects));
 			setLoading(false);
-			console.log("Loading Set to FaLSe");
-			console.log("useEffect [projects]");
+			//console.log("Loading Set to FaLSe");
+			//console.log("useEffect [projects]");
 		}
 	}, [projects]);
 
@@ -101,7 +100,7 @@ export default function ModalScreen() {
 		);
 	}
 
-	readProjects();
+	//readProjects();
 
 	return (
 		<View style={styles.container}>

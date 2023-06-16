@@ -14,7 +14,6 @@ const Project = (props) => {
 		onItemClicked(post);
 	};
 	let [version, setVersion] = useState(0);
-	console.log("installed version : ", Constants.expoConfig?.ios?.buildNumber);
 
 	const docRef = doc(db, "about", "version");
 	getDoc(docRef)

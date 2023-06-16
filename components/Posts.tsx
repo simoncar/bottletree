@@ -4,6 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 
 import Post from "./Post";
 import Project from "./Project";
+import { getPosts } from "../lib/APIprojects";
 
 const user = {
 	id: "1",
@@ -326,49 +327,34 @@ const instagramPosts = [
 
 export const Posts = (props) => {
 	const { project2, isGrid } = props;
-
-	const [posts, setPosts] = useState();
-	//const [project, setProject] = useState();
-	//const [title, setTitle] = useState();
-
+	const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const { project, title } = useLocalSearchParams();
 
-	useEffect((project) => {
-		loadPosts(project);
-		console.log("Posts: useEffect");
+	const postsRead = (postsDB) => {
+		setPosts(postsDB);
+		console.log("Callback postsRead", postsDB);
+	};
+
+	useEffect(() => {
+		console.log("useEffect [AAAAAAAA]");
+		//loadPosts(project);
+		const unsubscribe = getPosts(project, postsRead);
 
 		return () => {
-			// setPosts([]);
-			// const postsRef = databaseRef(database, "posts");
-			// databaseOff(postsRef);
+			unsubscribe;
 		};
 	}, []);
 
 	useEffect(() => {
-		loadPosts(project);
-		console.log("Posts: useEffect", project);
-		//setTitle(title);
-		//setProject(project);
-
-		console.log("TITLE : " + title);
-
-		return () => {
-			// setPosts([]);
-			// const postsRef = databaseRef(database, "posts");
-			// databaseOff(postsRef);
-		};
+		console.log("useEffect [posts]");
+		//if (posts !== "" && loading === true) {
+		//setProjectsList(JSON.parse(projects));
+		const unsubscribe = getPosts(project, postsRead);
+		setLoading(false);
+		console.log("useEffect [posts]", project);
+		//}
 	}, [project]);
-
-	const loadPosts = (project: string) => {
-		const filteredPosts = instagramPosts.filter((post) => {
-			return post.project === project;
-		});
-
-		// Log the filtered posts to the console
-		console.log(filteredPosts);
-
-		setPosts(filteredPosts);
-	};
 
 	const toggleLike = async (post) => {};
 	const toggleFollow = async (post) => {};
@@ -379,7 +365,7 @@ export const Posts = (props) => {
 		if (isGrid) {
 			return <ProfilePost post={post} onItemClicked={onItemClicked} />;
 		}
-		return <Post post={post} toggleLike={toggleLike} toggleFollow={toggleFollow} onItemClicked={onItemClicked} isFollowHidden={user && user.id === post.author.id} />;
+		return <Post post={post} toggleLike={toggleLike} toggleFollow={toggleFollow} onItemClicked={onItemClicked} />;
 	};
 
 	const getKey = (item) => {

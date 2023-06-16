@@ -1,11 +1,18 @@
 import iconSet from "@expo/vector-icons/build/FontAwesome5";
 import { db } from "./firebaseConfig";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot, Timestamp } from "firebase/firestore";
 
 interface IProject {
 	key: string;
 	title: string;
 	icon: string;
+}
+
+interface IPost {
+	key: string;
+	author: string;
+	timestamp: any;
+	images: string[];
 }
 
 type projectsRead = (projects: IProject[]) => void;
@@ -30,28 +37,24 @@ export async function getProjects(callback: projectsRead) {
 	return () => unsubscribe();
 }
 
-// export function isDomainAdmin(currentUid: string, adminArray: string[]) {
-// 	if (Array.isArray(adminArray)) {
-// 		if (adminArray.includes(currentUid)) return true;
-// 		else return false;
-// 	}
-// }
+export async function getPosts(projectId, callback: postsRead) {
+	//const querySnapshot = await getDocs(collection(db, "cities", "SF", "landmarks"));
+	//const q = query(collection(db, "projects", projectId, "posts"), where("state", "==", "CA"));
+	const q = query(collection(db, "projects", projectId, "posts"));
 
-// export async function isDomainAdminServer(currentUid: string, domain: string) {
-// 	return new Promise((resolve, reject) => {
-// 		firebase
-// 			.firestore()
-// 			.collection("domains")
-// 			.where("node", "==", domain)
-// 			.get()
-// 			.then(function (snapshot) {
-// 				snapshot.forEach(function (doc) {
-// 					const x = isDomainAdmin(currentUid, doc.data().admins);
-// 					resolve(x);
-// 				});
-// 			})
-// 			.catch((error) => {
-// 				reject(Error("isDomainAdminServer broke " + error));
-// 			});
-// 	});
-// }
+	const unsubscribe = onSnapshot(q, (querySnapshot) => {
+		const posts: IPost[] = [];
+		querySnapshot.forEach((doc) => {
+			posts.push({
+				key: doc.id,
+				author: doc.data().author,
+				images: doc.data().images,
+				timestamp: doc.data().timestamp
+			});
+		});
+		console.log("Current Posts: ", posts.join(", "));
+		callback(posts);
+	});
+
+	return () => unsubscribe();
+}
