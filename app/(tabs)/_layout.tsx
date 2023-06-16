@@ -6,9 +6,6 @@ import { BigText } from "../../components/StyledText";
 import Colors from "../../constants/Colors";
 import { View } from "../../components/Themed";
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome5>["name"]; color: string }) {
 	return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
 }
@@ -50,6 +47,7 @@ export default function TabLayout() {
 
 			<Tabs.Screen
 				name="add"
+				initialParams={{ currentProject: "YYYYZZZZ" }}
 				options={{
 					title: "",
 					headerTitle: () => <BigText style={{ fontSize: 28 }}>Add</BigText>,
