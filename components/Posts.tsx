@@ -4,7 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 
 import Post from "./Post";
 import Project from "./Project";
-import { getPosts } from "../lib/APIprojects";
+import { getPosts } from "../lib/APIpost";
 
 const user = {
 	id: "1",

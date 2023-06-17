@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import iconSet from "@expo/vector-icons/build/FontAwesome5";
 import { db } from "./firebaseConfig";
-import { collection, query, addDoc, onSnapshot, Timestamp } from "firebase/firestore";
+import { collection, query, addDoc, onSnapshot, Timestamp, orderBy } from "firebase/firestore";
 
 interface IPost {
 	projectId: string;
@@ -27,7 +27,7 @@ export function savePost(post: IPost) {
 }
 
 export async function getPosts(projectId, callback: postsRead) {
-	const q = query(collection(db, "projects", projectId, "posts"));
+	const q = query(collection(db, "projects", projectId, "posts"), orderBy("timestamp", "desc"));
 
 	const unsubscribe = onSnapshot(q, (querySnapshot) => {
 		const posts: IPost[] = [];

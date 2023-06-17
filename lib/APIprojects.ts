@@ -36,25 +36,3 @@ export async function getProjects(callback: projectsRead) {
 
 	return () => unsubscribe();
 }
-
-export async function getPosts(projectId, callback: postsRead) {
-	//const querySnapshot = await getDocs(collection(db, "cities", "SF", "landmarks"));
-	//const q = query(collection(db, "projects", projectId, "posts"), where("state", "==", "CA"));
-	const q = query(collection(db, "projects", projectId, "posts"));
-
-	const unsubscribe = onSnapshot(q, (querySnapshot) => {
-		const posts: IPost[] = [];
-		querySnapshot.forEach((doc) => {
-			posts.push({
-				key: doc.id,
-				author: doc.data().author,
-				images: doc.data().images,
-				timestamp: doc.data().timestamp
-			});
-		});
-		console.log("Current Posts: ", posts.join(", "));
-		callback(posts);
-	});
-
-	return () => unsubscribe();
-}
