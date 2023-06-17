@@ -1,6 +1,7 @@
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import MyContext from "../lib/context";
 import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
 import { db } from "../lib/firebaseConfig";
 import { Image } from "expo-image";
@@ -24,6 +25,12 @@ export default function ModalScreen() {
 
 	const isPresented = navigation.canGoBack();
 	const colorScheme = useColorScheme();
+	const { sharedData, updateSharedData } = useContext(MyContext);
+
+	const handleButtonClick = () => {
+		// Update the value in the context
+		updateSharedData({ username: "Jane Doe" });
+	};
 
 	const projectsRead = (projectsDB) => {
 		setProjects(projectsDB);
@@ -43,6 +50,7 @@ export default function ModalScreen() {
 		if (projects !== "" && loading === true) {
 			//setProjectsList(JSON.parse(projects));
 			setLoading(false);
+
 			//console.log("Loading Set to FaLSe");
 			//console.log("useEffect [projects]");
 		}
@@ -63,6 +71,9 @@ export default function ModalScreen() {
 				key={data.key}
 				onPress={() => {
 					/* 1. Navigate to the Details route with params */
+					console.log("data.key", data.key);
+					//setUserName("Smith, John Smith");
+
 					router.push({
 						pathname: "/",
 						params: {
@@ -86,7 +97,11 @@ export default function ModalScreen() {
 
 	function renderAdd() {
 		return (
-			<TouchableOpacity key={"add"}>
+			<TouchableOpacity
+				key={"add"}
+				onPress={() => {
+					handleButtonClick();
+				}}>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
 						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
@@ -94,6 +109,10 @@ export default function ModalScreen() {
 					<View>
 						<Text style={styles.project}>Add project</Text>
 						<Text style={styles.project}>(Not enabled yet)</Text>
+					</View>
+					<View>
+						<Text style={styles.project}>{sharedData.username}</Text>
+						<Text style={styles.project}>{sharedData.age}</Text>
 					</View>
 				</View>
 			</TouchableOpacity>

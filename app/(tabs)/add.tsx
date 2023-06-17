@@ -1,5 +1,5 @@
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { StoryEntity, StoryState } from "../../lib/interfaces";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
@@ -9,6 +9,7 @@ import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View } from "../../components/Themed";
 import { db, storage } from "../../lib/firebaseConfig";
 import * as Crypto from "expo-crypto";
+import { Context } from "../../lib/context";
 
 import { uploadBytes, uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
@@ -20,6 +21,7 @@ export default function addPhoto() {
 	const { currentProject, title } = useLocalSearchParams();
 
 	console.log("addPhoto: YYYYYY useLocalSearchParams: ", currentProject);
+	const value = useContext(Context);
 
 	const [image, setImage] = useState(null);
 	const [progress, setProgress] = useState(0);
@@ -119,7 +121,7 @@ export default function addPhoto() {
 			<Button title="Pick an image from camera roll" onPress={pickImage} />
 			<Text>{progress}</Text>
 			<Text>{image}</Text>
-
+			<Text>Context: A{value}A</Text>
 			{image && <Image source={image} style={styles.storyPhoto} />}
 
 			<TouchableOpacity style={styles.photoButton} onPress={this._pickImage}>
