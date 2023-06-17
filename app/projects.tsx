@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import MyContext from "../lib/context";
+import ProjectContext from "../lib/context";
 import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
 import { db } from "../lib/firebaseConfig";
 import { Image } from "expo-image";
@@ -12,6 +12,7 @@ import { Text, View } from "../components/Themed";
 import { getProjects } from "../lib/APIprojects";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Colors from "../constants/Colors";
+import Project from "../components/Project";
 
 export default function ModalScreen() {
 	const [projectsList, setProjectsList] = useState([]);
@@ -25,12 +26,7 @@ export default function ModalScreen() {
 
 	const isPresented = navigation.canGoBack();
 	const colorScheme = useColorScheme();
-	const { sharedData, updateSharedData } = useContext(MyContext);
-
-	const handleButtonClick = () => {
-		// Update the value in the context
-		updateSharedData({ username: "Jane Doe" });
-	};
+	const { sharedData, updateSharedData } = useContext(ProjectContext);
 
 	const projectsRead = (projectsDB) => {
 		setProjects(projectsDB);
@@ -72,7 +68,11 @@ export default function ModalScreen() {
 				onPress={() => {
 					/* 1. Navigate to the Details route with params */
 					console.log("data.key", data.key);
-					//setUserName("Smith, John Smith");
+					updateSharedData({
+						projectId: data.key,
+						projectTitle: data.title,
+						projectIcon: data.icon
+					});
 
 					router.push({
 						pathname: "/",
@@ -97,11 +97,7 @@ export default function ModalScreen() {
 
 	function renderAdd() {
 		return (
-			<TouchableOpacity
-				key={"add"}
-				onPress={() => {
-					handleButtonClick();
-				}}>
+			<TouchableOpacity key={"add"}>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
 						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
@@ -111,8 +107,8 @@ export default function ModalScreen() {
 						<Text style={styles.project}>(Not enabled yet)</Text>
 					</View>
 					<View>
-						<Text style={styles.project}>{sharedData.username}</Text>
-						<Text style={styles.project}>{sharedData.age}</Text>
+						<Text style={styles.project}>{sharedData.projectId}</Text>
+						<Text style={styles.project}>{sharedData.projectTitle}</Text>
 					</View>
 				</View>
 			</TouchableOpacity>

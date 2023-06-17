@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import MyContext from "./context";
+import ProjectContext from "./context";
 
 const MyProvider = ({ children }) => {
 	const [sharedData, setSharedData] = useState({
-		username: "John Doe",
-		age: 25
+		projectId: "",
+		projectTitle: "",
+		projectIcon: ""
 	});
 
 	const updateSharedData = (newData) => {
 		setSharedData({ ...sharedData, ...newData });
 	};
 
-	return <MyContext.Provider value={{ sharedData, updateSharedData }}>{children}</MyContext.Provider>;
+	return <ProjectContext.Provider value={{ sharedData, updateSharedData }}>{children}</ProjectContext.Provider>;
 };
 
 export default MyProvider;
