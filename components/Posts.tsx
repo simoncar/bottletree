@@ -337,8 +337,6 @@ export const Posts = (props) => {
 	};
 
 	useEffect(() => {
-		console.log("useEffect [AAAAAAAA]");
-		//loadPosts(project);
 		const unsubscribe = getPosts(project, postsRead);
 
 		return () => {

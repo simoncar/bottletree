@@ -9,7 +9,8 @@ import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View } from "../../components/Themed";
 import { db, storage } from "../../lib/firebaseConfig";
 import * as Crypto from "expo-crypto";
-import { Context } from "../../lib/context";
+import ProjectContext from "../../lib/context";
+import { savePost } from "../../lib/APIpost";
 
 import { uploadBytes, uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
@@ -18,10 +19,7 @@ export default function addPhoto() {
 		photo1: photo1 !== undefined ? photo1 : ""
 	};
 
-	const { currentProject, title } = useLocalSearchParams();
-
-	console.log("addPhoto: YYYYYY useLocalSearchParams: ", currentProject);
-	const value = useContext(Context);
+	const { sharedData, updateSharedData } = useContext(ProjectContext);
 
 	const [image, setImage] = useState(null);
 	const [progress, setProgress] = useState(0);
@@ -109,6 +107,12 @@ export default function addPhoto() {
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log("File available at", downloadURL);
 
+						savePost({
+							projectId: sharedData.projectId,
+							author: "DDDD",
+							images: [downloadURL]
+						});
+
 						//write to firebase
 					});
 				}
@@ -118,10 +122,10 @@ export default function addPhoto() {
 
 	return (
 		<View style={styles.container}>
+			<Text style={styles.title}>{sharedData.projectId}</Text>
 			<Button title="Pick an image from camera roll" onPress={pickImage} />
 			<Text>{progress}</Text>
 			<Text>{image}</Text>
-			<Text>Context: A{value}A</Text>
 			{image && <Image source={image} style={styles.storyPhoto} />}
 
 			<TouchableOpacity style={styles.photoButton} onPress={this._pickImage}>
