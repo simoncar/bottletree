@@ -30,7 +30,7 @@ export function savePost(post: IPost, callback: saveDone) {
 
 export async function getPosts(projectId, callback: postsRead) {
 	if (undefined === projectId) {
-		projectId = "73JwAXeOEhLXUggpVKK9";
+		projectId = "void";
 	}
 
 	const q = query(collection(db, "projects", projectId, "posts"), orderBy("timestamp", "desc"));

@@ -33,6 +33,14 @@ export default function addPhoto() {
 		});
 	};
 
+	const renderProgress = (progress) => {
+		if (progress > 0) {
+			return <Text>Upload Progress : {progress}%</Text>;
+		} else {
+			return;
+		}
+	};
+
 	const pickImage = async () => {
 		var d = new Date();
 
@@ -113,14 +121,21 @@ export default function addPhoto() {
 		}
 	};
 
-	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>{sharedData.projectId}</Text>
-			<Button title="Pick an image from camera roll" onPress={pickImage} />
-			<Text>{progress}</Text>
-			{image && <Image source={image} style={styles.storyPhoto} />}
-		</View>
-	);
+	if (undefined === sharedData.projectId || "" === sharedData.projectId) {
+		return (
+			<View style={styles.container}>
+				<Text style={styles.title}>Select a Project first and then try again</Text>
+			</View>
+		);
+	} else {
+		return (
+			<View style={styles.container}>
+				<Button title="Pick an image from camera roll" onPress={pickImage} />
+				{renderProgress(progress)}
+				{image && <Image source={image} style={styles.storyPhoto} />}
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

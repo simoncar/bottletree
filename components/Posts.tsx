@@ -7,7 +7,6 @@ import Project from "./Project";
 import { getPosts } from "../lib/APIpost";
 
 export const Posts = (props) => {
-	const { project2, isGrid } = props;
 	const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const { project, title } = useLocalSearchParams();
@@ -18,17 +17,20 @@ export const Posts = (props) => {
 	};
 
 	useEffect(() => {
-		const unsubscribe = getPosts(project, postsRead);
-		setLoading(false);
-		return () => {
-			unsubscribe;
-		};
+		if (undefined != project) {
+			const unsubscribe = getPosts(project, postsRead);
+			setLoading(false);
+			return () => {
+				unsubscribe;
+			};
+		}
 	}, []);
 
 	useEffect(() => {
-		const unsubscribe = getPosts(project, postsRead);
-		setLoading(false);
-		//}
+		if (undefined != project) {
+			const unsubscribe = getPosts(project, postsRead);
+			setLoading(false);
+		}
 	}, [project]);
 
 	const renderItems = (item) => {
