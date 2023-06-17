@@ -67,7 +67,6 @@ export default function ModalScreen() {
 				key={data.key}
 				onPress={() => {
 					/* 1. Navigate to the Details route with params */
-					console.log("data.key", data.key);
 					updateSharedData({
 						projectId: data.key,
 						projectTitle: data.title,
@@ -114,7 +113,6 @@ export default function ModalScreen() {
 			</TouchableOpacity>
 		);
 	}
-
 
 	return (
 		<View style={styles.container}>

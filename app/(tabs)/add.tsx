@@ -2,7 +2,6 @@ import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from "react";
 import { StoryEntity, StoryState } from "../../lib/interfaces";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
@@ -15,32 +14,12 @@ import { savePost } from "../../lib/APIpost";
 import { uploadBytes, uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function addPhoto() {
-	this.state = {
-		photo1: photo1 !== undefined ? photo1 : ""
-	};
-
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
 
 	const [image, setImage] = useState(null);
 	const [progress, setProgress] = useState(0);
 
 	var story: StoryEntity;
-
-	story = {
-		photo1:
-			"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2FIMG_4067.jpg?alt=media&token=c51daaf5-93e9-4604-b39e-2b20687d8855&_gl=1*1lv6shw*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODEzMi4wLjAuMA.."
-	};
-
-	this.state = {
-		photo1:
-			photo1 !== undefined
-				? photo1
-				: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2FIMG_4067.jpg?alt=media&token=c51daaf5-93e9-4604-b39e-2b20687d8855&_gl=1*1lv6shw*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODEzMi4wLjAuMA.."
-	};
-
-	//const currentProject = route.params.currentProject;
-
-	const { key, summary, description, photo1, visible, showIconChat, order, dateTimeStart, dateTimeEnd, date_start, time_start_pretty, time_end_pretty } = story;
 
 	const pickImage = async () => {
 		var d = new Date();
@@ -57,7 +36,6 @@ export default function addPhoto() {
 			const convertedImage = await new ImageManipulator.manipulateAsync(result.assets[0].uri, [{ resize: { height: 1000 } }], {
 				compress: 0
 			});
-			console.log("BBB");
 
 			fileToUpload = convertedImage.uri;
 			setImage(fileToUpload);
@@ -125,10 +103,9 @@ export default function addPhoto() {
 			<Text style={styles.title}>{sharedData.projectId}</Text>
 			<Button title="Pick an image from camera roll" onPress={pickImage} />
 			<Text>{progress}</Text>
-			<Text>{image}</Text>
 			{image && <Image source={image} style={styles.storyPhoto} />}
 
-			<TouchableOpacity style={styles.photoButton} onPress={this._pickImage}>
+			<TouchableOpacity style={styles.photoButton} onPress={pickImage}>
 				<FontAwesome5 name="camera" size={325} />
 			</TouchableOpacity>
 		</View>

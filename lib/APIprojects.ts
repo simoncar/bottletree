@@ -29,7 +29,6 @@ export async function getProjects(callback: projectsRead) {
 				icon: doc.data().icon
 			});
 		});
-		console.log("Current Projects: ", projects.join(", "));
 		callback(projects);
 	});
 

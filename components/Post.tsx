@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import { Image } from "expo-image";
 import Carousel from "react-native-reanimated-carousel";
+import { Image } from "expo-image";
 
 const { width } = Dimensions.get("window");
 
@@ -18,38 +18,6 @@ const Post = (props) => {
 
 	const clickItem = () => {
 		onItemClicked(post);
-	};
-
-	const renderPostContent = () => {
-		imageUrls = post.images && post.images.map((image) => image);
-
-		console.log("BBB Post: renderPostContent", post.images[0]);
-
-		return (
-			<View style={styles.listItemBody}>
-				<Image style={styles.image} source={imageUrls[0]}></Image>
-				<Carousel
-					width={width}
-					panGestureHandlerProps={{
-						activeOffsetX: [-10, 10]
-					}}
-					data={imageUrls}
-					onSnapToItem={(index) => console.log("current index:", index)}
-					renderItem={({ index }) => (
-						<View
-							style={{
-								flex: 1,
-								borderWidth: 0,
-								justifyContent: "center"
-							}}>
-							<Image style={styles.image} source={imageUrls[index]}></Image>
-							<Text style={styles.commentUserName}>Image: {index}</Text>
-							<Text style={styles.commentUserName}>Filename: {imageUrls[index]}</Text>
-						</View>
-					)}
-				/>
-			</View>
-		);
 	};
 
 	const renderPostComments = () => {
@@ -96,7 +64,7 @@ const Post = (props) => {
 		}
 	}
 
-	imageUrls = post.images && post.images.map((image) => image);
+	const imageUrls = post.images && post.images.map((image) => image);
 
 	return (
 		<View>
@@ -113,7 +81,6 @@ const Post = (props) => {
 					}}
 					height={width / 2}
 					data={imageUrls}
-					onSnapToItem={(index) => console.log("current index:", index)}
 					renderItem={({ index }) => (
 						<View
 							style={{
@@ -121,8 +88,12 @@ const Post = (props) => {
 								borderWidth: 1,
 								justifyContent: "center"
 							}}>
-							<Image style={styles.image} source={imageUrls[index]}></Image>
-							<Text style={{ textAlign: "center", fontSize: 30 }}>{index}</Text>
+							<Image
+								style={styles.image}
+								source={{
+									uri: imageUrls[index]
+								}}
+							/>
 						</View>
 					)}
 				/>
@@ -133,6 +104,8 @@ const Post = (props) => {
 		</View>
 	);
 };
+
+//source={imageUrls[index]}>
 
 const styles = StyleSheet.create({
 	image: {

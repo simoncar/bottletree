@@ -33,13 +33,11 @@ export const Posts = (props) => {
 
 	const renderItems = (item) => {
 		const post = item.item;
-		console.log("AAA renderItems:", post.key, post.images[0]);
 
 		return <Post post={post} />;
 	};
 
 	const getKey = (item) => {
-		console.log("getKey:", item.key);
 		return item.key;
 	};
 
