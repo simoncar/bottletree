@@ -18,7 +18,6 @@ interface IPost {
 type projectsRead = (projects: IProject[]) => void;
 
 export async function getProjects(callback: projectsRead) {
-	//const q = query(collection(db, "projects"), where("state", "==", "CA"));
 	const q = query(collection(db, "projects"));
 
 	const unsubscribe = onSnapshot(q, (querySnapshot) => {

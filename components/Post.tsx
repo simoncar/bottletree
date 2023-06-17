@@ -3,13 +3,10 @@ import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList } from "
 import { Image } from "expo-image";
 import Carousel from "react-native-reanimated-carousel";
 
-const blurhash = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
-
 const { width } = Dimensions.get("window");
 
 const Post = (props) => {
 	const { post, toggleLike, toggleFollow, onItemClicked, isFollowHidden } = props;
-	//const [myList, setMyList] = useState([]);
 
 	const onHeartClicked = () => {
 		toggleLike(post);
@@ -26,10 +23,12 @@ const Post = (props) => {
 	const renderPostContent = () => {
 		imageUrls = post.images && post.images.map((image) => image);
 
+		console.log("BBB Post: renderPostContent", post.images[0]);
+
 		return (
 			<View style={styles.listItemBody}>
+				<Image style={styles.image} source={imageUrls[0]}></Image>
 				<Carousel
-					loop
 					width={width}
 					panGestureHandlerProps={{
 						activeOffsetX: [-10, 10]
@@ -44,16 +43,14 @@ const Post = (props) => {
 								justifyContent: "center"
 							}}>
 							<Image style={styles.image} source={imageUrls[index]}></Image>
+							<Text style={styles.commentUserName}>Image: {index}</Text>
+							<Text style={styles.commentUserName}>Filename: {imageUrls[index]}</Text>
 						</View>
 					)}
 				/>
 			</View>
 		);
 	};
-
-	<View style={{ flexDirection: "row" }}>
-		<Text style={{ flex: 1, flexWrap: "wrap" }}> You miss fdddddd dddddddd You miss fdd</Text>
-	</View>;
 
 	const renderPostComments = () => {
 		const comments = post.comments.map((comment) => comment);
@@ -99,13 +96,37 @@ const Post = (props) => {
 		}
 	}
 
+	imageUrls = post.images && post.images.map((image) => image);
+
 	return (
 		<View>
 			<View style={styles.listItemHeader}>
 				{renderAvatar(post)}
 				{renderFullname(post)}
 			</View>
-			{renderPostContent()}
+
+			<View style={{ flex: 1 }}>
+				<Carousel
+					width={width}
+					panGestureHandlerProps={{
+						activeOffsetX: [-10, 10]
+					}}
+					height={width / 2}
+					data={imageUrls}
+					onSnapToItem={(index) => console.log("current index:", index)}
+					renderItem={({ index }) => (
+						<View
+							style={{
+								flex: 1,
+								borderWidth: 1,
+								justifyContent: "center"
+							}}>
+							<Image style={styles.image} source={imageUrls[index]}></Image>
+							<Text style={{ textAlign: "center", fontSize: 30 }}>{index}</Text>
+						</View>
+					)}
+				/>
+			</View>
 			<View style={styles.listItemFooter}>
 				<TouchableOpacity onPress={onHeartClicked}></TouchableOpacity>
 			</View>

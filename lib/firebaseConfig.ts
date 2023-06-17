@@ -13,8 +13,6 @@ const firebaseConfig = {
 	appId: `${fbConfig.appId}`
 };
 
-console.log("firebaseConfig", firebaseConfig);
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const storage = getStorage(app);

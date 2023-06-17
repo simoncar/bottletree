@@ -19,7 +19,6 @@ const Project = (props) => {
 	getDoc(docRef)
 		.then((docSnap) => {
 			if (docSnap.exists()) {
-				console.log("Document data:", docSnap.data());
 				setVersion(docSnap.data().current);
 			} else {
 				// docSnap.data() will be undefined in this case

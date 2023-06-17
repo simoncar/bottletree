@@ -26,8 +26,6 @@ export function Button(props) {
 export function ShortList(props) {
 	const { navigation } = props;
 
-	console.log("Shortlist: ", props);
-
 	const features = props.data ? props.data : [];
 	///if (!_.isEmpty(features)) {
 	return (

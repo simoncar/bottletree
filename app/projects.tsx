@@ -115,7 +115,6 @@ export default function ModalScreen() {
 		);
 	}
 
-	//readProjects();
 
 	return (
 		<View style={styles.container}>

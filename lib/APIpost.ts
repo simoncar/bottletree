@@ -27,6 +27,10 @@ export function savePost(post: IPost) {
 }
 
 export async function getPosts(projectId, callback: postsRead) {
+	if (undefined === projectId) {
+		projectId = "73JwAXeOEhLXUggpVKK9";
+	}
+
 	const q = query(collection(db, "projects", projectId, "posts"), orderBy("timestamp", "desc"));
 
 	const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -39,7 +43,6 @@ export async function getPosts(projectId, callback: postsRead) {
 				timestamp: doc.data().timestamp
 			});
 		});
-		console.log("Current Posts: ", posts.join(", "));
 		callback(posts);
 	});
 

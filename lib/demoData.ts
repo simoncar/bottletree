@@ -15,8 +15,6 @@ import { db } from "./firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 export const demoData = async () => {
-	console.log("demoData");
-
 	try {
 		// const docRef = await addDoc(collection(db, "users"), {
 		// 	first: "Ada",
