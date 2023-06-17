@@ -2,7 +2,7 @@ import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from "react";
 import { StoryEntity, StoryState } from "../../lib/interfaces";
 import { Image } from "expo-image";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View } from "../../components/Themed";
@@ -19,7 +19,19 @@ export default function addPhoto() {
 	const [image, setImage] = useState(null);
 	const [progress, setProgress] = useState(0);
 
+	const router = useRouter();
 	var story: StoryEntity;
+
+	const saveDone = (id) => {
+		console.log("saveDone:", id);
+		router.push({
+			pathname: "/",
+			params: {
+				project: sharedData.projectId,
+				title: sharedData.projectTitle
+			}
+		});
+	};
 
 	const pickImage = async () => {
 		var d = new Date();
@@ -85,13 +97,16 @@ export default function addPhoto() {
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log("File available at", downloadURL);
 
-						savePost({
-							projectId: sharedData.projectId,
-							author: "DDDD",
-							images: [downloadURL]
-						});
+						savePost(
+							{
+								projectId: sharedData.projectId,
+								author: "DDDD",
+								images: [downloadURL]
+							},
+							saveDone
+						);
 
-						//write to firebase
+						// return to the previeus screen
 					});
 				}
 			);
@@ -104,10 +119,6 @@ export default function addPhoto() {
 			<Button title="Pick an image from camera roll" onPress={pickImage} />
 			<Text>{progress}</Text>
 			{image && <Image source={image} style={styles.storyPhoto} />}
-
-			<TouchableOpacity style={styles.photoButton} onPress={pickImage}>
-				<FontAwesome5 name="camera" size={325} />
-			</TouchableOpacity>
 		</View>
 	);
 }

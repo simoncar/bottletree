@@ -9,7 +9,7 @@ interface IPost {
 	images: string[];
 }
 
-export function savePost(post: IPost) {
+export function savePost(post: IPost, callback: saveDone) {
 	try {
 		const docRef = addDoc(collection(db, "projects", post.projectId, "posts"), {
 			author: "Ada",
@@ -19,6 +19,7 @@ export function savePost(post: IPost) {
 			timestamp: Timestamp.now()
 		}).then((docRef) => {
 			console.log("Document written with ID: ", docRef.id);
+			callback(docRef.id);
 		});
 	} catch (e) {
 		console.error("Error adding document: ", e);
