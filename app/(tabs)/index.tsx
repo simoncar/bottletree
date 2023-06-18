@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
-
 import { View } from "../../components/Themed";
 import { Posts } from "../../components/Posts";
-
 import { demoData } from "../../lib/demoData";
+import React from "react";
 
 demoData();
 

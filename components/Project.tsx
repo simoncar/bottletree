@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, useColorScheme, Text, StyleSheet, Pressable } from "react-native";
-import { db } from "../lib/firebaseConfig";
+import { db } from "../lib/firebase";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { doc, getDoc } from "firebase/firestore";
 import { Link, Tabs } from "expo-router";

@@ -13,7 +13,6 @@ export const Posts = (props) => {
 	const { project, title } = useLocalSearchParams();
 
 	const postsRead = (postsDB) => {
-		//console.log("postsRead:", postsDB);
 		setPosts(postsDB);
 	};
 
@@ -54,7 +53,6 @@ export const Posts = (props) => {
 
 const styles = StyleSheet.create({
 	list: {
-		backgroundColor: "#000",
 		flex: 1,
 		width: "100%",
 		paddingTop: 4,

@@ -3,7 +3,7 @@ import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import ProjectContext from "../lib/context";
 import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
-import { db } from "../lib/firebaseConfig";
+import { db } from "../lib/firebase";
 import { Image } from "expo-image";
 import { collection, getDocs } from "firebase/firestore";
 import { ShortList } from "../components/sComponent";

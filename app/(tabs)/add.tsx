@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View } from "../../components/Themed";
-import { db, storage } from "../../lib/firebaseConfig";
+import { db, storage } from "../../lib/firebase";
 import * as Crypto from "expo-crypto";
 import ProjectContext from "../../lib/context";
 import { savePost } from "../../lib/APIpost";

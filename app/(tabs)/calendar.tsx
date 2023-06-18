@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Alert, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import { Agenda, DateData, AgendaEntry, AgendaSchedule } from "react-native-calendars";
+import { View, Text } from "../../components/Themed";
 
 interface State {
 	items?: AgendaSchedule;
@@ -103,74 +104,72 @@ export default class AgendaScreen extends Component<State> {
 
 	render() {
 		return (
-			<Agenda
-				items={{
-					"2023-06-10": [
-						{
-							name: "Build Started",
-							description: "Team will be onsite at 8am to start build"
-						},
-						{
-							name: "Plans Approved",
-							description: "See attached plans for details"
+			<SafeAreaView style={styles.safeAreaView}>
+				<Agenda
+					items={{
+						"2023-06-10": [
+							{
+								name: "Build Started",
+								description: "Team will be onsite at 8am to start build"
+							},
+							{
+								name: "Plans Approved",
+								description: "See attached plans for details"
+							}
+						],
+						"2023-06-11": [
+							{
+								name: "Foundations",
+								description: "Trucks have parking permits for the day"
+							}
+						],
+						"2023-06-12": [{ name: "Slab" }],
+						"2023-06-13": [{ name: "Walls" }],
+						"2023-06-14": [
+							{
+								name: "Roof",
+								description: "High winds expected, please secure materials"
+							}
+						],
+						"2023-06-15": [
+							{
+								name: "Deadline Taps Order",
+								description: "Order must be confirmed by 5pm",
+								contact: "Stefanie (555) 555-5555"
+							}
+						],
+						"2023-06-16": [{ name: "Plumbing" }],
+						"2023-06-17": [{ name: "Doors" }],
+						"2023-06-18": [{ name: "Move In" }]
+					}}
+					loadItemsForMonth={this.loadItems}
+					renderItem={this.renderItem}
+					rowHasChanged={this.rowHasChanged}
+					showClosingKnob={true}
+					monthFormat={"yyyy"}
+					theme={{
+						backgroundColor: "red",
+						//@ts-ignore
+						"stylesheet.agenda.main": {
+							reservations: {
+								backgroundColor: "red",
+								flex: 1,
+								marginTop: 100
+							}
 						}
-					],
-					"2023-06-11": [
-						{
-							name: "Foundations",
-							description: "Trucks have parking permits for the day"
-						}
-					],
-					"2023-06-12": [{ name: "Slab" }],
-					"2023-06-13": [{ name: "Walls" }],
-					"2023-06-14": [
-						{
-							name: "Roof",
-							description: "High winds expected, please secure materials"
-						}
-					],
-					"2023-06-15": [
-						{
-							name: "Deadline Taps Order",
-							description: "Order must be confirmed by 5pm",
-							contact: "Stefanie (555) 555-5555"
-						}
-					],
-					"2023-06-16": [{ name: "Plumbing" }],
-					"2023-06-17": [{ name: "Doors" }],
-					"2023-06-18": [{ name: "Move In" }]
-				}}
-				loadItemsForMonth={this.loadItems}
-				selected={"2023-06-10"}
-				renderItem={this.renderItem}
-				rowHasChanged={this.rowHasChanged}
-				showClosingKnob={true}
-				markingType={"period"}
-				markedDates={{
-					"2023-05-08": { textColor: "#43515c" },
-					"2023-05-09": { textColor: "#43515c" },
-					"2023-05-14": { startingDay: true, endingDay: true },
-					"2023-05-21": { startingDay: true },
-					"2023-05-22": { endingDay: true, color: "gray" },
-					"2023-05-24": { startingDay: true, color: "gray" },
-					"2023-05-25": { color: "gray" },
-					"2023-05-26": { endingDay: true, color: "gray" }
-				}}
-				monthFormat={"yyyy"}
-				theme={{ agendaKnobColor: "lightgrey" }}
-				hideExtraDays={false}
-				reservationsKeyExtractor={this.reservationsKeyExtractor}
-			/>
+					}}
+					disabledByDefault
+					hideExtraDays={false}
+					reservationsKeyExtractor={this.reservationsKeyExtractor}
+				/>
+			</SafeAreaView>
 		);
 	}
 
 	renderItem = (reservation: any, isFirst: boolean) => {
-		const fontSize = isFirst ? 16 : 14;
-		const color = isFirst ? "black" : "#43515c";
-
 		return (
 			<TouchableOpacity style={[styles.item, { height: reservation.height }]} onPress={() => Alert.alert(reservation.name)}>
-				<Text style={{ fontSize, color }}>{reservation.name}</Text>
+				<Text style={styles.description}>{reservation.name}</Text>
 				<Text style={styles.description}>{reservation.description}</Text>
 				<Text style={styles.description}>{reservation.contact}</Text>
 			</TouchableOpacity>
@@ -196,17 +195,8 @@ export default class AgendaScreen extends Component<State> {
 }
 
 const styles = StyleSheet.create({
-	item: {
-		backgroundColor: "white",
-		flex: 1,
-		borderRadius: 5,
-		padding: 10,
-		marginRight: 10,
-		marginTop: 17
-	},
 	description: {
-		paddingTop: 10,
-		color: "#43515c"
+		paddingTop: 10
 	},
 	emptyDate: {
 		height: 15,
@@ -217,5 +207,28 @@ const styles = StyleSheet.create({
 		height: 15,
 		flex: 1,
 		paddingTop: 30
+	},
+	safeAreaView: {
+		flex: 1,
+		backgroundColor: "blue"
+	},
+	list: {
+		backgroundColor: "#72e",
+		paddingVertical: 12,
+		paddingHorizontal: 16
+	},
+	item: {
+		backgroundColor: "green",
+		paddingHorizontal: 20,
+		paddingVertical: 24,
+		marginVertical: 8,
+		borderRadius: 8,
+		flex: 1,
+		padding: 10,
+		marginRight: 10,
+		marginTop: 17
+	},
+	title: {
+		fontSize: 32
 	}
 });

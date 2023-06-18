@@ -1,4 +1,4 @@
-import { db } from "./firebaseConfig";
+import { db } from "./firebase";
 import { collection, query, addDoc, onSnapshot, Timestamp, orderBy } from "firebase/firestore";
 import { IPost } from "./types";
 
