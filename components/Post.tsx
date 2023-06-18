@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Dimensions, Text, StyleSheet Pressable } from "react-native";
+import { View, Dimensions, Text, StyleSheet, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
