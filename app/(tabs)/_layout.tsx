@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
@@ -12,8 +12,6 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome5>["na
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme();
-	const value = "My Context Value";
-	const [context, setContext] = useState("default context value");
 
 	return (
 		<Tabs

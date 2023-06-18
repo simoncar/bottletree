@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList, Pressable } from "react-native";
-import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
+import React from "react";
+import { View, Dimensions, Text, StyleSheet Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
-import { IPost } from "../lib/types";
 
 const { width } = Dimensions.get("window");
 

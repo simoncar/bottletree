@@ -1,24 +1,13 @@
-import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import React, { useState, useContext } from "react";
+import { StyleSheet } from "react-native";
+import React, { useContext } from "react";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View } from "../components/Themed";
-import { db, storage } from "../lib/firebaseConfig";
-import * as Crypto from "expo-crypto";
 import ProjectContext from "../lib/context";
-import { savePost } from "../lib/APIpost";
-
-import { uploadBytes, uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function editPost() {
-	const { sharedData, updateSharedData } = useContext(ProjectContext);
-
+	const { sharedData } = useContext(ProjectContext);
 	const { project, key, image } = useLocalSearchParams();
-
-	const [progress, setProgress] = useState(0);
-
 	const router = useRouter();
 
 	const saveDone = (id) => {

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { View, useColorScheme, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import { View, useColorScheme, Text, StyleSheet, Pressable } from "react-native";
 import { db } from "../lib/firebaseConfig";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
-import Constants from "expo-constants";
+import { doc, getDoc } from "firebase/firestore";
 import { Link, Tabs } from "expo-router";
 
 const Project = (props) => {

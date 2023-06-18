@@ -2,7 +2,7 @@ import { fbConfig } from "../env";
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
-import { getStorage, uploadBytes, connectStorageEmulator } from "firebase/storage";
+import { getStorage,  connectStorageEmulator } from "firebase/storage";
 
 const firebaseConfig = {
 	apiKey: `${fbConfig.apiKey}`,

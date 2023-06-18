@@ -1,5 +1,3 @@
-import React, { useState, useEffect, useContext } from "react";
-import iconSet from "@expo/vector-icons/build/FontAwesome5";
 import { db } from "./firebaseConfig";
 import { collection, query, addDoc, onSnapshot, Timestamp, orderBy } from "firebase/firestore";
 import { IPost } from "./types";

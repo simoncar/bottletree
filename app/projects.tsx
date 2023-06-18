@@ -1,42 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
+import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import ProjectContext from "../lib/context";
 import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
 import { db } from "../lib/firebaseConfig";
 import { Image } from "expo-image";
-import { QuerySnapshot, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { ShortList } from "../components/sComponent";
 
 import { Text, View } from "../components/Themed";
 import { getProjects } from "../lib/APIprojects";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Colors from "../constants/Colors";
-import Project from "../components/Project";
 
 export default function ModalScreen() {
-	const [projectsList, setProjectsList] = useState([]);
 	const [projects, setProjects] = useState("");
 	const [loading, setLoading] = useState(true);
-
-	const navigation = useNavigation();
 	const router = useRouter();
-	const params = useLocalSearchParams();
-	const { id = 42, other } = params;
 
-	const isPresented = navigation.canGoBack();
 	const colorScheme = useColorScheme();
-	const { sharedData, updateSharedData } = useContext(ProjectContext);
+	const { updateSharedData } = useContext(ProjectContext);
 
 	const projectsRead = (projectsDB) => {
 		setProjects(projectsDB);
-		//console.log("Callback projectsRead", projectsDB);
 	};
 
 	useEffect(() => {
 		const unsubscribe = getProjects(projectsRead);
-		//console.log("useEffect: Getting Projects");
-
 		return () => {
 			unsubscribe;
 		};
@@ -44,11 +34,7 @@ export default function ModalScreen() {
 
 	useEffect(() => {
 		if (projects !== "" && loading === true) {
-			//setProjectsList(JSON.parse(projects));
 			setLoading(false);
-
-			//console.log("Loading Set to FaLSe");
-			//console.log("useEffect [projects]");
 		}
 	}, [projects]);
 

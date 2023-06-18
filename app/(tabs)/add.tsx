@@ -1,6 +1,5 @@
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from "react";
-import { StoryEntity, StoryState } from "../../lib/types";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
@@ -11,7 +10,7 @@ import * as Crypto from "expo-crypto";
 import ProjectContext from "../../lib/context";
 import { savePost } from "../../lib/APIpost";
 
-import { uploadBytes, uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
+import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function addPhoto() {
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
@@ -20,7 +19,6 @@ export default function addPhoto() {
 	const [progress, setProgress] = useState(0);
 
 	const router = useRouter();
-	var story: StoryEntity;
 
 	const saveDone = (id) => {
 		console.log("saveDone:", id);
