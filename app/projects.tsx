@@ -87,7 +87,6 @@ export default function ModalScreen() {
 					</View>
 					<View>
 						<Text style={styles.project}>{data.title || ""}</Text>
-						<Text style={styles.projectId}>ID: {data.key || ""}</Text>
 					</View>
 				</View>
 			</TouchableOpacity>
@@ -103,11 +102,7 @@ export default function ModalScreen() {
 					</View>
 					<View>
 						<Text style={styles.project}>Add project</Text>
-						<Text style={styles.project}>(Not enabled yet)</Text>
-					</View>
-					<View>
-						<Text style={styles.project}>{sharedData.projectId}</Text>
-						<Text style={styles.project}>{sharedData.projectTitle}</Text>
+						<Text style={styles.projectId}>(Not enabled yet)</Text>
 					</View>
 				</View>
 			</TouchableOpacity>
