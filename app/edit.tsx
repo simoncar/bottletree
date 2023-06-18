@@ -1,6 +1,6 @@
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from "react";
-import { StoryEntity, StoryState } from "../lib/interfaces";
+import { StoryEntity, StoryState } from "../lib/types";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";

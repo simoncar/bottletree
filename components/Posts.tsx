@@ -5,6 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import Post from "./Post";
 import Project from "./Project";
 import { getPosts } from "../lib/APIpost";
+import { IPost } from "../lib/types";
 
 export const Posts = (props) => {
 	const [posts, setPosts] = useState([]);
@@ -34,7 +35,7 @@ export const Posts = (props) => {
 	}, [project]);
 
 	const renderItems = (item) => {
-		const post = item.item;
+		const post: IPost = item.item;
 
 		return <Post post={post} />;
 	};

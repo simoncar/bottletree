@@ -3,44 +3,19 @@ import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList, Pressab
 import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
+import { IPost } from "../lib/types";
 
 const { width } = Dimensions.get("window");
 
 const Post = (props) => {
-	const { post, toggleLike, toggleFollow, onItemClicked, isFollowHidden } = props;
+	const { post } = props;
 	const router = useRouter();
-
-	function renderAvatar(post) {
-		if (undefined != post.author && undefined != post.author.avatar && post.author.avatar.length > 0) {
-			return (
-				<View style={styles.avatar}>
-					<Image style={styles.avatarFace} source={post.author.avatar}></Image>
-				</View>
-			);
-		} else {
-			return <View style={styles.avatar}></View>;
-		}
-	}
-	function renderFullname(post) {
-		if (undefined != post.author && undefined != post.author.fullname && post.author.fullname.length > 0) {
-			return (
-				<View>
-					<Text style={styles.listItemAuthorName}>{post.author.fullname}</Text>
-				</View>
-			);
-		} else {
-			return <View style={styles.avatar}></View>;
-		}
-	}
 
 	const imageUrls = post.images && post.images.map((image) => image);
 
 	return (
 		<View>
-			<View style={styles.listItemHeader}>
-				{renderAvatar(post)}
-				{renderFullname(post)}
-			</View>
+			<View style={styles.listItemHeader}></View>
 
 			<View style={{ flex: 1 }}>
 				<Carousel
@@ -50,14 +25,14 @@ const Post = (props) => {
 					}}
 					height={width / 2}
 					data={imageUrls}
-					renderItem={({ index }) => (
+					renderItem={({ index, post }) => (
 						<Pressable
 							onPress={() => {
 								router.push({
 									pathname: "/edit",
 									params: {
-										project: "data.key",
-										title: "data.title"
+										project: post.projectId,
+										key: post.key
 									}
 								});
 							}}

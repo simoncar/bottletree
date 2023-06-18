@@ -1,19 +1,7 @@
 import iconSet from "@expo/vector-icons/build/FontAwesome5";
 import { db } from "./firebaseConfig";
 import { collection, query, where, onSnapshot, Timestamp } from "firebase/firestore";
-
-interface IProject {
-	key: string;
-	title: string;
-	icon: string;
-}
-
-interface IPost {
-	key: string;
-	author: string;
-	timestamp: any;
-	images: string[];
-}
+import { IProject } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
 

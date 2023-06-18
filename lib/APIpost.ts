@@ -2,12 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import iconSet from "@expo/vector-icons/build/FontAwesome5";
 import { db } from "./firebaseConfig";
 import { collection, query, addDoc, onSnapshot, Timestamp, orderBy } from "firebase/firestore";
-
-interface IPost {
-	projectId: string;
-	author: string;
-	images: string[];
-}
+import { IPost } from "./types";
 
 export function savePost(post: IPost, callback: saveDone) {
 	try {
@@ -40,6 +35,7 @@ export async function getPosts(projectId, callback: postsRead) {
 		querySnapshot.forEach((doc) => {
 			posts.push({
 				key: doc.id,
+				projectId: projectId,
 				author: doc.data().author,
 				images: doc.data().images,
 				timestamp: doc.data().timestamp
