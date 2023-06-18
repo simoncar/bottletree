@@ -1,8 +1,7 @@
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import React, { useState, useContext } from "react";
-import { StoryEntity, StoryState } from "../lib/types";
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View } from "../components/Themed";
@@ -16,11 +15,11 @@ import { uploadBytes, uploadBytesResumable, getDownloadURL, ref } from "firebase
 export default function editPost() {
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
 
-	const [image, setImage] = useState(null);
+	const { project, key, image } = useLocalSearchParams();
+
 	const [progress, setProgress] = useState(0);
 
 	const router = useRouter();
-	var story: StoryEntity;
 
 	const saveDone = (id) => {
 		console.log("saveDone:", id);
@@ -33,7 +32,14 @@ export default function editPost() {
 		});
 	};
 
-	return <View style={styles.container}>{image && <Image source={image} style={styles.storyPhoto} />}</View>;
+	return (
+		<View style={styles.container}>
+			<Text>Project: {project}</Text>
+			<Text>Key: {key}</Text>
+			<Text>Image: {image}</Text>
+			{image && <Image source={image} style={styles.storyPhoto} />}
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({

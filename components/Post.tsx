@@ -25,14 +25,15 @@ const Post = (props) => {
 					}}
 					height={width / 2}
 					data={imageUrls}
-					renderItem={({ index, post }) => (
+					renderItem={({ index }) => (
 						<Pressable
 							onPress={() => {
 								router.push({
 									pathname: "/edit",
 									params: {
 										project: post.projectId,
-										key: post.key
+										key: post.key,
+										image: encodeURIComponent(imageUrls[index])
 									}
 								});
 							}}
