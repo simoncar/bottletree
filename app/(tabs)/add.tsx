@@ -33,6 +33,7 @@ export default function addPhoto() {
 		});
 	};
 
+
 	const renderProgress = (progress) => {
 		if (progress > 0) {
 			return <Text>Upload Progress : {progress}%</Text>;
