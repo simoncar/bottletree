@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { View, Dimensions, Text, StyleSheet, TouchableOpacity, FlatList, Pressable } from "react-native";
+import { Link, useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 
@@ -7,39 +8,7 @@ const { width } = Dimensions.get("window");
 
 const Post = (props) => {
 	const { post, toggleLike, toggleFollow, onItemClicked, isFollowHidden } = props;
-
-	const onHeartClicked = () => {
-		toggleLike(post);
-	};
-
-	const onFollowClicked = () => {
-		toggleFollow(post);
-	};
-
-	const clickItem = () => {
-		onItemClicked(post);
-	};
-
-	const renderPostComments = () => {
-		const comments = post.comments.map((comment) => comment);
-		console.log("Post: renderPostContent", comments);
-		return (
-			<View style={styles.commentsOverall}>
-				<FlatList
-					data={comments}
-					renderItem={({ item }) => (
-						<View style={styles.commentView}>
-							<Text style={styles.commentUserName}>{item.username} </Text>
-							<Text style={styles.commentText}>{item.comment}</Text>
-						</View>
-					)}
-				/>
-				<View style={styles.commentView}>
-					<Text style={styles.timestamp}>{post.timestamp}</Text>
-				</View>
-			</View>
-		);
-	};
+	const router = useRouter();
 
 	function renderAvatar(post) {
 		if (undefined != post.author && undefined != post.author.avatar && post.author.avatar.length > 0) {
@@ -82,24 +51,39 @@ const Post = (props) => {
 					height={width / 2}
 					data={imageUrls}
 					renderItem={({ index }) => (
-						<View
-							style={{
-								flex: 1,
-								borderWidth: 1,
-								justifyContent: "center"
-							}}>
-							<Image
-								style={styles.image}
-								source={{
-									uri: imageUrls[index]
-								}}
-							/>
-						</View>
+						<Pressable
+							onPress={() => {
+								router.push({
+									pathname: "/edit",
+									params: {
+										project: "data.key",
+										title: "data.title"
+									}
+								});
+							}}
+							style={({ pressed }) => [
+								{
+									flex: 1,
+									borderWidth: 1,
+									justifyContent: "center"
+								}
+							]}>
+							<View
+								style={{
+									flex: 1,
+									borderWidth: 1,
+									justifyContent: "center"
+								}}>
+								<Image
+									style={styles.image}
+									source={{
+										uri: imageUrls[index]
+									}}
+								/>
+							</View>
+						</Pressable>
 					)}
 				/>
-			</View>
-			<View style={styles.listItemFooter}>
-				<TouchableOpacity onPress={onHeartClicked}></TouchableOpacity>
 			</View>
 		</View>
 	);
