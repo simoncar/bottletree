@@ -146,13 +146,13 @@ export default class AgendaScreen extends Component<State> {
 					renderItem={this.renderItem}
 					rowHasChanged={this.rowHasChanged}
 					showClosingKnob={true}
+					selected={"2023-06-10"}
 					monthFormat={"yyyy"}
 					theme={{
-						backgroundColor: "red",
+						calendarBackground: "#282828",
 						//@ts-ignore
 						"stylesheet.agenda.main": {
 							reservations: {
-								backgroundColor: "red",
 								flex: 1,
 								marginTop: 100
 							}
@@ -209,8 +209,7 @@ const styles = StyleSheet.create({
 		paddingTop: 30
 	},
 	safeAreaView: {
-		flex: 1,
-		backgroundColor: "blue"
+		flex: 1
 	},
 	list: {
 		backgroundColor: "#72e",
@@ -218,7 +217,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16
 	},
 	item: {
-		backgroundColor: "green",
+		borderColor: "#ccc",
+		borderWidth: 1,
 		paddingHorizontal: 20,
 		paddingVertical: 24,
 		marginVertical: 8,
