@@ -22,7 +22,6 @@ export function savePost(post: IPost, callback: saveDone) {
 }
 
 export async function getPosts(projectId, callback: postsRead) {
-	console.log("getPosts [firebase]: " + projectId);
 
 	if (undefined === projectId || null === projectId || "" === projectId) {
 		projectId = "void";

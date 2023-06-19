@@ -13,9 +13,7 @@ export const Posts = (props) => {
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
 	var { project, title } = useLocalSearchParams();
 
-	console.log("Posts project (from params):", project);
 	if (undefined == project) {
-		console.log("Reaload from storage: sharedData:", sharedData.projectId);
 
 		project = sharedData.projectId;
 		title = sharedData.projectTitle;

@@ -21,7 +21,6 @@ export default function addPhoto() {
 	const router = useRouter();
 
 	const saveDone = (id) => {
-		console.log("saveDone:", id);
 		router.push({
 			pathname: "/",
 			params: {
@@ -84,7 +83,6 @@ export default function addPhoto() {
 				"state_changed",
 				(snapshot) => {
 					const uploadProgress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-					console.log("Upload is " + uploadProgress + "% done");
 					setProgress(uploadProgress);
 					switch (snapshot.state) {
 						case "paused":

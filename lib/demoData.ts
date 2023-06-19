@@ -2,7 +2,7 @@ import { db } from "./firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export const demoData = async () => {
-	console.log("Skip demo data");
+	//console.log("Skip demo data");
 };
 
 export const demoData2 = async () => {
