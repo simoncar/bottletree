@@ -58,6 +58,15 @@ function RootLayoutNav() {
 								}
 							})}
 						/>
+						<Stack.Screen
+							name="addProject"
+							options={({ navigation, route }) => ({
+								title: "Add Project",
+								headerTitleStyle: {
+									fontWeight: "bold"
+								}
+							})}
+						/>
 					</Stack>
 				</MyProvider>
 			</ThemeProvider>

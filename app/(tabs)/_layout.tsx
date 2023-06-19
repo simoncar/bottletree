@@ -46,7 +46,7 @@ export default function TabLayout() {
 			/>
 
 			<Tabs.Screen
-				name="add"
+				name="addPost"
 				initialParams={{ currentProject: "YYYYZZZZ" }}
 				options={{
 					title: "",

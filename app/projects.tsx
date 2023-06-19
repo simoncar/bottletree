@@ -51,7 +51,6 @@ export default function ModalScreen() {
 			<TouchableOpacity
 				key={data.key}
 				onPress={() => {
-					/* 1. Navigate to the Details route with params */
 					updateSharedData({
 						projectId: data.key,
 						projectTitle: data.title,
@@ -80,7 +79,18 @@ export default function ModalScreen() {
 
 	function renderAdd() {
 		return (
-			<TouchableOpacity key={"add"}>
+			<TouchableOpacity
+				key={"addProject"}
+				onPress={() => {
+					console.log("Add Project");
+
+					router.replace({
+						pathname: "/addProject",
+						params: {
+							project: "post.projectId"
+						}
+					});
+				}}>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
 						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
