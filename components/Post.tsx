@@ -39,14 +39,12 @@ const Post = (props) => {
 							style={({ pressed }) => [
 								{
 									flex: 1,
-									borderWidth: 1,
 									justifyContent: "center"
 								}
 							]}>
 							<View
 								style={{
 									flex: 1,
-									borderWidth: 1,
 									justifyContent: "center"
 								}}>
 								<Image
