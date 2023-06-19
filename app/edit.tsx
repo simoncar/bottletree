@@ -27,8 +27,6 @@ export default function editPost() {
 	};
 
 	const renderCaption = () => {
-		console.log("caption: ", caption);
-
 		if (caption == "") {
 			return "";
 		} else {
