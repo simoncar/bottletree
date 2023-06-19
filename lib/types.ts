@@ -6,6 +6,7 @@ export interface IPost {
 	author: string;
 	images: string[];
 	timestamp: Timestamp;
+	caption: string;
 }
 
 export interface IProject {

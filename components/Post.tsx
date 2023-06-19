@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Dimensions, Text, StyleSheet, Pressable } from "react-native";
+import { Dimensions, StyleSheet, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
+import { View, Text } from "../components/Themed";
 
 const { width } = Dimensions.get("window");
 
@@ -32,7 +33,8 @@ const Post = (props) => {
 									params: {
 										project: post.projectId,
 										key: post.key,
-										image: encodeURIComponent(imageUrls[index])
+										image: encodeURIComponent(imageUrls[index]),
+										caption: post.caption
 									}
 								});
 							}}
@@ -57,6 +59,9 @@ const Post = (props) => {
 						</Pressable>
 					)}
 				/>
+				<View style={styles.commentBlock}>
+					<Text style={styles.comment}>{post.caption}</Text>
+				</View>
 			</View>
 		</View>
 	);
@@ -65,6 +70,12 @@ const Post = (props) => {
 //source={imageUrls[index]}>
 
 const styles = StyleSheet.create({
+	commentBlock: {
+		padding: 8
+	},
+	comment: {
+		fontSize: 14
+	},
 	image: {
 		flex: 1,
 		width: "100%",

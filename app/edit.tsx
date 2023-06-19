@@ -1,17 +1,22 @@
-import { StyleSheet } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { StyleSheet, TextInput, SafeAreaView, Button } from "react-native";
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { Text, View } from "../components/Themed";
 import ProjectContext from "../lib/context";
+import { onChange } from "react-native-reanimated";
 
 export default function editPost() {
 	const { sharedData } = useContext(ProjectContext);
-	const { project, key, image } = useLocalSearchParams();
+	const [text, onChangeText] = useState("Useless Text");
+	const { project, key, image, caption } = useLocalSearchParams();
 	const router = useRouter();
 
-	const saveDone = (id) => {
-		console.log("saveDone:", id);
+	useEffect(() => {
+		<Stack.Screen options={{ title: "Overview" }} />;
+	}, []);
+
+	const save = () => {
 		router.push({
 			pathname: "/",
 			params: {
@@ -21,25 +26,37 @@ export default function editPost() {
 		});
 	};
 
+	const renderCaption = () => {
+		console.log("caption: ", caption);
+
+		if (caption == "") {
+			return "";
+		} else {
+			return caption;
+		}
+	};
+
 	return (
-		<View style={styles.container}>
-			<Text>Project: {project}</Text>
-			<Text>Key: {key}</Text>
-			<Text>Image: {image}</Text>
+		<SafeAreaView>
+			<Stack.Screen
+				options={{
+					headerRight: () => <Button title="Done" onPress={() => save()} />
+				}}
+			/>
+
 			{image && <Image source={image} style={styles.storyPhoto} />}
-		</View>
+			<TextInput style={styles.input} onChangeText={onChangeText} placeholder={"Write a caption..."} value={renderCaption()} autoFocus multiline />
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center",
 		justifyContent: "center"
 	},
 	title: {
-		fontSize: 20,
-		fontWeight: "bold"
+		fontSize: 20
 	},
 	separator: {
 		marginVertical: 30,
@@ -52,5 +69,13 @@ const styles = StyleSheet.create({
 		height: 200,
 		marginBottom: 12,
 		width: "98%"
+	},
+	input: {
+		height: 40,
+		margin: 12,
+		padding: 10,
+		paddingLeft: 20,
+		width: "98%",
+		fontSize: 20
 	}
 });

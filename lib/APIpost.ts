@@ -22,7 +22,6 @@ export function savePost(post: IPost, callback: saveDone) {
 }
 
 export async function getPosts(projectId, callback: postsRead) {
-
 	if (undefined === projectId || null === projectId || "" === projectId) {
 		projectId = "void";
 	}
@@ -37,7 +36,8 @@ export async function getPosts(projectId, callback: postsRead) {
 				projectId: projectId,
 				author: doc.data().author,
 				images: doc.data().images,
-				timestamp: doc.data().timestamp
+				timestamp: doc.data().timestamp,
+				caption: doc.data().caption
 			});
 		});
 		callback(posts);

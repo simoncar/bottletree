@@ -14,8 +14,6 @@ const MyProvider = ({ children }) => {
 
 	useEffect(() => {
 		AsyncStorage.getItem("@PROJECT").then((jsonValue) => {
-			console.log("Getting1 Use Effect: jsonValue: ", jsonValue);
-
 			if (jsonValue) {
 				setSharedData(JSON.parse(jsonValue));
 				console.log("Getting2 Use Effect: jsonValue: ", jsonValue);
@@ -28,7 +26,6 @@ const MyProvider = ({ children }) => {
 			const jsonValue = JSON.stringify({ ...sharedData, ...newData });
 			setSharedData({ ...sharedData, ...newData });
 			AsyncStorage.setItem("@PROJECT", jsonValue);
-			console.log("Setting: jsonValue: ", jsonValue);
 		} catch (e) {
 			console.log("updateSharedData Error: ", e);
 		}
