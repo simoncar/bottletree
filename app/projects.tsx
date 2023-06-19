@@ -7,7 +7,6 @@ import { db } from "../lib/firebase";
 import { Image } from "expo-image";
 import { collection, getDocs } from "firebase/firestore";
 import { ShortList } from "../components/sComponent";
-
 import { Text, View } from "../components/Themed";
 import { getProjects } from "../lib/APIprojects";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";

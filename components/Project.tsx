@@ -1,32 +1,15 @@
 import React, { useState } from "react";
-import { View, useColorScheme, Text, StyleSheet, Pressable } from "react-native";
-import { db } from "../lib/firebase";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { doc, getDoc } from "firebase/firestore";
 import { Link, Tabs } from "expo-router";
 
 const Project = (props) => {
 	const { project, title } = props;
-	const colorScheme = useColorScheme();
-	let aaa = 1;
+
 	const clickItem = () => {
 		onItemClicked(post);
 	};
-	let [version, setVersion] = useState(0);
 
-	const docRef = doc(db, "about", "version");
-	getDoc(docRef)
-		.then((docSnap) => {
-			if (docSnap.exists()) {
-				setVersion(docSnap.data().current);
-			} else {
-				// docSnap.data() will be undefined in this case
-				console.log("No such document!");
-			}
-		})
-		.catch((error) => {
-			console.log("Error getting document:", error);
-		});
 	return (
 		<Link href="/projects" asChild>
 			<Pressable>
