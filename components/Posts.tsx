@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { FlatList, StyleSheet, Pressable, useColorScheme } from "react-native";
+import { FlatList, StyleSheet, Pressable, useColorScheme, SafeAreaView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import ProjectContext from "../lib/context";
 import Post from "./Post";
@@ -69,18 +69,22 @@ export const Posts = (props) => {
 
 	return (
 		<View style={styles.list}>
-			<Project project={project} title={title} icon={icon} />
-			<FlatList data={posts} renderItem={renderItems} keyExtractor={(item, index) => getKey(item)} ListEmptyComponent={renderEmpty} />
+			<View>
+				<Project project={project} title={title} icon={icon} />
+			</View>
+			<View>
+				<FlatList data={posts} renderItem={renderItems} keyExtractor={(item, index) => getKey(item)} ListEmptyComponent={renderEmpty} />
+			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	list: {
-		flex: 1,
-		width: "100%",
 		paddingTop: 4,
-		padding: 10
+		padding: 10,
+		flex: 1,
+		width: "100%"
 	},
 	addPost: {
 		flex: 1,

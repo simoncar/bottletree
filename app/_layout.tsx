@@ -50,7 +50,7 @@ function RootLayoutNav() {
 
 						<Stack.Screen name="projects" options={{ presentation: "modal", title: "Projects" }} />
 						<Stack.Screen
-							name="edit"
+							name="editPost"
 							options={({ navigation, route }) => ({
 								title: "Edit",
 								headerTitleStyle: {
