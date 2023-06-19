@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs } from "expo-router";
+import { Image } from "expo-image";
 
 const Project = (props) => {
-	const { project, title } = props;
+	const { project, title, icon } = props;
 
 	const clickItem = () => {
 		onItemClicked(post);
@@ -14,6 +15,9 @@ const Project = (props) => {
 		<Link href="/projects" asChild>
 			<Pressable>
 				<View style={styles.outerView}>
+					<View style={styles.avatar}>
+						<Image style={styles.avatarFace} source={icon}></Image>
+					</View>
 					<View style={styles.innerView}>
 						<Text style={styles.updateText}>{title || "Select Project"}</Text>
 					</View>
@@ -38,12 +42,13 @@ const styles = StyleSheet.create({
 	rightChevron: {
 		marginHorizontal: 8
 	},
-	ddddddcccfffddddd: {
-		marginHorizontal: 8
+	avatar: {
+		textAlign: "center",
+		marginRight: 12,
+		width: 50,
+		alignItems: "center"
 	},
-	ddddddcdddccfffddddd: {
-		marginHorizontal: 8
-	},
+	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
 	innerView: {
 		flex: 1,
 		justifyContent: "space-between",

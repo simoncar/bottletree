@@ -61,7 +61,8 @@ export default function ModalScreen() {
 						pathname: "/",
 						params: {
 							project: data.key,
-							title: data.title
+							title: data.title,
+							icon: encodeURIComponent(data.icon)
 						}
 					});
 				}}>

@@ -15,11 +15,12 @@ export const Posts = (props) => {
 	const [loading, setLoading] = useState(true);
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
 	const colorScheme = useColorScheme();
-	var { project, title } = useLocalSearchParams();
+	var { project, title, icon } = useLocalSearchParams();
 
 	if (undefined == project) {
 		project = sharedData.projectId;
 		title = sharedData.projectTitle;
+		icon = sharedData.projectIcon;
 	}
 
 	const postsRead = (postsDB) => {
@@ -68,7 +69,7 @@ export const Posts = (props) => {
 
 	return (
 		<View style={styles.list}>
-			<Project project={project} title={title} />
+			<Project project={project} title={title} icon={icon} />
 			<FlatList data={posts} renderItem={renderItems} keyExtractor={(item, index) => getKey(item)} ListEmptyComponent={renderEmpty} />
 		</View>
 	);
