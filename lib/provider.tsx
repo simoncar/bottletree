@@ -16,7 +16,6 @@ const MyProvider = ({ children }) => {
 		AsyncStorage.getItem("@PROJECT").then((jsonValue) => {
 			if (jsonValue) {
 				setSharedData(JSON.parse(jsonValue));
-				console.log("Getting2 Use Effect: jsonValue: ", jsonValue);
 			}
 		});
 	}, []);

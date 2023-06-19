@@ -13,6 +13,8 @@ const Post = (props) => {
 
 	const imageUrls = post.images && post.images.map((image) => image);
 
+	const blurhash = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
 	return (
 		<View>
 			<View style={styles.listItemHeader}></View>
@@ -23,7 +25,7 @@ const Post = (props) => {
 					panGestureHandlerProps={{
 						activeOffsetX: [-10, 10]
 					}}
-					height={width / 2}
+					height={width / 1.5}
 					data={imageUrls}
 					renderItem={({ index }) => (
 						<Pressable
@@ -54,6 +56,7 @@ const Post = (props) => {
 									source={{
 										uri: imageUrls[index]
 									}}
+									placeholder={blurhash}
 								/>
 							</View>
 						</Pressable>
@@ -74,12 +77,13 @@ const styles = StyleSheet.create({
 		padding: 8
 	},
 	comment: {
-		fontSize: 14
+		fontSize: 16
 	},
 	image: {
 		flex: 1,
 		width: "100%",
-		backgroundColor: "#0553"
+		backgroundColor: "#0553",
+		height: 300
 	},
 	listItemHeader: {
 		alignItems: "center",

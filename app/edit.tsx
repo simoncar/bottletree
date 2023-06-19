@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, TextInput, SafeAreaView, Button, View, Alert } from "react-native";
+import { StyleSheet, SafeAreaView, Button, Alert } from "react-native";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { updatePost, deletePost } from "../lib/APIpost";
 import ProjectContext from "../lib/context";
-import { Text } from "../components/Themed";
+import { TextInput, View } from "../components/Themed";
 
 export default function editPost() {
 	const { sharedData } = useContext(ProjectContext);
@@ -109,8 +109,9 @@ const styles = StyleSheet.create({
 	storyPhoto: {
 		alignSelf: "center",
 		borderColor: "lightgray",
-		height: 200,
+		height: 300,
 		marginBottom: 12,
+		marginTop: 12,
 		width: "98%"
 	},
 	input: {
