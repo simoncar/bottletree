@@ -1,8 +1,8 @@
 import { db } from "./firebase";
-import { collection, query, addDoc, onSnapshot, Timestamp, orderBy } from "firebase/firestore";
+import { collection, query, addDoc, deleteDoc, onSnapshot, Timestamp, orderBy, doc, updateDoc } from "firebase/firestore";
 import { IPost } from "./types";
 
-export function savePost(post: IPost, callback: saveDone) {
+export function addPost(post: IPost, callback: saveDone) {
 	try {
 		const docRef = addDoc(collection(db, "projects", post.projectId, "posts"), {
 			author: "Ada",
@@ -19,6 +19,22 @@ export function savePost(post: IPost, callback: saveDone) {
 	}
 
 	return;
+}
+
+export function updatePost(post: IPost, callback: saveDone) {
+	const postRef = doc(db, "projects", post.projectId, "posts", post.key);
+	updateDoc(postRef, {
+		caption: post.caption
+	}).then(() => {
+		callback(post.key);
+	});
+}
+
+export function deletePost(post: IPost, callback: saveDone) {
+	const postRef = doc(db, "projects", post.projectId, "posts", post.key);
+	deleteDoc(postRef).then(() => {
+		callback(post.key);
+	});
 }
 
 export async function getPosts(projectId, callback: postsRead) {

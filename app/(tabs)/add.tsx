@@ -8,7 +8,7 @@ import { Text, View } from "../../components/Themed";
 import { db, storage } from "../../lib/firebase";
 import * as Crypto from "expo-crypto";
 import ProjectContext from "../../lib/context";
-import { savePost } from "../../lib/APIpost";
+import { addPost } from "../../lib/APIpost";
 
 import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
@@ -101,7 +101,7 @@ export default function addPhoto() {
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log("File available at", downloadURL);
 
-						savePost(
+						addPost(
 							{
 								projectId: sharedData.projectId,
 								author: "DDDD",
@@ -126,7 +126,9 @@ export default function addPhoto() {
 	} else {
 		return (
 			<View style={styles.container}>
-				<Button title="Pick an image from camera roll" onPress={pickImage} />
+				<View style={styles.button}>
+					<Button title="Pick an image from camera roll" onPress={pickImage} />
+				</View>
 				{renderProgress(progress)}
 				{image && <Image source={image} style={styles.storyPhoto} />}
 			</View>
@@ -155,5 +157,13 @@ const styles = StyleSheet.create({
 		height: 200,
 		marginBottom: 12,
 		width: "98%"
+	},
+
+	button: {
+		borderWidth: 1,
+		borderColor: "lightgray",
+		backgroundColor: "#E4E6C3",
+		padding: 10,
+		borderRadius: 100
 	}
 });
