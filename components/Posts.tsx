@@ -1,7 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
+import { TouchableOpacity, FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getPosts } from "../lib/APIpost";
@@ -9,12 +9,15 @@ import ProjectContext from "../lib/context";
 import { IPost } from "../lib/types";
 import Post from "./Post";
 import Project from "./Project";
+import { useRouter } from "expo-router";
 
 export const Posts = (props) => {
 	const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
 	const colorScheme = useColorScheme();
+	const router = useRouter();
+
 	var { project, title, icon } = useLocalSearchParams();
 
 	if (undefined == project) {
@@ -55,9 +58,21 @@ export const Posts = (props) => {
 			<View style={styles.addPost}>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
-						<Pressable>{({ pressed }) => <FontAwesome5 name="plus-square" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
+						<Pressable
+							onPress={() => {
+								console.log("Prouter push: /addPost");
+
+								router.push({
+									pathname: "/addPost",
+									params: {
+										project: "post.projectId"
+									}
+								});
+							}}
+						>
+							{({ pressed }) => <FontAwesome5 name="plus-square" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}
+						</Pressable>
 					</View>
-					<View></View>
 				</View>
 			</View>
 		);
