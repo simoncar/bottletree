@@ -31,8 +31,24 @@ export default function addPhoto() {
 	};
 
 	const renderProgress = (progress) => {
-		if (progress > 0) {
-			return <Text>Upload Progress : {progress}%</Text>;
+		if (null != image && progress > 0) {
+			return (
+				<View style={styles.progressContainer}>
+					<Text>Upload Progress : {progress}%</Text>
+				</View>
+			);
+		} else {
+			return;
+		}
+	};
+
+	const renderButton = () => {
+		if (null == image) {
+			return (
+				<View style={styles.button}>
+					<Button title="Pick an image from camera roll" onPress={pickImage} />
+				</View>
+			);
 		} else {
 			return;
 		}
@@ -100,7 +116,7 @@ export default function addPhoto() {
 					// Handle successful uploads on complete
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log("File available at", downloadURL);
-
+						setImage(null);
 						addPost(
 							{
 								projectId: sharedData.projectId,
@@ -126,9 +142,7 @@ export default function addPhoto() {
 	} else {
 		return (
 			<View style={styles.container}>
-				<View style={styles.button}>
-					<Button title="Pick an image from camera roll" onPress={pickImage} />
-				</View>
+				{renderButton()}
 				{renderProgress(progress)}
 				{image && <Image source={image} style={styles.storyPhoto} />}
 			</View>
@@ -142,11 +156,14 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center"
 	},
+	progressContainer: {
+		padding: 20
+	},
 	title: {
 		fontSize: 20,
 		fontWeight: "bold"
 	},
-	
+
 	storyPhoto: {
 		alignSelf: "center",
 		borderColor: "lightgray",
@@ -161,6 +178,5 @@ const styles = StyleSheet.create({
 		backgroundColor: "#E4E6C3",
 		padding: 10,
 		borderRadius: 100
-	},
-	
+	}
 });
