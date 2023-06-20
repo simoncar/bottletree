@@ -4,7 +4,6 @@ import { Link } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-
 const Project = (props) => {
 	const { project, title, icon } = props;
 
@@ -17,7 +16,7 @@ const Project = (props) => {
 			<Pressable>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
-						<Image style={styles.avatarFace} source={icon}></Image>
+						<Image style={styles.projectAvatar} source={icon}></Image>
 					</View>
 					<View style={styles.innerView}>
 						<Text style={styles.updateText}>{title || "Select Project"}</Text>
@@ -43,11 +42,10 @@ const styles = StyleSheet.create({
 	avatar: {
 		textAlign: "center",
 		marginRight: 12,
-		width: 50,
 		alignItems: "center"
 	},
 
-	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
+	projectAvatar: { width: 35, height: 35, borderRadius: 35 / 2 },
 	innerView: {
 		flex: 1,
 		justifyContent: "space-between",
@@ -57,9 +55,7 @@ const styles = StyleSheet.create({
 	outerView: {
 		alignItems: "center",
 		flexDirection: "row",
-		paddingVertical: 8,
 		backgroundColor: "#E4E6C3",
-		padding: 10,
 		borderRadius: 100
 	}
 });
