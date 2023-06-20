@@ -4,12 +4,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, SafeAreaView, StyleSheet } from "react-native";
 import { ShortList } from "../components/sComponent";
 import { Text, TextInput, View } from "../components/Themed";
-import { getProjectUsers } from "../lib/APIprojects";
+import { getProjectUsers, updateProject } from "../lib/APIprojects";
 import ProjectContext from "../lib/context";
 import { BorderlessButton } from "react-native-gesture-handler";
 
 export default function editPost() {
-	const { sharedData } = useContext(ProjectContext);
+	const { sharedData, updateSharedData } = useContext(ProjectContext);
 	const { projectId, projectTitle, icon } = useLocalSearchParams();
 	const [text, onChangeText] = useState(projectTitle);
 	const [projectUsers, setProjectUsers] = useState("");
@@ -24,7 +24,6 @@ export default function editPost() {
 	};
 
 	useEffect(() => {
-		console.log("editProject.tsx: useEffect projectId: " + projectId);
 		const unsubscribe = getProjectUsers(projectId, projectUsersRead);
 		return () => {
 			unsubscribe;
@@ -37,26 +36,34 @@ export default function editPost() {
 		}
 	}, [projectUsers]);
 
-	const saveDone = () => {
+	const saveDone = (id) => {
+		console.log("editProject.tsx: saveDone: id: " + text);
+
+		updateSharedData({
+			projectId: id,
+			projectTitle: text,
+			projectIcon: icon
+		});
+
 		router.push({
 			pathname: "/",
 			params: {
-				project: sharedData.projectId,
-				title: sharedData.projectTitle
+				project: id,
+				title: text,
+				icon: encodeURIComponent(sharedData.projectIcon)
 			}
 		});
 	};
 
 	const save = () => {
-		// updatePost(
-		// 	{
-		// 		projectId: sharedData.projectId,
-		// 		key: key,
-		// 		caption: text
-		// 	},
-		// 	saveDone
-		// );
-		saveDone();
+		updateProject(
+			{
+				key: projectId,
+				title: text,
+				icon: icon
+			},
+			saveDone
+		);
 	};
 
 	function renderRow(data: any) {
@@ -74,6 +81,12 @@ export default function editPost() {
 
 	return (
 		<SafeAreaView>
+			<Stack.Screen
+				options={{
+					headerRight: () => <Button title="Done" onPress={() => save()} />
+				}}
+			/>
+
 			<View style={styles.avatarAContainer}>
 				<View style={styles.avatarBView}>{icon && <Image source={icon} style={styles.avatarCFace} />}</View>
 			</View>

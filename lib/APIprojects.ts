@@ -1,4 +1,4 @@
-import { addDoc, collection, onSnapshot, query, Timestamp } from "firebase/firestore";
+import { addDoc, doc, updateDoc, collection, onSnapshot, query, Timestamp } from "firebase/firestore";
 import { db } from "./firebase";
 import { IProject, IProjectUsers } from "./types";
 
@@ -43,6 +43,15 @@ export async function getProjectUsers(projectId: string, callback: projectUsersR
 	});
 
 	return () => unsubscribe();
+}
+
+export function updateProject(project: IProject, callback: saveDone) {
+	const ref = doc(db, "projects", project.key);
+	updateDoc(ref, {
+		title: project.title
+	}).then(() => {
+		callback(project.key);
+	});
 }
 
 export function addProject(project: IProject, callback: saveDone) {
