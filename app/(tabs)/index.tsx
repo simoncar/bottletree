@@ -1,8 +1,8 @@
-import { StyleSheet } from "react-native";
-import { View } from "../../components/Themed";
-import { Posts } from "../../components/Posts";
-import { demoData } from "../../lib/demoData";
 import React from "react";
+import { StyleSheet } from "react-native";
+import { Posts } from "../../components/Posts";
+import { View } from "../../components/Themed";
+import { demoData } from "../../lib/demoData";
 
 demoData();
 
@@ -19,14 +19,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center"
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: "bold"
-	},
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: "80%"
 	}
 });
