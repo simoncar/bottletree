@@ -119,7 +119,14 @@ const styles = StyleSheet.create({
 		paddingTop: 20
 	},
 	avatarBView: {},
-	avatarCFace: { width: 100, height: 100, borderRadius: 100 / 2 },
+	avatarCFace: {
+		width: 150,
+		height: 150,
+		borderRadius: 150 / 2,
+		borderWidth: 1,
+		borderColor: "#CED0CE",
+		backgroundColor: "lightgrey"
+	},
 	projectNameContainer: {
 		paddingBottom: 50,
 		paddingTop: 20,
