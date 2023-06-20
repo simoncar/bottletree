@@ -6,6 +6,7 @@ import { ShortList } from "../components/sComponent";
 import { Text, TextInput, View } from "../components/Themed";
 import { getProjectUsers } from "../lib/APIprojects";
 import ProjectContext from "../lib/context";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 export default function editPost() {
 	const { sharedData } = useContext(ProjectContext);
@@ -65,26 +66,28 @@ export default function editPost() {
 					<Image style={styles.avatarFace} source={data.avatar}></Image>
 				</View>
 				<View>
-					<Text style={styles.project}>{data.name || ""}</Text>
+					<Text style={styles.name}>{data.name || ""}</Text>
 				</View>
 			</View>
 		);
 	}
 
 	return (
-		<View>
-			<Stack.Screen
-				options={{
-					headerRight: () => <Button title="Done" onPress={() => save()} />
-				}}
-			/>
-			{icon && <Image source={icon} style={styles.storyPhoto} />}
-			<TextInput style={styles.input} onChangeText={(text) => onChangeText(text)} placeholder={"Project Title"} value={text} multiline />
-			<View style={styles.container}>
+		<SafeAreaView>
+			<View style={styles.avatarAContainer}>
+				<View style={styles.avatarBView}>{icon && <Image source={icon} style={styles.avatarCFace} />}</View>
+			</View>
+			<View style={styles.projectNameContainer}>
+				<View style={styles.projectBox}>
+					<TextInput style={styles.project} onChangeText={(text) => onChangeText(text)} placeholder={"Project Title"} value={text} multiline />
+				</View>
+			</View>
+
+			<View>
 				<View>
 					<Text style={styles.accessHeader}> Access List</Text>
 				</View>
-				<View style={styles.projectList}>
+				<View>
 					{loading === false && (
 						<View>
 							<ShortList data={projectUsers} renderItem={renderRow} />
@@ -92,20 +95,39 @@ export default function editPost() {
 					)}
 				</View>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {},
-	projectList: {},
-	storyPhoto: {
-		alignSelf: "center",
-		borderColor: "lightgray",
-		height: 300,
-		marginBottom: 12,
-		marginTop: 12,
-		width: "98%"
+	avatarAContainer: {
+		alignItems: "center",
+		justifyContent: "center",
+		paddingTop: 20
+	},
+	avatarBView: {},
+	avatarCFace: { width: 100, height: 100, borderRadius: 100 / 2 },
+	projectNameContainer: {
+		paddingBottom: 50,
+		paddingTop: 20,
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	projectBox: {
+		padding: 10,
+		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderColor: "lightGray",
+		width: "85%",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	project: {
+		fontSize: 25,
+		fontWeight: "bold"
+	},
+	name: {
+		fontSize: 20,
+		paddingLeft: 20
 	},
 	accessHeader: {
 		fontSize: 18,
@@ -123,21 +145,6 @@ const styles = StyleSheet.create({
 		padding: 8,
 		height: 80
 	},
-	avatar: {
-		marginRight: 12,
-		width: 50
-	},
-	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
-	input: {
-		height: 140,
-		margin: 12,
-		padding: 10,
-		paddingLeft: 20,
-		width: "98%",
-		fontSize: 20
-	},
-	project: {
-		fontSize: 18,
-		marginBottom: 5
-	}
+	avatar: {},
+	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 }
 });

@@ -27,10 +27,10 @@ export default function editPost() {
 
 	return (
 		<SafeAreaView>
-			<View style={styles.avatarContainer}>
-				<View style={styles.avatar}>
+			<View style={styles.avatarAContainer}>
+				<View style={styles.avatarBView}>
 					<Image
-						style={styles.avatarFace}
+						style={styles.avatarCFace}
 						source={"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69"}
 					/>
 				</View>
@@ -72,13 +72,14 @@ export default function editPost() {
 }
 
 const styles = StyleSheet.create({
-	avatarFace: { width: 100, height: 100, borderRadius: 100 / 2 },
-	avatar: {},
-	avatarContainer: {
+	avatarAContainer: {
 		alignItems: "center",
 		justifyContent: "center",
 		paddingTop: 50
 	},
+	avatarBView: {},
+	avatarCFace: { width: 100, height: 100, borderRadius: 100 / 2 },
+
 	outerView: {
 		borderBottomColor: "#CED0CE",
 		borderBottomWidth: StyleSheet.hairlineWidth,
