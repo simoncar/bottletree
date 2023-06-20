@@ -77,39 +77,58 @@ export default function ModalScreen() {
 
 	function renderRow(data: any) {
 		return (
-			<TouchableOpacity
-				key={data.key}
-				onPress={() => {
-					updateSharedData({
-						projectId: data.key,
-						projectTitle: data.title,
-						projectIcon: data.icon
-					});
+			<View style={styles.outerView}>
+				<TouchableOpacity
+					key={data.key}
+					style={styles.innerView}
+					onPress={() => {
+						updateSharedData({
+							projectId: data.key,
+							projectTitle: data.title,
+							projectIcon: data.icon
+						});
 
-					router.push({
-						pathname: "/",
-						params: {
-							project: data.key,
-							title: data.title,
-							icon: encodeURIComponent(data.icon)
-						}
-					});
-				}}
-			>
-				<View style={styles.outerView}>
-					<View style={styles.innerView}>
-						<View style={styles.avatar}>
-							<Image style={styles.avatarFace} source={data.icon}></Image>
-						</View>
-						<View>
-							<Text style={styles.project}>{data.title || ""}</Text>
-						</View>
+						router.push({
+							pathname: "/",
+							params: {
+								project: data.key,
+								title: data.title,
+								icon: encodeURIComponent(data.icon)
+							}
+						});
+					}}
+				>
+					<View style={styles.avatar}>
+						<Image style={styles.avatarFace} source={data.icon}></Image>
 					</View>
+					<View>
+						<Text style={styles.project}>{data.title || ""}</Text>
+					</View>
+				</TouchableOpacity>
+				<TouchableOpacity
+					key={"chevron." + data.key}
+					onPress={() => {
+						updateSharedData({
+							projectId: data.key,
+							projectTitle: data.title,
+							projectIcon: data.icon
+						});
+
+						router.replace({
+							pathname: "/editProject",
+							params: {
+								projectId: data.key,
+								projectTitle: data.title,
+								icon: encodeURIComponent(data.icon)
+							}
+						});
+					}}
+				>
 					<View style={styles.rightChevron}>
 						<FontAwesome5 name="chevron-right" size={25} />
 					</View>
-				</View>
-			</TouchableOpacity>
+				</TouchableOpacity>
+			</View>
 		);
 	}
 
