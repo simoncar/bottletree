@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text } from "../components/Themed";
+import { color } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
 const Post = (props) => {
@@ -46,12 +47,7 @@ const Post = (props) => {
 								}
 							]}
 						>
-							<View
-								style={{
-									flex: 1,
-									justifyContent: "center"
-								}}
-							>
+							<View style={styles.imageContainer}>
 								<Image
 									style={styles.image}
 									source={{
@@ -65,6 +61,7 @@ const Post = (props) => {
 				/>
 				<View style={styles.commentBlock}>
 					<Text style={styles.comment}>{post.caption}</Text>
+					<Text style={styles.commentTime}>{new Date(post.timestamp.toDate()).toDateString()}</Text>
 				</View>
 			</View>
 		</View>
@@ -80,6 +77,15 @@ const styles = StyleSheet.create({
 	comment: {
 		fontSize: 16
 	},
+	commentTime: {
+		paddingTop: 4,
+		fontSize: 12,
+		color: "#999"
+	},
+	imageContainer: {
+		flex: 1,
+		justifyContent: "center"
+	},
 	image: {
 		flex: 1,
 		width: "100%",
@@ -90,8 +96,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		flexDirection: "row",
 		padding: 8
-	},
-	
+	}
 });
 
 export default Post;
