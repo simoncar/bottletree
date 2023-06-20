@@ -37,9 +37,17 @@ export default function RootLayout() {
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
 
+	const MyTheme = {
+		...DefaultTheme,
+		colors: {
+			...DefaultTheme.colors,
+			background: "#FFF"
+		}
+	};
+
 	return (
 		<>
-			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : MyTheme}>
 				<MyProvider>
 					<Stack>
 						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -67,6 +75,15 @@ function RootLayoutNav() {
 							name="addProject"
 							options={({ navigation, route }) => ({
 								title: "Add Project",
+								headerTitleStyle: {
+									fontWeight: "bold"
+								}
+							})}
+						/>
+						<Stack.Screen
+							name="user"
+							options={({ navigation, route }) => ({
+								title: "",
 								headerTitleStyle: {
 									fontWeight: "bold"
 								}

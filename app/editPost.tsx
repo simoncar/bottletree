@@ -94,18 +94,7 @@ export default function editPost() {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center"
-	},
-	title: {
-		fontSize: 20
-	},
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: "80%"
-	},
+
 	storyPhoto: {
 		alignSelf: "center",
 		borderColor: "lightgray",

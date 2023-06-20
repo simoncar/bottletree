@@ -162,11 +162,5 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderRadius: 100
 	},
-	butdddddton: {
-		borderWidth: 1,
-		borderColor: "lightgray",
-		backgroundColor: "#E4E6C3",
-		padding: 10,
-		borderRadius: 100
-	}
+	
 });

@@ -72,7 +72,7 @@ export default function editPost() {
 	}
 
 	return (
-		<SafeAreaView>
+		<View>
 			<Stack.Screen
 				options={{
 					headerRight: () => <Button title="Done" onPress={() => save()} />
@@ -92,7 +92,7 @@ export default function editPost() {
 					)}
 				</View>
 			</View>
-		</SafeAreaView>
+		</View>
 	);
 }
 

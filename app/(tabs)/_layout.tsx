@@ -1,10 +1,11 @@
-import React from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs } from "expo-router";
+import React from "react";
 import { Pressable, useColorScheme } from "react-native";
 import { BigText } from "../../components/StyledText";
-import Colors from "../../constants/Colors";
 import { View } from "../../components/Themed";
+import { UserAvatar } from "../../components/UserAvatar";
+import Colors from "../../constants/Colors";
 
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome5>["name"]; color: string }) {
 	return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -17,7 +18,8 @@ export default function TabLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint
-			}}>
+			}}
+		>
 			<Tabs.Screen
 				name="index"
 				options={{
@@ -27,8 +29,8 @@ export default function TabLayout() {
 					headerTitleAlign: "left",
 					headerRight: () => (
 						<View>
-							<Link href="/projects" asChild>
-								<Pressable>{({ pressed }) => <FontAwesome5 name="hammer" size={25} color={Colors[colorScheme ?? "light"].text} style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }} />}</Pressable>
+							<Link href="/user" asChild>
+								<Pressable>{({ pressed }) => <UserAvatar userID={123} avatar={""} />}</Pressable>
 							</Link>
 						</View>
 					)
