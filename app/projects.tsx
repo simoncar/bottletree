@@ -46,6 +46,35 @@ export default function ModalScreen() {
 		});
 	}
 
+	function renderAdd() {
+		return (
+			<TouchableOpacity
+				key={"addProject"}
+				onPress={() => {
+					console.log("Add Project");
+
+					router.replace({
+						pathname: "/addProject",
+						params: {
+							project: "post.projectId"
+						}
+					});
+				}}
+			>
+				<View style={styles.outerView}>
+					<View style={styles.innerView}>
+						<View style={styles.avatar}>
+							<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
+						</View>
+						<View>
+							<Text style={styles.project}>Add Project</Text>
+						</View>
+					</View>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+
 	function renderRow(data: any) {
 		return (
 			<TouchableOpacity
@@ -68,38 +97,16 @@ export default function ModalScreen() {
 				}}
 			>
 				<View style={styles.outerView}>
-					<View style={styles.avatar}>
-						<Image style={styles.avatarFace} source={data.icon}></Image>
+					<View style={styles.innerView}>
+						<View style={styles.avatar}>
+							<Image style={styles.avatarFace} source={data.icon}></Image>
+						</View>
+						<View>
+							<Text style={styles.project}>{data.title || ""}</Text>
+						</View>
 					</View>
-					<View>
-						<Text style={styles.project}>{data.title || ""}</Text>
-					</View>
-				</View>
-			</TouchableOpacity>
-		);
-	}
-
-	function renderAdd() {
-		return (
-			<TouchableOpacity
-				key={"addProject"}
-				onPress={() => {
-					console.log("Add Project");
-
-					router.replace({
-						pathname: "/addProject",
-						params: {
-							project: "post.projectId"
-						}
-					});
-				}}
-			>
-				<View style={styles.outerView}>
-					<View style={styles.avatar}>
-						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
-					</View>
-					<View>
-						<Text style={styles.project}>Add Project</Text>
+					<View style={styles.rightChevron}>
+						<FontAwesome5 name="chevron-right" size={25} />
 					</View>
 				</View>
 			</TouchableOpacity>
@@ -110,11 +117,11 @@ export default function ModalScreen() {
 		<View style={styles.container}>
 			<View style={styles.projectList}>
 				{loading === false && (
-					<View style={styles.card}>
+					<View>
 						<ShortList data={projects} renderItem={renderRow} />
 					</View>
 				)}
-				<View style={styles.card}>{renderAdd()}</View>
+				<View>{renderAdd()}</View>
 			</View>
 
 			{/* Use a light status bar on iOS to account for the black space above the modal */}
@@ -124,63 +131,40 @@ export default function ModalScreen() {
 }
 
 const styles = StyleSheet.create({
-	
 	container: {
-		flex: 1,
-		width: "100%"
+		flex: 1
 	},
 
-	projectList: {
-		alignContent: "flex-start"
+	projectList: {},
+	innerView: {
+		flex: 1,
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignItems: "center",
+		paddingHorizontal: 8
 	},
 
 	project: {
 		fontSize: 18,
 		marginBottom: 5
 	},
-	projectId: {
-		fontSize: 12,
-		marginBottom: 5,
-		color: "#777777"
+	rightChevron: {
+		marginHorizontal: 8
 	},
+
 	avatar: {
-		textAlign: "center",
 		marginRight: 12,
-		width: 50,
-		alignItems: "center"
+		width: 50
 	},
 	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: "80%"
-	},
-	innerView: {
-		flex: 1,
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-		paddingHorizontal: 8
-	},
 
 	outerView: {
 		borderBottomColor: "#CED0CE",
+		borderBottomWidth: StyleSheet.hairlineWidth,
 		flexDirection: "row",
 		paddingVertical: 8,
 		alignItems: "center",
 		padding: 8,
 		height: 80
-	},
-	outerViewLast: {
-		alignItems: "center",
-		borderBottomColor: "#CED0CE",
-		flexDirection: "row",
-		paddingVertical: 8
-	},
-	rightChevron: {
-		marginHorizontal: 8
-	},
-	subtitle: {
-		color: "#777777"
 	}
 });

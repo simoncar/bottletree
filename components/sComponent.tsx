@@ -27,7 +27,6 @@ export function ShortList(props) {
 	const { navigation } = props;
 
 	const features = props.data ? props.data : [];
-	///if (!_.isEmpty(features)) {
 	return (
 		<View>
 			{features.map((el) => {
@@ -35,9 +34,6 @@ export function ShortList(props) {
 			})}
 		</View>
 	);
-	//} else {
-	//	return null;
-	//}
 }
 
 const styles = StyleSheet.create({
