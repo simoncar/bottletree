@@ -125,7 +125,7 @@ export default function ModalScreen() {
 					}}
 				>
 					<View style={styles.rightChevron}>
-						<FontAwesome5 name="chevron-right" size={25} />
+						<FontAwesome5 name="chevron-right" size={25} color={Colors[colorScheme ?? "light"].text} />
 					</View>
 				</TouchableOpacity>
 			</View>
