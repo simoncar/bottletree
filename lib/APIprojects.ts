@@ -1,6 +1,6 @@
+import { addDoc, collection, onSnapshot, query, Timestamp } from "firebase/firestore";
 import { db } from "./firebase";
-import { collection, query, onSnapshot, addDoc, Timestamp } from "firebase/firestore";
-import { IProject } from "./types";
+import { IProject, IProjectUsers } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
 
@@ -17,6 +17,29 @@ export async function getProjects(callback: projectsRead) {
 			});
 		});
 		callback(projects);
+	});
+
+	return () => unsubscribe();
+}
+
+export async function getProjectUsers(projectId: string, callback: projectUsersRead) {
+	console.log("getProjectUsers", projectId);
+
+	const q = query(collection(db, "projects", projectId, "users"));
+
+	const unsubscribe = onSnapshot(q, (querySnapshot) => {
+		console.log("getProjectUsers 222");
+		const projectUsers: IProjectUsers[] = [];
+		querySnapshot.forEach((doc) => {
+			projectUsers.push({
+				key: doc.id,
+				avatar: doc.data().avatar,
+				name: doc.data().name
+			});
+		});
+		console.log("projectUsers", projectUsers);
+
+		callback(projectUsers);
 	});
 
 	return () => unsubscribe();

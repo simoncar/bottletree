@@ -14,3 +14,9 @@ export interface IProject {
 	title: string;
 	icon: string;
 }
+
+export interface IProjectUsers {
+	key: string;
+	avatar: string;
+	name: string;
+}

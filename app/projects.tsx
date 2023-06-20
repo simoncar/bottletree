@@ -91,7 +91,7 @@ export default function ModalScreen() {
 						router.push({
 							pathname: "/",
 							params: {
-								project: data.key,
+								projectId: data.key,
 								title: data.title,
 								icon: encodeURIComponent(data.icon)
 							}
