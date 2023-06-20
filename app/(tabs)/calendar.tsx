@@ -203,19 +203,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingTop: 30
 	},
-	emptydddddDate: {
-		height: 15,
-		flex: 1,
-		paddingTop: 30
-	},
+
 	safeAreaView: {
 		flex: 1
 	},
-	list: {
-		backgroundColor: "#72e",
-		paddingVertical: 12,
-		paddingHorizontal: 16
-	},
+
 	item: {
 		borderColor: "#ccc",
 		borderWidth: 1,
@@ -227,8 +219,5 @@ const styles = StyleSheet.create({
 		padding: 10,
 		marginRight: 10,
 		marginTop: 17
-	},
-	title: {
-		fontSize: 32
 	}
 });

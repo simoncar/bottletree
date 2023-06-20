@@ -76,10 +76,6 @@ export default function addPhoto() {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: "center",
-		justifyContent: "center"
-	},
 	input: {
 		height: 140,
 		margin: 12,
@@ -87,22 +83,6 @@ const styles = StyleSheet.create({
 		paddingLeft: 20,
 		width: "98%",
 		fontSize: 20
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: "bold"
-	},
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: "80%"
-	},
-	storyPhoto: {
-		alignSelf: "center",
-		borderColor: "lightgray",
-		height: 200,
-		marginBottom: 12,
-		width: "98%"
 	},
 
 	button: {
