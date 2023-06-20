@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import ProjectContext from "../lib/context";
-import { Platform, Pressable, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
-import { db } from "../lib/firebase";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { collection, getDocs } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { Platform, Pressable, StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { ShortList } from "../components/sComponent";
 import { Text, View } from "../components/Themed";
-import { getProjects } from "../lib/APIprojects";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Colors from "../constants/Colors";
+import { getProjects } from "../lib/APIprojects";
+import ProjectContext from "../lib/context";
+import { db } from "../lib/firebase";
 
 export default function ModalScreen() {
 	const [projects, setProjects] = useState("");
@@ -65,7 +65,8 @@ export default function ModalScreen() {
 							icon: encodeURIComponent(data.icon)
 						}
 					});
-				}}>
+				}}
+			>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
 						<Image style={styles.avatarFace} source={data.icon}></Image>
@@ -91,7 +92,8 @@ export default function ModalScreen() {
 							project: "post.projectId"
 						}
 					});
-				}}>
+				}}
+			>
 				<View style={styles.outerView}>
 					<View style={styles.avatar}>
 						<Pressable>{({ pressed }) => <FontAwesome5 name="plus" size={25} color={Colors[colorScheme ?? "light"].text} style={{ opacity: pressed ? 0.5 : 1 }} />}</Pressable>
@@ -122,16 +124,12 @@ export default function ModalScreen() {
 }
 
 const styles = StyleSheet.create({
+	
 	container: {
 		flex: 1,
 		width: "100%"
 	},
 
-	title: {
-		fontSize: 20,
-		fontWeight: "bold",
-		marginBottom: 20
-	},
 	projectList: {
 		alignContent: "flex-start"
 	},

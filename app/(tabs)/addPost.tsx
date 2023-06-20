@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
-import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { Image } from "expo-image";
-import { useRouter } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
-import { Text, View } from "../../components/Themed";
-import { db, storage } from "../../lib/firebase";
 import * as Crypto from "expo-crypto";
-import ProjectContext from "../../lib/context";
+import { Image } from "expo-image";
+import * as ImageManipulator from "expo-image-manipulator";
+import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
+import React, { useContext, useState } from "react";
+import { Button, StyleSheet } from "react-native";
+import { Text, View } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
+import ProjectContext from "../../lib/context";
+import { storage } from "../../lib/firebase";
 
-import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export default function addPhoto() {
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
@@ -146,11 +146,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: "bold"
 	},
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: "80%"
-	},
+	
 	storyPhoto: {
 		alignSelf: "center",
 		borderColor: "lightgray",
@@ -160,6 +156,13 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
+		borderWidth: 1,
+		borderColor: "lightgray",
+		backgroundColor: "#E4E6C3",
+		padding: 10,
+		borderRadius: 100
+	},
+	butdddddton: {
 		borderWidth: 1,
 		borderColor: "lightgray",
 		backgroundColor: "#E4E6C3",

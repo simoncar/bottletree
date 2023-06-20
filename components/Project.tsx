@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs } from "expo-router";
 import { Image } from "expo-image";
+import { Link } from "expo-router";
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const Project = (props) => {
 	const { project, title, icon } = props;
@@ -35,10 +35,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		marginRight: 12
 	},
-	updateddddText: {
-		fontSize: 16,
-		marginRight: 12
-	},
+
 	rightChevron: {
 		marginHorizontal: 8
 	},
@@ -48,6 +45,7 @@ const styles = StyleSheet.create({
 		width: 50,
 		alignItems: "center"
 	},
+
 	avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
 	innerView: {
 		flex: 1,

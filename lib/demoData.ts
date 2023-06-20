@@ -1,5 +1,5 @@
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "./firebase";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export const demoData = async () => {
 	//console.log("Skip demo data");

@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
-import { FlatList, StyleSheet, Pressable, useColorScheme, SafeAreaView } from "react-native";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useLocalSearchParams } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
+import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
+import { View } from "../components/Themed";
+import Colors from "../constants/Colors";
+import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/context";
+import { IPost } from "../lib/types";
 import Post from "./Post";
 import Project from "./Project";
-import { getPosts } from "../lib/APIpost";
-import { IPost } from "../lib/types";
-import { Text, View } from "../components/Themed";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import Colors from "../constants/Colors";
 
 export const Posts = (props) => {
 	const [posts, setPosts] = useState([]);
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		marginTop: 200
 	},
+
 	outerView: {
 		borderBottomColor: "#CED0CE",
 		flexDirection: "row",
@@ -105,9 +106,5 @@ const styles = StyleSheet.create({
 		marginRight: 12,
 		width: 50,
 		alignItems: "center"
-	},
-	project: {
-		fontSize: 18,
-		marginBottom: 5
 	}
 });
