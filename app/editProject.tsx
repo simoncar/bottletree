@@ -97,7 +97,7 @@ export default function editPost() {
 			</View>
 
 			<View>
-				<View>
+				<View style={styles.avatarAContainer}>
 					<Text style={styles.accessHeader}> Access List</Text>
 				</View>
 				<View>
