@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
 	projectBox: {
 		padding: 10,
 		borderBottomWidth: StyleSheet.hairlineWidth,
-		borderColor: "lightGray",
+		borderBottomColor: "#CED0CE",
 		width: "85%",
 		alignItems: "center",
 		justifyContent: "center"
