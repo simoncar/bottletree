@@ -53,13 +53,10 @@ export function AuthProvider(props) {
 		<AuthContext.Provider
 			value={{
 				signIn: (user) => {
-					console.log("set to Login Success: ", user);
-
 					setAuth(user);
 					setItem(JSON.stringify(user));
 				},
 				signOut: () => {
-					console.log("set to Logout");
 					setAuth(null);
 					removeItem();
 				},

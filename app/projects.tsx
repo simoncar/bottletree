@@ -2,11 +2,11 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { collection,getDocs } from "firebase/firestore";
-import React,{ useContext,useEffect,useState } from "react";
-import { Platform,Pressable,StyleSheet,TouchableOpacity,useColorScheme } from "react-native";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { Platform, Pressable, StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { ShortList } from "../components/sComponent";
-import { Text,View } from "../components/Themed";
+import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getProjects } from "../lib/APIprojects";
 import ProjectContext from "../lib/context";
@@ -77,7 +77,7 @@ export default function ModalScreen() {
 
 	function renderRow(data: any) {
 		return (
-			<View style={styles.outerView}>
+			<View key={data.key} style={styles.outerView}>
 				<TouchableOpacity
 					key={data.key}
 					style={styles.innerView}
@@ -137,7 +137,7 @@ export default function ModalScreen() {
 			<View style={styles.projectList}>
 				{loading === false && (
 					<View>
-						<ShortList data={projects} renderItem={renderRow} />
+						<ShortList key={projects.key} data={projects} renderItem={renderRow} />
 					</View>
 				)}
 				<View>{renderAdd()}</View>
