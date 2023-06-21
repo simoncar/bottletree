@@ -1,5 +1,6 @@
 import { useRouter, useSegments } from "expo-router";
-import React from "react";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import React, { useEffect } from "react";
 
 const AuthContext = React.createContext(null);
 
@@ -16,6 +17,10 @@ function useProtectedRoute(user) {
 	React.useEffect(() => {
 		const inAuthGroup = segments[0] === "(auth)";
 
+		if (user === undefined) {
+			return;
+		}
+
 		if (
 			// If the user is not signed in and the initial segment is not anything in the auth group.
 			!user &&
@@ -31,7 +36,16 @@ function useProtectedRoute(user) {
 }
 
 export function AuthProvider(props) {
+	const { getItem, setItem, removeItem } = useAsyncStorage("@USER");
 	const [user, setAuth] = React.useState(null);
+
+	useEffect(() => {
+		getItem().then((json) => {
+			if (json) {
+				setAuth(JSON.parse(json));
+			}
+		});
+	}, []);
 
 	useProtectedRoute(user);
 
@@ -42,10 +56,12 @@ export function AuthProvider(props) {
 					console.log("set to Login Success: ", user);
 
 					setAuth(user);
+					setItem(JSON.stringify(user));
 				},
 				signOut: () => {
 					console.log("set to Logout");
 					setAuth(null);
+					removeItem();
 				},
 				user
 			}}
