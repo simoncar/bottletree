@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Button, SafeAreaView, StyleSheet, useColorScheme } from "react-native";
+import { Button, SafeAreaView, StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
 import { Text, View } from "../components/Themed";
 import ProjectContext from "../lib/context";
 import { useRouter } from "expo-router";
@@ -8,6 +8,7 @@ import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
+import { useAuth } from "../lib/authContext";
 
 export default function editPost() {
 	const { sharedData } = useContext(ProjectContext);
@@ -15,6 +16,7 @@ export default function editPost() {
 	const [text, onChangeText] = useState(caption);
 	const router = useRouter();
 	const colorScheme = useColorScheme();
+	const { signOut } = useAuth();
 
 	const save = () => {
 		router.push({
@@ -61,11 +63,13 @@ export default function editPost() {
 			</View>
 
 			<View style={styles.outerView}>
-				<View style={styles.leftContent}>
-					<MaterialIcons name="logout" size={25} color={Colors[colorScheme ?? "light"].text} />
-					<Text style={styles.settingName}>Log Out</Text>
-				</View>
-				<View style={styles.rightChevron}></View>
+				<TouchableOpacity key={"signOut"} onPress={() => signOut()}>
+					<View style={styles.leftContent}>
+						<MaterialIcons name="logout" size={25} color={Colors[colorScheme ?? "light"].text} />
+						<Text style={styles.settingName}>Log Out</Text>
+					</View>
+					<View style={styles.rightChevron}></View>
+				</TouchableOpacity>
 			</View>
 		</SafeAreaView>
 	);

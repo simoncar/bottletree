@@ -94,7 +94,6 @@ export default function editPost() {
 }
 
 const styles = StyleSheet.create({
-
 	storyPhoto: {
 		alignSelf: "center",
 		borderColor: "lightgray",

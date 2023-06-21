@@ -5,6 +5,7 @@ import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import MyProvider from "../lib/provider";
+import { AuthProvider } from "../lib/authContext";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -48,49 +49,51 @@ function RootLayoutNav() {
 	return (
 		<>
 			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : MyTheme}>
-				<MyProvider>
-					<Stack>
-						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+				<AuthProvider>
+					<MyProvider>
+						<Stack>
+							<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-						<Stack.Screen name="projects" options={{ presentation: "modal", title: "Projects" }} />
-						<Stack.Screen
-							name="editPost"
-							options={({ navigation, route }) => ({
-								title: "Edit",
-								headerTitleStyle: {
-									fontWeight: "bold"
-								}
-							})}
-						/>
-						<Stack.Screen
-							name="editProject"
-							options={({ navigation, route }) => ({
-								title: "Project",
-								headerTitleStyle: {
-									fontWeight: "bold"
-								}
-							})}
-						/>
-						<Stack.Screen
-							name="addProject"
-							options={({ navigation, route }) => ({
-								title: "Add Project",
-								headerTitleStyle: {
-									fontWeight: "bold"
-								}
-							})}
-						/>
-						<Stack.Screen
-							name="user"
-							options={({ navigation, route }) => ({
-								title: "",
-								headerTitleStyle: {
-									fontWeight: "bold"
-								}
-							})}
-						/>
-					</Stack>
-				</MyProvider>
+							<Stack.Screen name="projects" options={{ presentation: "modal", title: "Projects" }} />
+							<Stack.Screen
+								name="editPost"
+								options={({ navigation, route }) => ({
+									title: "Edit",
+									headerTitleStyle: {
+										fontWeight: "bold"
+									}
+								})}
+							/>
+							<Stack.Screen
+								name="editProject"
+								options={({ navigation, route }) => ({
+									title: "Project",
+									headerTitleStyle: {
+										fontWeight: "bold"
+									}
+								})}
+							/>
+							<Stack.Screen
+								name="addProject"
+								options={({ navigation, route }) => ({
+									title: "Add Project",
+									headerTitleStyle: {
+										fontWeight: "bold"
+									}
+								})}
+							/>
+							<Stack.Screen
+								name="user"
+								options={({ navigation, route }) => ({
+									title: "",
+									headerTitleStyle: {
+										fontWeight: "bold"
+									}
+								})}
+							/>
+						</Stack>
+					</MyProvider>
+				</AuthProvider>
 			</ThemeProvider>
 		</>
 	);

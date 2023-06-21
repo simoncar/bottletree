@@ -36,7 +36,7 @@ const Post = (props) => {
 										project: post.projectId,
 										key: post.key,
 										image: encodeURIComponent(imageUrls[index]),
-										caption: post.caption
+										caption: encodeURIComponent(post.caption)
 									}
 								});
 							}}
