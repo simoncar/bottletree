@@ -26,7 +26,7 @@ export default function SignIn() {
 				<TextInput style={styles.TextInput} placeholder="Password" secureTextEntry={true} onChangeText={(password) => setPassword(password)} />
 			</View>
 
-			<TouchableOpacity onPress={() => signIn()} style={styles.loginBtn}>
+      <TouchableOpacity onPress={() => signIn({id:1,name:"simon"})} style={styles.loginBtn}>
 				<Text style={styles.loginText}>LOGIN</Text>
 			</TouchableOpacity>
 			<TouchableOpacity>

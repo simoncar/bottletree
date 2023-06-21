@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProjectContext from "./context";
-import { INITIAL_TRANSACTION_CONTEXT_V4 } from "@sentry/react-native/dist/js/tracing/reactnavigationv4";
 
 const MyProvider = ({ children }) => {
 	const INITIAL_PROJECT = {

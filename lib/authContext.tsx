@@ -38,8 +38,15 @@ export function AuthProvider(props) {
 	return (
 		<AuthContext.Provider
 			value={{
-				signIn: () => setAuth({}),
-				signOut: () => setAuth(null),
+				signIn: (user) => {
+					console.log("set to Login Success: ", user);
+
+					setAuth(user);
+				},
+				signOut: () => {
+					console.log("set to Logout");
+					setAuth(null);
+				},
 				user
 			}}
 		>
