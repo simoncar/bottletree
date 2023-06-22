@@ -82,9 +82,7 @@ export default function editPost() {
 			/>
 			{image && <Image source={image} style={styles.storyPhoto} />}
 			<View style={styles.outerView}>
-				<View style={styles.leftContent}>
-					<Text style={styles.settingName}>...</Text>
-				</View>
+				<View style={styles.leftContent}></View>
 				<TouchableOpacity onPress={onDelete}>
 					<View style={styles.rightChevron}>
 						<FontAwesome5 name="trash-alt" size={25} color={Colors[colorScheme ?? "light"].text} />
@@ -92,11 +90,6 @@ export default function editPost() {
 				</TouchableOpacity>
 			</View>
 			<TextInput style={styles.input} onChangeText={(text) => onChangeText(text)} placeholder={"Write a caption..."} value={text} autoFocus multiline />
-			<View style={styles.actions}>
-				<View style={styles.button}>
-					<Button title="Delete" onPress={onDelete} />
-				</View>
-			</View>
 		</SafeAreaView>
 	);
 }
@@ -135,17 +128,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		paddingVertical: 8,
 		alignItems: "center",
-		padding: 8,
-		height: 80
-	},
-	button: {
-		marginTop: 50,
-		borderWidth: 1,
-		borderColor: "lightgray",
-		backgroundColor: "#E4E6C3",
-		padding: 10,
-		borderRadius: 100,
-		alignSelf: "center",
-		width: "30%"
+		padding: 8
 	}
 });
