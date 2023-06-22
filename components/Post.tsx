@@ -13,6 +13,12 @@ const Post = (props) => {
 
 	const imageUrls = post.images && post.images.map((image) => image);
 
+	let caption = "";
+
+	if (post.caption != undefined) {
+		caption = post.caption;
+	}
+
 	const blurhash = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 	return (
@@ -36,7 +42,7 @@ const Post = (props) => {
 										project: post.projectId,
 										key: post.key,
 										image: encodeURIComponent(imageUrls[index]),
-										caption: encodeURIComponent(post.caption)
+										caption: encodeURIComponent(caption)
 									}
 								});
 							}}
@@ -60,7 +66,7 @@ const Post = (props) => {
 					)}
 				/>
 				<View style={styles.commentBlock}>
-					<Text style={styles.comment}>{post.caption}</Text>
+					<Text style={styles.comment}>{caption}</Text>
 					<Text style={styles.commentTime}>{new Date(post.timestamp.toDate()).toDateString()}</Text>
 				</View>
 			</View>

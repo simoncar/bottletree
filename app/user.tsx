@@ -9,6 +9,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
 import { useAuth } from "../lib/authContext";
+import { About } from "../lib/about";
 
 export default function editPost() {
 	const { sharedData } = useContext(ProjectContext);
@@ -71,12 +72,21 @@ export default function editPost() {
 					<View style={styles.rightChevron}></View>
 				</TouchableOpacity>
 			</View>
+
+			<View style={styles.aboutContainer}>
+				<About />
+			</View>
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
 	avatarAContainer: {
+		alignItems: "center",
+		justifyContent: "center",
+		paddingTop: 50
+	},
+	aboutContainer: {
 		alignItems: "center",
 		justifyContent: "center",
 		paddingTop: 50
@@ -106,8 +116,7 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 20,
-		fontWeight: "bold",
-		paddingLeft: 20
+		fontWeight: "bold"
 	},
 
 	settingName: {

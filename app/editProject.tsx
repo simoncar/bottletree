@@ -103,7 +103,7 @@ export default function editPost() {
 				<View>
 					{loading === false && (
 						<View>
-							<ShortList data={projectUsers} renderItem={renderRow} />
+							<ShortList key={projectUsers.key} data={projectUsers} renderItem={renderRow} />
 						</View>
 					)}
 				</View>

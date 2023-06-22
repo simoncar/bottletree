@@ -89,7 +89,7 @@ export default function editPost() {
 					</View>
 				</TouchableOpacity>
 			</View>
-			<TextInput style={styles.input} onChangeText={(text) => onChangeText(text)} placeholder={"Write a caption..."} value={text} autoFocus multiline />
+			<TextInput style={styles.input} onChangeText={(text) => onChangeText(text)} placeholder={"Write a caption..."} value={renderCaption()} autoFocus multiline />
 		</SafeAreaView>
 	);
 }
