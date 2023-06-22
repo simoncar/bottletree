@@ -50,6 +50,12 @@
 					"photosPermission": "The app accesses your photos to share the images your select with the project team."
 				}
 			],
+			[
+				"expo-camera",
+				{
+					"cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+				}
+			],
 			"sentry-expo"
 		]
 	}

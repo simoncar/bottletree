@@ -6,9 +6,6 @@ import * as Application from "expo-application";
 import * as Device from "expo-device";
 
 export const About = () => {
-	console.log("Constants: ", Constants);
-	console.log("Application: ", Application);
-
 	return (
 		<View style={styles.aboutContainer}>
 			<Text style={styles.version}>
