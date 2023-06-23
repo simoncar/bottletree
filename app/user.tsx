@@ -20,7 +20,7 @@ export default function editPost() {
 	const [text, onChangeText] = useState(caption);
 	const router = useRouter();
 	const colorScheme = useColorScheme();
-	const { signOut } = useAuth();
+	const { deleteAccount, signOut } = useAuth();
 	const { showActionSheetWithOptions } = useActionSheet();
 
 	const save = () => {
@@ -103,16 +103,24 @@ export default function editPost() {
 					<FontAwesome5 name="chevron-right" size={20} color={Colors[colorScheme ?? "light"].text} />
 				</View>
 			</View>
-
-			<View style={styles.outerView}>
-				<View style={styles.leftContent}>
-					<FontAwesome5 name="trash-alt" size={25} color={Colors[colorScheme ?? "light"].text} />
-					<Text style={styles.settingName}>Delete Account</Text>
+			<TouchableOpacity
+				key={"deleteAccount"}
+				onPress={() =>
+					router.push({
+						pathname: "/deleteAccount"
+					})
+				}
+			>
+				<View style={styles.outerView}>
+					<View style={styles.leftContent}>
+						<FontAwesome5 name="trash-alt" size={25} color={Colors[colorScheme ?? "light"].text} />
+						<Text style={styles.settingName}>Delete Account</Text>
+					</View>
+					<View style={styles.rightChevron}>
+						<FontAwesome5 name="chevron-right" size={20} color={Colors[colorScheme ?? "light"].text} />
+					</View>
 				</View>
-				<View style={styles.rightChevron}>
-					<FontAwesome5 name="chevron-right" size={20} color={Colors[colorScheme ?? "light"].text} />
-				</View>
-			</View>
+			</TouchableOpacity>
 
 			<View style={styles.outerView}>
 				<TouchableOpacity key={"signOut"} onPress={() => signOut()}>

@@ -20,12 +20,41 @@ export default function SignIn() {
 		setErrorMessage(error);
 	};
 
+	const renderAction = (errorMessage) => {
+		console.log("error message: ", errorMessage);
+
+		if (errorMessage == "Success") {
+			return;
+		} else {
+			return (
+				<TouchableOpacity
+					onPress={async () => {
+						console.log("touchable opacity signin");
+
+						createAccount(name, email, password, createAccountCallback);
+						//const resp = await appSignIn("simoncar@gmail.com", "password");
+						//console.log("resp: ", resp);
+						// if (resp?.user) {
+						// 	router.replace("/(tabs)/home");
+						// } else {
+						// 	console.log(resp.error);
+						// 	Alert.alert("Login Error", resp.error?.message);
+						// }
+					}}
+					style={styles.loginBtn}
+				>
+					<Text style={styles.loginText}>CREATE ACCOUNT</Text>
+				</TouchableOpacity>
+			);
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<Stack.Screen options={{ title: "Create Account" }} />
 
 			<View style={styles.inputView}>
-				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="text" placeholder="Name" autoCorrect={false} autoFocus autocomplete="name" onChangeText={(name) => setName(name)} />
+				<TextInput style={styles.TextInput} inputMode="text" placeholder="Name" autoCorrect={false} autoFocus autocomplete="name" onChangeText={(name) => setName(name)} />
 			</View>
 			<View style={styles.inputView}>
 				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="email" placeholder="Email" autocomplete="email" onChangeText={(email) => setEmail(email)} />
@@ -45,24 +74,7 @@ export default function SignIn() {
 				<Text>{errorMessage}</Text>
 			</View>
 
-			<TouchableOpacity
-				onPress={async () => {
-					console.log("touchable opacity signin");
-
-					createAccount(name, email, password, createAccountCallback);
-					//const resp = await appSignIn("simoncar@gmail.com", "password");
-					//console.log("resp: ", resp);
-					// if (resp?.user) {
-					// 	router.replace("/(tabs)/home");
-					// } else {
-					// 	console.log(resp.error);
-					// 	Alert.alert("Login Error", resp.error?.message);
-					// }
-				}}
-				style={styles.loginBtn}
-			>
-				<Text style={styles.loginText}>CREATE ACCOUNT</Text>
-			</TouchableOpacity>
+			{renderAction(errorMessage)}
 		</View>
 	);
 }
