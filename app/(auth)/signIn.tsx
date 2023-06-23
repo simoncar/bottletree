@@ -9,8 +9,14 @@ import { Text, View, TextInput } from "../../components/Themed";
 export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const { signIn } = useAuth();
+
+	const loginError = (error) => {
+		console.log("errorerrorerrorerrorerror:", error);
+		setErrorMessage(error);
+	};
 
 	return (
 		<View style={styles.container}>
@@ -21,17 +27,28 @@ export default function SignIn() {
 				source={"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Flogo%2FArm-Hammer-Logo.png?alt=media&token=cf1c4663-08f2-4bbf-bfc6-27fb3f4d098d"}
 			/>
 			<View style={styles.inputView}>
-				<TextInput style={styles.TextInput} inputMode="email" placeholder="Email" autoFocus autocomplete="email" onChangeText={(email) => setEmail(email)} />
+				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="email" placeholder="Email" autoFocus autocomplete="email" onChangeText={(email) => setEmail(email)} />
 			</View>
 			<View style={styles.inputView}>
-				<TextInput style={styles.TextInput} placeholder="Password" secureTextEntry={true} onChangeText={(password) => setPassword(password)} />
+				<TextInput
+					style={styles.TextInput}
+					placeholder="Password"
+					secureTextEntry={true}
+					onChangeText={(password) => {
+						setPassword(password);
+						setErrorMessage("");
+					}}
+				/>
+			</View>
+			<View>
+				<Text>{errorMessage}</Text>
 			</View>
 
 			<TouchableOpacity
 				onPress={async () => {
 					console.log("touchable opacity signin");
 
-					signIn({ id: 1, name: "simon" });
+					signIn(email, password, loginError);
 					//const resp = await appSignIn("simoncar@gmail.com", "password");
 					//console.log("resp: ", resp);
 					// if (resp?.user) {
@@ -81,6 +98,9 @@ const styles = StyleSheet.create({
 	forgot_button: {
 		height: 30,
 		marginTop: 30
+	},
+	loginText: {
+		color: "#000"
 	},
 	loginBtn: {
 		width: "80%",

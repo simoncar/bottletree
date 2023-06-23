@@ -70,19 +70,37 @@ export function AuthProvider(props) {
 	return (
 		<AuthContext.Provider
 			value={{
-				signIn: async (user) => {
+				signIn: async (screenEmail, screenPassword, callback: loginError) => {
 					try {
-						console.log("signIn", user);
-						const resp = await signInWithEmailAndPassword(auth, "simoncar@gmail.com", "password");
-						console.log("setAuthBB", user);
+						console.log("signIn----", screenEmail, screenPassword);
+						const resp = await signInWithEmailAndPassword(auth, screenEmail, screenPassword);
+						console.log("setAuthBB-", auth.currentUser);
+						const user = {
+							id: auth.currentUser.uid,
+							email: auth.currentUser.email,
+							name: auth.currentUser.displayName,
+							avatar: auth.currentUser.photoURL
+						};
+
 						setAuth(user);
 						console.log("setAuthAA", user);
 
 						setItem(JSON.stringify(user));
 						console.log("stringifyBB:", user);
 						return { user: auth.currentUser };
-					} catch (e) {
-						return { error: e };
+					} catch (error) {
+						// Handle Errors here.
+						const errorCode = error.code;
+						const errorMessage = error.message;
+						if (errorCode === "auth/wrong-password") {
+							callback("Wrong password.");
+						} else {
+							callback(errorMessage);
+						}
+						//setLoading(false);
+						console.log(error);
+
+						return { error: error };
 					}
 				},
 				signOut: () => {
