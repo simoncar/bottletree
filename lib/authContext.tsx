@@ -1,7 +1,7 @@
 import { useRouter, useSegments } from "expo-router";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import React, { useEffect } from "react";
-import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth/react-native";
+import { onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth/react-native";
 import { auth } from "../lib/firebase";
 import { setStatusBarHidden } from "expo-status-bar";
 
@@ -107,6 +107,17 @@ export function AuthProvider(props) {
 					console.log("signout XXXX:");
 					setAuth(null);
 					removeItem();
+				},
+				resetPassword: (screenEmail, callback: resetError) => {
+					console.log("RESET PASSWORD", screenEmail);
+					sendPasswordResetEmail(auth, screenEmail)
+						.then(() => callback("some stuff"))
+						.catch((error) => {
+							const errorMessage = error.message;
+							callback(errorMessage);
+						});
+					//setAuth(null);
+					//removeItem();
 				},
 				user
 			}}

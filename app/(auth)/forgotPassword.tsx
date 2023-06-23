@@ -3,44 +3,37 @@ import { StyleSheet, Button, TouchableOpacity } from "react-native";
 import { useAuth, appSignIn } from "../../lib/authContext";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 
 export default function SignIn() {
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 
-	const { signIn } = useAuth();
-	const router = useRouter();
+	const { resetPassword } = useAuth();
 
-	const loginError = (error) => {
-		console.log("errorerrorerrorerrorerror:", error);
+	const resetError = (error) => {
+		console.log("reset ERROR:", error);
 		setErrorMessage(error);
 	};
 
 	return (
 		<View style={styles.container}>
-			<Stack.Screen options={{ title: "Sign In" }} />
+			<Stack.Screen options={{ title: "Reset Password" }} />
 
 			<Image
 				style={styles.image}
 				source={"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Flogo%2FArm-Hammer-Logo.png?alt=media&token=cf1c4663-08f2-4bbf-bfc6-27fb3f4d098d"}
 			/>
+
+			<View>
+				<Text style={styles.resetHeader}>Can't log in?</Text>
+			</View>
+
 			<View style={styles.inputView}>
 				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="email" placeholder="Email" autoFocus autocomplete="email" onChangeText={(email) => setEmail(email)} />
 			</View>
-			<View style={styles.inputView}>
-				<TextInput
-					style={styles.TextInput}
-					placeholder="Password"
-					secureTextEntry={true}
-					onChangeText={(password) => {
-						setPassword(password);
-						setErrorMessage("");
-					}}
-				/>
-			</View>
+
 			<View>
 				<Text>{errorMessage}</Text>
 			</View>
@@ -49,7 +42,7 @@ export default function SignIn() {
 				onPress={async () => {
 					console.log("touchable opacity signin");
 
-					signIn(email, password, loginError);
+					resetPassword(email, resetError);
 					//const resp = await appSignIn("simoncar@gmail.com", "password");
 					//console.log("resp: ", resp);
 					// if (resp?.user) {
@@ -61,34 +54,11 @@ export default function SignIn() {
 				}}
 				style={styles.loginBtn}
 			>
-				<Text style={styles.loginText}>LOGIN</Text>
+				<Text style={styles.loginText}>SEND RESET LINK</Text>
 			</TouchableOpacity>
-			<TouchableOpacity
-				key={"forgotPassword"}
-				onPress={() => {
-					router.push({
-						pathname: "/forgotPassword",
-						params: {
-							email: email
-						}
-					});
-				}}
-			>
-				<Text style={styles.forgot_button}>Can't log in?</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				key={"createAccount"}
-				onPress={() => {
-					router.push({
-						pathname: "/forgotPassword",
-						params: {
-							email: email
-						}
-					});
-				}}
-			>
-				<Text style={styles.forgot_button}>Create an account</Text>
-			</TouchableOpacity>
+			<View>
+				<Text style={styles.resetDetail}>We will email you a password reset link.</Text>
+			</View>
 		</View>
 	);
 }
@@ -109,6 +79,14 @@ const styles = StyleSheet.create({
 		width: "70%",
 		height: 45,
 		marginBottom: 20
+	},
+	resetHeader: {
+		fontSize: 20,
+		fontWeight: "bold",
+		paddingBottom: 20
+	},
+	resetDetail: {
+		paddingTop: 20
 	},
 	TextInput: {
 		height: 50,
