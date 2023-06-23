@@ -1,6 +1,9 @@
 import { useRouter, useSegments } from "expo-router";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import React, { useEffect } from "react";
+import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth/react-native";
+import { auth } from "../lib/firebase";
+import { setStatusBarHidden } from "expo-status-bar";
 
 const AuthContext = React.createContext(null);
 
@@ -8,6 +11,15 @@ const AuthContext = React.createContext(null);
 export function useAuth() {
 	return React.useContext(AuthContext);
 }
+
+const unsub = onAuthStateChanged(auth, (user) => {
+	console.log("onAuthStateChange", user);
+	// AuthStore.update((store) => {
+	// 	store.user = user;
+	// 	store.isLoggedIn = user ? true : false;
+	// 	store.initialized = true;
+	// });
+});
 
 // This hook will protect the route access based on user authentication.
 function useProtectedRoute(user) {
@@ -18,18 +30,24 @@ function useProtectedRoute(user) {
 		const inAuthGroup = segments[0] === "(auth)";
 
 		if (user === undefined) {
+			console.log("user undefined");
+
 			return;
 		}
 
 		if (
 			// If the user is not signed in and the initial segment is not anything in the auth group.
+
 			!user &&
 			!inAuthGroup
 		) {
 			// Redirect to the sign-in page.
+			console.log("// Redirect to the sign-in page.");
 			router.replace("/signIn");
 		} else if (user && inAuthGroup) {
 			// Redirect away from the sign-in page.
+			console.log("Redirect away from the sign-in page.", user, inAuthGroup);
+
 			router.replace("/");
 		}
 	}, [user, segments]);
@@ -52,11 +70,23 @@ export function AuthProvider(props) {
 	return (
 		<AuthContext.Provider
 			value={{
-				signIn: (user) => {
-					setAuth(user);
-					setItem(JSON.stringify(user));
+				signIn: async (user) => {
+					try {
+						console.log("signIn", user);
+						const resp = await signInWithEmailAndPassword(auth, "simoncar@gmail.com", "password");
+						console.log("setAuthBB", user);
+						setAuth(user);
+						console.log("setAuthAA", user);
+
+						setItem(JSON.stringify(user));
+						console.log("stringifyBB:", user);
+						return { user: auth.currentUser };
+					} catch (e) {
+						return { error: e };
+					}
 				},
 				signOut: () => {
+					console.log("signout XXXX:");
 					setAuth(null);
 					removeItem();
 				},
@@ -67,3 +97,51 @@ export function AuthProvider(props) {
 		</AuthContext.Provider>
 	);
 }
+
+export const appSignIn = async (email, password) => {
+	try {
+		const resp = await signInWithEmailAndPassword(auth, email, password);
+
+		//setAuth(user);
+
+		// AuthStore.update((store) => {
+		// 	store.user = resp.user;
+		// 	store.isLoggedIn = resp.user ? true : false;
+		// });
+		return { user: auth.currentUser };
+	} catch (e) {
+		return { error: e };
+	}
+};
+
+export const appSignOut = async () => {
+	try {
+		await signOut(auth);
+		// AuthStore.update((store) => {
+		// 	store.user = null;
+		// 	store.isLoggedIn = false;
+		// });
+		return { user: null };
+	} catch (e) {
+		return { error: e };
+	}
+};
+
+export const appSignUp = async (email, password, displayName) => {
+	try {
+		// this will trigger onAuthStateChange to update the store..
+		const resp = await createUserWithEmailAndPassword(auth, email, password);
+
+		// add the displayName
+		await updateProfile(resp.user, { displayName });
+
+		// AuthStore.update((store) => {
+		// 	store.user = auth.currentUser;
+		// 	store.isLoggedIn = true;
+		// });
+
+		return { user: auth.currentUser };
+	} catch (e) {
+		return { error: e };
+	}
+};

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { useAuth } from "../../lib/authContext";
+import { useAuth, appSignIn } from "../../lib/authContext";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
 import { Stack } from "expo-router";
@@ -11,6 +11,7 @@ export default function SignIn() {
 	const [password, setPassword] = useState("");
 
 	const { signIn } = useAuth();
+
 	return (
 		<View style={styles.container}>
 			<Stack.Screen options={{ title: "Sign In" }} />
@@ -20,13 +21,28 @@ export default function SignIn() {
 				source={"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Flogo%2FArm-Hammer-Logo.png?alt=media&token=cf1c4663-08f2-4bbf-bfc6-27fb3f4d098d"}
 			/>
 			<View style={styles.inputView}>
-				<TextInput style={styles.TextInput} placeholder="Email" onChangeText={(email) => setEmail(email)} />
+				<TextInput style={styles.TextInput} inputMode="email" placeholder="Email" autoFocus autocomplete="email" onChangeText={(email) => setEmail(email)} />
 			</View>
 			<View style={styles.inputView}>
 				<TextInput style={styles.TextInput} placeholder="Password" secureTextEntry={true} onChangeText={(password) => setPassword(password)} />
 			</View>
 
-			<TouchableOpacity onPress={() => signIn({ id: 1, name: "simon" })} style={styles.loginBtn}>
+			<TouchableOpacity
+				onPress={async () => {
+					console.log("touchable opacity signin");
+
+					signIn({ id: 1, name: "simon" });
+					//const resp = await appSignIn("simoncar@gmail.com", "password");
+					//console.log("resp: ", resp);
+					// if (resp?.user) {
+					// 	router.replace("/(tabs)/home");
+					// } else {
+					// 	console.log(resp.error);
+					// 	Alert.alert("Login Error", resp.error?.message);
+					// }
+				}}
+				style={styles.loginBtn}
+			>
 				<Text style={styles.loginText}>LOGIN</Text>
 			</TouchableOpacity>
 			<TouchableOpacity>

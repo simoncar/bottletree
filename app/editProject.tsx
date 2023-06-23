@@ -1,12 +1,15 @@
 import { Image } from "expo-image";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, SafeAreaView, StyleSheet } from "react-native";
+import { Button, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import { ShortList } from "../components/sComponent";
 import { Text, TextInput, View } from "../components/Themed";
 import { getProjectUsers, updateProject } from "../lib/APIprojects";
 import ProjectContext from "../lib/context";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Entypo from "@expo/vector-icons/Entypo";
 import { BorderlessButton } from "react-native-gesture-handler";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 export default function editPost() {
 	const { sharedData, updateSharedData } = useContext(ProjectContext);
@@ -14,6 +17,7 @@ export default function editPost() {
 	const [text, onChangeText] = useState(projectTitle);
 	const [projectUsers, setProjectUsers] = useState("");
 	const [loading, setLoading] = useState(true);
+	const { showActionSheetWithOptions } = useActionSheet();
 
 	console.log("editProject.tsx: projectId: " + projectId);
 
@@ -79,6 +83,51 @@ export default function editPost() {
 		);
 	}
 
+	const openActionSheet = async () => {
+		const options = ["Take Photo", "Pick from Camera Roll", "Delete", "Cancel"];
+		const destructiveButtonIndex = options.length - 2;
+		const cancelButtonIndex = options.length - 1;
+
+		showActionSheetWithOptions(
+			{
+				options,
+				cancelButtonIndex,
+				destructiveButtonIndex
+			},
+			(buttonIndex) => {
+				switch (buttonIndex) {
+					case 0:
+						//props.navigation.push("CameraScreen");
+						break;
+					case 1:
+						//pickImage();
+						break;
+					case 2:
+						//setGPhotoURL("");
+						//setPhotoURL("");
+						break;
+				}
+			}
+		);
+	};
+
+	const profilePic = () => {
+		return (
+			<View style={styles.profilePicContainer}>
+				<TouchableOpacity
+					onPress={() => {
+						openActionSheet();
+					}}
+				>
+					{icon ? <Image style={styles.profilePhoto} source={icon} /> : <Ionicons name="ios-person" size={100} color="#999999" style={styles.profilePic} />}
+					<View style={styles.circle}>
+						<Entypo name="camera" size={17} style={styles.camera} />
+					</View>
+				</TouchableOpacity>
+			</View>
+		);
+	};
+
 	return (
 		<SafeAreaView>
 			<Stack.Screen
@@ -88,7 +137,7 @@ export default function editPost() {
 			/>
 
 			<View style={styles.avatarAContainer}>
-				<View style={styles.avatarBView}>{icon && <Image source={icon} style={styles.avatarCFace} />}</View>
+				<View style={styles.avatarBView}>{profilePic()}</View>
 			</View>
 			<View style={styles.projectNameContainer}>
 				<View style={styles.projectBox}>
@@ -113,6 +162,18 @@ export default function editPost() {
 }
 
 const styles = StyleSheet.create({
+	camera: {
+		color: "white",
+		marginBottom: 2
+	},
+	profilePhoto: {
+		borderColor: "grey",
+		borderRadius: 150 / 2,
+		borderWidth: 1,
+		height: 150,
+		overflow: "hidden",
+		width: 150
+	},
 	avatarAContainer: {
 		alignItems: "center",
 		justifyContent: "center",
@@ -132,6 +193,29 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 		alignItems: "center",
 		justifyContent: "center"
+	},
+	profilePic: {
+		borderColor: "lightgray",
+		height: 200
+	},
+	profilePicContainer: {
+		alignItems: "center",
+		paddingBottom: 15,
+		paddingHorizontal: 15,
+		paddingTop: 15
+	},
+	circle: {
+		alignItems: "center",
+		backgroundColor: "lightgrey",
+		borderColor: "white",
+		borderRadius: 30 / 2,
+		borderWidth: 2,
+		height: 30,
+		justifyContent: "center",
+		left: 115,
+		position: "absolute",
+		top: 115,
+		width: 30
 	},
 	projectBox: {
 		padding: 10,
