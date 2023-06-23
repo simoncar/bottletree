@@ -8,6 +8,7 @@ import { Text, View, TextInput } from "../../components/Themed";
 
 export default function SignIn() {
 	const [email, setEmail] = useState("");
+	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 
@@ -21,14 +22,13 @@ export default function SignIn() {
 
 	return (
 		<View style={styles.container}>
-			<Stack.Screen options={{ title: "Sign In" }} />
+			<Stack.Screen options={{ title: "Create Account" }} />
 
-			<Image
-				style={styles.image}
-				source={"https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Flogo%2FArm-Hammer-Logo.png?alt=media&token=cf1c4663-08f2-4bbf-bfc6-27fb3f4d098d"}
-			/>
 			<View style={styles.inputView}>
-				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="email" placeholder="Email" autoFocus autocomplete="email" onChangeText={(email) => setEmail(email)} />
+				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="text" placeholder="Name" autoCorrect={false} autoFocus autocomplete="name" onChangeText={(name) => setName(name)} />
+			</View>
+			<View style={styles.inputView}>
+				<TextInput style={styles.TextInput} keyboardType="email-address" inputMode="email" placeholder="Email" autocomplete="email" onChangeText={(email) => setEmail(email)} />
 			</View>
 			<View style={styles.inputView}>
 				<TextInput
@@ -61,33 +61,7 @@ export default function SignIn() {
 				}}
 				style={styles.loginBtn}
 			>
-				<Text style={styles.loginText}>LOGIN</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				key={"forgotPassword"}
-				onPress={() => {
-					router.push({
-						pathname: "/forgotPassword",
-						params: {
-							email: email
-						}
-					});
-				}}
-			>
-				<Text style={styles.forgot_button}>Can't log in?</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				key={"createAccount"}
-				onPress={() => {
-					router.push({
-						pathname: "/createAccount",
-						params: {
-							email: email
-						}
-					});
-				}}
-			>
-				<Text style={styles.forgot_button}>Create an account</Text>
+				<Text style={styles.loginText}>CREATE ACCOUNT</Text>
 			</TouchableOpacity>
 		</View>
 	);
@@ -96,14 +70,10 @@ export default function SignIn() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center"
+		alignItems: "center",
+		paddingTop: 100
 	},
-	image: {
-		width: 200,
-		height: 200,
-		marginBottom: 50,
-		marginTop: 50
-	},
+
 	inputView: {
 		borderRadius: 5,
 		width: "70%",
@@ -119,10 +89,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: StyleSheet.hairlineWidth,
 		borderBottomColor: "#CED0CE"
 	},
-	forgot_button: {
-		height: 30,
-		marginTop: 30
-	},
+
 	loginText: {
 		color: "#000"
 	},
