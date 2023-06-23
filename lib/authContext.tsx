@@ -129,8 +129,8 @@ export function AuthProvider(props) {
 							const errorMessage = error.message;
 							callback(errorMessage);
 						});
-					//setAuth(null);
-					//removeItem();
+					setAuth(null);
+					removeItem();
 				},
 				createAccount: (screenName, screenEmail, screenPassword, callback: createAccountCallback) => {
 					console.log("CREATE ACCOUNT", screenName, screenEmail, screenPassword);

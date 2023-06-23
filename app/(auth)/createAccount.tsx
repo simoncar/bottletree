@@ -24,7 +24,19 @@ export default function SignIn() {
 		console.log("error message: ", errorMessage);
 
 		if (errorMessage == "Success") {
-			return;
+			return (
+				<TouchableOpacity
+					onPress={async () => {
+						router.replace({
+							pathname: "/SignIn",
+							params: {}
+						});
+					}}
+					style={styles.loginBtn}
+				>
+					<Text style={styles.loginText}>SIGN In</Text>
+				</TouchableOpacity>
+			);
 		} else {
 			return (
 				<TouchableOpacity
@@ -32,14 +44,6 @@ export default function SignIn() {
 						console.log("touchable opacity signin");
 
 						createAccount(name, email, password, createAccountCallback);
-						//const resp = await appSignIn("simoncar@gmail.com", "password");
-						//console.log("resp: ", resp);
-						// if (resp?.user) {
-						// 	router.replace("/(tabs)/home");
-						// } else {
-						// 	console.log(resp.error);
-						// 	Alert.alert("Login Error", resp.error?.message);
-						// }
 					}}
 					style={styles.loginBtn}
 				>
