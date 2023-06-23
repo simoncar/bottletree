@@ -119,6 +119,17 @@ export function AuthProvider(props) {
 					//setAuth(null);
 					//removeItem();
 				},
+				createAccount: (screenName, screenEmail, screenPassword, callback: createAccountCallback) => {
+					console.log("CREATE ACCOUNT", screenName, screenEmail, screenPassword);
+					createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
+						.then(() => callback("Success"))
+						.catch((error) => {
+							const errorMessage = error.message;
+							callback(errorMessage);
+						});
+					//setAuth(null);
+					//removeItem();
+				},
 				user
 			}}
 		>

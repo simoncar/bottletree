@@ -12,10 +12,10 @@ export default function SignIn() {
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 
-	const { signIn } = useAuth();
+	const { createAccount } = useAuth();
 	const router = useRouter();
 
-	const loginError = (error) => {
+	const createAccountCallback = (error) => {
 		console.log("errorerrorerrorerrorerror:", error);
 		setErrorMessage(error);
 	};
@@ -49,7 +49,7 @@ export default function SignIn() {
 				onPress={async () => {
 					console.log("touchable opacity signin");
 
-					signIn(email, password, loginError);
+					createAccount(name, email, password, createAccountCallback);
 					//const resp = await appSignIn("simoncar@gmail.com", "password");
 					//console.log("resp: ", resp);
 					// if (resp?.user) {
