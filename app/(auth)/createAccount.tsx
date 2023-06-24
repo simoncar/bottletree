@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { useAuth, appSignIn } from "../../lib/authContext";
-import { StatusBar } from "expo-status-bar";
-import { Image } from "expo-image";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { useAuth } from "../../lib/authContext";
 import { Stack, useRouter } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 
@@ -102,38 +100,38 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    TextInput: {
+        alignItems: "flex-start",
+        borderBottomColor: "#CED0CE",
+        borderBottomWidth: StyleSheet.hairlineWidth,
         flex: 1,
+        height: 50,
+        marginLeft: 20,
+        padding: 10,
+    },
+
+    container: {
         alignItems: "center",
+        flex: 1,
         paddingTop: 100,
     },
-
     inputView: {
         borderRadius: 5,
-        width: "70%",
         height: 45,
         marginBottom: 20,
-    },
-    TextInput: {
-        height: 50,
-        flex: 1,
-        padding: 10,
-        marginLeft: 20,
-        alignItems: "flex-start",
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: "#CED0CE",
+        width: "70%",
     },
 
-    loginText: {
-        color: "#000",
-    },
     loginBtn: {
-        width: "80%",
+        alignItems: "center",
+        backgroundColor: "#E4E6C3",
         borderRadius: 25,
         height: 50,
-        alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "#E4E6C3",
+        width: "80%",
+    },
+    loginText: {
+        color: "#000",
     },
 });
