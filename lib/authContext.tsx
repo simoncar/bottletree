@@ -122,6 +122,22 @@ export function AuthProvider(props) {
                             ),
                         };
 
+                        updateProfile(auth.currentUser, {
+                            displayName: "Jane Q. User",
+                            photoURL:
+                                "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
+                        })
+                            .then(() => {
+                                // Profile updated!
+                                // ...
+                                console.log("profile updated");
+                            })
+                            .catch((error) => {
+                                // An error occurred
+                                // ...
+                                console.log("profile ERROR updated");
+                            });
+
                         setAuth(user);
                         console.log("setAuthAA", user);
 

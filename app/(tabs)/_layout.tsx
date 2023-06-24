@@ -20,8 +20,6 @@ export default function TabLayout() {
     const colorScheme = useColorScheme();
     const { user, updateSharedData } = useAuth();
 
-    console.log("TabLayout: user: " + user.email + JSON.stringify(user));
-
     return (
         <Tabs
             screenOptions={{
@@ -44,8 +42,8 @@ export default function TabLayout() {
                                 <Pressable>
                                     {({ pressed }) => (
                                         <UserAvatar
-                                            uid={user.uid}
-                                            photoURL={user.photoURL}
+                                            uid="user.uid"
+                                            photoURL="{user.photoURL}"
                                         />
                                     )}
                                 </Pressable>
