@@ -11,6 +11,7 @@ import {
     deleteUser,
 } from "firebase/auth/react-native";
 import { auth } from "../lib/firebase";
+import { IUser } from "./types";
 
 const AuthContext = React.createContext(null);
 
@@ -20,12 +21,7 @@ export function useAuth() {
 }
 
 const unsub = onAuthStateChanged(auth, (user) => {
-    console.log("onAuthStateChange", user);
-    // AuthStore.update((store) => {
-    // 	store.user = user;
-    // 	store.isLoggedIn = user ? true : false;
-    // 	store.initialized = true;
-    // });
+    //console.log("onAuthStateChange", user);
 });
 
 // This hook will protect the route access based on user authentication.
@@ -65,8 +61,15 @@ function useProtectedRoute(user) {
 }
 
 export function AuthProvider(props) {
+    const INITIAL_USER = {
+        id: "",
+        email: "",
+        name: "",
+        avatar: "",
+    };
+
     const { getItem, setItem, removeItem } = useAsyncStorage("@USER");
-    const [user, setAuth] = React.useState(null);
+    const [user, setAuth] = React.useState(INITIAL_USER);
 
     useEffect(() => {
         getItem().then((json) => {
@@ -78,12 +81,26 @@ export function AuthProvider(props) {
 
     useProtectedRoute(user);
 
+    const updateSharedData = (newData) => {
+        try {
+            const jsonValue = JSON.stringify({ ...user, ...newData });
+            setAuth({ ...user, ...newData });
+            setItem(jsonValue);
+        } catch (e) {
+            console.log("updateSharedData Error: ", e);
+        }
+    };
+
+    function convertToString(value: string | null): string {
+        return String(value);
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 signIn: async (
-                    screenEmail,
-                    screenPassword,
+                    screenEmail: string,
+                    screenPassword: string,
                     callback: loginError,
                 ) => {
                     try {
@@ -94,11 +111,15 @@ export function AuthProvider(props) {
                             screenPassword,
                         );
                         console.log("setAuthBB-", auth.currentUser);
-                        const user = {
-                            id: auth.currentUser.uid,
-                            email: auth.currentUser.email,
-                            name: auth.currentUser.displayName,
-                            avatar: auth.currentUser.photoURL,
+                        const user: IUser = {
+                            uid: convertToString(auth.currentUser.uid),
+                            email: convertToString(auth.currentUser.email),
+                            displayName: convertToString(
+                                auth.currentUser.displayName,
+                            ),
+                            photoURL: convertToString(
+                                auth.currentUser.photoURL,
+                            ),
                         };
 
                         setAuth(user);
@@ -127,7 +148,7 @@ export function AuthProvider(props) {
                     setAuth(null);
                     removeItem();
                 },
-                resetPassword: (screenEmail:string, callback: resetError) => {
+                resetPassword: (screenEmail: string, callback: resetError) => {
                     console.log("RESET PASSWORD", screenEmail);
                     sendPasswordResetEmail(auth, screenEmail)
                         .then(() => callback("some stuff"))
@@ -152,9 +173,9 @@ export function AuthProvider(props) {
                     removeItem();
                 },
                 createAccount: (
-                    screenName:string,
-                    screenEmail:string,
-                    screenPassword:string,
+                    screenName: string,
+                    screenEmail: string,
+                    screenPassword: string,
                     callback: createAccountCallback,
                 ) => {
                     console.log(

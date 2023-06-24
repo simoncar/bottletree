@@ -1,22 +1,23 @@
 import { Timestamp } from "firebase/firestore";
 
 export interface IPost {
-	key: string;
-	projectId: string;
-	author: string;
-	images: string[];
-	timestamp: Timestamp;
-	caption: string;
+    key: string;
+    projectId: string;
+    author: string;
+    images: string[];
+    timestamp: Timestamp;
+    caption: string;
 }
 
 export interface IProject {
-	key: string;
-	title: string;
-	icon: string;
+    key: string;
+    title: string;
+    icon: string;
 }
 
-export interface IProjectUsers {
-	key: string;
-	avatar: string;
-	name: string;
+export interface IUser {
+    uid: string;
+    photoURL: string;
+    displayName: string;
+    email: string;
 }
