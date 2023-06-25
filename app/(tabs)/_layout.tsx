@@ -19,6 +19,22 @@ function TabBarIcon(props: {
 export default function TabLayout() {
     const colorScheme = useColorScheme();
     const { user, updateSharedData } = useAuth();
+    let loggedInUser: IUser = user;
+
+    console.log("TabLayout: user: ", user, loggedInUser);
+
+    if (null == user) {
+        console.log("setting loggedInUser to 0 length string");
+
+        loggedInUser = {
+            uid: "",
+            displayName: "",
+            email: "",
+            photoURL: "",
+        };
+    } else {
+        console.log("setting loggedInUser to user");
+    }
 
     return (
         <Tabs
@@ -42,8 +58,8 @@ export default function TabLayout() {
                                 <Pressable>
                                     {({ pressed }) => (
                                         <UserAvatar
-                                            uid="user.uid"
-                                            photoURL="{user.photoURL}"
+                                            uid={loggedInUser.uid}
+                                            photoURL={loggedInUser.photoURL}
                                         />
                                     )}
                                 </Pressable>

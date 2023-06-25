@@ -36,6 +36,7 @@ export default function SignIn() {
                     keyboardType="email-address"
                     inputMode="email"
                     placeholder="Email"
+                    autoCapitalize="none"
                     autoFocus
                     autocomplete="email"
                     onChangeText={(email) => setEmail(email)}

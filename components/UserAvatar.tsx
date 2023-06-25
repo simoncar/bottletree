@@ -6,25 +6,21 @@ import { Text, View } from "../components/Themed";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-function isEmpty(value) {
-    return value == null || value.length === 0;
-}
-
-const renderPhotoURL = (photoURL) => {
-    if (isEmpty(photoURL)) {
-        return (
-            <View>
-                <Image style={styles.avatarFace} source={photoURL}></Image>
-            </View>
-        );
-    } else {
+function renderPhotoURL(photoURL) {
+    if (photoURL == "") {
         return (
             <View>
                 <Ionicons name="ios-person-circle-outline" size={40} />
             </View>
         );
+    } else {
+        return (
+            <View>
+                <Image style={styles.avatarFace} source={photoURL}></Image>
+            </View>
+        );
     }
-};
+}
 
 export const UserAvatar = (props) => {
     const { uid, photoURL } = props;
@@ -38,7 +34,7 @@ export const UserAvatar = (props) => {
                     pathname: "/user",
                     params: {
                         uid: uid,
-                        photoURL: photoURL,
+                        photoURL: encodeURIComponent(photoURL),
                     },
                 });
             }}>

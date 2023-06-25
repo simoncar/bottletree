@@ -61,12 +61,7 @@ function useProtectedRoute(user) {
 }
 
 export function AuthProvider(props) {
-    const INITIAL_USER = {
-        id: "",
-        email: "",
-        name: "",
-        avatar: "",
-    };
+    const INITIAL_USER = null;
 
     const { getItem, setItem, removeItem } = useAsyncStorage("@USER");
     const [user, setAuth] = React.useState(INITIAL_USER);
@@ -78,6 +73,8 @@ export function AuthProvider(props) {
             }
         });
     }, []);
+
+    console.log("AuthProvider", user);
 
     useProtectedRoute(user);
 
@@ -92,7 +89,11 @@ export function AuthProvider(props) {
     };
 
     function convertToString(value: string | null): string {
-        return String(value);
+        if (value === null) {
+            return "";
+        } else {
+            return value;
+        }
     }
 
     return (
@@ -110,7 +111,6 @@ export function AuthProvider(props) {
                             screenEmail,
                             screenPassword,
                         );
-                        console.log("setAuthBB-", auth.currentUser);
                         const user: IUser = {
                             uid: convertToString(auth.currentUser.uid),
                             email: convertToString(auth.currentUser.email),
@@ -122,27 +122,26 @@ export function AuthProvider(props) {
                             ),
                         };
 
-                        updateProfile(auth.currentUser, {
-                            displayName: "Jane Q. User",
-                            photoURL:
-                                "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
-                        })
-                            .then(() => {
-                                // Profile updated!
-                                // ...
-                                console.log("profile updated");
-                            })
-                            .catch((error) => {
-                                // An error occurred
-                                // ...
-                                console.log("profile ERROR updated");
-                            });
+                        console.log("PHOTO -", auth.currentUser.photoURL);
+
+                        // updateProfile(auth.currentUser, {
+                        //     displayName: "Jane Q. User",
+                        //     photoURL:
+                        //         "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
+                        // })
+                        //     .then(() => {
+                        //         // Profile updated!
+                        //         // ...
+                        //         console.log("profile updated");
+                        //     })
+                        //     .catch((error) => {
+                        //         // An error occurred
+                        //         // ...
+                        //         console.log("profile ERROR updated");
+                        //     });
 
                         setAuth(user);
-                        console.log("setAuthAA", user);
-
                         setItem(JSON.stringify(user));
-                        console.log("stringifyBB:", user);
                         return { user: auth.currentUser };
                     } catch (error) {
                         // Handle Errors here.
@@ -161,8 +160,8 @@ export function AuthProvider(props) {
                 },
                 signOut: () => {
                     console.log("signout XXXX:");
-                    setAuth(null);
                     removeItem();
+                    setAuth(null);
                 },
                 resetPassword: (screenEmail: string, callback: resetError) => {
                     console.log("RESET PASSWORD", screenEmail);

@@ -24,7 +24,7 @@ export default function editUser() {
     const { uid, photoURL } = useLocalSearchParams();
     const router = useRouter();
     const colorScheme = useColorScheme();
-    const { deleteAccount, signOut } = useAuth();
+    const { deleteAccount, signOut, user } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();
 
     const save = () => {
@@ -76,20 +76,17 @@ export default function editUser() {
                     onPress={() => {
                         openActionSheet();
                     }}>
-                    {"statePhotoURL" ? (
-                        <Image
-                            style={styles.profilePhoto}
-                            source={
-                                "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69"
-                            }
-                        />
+                    {photoURL ? (
+                        <Image style={styles.profilePhoto} source={photoURL} />
                     ) : (
-                        <Ionicons
-                            name="ios-person"
-                            size={100}
-                            color="#999999"
-                            style={styles.profilePic}
-                        />
+                        <View style={styles.profileCircleIcon}>
+                            <Ionicons
+                                name="ios-person"
+                                size={100}
+                                color="#999999"
+                                style={styles.profilePic}
+                            />
+                        </View>
                     )}
                     <View style={styles.circle}>
                         <Entypo name="camera" size={17} style={styles.camera} />
@@ -105,7 +102,7 @@ export default function editUser() {
                 <View style={styles.avatarBView}>{profilePic()}</View>
 
                 <View style={styles.nameContainer}>
-                    <Text style={styles.name}>Jacob Graham</Text>
+                    <Text style={styles.name}>{user && user.displayName}</Text>
                 </View>
             </View>
 
@@ -217,7 +214,6 @@ const styles = StyleSheet.create({
         paddingBottom: 50,
         paddingTop: 20,
     },
-
     outerView: {
         alignItems: "center",
         borderBottomColor: "#CED0CE",
@@ -227,6 +223,15 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         padding: 8,
     },
+    profileCircleIcon: {
+        alignItems: "center",
+        borderColor: "lightgray",
+        borderRadius: 150 / 2,
+        borderWidth: 1,
+        height: 150,
+        justifyContent: "center",
+        width: 150,
+    },
     profilePhoto: {
         borderColor: "grey",
         borderRadius: 150 / 2,
@@ -235,10 +240,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         width: 150,
     },
-    profilePic: {
-        borderColor: "lightgray",
-        height: 200,
-    },
+    profilePic: {},
     profilePicContainer: {
         alignItems: "center",
         paddingBottom: 15,
