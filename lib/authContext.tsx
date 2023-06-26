@@ -124,22 +124,6 @@ export function AuthProvider(props) {
 
                         console.log("PHOTO -", auth.currentUser.photoURL);
 
-                        // updateProfile(auth.currentUser, {
-                        //     displayName: "Jane Q. User",
-                        //     photoURL:
-                        //         "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
-                        // })
-                        //     .then(() => {
-                        //         // Profile updated!
-                        //         // ...
-                        //         console.log("profile updated");
-                        //     })
-                        //     .catch((error) => {
-                        //         // An error occurred
-                        //         // ...
-                        //         console.log("profile ERROR updated");
-                        //     });
-
                         setAuth(user);
                         setItem(JSON.stringify(user));
                         return { user: auth.currentUser };
@@ -159,12 +143,11 @@ export function AuthProvider(props) {
                     }
                 },
                 signOut: () => {
-                    console.log("signout XXXX:");
                     removeItem();
                     setAuth(null);
                 },
+
                 resetPassword: (screenEmail: string, callback: resetError) => {
-                    console.log("RESET PASSWORD", screenEmail);
                     sendPasswordResetEmail(auth, screenEmail)
                         .then(() => callback("some stuff"))
                         .catch((error) => {
@@ -176,7 +159,6 @@ export function AuthProvider(props) {
                 },
                 deleteAccount: (callback: resetError) => {
                     const user = auth.currentUser;
-                    console.log("DELETE ACCOUNT", user);
 
                     deleteUser(user)
                         .then(() => callback("deleting the user"))
@@ -193,12 +175,6 @@ export function AuthProvider(props) {
                     screenPassword: string,
                     callback: createAccountCallback,
                 ) => {
-                    console.log(
-                        "CREATE ACCOUNT",
-                        screenName,
-                        screenEmail,
-                        screenPassword,
-                    );
                     createUserWithEmailAndPassword(
                         auth,
                         screenEmail,
@@ -218,6 +194,32 @@ export function AuthProvider(props) {
         </AuthContext.Provider>
     );
 }
+
+export const updateAccount = (displayName: string) =>
+{
+    const newData = { displayName: displayName };
+
+
+    updateProfile(auth.currentUser, {
+        displayName: displayName,
+        // photoURL:
+        //     "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
+    })
+        .then(() => {
+            // Profile updated!
+            // ...
+            console.log("upser account update:", displayName);
+            //updateSharedData({ displayName: displayName });
+            const jsonValue = JSON.stringify({ ...auth.currentUser, ...newData });
+            setAuth({ ...auth.currentUser, ...newData });
+            setItem(jsonValue);
+        })
+        .catch((error) => {
+            // An error occurred
+            // ...
+            console.log("user update ERROR updated");
+        });
+};
 
 export const appSignIn = async (email, password) => {
     try {

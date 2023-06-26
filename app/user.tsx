@@ -5,10 +5,11 @@ import {
     StyleSheet,
     useColorScheme,
     TouchableOpacity,
+    Button,
 } from "react-native";
-import { Text, View } from "../components/Themed";
-import ProjectContext from "../lib/context";
-import { useRouter } from "expo-router";
+import { Text, View, TextInput } from "../components/Themed";
+import { AuthContext } from "../lib/authContext";
+import { useRouter, Stack } from "expo-router";
 import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -18,16 +19,20 @@ import Colors from "../constants/Colors";
 import { useAuth } from "../lib/authContext";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import { updateAccount } from "../lib/authContext";
 
 export default function editUser() {
-    const { sharedData } = useContext(ProjectContext);
-    const { uid, photoURL } = useLocalSearchParams();
+    const { sharedData, updateSharedData } = useContext(AuthContext);
+    const { uid, photoURL, displayName } = useLocalSearchParams();
+    const [text, onChangeText] = useState(displayName);
     const router = useRouter();
     const colorScheme = useColorScheme();
     const { deleteAccount, signOut, user } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();
 
     const save = () => {
+        updateAccount(text);
+        updateSharedData({ displayName });
         router.push({
             pathname: "/",
             params: {
@@ -98,31 +103,29 @@ export default function editUser() {
 
     return (
         <SafeAreaView>
+            <Stack.Screen
+                options={{
+                    headerRight: () => (
+                        <Button title="Done" onPress={() => save()} />
+                    ),
+                }}
+            />
             <View style={styles.avatarAContainer}>
                 <View style={styles.avatarBView}>{profilePic()}</View>
 
-                <View style={styles.nameContainer}>
-                    <Text style={styles.name}>{user && user.displayName}</Text>
+                <View style={styles.projectNameContainer}>
+                    <View style={styles.projectBox}>
+                        <TextInput
+                            style={styles.project}
+                            onChangeText={(text) => onChangeText(text)}
+                            placeholder={"Your Name"}
+                            value={text}
+                            multiline
+                        />
+                    </View>
                 </View>
             </View>
 
-            <View style={styles.outerView}>
-                <View style={styles.leftContent}>
-                    <FontAwesome5
-                        name="address-card"
-                        size={25}
-                        color={Colors[colorScheme ?? "light"].text}
-                    />
-                    <Text style={styles.settingName}>Contact Details</Text>
-                </View>
-                <View style={styles.rightChevron}>
-                    <FontAwesome5
-                        name="chevron-right"
-                        size={20}
-                        color={Colors[colorScheme ?? "light"].text}
-                    />
-                </View>
-            </View>
             <TouchableOpacity
                 key={"deleteAccount"}
                 onPress={() =>
@@ -179,7 +182,7 @@ const styles = StyleSheet.create({
     avatarAContainer: {
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: 50,
+        paddingTop: 20,
     },
     avatarBView: {},
     camera: {
@@ -240,7 +243,19 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         width: 150,
     },
+    project: {
+        fontSize: 25,
+        fontWeight: "bold",
+    },
     profilePic: {},
+    projectBox: {
+        alignItems: "center",
+        borderBottomColor: "#CED0CE",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        justifyContent: "center",
+        padding: 10,
+        width: "85%",
+    },
     profilePicContainer: {
         alignItems: "center",
         paddingBottom: 15,
@@ -248,6 +263,12 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
 
+    projectNameContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom: 50,
+        paddingTop: 20,
+    },
     rightChevron: {
         marginHorizontal: 8,
     },

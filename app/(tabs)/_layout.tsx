@@ -60,6 +60,9 @@ export default function TabLayout() {
                                         <UserAvatar
                                             uid={loggedInUser.uid}
                                             photoURL={loggedInUser.photoURL}
+                                            displayName={
+                                                loggedInUser.displayName
+                                            }
                                         />
                                     )}
                                 </Pressable>

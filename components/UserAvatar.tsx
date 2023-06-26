@@ -1,16 +1,21 @@
 import React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { useRouter } from "expo-router";
 import { Text, View } from "../components/Themed";
-
+import Colors from "../constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 function renderPhotoURL(photoURL) {
+    const colorScheme = useColorScheme();
     if (photoURL == "") {
         return (
             <View>
-                <Ionicons name="ios-person-circle-outline" size={40} />
+                <Ionicons
+                    name="ios-person-circle-outline"
+                    size={40}
+                    color={Colors[colorScheme ?? "light"].text}
+                />
             </View>
         );
     } else {
@@ -23,7 +28,7 @@ function renderPhotoURL(photoURL) {
 }
 
 export const UserAvatar = (props) => {
-    const { uid, photoURL } = props;
+    const { uid, photoURL, displayName } = props;
     const router = useRouter();
 
     return (
@@ -35,6 +40,7 @@ export const UserAvatar = (props) => {
                     params: {
                         uid: uid,
                         photoURL: encodeURIComponent(photoURL),
+                        displayName: displayName,
                     },
                 });
             }}>
