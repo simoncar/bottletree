@@ -11,7 +11,7 @@ import {
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { updatePost, deletePost } from "../lib/APIpost";
-import ProjectContext from "../lib/context";
+import ProjectContext from "../lib/projectContext";
 import { TextInput, View, Text } from "../components/Themed";
 import Colors from "../constants/Colors";
 

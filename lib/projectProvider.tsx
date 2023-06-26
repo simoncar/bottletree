@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ProjectContext from "./context";
+import ProjectContext from "./projectContext";
 import { IUser } from "./types";
 
-const MyProvider = ({ children }) => {
+const ProjectProvider = ({ children }) => {
     const INITIAL_PROJECT: IUser = {
         uid: "",
         displayName: "",
@@ -38,4 +38,4 @@ const MyProvider = ({ children }) => {
     );
 };
 
-export default MyProvider;
+export default ProjectProvider;

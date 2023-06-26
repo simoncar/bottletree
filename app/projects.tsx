@@ -15,7 +15,7 @@ import { ShortList } from "../components/sComponent";
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getProjects } from "../lib/APIprojects";
-import ProjectContext from "../lib/context";
+import ProjectContext from "../lib/projectContext";
 import { db } from "../lib/firebase";
 
 export default function ModalScreen() {

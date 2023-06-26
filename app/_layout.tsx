@@ -8,7 +8,7 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
 import { useColorScheme } from "react-native";
-import MyProvider from "../lib/provider";
+import ProjectProvider from "../lib/projectProvider";
 import { AuthProvider } from "../lib/authContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
@@ -56,7 +56,7 @@ function RootLayoutNav() {
             <ThemeProvider value={colorScheme === "dark" ? DarkTheme : MyTheme}>
                 <AuthProvider>
                     <ActionSheetProvider>
-                        <MyProvider>
+                        <ProjectProvider>
                             <Stack>
                                 <Stack.Screen
                                     name="(tabs)"
@@ -107,7 +107,7 @@ function RootLayoutNav() {
                                     })}
                                 />
                             </Stack>
-                        </MyProvider>
+                        </ProjectProvider>
                     </ActionSheetProvider>
                 </AuthProvider>
             </ThemeProvider>

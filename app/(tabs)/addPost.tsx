@@ -7,7 +7,7 @@ import React, { useContext, useState } from "react";
 import { Button, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
-import ProjectContext from "../../lib/context";
+import ProjectContext from "../../lib/projectContext";
 import { storage } from "../../lib/firebase";
 
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";

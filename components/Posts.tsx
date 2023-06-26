@@ -11,7 +11,7 @@ import {
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getPosts } from "../lib/APIpost";
-import ProjectContext from "../lib/context";
+import ProjectContext from "../lib/projectContext";
 import { IPost } from "../lib/types";
 import Post from "./Post";
 import Project from "./Project";

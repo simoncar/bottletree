@@ -10,7 +10,7 @@ import {
 import { ShortList } from "../components/sComponent";
 import { Text, TextInput, View } from "../components/Themed";
 import { getProjectUsers, updateProject } from "../lib/APIprojects";
-import ProjectContext from "../lib/context";
+import ProjectContext from "../lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { BorderlessButton } from "react-native-gesture-handler";

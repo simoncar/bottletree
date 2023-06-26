@@ -5,7 +5,7 @@ import { useRouter, Stack } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View, TextInput } from "../components/Themed";
-import ProjectContext from "../lib/context";
+import ProjectContext from "../lib/projectContext";
 import { addProject } from "../lib/APIprojects";
 import { IProject } from "../lib/types";
 
