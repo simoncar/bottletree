@@ -1,10 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
-import Constants from "expo-constants";
 import * as Application from "expo-application";
-import * as Device from "expo-device";
-import { useAuth } from "../lib/authContext";
+import { useAuth } from "../lib/authProvider";
 
 export const About = () => {
     const { user, updateSharedData } = useAuth();

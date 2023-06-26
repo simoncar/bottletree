@@ -9,7 +9,7 @@ import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import ProjectProvider from "../lib/projectProvider";
-import { AuthProvider } from "../lib/authContext";
+import AuthProvider from "../lib/authProvider";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 export { ErrorBoundary } from "expo-router";
 

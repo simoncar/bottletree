@@ -8,7 +8,7 @@ import {
     Button,
 } from "react-native";
 import { Text, View, TextInput } from "../components/Themed";
-import { AuthContext } from "../lib/authContext";
+import AuthContext, { useAuth, appSignIn } from "../lib/authProvider";
 import { useRouter, Stack } from "expo-router";
 import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -16,13 +16,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
-import { useAuth } from "../lib/authContext";
+import { updateAccount } from "../lib/APIuser";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { updateAccount } from "../lib/authContext";
 
 export default function editUser() {
-    const { sharedData, updateSharedData } = useContext(AuthContext);
     const { uid, photoURL, displayName } = useLocalSearchParams();
     const [text, onChangeText] = useState(displayName);
     const router = useRouter();
@@ -32,7 +30,7 @@ export default function editUser() {
 
     const save = () => {
         updateAccount(text);
-        updateSharedData({ displayName });
+        //updateSharedData({ text });
         router.push({
             pathname: "/",
             params: {
@@ -209,14 +207,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         paddingHorizontal: 8,
     },
-    name: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-    nameContainer: {
-        paddingBottom: 50,
-        paddingTop: 20,
-    },
+
     outerView: {
         alignItems: "center",
         borderBottomColor: "#CED0CE",

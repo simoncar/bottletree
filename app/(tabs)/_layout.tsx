@@ -7,7 +7,7 @@ import { View } from "../../components/Themed";
 import { UserAvatar } from "../../components/UserAvatar";
 import Colors from "../../constants/Colors";
 import { IUser } from "../../lib/types";
-import { useAuth } from "../../lib/authContext";
+import { useAuth } from "../../lib/authProvider";
 
 function TabBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome5>["name"];

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { useAuth, appSignIn } from "../../lib/authContext";
+import { useAuth, appSignIn } from "../../lib/authProvider";
 import { StatusBar } from "expo-status-bar";
 import { Image } from "expo-image";
 import { Stack, useRouter } from "expo-router";
