@@ -11,7 +11,6 @@ import { useColorScheme } from "react-native";
 import ProjectProvider from "../lib/projectProvider";
 import { AuthProvider } from "../lib/authContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-
 export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
