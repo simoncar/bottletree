@@ -87,7 +87,7 @@ const AuthProvider = ({ children }) => {
         try {
             const jsonValue = JSON.stringify({ ...shareDataUser, ...newData });
             setSharedDataUser({ ...shareDataUser, ...newData });
-            AsyncStorage.setItem("@USER", { ...shareDataUser, ...newData });
+            AsyncStorage.setItem("@USER", jsonValue);
             console.log("updateSharedDataUser ASYNCSTORAGE", jsonValue);
         } catch (e) {
             console.log("updateSharedDataUser Error: ", e);
