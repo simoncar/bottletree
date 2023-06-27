@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     SafeAreaView,
     StyleSheet,
@@ -8,7 +8,7 @@ import {
     Button,
 } from "react-native";
 import { Text, View, TextInput } from "../components/Themed";
-import AuthContext, { useAuth, appSignIn } from "../lib/authProvider";
+import { useAuth, appSignIn } from "../lib/authProvider";
 import { useRouter, Stack } from "expo-router";
 import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -25,12 +25,18 @@ export default function editUser() {
     const [text, onChangeText] = useState(displayName);
     const router = useRouter();
     const colorScheme = useColorScheme();
-    const { deleteAccount, signOut, user } = useAuth();
+    const { shareDataUser, updateSharedDataUser, signOut } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();
 
+    console.log("editUser222: " + JSON.stringify(shareDataUser));
+
+    useEffect(() => {
+        onChangeText(shareDataUser.displayName);
+    }, []);
+
     const save = () => {
-        updateAccount(text);
-        //updateSharedData({ text });
+        updateAccount(text); //firebease auth update function
+        updateSharedDataUser({ displayName: text });
         router.push({
             pathname: "/",
             params: {

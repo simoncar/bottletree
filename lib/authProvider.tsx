@@ -1,7 +1,9 @@
 import { useRouter, useSegments } from "expo-router";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import AsyncStorage, {
+    useAsyncStorage,
+} from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
@@ -30,9 +32,10 @@ function useProtectedRoute(user) {
 
     React.useEffect(() => {
         const inAuthGroup = segments[0] === "(auth)";
+        console.log("useEffect .... useProtectedRoute", user, inAuthGroup);
 
         if (user === undefined) {
-            console.log("user undefined");
+            console.log(">>>>>>>>>user undefined");
 
             return;
         }
@@ -44,12 +47,12 @@ function useProtectedRoute(user) {
             !inAuthGroup
         ) {
             // Redirect to the sign-in page.
-            console.log("// Redirect to the sign-in page.");
+            console.log("useProtectedRoute:  Redirect to the sign-in page.");
             router.replace("/signIn");
         } else if (user && inAuthGroup) {
             // Redirect away from the sign-in page.
             console.log(
-                "Redirect away from the sign-in page.",
+                "useProtectedRoute:Redirect away from the sign-in page.",
                 user,
                 inAuthGroup,
             );
@@ -61,30 +64,117 @@ function useProtectedRoute(user) {
 
 const AuthProvider = ({ children }) => {
     const INITIAL_USER = null;
-
-    const { getItem, setItem, removeItem } = useAsyncStorage("@USER");
-    const [user, setAuth] = React.useState(INITIAL_USER);
+    const [shareDataUser, setSharedDataUser] = useState(INITIAL_USER);
 
     useEffect(() => {
-        getItem().then((json) => {
-            if (json) {
-                setAuth(JSON.parse(json));
+        AsyncStorage.getItem("@USER").then((jsonValue) => {
+            console.log(
+                "AuthProvider useEffect AsyncStorage.getItem(@USER)",
+                jsonValue,
+            );
+
+            if (jsonValue) {
+                console.log("saving to useState", jsonValue);
+
+                setSharedDataUser(JSON.parse(jsonValue));
             }
         });
     }, []);
 
-    console.log("AuthProvider", user);
+    useProtectedRoute(shareDataUser);
 
-    useProtectedRoute(user);
-
-    const updateSharedData = (newData) => {
+    const updateSharedDataUser = (newData) => {
         try {
-            const jsonValue = JSON.stringify({ ...user, ...newData });
-            setAuth({ ...user, ...newData });
-            setItem(jsonValue);
+            const jsonValue = JSON.stringify({ ...shareDataUser, ...newData });
+            setSharedDataUser({ ...shareDataUser, ...newData });
+            AsyncStorage.setItem("@USER", { ...shareDataUser, ...newData });
+            console.log("updateSharedDataUser ASYNCSTORAGE", jsonValue);
         } catch (e) {
-            console.log("updateSharedData Error: ", e);
+            console.log("updateSharedDataUser Error: ", e);
         }
+    };
+
+    const signIn = async (
+        screenEmail: string,
+        screenPassword: string,
+        callback: loginError,
+    ) => {
+        try {
+            console.log("signIn----", screenEmail, screenPassword);
+            const resp = await signInWithEmailAndPassword(
+                auth,
+                screenEmail,
+                screenPassword,
+            );
+            const user: IUser = {
+                uid: convertToString(auth.currentUser.uid),
+                email: convertToString(auth.currentUser.email),
+                displayName: convertToString(auth.currentUser.displayName),
+                photoURL: convertToString(auth.currentUser.photoURL),
+            };
+
+            console.log("PHOTO -", auth.currentUser.photoURL);
+
+            setSharedDataUser(user);
+            AsyncStorage.setItem("@USER", JSON.stringify(user));
+            return { user: auth.currentUser };
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if (errorCode === "auth/wrong-password") {
+                callback("Wrong password.");
+            } else {
+                callback(errorMessage);
+            }
+            //setLoading(false);
+            console.log(error);
+
+            return { error: error };
+        }
+    };
+
+    const signOut = async () => {
+        AsyncStorage.removeItem("@USER");
+        setSharedDataUser(null);
+    };
+
+    const resetPassword = (screenEmail: string, callback: resetError) => {
+        sendPasswordResetEmail(auth, screenEmail)
+            .then(() => callback("some stuff"))
+            .catch((error) => {
+                const errorMessage = error.message;
+                callback(errorMessage);
+            });
+        //setSharedDataUser(null);
+        //removeItem();
+    };
+
+    const deleteAccount = async (callback: resetError) => {
+        const user = auth.currentUser;
+
+        deleteUser(user)
+            .then(() => callback("deleting the user"))
+            .catch((error) => {
+                const errorMessage = error.message;
+                callback(errorMessage);
+            });
+        setSharedDataUser(null);
+        AsyncStorage.removeItem("@USER");
+    };
+
+    const createAccount = async (
+        screenName: string,
+        screenEmail: string,
+        screenPassword: string,
+        callback: createAccountCallback,
+    ) => {
+        createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
+            .then(() => callback("Success"))
+            .catch((error) => {
+                const errorMessage = error.message;
+                callback(errorMessage);
+            });
     };
 
     function convertToString(value: string | null): string {
@@ -98,108 +188,24 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
-                signIn: async (
-                    screenEmail: string,
-                    screenPassword: string,
-                    callback: loginError,
-                ) => {
-                    try {
-                        console.log("signIn----", screenEmail, screenPassword);
-                        const resp = await signInWithEmailAndPassword(
-                            auth,
-                            screenEmail,
-                            screenPassword,
-                        );
-                        const user: IUser = {
-                            uid: convertToString(auth.currentUser.uid),
-                            email: convertToString(auth.currentUser.email),
-                            displayName: convertToString(
-                                auth.currentUser.displayName,
-                            ),
-                            photoURL: convertToString(
-                                auth.currentUser.photoURL,
-                            ),
-                        };
-
-                        console.log("PHOTO -", auth.currentUser.photoURL);
-
-                        setAuth(user);
-                        setItem(JSON.stringify(user));
-                        return { user: auth.currentUser };
-                    } catch (error) {
-                        // Handle Errors here.
-                        const errorCode = error.code;
-                        const errorMessage = error.message;
-                        if (errorCode === "auth/wrong-password") {
-                            callback("Wrong password.");
-                        } else {
-                            callback(errorMessage);
-                        }
-                        //setLoading(false);
-                        console.log(error);
-
-                        return { error: error };
-                    }
-                },
-                signOut: () => {
-                    removeItem();
-                    setAuth(null);
-                },
-
-                resetPassword: (screenEmail: string, callback: resetError) => {
-                    sendPasswordResetEmail(auth, screenEmail)
-                        .then(() => callback("some stuff"))
-                        .catch((error) => {
-                            const errorMessage = error.message;
-                            callback(errorMessage);
-                        });
-                    //setAuth(null);
-                    //removeItem();
-                },
-                deleteAccount: (callback: resetError) => {
-                    const user = auth.currentUser;
-
-                    deleteUser(user)
-                        .then(() => callback("deleting the user"))
-                        .catch((error) => {
-                            const errorMessage = error.message;
-                            callback(errorMessage);
-                        });
-                    setAuth(null);
-                    removeItem();
-                },
-                createAccount: (
-                    screenName: string,
-                    screenEmail: string,
-                    screenPassword: string,
-                    callback: createAccountCallback,
-                ) => {
-                    createUserWithEmailAndPassword(
-                        auth,
-                        screenEmail,
-                        screenPassword,
-                    )
-                        .then(() => callback("Success"))
-                        .catch((error) => {
-                            const errorMessage = error.message;
-                            callback(errorMessage);
-                        });
-                    //setAuth(null);
-                    //removeItem();
-                },
-                user,
+                shareDataUser,
+                signIn,
+                signOut,
+                resetPassword,
+                deleteAccount,
+                updateSharedDataUser,
+                createAccount,
             }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-
 export const appSignIn = async (email, password) => {
     try {
         const resp = await signInWithEmailAndPassword(auth, email, password);
 
-        //setAuth(user);
+        //setSharedDataUser(user);
 
         // AuthStore.update((store) => {
         // 	store.user = resp.user;

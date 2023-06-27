@@ -2,7 +2,10 @@ import { updateProfile } from "firebase/auth/react-native";
 import { auth } from "../lib/firebase";
 import { IProject, IUser } from "./types";
 
+import React, { useContext, useState } from "react";
+
 export const updateAccount = (displayName: string) => {
+    //const { sharedData, updateSharedData } = useContext(AuthContext);
     const newData = { displayName: displayName };
 
     updateProfile(auth.currentUser, {

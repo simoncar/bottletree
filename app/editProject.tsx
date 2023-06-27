@@ -17,7 +17,7 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 
 export default function editPost() {
-    const { sharedData, updateSharedData } = useContext(ProjectContext);
+    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
     const { projectId, projectTitle, icon } = useLocalSearchParams();
     const [text, onChangeText] = useState(projectTitle);
     const [projectUsers, setProjectUsers] = useState("");
@@ -48,7 +48,7 @@ export default function editPost() {
     const saveDone = (id) => {
         console.log("editProject.tsx: saveDone: id: " + text);
 
-        updateSharedData({
+        updateSharedDataProject({
             projectId: id,
             projectTitle: text,
             projectIcon: icon,

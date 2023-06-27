@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import * as Application from "expo-application";
-import { useAuth } from "../lib/authProvider";
+import { useAuth, appSignIn } from "../lib/authProvider";
 
 export const About = () => {
-    const { user, updateSharedData } = useAuth();
+    const { shareDataUser, updateSharedData, signOut } = useAuth();
 
-    if (null == user) {
-        return;
+    if (null == shareDataUser) {
+        return (
+            <View>
+                <Text style={styles.version}>About</Text>
+            </View>
+        );
     } else {
         return (
             <View style={styles.aboutContainer}>
@@ -16,9 +20,10 @@ export const About = () => {
                     {Application.nativeApplicationVersion} (
                     {Application.nativeBuildVersion})
                 </Text>
-                <Text style={styles.version}>{user.uid}</Text>
-                <Text style={styles.version}>{user.displayName}</Text>
-                <Text style={styles.version}>{user.email}</Text>
+                <Text style={styles.version}>{shareDataUser.uid}</Text>
+                <Text style={styles.version}>{shareDataUser.displayName}</Text>
+                <Text style={styles.version}>{shareDataUser.email}</Text>
+                <Text style={styles.version}>About</Text>
             </View>
         );
     }

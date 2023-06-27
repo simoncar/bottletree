@@ -53,9 +53,9 @@ function RootLayoutNav() {
     return (
         <>
             <ThemeProvider value={colorScheme === "dark" ? DarkTheme : MyTheme}>
-                <AuthProvider>
-                    <ActionSheetProvider>
-                        <ProjectProvider>
+                <ActionSheetProvider>
+                    <ProjectProvider>
+                        <AuthProvider>
                             <Stack>
                                 <Stack.Screen
                                     name="(tabs)"
@@ -106,9 +106,9 @@ function RootLayoutNav() {
                                     })}
                                 />
                             </Stack>
-                        </ProjectProvider>
-                    </ActionSheetProvider>
-                </AuthProvider>
+                        </AuthProvider>
+                    </ProjectProvider>
+                </ActionSheetProvider>
             </ThemeProvider>
         </>
     );

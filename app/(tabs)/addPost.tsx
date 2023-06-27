@@ -13,12 +13,14 @@ import { storage } from "../../lib/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export default function addPhoto() {
-    const { sharedData, updateSharedData } = useContext(ProjectContext);
+    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
 
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
 
     const router = useRouter();
+
+    console.log("addPhoto: " + JSON.stringify(sharedData));
 
     const saveDone = (id) => {
         router.push({

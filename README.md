@@ -16,3 +16,6 @@ eas update --branch production --message "Updating the app"
 
 
 npx expo start --offline
+
+
+open "rndebugger://set-debugger-loc?host=localhost&port=19000"

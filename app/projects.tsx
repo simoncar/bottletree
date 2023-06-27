@@ -24,7 +24,7 @@ export default function ModalScreen() {
     const router = useRouter();
 
     const colorScheme = useColorScheme();
-    const { updateSharedData } = useContext(ProjectContext);
+    const { updateSharedDataProject } = useContext(ProjectContext);
 
     const projectsRead = (projectsDB) => {
         setProjects(projectsDB);
@@ -98,7 +98,7 @@ export default function ModalScreen() {
                     key={data.key}
                     style={styles.innerView}
                     onPress={() => {
-                        updateSharedData({
+                        updateSharedDataProject({
                             projectId: data.key,
                             projectTitle: data.title,
                             projectIcon: data.icon,
@@ -125,7 +125,7 @@ export default function ModalScreen() {
                 <TouchableOpacity
                     key={"chevron." + data.key}
                     onPress={() => {
-                        updateSharedData({
+                        updateSharedDataProject({
                             projectId: data.key,
                             projectTitle: data.title,
                             projectIcon: data.icon,

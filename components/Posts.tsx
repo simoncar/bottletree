@@ -20,7 +20,7 @@ import { useRouter } from "expo-router";
 export const Posts = (props) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { sharedData, updateSharedData } = useContext(ProjectContext);
+    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
     const router = useRouter();
 

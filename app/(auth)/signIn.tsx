@@ -15,7 +15,7 @@ export default function SignIn() {
     const router = useRouter();
 
     const loginError = (error) => {
-        console.log("errorerrorerrorerrorerror:", error);
+        console.log("SignIn Error:", error);
         setErrorMessage(error);
     };
 

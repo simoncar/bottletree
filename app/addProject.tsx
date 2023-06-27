@@ -12,7 +12,7 @@ import { IProject } from "../lib/types";
 import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function addPhoto() {
-    const { sharedData, updateSharedData } = useContext(ProjectContext);
+    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
 
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
@@ -27,7 +27,7 @@ export default function addPhoto() {
     const router = useRouter();
 
     const saveDone = (id) => {
-        updateSharedData({
+        updateSharedDataProject({
             projectId: id,
             projectTitle: project.title,
             projectIcon: project.icon,
