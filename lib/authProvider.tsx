@@ -32,11 +32,8 @@ function useProtectedRoute(user) {
 
     React.useEffect(() => {
         const inAuthGroup = segments[0] === "(auth)";
-        console.log("useEffect .... useProtectedRoute", user, inAuthGroup);
 
         if (user === undefined) {
-            console.log(">>>>>>>>>user undefined");
-
             return;
         }
 
@@ -47,16 +44,9 @@ function useProtectedRoute(user) {
             !inAuthGroup
         ) {
             // Redirect to the sign-in page.
-            console.log("useProtectedRoute:  Redirect to the sign-in page.");
             router.replace("/signIn");
         } else if (user && inAuthGroup) {
             // Redirect away from the sign-in page.
-            console.log(
-                "useProtectedRoute:Redirect away from the sign-in page.",
-                user,
-                inAuthGroup,
-            );
-
             router.replace("/");
         }
     }, [user, segments]);
@@ -90,10 +80,7 @@ const AuthProvider = ({ children }) => {
             const jsonValue = JSON.stringify({ ...sharedDataUser, ...newData });
             setSharedDataUser({ ...sharedDataUser, ...newData });
             AsyncStorage.setItem("@USER", jsonValue);
-            console.log("updateSharedDataUser ASYNCSTORAGE", jsonValue);
-        } catch (e) {
-            console.log("updateSharedDataUser Error: ", e);
-        }
+        } catch (e) {}
     };
 
     const createAccount = async (
@@ -102,11 +89,21 @@ const AuthProvider = ({ children }) => {
         screenPassword: string,
         callback: createAccountCallback,
     ) => {
+        console.log("createAccount", screenName, screenEmail, screenPassword);
+
         createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
-            .then(() => callback("Success"))
+            .then(() => {
+                const user: IUser = {
+                    uid: auth.currentUser.uid,
+                    email: screenEmail,
+                    displayName: convertToString(screenName),
+                    photoURL: convertToString(""),
+                };
+                callback(user, "Success");
+            })
             .catch((error) => {
                 const errorMessage = error.message;
-                callback(errorMessage);
+                callback({}, errorMessage);
             });
     };
 
@@ -128,9 +125,6 @@ const AuthProvider = ({ children }) => {
                 displayName: convertToString(auth.currentUser.displayName),
                 photoURL: convertToString(auth.currentUser.photoURL),
             };
-
-            console.log("PHOTO -", auth.currentUser.photoURL);
-
             setSharedDataUser(user);
             AsyncStorage.setItem("@USER", JSON.stringify(user));
             return { user: auth.currentUser };

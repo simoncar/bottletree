@@ -10,18 +10,16 @@ export default function SignIn() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const { updateSharedDataUser, createAccount } = useAuth;
+    const { updateSharedDataUser, createAccount, signIn } = useAuth();
     const router = useRouter();
 
-    const createAccountCallback = (error) => {
+    const createAccountCallback = (user, error) => {
         console.log("createAccountCallback:", error);
         if (error == "Success") {
-            console.log("AAA createAccountCallback:", name, error);
-
             updateAccount(name); //firebease auth update function
-            console.log("BBBB createAccountCallback:", error);
-            updateSharedDataUser({ displayName: name });
-            console.log("CCC createAccountCallback:", error);
+            updateSharedDataUser(user);
+        } else {
+            updateSharedDataUser(null);
         }
         setErrorMessage(error);
     };
@@ -45,6 +43,8 @@ export default function SignIn() {
                 <TouchableOpacity
                     onPress={async () => {
                         console.log("touchable opacity signin");
+
+                        // signIn(email, password, loginError);
 
                         createAccount(
                             name,

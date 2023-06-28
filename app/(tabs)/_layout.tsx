@@ -22,19 +22,14 @@ export default function TabLayout() {
     const { sharedDataUser, updateSharedDataUser } = useContext(AuthContext);
     let loggedInUser: IUser = sharedDataUser;
     const { uid, displayName } = useLocalSearchParams();
-    console.log("TabLayout: user: ", sharedDataUser, loggedInUser);
 
     if (null == sharedDataUser) {
-        console.log("setting loggedInUser to 0 length string");
-
         loggedInUser = {
             uid: "",
             displayName: "",
             email: "",
             photoURL: "",
         };
-    } else {
-        console.log("setting loggedInUser to user");
     }
 
     return (
