@@ -27,18 +27,20 @@ export default function editUser() {
     const colorScheme = useColorScheme();
     const { shareDataUser, updateSharedDataUser, signOut } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();
-
-    console.log("editUser222: " + JSON.stringify(shareDataUser));
-
+    console.log("0000");
     useEffect(() => {
         if (null != shareDataUser) {
+            console.log("1111");
             onChangeText(shareDataUser.displayName);
         } else {
+            console.log("22222editUser: shareDataUser is null");
+
             onChangeText("");
         }
     }, []);
 
     const save = () => {
+        console.log("3333");
         updateAccount(text); //firebease auth update function
         updateSharedDataUser({ displayName: text });
         router.push({
@@ -58,7 +60,7 @@ export default function editUser() {
         ];
         const destructiveButtonIndex = options.length - 2;
         const cancelButtonIndex = options.length - 1;
-
+        console.log("4444");
         showActionSheetWithOptions(
             {
                 options,
@@ -83,6 +85,7 @@ export default function editUser() {
     };
 
     const profilePic = () => {
+        console.log("5555");
         return (
             <View style={styles.profilePicContainer}>
                 <TouchableOpacity
@@ -94,7 +97,7 @@ export default function editUser() {
                     ) : (
                         <View style={styles.profileCircleIcon}>
                             <Ionicons
-                                name="ios-person"
+                                name="home"
                                 size={100}
                                 color="#999999"
                                 style={styles.profilePic}
@@ -109,6 +112,7 @@ export default function editUser() {
         );
     };
 
+    console.log("6666");
     return (
         <SafeAreaView>
             <Stack.Screen
@@ -244,11 +248,17 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         width: 150,
     },
+    profilePic: {},
+    profilePicContainer: {
+        alignItems: "center",
+        paddingBottom: 15,
+        paddingHorizontal: 15,
+        paddingTop: 15,
+    },
     project: {
         fontSize: 25,
         fontWeight: "bold",
     },
-    profilePic: {},
     projectBox: {
         alignItems: "center",
         borderBottomColor: "#CED0CE",
@@ -256,12 +266,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 10,
         width: "85%",
-    },
-    profilePicContainer: {
-        alignItems: "center",
-        paddingBottom: 15,
-        paddingHorizontal: 15,
-        paddingTop: 15,
     },
 
     projectNameContainer: {
