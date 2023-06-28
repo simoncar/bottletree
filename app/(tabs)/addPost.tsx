@@ -1,7 +1,4 @@
-import * as Crypto from "expo-crypto";
 import { Image } from "expo-image";
-import * as ImageManipulator from "expo-image-manipulator";
-import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Button, StyleSheet } from "react-native";
@@ -65,9 +62,6 @@ export default function addPhoto() {
         setProgress(progress);
     };
     const addImageCallback = (downloadURL) => {
-        console.log("addImageCallback:");
-        console.log("AAA createAccountCallback:");
-
         setImage(null);
         addPost(
             {

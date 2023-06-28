@@ -19,10 +19,12 @@ import Colors from "../constants/Colors";
 import { updateAccount } from "../lib/APIuser";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import { addImage } from "../lib/APIimage";
 
 export default function editUser() {
     const { uid, photoURL, displayName } = useLocalSearchParams();
     const [text, onChangeText] = useState(displayName);
+    const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
     const router = useRouter();
     const colorScheme = useColorScheme();
     const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
@@ -43,10 +45,30 @@ export default function editUser() {
         updateSharedDataUser({ displayName: text });
         router.push({
             pathname: "/",
-            params: {
-                project: "post.projectId",
-            },
         });
+    };
+
+    const progressCallback = (progress) => {
+        console.log("progressCallback: " + progress);
+    };
+
+    const addImageCallback = (downloadURL) => {
+        console.log("addImageCallback:", downloadURL);
+        onChangeTextPhotoURL(downloadURL);
+        //  setImage(null);
+        //  addPost(
+        //      {
+        //          projectId: sharedData.projectId,
+        //          author: "DDDD",
+        //          images: [downloadURL],
+        //      },
+        //      saveDone,
+        //  );
+    };
+
+    const pickImage = async () => {
+        console.log("pickImage: ");
+        addImage(progressCallback, addImageCallback);
     };
 
     const openActionSheet = async () => {
@@ -70,7 +92,7 @@ export default function editUser() {
                         //props.navigation.push("CameraScreen");
                         break;
                     case 1:
-                        //pickImage();
+                        pickImage();
                         break;
                     case 2:
                         //setGPhotoURL("");
@@ -88,8 +110,11 @@ export default function editUser() {
                     onPress={() => {
                         openActionSheet();
                     }}>
-                    {photoURL ? (
-                        <Image style={styles.profilePhoto} source={photoURL} />
+                    {textPhotoURL ? (
+                        <Image
+                            style={styles.profilePhoto}
+                            source={textPhotoURL}
+                        />
                     ) : (
                         <View style={styles.profileCircleIcon}>
                             <Ionicons

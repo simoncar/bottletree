@@ -7,6 +7,7 @@ import React, { useContext, useState } from "react";
 export const updateAccount = (displayName: string) => {
     //const { sharedData, updateSharedData } = useContext(AuthContext);
     const newData = { displayName: displayName };
+    console.log("upser account update:", displayName, auth);
 
     updateProfile(auth.currentUser, {
         displayName: displayName,
@@ -28,6 +29,6 @@ export const updateAccount = (displayName: string) => {
         .catch((error) => {
             // An error occurred
             // ...
-            console.log("user update ERROR updated");
+            console.log("user update ERROR updated", error);
         });
 };
