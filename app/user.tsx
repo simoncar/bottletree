@@ -25,15 +25,15 @@ export default function editUser() {
     const [text, onChangeText] = useState(displayName);
     const router = useRouter();
     const colorScheme = useColorScheme();
-    const { shareDataUser, updateSharedDataUser, signOut } = useAuth();
+    const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();
     console.log("0000");
     useEffect(() => {
-        if (null != shareDataUser) {
+        if (null != sharedDataUser) {
             console.log("1111");
-            onChangeText(shareDataUser.displayName);
+            onChangeText(sharedDataUser.displayName);
         } else {
-            console.log("22222editUser: shareDataUser is null");
+            console.log("22222editUser: sharedDataUser is null");
 
             onChangeText("");
         }

@@ -5,9 +5,9 @@ import * as Application from "expo-application";
 import { useAuth, appSignIn } from "../lib/authProvider";
 
 export const About = () => {
-    const { shareDataUser, updateSharedData, signOut } = useAuth();
+    const { sharedDataUser, updateSharedData, signOut } = useAuth();
 
-    if (null == shareDataUser) {
+    if (null == sharedDataUser) {
         return (
             <View>
                 <Text style={styles.version}>About</Text>
@@ -20,9 +20,9 @@ export const About = () => {
                     {Application.nativeApplicationVersion} (
                     {Application.nativeBuildVersion})
                 </Text>
-                <Text style={styles.version}>{shareDataUser.uid}</Text>
-                <Text style={styles.version}>{shareDataUser.email}</Text>
-                <Text style={styles.version}>{shareDataUser.displayName}</Text>
+                <Text style={styles.version}>{sharedDataUser.uid}</Text>
+                <Text style={styles.version}>{sharedDataUser.email}</Text>
+                <Text style={styles.version}>{sharedDataUser.displayName}</Text>
             </View>
         );
     }

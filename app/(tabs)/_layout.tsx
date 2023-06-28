@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs } from "expo-router";
+import { Link, Tabs, useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import { Pressable, useColorScheme } from "react-native";
 import { BigText } from "../../components/StyledText";
@@ -8,6 +8,7 @@ import { UserAvatar } from "../../components/UserAvatar";
 import Colors from "../../constants/Colors";
 import { IUser } from "../../lib/types";
 import { useAuth } from "../../lib/authProvider";
+import AuthContext from "../../lib/authContext";
 
 function TabBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -18,12 +19,12 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
     const colorScheme = useColorScheme();
-    const { user, updateSharedData } = useAuth();
-    let loggedInUser: IUser = user;
+    const { sharedDataUser, updateSharedDataUser } = useContext(AuthContext);
+    let loggedInUser: IUser = sharedDataUser;
+    const { uid, displayName } = useLocalSearchParams();
+    console.log("TabLayout: user: ", sharedDataUser, loggedInUser);
 
-    console.log("TabLayout: user: ", user, loggedInUser);
-
-    if (null == user) {
+    if (null == sharedDataUser) {
         console.log("setting loggedInUser to 0 length string");
 
         loggedInUser = {
@@ -55,17 +56,11 @@ export default function TabLayout() {
                     headerRight: () => (
                         <View>
                             <Link href="/user" asChild>
-                                <Pressable>
-                                    {({ pressed }) => (
-                                        <UserAvatar
-                                            uid={loggedInUser.uid}
-                                            photoURL={loggedInUser.photoURL}
-                                            displayName={
-                                                loggedInUser.displayName
-                                            }
-                                        />
-                                    )}
-                                </Pressable>
+                                <UserAvatar
+                                    uid={loggedInUser.uid}
+                                    photoURL={loggedInUser.photoURL}
+                                    displayName={loggedInUser.displayName}
+                                />
                             </Link>
                         </View>
                     ),

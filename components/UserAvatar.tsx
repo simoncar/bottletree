@@ -35,6 +35,15 @@ export const UserAvatar = (props) => {
         <TouchableOpacity
             key={"editProfile"}
             onPress={() => {
+                console.log(
+                    "UserAvatar onPress: " +
+                        uid +
+                        " " +
+                        photoURL +
+                        " " +
+                        displayName,
+                );
+
                 router.push({
                     pathname: "/user",
                     params: {

@@ -64,7 +64,7 @@ function useProtectedRoute(user) {
 
 const AuthProvider = ({ children }) => {
     const INITIAL_USER = null;
-    const [shareDataUser, setSharedDataUser] = useState(INITIAL_USER);
+    const [sharedDataUser, setSharedDataUser] = useState(INITIAL_USER);
 
     useEffect(() => {
         AsyncStorage.getItem("@USER").then((jsonValue) => {
@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
                 jsonValue,
             );
 
-            if (jsonValue) {
+            if (jsonValue && jsonValue.uid) {
                 console.log("saving to useState", jsonValue);
 
                 setSharedDataUser(JSON.parse(jsonValue));
@@ -81,12 +81,12 @@ const AuthProvider = ({ children }) => {
         });
     }, []);
 
-    useProtectedRoute(shareDataUser);
+    useProtectedRoute(sharedDataUser);
 
     const updateSharedDataUser = (newData) => {
         try {
-            const jsonValue = JSON.stringify({ ...shareDataUser, ...newData });
-            setSharedDataUser({ ...shareDataUser, ...newData });
+            const jsonValue = JSON.stringify({ ...sharedDataUser, ...newData });
+            setSharedDataUser({ ...sharedDataUser, ...newData });
             AsyncStorage.setItem("@USER", jsonValue);
             console.log("updateSharedDataUser ASYNCSTORAGE", jsonValue);
         } catch (e) {
@@ -188,7 +188,7 @@ const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider
             value={{
-                shareDataUser,
+                sharedDataUser,
                 signIn,
                 signOut,
                 resetPassword,
