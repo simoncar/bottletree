@@ -3,24 +3,30 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../../lib/authProvider";
 import { Stack, useRouter } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
+import { updateAccount } from "../../lib/APIuser";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
-    const { createAccount } = useAuth();
+    const { updateSharedDataUser, createAccount } = useAuth;
     const router = useRouter();
 
     const createAccountCallback = (error) => {
-        console.log("errorerrorerrorerrorerror:", error);
+        console.log("createAccountCallback:", error);
+        if (error == "Success") {
+            console.log("AAA createAccountCallback:", name, error);
+
+            updateAccount(name); //firebease auth update function
+            console.log("BBBB createAccountCallback:", error);
+            updateSharedDataUser({ displayName: name });
+            console.log("CCC createAccountCallback:", error);
+        }
         setErrorMessage(error);
     };
 
     const renderAction = (errorMessage) => {
-        console.log("error message: ", errorMessage);
-
         if (errorMessage == "Success") {
             return (
                 <TouchableOpacity
@@ -74,6 +80,7 @@ export default function SignIn() {
                     style={styles.TextInput}
                     keyboardType="email-address"
                     inputMode="email"
+                    autoCapitalize="none"
                     placeholder="Email"
                     autocomplete="email"
                     onChangeText={(email) => setEmail(email)}

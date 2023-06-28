@@ -31,7 +31,11 @@ export default function editUser() {
     console.log("editUser222: " + JSON.stringify(shareDataUser));
 
     useEffect(() => {
-        onChangeText(shareDataUser.displayName);
+        if (null != shareDataUser) {
+            onChangeText(shareDataUser.displayName);
+        } else {
+            onChangeText("");
+        }
     }, []);
 
     const save = () => {

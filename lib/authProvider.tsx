@@ -94,6 +94,20 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const createAccount = async (
+        screenName: string,
+        screenEmail: string,
+        screenPassword: string,
+        callback: createAccountCallback,
+    ) => {
+        createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
+            .then(() => callback("Success"))
+            .catch((error) => {
+                const errorMessage = error.message;
+                callback(errorMessage);
+            });
+    };
+
     const signIn = async (
         screenEmail: string,
         screenPassword: string,
@@ -161,20 +175,6 @@ const AuthProvider = ({ children }) => {
             });
         setSharedDataUser(null);
         AsyncStorage.removeItem("@USER");
-    };
-
-    const createAccount = async (
-        screenName: string,
-        screenEmail: string,
-        screenPassword: string,
-        callback: createAccountCallback,
-    ) => {
-        createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
-            .then(() => callback("Success"))
-            .catch((error) => {
-                const errorMessage = error.message;
-                callback(errorMessage);
-            });
     };
 
     function convertToString(value: string | null): string {

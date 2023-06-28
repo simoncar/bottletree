@@ -21,9 +21,8 @@ export const About = () => {
                     {Application.nativeBuildVersion})
                 </Text>
                 <Text style={styles.version}>{shareDataUser.uid}</Text>
-                <Text style={styles.version}>{shareDataUser.displayName}</Text>
                 <Text style={styles.version}>{shareDataUser.email}</Text>
-                <Text style={styles.version}>About</Text>
+                <Text style={styles.version}>{shareDataUser.displayName}</Text>
             </View>
         );
     }
