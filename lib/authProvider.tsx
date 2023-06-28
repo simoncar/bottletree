@@ -73,10 +73,12 @@ const AuthProvider = ({ children }) => {
                 jsonValue,
             );
 
-            if (jsonValue && jsonValue.uid) {
+            if (jsonValue) {
                 console.log("saving to useState", jsonValue);
-
-                setSharedDataUser(JSON.parse(jsonValue));
+                const user = JSON.parse(jsonValue);
+                if (user && user.uid) {
+                    setSharedDataUser(user);
+                }
             }
         });
     }, []);
