@@ -27,10 +27,9 @@ export default function editUser() {
     const colorScheme = useColorScheme();
     const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();
-    console.log("0000");
+
     useEffect(() => {
         if (null != sharedDataUser) {
-            console.log("1111");
             onChangeText(sharedDataUser.displayName);
         } else {
             console.log("22222editUser: sharedDataUser is null");
@@ -40,7 +39,6 @@ export default function editUser() {
     }, []);
 
     const save = () => {
-        console.log("3333");
         updateAccount(text); //firebease auth update function
         updateSharedDataUser({ displayName: text });
         router.push({
@@ -60,7 +58,6 @@ export default function editUser() {
         ];
         const destructiveButtonIndex = options.length - 2;
         const cancelButtonIndex = options.length - 1;
-        console.log("4444");
         showActionSheetWithOptions(
             {
                 options,
@@ -85,7 +82,6 @@ export default function editUser() {
     };
 
     const profilePic = () => {
-        console.log("5555");
         return (
             <View style={styles.profilePicContainer}>
                 <TouchableOpacity
@@ -112,7 +108,6 @@ export default function editUser() {
         );
     };
 
-    console.log("6666");
     return (
         <SafeAreaView>
             <Stack.Screen

@@ -7,6 +7,7 @@ import React, { useContext, useState } from "react";
 import { Button, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
+import { addImage } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
 import { storage } from "../../lib/firebase";
 
@@ -33,7 +34,7 @@ export default function addPhoto() {
     };
 
     const renderProgress = (progress) => {
-        if (null != image && progress > 0) {
+        if (progress && progress > 0) {
             return (
                 <View style={styles.progressContainer}>
                     <Text>Upload Progress : {progress}%</Text>
@@ -58,97 +59,29 @@ export default function addPhoto() {
             return;
         }
     };
+    const progressCallback = (progress) => {
+        console.log("progressCallback: " + progress);
+
+        setProgress(progress);
+    };
+    const addImageCallback = (downloadURL) => {
+        console.log("addImageCallback:");
+        console.log("AAA createAccountCallback:");
+
+        setImage(null);
+        addPost(
+            {
+                projectId: sharedData.projectId,
+                author: "DDDD",
+                images: [downloadURL],
+            },
+            saveDone,
+        );
+    };
 
     const pickImage = async () => {
-        var d = new Date();
-
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            var fileToUpload = "";
-            var mime = "";
-
-            const convertedImage = await new ImageManipulator.manipulateAsync(
-                result.assets[0].uri,
-                [{ resize: { height: 1000 } }],
-                {
-                    compress: 0,
-                },
-            );
-
-            fileToUpload = convertedImage.uri;
-            setImage(fileToUpload);
-            mime = "image/jpeg";
-
-            const blob = await new Promise((resolve, reject) => {
-                const xhr = new XMLHttpRequest();
-                xhr.onload = function () {
-                    resolve(xhr.response);
-                };
-                xhr.onerror = function (e) {
-                    reject(new TypeError("Network request failed"));
-                };
-                xhr.responseType = "blob";
-                xhr.open("GET", fileToUpload, true);
-                xhr.send(null);
-            });
-
-            const UUID = Crypto.randomUUID();
-
-            const fileName =
-                "posts/" +
-                d.getUTCFullYear() +
-                ("0" + (d.getMonth() + 1)).slice(-2) +
-                "/" +
-                UUID;
-
-            const storageRef = ref(storage, fileName);
-
-            const uploadTask = uploadBytesResumable(storageRef, blob);
-
-            uploadTask.on(
-                "state_changed",
-                (snapshot) => {
-                    const uploadProgress = Math.floor(
-                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-                    );
-                    setProgress(uploadProgress);
-                    switch (snapshot.state) {
-                        case "paused":
-                            console.log("Upload is paused");
-                            break;
-                        case "running":
-                            console.log("Upload is running");
-                            break;
-                    }
-                },
-                (error) => {
-                    // Handle unsuccessful uploads
-                },
-                () => {
-                    // Handle successful uploads on complete
-                    getDownloadURL(uploadTask.snapshot.ref).then(
-                        (downloadURL) => {
-                            console.log("File available at", downloadURL);
-                            setImage(null);
-                            addPost(
-                                {
-                                    projectId: sharedData.projectId,
-                                    author: "DDDD",
-                                    images: [downloadURL],
-                                },
-                                saveDone,
-                            );
-
-                            // return to the previeus screen
-                        },
-                    );
-                },
-            );
-        }
+        console.log("pickImage: ");
+        addImage(progressCallback, addImageCallback);
     };
 
     if (undefined === sharedData.projectId || "" === sharedData.projectId) {
