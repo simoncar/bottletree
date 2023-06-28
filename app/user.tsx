@@ -16,7 +16,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
-import { updateAccount } from "../lib/APIuser";
+import { updateAccountName, updateAccountPhotoURL } from "../lib/APIuser";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
@@ -41,7 +41,7 @@ export default function editUser() {
     }, []);
 
     const save = () => {
-        updateAccount(text); //firebease auth update function
+        updateAccountName(text); //firebease auth update function
         updateSharedDataUser({ displayName: text });
         router.push({
             pathname: "/",
@@ -55,6 +55,8 @@ export default function editUser() {
     const addImageCallback = (downloadURL) => {
         console.log("addImageCallback:", downloadURL);
         onChangeTextPhotoURL(downloadURL);
+        updateAccountPhotoURL(downloadURL); //firebease auth update function
+        updateSharedDataUser({ photoURL: downloadURL });
         //  setImage(null);
         //  addPost(
         //      {
@@ -72,12 +74,7 @@ export default function editUser() {
     };
 
     const openActionSheet = async () => {
-        const options = [
-            "Take Photo",
-            "Pick from Camera Roll",
-            "Delete",
-            "Cancel",
-        ];
+        const options = ["Pick from Camera Roll", "Delete", "Cancel"];
         const destructiveButtonIndex = options.length - 2;
         const cancelButtonIndex = options.length - 1;
         showActionSheetWithOptions(
@@ -89,12 +86,12 @@ export default function editUser() {
             (buttonIndex) => {
                 switch (buttonIndex) {
                     case 0:
-                        //props.navigation.push("CameraScreen");
-                        break;
-                    case 1:
                         pickImage();
                         break;
-                    case 2:
+                    case 1:
+                        updateAccountPhotoURL("");
+                        updateSharedDataUser({ photoURL: "" });
+                        onChangeTextPhotoURL("");
                         //setGPhotoURL("");
                         //setPhotoURL("");
                         break;
