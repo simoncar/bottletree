@@ -17,6 +17,7 @@ import Post from "./Post";
 import Project from "./Project";
 import { useRouter } from "expo-router";
 
+
 export const Posts = (props) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -62,6 +63,7 @@ export const Posts = (props) => {
     const renderEmpty = () => {
         return (
             <View style={styles.addPost}>
+              
                 <View style={styles.outerView}>
                     <View style={styles.avatar}>
                         <Pressable

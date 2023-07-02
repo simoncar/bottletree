@@ -106,7 +106,7 @@ export default function editPost() {
                 style={styles.input}
                 onChangeText={(text) => onChangeText(text)}
                 placeholder={"Write a caption..."}
-                value={renderCaption()}
+                value={text}
                 autoFocus
                 multiline
             />

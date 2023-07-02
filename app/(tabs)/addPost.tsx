@@ -6,9 +6,7 @@ import { Text, View } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
 import { addImage } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
-import { storage } from "../../lib/firebase";
-
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import * as Progress from "react-native-progress";
 
 export default function addPhoto() {
     const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
@@ -35,6 +33,12 @@ export default function addPhoto() {
             return (
                 <View style={styles.progressContainer}>
                     <Text>Upload Progress : {progress}%</Text>
+                    <Progress.Bar
+                        progress={progress / 100}
+                        width={200}
+                        borderWidth={0}
+                        unfilledColor="#E5E5E5"
+                    />
                 </View>
             );
         } else {
@@ -42,8 +46,8 @@ export default function addPhoto() {
         }
     };
 
-    const renderButton = () => {
-        if (null == image) {
+    const renderButton = (progress) => {
+        if (null == image && progress == 0) {
             return (
                 <View style={styles.button}>
                     <Button
@@ -71,6 +75,7 @@ export default function addPhoto() {
             },
             saveDone,
         );
+        setProgress(0);
     };
 
     const pickImage = async () => {
@@ -81,7 +86,7 @@ export default function addPhoto() {
     if (undefined === sharedData.projectId || "" === sharedData.projectId) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>
+                <Text style={styles.title}>``
                     Select a Project first and then try again
                 </Text>
             </View>
@@ -89,7 +94,7 @@ export default function addPhoto() {
     } else {
         return (
             <View style={styles.container}>
-                {renderButton()}
+                {renderButton(progress)}
                 {renderProgress(progress)}
                 {image && <Image source={image} style={styles.storyPhoto} />}
             </View>
