@@ -1,31 +1,22 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
-import {
-    TouchableOpacity,
-    FlatList,
-    Pressable,
-    StyleSheet,
-    useColorScheme,
-} from "react-native";
+import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
-import { IPost } from "../lib/types";
+import { IPost, IProject } from "../lib/types";
 import Post from "./Post";
 import Project from "./Project";
 import { useRouter } from "expo-router";
 
-
-export const Posts = (props) => {
+export const Posts = () => {
+    const { sharedData } = useContext(ProjectContext);
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
     const router = useRouter();
-
-    var { project, title, icon } = useLocalSearchParams();
+    let { project, title, icon } = useLocalSearchParams();
 
     if (undefined == project) {
         project = sharedData.projectId;
@@ -40,7 +31,6 @@ export const Posts = (props) => {
     useEffect(() => {
         if (undefined != project) {
             const unsubscribe = getPosts(project, postsRead);
-            setLoading(false);
             return () => {
                 unsubscribe;
             };
@@ -50,7 +40,6 @@ export const Posts = (props) => {
     useEffect(() => {
         if (undefined != project) {
             const unsubscribe = getPosts(project, postsRead);
-            setLoading(false);
         }
     }, [project]);
 
@@ -63,7 +52,6 @@ export const Posts = (props) => {
     const renderEmpty = () => {
         return (
             <View style={styles.addPost}>
-              
                 <View style={styles.outerView}>
                     <View style={styles.avatar}>
                         <Pressable
@@ -114,31 +102,31 @@ export const Posts = (props) => {
 };
 
 const styles = StyleSheet.create({
-    list: {
-        paddingTop: 4,
-        padding: 10,
-        flex: 1,
-        width: "100%",
-    },
     addPost: {
-        flex: 1,
         alignItems: "center",
+        flex: 1,
         justifyContent: "center",
         marginTop: 200,
     },
+    avatar: {
+        alignItems: "center",
+        marginRight: 12,
+        textAlign: "center",
+        width: 50,
+    },
 
+    list: {
+        flex: 1,
+        paddingTop: 4,
+        padding: 10,
+        width: "100%",
+    },
     outerView: {
+        alignItems: "center",
         borderBottomColor: "#CED0CE",
         flexDirection: "row",
-        paddingVertical: 8,
-        alignItems: "center",
-        padding: 8,
         height: 80,
-    },
-    avatar: {
-        textAlign: "center",
-        marginRight: 12,
-        width: 50,
-        alignItems: "center",
+        paddingVertical: 8,
+        padding: 8,
     },
 });
