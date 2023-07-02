@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import {
     StyleSheet,
@@ -12,13 +12,14 @@ import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { updatePost, deletePost } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
-import { TextInput, View, Text } from "../components/Themed";
+import { TextInput, View } from "../components/Themed";
 import Colors from "../constants/Colors";
+import { IPost } from "../lib/types";
 
 export default function editPost() {
     const { sharedData } = useContext(ProjectContext);
-    const { project, key, image, caption } = useLocalSearchParams();
-    const [text, onChangeText] = useState(caption);
+    const { key, image, caption } = useLocalSearchParams();
+    const [text, onChangeText] = useState(caption?.toString() ?? "");
     const colorScheme = useColorScheme();
 
     const router = useRouter();
@@ -34,14 +35,13 @@ export default function editPost() {
     };
 
     const save = () => {
-        updatePost(
-            {
-                projectId: sharedData.projectId,
-                key: key,
-                caption: text,
-            },
-            saveDone,
-        );
+        const post: IPost = {
+            projectId: sharedData.projectId,
+            key: key?.toString() ?? "",
+            caption: text?.toString() ?? "",
+        };
+
+        updatePost(post, saveDone);
     };
 
     const onDelete = () => {
@@ -60,8 +60,8 @@ export default function editPost() {
                         deletePost(
                             {
                                 projectId: sharedData.projectId,
-                                key: key,
-                                caption: text,
+                                key: key?.toString() ?? "",
+                                caption: text?.toString() ?? "",
                             },
                             saveDone,
                         );
@@ -70,14 +70,6 @@ export default function editPost() {
             ],
             { cancelable: false },
         );
-    };
-
-    const renderCaption = () => {
-        if (undefined == caption || caption == "") {
-            return "";
-        } else {
-            return caption;
-        }
     };
 
     return (
@@ -115,6 +107,33 @@ export default function editPost() {
 }
 
 const styles = StyleSheet.create({
+    input: {
+        fontSize: 20,
+        height: 140,
+        margin: 12,
+        padding: 10,
+        paddingLeft: 20,
+        width: "98%",
+    },
+    leftContent: {
+        alignItems: "center",
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        paddingHorizontal: 8,
+    },
+    outerView: {
+        alignItems: "center",
+        borderBottomColor: "#CED0CE",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        flexDirection: "row",
+        paddingVertical: 8,
+        padding: 8,
+    },
+    rightChevron: {
+        marginHorizontal: 8,
+    },
+
     storyPhoto: {
         alignSelf: "center",
         borderColor: "lightgray",
@@ -122,32 +141,5 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         marginTop: 12,
         width: "98%",
-    },
-    input: {
-        height: 140,
-        margin: 12,
-        padding: 10,
-        paddingLeft: 20,
-        width: "98%",
-        fontSize: 20,
-    },
-    leftContent: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        paddingHorizontal: 8,
-    },
-    rightChevron: {
-        marginHorizontal: 8,
-    },
-
-    outerView: {
-        borderBottomColor: "#CED0CE",
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        flexDirection: "row",
-        paddingVertical: 8,
-        alignItems: "center",
-        padding: 8,
     },
 });

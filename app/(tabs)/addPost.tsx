@@ -6,19 +6,18 @@ import { Text, View } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
 import { addImage } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
+import { IPost } from "../../lib/types";
 import * as Progress from "react-native-progress";
 
 export default function addPhoto() {
-    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
+    const { sharedData } = useContext(ProjectContext);
 
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
 
     const router = useRouter();
 
-    console.log("addPhoto: " + JSON.stringify(sharedData));
-
-    const saveDone = (id) => {
+    const saveDone = () => {
         router.push({
             pathname: "/",
             params: {
@@ -28,7 +27,7 @@ export default function addPhoto() {
         });
     };
 
-    const renderProgress = (progress) => {
+    const renderProgress = (progress: number) => {
         if (progress && progress > 0) {
             return (
                 <View style={styles.progressContainer}>
@@ -46,7 +45,7 @@ export default function addPhoto() {
         }
     };
 
-    const renderButton = (progress) => {
+    const renderButton = (progress: number) => {
         if (null == image && progress == 0) {
             return (
                 <View style={styles.button}>
@@ -60,21 +59,20 @@ export default function addPhoto() {
             return;
         }
     };
-    const progressCallback = (progress) => {
-        console.log("progressCallback: " + progress);
-
+    const progressCallback = (progress: number) => {
         setProgress(progress);
     };
-    const addImageCallback = (downloadURL) => {
+    const addImageCallback = (downloadURL: string) => {
         setImage(null);
-        addPost(
-            {
-                projectId: sharedData.projectId,
-                author: "DDDD",
-                images: [downloadURL],
-            },
-            saveDone,
-        );
+
+        const post: IPost = {
+            key: "",
+            caption: "",
+            projectId: sharedData.projectId,
+            images: [downloadURL],
+        };
+
+        addPost(post, saveDone);
         setProgress(0);
     };
 
@@ -86,8 +84,8 @@ export default function addPhoto() {
     if (undefined === sharedData.projectId || "" === sharedData.projectId) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>``
-                    Select a Project first and then try again
+                <Text style={styles.title}>
+                    Select a Project first and then try again.
                 </Text>
             </View>
         );
@@ -103,17 +101,20 @@ export default function addPhoto() {
 }
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "#E4E6C3",
+        borderColor: "lightgray",
+        borderRadius: 100,
+        borderWidth: 1,
+        padding: 10,
+    },
     container: {
-        flex: 1,
         alignItems: "center",
+        flex: 1,
         justifyContent: "center",
     },
     progressContainer: {
         padding: 20,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
     },
 
     storyPhoto: {
@@ -124,11 +125,8 @@ const styles = StyleSheet.create({
         width: "98%",
     },
 
-    button: {
-        borderWidth: 1,
-        borderColor: "lightgray",
-        backgroundColor: "#E4E6C3",
-        padding: 10,
-        borderRadius: 100,
+    title: {
+        fontSize: 20,
+        fontWeight: "bold",
     },
 });
