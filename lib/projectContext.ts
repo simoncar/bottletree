@@ -1,10 +1,9 @@
 import React from "react";
 
-
 const ProjectContext = React.createContext({
-    projectId: "",
-    projectTitle: "",
-    projectIcon: "",
+    key: "",
+    title: "",
+    icon: "",
 });
 
 export default ProjectContext;

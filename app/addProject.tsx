@@ -28,9 +28,9 @@ export default function addPhoto() {
 
     const saveDone = (id) => {
         updateSharedDataProject({
-            projectId: id,
-            projectTitle: project.title,
-            projectIcon: project.icon,
+            key: id,
+            title: project.title,
+            icon: project.icon,
         });
 
         console.log("added project: ", id);

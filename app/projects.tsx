@@ -99,9 +99,9 @@ export default function ModalScreen() {
                     style={styles.innerView}
                     onPress={() => {
                         updateSharedDataProject({
-                            projectId: data.key,
-                            projectTitle: data.title,
-                            projectIcon: data.icon,
+                            key: data.key,
+                            title: data.title,
+                            icon: data.icon,
                         });
 
                         router.push({
@@ -126,9 +126,9 @@ export default function ModalScreen() {
                     key={"chevron." + data.key}
                     onPress={() => {
                         updateSharedDataProject({
-                            projectId: data.key,
-                            projectTitle: data.title,
-                            projectIcon: data.icon,
+                            key: data.key,
+                            title: data.title,
+                            icon: data.icon,
                         });
 
                         router.replace({

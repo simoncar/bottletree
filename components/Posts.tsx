@@ -12,25 +12,29 @@ import Project from "./Project";
 import { useRouter } from "expo-router";
 
 export const Posts = () => {
-    const { sharedData } = useContext(ProjectContext);
+    const { sharedDataProject } = useContext(ProjectContext);
+    let currentProject: IProject = sharedDataProject;
     const [posts, setPosts] = useState([]);
     const colorScheme = useColorScheme();
     const router = useRouter();
-    let { project, title, icon } = useLocalSearchParams();
 
-    if (undefined == project) {
-        project = sharedData.projectId;
-        title = sharedData.projectTitle;
-        icon = sharedData.projectIcon;
+    if (null == sharedDataProject) {
+        currentProject = {
+            key: "",
+            title: "",
+            icon: "",
+        };
     }
+    console.log("sharedDataProject1:", currentProject);
+    console.log("sharedDataProject2:", sharedDataProject);
 
     const postsRead = (postsDB) => {
         setPosts(postsDB);
     };
 
     useEffect(() => {
-        if (undefined != project) {
-            const unsubscribe = getPosts(project, postsRead);
+        if (undefined != currentProject) {
+            const unsubscribe = getPosts(currentProject.key, postsRead);
             return () => {
                 unsubscribe;
             };
@@ -38,10 +42,10 @@ export const Posts = () => {
     }, []);
 
     useEffect(() => {
-        if (undefined != project) {
-            const unsubscribe = getPosts(project, postsRead);
+        if (undefined != currentProject?.key) {
+            const unsubscribe = getPosts(currentProject.key, postsRead);
         }
-    }, [project]);
+    }, [currentProject]);
 
     const renderItems = (item) => {
         const post: IPost = item.item;
@@ -87,7 +91,11 @@ export const Posts = () => {
     return (
         <View style={styles.list}>
             <View>
-                <Project project={project} title={title} icon={icon} />
+                <Project
+                    project={currentProject.key}
+                    title={currentProject.title}
+                    icon={currentProject.icon}
+                />
             </View>
             <View>
                 <FlatList

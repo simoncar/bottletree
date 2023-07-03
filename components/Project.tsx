@@ -12,6 +12,8 @@ const Project = (props) => {
         onItemClicked(post);
     };
 
+    console.log("pro>>>PROJECTject", icon);
+
     return (
         <Link href="/projects" asChild>
             <Pressable>

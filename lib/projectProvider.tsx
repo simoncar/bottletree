@@ -3,6 +3,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProjectContext from "./projectContext";
 import { IUser } from "./types";
 
+// This hook can be used to access the user info.
+export function useProject() {
+    return React.useContext(ProjectContext);
+}
+
 const ProjectProvider = ({ children }) => {
     const INITIAL_PROJECT: IUser = {
         uid: "",
@@ -11,7 +16,7 @@ const ProjectProvider = ({ children }) => {
         photoURL: "",
     };
 
-    const [sharedData, setSharedDataProject] = useState(INITIAL_PROJECT);
+    const [sharedDataProject, setSharedDataProject] = useState(INITIAL_PROJECT);
 
     useEffect(() => {
         AsyncStorage.getItem("@PROJECT").then((jsonValue) => {
@@ -23,8 +28,11 @@ const ProjectProvider = ({ children }) => {
 
     const updateSharedDataProject = (newData) => {
         try {
-            const jsonValue = JSON.stringify({ ...sharedData, ...newData });
-            setSharedDataProject({ ...sharedData, ...newData });
+            const jsonValue = JSON.stringify({
+                ...sharedDataProject,
+                ...newData,
+            });
+            setSharedDataProject({ ...sharedDataProject, ...newData });
             AsyncStorage.setItem("@PROJECT", jsonValue);
         } catch (e) {
             console.log("updateSharedDataProject Error: ", e);
@@ -33,7 +41,7 @@ const ProjectProvider = ({ children }) => {
 
     return (
         <ProjectContext.Provider
-            value={{ sharedData, updateSharedDataProject }}>
+            value={{ sharedDataProject, updateSharedDataProject }}>
             {children}
         </ProjectContext.Provider>
     );

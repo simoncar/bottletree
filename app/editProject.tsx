@@ -10,22 +10,20 @@ import {
 import { ShortList } from "../components/sComponent";
 import { Text, TextInput, View } from "../components/Themed";
 import { getProjectUsers, updateProject } from "../lib/APIprojects";
-import ProjectContext from "../lib/projectContext";
+import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 
 export default function editPost() {
-    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
+    const { sharedData, updateSharedDataProject } = useProject();
     const { projectId, projectTitle, photoURL } = useLocalSearchParams();
     const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
     const [text, onChangeText] = useState(projectTitle);
     const [projectUsers, setProjectUsers] = useState("");
     const [loading, setLoading] = useState(true);
     const { showActionSheetWithOptions } = useActionSheet();
-
-    console.log("editProject.tsx: projectId: " + projectId);
 
     const router = useRouter();
 
@@ -47,21 +45,16 @@ export default function editPost() {
     }, [projectUsers]);
 
     const saveDone = (id: string) => {
-        console.log("editProject.tsx: saveDone: id: " + text);
+        console.log("SAVE DONE: " + text, textPhotoURL);
 
         updateSharedDataProject({
-            projectId: id,
-            projectTitle: text,
-            projectIcon: textPhotoURL,
+            key: id,
+            title: text,
+            icon: textPhotoURL,
         });
 
         router.push({
             pathname: "/",
-            params: {
-                project: id,
-                title: text,
-                icon: encodeURIComponent(sharedData.projectIcon),
-            },
         });
     };
 
