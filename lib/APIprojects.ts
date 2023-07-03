@@ -11,6 +11,8 @@ import { db } from "./firebase";
 import { IProject, IUser } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
+const stockHouseIcon =
+    "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
 export async function getProjects(callback: projectsRead) {
     const q = query(collection(db, "projects"));
@@ -59,8 +61,11 @@ export async function getProjectUsers(
 
 export function updateProject(project: IProject, callback: saveDone) {
     const ref = doc(db, "projects", project.key);
+    console.log("YYYYYupdateProject", project);
+
     updateDoc(ref, {
         title: project.title,
+        icon: project?.icon ?? stockHouseIcon,
     }).then(() => {
         callback(project.key);
     });
@@ -70,7 +75,7 @@ export function addProject(project: IProject, callback: saveDone) {
     try {
         const docRef = addDoc(collection(db, "projects"), {
             title: project.title,
-            icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07",
+            icon: stockHouseIcon,
             timestamp: Timestamp.now(),
         }).then((docRef) => {
             console.log("Project written with ID: ", docRef.id);

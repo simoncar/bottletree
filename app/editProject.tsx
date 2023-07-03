@@ -46,13 +46,13 @@ export default function editPost() {
         }
     }, [projectUsers]);
 
-    const saveDone = (id) => {
+    const saveDone = (id: string) => {
         console.log("editProject.tsx: saveDone: id: " + text);
 
         updateSharedDataProject({
             projectId: id,
             projectTitle: text,
-            projectIcon: icon,
+            projectIcon: textPhotoURL,
         });
 
         router.push({
@@ -65,12 +65,14 @@ export default function editPost() {
         });
     };
 
-    const save = () => {
+    const save = (downloadURL: string) => {
+        console.log("XXXXeditProject.tsx: save: text: " + downloadURL);
+
         updateProject(
             {
                 key: projectId,
                 title: text,
-                icon: icon,
+                icon: downloadURL,
             },
             saveDone,
         );
@@ -97,6 +99,8 @@ export default function editPost() {
 
     const addImageCallback = (downloadURL: string) => {
         onChangeTextPhotoURL(downloadURL);
+        save(downloadURL);
+
         //updateAccountPhotoURL(downloadURL); //firebease auth update function
         //updateSharedDataUser({ photoURL: downloadURL });
         //  setImage(null);
@@ -174,7 +178,10 @@ export default function editPost() {
             <Stack.Screen
                 options={{
                     headerRight: () => (
-                        <Button title="Done" onPress={() => save()} />
+                        <Button
+                            title="Done"
+                            onPress={() => save(textPhotoURL)}
+                        />
                     ),
                 }}
             />
