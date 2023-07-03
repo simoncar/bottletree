@@ -1,8 +1,5 @@
 import { updateProfile } from "firebase/auth/react-native";
 import { auth } from "../lib/firebase";
-import { IProject, IUser } from "./types";
-
-import React, { useContext, useState } from "react";
 
 export const updateAccountName = (displayName: string) => {
     //const { sharedData, updateSharedData } = useContext(AuthContext);
@@ -11,8 +8,6 @@ export const updateAccountName = (displayName: string) => {
 
     updateProfile(auth.currentUser, {
         displayName: displayName,
-        // photoURL:
-        //     "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
     })
         .then(() => {
             // Profile updated!
@@ -40,8 +35,6 @@ export const updateAccountPhotoURL = (photoURL: string) => {
 
     updateProfile(auth.currentUser, {
         photoURL: photoURL,
-        // photoURL:
-        //     "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
     })
         .then(() => {
             // Profile updated!

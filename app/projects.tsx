@@ -136,7 +136,7 @@ export default function ModalScreen() {
                             params: {
                                 projectId: data.key,
                                 projectTitle: data.title,
-                                icon: encodeURIComponent(data.icon),
+                                photoURL: encodeURIComponent(data.icon),
                             },
                         });
                     }}>

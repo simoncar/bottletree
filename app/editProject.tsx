@@ -13,12 +13,13 @@ import { getProjectUsers, updateProject } from "../lib/APIprojects";
 import ProjectContext from "../lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
-import { BorderlessButton } from "react-native-gesture-handler";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import { addImage } from "../lib/APIimage";
 
 export default function editPost() {
     const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
-    const { projectId, projectTitle, icon } = useLocalSearchParams();
+    const { projectId, projectTitle, photoURL } = useLocalSearchParams();
+    const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
     const [text, onChangeText] = useState(projectTitle);
     const [projectUsers, setProjectUsers] = useState("");
     const [loading, setLoading] = useState(true);
@@ -90,13 +91,32 @@ export default function editPost() {
         );
     }
 
+    const progressCallback = (progress) => {
+        console.log("progressCallback: " + progress);
+    };
+
+    const addImageCallback = (downloadURL: string) => {
+        onChangeTextPhotoURL(downloadURL);
+        //updateAccountPhotoURL(downloadURL); //firebease auth update function
+        //updateSharedDataUser({ photoURL: downloadURL });
+        //  setImage(null);
+        //  addPost(
+        //      {
+        //          projectId: sharedData.projectId,
+        //          author: "DDDD",
+        //          images: [downloadURL],
+        //      },
+        //      saveDone,
+        //  );
+    };
+
+    const pickImage = async () => {
+        console.log("pickImage: ");
+        addImage(progressCallback, addImageCallback);
+    };
+
     const openActionSheet = async () => {
-        const options = [
-            "Take Photo",
-            "Pick from Camera Roll",
-            "Delete",
-            "Cancel",
-        ];
+        const options = ["Pick from Camera Roll", "Delete", "Cancel"];
         const destructiveButtonIndex = options.length - 2;
         const cancelButtonIndex = options.length - 1;
 
@@ -109,14 +129,12 @@ export default function editPost() {
             (buttonIndex) => {
                 switch (buttonIndex) {
                     case 0:
-                        //props.navigation.push("CameraScreen");
+                        pickImage();
                         break;
                     case 1:
-                        //pickImage();
-                        break;
-                    case 2:
-                        //setGPhotoURL("");
-                        //setPhotoURL("");
+                        //updateAccountPhotoURL("");
+                        //updateSharedDataUser({ photoURL: "" });
+                        onChangeTextPhotoURL("");
                         break;
                 }
             },
@@ -130,8 +148,11 @@ export default function editPost() {
                     onPress={() => {
                         openActionSheet();
                     }}>
-                    {icon ? (
-                        <Image style={styles.profilePhoto} source={icon} />
+                    {textPhotoURL ? (
+                        <Image
+                            style={styles.profilePhoto}
+                            source={textPhotoURL}
+                        />
                     ) : (
                         <Ionicons
                             name="ios-person"

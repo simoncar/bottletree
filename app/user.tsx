@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     SafeAreaView,
     StyleSheet,
@@ -34,8 +34,6 @@ export default function editUser() {
         if (null != sharedDataUser) {
             onChangeText(sharedDataUser.displayName);
         } else {
-            console.log("22222editUser: sharedDataUser is null");
-
             onChangeText("");
         }
     }, []);
@@ -52,8 +50,7 @@ export default function editUser() {
         console.log("progressCallback: " + progress);
     };
 
-    const addImageCallback = (downloadURL) => {
-        console.log("addImageCallback:", downloadURL);
+    const addImageCallback = (downloadURL: string) => {
         onChangeTextPhotoURL(downloadURL);
         updateAccountPhotoURL(downloadURL); //firebease auth update function
         updateSharedDataUser({ photoURL: downloadURL });
@@ -92,8 +89,7 @@ export default function editUser() {
                         updateAccountPhotoURL("");
                         updateSharedDataUser({ photoURL: "" });
                         onChangeTextPhotoURL("");
-                        //setGPhotoURL("");
-                        //setPhotoURL("");
+
                         break;
                 }
             },

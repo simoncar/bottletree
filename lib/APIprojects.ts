@@ -82,3 +82,30 @@ export function addProject(project: IProject, callback: saveDone) {
 
     return;
 }
+
+export const updateProjectPhotoURL = (photoURL: string) => {
+    //const { sharedData, updateSharedData } = useContext(AuthContext);
+    const newData = { photoURL: photoURL };
+    console.log("update project updatephotoURL:", photoURL);
+
+    updateProfile(auth.currentUser, {
+        photoURL: photoURL,
+    })
+        .then(() => {
+            // Profile updated!
+            // ...
+            console.log("upser account update:", photoURL);
+            //updateSharedData({ displayName: displayName });
+            // const jsonValue = JSON.stringify({
+            //     ...auth.currentUser,
+            //     ...newData,
+            // });
+            // setAuth({ ...auth.currentUser, ...newData });
+            // setItem(jsonValue);
+        })
+        .catch((error) => {
+            // An error occurred
+            // ...
+            console.log("user update ERROR updated", error);
+        });
+};
