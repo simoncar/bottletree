@@ -23,6 +23,7 @@ export default function addPhoto() {
         key: "",
         title: "",
         icon: "",
+        archived: false,
     };
 
     const router = useRouter();
@@ -32,6 +33,7 @@ export default function addPhoto() {
             key: id,
             title: project.title,
             icon: project.icon,
+            archived: project.archived,
         });
 
         console.log("added project: ", id);

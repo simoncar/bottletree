@@ -13,6 +13,7 @@ export interface IProject {
     key: string;
     title: string;
     icon: string;
+    archived?: boolean;
 }
 
 export interface IUser {

@@ -2,13 +2,13 @@ import { Image } from "expo-image";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     TouchableOpacity,
+    Button as NativeButton,
 } from "react-native";
 import { ShortList } from "../components/sComponent";
-import { Text, TextInput, View } from "../components/Themed";
+import { Text, TextInput, View, Button } from "../components/Themed";
 import { getProjectUsers, updateProject } from "../lib/APIprojects";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -58,14 +58,13 @@ export default function editPost() {
         });
     };
 
-    const save = (downloadURL: string) => {
-        console.log("XXXXeditProject.tsx: save: text: " + downloadURL);
-
+    const save = (downloadURL: string, archived: boolean) => {
         updateProject(
             {
                 key: projectId,
                 title: text,
                 icon: downloadURL,
+                archived: archived,
             },
             saveDone,
         );
@@ -75,9 +74,7 @@ export default function editPost() {
         return (
             <View style={styles.outerView}>
                 <View style={styles.avatar}>
-                    <Image
-                        style={styles.avatarFace}
-                        source={data.avatar}></Image>
+                    <Image style={styles.avatarFace} source={data.avatar} />
                 </View>
                 <View>
                     <Text style={styles.name}>{data.name || ""}</Text>
@@ -92,19 +89,6 @@ export default function editPost() {
 
     const addImageCallback = (downloadURL: string) => {
         onChangeTextPhotoURL(downloadURL);
-        save(downloadURL);
-
-        //updateAccountPhotoURL(downloadURL); //firebease auth update function
-        //updateSharedDataUser({ photoURL: downloadURL });
-        //  setImage(null);
-        //  addPost(
-        //      {
-        //          projectId: sharedData.projectId,
-        //          author: "DDDD",
-        //          images: [downloadURL],
-        //      },
-        //      saveDone,
-        //  );
     };
 
     const pickImage = async () => {
@@ -171,9 +155,9 @@ export default function editPost() {
             <Stack.Screen
                 options={{
                     headerRight: () => (
-                        <Button
+                        <NativeButton
                             title="Done"
-                            onPress={() => save(textPhotoURL)}
+                            onPress={() => save(textPhotoURL, false)}
                         />
                     ),
                 }}
@@ -208,6 +192,12 @@ export default function editPost() {
                             />
                         </View>
                     )}
+                </View>
+                <View style={styles.avatarAContainer}>
+                    <Button
+                        title="Archive Project"
+                        onPress={() => save(textPhotoURL, true)}
+                    />
                 </View>
             </View>
         </SafeAreaView>

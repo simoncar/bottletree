@@ -43,15 +43,6 @@ export default function ModalScreen() {
         }
     }, [projects]);
 
-    function readProjects() {
-        getDocs(collection(db, "projects")).then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log("Reading Projects: ", doc.id, " => ", doc.data());
-            });
-        });
-    }
-
     function renderAdd() {
         return (
             <TouchableOpacity
@@ -114,9 +105,7 @@ export default function ModalScreen() {
                         });
                     }}>
                     <View style={styles.avatar}>
-                        <Image
-                            style={styles.avatarFace}
-                            source={data.icon}></Image>
+                        <Image style={styles.avatarFace} source={data.icon} />
                     </View>
                     <View>
                         <Text style={styles.project}>{data.title || ""}</Text>

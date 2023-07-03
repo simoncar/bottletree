@@ -6,6 +6,7 @@ import {
     onSnapshot,
     query,
     Timestamp,
+    where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { IProject, IUser } from "./types";
@@ -15,7 +16,7 @@ const stockHouseIcon =
     "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
 export async function getProjects(callback: projectsRead) {
-    const q = query(collection(db, "projects"));
+    const q = query(collection(db, "projects"), where("archived", "!=", true));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const projects: IProject[] = [];
@@ -61,11 +62,11 @@ export async function getProjectUsers(
 
 export function updateProject(project: IProject, callback: saveDone) {
     const ref = doc(db, "projects", project.key);
-    console.log("YYYYYupdateProject", project);
 
     updateDoc(ref, {
         title: project.title,
         icon: project?.icon ?? stockHouseIcon,
+        archived: project?.archived ?? false,
     }).then(() => {
         callback(project.key);
     });
@@ -77,6 +78,7 @@ export function addProject(project: IProject, callback: saveDone) {
             title: project.title,
             icon: stockHouseIcon,
             timestamp: Timestamp.now(),
+            archived: false,
         }).then((docRef) => {
             console.log("Project written with ID: ", docRef.id);
             callback(docRef.id);
