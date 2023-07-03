@@ -1,8 +1,8 @@
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Button, StyleSheet } from "react-native";
-import { Text, View } from "../../components/Themed";
+import { StyleSheet } from "react-native";
+import { Text, View, Button } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
 import { addImage } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
@@ -10,7 +10,7 @@ import { IPost } from "../../lib/types";
 import * as Progress from "react-native-progress";
 
 export default function addPhoto() {
-    const { sharedData } = useContext(ProjectContext);
+    const { sharedDataProject } = useContext(ProjectContext);
 
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
@@ -21,8 +21,8 @@ export default function addPhoto() {
         router.push({
             pathname: "/",
             params: {
-                project: sharedData.projectId,
-                title: sharedData.projectTitle,
+                project: sharedDataProject.key,
+                title: sharedDataProject.title,
             },
         });
     };
@@ -48,12 +48,10 @@ export default function addPhoto() {
     const renderButton = (progress: number) => {
         if (null == image && progress == 0) {
             return (
-                <View style={styles.button}>
-                    <Button
-                        title="Pick an image from camera roll"
-                        onPress={pickImage}
-                    />
-                </View>
+                <Button
+                    title="Pick an image from camera roll"
+                    onPress={pickImage}
+                />
             );
         } else {
             return;
@@ -68,7 +66,7 @@ export default function addPhoto() {
         const post: IPost = {
             key: "",
             caption: "",
-            projectId: sharedData.projectId,
+            projectId: sharedDataProject.key,
             images: [downloadURL],
         };
 
@@ -81,7 +79,7 @@ export default function addPhoto() {
         addImage(progressCallback, addImageCallback);
     };
 
-    if (undefined === sharedData.projectId || "" === sharedData.projectId) {
+    if (undefined === sharedDataProject.key || "" === sharedDataProject.key) {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>
@@ -101,13 +99,6 @@ export default function addPhoto() {
 }
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "#E4E6C3",
-        borderColor: "lightgray",
-        borderRadius: 100,
-        borderWidth: 1,
-        padding: 10,
-    },
     container: {
         alignItems: "center",
         flex: 1,

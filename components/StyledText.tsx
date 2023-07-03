@@ -8,3 +8,4 @@ export function MonoText(props: TextProps) {
 export function BigText(props: TextProps) {
 	return <Text {...props} style={[props.style, { fontFamily: "FuturaBold" }]} />;
 }
+

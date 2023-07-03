@@ -1,8 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
-import { View } from "../components/Themed";
+import { View, Text, Button } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
@@ -25,8 +24,6 @@ export const Posts = () => {
             icon: "",
         };
     }
-    console.log("sharedDataProject1:", currentProject);
-    console.log("sharedDataProject2:", sharedDataProject);
 
     const postsRead = (postsDB) => {
         setPosts(postsDB);
@@ -56,30 +53,14 @@ export const Posts = () => {
     const renderEmpty = () => {
         return (
             <View style={styles.addPost}>
-                <View style={styles.outerView}>
-                    <View style={styles.avatar}>
-                        <Pressable
-                            onPress={() => {
-                                console.log("Prouter push: /addPost");
-
-                                router.push({
-                                    pathname: "/addPost",
-                                    params: {
-                                        project: "post.projectId",
-                                    },
-                                });
-                            }}>
-                            {({ pressed }) => (
-                                <FontAwesome5
-                                    name="plus-square"
-                                    size={25}
-                                    color={Colors[colorScheme ?? "light"].text}
-                                    style={{ opacity: pressed ? 0.5 : 1 }}
-                                />
-                            )}
-                        </Pressable>
-                    </View>
-                </View>
+                <Button
+                    title="Add a new post"
+                    onPress={() => {
+                        router.push({
+                            pathname: "/addPost",
+                        });
+                    }}
+                />
             </View>
         );
     };
@@ -97,7 +78,7 @@ export const Posts = () => {
                     icon={currentProject.icon}
                 />
             </View>
-            <View>
+            <View style={styles.button}>
                 <FlatList
                     data={posts}
                     renderItem={renderItems}
@@ -116,25 +97,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 200,
     },
-    avatar: {
-        alignItems: "center",
-        marginRight: 12,
-        textAlign: "center",
-        width: 50,
-    },
 
     list: {
         flex: 1,
         paddingTop: 4,
         padding: 10,
         width: "100%",
-    },
-    outerView: {
-        alignItems: "center",
-        borderBottomColor: "#CED0CE",
-        flexDirection: "row",
-        height: 80,
-        paddingVertical: 8,
-        padding: 8,
     },
 });

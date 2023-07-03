@@ -12,8 +12,6 @@ const Project = (props) => {
         onItemClicked(post);
     };
 
-    console.log("pro>>>PROJECTject", icon);
-
     return (
         <Link href="/projects" asChild>
             <Pressable>
@@ -48,36 +46,36 @@ const Project = (props) => {
 };
 
 const styles = StyleSheet.create({
-    updateText: {
-        fontSize: 16,
-        marginRight: 12,
-    },
-
-    rightChevron: {
-        marginHorizontal: 8,
-    },
     avatar: {
-        textAlign: "center",
-        marginRight: 12,
         alignItems: "center",
-    },
-    avatarIcon: {
+        marginRight: 12,
         textAlign: "center",
-        fontSize: 25,
     },
 
-    projectAvatar: { width: 35, height: 35, borderRadius: 35 / 2 },
+    avatarIcon: {
+        fontSize: 25,
+        textAlign: "center",
+    },
     innerView: {
+        alignItems: "center",
         flex: 1,
         justifyContent: "space-between",
-        alignItems: "center",
         paddingHorizontal: 8,
     },
     outerView: {
         alignItems: "center",
-        flexDirection: "row",
         backgroundColor: "#E4E6C3",
         borderRadius: 100,
+        flexDirection: "row",
+    },
+
+    projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
+    rightChevron: {
+        marginHorizontal: 8,
+    },
+    updateText: {
+        fontSize: 16,
+        marginRight: 12,
     },
 });
 

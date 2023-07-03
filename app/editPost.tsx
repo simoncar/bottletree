@@ -17,7 +17,7 @@ import Colors from "../constants/Colors";
 import { IPost } from "../lib/types";
 
 export default function editPost() {
-    const { sharedData } = useContext(ProjectContext);
+    const { sharedDataProject } = useContext(ProjectContext);
     const { key, image, caption } = useLocalSearchParams();
     const [text, onChangeText] = useState(caption?.toString() ?? "");
     const colorScheme = useColorScheme();
@@ -28,15 +28,15 @@ export default function editPost() {
         router.push({
             pathname: "/",
             params: {
-                project: sharedData.projectId,
-                title: sharedData.projectTitle,
+                project: sharedDataProject.key,
+                title: sharedDataProject.title,
             },
         });
     };
 
     const save = () => {
         const post: IPost = {
-            projectId: sharedData.projectId,
+            projectId: sharedDataProject.key,
             key: key?.toString() ?? "",
             caption: text?.toString() ?? "",
         };
@@ -59,7 +59,7 @@ export default function editPost() {
                     onPress: () => {
                         deletePost(
                             {
-                                projectId: sharedData.projectId,
+                                projectId: sharedDataProject.key,
                                 key: key?.toString() ?? "",
                                 caption: text?.toString() ?? "",
                             },

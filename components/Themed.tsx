@@ -8,6 +8,8 @@ import {
     Text as DefaultText,
     useColorScheme,
     View as DefaultView,
+    Button as DefaultButton,
+    StyleSheet,
 } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -35,6 +37,7 @@ type ThemeProps = {
 export type TextProps = ThemeProps & DefaultText["props"];
 export type TextInputProps = ThemeProps & DefaultTextInput["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
+export type ButtonProps = ThemeProps & DefaultButton["props"];
 
 export function Text(props: TextProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
@@ -69,3 +72,24 @@ export function TextInput(props: TextInputProps) {
         />
     );
 }
+
+export function Button(props: ButtonProps) {
+    const { style, lightColor, darkColor, ...otherProps } = props;
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+
+    return (
+        <View style={styles.button}>
+            <DefaultButton style={[{ color }, style]} {...otherProps} />
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "#E4E6C3",
+        borderColor: "lightgray",
+        borderRadius: 100,
+        borderWidth: 1,
+        padding: 10,
+    },
+});

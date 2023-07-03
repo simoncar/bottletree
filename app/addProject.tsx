@@ -12,7 +12,8 @@ import { IProject } from "../lib/types";
 import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function addPhoto() {
-    const { sharedData, updateSharedDataProject } = useContext(ProjectContext);
+    const { sharedDataProject, updateSharedDataProject } =
+        useContext(ProjectContext);
 
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
