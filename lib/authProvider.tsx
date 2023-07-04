@@ -1,7 +1,5 @@
 import { useRouter, useSegments } from "expo-router";
-import AsyncStorage, {
-    useAsyncStorage,
-} from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
 import React, { useEffect, useState } from "react";
 import {
@@ -58,13 +56,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         AsyncStorage.getItem("@USER").then((jsonValue) => {
-            console.log(
-                "AuthProvider useEffect AsyncStorage.getItem(@USER)",
-                jsonValue,
-            );
-
             if (jsonValue) {
-                console.log("saving to useState", jsonValue);
                 const user = JSON.parse(jsonValue);
                 if (user && user.uid) {
                     setSharedDataUser(user);
@@ -89,8 +81,6 @@ const AuthProvider = ({ children }) => {
         screenPassword: string,
         callback: createAccountCallback,
     ) => {
-        console.log("createAccount", screenName, screenEmail, screenPassword);
-
         createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
             .then(() => {
                 const user: IUser = {
@@ -113,7 +103,6 @@ const AuthProvider = ({ children }) => {
         callback: loginError,
     ) => {
         try {
-            console.log("signIn----", screenEmail, screenPassword);
             const resp = await signInWithEmailAndPassword(
                 auth,
                 screenEmail,

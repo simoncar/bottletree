@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     SafeAreaView,
     StyleSheet,
@@ -193,7 +193,7 @@ export default function editPost() {
                         </View>
                     )}
                 </View>
-                <View style={styles.avatarAContainer}>
+                <View style={styles.archive}>
                     <Button
                         title="Archive Project"
                         onPress={() => save(textPhotoURL, true)}
@@ -211,6 +211,11 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 5,
         marginTop: 5,
+    },
+    archive: {
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: 60,
     },
     avatar: {},
     avatarAContainer: {

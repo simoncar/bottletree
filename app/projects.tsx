@@ -2,7 +2,6 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { collection, getDocs } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import {
     Platform,
@@ -16,17 +15,17 @@ import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getProjects } from "../lib/APIprojects";
 import ProjectContext from "../lib/projectContext";
-import { db } from "../lib/firebase";
+import { IProject } from "../lib/types";
 
 export default function ModalScreen() {
-    const [projects, setProjects] = useState("");
+    const [projects, setProjects] = useState<IProject[] | null>(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     const colorScheme = useColorScheme();
     const { updateSharedDataProject } = useContext(ProjectContext);
 
-    const projectsRead = (projectsDB) => {
+    const projectsRead = (projectsDB: IProject[]) => {
         setProjects(projectsDB);
     };
 
@@ -38,7 +37,7 @@ export default function ModalScreen() {
     }, []);
 
     useEffect(() => {
-        if (projects !== "" && loading === true) {
+        if (projects !== null && loading === true) {
             setLoading(false);
         }
     }, [projects]);
@@ -82,7 +81,7 @@ export default function ModalScreen() {
         );
     }
 
-    function renderRow(data: any) {
+    function renderRow(data: IProject) {
         return (
             <View key={data.key} style={styles.outerView}>
                 <TouchableOpacity
@@ -163,40 +162,40 @@ export default function ModalScreen() {
 }
 
 const styles = StyleSheet.create({
+    avatar: {
+        marginRight: 12,
+        width: 50,
+    },
+
+    avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
     container: {
         flex: 1,
     },
 
-    projectList: {},
     innerView: {
+        alignItems: "center",
         flex: 1,
         flexDirection: "row",
         justifyContent: "flex-start",
-        alignItems: "center",
         paddingHorizontal: 8,
+    },
+    outerView: {
+        alignItems: "center",
+        borderBottomColor: "#CED0CE",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        flexDirection: "row",
+        height: 80,
+        paddingVertical: 8,
+        padding: 8,
     },
 
     project: {
         fontSize: 18,
         marginBottom: 5,
     },
+    projectList: {},
+
     rightChevron: {
         marginHorizontal: 8,
-    },
-
-    avatar: {
-        marginRight: 12,
-        width: 50,
-    },
-    avatarFace: { width: 48, height: 48, borderRadius: 48 / 2 },
-
-    outerView: {
-        borderBottomColor: "#CED0CE",
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        flexDirection: "row",
-        paddingVertical: 8,
-        alignItems: "center",
-        padding: 8,
-        height: 80,
     },
 });

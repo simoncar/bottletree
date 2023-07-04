@@ -37,8 +37,6 @@ export async function getProjectUsers(
     projectId: string,
     callback: projectUsersRead,
 ) {
-    console.log("getProjectUsers", projectId);
-
     const q = query(collection(db, "projects", projectId, "users"));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
