@@ -6,52 +6,21 @@ import { Image } from "expo-image";
 import { View, Text } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
 import { getComments } from "../lib/APIpost";
+import Comments from "./PostComments";
 
 const { width } = Dimensions.get("window");
 
 const Post = (props) => {
     const { post } = props;
-    const [comments, setComments] = useState([]);
     const router = useRouter();
 
     const imageUrls = post.images && post.images.map((image) => image);
 
     let caption = "";
 
-    useEffect(() => {
-        console.log("AAAA");
-
-        getComments(post.projectId, post.key).then((comments) => {
-            setComments(comments);
-            console.log("Post: useEffect", comments);
-        });
-    }, []);
-
     if (post.caption != undefined) {
         caption = post.caption;
     }
-
-    const renderPostComments = () => {
-        if (comments != undefined) {
-            return (
-                <View style={styles.commentsOverall}>
-                    <FlatList
-                        data={comments}
-                        renderItem={({ item }) => (
-                            <View style={styles.commentView}>
-                                <Text style={styles.commentUserName}>
-                                    {item.displayName}
-                                </Text>
-                                <Text style={styles.commentText}>
-                                    {item.comment}
-                                </Text>
-                            </View>
-                        )}
-                    />
-                </View>
-            );
-        }
-    };
 
     return (
         <View>
@@ -103,7 +72,7 @@ const Post = (props) => {
                     <Text style={styles.commentTime}>
                         {new Date(post.timestamp.toDate()).toDateString()}
                     </Text>
-                    {renderPostComments()}
+                    <Comments project={post.projectId} post={post.key} />
                 </View>
             </View>
         </View>
@@ -117,16 +86,11 @@ const styles = StyleSheet.create({
     commentBlock: {
         padding: 8,
     },
-    commentText: {},
     commentTime: {
         color: "#999",
         fontSize: 12,
         paddingTop: 4,
     },
-    commentUserName: { fontWeight: "bold", paddingRight: 4 },
-
-    commentView: { flexDirection: "row", paddingLeft: 10, paddingTop: 10 },
-    commentsOverall: {},
     image: {
         backgroundColor: "#0553",
         flex: 1,

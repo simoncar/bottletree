@@ -107,6 +107,3 @@ const styles = StyleSheet.create({
 });
 
 export default Project;
-function onItemClicked(post: any) {
-    throw new Error("Function not implemented.");
-}
