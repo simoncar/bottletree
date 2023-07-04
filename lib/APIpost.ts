@@ -97,7 +97,6 @@ export async function getComments(projectId: string, postId: string) {
         });
         console.log("PUSH: ", comments);
     });
-    console.log("RETURN: ", projectId, postId, comments);
 
     return comments;
 }
