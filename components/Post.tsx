@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, StyleSheet, Pressable, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
+import { getComments } from "../lib/APIpost";
+
 const { width } = Dimensions.get("window");
 
 const Post = (props) => {
     const { post } = props;
+    const [comments, setComments] = useState([]);
     const router = useRouter();
 
     const imageUrls = post.images && post.images.map((image) => image);
 
     let caption = "";
 
+    useEffect(() => {
+        console.log("AAAA");
+
+        getComments(post.projectId, post.key).then((comments) => {
+            setComments(comments);
+            console.log("Post: useEffect", comments);
+        });
+    }, []);
+
     if (post.caption != undefined) {
         caption = post.caption;
     }
 
     const renderPostComments = () => {
-        if (post.comments != undefined) {
-            const comments = post.comments.map((comment) => comment);
-            console.log("Post: renderPostContent", comments);
+        console.log("Post11111: renderPostComments", comments);
+
+        if (comments != undefined) {
+            console.log("Post2222: renderPostContent", comments);
             return (
                 <View style={styles.commentsOverall}>
                     <FlatList
@@ -30,7 +43,7 @@ const Post = (props) => {
                         renderItem={({ item }) => (
                             <View style={styles.commentView}>
                                 <Text style={styles.commentUserName}>
-                                    {item.username}{" "}
+                                    {item.displayName}
                                 </Text>
                                 <Text style={styles.commentText}>
                                     {item.comment}
