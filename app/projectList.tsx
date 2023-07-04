@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flex: 1,
         flexDirection: "row",
-        justifyContent: "flex-start",
+       
         paddingHorizontal: 8,
     },
     outerView: {
