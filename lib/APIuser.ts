@@ -1,25 +1,33 @@
 import { updateProfile } from "firebase/auth/react-native";
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
+import {
+    addDoc,
+    doc,
+    setDoc,
+    updateDoc,
+    collection,
+    onSnapshot,
+    query,
+    Timestamp,
+    where,
+} from "firebase/firestore";
 
 export const updateAccountName = (displayName: string) => {
     //const { sharedData, updateSharedData } = useContext(AuthContext);
-    const newData = { displayName: displayName };
-    console.log("upser account update:", displayName, auth);
+    const ref = doc(db, "users", auth.currentUser.uid);
 
     updateProfile(auth.currentUser, {
         displayName: displayName,
     })
         .then(() => {
-            // Profile updated!
-            // ...
-            console.log("upser account update:", displayName);
-            //updateSharedData({ displayName: displayName });
-            // const jsonValue = JSON.stringify({
-            //     ...auth.currentUser,
-            //     ...newData,
-            // });
-            // setAuth({ ...auth.currentUser, ...newData });
-            // setItem(jsonValue);
+            setDoc(
+                ref,
+                {
+                    displayName: displayName,
+                    email: auth.currentUser.email,
+                },
+                { merge: true },
+            );
         })
         .catch((error) => {
             // An error occurred
@@ -30,23 +38,24 @@ export const updateAccountName = (displayName: string) => {
 
 export const updateAccountPhotoURL = (photoURL: string) => {
     //const { sharedData, updateSharedData } = useContext(AuthContext);
-    const newData = { photoURL: photoURL };
-    console.log("upser account updatephotoURL:", photoURL, auth);
+    const ref = doc(db, "users", auth.currentUser.uid);
 
     updateProfile(auth.currentUser, {
         photoURL: photoURL,
     })
         .then(() => {
-            // Profile updated!
-            // ...
-            console.log("upser account update:", photoURL);
-            //updateSharedData({ displayName: displayName });
-            // const jsonValue = JSON.stringify({
-            //     ...auth.currentUser,
-            //     ...newData,
-            // });
-            // setAuth({ ...auth.currentUser, ...newData });
-            // setItem(jsonValue);
+            setDoc(
+                ref,
+                {
+                    photoURL: photoURL,
+                    email: auth.currentUser.email,
+                },
+                { merge: true },
+            );
+        })
+        .then(() => {
+            //callback(project.key);
+            console.log("its done-  account update:", photoURL);
         })
         .catch((error) => {
             // An error occurred

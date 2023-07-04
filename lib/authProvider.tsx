@@ -217,14 +217,12 @@ export const appSignOut = async () => {
 
 export const appSignUp = async (email, password, displayName) => {
     try {
-        // this will trigger onAuthStateChange to update the store..
         const resp = await createUserWithEmailAndPassword(
             auth,
             email,
             password,
         );
 
-        // add the displayName
         await updateProfile(resp.user, { displayName });
 
         // AuthStore.update((store) => {

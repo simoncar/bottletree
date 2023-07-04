@@ -17,6 +17,8 @@ Notifications.setNotificationHandler({
     }),
 });
 
+console.log("index.ts");
+
 async function registerForPushNotificationsAsync() {
     let token;
     if (Device.isDevice) {

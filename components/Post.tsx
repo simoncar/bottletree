@@ -1,12 +1,12 @@
 import React from "react";
-import { Dimensions, StyleSheet, Pressable } from "react-native";
+import { Dimensions, StyleSheet, Pressable, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text } from "../components/Themed";
-import { color } from "react-native-reanimated";
-
+import { blurhash } from "../constants/Colors";
 const { width } = Dimensions.get("window");
+
 const Post = (props) => {
     const { post } = props;
     const router = useRouter();
@@ -19,14 +19,35 @@ const Post = (props) => {
         caption = post.caption;
     }
 
-    const blurhash =
-        "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+    const renderPostComments = () => {
+        if (post.comments != undefined) {
+            const comments = post.comments.map((comment) => comment);
+            console.log("Post: renderPostContent", comments);
+            return (
+                <View style={styles.commentsOverall}>
+                    <FlatList
+                        data={comments}
+                        renderItem={({ item }) => (
+                            <View style={styles.commentView}>
+                                <Text style={styles.commentUserName}>
+                                    {item.username}{" "}
+                                </Text>
+                                <Text style={styles.commentText}>
+                                    {item.comment}
+                                </Text>
+                            </View>
+                        )}
+                    />
+                </View>
+            );
+        }
+    };
 
     return (
         <View>
             <View style={styles.listItemHeader}></View>
 
-            <View style={{ flex: 1 }}>
+            <View style={styles.postView}>
                 <Carousel
                     width={width}
                     panGestureHandlerProps={{
@@ -72,41 +93,41 @@ const Post = (props) => {
                     <Text style={styles.commentTime}>
                         {new Date(post.timestamp.toDate()).toDateString()}
                     </Text>
+                    {renderPostComments()}
                 </View>
             </View>
         </View>
     );
 };
 
-//source={imageUrls[index]}>
-
 const styles = StyleSheet.create({
-    commentBlock: {
-        padding: 8,
-    },
     comment: {
         fontSize: 16,
     },
+    commentBlock: {
+        padding: 8,
+    },
     commentTime: {
-        paddingTop: 4,
-        fontSize: 12,
         color: "#999",
+        fontSize: 12,
+        paddingTop: 4,
+    },
+    image: {
+        backgroundColor: "#0553",
+        flex: 1,
+        height: 300,
+        width: "100%",
     },
     imageContainer: {
         flex: 1,
         justifyContent: "center",
-    },
-    image: {
-        flex: 1,
-        width: "100%",
-        backgroundColor: "#0553",
-        height: 300,
     },
     listItemHeader: {
         alignItems: "center",
         flexDirection: "row",
         padding: 8,
     },
+    postView: { flex: 1 },
 });
 
 export default Post;
