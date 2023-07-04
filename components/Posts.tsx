@@ -65,6 +65,9 @@ export const Posts = () => {
         );
     };
 
+    const renderFooter = () => {
+        return <View style={styles.footer}></View>;
+    };
     const getKey = (item) => {
         return item.key;
     };
@@ -84,6 +87,7 @@ export const Posts = () => {
                     renderItem={renderItems}
                     keyExtractor={(item, index) => getKey(item)}
                     ListEmptyComponent={renderEmpty}
+                    ListFooterComponent={renderFooter}
                 />
             </View>
         </View>
@@ -96,6 +100,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         marginTop: 200,
+    },
+
+    footer: {
+        paddingTop: 100,
     },
 
     list: {

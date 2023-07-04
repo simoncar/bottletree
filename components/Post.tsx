@@ -32,10 +32,7 @@ const Post = (props) => {
     }
 
     const renderPostComments = () => {
-        console.log("Post11111: renderPostComments", comments);
-
         if (comments != undefined) {
-            console.log("Post2222: renderPostContent", comments);
             return (
                 <View style={styles.commentsOverall}>
                     <FlatList
@@ -120,11 +117,16 @@ const styles = StyleSheet.create({
     commentBlock: {
         padding: 8,
     },
+    commentText: {},
     commentTime: {
         color: "#999",
         fontSize: 12,
         paddingTop: 4,
     },
+    commentUserName: { fontWeight: "bold", paddingRight: 4 },
+
+    commentView: { flexDirection: "row", paddingLeft: 10, paddingTop: 10 },
+    commentsOverall: {},
     image: {
         backgroundColor: "#0553",
         flex: 1,
