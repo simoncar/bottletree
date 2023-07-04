@@ -75,6 +75,12 @@ const styles = StyleSheet.create({
         fontSize: 25,
         textAlign: "center",
     },
+    outerView: {
+        alignItems: "center",
+        backgroundColor: "#E4E6C3",
+        borderRadius: 100,
+        flexDirection: "row",
+    },
     pressableLeft: {
         alignItems: "center",
         width: 50,
@@ -84,19 +90,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flex: 1,
     },
+    projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
+
     projectText: {
         alignItems: "center",
         flexDirection: "row",
         flex: 1,
     },
-    outerView: {
-        alignItems: "center",
-        backgroundColor: "#E4E6C3",
-        borderRadius: 100,
-        flexDirection: "row",
-    },
-
-    projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
     rightChevron: {
         marginHorizontal: 8,
     },

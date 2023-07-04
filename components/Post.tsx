@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Dimensions, StyleSheet, Pressable, FlatList } from "react-native";
+import React from "react";
+import { Dimensions, StyleSheet, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
-import { getComments } from "../lib/APIpost";
 import Comments from "./PostComments";
 
 const { width } = Dimensions.get("window");
