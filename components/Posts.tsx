@@ -52,7 +52,7 @@ export const Posts = () => {
 
     const renderEmpty = () => {
         return (
-            <View style={styles.addPost}>
+<View style={styles.addPost}>
                 <Button
                     title="Add a new post"
                     onPress={() => {
