@@ -50,7 +50,7 @@ const Comments = (props) => {
 };
 
 const styles = StyleSheet.create({
-    commentInput: { flexDirection: "row", paddingTop: 10 },
+    commentInput: { flexDirection: "row", paddingLeft: 10, paddingTop: 10 },
     commentText: {},
     commentUserName: { fontWeight: "bold", paddingRight: 4 },
     commentView: { flexDirection: "row", paddingLeft: 10, paddingTop: 10 },
