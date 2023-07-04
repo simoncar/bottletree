@@ -7,7 +7,7 @@ import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
 import { IPost, IProject } from "../lib/types";
 import Post from "./Post";
-import Project from "./Project";
+import Project from "./ProjectPanel";
 import { useRouter } from "expo-router";
 
 export const Posts = () => {
