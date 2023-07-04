@@ -95,7 +95,6 @@ export async function getComments(projectId: string, postId: string) {
             timestamp: doc.data().timestamp,
             uid: doc.data().uid,
         });
-        console.log("PUSH: ", comments);
     });
 
     return comments;
