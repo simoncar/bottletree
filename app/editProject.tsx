@@ -113,8 +113,6 @@ export default function editPost() {
                         pickImage();
                         break;
                     case 1:
-                        //updateAccountPhotoURL("");
-                        //updateSharedDataUser({ photoURL: "" });
                         onChangeTextPhotoURL("");
                         break;
                 }

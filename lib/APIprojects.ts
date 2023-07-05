@@ -70,9 +70,12 @@ export function updateProject(project: IProject, callback: saveDone) {
     });
 }
 
-export function addProject(project: IProject, callback: saveDone) {
+export function addProject(
+    project: IProject,
+    callback: { (id: string): void; (arg0: string): void },
+) {
     try {
-        const docRef = addDoc(collection(db, "projects"), {
+        addDoc(collection(db, "projects"), {
             title: project.title,
             icon: stockHouseIcon,
             timestamp: Timestamp.now(),
@@ -87,29 +90,3 @@ export function addProject(project: IProject, callback: saveDone) {
 
     return;
 }
-
-export const updateProjectPhotoURL = (photoURL: string) => {
-    //const { sharedData, updateSharedData } = useContext(AuthContext);
-    const newData = { photoURL: photoURL };
-    console.log("update project updatephotoURL:", photoURL);
-
-    updateProfile(auth.currentUser, {
-        photoURL: photoURL,
-    })
-        .then(() => {
-            // Profile updated!
-            // ...
-            //updateSharedData({ displayName: displayName });
-            // const jsonValue = JSON.stringify({
-            //     ...auth.currentUser,
-            //     ...newData,
-            // });
-            // setAuth({ ...auth.currentUser, ...newData });
-            // setItem(jsonValue);
-        })
-        .catch((error) => {
-            // An error occurred
-            // ...
-            console.log("user update ERROR updated", error);
-        });
-};
