@@ -50,7 +50,10 @@ export function deletePost(post: IPost, callback: saveDone) {
     });
 }
 
-export async function getPosts(projectId, callback: postsRead) {
+export async function getPosts(
+    projectId: string | null | undefined,
+    callback: postsRead,
+) {
     if (undefined === projectId || null === projectId || "" === projectId) {
         projectId = "void";
     }
@@ -98,4 +101,29 @@ export async function getComments(projectId: string, postId: string) {
     });
 
     return comments;
+}
+
+export function addComment(
+    project: string,
+    post: string,
+    comment: IComment,
+    callback: { (comment: IComment): void; (arg0: string): void },
+) {
+    try {
+        addDoc(
+            collection(db, "projects", project, "posts", post, "comments"),
+            comment,
+        ).then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+            const newData = { key: docRef.id };
+
+            console.log("callback: ", { ...comment, ...newData });
+
+            callback({ ...comment, ...newData });
+        });
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+
+    return;
 }

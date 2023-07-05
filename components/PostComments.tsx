@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, FlatList, useColorScheme } from "react-native";
+import { StyleSheet, FlatList, useColorScheme, Pressable } from "react-native";
 import { View, Text, TextInput } from "./Themed";
-import { getComments } from "../lib/APIpost";
+import { addComment, getComments } from "../lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
+import { IComment } from "../lib/types";
+import { useAuth } from "../lib/authProvider";
+import { Timestamp } from "firebase/firestore";
 
 const Comments = (props) => {
     const { post, project } = props;
@@ -11,12 +14,29 @@ const Comments = (props) => {
     const [text, setComment] = useState("");
     const [action, setAction] = useState(false);
     const colorScheme = useColorScheme();
+    const { sharedDataUser } = useAuth();
 
     useEffect(() => {
         getComments(project, post).then((comments) => {
             setComments(comments);
         });
     }, []);
+
+    const saveDone = (comment: IComment) => {
+        //setProjects(projectsDB);
+        console.log("Comment saved", comment);
+    };
+
+    const save = () => {
+        const comment: IComment = {
+            comment: text,
+            displayName: sharedDataUser.displayName,
+            timestamp: Timestamp.now(),
+            uid: sharedDataUser.uid,
+        };
+
+        addComment(project, post, comment, saveDone);
+    };
 
     const renderInput = () => {
         if (action) {
@@ -32,13 +52,17 @@ const Comments = (props) => {
                         value={text}
                         autoFocus
                     />
-                    <View style={styles.inputAction}>
+                    <Pressable
+                        style={styles.inputAction}
+                        onPress={() => {
+                            save();
+                        }}>
                         <MaterialIcons
                             name="send"
                             size={25}
                             color={Colors[colorScheme ?? "light"].text}
                         />
-                    </View>
+                    </Pressable>
                 </View>
             );
         } else {

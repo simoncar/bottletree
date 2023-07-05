@@ -17,6 +17,7 @@ import { getProjects } from "../lib/APIprojects";
 import ProjectContext from "../lib/projectContext";
 import { IProject } from "../lib/types";
 
+
 export default function ModalScreen() {
     const [projects, setProjects] = useState<IProject[] | null>(null);
     const [loading, setLoading] = useState(true);

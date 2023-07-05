@@ -25,10 +25,9 @@ export interface IUser {
 }
 
 export interface IComment {
-    key: string;
+    key?: string;
     comment: string;
     displayName: string;
     timestamp: Timestamp;
     uid: string;
 }
-
