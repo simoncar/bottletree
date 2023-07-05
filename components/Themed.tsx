@@ -89,7 +89,6 @@ export function Button(props: ButtonProps) {
 export function ParsedText(props: ParsedTextProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
-    console.log("ParsedText", color);
 
     return (
         <ParsedTextUnthemed

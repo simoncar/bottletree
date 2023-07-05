@@ -2,7 +2,7 @@ import React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { useRouter } from "expo-router";
-import { Text, View } from "../components/Themed";
+import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -35,15 +35,6 @@ export const UserAvatar = (props) => {
         <TouchableOpacity
             key={"editProfile"}
             onPress={() => {
-                console.log(
-                    "UserAvatar onPress: " +
-                        uid +
-                        " " +
-                        photoURL +
-                        " " +
-                        displayName,
-                );
-
                 router.push({
                     pathname: "/user",
                     params: {

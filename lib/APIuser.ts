@@ -25,6 +25,7 @@ export const updateAccountName = (displayName: string) => {
                 {
                     displayName: displayName,
                     email: auth.currentUser.email,
+                    photoURL: auth.currentUser.photoURL,
                 },
                 { merge: true },
             );
@@ -49,6 +50,7 @@ export const updateAccountPhotoURL = (photoURL: string) => {
                 {
                     photoURL: photoURL,
                     email: auth.currentUser.email,
+                    displayName: auth.currentUser.displayName,
                 },
                 { merge: true },
             );

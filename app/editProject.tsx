@@ -45,8 +45,6 @@ export default function editPost() {
     }, [projectUsers]);
 
     const saveDone = (id: string) => {
-        console.log("SAVE DONE: " + text, textPhotoURL);
-
         updateSharedDataProject({
             key: id,
             title: text,
@@ -178,7 +176,7 @@ export default function editPost() {
 
             <View>
                 <View style={styles.avatarAContainer}>
-                    <Text style={styles.accessHeader}> Access List</Text>
+                    <Text style={styles.accessHeader}></Text>
                 </View>
                 <View>
                     {loading === false && (

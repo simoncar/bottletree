@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
-import { View, Text } from "../components/Themed";
+import { View, Text, ParsedText } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
 import Comments from "./PostComments";
 
@@ -67,7 +67,7 @@ const Post = (props) => {
                     )}
                 />
                 <View style={styles.commentBlock}>
-                    <Text style={styles.comment}>{caption}</Text>
+                    <ParsedText style={styles.comment} text={caption} />
                     <Text style={styles.commentTime}>
                         {new Date(post.timestamp.toDate()).toDateString()}
                     </Text>
