@@ -81,6 +81,18 @@ export default function ModalScreen() {
         );
     }
 
+    function renderTitle(data: IProject) {
+        if (!data.archived) {
+            return <Text style={styles.project}>{data.title || ""}</Text>;
+        } else {
+            return (
+                <Text style={styles.projectArchived}>
+                    {data.title || ""} (Archived)
+                </Text>
+            );
+        }
+    }
+
     function renderRow(data: IProject) {
         return (
             <View key={data.key} style={styles.outerView}>
@@ -106,9 +118,7 @@ export default function ModalScreen() {
                     <View style={styles.avatar}>
                         <Image style={styles.avatarFace} source={data.icon} />
                     </View>
-                    <View>
-                        <Text style={styles.project}>{data.title || ""}</Text>
-                    </View>
+                    <View>{renderTitle(data)}</View>
                 </TouchableOpacity>
                 <TouchableOpacity
                     key={"chevron." + data.key}
@@ -143,6 +153,7 @@ export default function ModalScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.projectList}>
+                <View>{renderAdd()}</View>
                 {loading === false && (
                     <View>
                         <ShortList
@@ -152,7 +163,6 @@ export default function ModalScreen() {
                         />
                     </View>
                 )}
-                <View>{renderAdd()}</View>
             </View>
 
             {/* Use a light status bar on iOS to account for the black space above the modal */}
@@ -192,6 +202,11 @@ const styles = StyleSheet.create({
     project: {
         fontSize: 18,
         marginBottom: 5,
+    },
+    projectArchived: {
+        fontSize: 18,
+        marginBottom: 5,
+        color: "grey",
     },
     projectList: {},
 
