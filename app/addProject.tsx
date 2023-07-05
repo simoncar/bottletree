@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View, TextInput } from "../components/Themed";
 import ProjectContext from "../lib/projectContext";
-import { addProject } from "../lib/APIprojects";
+import { addProject } from "../lib/APIproject";
 import { IProject } from "../lib/types";
 
 import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";

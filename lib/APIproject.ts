@@ -7,7 +7,10 @@ import {
     query,
     Timestamp,
     where,
+    getDocs,
+    documentId,
 } from "firebase/firestore";
+import firebase from "firebase/app";
 import { db } from "./firebase";
 import { IProject, IUser } from "./types";
 
@@ -33,29 +36,47 @@ export async function getProjects(callback: projectsRead) {
     return () => unsubscribe();
 }
 
-export async function getProjectUsers(
-    projectId: string,
-    callback: projectUsersRead,
-) {
-    const q = query(collection(db, "projects", projectId, "users"));
+export async function getProjectUsers(projectId: string, callback) {
+    const q1 = query(collection(db, "projects", projectId, "users"));
 
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        console.log("getProjectUsers 222");
-        const projectUsers: IUser[] = [];
-        querySnapshot.forEach((doc) => {
-            projectUsers.push({
-                uid: doc.id,
-                photoURL: doc.data().avatar,
-                displayName: doc.data().name,
-                email: doc.data().email,
-            });
-        });
-        console.log("projectUsers", projectUsers);
-
-        callback(projectUsers);
+    const idSnapshot = await getDocs(q1);
+    const idList: string[] = [];
+    idSnapshot.forEach((doc) => {
+        idList.push(doc.id);
     });
 
-    return () => unsubscribe();
+    console.log("GET DOCS: ", idList);
+    const q2 = query(
+        collection(db, "users"),
+        where(documentId(), "in", idList),
+    );
+    console.log("BBB");
+
+    const usersSnapshot = await getDocs(q2);
+    console.log("CCC");
+
+    const userList: IUser[] = [];
+    console.log("DDD");
+
+    usersSnapshot.forEach((doc) => {
+        console.log("EEE");
+
+        console.log("DOC: ", doc.id, " => ", doc.data());
+
+        userList.push({
+            uid: doc.id,
+            displayName: doc.data().displayName,
+            email: doc.data().email,
+            photoURL: doc.data().photoURL,
+        });
+    });
+
+    console.log("FFF");
+
+    console.log(userList);
+    console.log("GGG");
+
+    callback(userList);
 }
 
 export function updateProject(project: IProject, callback: saveDone) {

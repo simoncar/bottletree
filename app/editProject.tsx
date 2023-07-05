@@ -6,43 +6,30 @@ import {
     StyleSheet,
     TouchableOpacity,
     Button as NativeButton,
+    useColorScheme,
+    Pressable,
 } from "react-native";
-import { ShortList } from "../components/sComponent";
+
 import { Text, TextInput, View, Button } from "../components/Themed";
-import { getProjectUsers, updateProject } from "../lib/APIprojects";
+import { updateProject } from "../lib/APIproject";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
+import Colors from "../constants/Colors";
+import { ProjectUsers } from "../components/ProjectUsers";
 
 export default function editPost() {
     const { sharedData, updateSharedDataProject } = useProject();
     const { projectId, projectTitle, photoURL } = useLocalSearchParams();
     const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
     const [text, onChangeText] = useState(projectTitle);
-    const [projectUsers, setProjectUsers] = useState("");
-    const [loading, setLoading] = useState(true);
+    const colorScheme = useColorScheme();
+
     const { showActionSheetWithOptions } = useActionSheet();
 
     const router = useRouter();
-
-    const projectUsersRead = (projectUsersDB) => {
-        setProjectUsers(projectUsersDB);
-    };
-
-    useEffect(() => {
-        const unsubscribe = getProjectUsers(projectId, projectUsersRead);
-        return () => {
-            unsubscribe;
-        };
-    }, []);
-
-    useEffect(() => {
-        if (projectUsers !== "" && loading === true) {
-            setLoading(false);
-        }
-    }, [projectUsers]);
 
     const saveDone = (id: string) => {
         updateSharedDataProject({
@@ -67,19 +54,6 @@ export default function editPost() {
             saveDone,
         );
     };
-
-    function renderRow(data: any) {
-        return (
-            <View style={styles.outerView}>
-                <View style={styles.avatar}>
-                    <Image style={styles.avatarFace} source={data.avatar} />
-                </View>
-                <View>
-                    <Text style={styles.name}>{data.name || ""}</Text>
-                </View>
-            </View>
-        );
-    }
 
     const progressCallback = (progress) => {
         console.log("progressCallback: " + progress);
@@ -174,54 +148,35 @@ export default function editPost() {
                 </View>
             </View>
 
-            <View>
-                <View style={styles.avatarAContainer}>
-                    <Text style={styles.accessHeader}></Text>
-                </View>
-                <View>
-                    {loading === false && (
-                        <View>
-                            <ShortList
-                                key={projectUsers.key}
-                                data={projectUsers}
-                                renderItem={renderRow}
-                            />
-                        </View>
-                    )}
-                </View>
-                <View style={styles.archive}>
-                    <Button
-                        title="Archive Project"
-                        onPress={() => save(textPhotoURL, true)}
+            <ProjectUsers project={projectId} />
+
+            <Pressable
+                style={styles.outerView}
+                onPress={() => save(textPhotoURL, true)}>
+                <View style={styles.avatar}>
+                    <Ionicons
+                        name="archive"
+                        size={25}
+                        color={Colors[colorScheme ?? "light"].text}
                     />
                 </View>
-            </View>
+                <View>
+                    <Text style={styles.name}>Archive Project</Text>
+                </View>
+            </Pressable>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    accessHeader: {
-        flexDirection: "row",
-        fontSize: 18,
-        fontWeight: "bold",
-        marginBottom: 5,
-        marginTop: 5,
-    },
-    archive: {
-        alignItems: "center",
-        justifyContent: "center",
-        paddingTop: 60,
-    },
-    avatar: {},
+    avatar: { alignItems: "center", justifyContent: "center", width: 48 },
     avatarAContainer: {
         alignItems: "center",
         justifyContent: "center",
         paddingTop: 20,
     },
-    avatarBView: {},
 
-    avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
+    avatarBView: {},
     camera: {
         color: "white",
         marginBottom: 2,
@@ -252,6 +207,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         padding: 8,
     },
+
     profilePhoto: {
         borderColor: "grey",
         borderRadius: 150 / 2,

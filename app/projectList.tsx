@@ -13,10 +13,9 @@ import {
 import { ShortList } from "../components/sComponent";
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
-import { getProjects } from "../lib/APIprojects";
+import { getProjects } from "../lib/APIproject";
 import ProjectContext from "../lib/projectContext";
 import { IProject } from "../lib/types";
-
 
 export default function ModalScreen() {
     const [projects, setProjects] = useState<IProject[] | null>(null);
@@ -177,7 +176,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flex: 1,
         flexDirection: "row",
-       
+
         paddingHorizontal: 8,
     },
     outerView: {
