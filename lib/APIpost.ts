@@ -86,7 +86,7 @@ export async function getComments(projectId: string, postId: string) {
 
     const qComments = query(
         collection(db, "projects", projectId, "posts", postId, "comments"),
-        orderBy("timestamp", "desc"),
+        orderBy("timestamp", "asc"),
     );
 
     const commentsSnapshot = await getDocs(qComments);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, useColorScheme, Pressable } from "react-native";
-import { View, Text, TextInput } from "./Themed";
+import { View, Text, TextInput, ParsedText } from "./Themed";
 import { addComment, getComments } from "../lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
@@ -8,10 +8,11 @@ import { IComment } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
 import { Timestamp } from "firebase/firestore";
 
+
 const Comments = (props) => {
     const { post, project } = props;
     const [comments, setComments] = useState([]);
-    const [text, setComment] = useState("");
+    const [text, setComment] = useState("Add a comment...");
     const [action, setAction] = useState(false);
     const colorScheme = useColorScheme();
     const { sharedDataUser } = useAuth();
@@ -28,6 +29,7 @@ const Comments = (props) => {
     };
 
     const save = () => {
+        setAction(false);
         const comment: IComment = {
             comment: text,
             displayName: sharedDataUser.displayName,
@@ -73,7 +75,7 @@ const Comments = (props) => {
                         onPress={() => {
                             setAction(true);
                         }}>
-                        Add a comment...
+                        {text}
                     </Text>
                     <View style={styles.inputAction}></View>
                 </View>
@@ -90,7 +92,10 @@ const Comments = (props) => {
                         <Text style={styles.commentUserName}>
                             {item.displayName}
                         </Text>
-                        <Text style={styles.commentText}>{item.comment}</Text>
+                        <ParsedText
+                            style={styles.commentText}
+                            text={item.comment}
+                        />
                     </View>
                 )}
             />
@@ -107,11 +112,11 @@ const styles = StyleSheet.create({
         paddingTop: 10,
     },
     commentInputPlaceholder: {
+        color: "lightgray",
         flex: 1,
         paddingBottom: 10,
         paddingLeft: 10,
         paddingTop: 10,
-        color: "lightgray",
     },
     commentText: {},
     commentUserName: { fontWeight: "bold", paddingRight: 4 },

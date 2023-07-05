@@ -99,7 +99,6 @@ export const updateProjectPhotoURL = (photoURL: string) => {
         .then(() => {
             // Profile updated!
             // ...
-            console.log("upser account update:", photoURL);
             //updateSharedData({ displayName: displayName });
             // const jsonValue = JSON.stringify({
             //     ...auth.currentUser,

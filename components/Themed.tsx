@@ -14,6 +14,7 @@ import {
 
 import Colors from "../constants/Colors";
 import React from "react";
+import { ParsedTextUnthemed } from "../components/ParsedText";
 
 export function useThemeColor(
     props: { light?: string; dark?: string },
@@ -38,6 +39,7 @@ export type TextProps = ThemeProps & DefaultText["props"];
 export type TextInputProps = ThemeProps & DefaultTextInput["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
 export type ButtonProps = ThemeProps & DefaultButton["props"];
+export type ParsedTextProps = ThemeProps & ParsedTextUnthemed["props"];
 
 export function Text(props: TextProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
@@ -81,6 +83,20 @@ export function Button(props: ButtonProps) {
         <View style={styles.button}>
             <DefaultButton style={[{ color }, style]} {...otherProps} />
         </View>
+    );
+}
+
+export function ParsedText(props: ParsedTextProps) {
+    const { style, lightColor, darkColor, ...otherProps } = props;
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+    console.log("ParsedText", color);
+
+    return (
+        <ParsedTextUnthemed
+            textColor={color}
+            linkColor={color}
+            {...otherProps}
+        />
     );
 }
 
