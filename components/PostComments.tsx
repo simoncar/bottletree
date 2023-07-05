@@ -8,12 +8,14 @@ import { IComment } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
 import { Timestamp } from "firebase/firestore";
 
-
 const Comments = (props) => {
     const { post, project } = props;
+
+    const defaultComment = "Add a comment...";
     const [comments, setComments] = useState([]);
-    const [text, setComment] = useState("Add a comment...");
+    const [text, setComment] = useState(defaultComment);
     const [action, setAction] = useState(false);
+    const [saved, setSaved] = useState(false);
     const colorScheme = useColorScheme();
     const { sharedDataUser } = useAuth();
 
@@ -23,9 +25,17 @@ const Comments = (props) => {
         });
     }, []);
 
+    useEffect(() => {
+        getComments(project, post).then((comments) => {
+            setComments(comments);
+        });
+    }, [saved]);
+
     const saveDone = (comment: IComment) => {
         //setProjects(projectsDB);
         console.log("Comment saved", comment);
+        setSaved(true);
+        setComment(defaultComment);
     };
 
     const save = () => {
@@ -46,7 +56,7 @@ const Comments = (props) => {
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.commentInput}
-                        placeholder={"Add a comment..."}
+                        placeholder={defaultComment}
                         onChangeText={(text) => {
                             setComment(text);
                             setAction(true);
@@ -74,6 +84,7 @@ const Comments = (props) => {
                         style={styles.commentInputPlaceholder}
                         onPress={() => {
                             setAction(true);
+                            setComment(null);
                         }}>
                         {text}
                     </Text>

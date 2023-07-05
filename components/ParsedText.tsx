@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import * as Linking from "expo-linking";
 import ParsedText from "react-native-parsed-text";
 
@@ -73,17 +72,3 @@ export const ParsedTextUnthemed = (props) => {
         </ParsedText>
     );
 };
-
-const styles = StyleSheet.create({
-    email: {
-        color: "blue",
-        textDecorationLine: "underline",
-    },
-    textBody: {
-        color: "green",
-    },
-    url: {
-        color: "blue",
-        textDecorationLine: "underline",
-    },
-});
