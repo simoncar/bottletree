@@ -5,7 +5,7 @@ import { Image } from "expo-image";
 import { Stack, useRouter } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 
-export default function SignIn() {
+export default function SignInScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");

@@ -174,8 +174,12 @@ const AuthProvider = ({ children }) => {
         <AuthContext.Provider
             value={{
                 sharedDataUser,
-                signIn,
-                signOut,
+                signIn: () => {
+                    signIn;
+                },
+                signOut: () => {
+                    console.log("signOut");
+                },
                 resetPassword,
                 deleteAccount,
                 updateSharedDataUser,
