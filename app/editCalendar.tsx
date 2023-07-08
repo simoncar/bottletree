@@ -28,7 +28,7 @@ export default function editPost() {
     const [title, onChangeTitle] = useState(calendarTitle);
     const [description, onChangeDescription] = useState(calendarTitle);
 
-    const [isEnabledAllDay, setIsEnabledAllDay] = useState(true);
+    const [allDay, setAllDay] = useState(true);
 
     const [beginDate, setBeginDate] = useState(new Date());
     const [beginTime, setBeginTime] = useState(new Date());
@@ -90,7 +90,7 @@ export default function editPost() {
     };
 
     const toggleAllDaySwitch = () =>
-        setIsEnabledAllDay((previousState) => !previousState);
+        setAllDay((previousState) => !previousState);
 
     return (
         <SafeAreaView>
@@ -131,10 +131,10 @@ export default function editPost() {
                 <View style={styles.right}>
                     <Switch
                         trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={isEnabledAllDay ? "#f5dd4b" : "#f4f3f4"}
+                        thumbColor={allDay ? "#f5dd4b" : "#f4f3f4"}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleAllDaySwitch}
-                        value={isEnabledAllDay}
+                        value={allDay}
                     />
                 </View>
             </View>
@@ -150,15 +150,17 @@ export default function editPost() {
                         onChange={onChangeBeginDate}
                     />
                 </View>
-                <View style={styles.right}>
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={beginTime}
-                        mode={"time"}
-                        is24Hour={true}
-                        onChange={onChangeBeginTime}
-                    />
-                </View>
+                {!allDay && (
+                    <View style={styles.right}>
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={beginTime}
+                            mode={"time"}
+                            is24Hour={true}
+                            onChange={onChangeBeginTime}
+                        />
+                    </View>
+                )}
             </View>
 
             <View style={styles.itemView}>
@@ -172,15 +174,17 @@ export default function editPost() {
                         onChange={onChangeEndDate}
                     />
                 </View>
-                <View style={styles.right}>
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={endTime}
-                        mode={"time"}
-                        is24Hour={true}
-                        onChange={onChangeEndTime}
-                    />
-                </View>
+                {!allDay && (
+                    <View style={styles.right}>
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={endTime}
+                            mode={"time"}
+                            is24Hour={true}
+                            onChange={onChangeEndTime}
+                        />
+                    </View>
+                )}
             </View>
 
             <View style={[styles.itemView, styles.line]}>
@@ -197,6 +201,21 @@ export default function editPost() {
                     />
                 </View>
             </View>
+
+            <Pressable
+                style={styles.itemView}
+                onPress={() => save(textPhotoURL, true)}>
+                <View style={styles.avatar}>
+                    <Ionicons
+                        name="save-outline"
+                        size={25}
+                        color={Colors[colorScheme ?? "light"].text}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.actionTitle}>Save</Text>
+                </View>
+            </Pressable>
 
             <Pressable
                 style={styles.itemView}
