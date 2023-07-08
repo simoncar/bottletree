@@ -45,12 +45,24 @@ export default function addPhoto() {
         }
     };
 
-    const renderButton = (progress: number) => {
+    const renderButtonImage = (progress: number) => {
         if (null == image && progress == 0) {
             return (
                 <Button
                     title="Pick an image from camera roll"
                     onPress={pickImage}
+                />
+            );
+        } else {
+            return;
+        }
+    };
+    const renderButtonCalendar = () => {
+        if (null == image && progress == 0) {
+            return (
+                <Button
+                    title="Pick an image from camera roll"
+                    onPress={router.push({ pathname: "/editCalendar" })}
                 />
             );
         } else {
@@ -90,7 +102,8 @@ export default function addPhoto() {
     } else {
         return (
             <View style={styles.container}>
-                {renderButton(progress)}
+                {renderButtonImage(progress)}
+                {renderButtonCalendar()}
                 {renderProgress(progress)}
                 {image && <Image source={image} style={styles.storyPhoto} />}
             </View>
