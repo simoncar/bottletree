@@ -31,3 +31,14 @@ export interface IComment {
     timestamp: Timestamp;
     uid: string;
 }
+
+export interface ICalendarEvent {
+    key?: string;
+    allDay: boolean;
+    dateBegin: Timestamp;
+    dateEnd: Timestamp;
+    description: string;
+    projectId: string;
+    title: string;
+    uid: string;
+}

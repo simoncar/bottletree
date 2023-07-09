@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import { Text, TextInput, View } from "../components/Themed";
-import { updateProject } from "../lib/APIproject";
+import { addCalendarEvent, updateCalendarEvent } from "../lib/APIcalendar";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
@@ -20,73 +20,92 @@ import DateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import Colors from "../constants/Colors";
+import { ICalendarEvent } from "../lib/types";
+import { Timestamp } from "firebase/firestore";
+import { useAuth } from "../lib/authProvider";
 
 export default function editPost() {
-    const { sharedData, updateSharedDataProject } = useProject();
-    const { calendarId, calendarTitle } = useLocalSearchParams();
+    const { sharedDataProject } = useProject();
+    const { sharedDataUser } = useAuth();
+    const { calendarId } = useLocalSearchParams();
 
-    const [title, onChangeTitle] = useState(calendarTitle);
-    const [description, onChangeDescription] = useState(calendarTitle);
+    const [title, onChangeTitle] = useState();
+    const [description, onChangeDescription] = useState();
 
     const [allDay, setAllDay] = useState(true);
 
-    const [beginDate, setBeginDate] = useState(new Date());
-    const [beginTime, setBeginTime] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [endTime, setEndTime] = useState(new Date());
+    const [dateBegin, setDateBegin] = useState(new Date());
+    const [dateBeginTime, setDateBeginTime] = useState(new Date());
+    const [dateEnd, setDateEnd] = useState(new Date());
+    const [dateEndTime, setDateEndTime] = useState(new Date());
 
     const colorScheme = useColorScheme();
     const router = useRouter();
 
     const saveDone = (id: string) => {
-        updateSharedDataProject({
-            key: id,
-            title: text,
-            icon: textPhotoURL,
-        });
+        console.log("saveDone: " + id);
 
-        router.push({
-            pathname: "/",
+        router.replace({
+            pathname: "/calendar",
+            params: {},
         });
     };
 
-    const save = (downloadURL: string, archived: boolean) => {
-        updateProject(
-            {
-                key: projectId,
-                title: text,
-                icon: downloadURL,
-                archived: archived,
-            },
-            saveDone,
-        );
+    const save = () => {
+        const d1 = new Date(dateBegin);
+        const d2 = new Date(dateEnd);
+
+        if (allDay) {
+            d1.setHours(0, 0, 0, 0);
+            d2.setHours(0, 0, 0, 0);
+        } else {
+            d1.setHours(
+                dateBeginTime.getHours(),
+                dateBeginTime.getMinutes(),
+                0,
+                0,
+            );
+            d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
+        }
+
+        const calendarEvent: ICalendarEvent = {
+            allDay: allDay,
+            dateBegin: Timestamp.fromDate(d1),
+            dateEnd: Timestamp.fromDate(d2),
+            description: description || "",
+            title: title || "",
+            projectId: sharedDataProject.key,
+            uid: sharedDataUser.uid,
+        };
+
+        addCalendarEvent(calendarEvent, saveDone);
     };
 
-    const onChangeBeginDate = (
+    const onChangedateBegin = (
         event: DateTimePickerEvent,
         selectedDate: Date,
     ) => {
-        setBeginDate(selectedDate);
-        console.log("beginDate: " + selectedDate);
+        setDateBegin(selectedDate);
+        console.log("dateBegin: " + selectedDate);
     };
     const onChangeBeginTime = (
         event: DateTimePickerEvent,
         selectedDate: Date,
     ) => {
-        setBeginTime(selectedDate);
+        setDateBeginTime(selectedDate);
         console.log("beginTime: " + selectedDate);
     };
-    const onChangeEndDate = (
+    const onChangedateEnd = (
         event: DateTimePickerEvent,
         selectedDate: Date,
     ) => {
-        setEndDate(selectedDate);
+        setDateEnd(selectedDate);
     };
     const onChangeEndTime = (
         event: DateTimePickerEvent,
         selectedDate: Date,
     ) => {
-        setEndTime(selectedDate);
+        setDateEndTime(selectedDate);
     };
 
     const toggleAllDaySwitch = () =>
@@ -97,10 +116,7 @@ export default function editPost() {
             <Stack.Screen
                 options={{
                     headerRight: () => (
-                        <NativeButton
-                            title="Done"
-                            onPress={() => save(textPhotoURL, false)}
-                        />
+                        <NativeButton title="Done" onPress={() => save()} />
                     ),
                 }}
             />
@@ -144,17 +160,17 @@ export default function editPost() {
                 <View style={styles.date}>
                     <DateTimePicker
                         testID="dateTimePicker"
-                        value={beginDate}
+                        value={dateBegin}
                         mode={"date"}
                         is24Hour={true}
-                        onChange={onChangeBeginDate}
+                        onChange={onChangedateBegin}
                     />
                 </View>
                 {!allDay && (
                     <View style={styles.right}>
                         <DateTimePicker
                             testID="dateTimePicker"
-                            value={beginTime}
+                            value={dateBeginTime}
                             mode={"time"}
                             is24Hour={true}
                             onChange={onChangeBeginTime}
@@ -168,17 +184,17 @@ export default function editPost() {
                 <View style={styles.date}>
                     <DateTimePicker
                         testID="dateTimePicker"
-                        value={endDate}
+                        value={dateEnd}
                         mode={"date"}
                         is24Hour={true}
-                        onChange={onChangeEndDate}
+                        onChange={onChangedateEnd}
                     />
                 </View>
                 {!allDay && (
                     <View style={styles.right}>
                         <DateTimePicker
                             testID="dateTimePicker"
-                            value={endTime}
+                            value={dateEndTime}
                             mode={"time"}
                             is24Hour={true}
                             onChange={onChangeEndTime}
@@ -202,9 +218,7 @@ export default function editPost() {
                 </View>
             </View>
 
-            <Pressable
-                style={styles.itemView}
-                onPress={() => save(textPhotoURL, true)}>
+            <Pressable style={styles.itemView} onPress={() => save()}>
                 <View style={styles.avatar}>
                     <Ionicons
                         name="save-outline"
@@ -219,7 +233,9 @@ export default function editPost() {
 
             <Pressable
                 style={styles.itemView}
-                onPress={() => save(textPhotoURL, true)}>
+                onPress={() => {
+                    console.log("delete");
+                }}>
                 <View style={styles.avatar}>
                     <Ionicons
                         name="trash"
@@ -241,10 +257,10 @@ const styles = StyleSheet.create({
     },
     avatar: { alignItems: "center", justifyContent: "center", width: 48 },
     date: {
-        width: 50,
+        alignItems: "flex-start",
         flex: 1,
         justifyContent: "flex-start",
-        alignItems: "flex-start",
+        width: 50,
     },
     itemView: {
         alignItems: "center",
