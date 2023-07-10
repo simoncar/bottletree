@@ -1,8 +1,6 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
-import { View, Text, Button } from "../components/Themed";
-import Colors from "../constants/Colors";
+import { FlatList, StyleSheet } from "react-native";
+import { View, Button } from "../components/Themed";
 import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
 import { IPost, IProject } from "../lib/types";
@@ -14,7 +12,6 @@ export const Posts = () => {
     const { sharedDataProject } = useContext(ProjectContext);
     let currentProject: IProject = sharedDataProject;
     const [posts, setPosts] = useState([]);
-    const colorScheme = useColorScheme();
     const router = useRouter();
 
     if (null == sharedDataProject) {
@@ -41,6 +38,9 @@ export const Posts = () => {
     useEffect(() => {
         if (undefined != currentProject?.key) {
             const unsubscribe = getPosts(currentProject.key, postsRead);
+            return () => {
+                unsubscribe;
+            };
         }
     }, [currentProject]);
 
@@ -52,7 +52,7 @@ export const Posts = () => {
 
     const renderEmpty = () => {
         return (
-<View style={styles.addPost}>
+            <View style={styles.addPost}>
                 <Button
                     title="Add a new post"
                     onPress={() => {
@@ -81,7 +81,7 @@ export const Posts = () => {
                     icon={currentProject.icon}
                 />
             </View>
-            <View style={styles.button}>
+            <View>
                 <FlatList
                     data={posts}
                     renderItem={renderItems}
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 200,
     },
-
     footer: {
         paddingTop: 100,
     },

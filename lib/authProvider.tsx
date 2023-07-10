@@ -45,7 +45,7 @@ function useProtectedRoute(user) {
             router.replace("/signIn");
         } else if (user && inAuthGroup) {
             // Redirect away from the sign-in page.
-            router.replace("/editCalendar");
+            router.replace("/calendar");
         }
     }, [user, segments]);
 }

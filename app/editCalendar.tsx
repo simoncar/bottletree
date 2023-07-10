@@ -1,10 +1,8 @@
-import { Image } from "expo-image";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     SafeAreaView,
     StyleSheet,
-    TouchableOpacity,
     Button as NativeButton,
     useColorScheme,
     Pressable,
@@ -12,7 +10,7 @@ import {
 } from "react-native";
 
 import { Text, TextInput, View } from "../components/Themed";
-import { addCalendarEvent, updateCalendarEvent } from "../lib/APIcalendar";
+import { addCalendarEvent } from "../lib/APIcalendar";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";

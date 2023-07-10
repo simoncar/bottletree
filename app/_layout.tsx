@@ -97,6 +97,15 @@ function RootLayoutNav() {
                                     })}
                                 />
                                 <Stack.Screen
+                                    name="editCalendar"
+                                    options={({ navigation, route }) => ({
+                                        title: "Add Event",
+                                        headerTitleStyle: {
+                                            fontWeight: "bold",
+                                        },
+                                    })}
+                                />
+                                <Stack.Screen
                                     name="user"
                                     options={({ navigation, route }) => ({
                                         title: "",

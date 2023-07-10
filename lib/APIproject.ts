@@ -11,7 +11,6 @@ import {
     documentId,
     orderBy,
 } from "firebase/firestore";
-import firebase from "firebase/app";
 import { db } from "./firebase";
 import { IProject, IUser } from "./types";
 
@@ -38,7 +37,10 @@ export async function getProjects(callback: projectsRead) {
     return () => unsubscribe();
 }
 
-export async function getProjectUsers(projectId: string, callback) {
+export async function getProjectUsers(
+    projectId: string,
+    callback: { (projectUsersDB: any): void; (arg0: IUser[]): void },
+) {
     const q1 = query(collection(db, "projects", projectId, "users"));
 
     const idSnapshot = await getDocs(q1);

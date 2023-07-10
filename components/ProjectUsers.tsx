@@ -43,7 +43,7 @@ export const ProjectUsers = (props) => {
 
     return (
         <View>
-            <View style={styles.avatarAContainer}>
+            <View>
                 <Text style={styles.accessHeader}></Text>
             </View>
             <View>

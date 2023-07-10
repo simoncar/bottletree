@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../../lib/authProvider";
 import { Stack, useRouter } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
-import { updateAccount } from "../../lib/APIuser";
+import { updateAccountName } from "../../lib/APIuser";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function SignIn() {
     const createAccountCallback = (user, error) => {
         console.log("createAccountCallback:", error);
         if (error == "Success") {
-            updateAccount(name); //firebease auth update function
+            updateAccountName(name); //firebease auth update function
             updateSharedDataUser(user);
         } else {
             updateSharedDataUser(null);
@@ -24,7 +24,7 @@ export default function SignIn() {
         setErrorMessage(error);
     };
 
-    const renderAction = (errorMessage) => {
+    const renderAction = (errorMessage: string) => {
         if (errorMessage == "Success") {
             return (
                 <TouchableOpacity
@@ -71,7 +71,7 @@ export default function SignIn() {
                     placeholder="Name"
                     autoCorrect={false}
                     autoFocus
-                    autocomplete="name"
+                    autoComplete="name"
                     onChangeText={(name) => setName(name)}
                 />
             </View>
@@ -82,7 +82,7 @@ export default function SignIn() {
                     inputMode="email"
                     autoCapitalize="none"
                     placeholder="Email"
-                    autocomplete="email"
+                    autoComplete="email"
                     onChangeText={(email) => setEmail(email)}
                 />
             </View>

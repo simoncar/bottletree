@@ -1,18 +1,5 @@
-import { db } from "./firebase";
-import {
-    collection,
-    query,
-    addDoc,
-    deleteDoc,
-    onSnapshot,
-    Timestamp,
-    orderBy,
-    doc,
-    updateDoc,
-} from "firebase/firestore";
 import * as ImageManipulator from "expo-image-manipulator";
 import * as ImagePicker from "expo-image-picker";
-import { IPost } from "./types";
 import { storage } from "./firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import * as Crypto from "expo-crypto";
@@ -20,16 +7,13 @@ import * as Crypto from "expo-crypto";
 export const addImage = async (progressCallback, addImageCallback) => {
     console.log("addImage API Called");
 
-    var d = new Date();
-
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 1,
     });
 
     if (!result.canceled) {
         var fileToUpload = "";
-        var mime = "";
 
         const convertedImage = await new ImageManipulator.manipulateAsync(
             result.assets[0].uri,
@@ -40,7 +24,6 @@ export const addImage = async (progressCallback, addImageCallback) => {
         );
 
         fileToUpload = convertedImage.uri;
-        mime = "image/jpeg";
 
         const blob = await new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
@@ -56,6 +39,7 @@ export const addImage = async (progressCallback, addImageCallback) => {
         });
 
         const UUID = Crypto.randomUUID();
+        const d = new Date();
 
         const fileName =
             "posts/" +
@@ -86,7 +70,7 @@ export const addImage = async (progressCallback, addImageCallback) => {
                 }
             },
             (error) => {
-                // Handle unsuccessful uploads
+                console.log("error file upload:", error);
             },
             () => {
                 // Handle successful uploads on complete

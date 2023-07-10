@@ -17,7 +17,7 @@ import Colors from "../constants/Colors";
 import { IPost } from "../lib/types";
 
 export default function editPost() {
-    const { sharedDataProject } = useContext(ProjectContext);
+    const sharedDataProject = useContext(ProjectContext);
     const { key, image, caption } = useLocalSearchParams();
     const [text, onChangeText] = useState(caption?.toString() ?? "");
     const colorScheme = useColorScheme();

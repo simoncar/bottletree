@@ -1,16 +1,6 @@
 import { updateProfile } from "firebase/auth/react-native";
 import { auth, db } from "../lib/firebase";
-import {
-    addDoc,
-    doc,
-    setDoc,
-    updateDoc,
-    collection,
-    onSnapshot,
-    query,
-    Timestamp,
-    where,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export const updateAccountName = (displayName: string) => {
     //const { sharedData, updateSharedData } = useContext(AuthContext);

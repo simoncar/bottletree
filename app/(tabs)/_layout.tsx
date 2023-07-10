@@ -1,7 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs, useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
-import { Pressable, useColorScheme } from "react-native";
+import { Link, Tabs } from "expo-router";
+import React, { useContext } from "react";
+import { useColorScheme } from "react-native";
 import { BigText } from "../../components/StyledText";
 import { View } from "../../components/Themed";
 import { UserAvatar } from "../../components/UserAvatar";
@@ -21,7 +21,6 @@ export default function TabLayout() {
     const colorScheme = useColorScheme();
     const { sharedDataUser, updateSharedDataUser } = useContext(AuthContext);
     let loggedInUser: IUser = sharedDataUser;
-    const { uid, displayName } = useLocalSearchParams();
 
     if (null == sharedDataUser) {
         loggedInUser = {
@@ -31,8 +30,6 @@ export default function TabLayout() {
             photoURL: "",
         };
     }
-
-
 
     return (
         <Tabs
@@ -95,4 +92,3 @@ export default function TabLayout() {
         </Tabs>
     );
 }
-    

@@ -1,52 +1,33 @@
-import {
-    addDoc,
-    doc,
-    updateDoc,
-    collection,
-    onSnapshot,
-    query,
-    Timestamp,
-    where,
-    getDocs,
-    documentId,
-    orderBy,
-} from "firebase/firestore";
-import firebase from "firebase/app";
+import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "./firebase";
 import { IProject, ICalendarEvent } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
 
-export async function getItems(callback: itemsRead) {
+export async function getItems(projectId: string, callback: itemsRead) {
     const q = query(collection(db, "calendar"));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const projects: IProject[] = [];
+        const calendarEvents: ICalendarEvent[] = [];
         querySnapshot.forEach((doc) => {
-            projects.push({
+            calendarEvents.push({
                 key: doc.id,
+                allDay: doc.data().allDay,
+                dateBegin: doc.data().dateBegin,
+                dateEnd: doc.data().dateEnd,
+                description: doc.data().description,
+                projectId: doc.data().projectId,
                 title: doc.data().title,
-                icon: doc.data().icon,
-                archived: doc.data().archived,
+                uid: doc.data().uid,
             });
         });
-        callback(projects);
+
+        console.log("Calendar Events read: ", calendarEvents);
+
+        callback(calendarEvents);
     });
 
     return () => unsubscribe();
-}
-
-export function updateCalendarEvent(
-    calendarEvent: ICalendarEvent,
-    callback: saveDone,
-) {
-    const ref = doc(db, "calendar", calendarEvent.key);
-
-    updateDoc(ref, {
-        calendarEvent,
-    }).then(() => {
-        callback(docRef.id);
-    });
 }
 
 export function addCalendarEvent(
@@ -55,7 +36,13 @@ export function addCalendarEvent(
 ) {
     try {
         addDoc(collection(db, "calendar"), {
-            calendarEvent,
+            allDay: calendarEvent.allDay,
+            dateBegin: calendarEvent.dateBegin,
+            dateEnd: calendarEvent.dateEnd,
+            description: calendarEvent.description,
+            projectId: calendarEvent.projectId,
+            title: calendarEvent.title,
+            uid: calendarEvent.uid,
         }).then((docRef) => {
             console.log("Calendar Event written with ID: ", docRef.id);
             callback(docRef.id);
@@ -66,3 +53,50 @@ export function addCalendarEvent(
 
     return;
 }
+
+interface DateRange {
+    start: string;
+    end: string;
+}
+
+interface ExpandedDates {
+    [date: string]: string;
+}
+
+function expandDateRanges(
+    dateRanges: Record<string, DateRange>,
+): ExpandedDates {
+    const expandedDates: ExpandedDates = {};
+
+    for (const key in dateRanges) {
+        if (dateRanges.hasOwnProperty(key)) {
+            const range = dateRanges[key];
+            const startDate = new Date(range.start);
+            const endDate = new Date(range.end);
+
+            const currentDate = new Date(startDate);
+            while (currentDate <= endDate) {
+                const dateString = currentDate.toISOString().split("T")[0];
+                expandedDates[dateString] = key;
+
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        }
+    }
+
+    return expandedDates;
+}
+
+const dateRanges: Record<string, DateRange> = {
+    range1: {
+        start: "2023-07-01",
+        end: "2023-07-05",
+    },
+    range2: {
+        start: "2023-07-08",
+        end: "2023-07-10",
+    },
+};
+
+const expandedDates = expandDateRanges(dateRanges);
+console.log(expandedDates);
