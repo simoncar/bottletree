@@ -73,50 +73,12 @@ export default function Calendar() {
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <Agenda
-                items={{
-                    "2023-06-10": [
-                        {
-                            name: "Build Started",
-                            description:
-                                "Team will be onsite at 8am to start build",
-                        },
-                        {
-                            name: "Plans Approved",
-                            description: "See attached plans for details",
-                        },
-                    ],
-                    "2023-06-11": [
-                        {
-                            name: "Foundations",
-                            description:
-                                "Trucks have parking permits for the day",
-                        },
-                    ],
-                    "2023-06-12": [{ name: "Slab" }],
-                    "2023-06-13": [{ name: "Walls" }],
-                    "2023-06-14": [
-                        {
-                            name: "Roof",
-                            description:
-                                "High winds expected, please secure materials",
-                        },
-                    ],
-                    "2023-06-15": [
-                        {
-                            name: "Deadline Taps Order",
-                            description: "Order must be confirmed by 5pm",
-                            contact: "Stefanie (555) 555-5555",
-                        },
-                    ],
-                    "2023-06-16": [{ name: "Plumbing" }],
-                    "2023-06-17": [{ name: "Doors" }],
-                    "2023-06-18": [{ name: "Move In" }],
-                }}
+                items={items}
                 // loadItemsForMonth={loadItems()}
                 renderItem={renderItem}
                 rowHasChanged={rowHasChanged}
                 showClosingKnob={true}
-                selected={"2023-06-10"}
+                selected={"2023-07-10"}
                 monthFormat={"yyyy"}
                 theme={{
                     calendarBackground: "#282828",
@@ -163,3 +125,44 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
+
+// {
+//                     "2023-06-10": [
+//                         {
+//                             name: "Build Started",
+//                             description:
+//                                 "Team will be onsite at 8am to start build",
+//                         },
+//                         {
+//                             name: "Plans Approved",
+//                             description: "See attached plans for details",
+//                         },
+//                     ],
+
+//                     "2023-06-11": [
+//                         {
+//                             name: "Foundations",
+//                             description:
+//                                 "Trucks have parking permits for the day",
+//                         },
+//                     ],
+//                     "2023-06-12": [{ name: "Slab" }],
+//                     "2023-06-13": [{ name: "Walls" }],
+//                     "2023-06-14": [
+//                         {
+//                             name: "Roof",
+//                             description:
+//                                 "High winds expected, please secure materials",
+//                         },
+//                     ],
+//                     "2023-06-15": [
+//                         {
+//                             name: "Deadline Taps Order",
+//                             description: "Order must be confirmed by 5pm",
+//                             contact: "Stefanie (555) 555-5555",
+//                         },
+//                     ],
+//                     "2023-06-16": [{ name: "Plumbing" }],
+//                     "2023-06-17": [{ name: "Doors" }],
+//                     "2023-06-18": [{ name: "Move In" }],
+//                 }

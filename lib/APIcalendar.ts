@@ -19,12 +19,16 @@ export async function getItems(projectId: string, callback: itemsRead) {
                 projectId: doc.data().projectId,
                 title: doc.data().title,
                 uid: doc.data().uid,
+                dd: doc.data().dateBegin.toDate().toISOString().split("T")[0],
+                ee: doc.data().dateEnd.toDate().toISOString().split("T")[0],
             });
         });
 
-        console.log("Calendar Events read: ", calendarEvents);
+        console.log("Calendar Events BEFORE: ", calendarEvents);
+        const expandedDates = expandDateRanges(calendarEvents);
+        console.log("Calendar Events AFTER: ", expandedDates);
 
-        callback(calendarEvents);
+        callback(expandedDates);
     });
 
     return () => unsubscribe();
@@ -55,48 +59,101 @@ export function addCalendarEvent(
 }
 
 interface DateRange {
-    start: string;
-    end: string;
+    dateBegin: string;
+    dateEnd: string;
 }
 
 interface ExpandedDates {
     [date: string]: string;
 }
 
-function expandDateRanges(
-    dateRanges: Record<string, DateRange>,
-): ExpandedDates {
+function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
     const expandedDates: ExpandedDates = {};
 
-    for (const key in dateRanges) {
-        if (dateRanges.hasOwnProperty(key)) {
-            const range = dateRanges[key];
-            const startDate = new Date(range.start);
-            const endDate = new Date(range.end);
+    for (const range of dateRanges) {
+        const startDate = new Date(range.dd);
+        const endDate = new Date(range.ee);
 
-            const currentDate = new Date(startDate);
-            while (currentDate <= endDate) {
-                const dateString = currentDate.toISOString().split("T")[0];
-                expandedDates[dateString] = key;
+        const currentDate = new Date(startDate);
+        while (currentDate <= endDate) {
+            const dateString = currentDate.toISOString().split("T")[0];
+            expandedDates[dateString] = [
+                ...(expandedDates[dateString] || []),
+                {
+                    title: range.title,
+                    name: range.title,
+                    description: range.description,
+                    projectId: range.projectId,
+                    key: range.key,
+                    dateBegin: range.dateBegin,
+                    dateEnd: range.dateEnd,
+                    allDay: range.allDay,
+                    uid: range.uid,
+                },
+            ];
 
-                currentDate.setDate(currentDate.getDate() + 1);
-            }
+            currentDate.setDate(currentDate.getDate() + 1);
         }
     }
 
     return expandedDates;
 }
 
-const dateRanges: Record<string, DateRange> = {
-    range1: {
+const dateRanges: DateRange[] = [
+    {
         start: "2023-07-01",
         end: "2023-07-05",
     },
-    range2: {
+    {
         start: "2023-07-08",
         end: "2023-07-10",
     },
-};
+];
 
 const expandedDates = expandDateRanges(dateRanges);
 console.log(expandedDates);
+
+// interface DateRange {
+//     dateBegin: string;
+//     dateEnd: string;
+// }
+
+// interface ExpandedDates {
+//     [date: string]: string;
+// }
+
+// function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
+//     const expandedDates: ExpandedDates = {};
+//     console.log("dateRanges:", dateRanges);
+
+//     for (const range of dateRanges) {
+//         console.log("aaa:", range.start, range.end);
+
+//         const startDate = new Date(range.start);
+//         const endDate = new Date(range.end);
+
+//         const currentDate = new Date(startDate);
+//         while (currentDate <= endDate) {
+//             const dateString = currentDate.toISOString().split("T")[0];
+//             expandedDates[dateString] = range.start + "-" + range.end;
+
+//             currentDate.setDate(currentDate.getDate() + 1);
+//         }
+//     }
+
+//     return expandedDates;
+// }
+
+// const dateRanges: DateRange[] = [
+//     {
+//         dateBegin: "2023-07-01",
+//         dateEnd: "2023-07-05",
+//     },
+//     {
+//         dateBegin: "2023-07-08",
+//         dateEnd: "2023-07-10",
+//     },
+// ];
+
+// const expandedDates = expandDateRanges(dateRanges);
+// console.log(expandedDates);
