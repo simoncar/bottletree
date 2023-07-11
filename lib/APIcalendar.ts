@@ -19,19 +19,77 @@ export async function getItems(projectId: string, callback: itemsRead) {
                 projectId: doc.data().projectId,
                 title: doc.data().title,
                 uid: doc.data().uid,
-                dd: doc.data().dateBegin.toDate().toISOString().split("T")[0],
-                ee: doc.data().dateEnd.toDate().toISOString().split("T")[0],
+                dateBeginSplit: doc
+                    .data()
+                    .dateBegin.toDate()
+                    .toISOString()
+                    .split("T")[0],
+                dateEndSplit: doc
+                    .data()
+                    .dateEnd.toDate()
+                    .toISOString()
+                    .split("T")[0],
+                timeBegin: doc
+                    .data()
+                    .dateBegin.toDate()
+                    .toLocaleTimeString("en-US"),
+                timeEnd: doc
+                    .data()
+                    .dateEnd.toDate()
+                    .toLocaleTimeString("en-US"),
             });
         });
 
-        console.log("Calendar Events BEFORE: ", calendarEvents);
         const expandedDates = expandDateRanges(calendarEvents);
-        console.log("Calendar Events AFTER: ", expandedDates);
+        console.log("expandedDates", expandedDates);
 
         callback(expandedDates);
     });
 
     return () => unsubscribe();
+}
+
+interface DateRange {
+    dateBegin: string;
+    dateEnd: string;
+}
+
+interface ExpandedDates {
+    [date: string]: string;
+}
+
+function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
+    const expandedDates: ExpandedDates = {};
+
+    for (const range of dateRanges) {
+        const startDate = new Date(range.dateBeginSplit);
+        const endDate = new Date(range.dateEndSplit);
+
+        const currentDate = new Date(startDate);
+        while (currentDate <= endDate) {
+            const dateString = currentDate.toISOString().split("T")[0];
+            expandedDates[dateString] = [
+                ...(expandedDates[dateString] || []),
+                {
+                    title: range.title,
+                    description: range.description,
+                    projectId: range.projectId,
+                    key: range.key,
+                    dateBegin: range.dateBegin,
+                    dateEnd: range.dateEnd,
+                    allDay: range.allDay,
+                    uid: range.uid,
+                    dateBeginSplit: range.dateBeginSplit,
+                    timeBegin: range.timeBegin,
+                    timeEnd: range.timeEnd,
+                },
+            ];
+
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+    }
+
+    return expandedDates;
 }
 
 export function addCalendarEvent(
@@ -48,7 +106,6 @@ export function addCalendarEvent(
             title: calendarEvent.title,
             uid: calendarEvent.uid,
         }).then((docRef) => {
-            console.log("Calendar Event written with ID: ", docRef.id);
             callback(docRef.id);
         });
     } catch (e) {
@@ -57,103 +114,3 @@ export function addCalendarEvent(
 
     return;
 }
-
-interface DateRange {
-    dateBegin: string;
-    dateEnd: string;
-}
-
-interface ExpandedDates {
-    [date: string]: string;
-}
-
-function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
-    const expandedDates: ExpandedDates = {};
-
-    for (const range of dateRanges) {
-        const startDate = new Date(range.dd);
-        const endDate = new Date(range.ee);
-
-        const currentDate = new Date(startDate);
-        while (currentDate <= endDate) {
-            const dateString = currentDate.toISOString().split("T")[0];
-            expandedDates[dateString] = [
-                ...(expandedDates[dateString] || []),
-                {
-                    title: range.title,
-                    name: range.title,
-                    description: range.description,
-                    projectId: range.projectId,
-                    key: range.key,
-                    dateBegin: range.dateBegin,
-                    dateEnd: range.dateEnd,
-                    allDay: range.allDay,
-                    uid: range.uid,
-                },
-            ];
-
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-    }
-
-    return expandedDates;
-}
-
-const dateRanges: DateRange[] = [
-    {
-        start: "2023-07-01",
-        end: "2023-07-05",
-    },
-    {
-        start: "2023-07-08",
-        end: "2023-07-10",
-    },
-];
-
-const expandedDates = expandDateRanges(dateRanges);
-console.log(expandedDates);
-
-// interface DateRange {
-//     dateBegin: string;
-//     dateEnd: string;
-// }
-
-// interface ExpandedDates {
-//     [date: string]: string;
-// }
-
-// function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
-//     const expandedDates: ExpandedDates = {};
-//     console.log("dateRanges:", dateRanges);
-
-//     for (const range of dateRanges) {
-//         console.log("aaa:", range.start, range.end);
-
-//         const startDate = new Date(range.start);
-//         const endDate = new Date(range.end);
-
-//         const currentDate = new Date(startDate);
-//         while (currentDate <= endDate) {
-//             const dateString = currentDate.toISOString().split("T")[0];
-//             expandedDates[dateString] = range.start + "-" + range.end;
-
-//             currentDate.setDate(currentDate.getDate() + 1);
-//         }
-//     }
-
-//     return expandedDates;
-// }
-
-// const dateRanges: DateRange[] = [
-//     {
-//         dateBegin: "2023-07-01",
-//         dateEnd: "2023-07-05",
-//     },
-//     {
-//         dateBegin: "2023-07-08",
-//         dateEnd: "2023-07-10",
-//     },
-// ];
-
-// const expandedDates = expandDateRanges(dateRanges);
-// console.log(expandedDates);

@@ -20,11 +20,19 @@ import ProjectContext from "../../lib/projectContext";
 export default function Calendar() {
     const [items, setItems] = useState([]);
     const { sharedDataProject } = useContext(ProjectContext);
-    const currentProject: IProject = sharedDataProject;
+    let currentProject: IProject = sharedDataProject;
 
     const itemsRead = (calendarItemsDB) => {
         setItems(calendarItemsDB);
     };
+
+    if (null == sharedDataProject) {
+        currentProject = {
+            key: "",
+            title: "",
+            icon: "",
+        };
+    }
 
     useEffect(() => {
         if (undefined != currentProject) {
@@ -39,12 +47,15 @@ export default function Calendar() {
         return (
             <TouchableOpacity
                 style={[styles.item, { height: reservation.height }]}
-                onPress={() => Alert.alert(reservation.name)}>
-                <Text style={styles.description}>{reservation.name}</Text>
+                onPress={() => Alert.alert(reservation.title)}>
+                <Text style={styles.title}>{reservation.title}</Text>
                 <Text style={styles.description}>
-                    {reservation.description}
+                    {reservation.dateBeginSplit}
+                    ZZZZZ {reservation.description}
                 </Text>
-                <Text style={styles.description}>{reservation.contact}</Text>
+                <Text style={styles.description}>
+                    {reservation.timeBegin} - {reservation.timeEnd}
+                </Text>
             </TouchableOpacity>
         );
     };
@@ -72,16 +83,20 @@ export default function Calendar() {
 
     return (
         <SafeAreaView style={styles.safeAreaView}>
+            <View>
+                <Project
+                    project={currentProject.key}
+                    title={currentProject.title}
+                    icon={currentProject.icon}
+                />
+            </View>
             <Agenda
                 items={items}
                 // loadItemsForMonth={loadItems()}
                 renderItem={renderItem}
                 rowHasChanged={rowHasChanged}
                 showClosingKnob={true}
-                selected={"2023-07-10"}
-                monthFormat={"yyyy"}
                 theme={{
-                    calendarBackground: "#282828",
                     //@ts-ignore
                     "stylesheet.agenda.main": {
                         reservations: {
@@ -107,16 +122,11 @@ const styles = StyleSheet.create({
         height: 15,
         paddingTop: 30,
     },
-
     item: {
-        borderColor: "#ccc",
+        backgroundColor: "green",
         borderRadius: 8,
-        borderWidth: 1,
         flex: 1,
-        marginRight: 10,
-        marginTop: 17,
-        marginVertical: 8,
-        paddingHorizontal: 20,
+        margin: 8,
         paddingVertical: 24,
         padding: 10,
     },
@@ -124,45 +134,9 @@ const styles = StyleSheet.create({
     safeAreaView: {
         flex: 1,
     },
+
+    title: {
+        fontSize: 16,
+        fontWeight: "bold",
+    },
 });
-
-// {
-//                     "2023-06-10": [
-//                         {
-//                             name: "Build Started",
-//                             description:
-//                                 "Team will be onsite at 8am to start build",
-//                         },
-//                         {
-//                             name: "Plans Approved",
-//                             description: "See attached plans for details",
-//                         },
-//                     ],
-
-//                     "2023-06-11": [
-//                         {
-//                             name: "Foundations",
-//                             description:
-//                                 "Trucks have parking permits for the day",
-//                         },
-//                     ],
-//                     "2023-06-12": [{ name: "Slab" }],
-//                     "2023-06-13": [{ name: "Walls" }],
-//                     "2023-06-14": [
-//                         {
-//                             name: "Roof",
-//                             description:
-//                                 "High winds expected, please secure materials",
-//                         },
-//                     ],
-//                     "2023-06-15": [
-//                         {
-//                             name: "Deadline Taps Order",
-//                             description: "Order must be confirmed by 5pm",
-//                             contact: "Stefanie (555) 555-5555",
-//                         },
-//                     ],
-//                     "2023-06-16": [{ name: "Plumbing" }],
-//                     "2023-06-17": [{ name: "Doors" }],
-//                     "2023-06-18": [{ name: "Move In" }],
-//                 }
