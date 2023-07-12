@@ -1,64 +1,62 @@
 {
-  "expo": {
-    "name": "One Build",
-    "slug": "bottletree",
-    "version": "1.0.16",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "bottletree",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#F9D96C"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "19",
-      "config": {
-        "usesNonExemptEncryption": false
-      }
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#F9D96C"
-      },
-      "versionCode": 4
-    },
-    "web": {
-      "bundler": "metro",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "c4340333-f23a-41cb-a647-97dee3bc0a01"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/c4340333-f23a-41cb-a647-97dee3bc0a01"
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to share the images you select with the project team."
-        }
-      ],
-      [
-        "expo-camera",
-        {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
-        }
-      ],
-      "sentry-expo"
-    ]
-  }
+    "expo": {
+        "name": "One Build",
+        "slug": "bottletree",
+        "version": "1.0.17",
+        "orientation": "portrait",
+        "icon": "./assets/images/icon.png",
+        "scheme": "bottletree",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/images/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#F9D96C"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.simoncar.bottletree",
+            "buildNumber": "20",
+            "config": {
+                "usesNonExemptEncryption": false
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#F9D96C"
+            },
+            "versionCode": 4
+        },
+        "web": {
+            "bundler": "metro",
+            "favicon": "./assets/images/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "c4340333-f23a-41cb-a647-97dee3bc0a01"
+            }
+        },
+        "runtimeVersion": {
+            "policy": "sdkVersion"
+        },
+        "updates": {
+            "url": "https://u.expo.dev/c4340333-f23a-41cb-a647-97dee3bc0a01"
+        },
+        "plugins": [
+            [
+                "expo-image-picker",
+                {
+                    "photosPermission": "The app accesses your photos to share the images you select with the project team."
+                }
+            ],
+            [
+                "expo-camera",
+                {
+                    "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+                }
+            ],
+            "sentry-expo"
+        ]
+    }
 }

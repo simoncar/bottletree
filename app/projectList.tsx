@@ -164,9 +164,6 @@ export default function ModalScreen() {
                     </View>
                 )}
             </View>
-
-            {/* Use a light status bar on iOS to account for the black space above the modal */}
-            <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
         </View>
     );
 }
@@ -180,6 +177,7 @@ const styles = StyleSheet.create({
     avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
     container: {
         flex: 1,
+        height: 200,
     },
 
     innerView: {

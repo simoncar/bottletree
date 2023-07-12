@@ -44,7 +44,6 @@ export async function getItems(projectId: string, callback: itemsRead) {
         });
 
         const expandedDates = expandDateRanges(calendarEvents);
-        console.log("expandedDates", expandedDates);
 
         callback(expandedDates);
     });

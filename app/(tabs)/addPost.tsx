@@ -57,18 +57,7 @@ export default function addPhoto() {
             return;
         }
     };
-    const renderButtonCalendar = () => {
-        if (null == image && progress == 0) {
-            return (
-                <Button
-                    title="Pick an image from camera roll"
-                    onPress={router.push({ pathname: "/editCalendar" })}
-                />
-            );
-        } else {
-            return;
-        }
-    };
+
     const progressCallback = (progress: number) => {
         setProgress(progress);
     };
@@ -103,7 +92,6 @@ export default function addPhoto() {
         return (
             <View style={styles.container}>
                 {renderButtonImage(progress)}
-                {renderButtonCalendar()}
                 {renderProgress(progress)}
                 {image && <Image source={image} style={styles.storyPhoto} />}
             </View>

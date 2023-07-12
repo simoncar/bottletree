@@ -104,7 +104,7 @@ export default function Calendar() {
                 />
             </View>
             <Agenda
-                items={items}
+                items={{ items }}
                 // loadItemsForMonth={loadItems()}
                 renderItem={renderItem}
                 rowHasChanged={rowHasChanged}
