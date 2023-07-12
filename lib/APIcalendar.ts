@@ -32,7 +32,10 @@ export async function getItems(projectId: string, callback: itemsRead) {
                 timeBegin: doc
                     .data()
                     .dateBegin.toDate()
-                    .toLocaleTimeString("en-US"),
+                    .toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }),
                 timeEnd: doc
                     .data()
                     .dateEnd.toDate()

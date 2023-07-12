@@ -3,6 +3,7 @@ import {
     Alert,
     StyleSheet,
     TouchableOpacity,
+    useColorScheme,
     SafeAreaView,
 } from "react-native";
 import {
@@ -14,12 +15,15 @@ import {
 import { getItems } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
-import { View, Text } from "../../components/Themed";
+import { View, Text, useThemeColor } from "../../components/Themed";
 import ProjectContext from "../../lib/projectContext";
+import Colors from "../../constants/Colors";
 
 export default function Calendar() {
     const [items, setItems] = useState([]);
     const { sharedDataProject } = useContext(ProjectContext);
+    const colorScheme = useColorScheme();
+
     let currentProject: IProject = sharedDataProject;
 
     const itemsRead = (calendarItemsDB) => {
@@ -46,16 +50,25 @@ export default function Calendar() {
     const renderItem = (reservation: any, isFirst: boolean) => {
         return (
             <TouchableOpacity
-                style={[styles.item, { height: reservation.height }]}
+                style={[
+                    styles.item,
+                    {
+                        height: reservation.height,
+                        backgroundColor:
+                            Colors[colorScheme ?? "light"].calendarPanel,
+                    },
+                ]}
                 onPress={() => Alert.alert(reservation.title)}>
                 <Text style={styles.title}>{reservation.title}</Text>
                 <Text style={styles.description}>
                     {reservation.dateBeginSplit}
-                    ZZZZZ {reservation.description}
+                    ZZZZ {reservation.description}
                 </Text>
-                <Text style={styles.description}>
-                    {reservation.timeBegin} - {reservation.timeEnd}
-                </Text>
+                {!reservation.allDay && (
+                    <Text style={styles.description}>
+                        Time: {reservation.timeBegin} - {reservation.timeEnd}
+                    </Text>
+                )}
             </TouchableOpacity>
         );
     };
@@ -97,12 +110,36 @@ export default function Calendar() {
                 rowHasChanged={rowHasChanged}
                 showClosingKnob={true}
                 theme={{
+                    calendarBackground:
+                        Colors[colorScheme ?? "light"].background,
+                    agendaDayTextColor: Colors[colorScheme ?? "light"].text,
+                    dotColor: Colors[colorScheme ?? "light"].text,
+                    monthTextColor: Colors[colorScheme ?? "light"].text,
+                    agendaDayNumColor: Colors[colorScheme ?? "light"].text,
+                    agendaTodayColor: Colors[colorScheme ?? "light"].text,
+                    agendaKnobColor: "grey",
+                    textMonthFontWeight: "bold",
                     //@ts-ignore
                     "stylesheet.agenda.main": {
                         reservations: {
                             flex: 1,
                             marginTop: 100,
                         },
+                    },
+                }}
+                markingType={"period"}
+                markedDates={{
+                    "2023-07-13": { startingDay: true, color: "#2f95dc" },
+                    "2023-07-14": {
+                        selected: true,
+                        endingDay: true,
+                        color: "#2f95dc",
+                    },
+                    "2023-07-18": {
+                        disabled: true,
+                        startingDay: true,
+                        color: "#2f95dc",
+                        endingDay: true,
                     },
                 }}
                 disabledByDefault
@@ -123,7 +160,6 @@ const styles = StyleSheet.create({
         paddingTop: 30,
     },
     item: {
-        backgroundColor: "green",
         borderRadius: 8,
         flex: 1,
         margin: 8,
