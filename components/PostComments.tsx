@@ -100,10 +100,11 @@ const Comments = (props) => {
                 data={comments}
                 renderItem={({ item }) => (
                     <View style={styles.commentView}>
-                        <Text style={styles.commentUserName}>
+                        <Text selectable style={styles.commentUserName}>
                             {item.displayName}
                         </Text>
                         <ParsedText
+                            selectable
                             style={styles.commentText}
                             text={item.comment}
                         />

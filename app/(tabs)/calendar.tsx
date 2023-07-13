@@ -20,7 +20,7 @@ import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 
 export default function Calendar() {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState({});
     const { sharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
 
@@ -62,7 +62,7 @@ export default function Calendar() {
                 <Text style={styles.title}>{reservation.title}</Text>
                 <Text style={styles.description}>
                     {reservation.dateBeginSplit}
-                    ZZZZ {reservation.description}
+                    {reservation.description}
                 </Text>
                 {!reservation.allDay && (
                     <Text style={styles.description}>
@@ -104,7 +104,7 @@ export default function Calendar() {
                 />
             </View>
             <Agenda
-                items={{ items }}
+                items={items}
                 // loadItemsForMonth={loadItems()}
                 renderItem={renderItem}
                 rowHasChanged={rowHasChanged}
@@ -125,21 +125,6 @@ export default function Calendar() {
                             flex: 1,
                             marginTop: 100,
                         },
-                    },
-                }}
-                markingType={"period"}
-                markedDates={{
-                    "2023-07-13": { startingDay: true, color: "#2f95dc" },
-                    "2023-07-14": {
-                        selected: true,
-                        endingDay: true,
-                        color: "#2f95dc",
-                    },
-                    "2023-07-18": {
-                        disabled: true,
-                        startingDay: true,
-                        color: "#2f95dc",
-                        endingDay: true,
                     },
                 }}
                 disabledByDefault

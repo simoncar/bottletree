@@ -1,4 +1,10 @@
-import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    onSnapshot,
+    query,
+    Timestamp,
+} from "firebase/firestore";
 import { db } from "./firebase";
 import { IProject, ICalendarEvent } from "./types";
 
@@ -36,11 +42,26 @@ export async function getItems(projectId: string, callback: itemsRead) {
                         hour: "2-digit",
                         minute: "2-digit",
                     }),
-                timeEnd: doc
-                    .data()
-                    .dateEnd.toDate()
-                    .toLocaleTimeString("en-US"),
+                timeEnd: doc.data().dateEnd.toDate().toLocaleTimeString({
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
             });
+        });
+
+        calendarEvents.push({
+            key: "emptyKey",
+            allDay: false,
+            dateBegin: Timestamp.fromDate(new Date("2023-01-01")),
+            dateEnd: Timestamp.fromDate(new Date("2025-01-01")),
+            description: "",
+            projectId: "",
+            title: "",
+            uid: "",
+            dateBeginSplit: new Date("2023-01-01").toISOString().split("T")[0],
+            dateEndSplit: new Date("2025-01-01").toISOString().split("T")[0],
+            timeBegin: "00:00",
+            timeEnd: "00:00",
         });
 
         const expandedDates = expandDateRanges(calendarEvents);
@@ -70,22 +91,28 @@ function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
         const currentDate = new Date(startDate);
         while (currentDate <= endDate) {
             const dateString = currentDate.toISOString().split("T")[0];
-            expandedDates[dateString] = [
-                ...(expandedDates[dateString] || []),
-                {
-                    title: range.title,
-                    description: range.description,
-                    projectId: range.projectId,
-                    key: range.key,
-                    dateBegin: range.dateBegin,
-                    dateEnd: range.dateEnd,
-                    allDay: range.allDay,
-                    uid: range.uid,
-                    dateBeginSplit: range.dateBeginSplit,
-                    timeBegin: range.timeBegin,
-                    timeEnd: range.timeEnd,
-                },
-            ];
+            if (range.key === "emptyKey") {
+                expandedDates[dateString] = [
+                    ...(expandedDates[dateString] || []),
+                ];
+            } else {
+                expandedDates[dateString] = [
+                    ...(expandedDates[dateString] || []),
+                    {
+                        title: range.title,
+                        description: range.description,
+                        projectId: range.projectId,
+                        key: range.key,
+                        dateBegin: range.dateBegin,
+                        dateEnd: range.dateEnd,
+                        allDay: range.allDay,
+                        uid: range.uid,
+                        dateBeginSplit: range.dateBeginSplit,
+                        timeBegin: range.timeBegin,
+                        timeEnd: range.timeEnd,
+                    },
+                ];
+            }
 
             currentDate.setDate(currentDate.getDate() + 1);
         }

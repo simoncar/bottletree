@@ -1,14 +1,15 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs } from "expo-router";
+import { Link, Tabs, useRouter } from "expo-router";
 import React, { useContext } from "react";
-import { useColorScheme } from "react-native";
-import { BigText } from "../../components/StyledText";
+import { Pressable, useColorScheme } from "react-native";
+import { BigText, Text } from "../../components/StyledText";
 import { View } from "../../components/Themed";
 import { UserAvatar } from "../../components/UserAvatar";
 import Colors from "../../constants/Colors";
 import { IUser } from "../../lib/types";
 import { useAuth } from "../../lib/authProvider";
 import AuthContext from "../../lib/authContext";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 function TabBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -22,6 +23,8 @@ export default function TabLayout() {
     const { sharedDataUser, updateSharedDataUser } = useContext(AuthContext);
     let loggedInUser: IUser = sharedDataUser;
 
+    const router = useRouter();
+
     if (null == sharedDataUser) {
         loggedInUser = {
             uid: "",
@@ -30,6 +33,39 @@ export default function TabLayout() {
             photoURL: "",
         };
     }
+
+    const { showActionSheetWithOptions } = useActionSheet();
+
+    const openActionSheet = async () => {
+        const options = ["Add Photo", "Add Calendar Event", "Delete", "Cancel"];
+        const destructiveButtonIndex = options.length - 2;
+        const cancelButtonIndex = options.length - 1;
+
+        showActionSheetWithOptions(
+            {
+                options,
+                cancelButtonIndex,
+                destructiveButtonIndex,
+            },
+            (buttonIndex) => {
+                switch (buttonIndex) {
+                    case 0:
+                        router.push({
+                            pathname: "/addPost",
+                        });
+                        break;
+                    case 1:
+                        router.push({
+                            pathname: "/editCalendar",
+                        });
+                        break;
+                    case 2:
+                        // onChangeTextPhotoURL("");
+                        break;
+                }
+            },
+        );
+    };
 
     return (
         <Tabs
@@ -62,6 +98,31 @@ export default function TabLayout() {
             />
 
             <Tabs.Screen
+                name="addPost"
+                options={{
+                    title: "Empty",
+                    tabBarButton: () => (
+                        <Pressable
+                            onPress={() => {
+                                openActionSheet();
+                            }}
+                            style={{
+                                marginTop: -9,
+                                backgroundColor: "#ec562a",
+                                borderRadius: 55 / 2,
+                                width: 55,
+                                height: 55,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                paddingLeft: 0,
+                            }}>
+                            <TabBarIcon name="plus-square" />
+                        </Pressable>
+                    ),
+                }}
+            />
+
+            <Tabs.Screen
                 name="calendar"
                 options={{
                     title: "",
@@ -71,21 +132,6 @@ export default function TabLayout() {
                     headerTitleAlign: "left",
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="calendar" color={color} />
-                    ),
-                }}
-            />
-
-            <Tabs.Screen
-                name="addPost"
-                initialParams={{ currentProject: "YYYYZZZZ" }}
-                options={{
-                    title: "",
-                    headerTitle: () => (
-                        <BigText style={{ fontSize: 28 }}>Add</BigText>
-                    ),
-                    headerTitleAlign: "left",
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="plus-square" color={color} />
                     ),
                 }}
             />
