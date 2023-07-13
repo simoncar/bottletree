@@ -16,6 +16,7 @@ import { getItems } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
 import { View, Text, useThemeColor } from "../../components/Themed";
+import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 
@@ -48,14 +49,19 @@ export default function Calendar() {
     }, []);
 
     const renderItem = (reservation: any, isFirst: boolean) => {
+        let colorPanel = Colors[colorScheme ?? "light"].calendarPanelAllDay;
+
+        if (!reservation.allDay) {
+            colorPanel = Colors[colorScheme ?? "light"].calendarPanelPartDay;
+        }
+
         return (
             <TouchableOpacity
                 style={[
                     styles.item,
                     {
                         height: reservation.height,
-                        backgroundColor:
-                            Colors[colorScheme ?? "light"].calendarPanel,
+                        backgroundColor: colorPanel,
                     },
                 ]}
                 onPress={() => Alert.alert(reservation.title)}>
@@ -72,9 +78,25 @@ export default function Calendar() {
                     {reservation.description}
                 </Text>
                 {!reservation.allDay && (
-                    <Text style={styles.description}>
-                        Time: {reservation.timeBegin} - {reservation.timeEnd}
-                    </Text>
+                    <View
+                        style={[
+                            styles.time,
+                            {
+                                height: reservation.height,
+                                backgroundColor:
+                                    Colors[colorScheme ?? "light"]
+                                        .calendarPanel,
+                            },
+                        ]}>
+                        <Feather
+                            name="clock"
+                            size={25}
+                            color={Colors[colorScheme ?? "light"].text}
+                        />
+                        <Text style={styles.timeText}>
+                            {reservation.timeBegin} - {reservation.timeEnd}
+                        </Text>
+                    </View>
                 )}
             </TouchableOpacity>
         );
@@ -137,6 +159,9 @@ export default function Calendar() {
                 disabledByDefault
                 hideExtraDays={false}
                 reservationsKeyExtractor={reservationsKeyExtractor}
+                onDayPress={(day: DateData) => {
+                    console.log("day pressed", day);
+                }}
             />
         </SafeAreaView>
     );
@@ -155,13 +180,19 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         flex: 1,
         margin: 8,
-        paddingVertical: 24,
         padding: 10,
     },
 
     safeAreaView: {
         flex: 1,
     },
+    time: {
+        paddingTop: 10,
+        alignItems: "center",
+        flexDirection: "row",
+        verticalAlign: "middle",
+    },
+    timeText: { paddingLeft: 10 },
 
     title: {
         fontSize: 16,

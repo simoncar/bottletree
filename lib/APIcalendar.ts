@@ -42,7 +42,7 @@ export async function getItems(projectId: string, callback: itemsRead) {
                         hour: "2-digit",
                         minute: "2-digit",
                     }),
-                timeEnd: doc.data().dateEnd.toDate().toLocaleTimeString({
+                timeEnd: doc.data().dateEnd.toDate().toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                 }),
@@ -87,8 +87,11 @@ function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
     for (const range of dateRanges) {
         const startDate = new Date(range.dateBeginSplit);
         const endDate = new Date(range.dateEndSplit);
+        let numDays = (endDate.getTime() - startDate.getTime()) / 86400000;
 
         const currentDate = new Date(startDate);
+        let i = 1;
+
         while (currentDate <= endDate) {
             const dateString = currentDate.toISOString().split("T")[0];
             if (range.key === "emptyKey") {
@@ -99,7 +102,7 @@ function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
                 expandedDates[dateString] = [
                     ...(expandedDates[dateString] || []),
                     {
-                        title: range.title,
+                        title: range.title + " (Day " + i + "/" + numDays + ")",
                         description: range.description,
                         projectId: range.projectId,
                         key: range.key,
@@ -113,6 +116,7 @@ function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
                     },
                 ];
             }
+            i++;
 
             currentDate.setDate(currentDate.getDate() + 1);
         }
