@@ -96,7 +96,7 @@ export default function TabLayout() {
                 name="addPost"
                 options={{
                     title: "Empty",
-                    tabBarButton: () => (
+                    tabBarButton: ({ color }) => (
                         <Pressable
                             onPress={() => {
                                 openActionSheet();
@@ -111,7 +111,7 @@ export default function TabLayout() {
                                 justifyContent: "center",
                                 paddingLeft: 0,
                             }}>
-                            <TabBarIcon name="plus-square" />
+                            <TabBarIcon name="plus-square" color={color} />
                         </Pressable>
                     ),
                 }}

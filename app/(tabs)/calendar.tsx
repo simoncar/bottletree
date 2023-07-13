@@ -59,9 +59,16 @@ export default function Calendar() {
                     },
                 ]}
                 onPress={() => Alert.alert(reservation.title)}>
-                <Text style={styles.title}>{reservation.title}</Text>
+                <Text
+                    style={[
+                        styles.title,
+                        {
+                            color: Colors[colorScheme ?? "light"].calendarTitle,
+                        },
+                    ]}>
+                    {reservation.title}
+                </Text>
                 <Text style={styles.description}>
-                    {reservation.dateBeginSplit}
                     {reservation.description}
                 </Text>
                 {!reservation.allDay && (
