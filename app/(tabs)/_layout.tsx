@@ -37,15 +37,13 @@ export default function TabLayout() {
     const { showActionSheetWithOptions } = useActionSheet();
 
     const openActionSheet = async () => {
-        const options = ["Add Photo", "Add Calendar Event", "Delete", "Cancel"];
-        const destructiveButtonIndex = options.length - 2;
+        const options = ["Add Photo", "Add Calendar Event", "Cancel"];
         const cancelButtonIndex = options.length - 1;
 
         showActionSheetWithOptions(
             {
                 options,
                 cancelButtonIndex,
-                destructiveButtonIndex,
             },
             (buttonIndex) => {
                 switch (buttonIndex) {
@@ -58,9 +56,6 @@ export default function TabLayout() {
                         router.push({
                             pathname: "/editCalendar",
                         });
-                        break;
-                    case 2:
-                        // onChangeTextPhotoURL("");
                         break;
                 }
             },
