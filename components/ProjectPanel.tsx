@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     },
     outerView: {
         alignItems: "center",
-        backgroundColor: "#E4E6C3",
+        backgroundColor: "#F0F8FF",
         borderRadius: 100,
         flexDirection: "row",
     },

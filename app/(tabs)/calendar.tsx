@@ -124,7 +124,7 @@ export default function Calendar() {
     };
 
     return (
-        <SafeAreaView style={styles.safeAreaView}>
+        <View style={styles.list}>
             <View>
                 <Project
                     project={currentProject.key}
@@ -164,7 +164,7 @@ export default function Calendar() {
                     console.log("day pressed", day);
                 }}
             />
-        </SafeAreaView>
+        </View>
     );
 }
 
@@ -183,9 +183,16 @@ const styles = StyleSheet.create({
         margin: 8,
         padding: 10,
     },
-
+    list: {
+        flex: 1,
+        paddingTop: 4,
+        padding: 10,
+        width: "100%",
+    },
     safeAreaView: {
         flex: 1,
+        padding: 10,
+        width: "100%",
     },
     time: {
         paddingTop: 10,
