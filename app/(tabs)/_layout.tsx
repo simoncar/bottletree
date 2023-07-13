@@ -111,7 +111,7 @@ export default function TabLayout() {
                                 justifyContent: "center",
                                 paddingLeft: 0,
                             }}>
-                            <TabBarIcon name="plus-square" color={color} />
+                            <TabBarIcon name="plus-square" color={"white"} />
                         </Pressable>
                     ),
                 }}

@@ -141,12 +141,13 @@ export default function Calendar() {
                 theme={{
                     calendarBackground:
                         Colors[colorScheme ?? "light"].background,
-                    agendaDayTextColor: Colors[colorScheme ?? "light"].text,
                     dotColor: Colors[colorScheme ?? "light"].text,
                     monthTextColor: Colors[colorScheme ?? "light"].text,
                     agendaDayNumColor: Colors[colorScheme ?? "light"].text,
                     agendaTodayColor: Colors[colorScheme ?? "light"].text,
                     agendaKnobColor: "grey",
+                    dayTextColor: "#2d4150",
+                    textDisabledColor: "#2d4150",
                     textMonthFontWeight: "bold",
                     //@ts-ignore
                     "stylesheet.agenda.main": {

@@ -4,6 +4,7 @@ const tintColorDark = "#fff";
 export default {
     light: {
         text: "#000",
+        orangeButtonIcon: "#fff",
         textPlaceholder: "#ccc",
         background: "#fff",
         tint: tintColorLight,
@@ -15,6 +16,7 @@ export default {
     },
     dark: {
         text: "#fff",
+        orangeButtonIcon: "#000",
         textPlaceholder: "#ccc",
         background: "#000",
         tint: tintColorDark,
