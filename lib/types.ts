@@ -34,11 +34,15 @@ export interface IComment {
 
 export interface ICalendarEvent {
     key?: string;
-    allDay: boolean;
     dateBegin: Timestamp;
     dateEnd: Timestamp;
     description: string;
-    projectId: string;
+    projectId?: string;
     title: string;
     uid: string;
+    extensionTitle?: string;
+    extensionDateBeginSplit?: string;
+    extensionDateEndSplit?: string;
+    extensionTimeBegin?: string;
+    extensionTimeEnd?: string;
 }

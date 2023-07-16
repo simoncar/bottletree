@@ -4,64 +4,74 @@ import {
     onSnapshot,
     query,
     Timestamp,
+    setDoc,
+    doc,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import { IProject, ICalendarEvent } from "./types";
+import { ICalendarEvent } from "./types";
 
-type projectsRead = (projects: IProject[]) => void;
+type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
 
 export async function getItems(projectId: string, callback: itemsRead) {
     const q = query(collection(db, "calendar"));
+    console.log("getting items");
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const calendarEvents: ICalendarEvent[] = [];
         querySnapshot.forEach((doc) => {
-            calendarEvents.push({
+            const data = {
                 key: doc.id,
-                allDay: doc.data().allDay,
                 dateBegin: doc.data().dateBegin,
                 dateEnd: doc.data().dateEnd,
                 description: doc.data().description,
                 projectId: doc.data().projectId,
                 title: doc.data().title,
                 uid: doc.data().uid,
-                dateBeginSplit: doc
+                extensionDateBeginSplit: doc
                     .data()
                     .dateBegin.toDate()
                     .toISOString()
                     .split("T")[0],
-                dateEndSplit: doc
+                extensionDateEndSplit: doc
                     .data()
                     .dateEnd.toDate()
                     .toISOString()
                     .split("T")[0],
-                timeBegin: doc
+                extensionTimeBegin: doc
                     .data()
                     .dateBegin.toDate()
                     .toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                     }),
-                timeEnd: doc.data().dateEnd.toDate().toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
-            });
+                extensionTimeEnd: doc
+                    .data()
+                    .dateEnd.toDate()
+                    .toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }),
+            };
+
+            calendarEvents.push(data);
         });
 
         calendarEvents.push({
             key: "emptyKey",
-            allDay: false,
             dateBegin: Timestamp.fromDate(new Date("2023-01-01")),
             dateEnd: Timestamp.fromDate(new Date("2025-01-01")),
             description: "",
             projectId: "",
             title: "",
             uid: "",
-            dateBeginSplit: new Date("2023-01-01").toISOString().split("T")[0],
-            dateEndSplit: new Date("2025-01-01").toISOString().split("T")[0],
-            timeBegin: "00:00",
-            timeEnd: "00:00",
+            extensionDateBeginSplit: new Date("2023-01-01")
+                .toISOString()
+                .split("T")[0],
+            extensionDateEndSplit: new Date("2025-01-01")
+                .toISOString()
+                .split("T")[0],
+            extensionTimeBegin: "00:00",
+            extensionTimeEnd: "00:00",
         });
 
         const expandedDates = expandDateRanges(calendarEvents);
@@ -72,47 +82,51 @@ export async function getItems(projectId: string, callback: itemsRead) {
     return () => unsubscribe();
 }
 
-interface DateRange {
-    dateBegin: string;
-    dateEnd: string;
-}
-
 interface ExpandedDates {
     [date: string]: string;
 }
 
-function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
+function expandDateRanges(dateRanges: ICalendarEvent[]): ExpandedDates {
     const expandedDates: ExpandedDates = {};
 
     for (const range of dateRanges) {
-        const startDate = new Date(range.dateBeginSplit);
-        const endDate = new Date(range.dateEndSplit);
-        let numDays = (endDate.getTime() - startDate.getTime()) / 86400000;
+        const startDate = new Date(range.extensionDateBeginSplit);
+        const endDate = new Date(range.extensionDateEndSplit);
+        const numDays =
+            (endDate.getTime() - startDate.getTime()) / 86400000 + 1;
 
         const currentDate = new Date(startDate);
         let i = 1;
 
         while (currentDate <= endDate) {
             const dateString = currentDate.toISOString().split("T")[0];
+
+            let extensionTitle = range.title;
+
             if (range.key === "emptyKey") {
                 expandedDates[dateString] = [
                     ...(expandedDates[dateString] || []),
                 ];
             } else {
+                if (numDays > 1) {
+                    extensionTitle =
+                        range.title + " (Day " + i + "/" + numDays + ")";
+                }
                 expandedDates[dateString] = [
                     ...(expandedDates[dateString] || []),
                     {
-                        title: range.title + " (Day " + i + "/" + numDays + ")",
+                        title: range.title,
                         description: range.description,
                         projectId: range.projectId,
                         key: range.key,
                         dateBegin: range.dateBegin,
                         dateEnd: range.dateEnd,
-                        allDay: range.allDay,
                         uid: range.uid,
-                        dateBeginSplit: range.dateBeginSplit,
-                        timeBegin: range.timeBegin,
-                        timeEnd: range.timeEnd,
+                        extensionTitle: extensionTitle,
+                        extensionDateBeginSplit: range.extensionDateBeginSplit,
+                        extensionDateEndSplit: range.extensionDateEndSplit,
+                        extensionTimeBegin: range.extensionTimeBegin,
+                        extensionTimeEnd: range.extensionTimeEnd,
                     },
                 ];
             }
@@ -125,22 +139,34 @@ function expandDateRanges(dateRanges: DateRange[]): ExpandedDates {
     return expandedDates;
 }
 
-export function addCalendarEvent(
+export function setCalendarEvent(
     calendarEvent: ICalendarEvent,
     callback: { (id: string): void; (arg0: string): void },
 ) {
     try {
-        addDoc(collection(db, "calendar"), {
-            allDay: calendarEvent.allDay,
-            dateBegin: calendarEvent.dateBegin,
-            dateEnd: calendarEvent.dateEnd,
-            description: calendarEvent.description,
-            projectId: calendarEvent.projectId,
-            title: calendarEvent.title,
-            uid: calendarEvent.uid,
-        }).then((docRef) => {
-            callback(docRef.id);
-        });
+        if (calendarEvent.key == undefined) {
+            addDoc(collection(db, "calendar"), {
+                dateBegin: calendarEvent.dateBegin,
+                dateEnd: calendarEvent.dateEnd,
+                description: calendarEvent.description,
+                projectId: calendarEvent.projectId,
+                title: calendarEvent.title,
+                uid: calendarEvent.uid,
+            }).then((docRef) => {
+                callback(docRef.id);
+            });
+        } else {
+            setDoc(doc(db, "calendar", calendarEvent.key), {
+                dateBegin: calendarEvent.dateBegin,
+                dateEnd: calendarEvent.dateEnd,
+                description: calendarEvent.description,
+                projectId: calendarEvent.projectId,
+                title: calendarEvent.title,
+                uid: calendarEvent.uid,
+            }).then((docRef) => {
+                callback(calendarEvent.key);
+            });
+        }
     } catch (e) {
         console.error("Error adding calendar event: ", e);
     }

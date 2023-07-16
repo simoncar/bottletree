@@ -1,73 +1,85 @@
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { addDoc, doc, collection, Timestamp, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import { setBadgeCountAsync } from "expo-notifications";
 
-export const demoData = async () => {
+export const demoData2 = async () => {
     //console.log("Skip demo data");
 };
 
-export const demoData2 = async () => {
+export const demoData = async () => {
     try {
-        const projectRef1 = await addDoc(collection(db, "projects"), {
-            title: "(Local) 106 Jolimont",
-            icon: "https://",
-            archived: false,
-        });
+        const projectRef1 = await setDoc(
+            doc(db, "projects", "project11111111"),
+            {
+                title: "(Local) 106 Jolimont",
+                icon: "https://",
+                archived: false,
+            },
+            { merge: true },
+        );
 
-        console.log("Document written with ID: ", projectRef1.id);
-
-        const postRef1 = await addDoc(
-            collection(db, "projects", projectRef1.id, "posts"),
+        const postRef1 = await setDoc(
+            doc(db, "projects", "project11111111", "posts", "post1111111"),
             {
                 author: "John Doe",
                 avatar: "https://",
                 timestamp: Timestamp.now(),
                 images: [
-                    "http://127.0.0.1:9199/v0/b/builder-403d5.appspot.com/o/profilePic.jpeg?alt=media&token=e71be59c-587d-4018-889f-7a81d2e440d3",
+                    "http://127.0.0.1:9199/v0/b/builder-403d5.appspot.com/o/01_View07_NIT.jpg?alt=media&token=12e33333-f59d-4aba-84ee-555c1aedd910",
                 ],
             },
+            { merge: true },
         );
 
-        console.log("Document written with ID: ", postRef1.id);
+        const projectRef2 = await setDoc(
+            doc(db, "projects", "project22222222"),
+            {
+                title: "(Local) Placa Rovira",
+                icon: "https://",
+                archived: false,
+            },
+            { merge: true },
+        );
 
-        const projectRef2 = await addDoc(collection(db, "projects"), {
-            title: "(Local) Placa Rovira",
-            icon: "https://",
-        });
-
-        console.log("Document written with ID: ", projectRef2.id);
-
-        const postRef2 = await addDoc(
-            collection(db, "projects", projectRef2.id, "posts"),
+        const postRef2 = await setDoc(
+            doc(db, "projects", "project22222222", "posts", "post2222222"),
             {
                 author: "John Doe",
                 avatar: "https://",
                 timestamp: Timestamp.now(),
                 images: [
-                    "http://127.0.0.1:9199/v0/b/builder-403d5.appspot.com/o/rovira.jpg?alt=media&token=abceec3f-7a1c-4208-8233-59955e407d9b",
+                    "http://127.0.0.1:9199/v0/b/builder-403d5.appspot.com/o/01_View07_NIT.jpg?alt=media&token=12e33333-f59d-4aba-84ee-555c1aedd910",
+                    "http://127.0.0.1:9199/v0/b/builder-403d5.appspot.com/o/01_View08.jpg?alt=media&token=f4464847-94ef-40bd-bdca-5f39cd8bffaf",
+                    "http://127.0.0.1:9199/v0/b/builder-403d5.appspot.com/o/01_View09.jpg?alt=media&token=0e1c3b21-dfad-47fa-afeb-cbd7ad2e7aa4",
                 ],
             },
+            { merge: true },
         );
 
-        console.log("Document written with ID: ", postRef2.id);
-
-        const postRef3 = await addDoc(collection(db, "calendar"), {
-            allDay: true,
-            description: "some description",
-            title: "some title",
-            dateBegin: Timestamp.fromDate(new Date(2023, 7, 15)),
-            dateEnd: Timestamp.fromDate(new Date(2023, 7, 15)),
-            uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-            projectId: "73JwAXeOEhLXUggpVKK9",
-        });
-        const postRef4 = await addDoc(collection(db, "calendar"), {
-            allDay: true,
-            description: "some description",
-            title: "some title",
-            dateBegin: Timestamp.fromDate(new Date(2023, 7, 10)),
-            dateEnd: Timestamp.fromDate(new Date(2023, 7, 14)),
-            uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-            projectId: "73JwAXeOEhLXUggpVKK9",
-        });
+        const postRef3 = await setDoc(
+            doc(db, "calendar", "calendar11111111"),
+            {
+                description: "some description",
+                title: "Install the Kitchen",
+                dateBegin: Timestamp.fromDate(new Date(2023, 6, 15)),
+                dateEnd: Timestamp.fromDate(new Date(2023, 6, 15)),
+                uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
+                projectId: "73JwAXeOEhLXUggpVKK9",
+            },
+            { merge: true },
+        );
+        const postRef4 = await setDoc(
+            doc(db, "calendar", "calendar22222222"),
+            {
+                description: "some description",
+                title: "Paint the walls",
+                dateBegin: Timestamp.fromDate(new Date(2023, 6, 15)),
+                dateEnd: Timestamp.fromDate(new Date(2023, 6, 17)),
+                uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
+                projectId: "73JwAXeOEhLXUggpVKK9",
+            },
+            { merge: true },
+        );
     } catch (e) {
         console.error("Error adding document: ", e);
     }

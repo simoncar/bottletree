@@ -19,11 +19,13 @@ import { View, Text, useThemeColor } from "../../components/Themed";
 import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
+import { useRouter } from "expo-router";
 
 export default function Calendar() {
     const [items, setItems] = useState({});
     const { sharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
+    const router = useRouter();
 
     let currentProject: IProject = sharedDataProject;
 
@@ -49,11 +51,7 @@ export default function Calendar() {
     }, []);
 
     const renderItem = (reservation: any, isFirst: boolean) => {
-        let colorPanel = Colors[colorScheme ?? "light"].calendarPanelAllDay;
-
-        if (!reservation.allDay) {
-            colorPanel = Colors[colorScheme ?? "light"].calendarPanelPartDay;
-        }
+        let colorPanel = Colors[colorScheme ?? "light"].calendarPanel;
 
         return (
             <TouchableOpacity
@@ -64,7 +62,19 @@ export default function Calendar() {
                         backgroundColor: colorPanel,
                     },
                 ]}
-                onPress={() => Alert.alert(reservation.title)}>
+                onPress={() => {
+                    router.push({
+                        pathname: "/editCalendar",
+                        params: {
+                            pkey: reservation.key,
+                            ptitle: reservation.title,
+                            pdescription: reservation.description,
+                            pdateBegin: reservation.dateBegin,
+                            pdateEnd: reservation.dateEnd,
+                            puid: reservation.uid,
+                        },
+                    });
+                }}>
                 <Text
                     style={[
                         styles.title,
@@ -72,32 +82,31 @@ export default function Calendar() {
                             color: Colors[colorScheme ?? "light"].calendarTitle,
                         },
                     ]}>
-                    {reservation.title}
+                    {reservation.extensionTitle}
                 </Text>
                 <Text style={styles.description}>
                     {reservation.description}
                 </Text>
-                {!reservation.allDay && (
-                    <View
-                        style={[
-                            styles.time,
-                            {
-                                height: reservation.height,
-                                backgroundColor:
-                                    Colors[colorScheme ?? "light"]
-                                        .calendarPanel,
-                            },
-                        ]}>
-                        <Feather
-                            name="clock"
-                            size={25}
-                            color={Colors[colorScheme ?? "light"].text}
-                        />
-                        <Text style={styles.timeText}>
-                            {reservation.timeBegin} - {reservation.timeEnd}
-                        </Text>
-                    </View>
-                )}
+
+                <View
+                    style={[
+                        styles.time,
+                        {
+                            height: reservation.height,
+                            backgroundColor:
+                                Colors[colorScheme ?? "light"].calendarPanel,
+                        },
+                    ]}>
+                    <Feather
+                        name="clock"
+                        size={25}
+                        color={Colors[colorScheme ?? "light"].text}
+                    />
+                    <Text style={styles.timeText}>
+                        {reservation.extensionTimeBegin} -{" "}
+                        {reservation.extensionTimeEnd}
+                    </Text>
+                </View>
             </TouchableOpacity>
         );
     };
@@ -189,16 +198,10 @@ const styles = StyleSheet.create({
         padding: 10,
         width: "100%",
     },
-    safeAreaView: {
-        flex: 1,
-        padding: 10,
-        width: "100%",
-    },
     time: {
-        paddingTop: 10,
         alignItems: "center",
         flexDirection: "row",
-        verticalAlign: "middle",
+        paddingTop: 10,
     },
     timeText: { paddingLeft: 10 },
 

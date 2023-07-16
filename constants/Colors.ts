@@ -10,8 +10,7 @@ export default {
         tint: tintColorLight,
         tabIconDefault: "#ccc",
         tabIconSelected: tintColorLight,
-        calendarPanelAllDay: "#e9f0fd",
-        calendarPanelPartDay: "#D0E0FD",
+        calendarPanel: "#e9f0fd",
         calendarTitle: "#3265cb",
     },
     dark: {
@@ -22,8 +21,7 @@ export default {
         tint: tintColorDark,
         tabIconDefault: "#ccc",
         tabIconSelected: tintColorDark,
-        calendarPanelAllDay: "#2f95dc",
-        calendarPanelPartDay: "#71B0DC",
+        calendarPanel: "#2f95dc",
         calendarTitle: "#fff",
     },
 };

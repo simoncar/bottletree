@@ -6,6 +6,7 @@ import { Image } from "expo-image";
 import { View, Text, ParsedText } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
 import Comments from "./PostComments";
+import { Dots } from "../components/dots";
 
 const { width } = Dimensions.get("window");
 
@@ -21,6 +22,7 @@ const Post = (props) => {
         caption = post.caption;
     }
 
+    console.log("post:", imageUrls);
     return (
         <View>
             <View style={styles.listItemHeader}></View>
@@ -66,6 +68,7 @@ const Post = (props) => {
                         </Pressable>
                     )}
                 />
+                <Dots images={imageUrls} />
                 <View style={styles.commentBlock}>
                     <ParsedText style={styles.comment} text={caption} />
                     <Text style={styles.commentTime}>

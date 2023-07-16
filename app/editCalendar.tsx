@@ -1,5 +1,5 @@
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     SafeAreaView,
     StyleSheet,
@@ -10,10 +10,9 @@ import {
 } from "react-native";
 
 import { Text, TextInput, View } from "../components/Themed";
-import { addCalendarEvent } from "../lib/APIcalendar";
+import { setCalendarEvent } from "../lib/APIcalendar";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Feather from "@expo/vector-icons/Feather";
 import DateTimePicker, {
     DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
@@ -22,15 +21,14 @@ import { ICalendarEvent } from "../lib/types";
 import { Timestamp } from "firebase/firestore";
 import { useAuth } from "../lib/authProvider";
 
-export default function editPost() {
+export default function editCalendar() {
     const { sharedDataProject } = useProject();
     const { sharedDataUser } = useAuth();
-    const { calendarId } = useLocalSearchParams();
+    const { pkey, ptitle, pdescription, pdateBegin, pdateEnd, puid } =
+        useLocalSearchParams();
 
-    const [title, onChangeTitle] = useState();
-    const [description, onChangeDescription] = useState();
-
-    const [allDay, setAllDay] = useState(true);
+    const [title, onChangeTitle] = useState(ptitle);
+    const [description, onChangeDescription] = useState(pdescription);
 
     const [dateBegin, setDateBegin] = useState(new Date());
     const [dateBeginTime, setDateBeginTime] = useState(new Date());
@@ -50,24 +48,16 @@ export default function editPost() {
     };
 
     const save = () => {
+        //.toLocaleTimeString("en", { timezone: "Europe/Madrid",});
+
         const d1 = new Date(dateBegin);
         const d2 = new Date(dateEnd);
 
-        if (allDay) {
-            d1.setHours(0, 0, 0, 0);
-            d2.setHours(0, 0, 0, 0);
-        } else {
-            d1.setHours(
-                dateBeginTime.getHours(),
-                dateBeginTime.getMinutes(),
-                0,
-                0,
-            );
-            d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
-        }
+        d1.setHours(dateBeginTime.getHours(), dateBeginTime.getMinutes(), 0, 0);
+        d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
 
         const calendarEvent: ICalendarEvent = {
-            allDay: allDay,
+            key: pkey,
             dateBegin: Timestamp.fromDate(d1),
             dateEnd: Timestamp.fromDate(d2),
             description: description || "",
@@ -76,7 +66,7 @@ export default function editPost() {
             uid: sharedDataUser.uid,
         };
 
-        addCalendarEvent(calendarEvent, saveDone);
+        setCalendarEvent(calendarEvent, saveDone);
     };
 
     const onChangedateBegin = (
@@ -106,9 +96,6 @@ export default function editPost() {
         setDateEndTime(selectedDate);
     };
 
-    const toggleAllDaySwitch = () =>
-        setAllDay((previousState) => !previousState);
-
     return (
         <SafeAreaView>
             <Stack.Screen
@@ -132,28 +119,6 @@ export default function editPost() {
             </View>
 
             <View style={styles.itemView}>
-                <View style={styles.avatar}>
-                    <Feather
-                        name="clock"
-                        size={25}
-                        color={Colors[colorScheme ?? "light"].text}
-                    />
-                </View>
-                <View style={styles.title}>
-                    <Text style={styles.normalText}>All-day</Text>
-                </View>
-                <View style={styles.right}>
-                    <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={allDay ? "#f5dd4b" : "#f4f3f4"}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleAllDaySwitch}
-                        value={allDay}
-                    />
-                </View>
-            </View>
-
-            <View style={styles.itemView}>
                 <View style={styles.avatar}></View>
                 <View style={styles.date}>
                     <DateTimePicker
@@ -164,17 +129,15 @@ export default function editPost() {
                         onChange={onChangedateBegin}
                     />
                 </View>
-                {!allDay && (
-                    <View style={styles.right}>
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={dateBeginTime}
-                            mode={"time"}
-                            is24Hour={true}
-                            onChange={onChangeBeginTime}
-                        />
-                    </View>
-                )}
+                <View style={styles.right}>
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={dateBeginTime}
+                        mode={"time"}
+                        is24Hour={true}
+                        onChange={onChangeBeginTime}
+                    />
+                </View>
             </View>
 
             <View style={styles.itemView}>
@@ -188,17 +151,15 @@ export default function editPost() {
                         onChange={onChangedateEnd}
                     />
                 </View>
-                {!allDay && (
-                    <View style={styles.right}>
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={dateEndTime}
-                            mode={"time"}
-                            is24Hour={true}
-                            onChange={onChangeEndTime}
-                        />
-                    </View>
-                )}
+                <View style={styles.right}>
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={dateEndTime}
+                        mode={"time"}
+                        is24Hour={true}
+                        onChange={onChangeEndTime}
+                    />
+                </View>
             </View>
 
             <View style={[styles.itemView, styles.line]}>
