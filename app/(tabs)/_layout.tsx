@@ -10,12 +10,19 @@ import { IUser } from "../../lib/types";
 import { useAuth } from "../../lib/authProvider";
 import AuthContext from "../../lib/authContext";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import * as Device from "expo-device";
 
 function TabBarIcon(props: {
     name: React.ComponentProps<typeof FontAwesome5>["name"];
     color: string;
 }) {
     return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
+}
+
+let appName = "One Build";
+
+if (!Device.isDevice) {
+    appName = "One Build (Emulator)";
 }
 
 export default function TabLayout() {
@@ -75,7 +82,7 @@ export default function TabLayout() {
                         <TabBarIcon name="home" color={color} />
                     ),
                     headerTitle: () => (
-                        <BigText style={{ fontSize: 28 }}>One Build</BigText>
+                        <BigText style={{ fontSize: 28 }}>{appName}</BigText>
                     ),
                     headerTitleAlign: "left",
                     headerRight: () => (

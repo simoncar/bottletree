@@ -1,4 +1,5 @@
 import { fbConfig } from "../env";
+import * as Device from "expo-device";
 import { initializeApp } from "firebase/app";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
@@ -25,8 +26,10 @@ const auth = initializeAuth(app, {
 const db = getFirestore();
 const storage = getStorage(app);
 
-connectFirestoreEmulator(db, "localhost", 8080);
-connectStorageEmulator(storage, "127.0.0.1", 9199);
-connectAuthEmulator(auth, "http://localhost:9099/auth");
+if (!Device.isDevice) {
+    connectFirestoreEmulator(db, "localhost", 8080);
+    connectStorageEmulator(storage, "127.0.0.1", 9199);
+    connectAuthEmulator(auth, "http://localhost:9099/auth");
+}
 
 export { db, storage, auth };
