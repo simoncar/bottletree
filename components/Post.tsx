@@ -22,7 +22,6 @@ const Post = (props) => {
         caption = post.caption;
     }
 
-    console.log("post:", imageUrls);
     return (
         <View>
             <View style={styles.listItemHeader}></View>

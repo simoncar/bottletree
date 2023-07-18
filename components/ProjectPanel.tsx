@@ -2,17 +2,27 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
 import React, { useContext } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import ProjectContext from "../lib/projectContext";
+import Colors from "../constants/Colors";
+import { Text } from "../components/Themed";
 
 const Project = (props) => {
     const { project, title, icon } = props;
     const { updateSharedDataProject } = useContext(ProjectContext);
     const router = useRouter();
+    const colorScheme = useColorScheme();
 
     return (
-        <View style={styles.outerView}>
+        <View
+            style={[
+                styles.outerView,
+                {
+                    backgroundColor:
+                        Colors[colorScheme ?? "light"].projectPanel,
+                },
+            ]}>
             <Pressable
                 style={styles.pressableLeft}
                 onPress={() => {
@@ -55,7 +65,11 @@ const Project = (props) => {
                         </Text>
                     </View>
                     <View style={styles.rightChevron}>
-                        <FontAwesome5 name="angle-down" size={25} />
+                        <FontAwesome5
+                            name="angle-down"
+                            size={25}
+                            color={Colors[colorScheme ?? "light"].text}
+                        />
                     </View>
                 </Pressable>
             </Link>
@@ -78,8 +92,10 @@ const styles = StyleSheet.create({
     outerView: {
         alignItems: "center",
         backgroundColor: "#F0F8FF",
-        borderRadius: 100,
+        borderRadius: 5,
         flexDirection: "row",
+        marginTop: 10,
+        padding: 5,
     },
     pressableLeft: {
         alignItems: "center",
@@ -102,6 +118,7 @@ const styles = StyleSheet.create({
     },
     updateText: {
         fontSize: 16,
+        fontWeight: "bold",
         marginRight: 12,
     },
 });

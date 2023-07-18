@@ -40,7 +40,7 @@ export async function getItems(projectId: string, callback: itemsRead) {
                 extensionTimeBegin: doc
                     .data()
                     .dateBegin.toDate()
-                    .toLocaleTimeString([], {
+                   .toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                     }),
@@ -127,6 +127,8 @@ function expandDateRanges(dateRanges: ICalendarEvent[]): ExpandedDates {
                         extensionDateEndSplit: range.extensionDateEndSplit,
                         extensionTimeBegin: range.extensionTimeBegin,
                         extensionTimeEnd: range.extensionTimeEnd,
+                        extensionDay: i,
+                        extensionNumDays: numDays,
                     },
                 ];
             }

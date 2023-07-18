@@ -8,10 +8,9 @@ export default {
         textPlaceholder: "#ccc",
         background: "#fff",
         tint: tintColorLight,
-        tabIconDefault: "#ccc",
-        tabIconSelected: tintColorLight,
         calendarPanel: "#e9f0fd",
         calendarTitle: "#3265cb",
+        projectPanel: "#e9f0fd",
     },
     dark: {
         text: "#fff",
@@ -19,10 +18,9 @@ export default {
         textPlaceholder: "#ccc",
         background: "#000",
         tint: tintColorDark,
-        tabIconDefault: "#ccc",
-        tabIconSelected: tintColorDark,
         calendarPanel: "#2f95dc",
         calendarTitle: "#fff",
+        projectPanel: "#232323",
     },
 };
 

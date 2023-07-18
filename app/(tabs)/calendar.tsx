@@ -1,21 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-    Alert,
-    StyleSheet,
-    TouchableOpacity,
-    useColorScheme,
-    SafeAreaView,
-} from "react-native";
-import {
-    Agenda,
-    DateData,
-    AgendaEntry,
-    AgendaSchedule,
-} from "react-native-calendars";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
+import { Agenda, DateData, AgendaEntry } from "react-native-calendars";
 import { getItems } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
-import { View, Text, useThemeColor } from "../../components/Themed";
+import { View, Text } from "../../components/Themed";
 import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
@@ -50,8 +39,39 @@ export default function Calendar() {
         }
     }, []);
 
+    const renderTime = (reservation: any) => {
+        let time = "";
+        // console.log("renderTime", reservation.extensionDateBeginSplit);
+
+        // const begin = new Date(reservation.extensionDateBeginSplit)
+        //     .toISOString()
+        //     .split("T")[0];
+        // const end = new Date(reservation.extensionDateEndSplit)
+        //     .toISOString()
+        //     .split("T")[0];
+        // const current = new Date(
+
+        if (reservation.extensionNumDays == 1) {
+            time =
+                reservation.extensionTimeBegin +
+                " - " +
+                reservation.extensionTimeEnd;
+        } else {
+            if (reservation.extensionDay == 1) {
+                time = reservation.extensionTimeBegin;
+            } else if (
+                reservation.extensionDay == reservation.extensionNumDays
+            ) {
+                time = "Ends " + reservation.extensionTimeEnd;
+            } else {
+                time = "All day";
+            }
+        }
+        return <Text style={styles.timeText}>{time}</Text>;
+    };
+
     const renderItem = (reservation: any, isFirst: boolean) => {
-        let colorPanel = Colors[colorScheme ?? "light"].calendarPanel;
+        const colorPanel = Colors[colorScheme ?? "light"].calendarPanel;
 
         return (
             <TouchableOpacity
@@ -69,8 +89,12 @@ export default function Calendar() {
                             pkey: reservation.key,
                             ptitle: reservation.title,
                             pdescription: reservation.description,
-                            pdateBegin: reservation.dateBegin,
-                            pdateEnd: reservation.dateEnd,
+                            pdateBegin: encodeURIComponent(
+                                reservation.dateBegin.toDate(),
+                            ),
+                            pdateEnd: encodeURIComponent(
+                                reservation.dateEnd.toDate(),
+                            ),
                             puid: reservation.uid,
                         },
                     });
@@ -88,25 +112,7 @@ export default function Calendar() {
                     {reservation.description}
                 </Text>
 
-                <View
-                    style={[
-                        styles.time,
-                        {
-                            height: reservation.height,
-                            backgroundColor:
-                                Colors[colorScheme ?? "light"].calendarPanel,
-                        },
-                    ]}>
-                    <Feather
-                        name="clock"
-                        size={25}
-                        color={Colors[colorScheme ?? "light"].text}
-                    />
-                    <Text style={styles.timeText}>
-                        {reservation.extensionTimeBegin} -{" "}
-                        {reservation.extensionTimeEnd}
-                    </Text>
-                </View>
+                {renderTime(reservation)}
             </TouchableOpacity>
         );
     };
@@ -158,7 +164,6 @@ export default function Calendar() {
                     dayTextColor: "#2d4150",
                     textDisabledColor: "#2d4150",
                     textMonthFontWeight: "bold",
-                    //@ts-ignore
                     "stylesheet.agenda.main": {
                         reservations: {
                             flex: 1,
@@ -198,12 +203,8 @@ const styles = StyleSheet.create({
         padding: 10,
         width: "100%",
     },
-    time: {
-        alignItems: "center",
-        flexDirection: "row",
-        paddingTop: 10,
-    },
-    timeText: { paddingLeft: 10 },
+
+    timeText: { paddingTop: 5 },
 
     title: {
         fontSize: 16,

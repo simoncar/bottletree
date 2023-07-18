@@ -2,9 +2,11 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Posts } from "../../components/Posts";
 import { View } from "../../components/Themed";
-import { demoData } from "../../lib/demoData";
 
-demoData();
+
+
+
+
 
 export default function TabOneScreen() {
 	return (

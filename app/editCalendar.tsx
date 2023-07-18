@@ -25,15 +25,27 @@ export default function editCalendar() {
     const { sharedDataProject } = useProject();
     const { sharedDataUser } = useAuth();
     const { pkey, ptitle, pdescription, pdateBegin, pdateEnd, puid } =
-        useLocalSearchParams();
+        useLocalSearchParams<{
+            pkey: string;
+            ptitle: string;
+            pdescription: string;
+            pdateBegin: string;
+            pdateEnd: string;
+            puid: string;
+        }>();
 
     const [title, onChangeTitle] = useState(ptitle);
     const [description, onChangeDescription] = useState(pdescription);
 
-    const [dateBegin, setDateBegin] = useState(new Date());
-    const [dateBeginTime, setDateBeginTime] = useState(new Date());
-    const [dateEnd, setDateEnd] = useState(new Date());
-    const [dateEndTime, setDateEndTime] = useState(new Date());
+    console.log("BEGIN:", pdateBegin);
+
+    const [dateBegin, setDateBegin] = useState<Date>(new Date(pdateBegin));
+    const [dateBeginTime, setDateBeginTime] = useState<Date>(
+        new Date(pdateBegin),
+    );
+
+    const [dateEnd, setDateEnd] = useState<Date>(new Date(pdateEnd));
+    const [dateEndTime, setDateEndTime] = useState<Date>(new Date(pdateEnd));
 
     const colorScheme = useColorScheme();
     const router = useRouter();
