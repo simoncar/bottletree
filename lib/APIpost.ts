@@ -35,6 +35,8 @@ export function addPost(post: IPost, callback: saveDone) {
 }
 
 export function updatePost(post: IPost, callback: saveDone) {
+    console.log("updatePost: ", post);
+
     const postRef = doc(db, "projects", post.projectId, "posts", post.key);
     updateDoc(postRef, {
         caption: post.caption,

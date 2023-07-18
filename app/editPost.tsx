@@ -17,11 +17,10 @@ import Colors from "../constants/Colors";
 import { IPost } from "../lib/types";
 
 export default function editPost() {
-    const sharedDataProject = useContext(ProjectContext);
+    const { sharedDataProject } = useContext(ProjectContext);
     const { key, image, caption } = useLocalSearchParams();
     const [text, onChangeText] = useState(caption?.toString() ?? "");
     const colorScheme = useColorScheme();
-
     const router = useRouter();
 
     const saveDone = () => {
@@ -35,6 +34,8 @@ export default function editPost() {
     };
 
     const save = () => {
+        console.log("save:", sharedDataProject.key);
+
         const post: IPost = {
             projectId: sharedDataProject.key,
             key: key?.toString() ?? "",
