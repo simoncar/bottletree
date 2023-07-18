@@ -3,13 +3,14 @@ import React from "react";
 import { Dimensions, StyleSheet, Pressable } from "react-native";
 import { View, Text, ParsedText } from "../components/Themed";
 
-export const Dots = (props) => {
+const Dots = (props) => {
     const numberImages = 1; //props.images[].length
+    const imageArray = props.images;
 
-    if (numberImages > 1) {
-        return (
-            <View style={styles.dotContainer}>
-                {props.images.map((image, index) => (
+    return (
+        <View style={styles.dotContainer}>
+            {imageArray.length > 1 &&
+                props.images.map((image, index) => (
                     <View
                         key={index}
                         style={[
@@ -23,9 +24,8 @@ export const Dots = (props) => {
                         ]}
                     />
                 ))}
-            </View>
-        );
-    }
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
@@ -41,3 +41,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 });
+
+export default Dots;

@@ -6,7 +6,7 @@ import { Image } from "expo-image";
 import { View, Text, ParsedText } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
 import Comments from "./PostComments";
-import { Dots } from "../components/dots";
+import Dots from "../components/dots";
 
 const { width } = Dimensions.get("window");
 
