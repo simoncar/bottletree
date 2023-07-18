@@ -10,6 +10,8 @@ export default {
         tint: tintColorLight,
         calendarPanel: "#e9f0fd",
         calendarTitle: "#3265cb",
+        calendarDayTextColor: "#2d4150",
+        textDisabledColor: "#2d4150",
         projectPanel: "#e9f0fd",
     },
     dark: {
@@ -20,6 +22,8 @@ export default {
         tint: tintColorDark,
         calendarPanel: "#2f95dc",
         calendarTitle: "#fff",
+        calendarDayTextColor: "#fff",
+        textDisabledColor: "#fff",
         projectPanel: "#232323",
     },
 };

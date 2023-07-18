@@ -41,15 +41,6 @@ export default function Calendar() {
 
     const renderTime = (reservation: any) => {
         let time = "";
-        // console.log("renderTime", reservation.extensionDateBeginSplit);
-
-        // const begin = new Date(reservation.extensionDateBeginSplit)
-        //     .toISOString()
-        //     .split("T")[0];
-        // const end = new Date(reservation.extensionDateEndSplit)
-        //     .toISOString()
-        //     .split("T")[0];
-        // const current = new Date(
 
         if (reservation.extensionNumDays == 1) {
             time =
@@ -161,8 +152,10 @@ export default function Calendar() {
                     agendaDayNumColor: Colors[colorScheme ?? "light"].text,
                     agendaTodayColor: Colors[colorScheme ?? "light"].text,
                     agendaKnobColor: "grey",
-                    dayTextColor: "#2d4150",
-                    textDisabledColor: "#2d4150",
+                    dayTextColor:
+                        Colors[colorScheme ?? "light"].calendarDayTextColor,
+                    textDisabledColor:
+                        Colors[colorScheme ?? "light"].textDisabledColor,
                     textMonthFontWeight: "bold",
                     "stylesheet.agenda.main": {
                         reservations: {
