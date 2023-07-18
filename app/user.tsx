@@ -39,7 +39,10 @@ export default function editUser() {
     }, []);
 
     const save = () => {
+        console.log("save: " + sharedDataUser.displayName);
+
         updateAccountName(text); //firebease auth update function
+
         updateSharedDataUser({ displayName: text });
         router.push({
             pathname: "/",
