@@ -3,10 +3,6 @@ import { auth, db } from "../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 export const updateAccountName = (displayName: string) => {
-    //const { sharedData, updateSharedData } = useContext(AuthContext);
-
-    console.log("user update updated", auth.currentUser);
-
     const ref = doc(db, "users", auth.currentUser.uid);
 
     updateProfile(auth.currentUser, {
