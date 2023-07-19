@@ -6,11 +6,11 @@ import {
     Button as NativeButton,
     useColorScheme,
     Pressable,
-    Switch,
+    Alert,
 } from "react-native";
 
 import { Text, TextInput, View } from "../components/Themed";
-import { setCalendarEvent } from "../lib/APIcalendar";
+import { setCalendarEvent, deleteCalendarEvent } from "../lib/APIcalendar";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker, {
@@ -37,9 +37,6 @@ export default function editCalendar() {
     const [title, onChangeTitle] = useState(ptitle);
     const [description, onChangeDescription] = useState(pdescription);
 
-    console.log("BEGIN1:", pdateBegin);
-    console.log("BEGIN2:", new Date(pdateBegin));
-
     const [dateBegin, setDateBegin] = useState<Date>(new Date(pdateBegin));
     const [dateBeginTime, setDateBeginTime] = useState<Date>(
         new Date(pdateBegin),
@@ -57,8 +54,6 @@ export default function editCalendar() {
     };
 
     const save = () => {
-        //.toLocaleTimeString("en", { timezone: "Europe/Madrid",});
-
         const d1 = new Date(dateBegin);
         const d2 = new Date(dateEnd);
 
@@ -76,6 +71,49 @@ export default function editCalendar() {
         };
 
         setCalendarEvent(calendarEvent, saveDone);
+    };
+
+    const deleteDone = (id: string) => {
+        router.push({
+            pathname: "/calendar",
+        });
+    };
+
+    const doDelete = () => {
+        const d1 = new Date(dateBegin);
+        const d2 = new Date(dateEnd);
+
+        d1.setHours(dateBeginTime.getHours(), dateBeginTime.getMinutes(), 0, 0);
+        d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
+
+        const calendarEvent: ICalendarEvent = {
+            key: pkey,
+            dateBegin: Timestamp.fromDate(d1),
+            dateEnd: Timestamp.fromDate(d2),
+            description: description || "",
+            title: title || "",
+            projectId: sharedDataProject.key,
+            uid: sharedDataUser.uid,
+        };
+
+        Alert.alert(
+            "Delete",
+            "Are you sure?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel",
+                },
+                {
+                    text: "Delete",
+                    onPress: () => {
+                        deleteCalendarEvent(calendarEvent, deleteDone);
+                    },
+                },
+            ],
+            { cancelable: false },
+        );
     };
 
     const onChangedateBegin = (
@@ -123,6 +161,7 @@ export default function editCalendar() {
                         onChangeText={(title) => onChangeTitle(title)}
                         placeholder={"Add title"}
                         value={title}
+                        autoFocus={true}
                     />
                 </View>
             </View>
@@ -199,11 +238,7 @@ export default function editCalendar() {
                 </View>
             </Pressable>
 
-            <Pressable
-                style={styles.itemView}
-                onPress={() => {
-                    console.log("delete");
-                }}>
+            <Pressable style={styles.itemView} onPress={() => doDelete()}>
                 <View style={styles.avatar}>
                     <Ionicons
                         name="trash"
@@ -241,9 +276,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#CED0CE",
         borderBottomWidth: StyleSheet.hairlineWidth,
     },
-    normalText: {
-        fontSize: 16,
-    },
+
     right: { paddingRight: 8 },
     title: { flex: 1, justifyContent: "flex-start" },
     titleText: {
