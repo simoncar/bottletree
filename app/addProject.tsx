@@ -9,7 +9,6 @@ import ProjectContext from "../lib/projectContext";
 import { addProject } from "../lib/APIproject";
 import { IProject } from "../lib/types";
 
-import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function addPhoto() {
     const { sharedDataProject, updateSharedDataProject } =

@@ -11,6 +11,7 @@ import {
     updateProfile,
     deleteUser,
 } from "firebase/auth/react-native";
+import { Platform } from "react-native";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
 
@@ -42,10 +43,28 @@ function useProtectedRoute(user) {
             !inAuthGroup
         ) {
             // Redirect to the sign-in page.
-            router.replace("/signIn");
+            if (Platform.OS === "ios") {
+                setTimeout(() => {
+                    router.replace("/signIn");
+                }, 1);
+            } else {
+                setImmediate(() => {
+                    router.replace("/signIn");
+                });
+            }
         } else if (user && inAuthGroup) {
             // Redirect away from the sign-in page.
-            router.replace("/");
+            //router.replace("/");
+
+            if (Platform.OS === "ios") {
+                setTimeout(() => {
+                    router.replace("/");
+                }, 1);
+            } else {
+                setImmediate(() => {
+                    router.replace("/");
+                });
+            }
         }
     }, [user, segments]);
 }

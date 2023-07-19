@@ -87,7 +87,7 @@ export default function TabLayout() {
                     headerTitleAlign: "left",
                     headerRight: () => (
                         <View>
-                            <Link href="/user" asChild>
+                            <Link href="/user">
                                 <UserAvatar
                                     uid={loggedInUser.uid}
                                     photoURL={loggedInUser.photoURL}
