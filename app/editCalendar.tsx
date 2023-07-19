@@ -1,4 +1,4 @@
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useState, useEffect } from "react";
 import {
     SafeAreaView,
@@ -37,7 +37,8 @@ export default function editCalendar() {
     const [title, onChangeTitle] = useState(ptitle);
     const [description, onChangeDescription] = useState(pdescription);
 
-    console.log("BEGIN:", pdateBegin);
+    console.log("BEGIN1:", pdateBegin);
+    console.log("BEGIN2:", new Date(pdateBegin));
 
     const [dateBegin, setDateBegin] = useState<Date>(new Date(pdateBegin));
     const [dateBeginTime, setDateBeginTime] = useState<Date>(
@@ -48,14 +49,10 @@ export default function editCalendar() {
     const [dateEndTime, setDateEndTime] = useState<Date>(new Date(pdateEnd));
 
     const colorScheme = useColorScheme();
-    const router = useRouter();
 
     const saveDone = (id: string) => {
-        console.log("saveDone: " + id);
-
-        router.replace({
+        router.push({
             pathname: "/calendar",
-            params: {},
         });
     };
 

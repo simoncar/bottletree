@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Text, View, Button } from "../../components/Themed";
@@ -14,8 +14,6 @@ export default function addPhoto() {
 
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
-
-    const router = useRouter();
 
     const saveDone = () => {
         router.push({

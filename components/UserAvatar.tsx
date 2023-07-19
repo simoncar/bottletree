@@ -1,7 +1,7 @@
 import React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -29,7 +29,6 @@ function renderPhotoURL(photoURL) {
 
 export const UserAvatar = (props) => {
     const { uid, photoURL, displayName } = props;
-    const router = useRouter();
 
     return (
         <TouchableOpacity
@@ -39,7 +38,7 @@ export const UserAvatar = (props) => {
                     pathname: "/user",
                     params: {
                         uid: uid,
-                        photoURL: encodeURIComponent(photoURL),
+                        photoURL: photoURL,
                         displayName: displayName,
                     },
                 });

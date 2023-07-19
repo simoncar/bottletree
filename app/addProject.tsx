@@ -1,15 +1,13 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Button, SafeAreaView } from "react-native";
 import { Image } from "expo-image";
-import { useRouter, Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Text, View, TextInput } from "../components/Themed";
 import ProjectContext from "../lib/projectContext";
 import { addProject } from "../lib/APIproject";
 import { IProject } from "../lib/types";
-
-import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
 
 export default function addPhoto() {
     const { sharedDataProject, updateSharedDataProject } =
@@ -25,8 +23,6 @@ export default function addPhoto() {
         icon: "",
         archived: false,
     };
-
-    const router = useRouter();
 
     const saveDone = (id) => {
         updateSharedDataProject({

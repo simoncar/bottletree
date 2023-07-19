@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { useAuth } from "../lib/authProvider";
-import { Stack, useRouter } from "expo-router";
+import { Stack, router } from "expo-router";
 import { Text, View } from "../components/Themed";
 
 export default function DeleteAccount() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const { deleteAccount } = useAuth();
-    const router = useRouter();
 
     const deleteAccountCallback = (error) => {
         console.log("Delete Account Error:", error);

@@ -3,14 +3,14 @@ import { auth, db } from "../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 export const updateAccountName = (displayName: string) => {
-    const ref = doc(db, "users", auth.currentUser.uid);
+    const docRef = doc(db, "users", auth.currentUser.uid);
 
     updateProfile(auth.currentUser, {
         displayName: displayName,
     })
         .then(() => {
             setDoc(
-                ref,
+                docRef,
                 {
                     displayName: displayName,
                     email: auth.currentUser.email,
@@ -28,14 +28,14 @@ export const updateAccountName = (displayName: string) => {
 
 export const updateAccountPhotoURL = (photoURL: string) => {
     //const { sharedData, updateSharedData } = useContext(AuthContext);
-    const ref = doc(db, "users", auth.currentUser.uid);
+    const docRef = doc(db, "users", auth.currentUser.uid);
 
     updateProfile(auth.currentUser, {
         photoURL: photoURL,
     })
         .then(() => {
             setDoc(
-                ref,
+                docRef,
                 {
                     photoURL: photoURL,
                     email: auth.currentUser.email,

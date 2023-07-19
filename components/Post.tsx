@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions, StyleSheet, Pressable } from "react-native";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text, ParsedText } from "../components/Themed";
@@ -12,7 +12,6 @@ const { width } = Dimensions.get("window");
 
 const Post = (props) => {
     const { post } = props;
-    const router = useRouter();
 
     const imageUrls = post.images && post.images.map((image) => image);
 
@@ -42,10 +41,8 @@ const Post = (props) => {
                                     params: {
                                         project: post.projectId,
                                         key: post.key,
-                                        image: encodeURIComponent(
-                                            imageUrls[index],
-                                        ),
-                                        caption: encodeURIComponent(caption),
+                                        image: imageUrls[index],
+                                        caption: caption,
                                     },
                                 });
                             }}

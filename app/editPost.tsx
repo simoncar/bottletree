@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams, Stack } from "expo-router";
+import { router, useLocalSearchParams, Stack } from "expo-router";
 import { updatePost, deletePost } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
 import { TextInput, View } from "../components/Themed";
@@ -21,7 +21,6 @@ export default function editPost() {
     const { key, image, caption } = useLocalSearchParams();
     const [text, onChangeText] = useState(caption?.toString() ?? "");
     const colorScheme = useColorScheme();
-    const router = useRouter();
 
     const saveDone = () => {
         router.push({

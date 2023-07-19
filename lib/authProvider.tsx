@@ -1,4 +1,4 @@
-import { useRouter, useSegments } from "expo-router";
+import { router, useSegments } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
 import React, { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import {
     updateProfile,
     deleteUser,
 } from "firebase/auth/react-native";
+import { Platform } from "react-native";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
 
@@ -26,7 +27,6 @@ const unsub = onAuthStateChanged(auth, (user) => {
 // This hook will protect the route access based on user authentication.
 function useProtectedRoute(user) {
     const segments = useSegments();
-    const router = useRouter();
 
     React.useEffect(() => {
         const inAuthGroup = segments[0] === "(auth)";
@@ -42,10 +42,28 @@ function useProtectedRoute(user) {
             !inAuthGroup
         ) {
             // Redirect to the sign-in page.
-            router.replace("/signIn");
+            if (Platform.OS === "ios") {
+                setTimeout(() => {
+                    router.replace("/signIn");
+                }, 1);
+            } else {
+                setImmediate(() => {
+                    router.replace("/signIn");
+                });
+            }
         } else if (user && inAuthGroup) {
             // Redirect away from the sign-in page.
-            router.replace("/");
+            //router.replace("/");
+
+            if (Platform.OS === "ios") {
+                setTimeout(() => {
+                    router.replace("/");
+                }, 1);
+            } else {
+                setImmediate(() => {
+                    router.replace("/");
+                });
+            }
         }
     }, [user, segments]);
 }

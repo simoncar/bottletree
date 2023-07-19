@@ -6,13 +6,12 @@ import ProjectContext from "../lib/projectContext";
 import { IPost, IProject } from "../lib/types";
 import Post from "./Post";
 import Project from "./ProjectPanel";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 
 export const Posts = () => {
     const { sharedDataProject } = useContext(ProjectContext);
     let currentProject: IProject = sharedDataProject;
     const [posts, setPosts] = useState([]);
-    const router = useRouter();
 
     if (null == sharedDataProject) {
         currentProject = {

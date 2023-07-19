@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs, useRouter } from "expo-router";
+import { Link, Tabs, router } from "expo-router";
 import React, { useContext } from "react";
 import { Pressable, useColorScheme } from "react-native";
 import { BigText, Text } from "../../components/StyledText";
@@ -30,8 +30,6 @@ export default function TabLayout() {
     const { sharedDataUser, updateSharedDataUser } = useContext(AuthContext);
     let loggedInUser: IUser = sharedDataUser;
 
-    const router = useRouter();
-
     if (null == sharedDataUser) {
         loggedInUser = {
             uid: "",
@@ -46,6 +44,11 @@ export default function TabLayout() {
     const openActionSheet = async () => {
         const options = ["Add Photo", "Add Calendar Event", "Cancel"];
         const cancelButtonIndex = options.length - 1;
+        const dateBegin = new Date();
+        dateBegin.setMinutes(0);
+        const dateEnd = new Date();
+        dateEnd.setMinutes(0);
+        dateEnd.setHours(dateEnd.getHours() + 1);
 
         showActionSheetWithOptions(
             {
@@ -62,6 +65,10 @@ export default function TabLayout() {
                     case 1:
                         router.push({
                             pathname: "/editCalendar",
+                            params: {
+                                pdateBegin: dateBegin,
+                                pdateEnd: dateEnd,
+                            },
                         });
                         break;
                 }
@@ -87,7 +94,7 @@ export default function TabLayout() {
                     headerTitleAlign: "left",
                     headerRight: () => (
                         <View>
-                            <Link href="/user" asChild>
+                            <Link href="/user">
                                 <UserAvatar
                                     uid={loggedInUser.uid}
                                     photoURL={loggedInUser.photoURL}
