@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
     SafeAreaView,
@@ -28,8 +28,6 @@ export default function editPost() {
     const colorScheme = useColorScheme();
 
     const { showActionSheetWithOptions } = useActionSheet();
-
-    const router = useRouter();
 
     const saveDone = (id: string) => {
         updateSharedDataProject({

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Text, View, TextInput } from "../components/Themed";
 import { useAuth, appSignIn } from "../lib/authProvider";
-import { useRouter, Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -25,7 +25,6 @@ export default function editUser() {
     const { uid, photoURL, displayName } = useLocalSearchParams();
     const [text, onChangeText] = useState(displayName);
     const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
-    const router = useRouter();
     const colorScheme = useColorScheme();
     const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
     const { showActionSheetWithOptions } = useActionSheet();

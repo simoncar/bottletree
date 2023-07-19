@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../../lib/authProvider";
-import { Stack, useRouter } from "expo-router";
+import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 import { updateAccountName } from "../../lib/APIuser";
 
@@ -11,7 +11,6 @@ export default function SignIn() {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const { updateSharedDataUser, createAccount, signIn } = useAuth();
-    const router = useRouter();
 
     const createAccountCallback = (user, error) => {
         console.log("createAccountCallback:", error);

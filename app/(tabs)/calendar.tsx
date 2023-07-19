@@ -8,13 +8,12 @@ import { View, Text } from "../../components/Themed";
 import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 
 export default function Calendar() {
     const [items, setItems] = useState({});
     const { sharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
-    const router = useRouter();
 
     let currentProject: IProject = sharedDataProject;
 
@@ -80,12 +79,8 @@ export default function Calendar() {
                             pkey: reservation.key,
                             ptitle: reservation.title,
                             pdescription: reservation.description,
-                            pdateBegin: encodeURIComponent(
-                                reservation.dateBegin.toDate(),
-                            ),
-                            pdateEnd: encodeURIComponent(
-                                reservation.dateEnd.toDate(),
-                            ),
+                            pdateBegin: reservation.dateBegin.toDate(),
+                            pdateEnd: reservation.dateEnd.toDate(),
                             puid: reservation.uid,
                         },
                     });

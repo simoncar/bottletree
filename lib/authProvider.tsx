@@ -1,4 +1,4 @@
-import { useRouter, useSegments } from "expo-router";
+import { router, useSegments } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
 import React, { useEffect, useState } from "react";
@@ -27,7 +27,6 @@ const unsub = onAuthStateChanged(auth, (user) => {
 // This hook will protect the route access based on user authentication.
 function useProtectedRoute(user) {
     const segments = useSegments();
-    const router = useRouter();
 
     React.useEffect(() => {
         const inAuthGroup = segments[0] === "(auth)";

@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useState } from "react";
 import {
@@ -20,7 +20,6 @@ import { IProject } from "../lib/types";
 export default function ModalScreen() {
     const [projects, setProjects] = useState<IProject[] | null>(null);
     const [loading, setLoading] = useState(true);
-    const router = useRouter();
 
     const colorScheme = useColorScheme();
     const { updateSharedDataProject } = useContext(ProjectContext);
@@ -111,7 +110,7 @@ export default function ModalScreen() {
                             params: {
                                 projectId: data.key,
                                 title: data.title,
-                                icon: encodeURIComponent(data.icon),
+                                icon: data.icon,
                             },
                         });
                     }}>
@@ -134,7 +133,7 @@ export default function ModalScreen() {
                             params: {
                                 projectId: data.key,
                                 projectTitle: data.title,
-                                photoURL: encodeURIComponent(data.icon),
+                                photoURL: data.icon,
                             },
                         });
                     }}>

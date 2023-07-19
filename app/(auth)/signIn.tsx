@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../../lib/authProvider";
 import { Image } from "expo-image";
-import { Stack, useRouter } from "expo-router";
+import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 
 export default function SignIn() {
@@ -11,7 +11,6 @@ export default function SignIn() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const { signIn } = useAuth();
-    const router = useRouter();
 
     const loginError = (error) => {
         console.log("SignIn Error:", error);

@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { Link, useRouter } from "expo-router";
+import { Link, router } from "expo-router";
 import React, { useContext } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -11,7 +11,6 @@ import { Text } from "../components/Themed";
 const Project = (props) => {
     const { project, title, icon } = props;
     const { updateSharedDataProject } = useContext(ProjectContext);
-    const router = useRouter();
     const colorScheme = useColorScheme();
 
     return (
@@ -37,7 +36,7 @@ const Project = (props) => {
                         params: {
                             projectId: project,
                             projectTitle: title,
-                            photoURL: encodeURIComponent(icon),
+                            photoURL: icon,
                         },
                     });
                 }}>
