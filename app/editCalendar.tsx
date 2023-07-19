@@ -217,13 +217,15 @@ export default function editCalendar() {
                 <View style={styles.avatar}></View>
                 <View style={styles.title}>
                     <TextInput
-                        style={styles.titleText}
+                        style={styles.textDescription}
                         onChangeText={(description) =>
                             onChangeDescription(description)
                         }
                         placeholder={"Add description"}
                         value={description}
-                        multiline
+                        multiline={true}
+                        numberOfLines={4}
+                        autoCapitalize="none"
                     />
                 </View>
             </View>
@@ -287,5 +289,10 @@ const styles = StyleSheet.create({
     title: { flex: 1, justifyContent: "flex-start" },
     titleText: {
         fontSize: 20,
+    },
+
+    textDescription: {
+        fontSize: 20,
+        height: 80,
     },
 });

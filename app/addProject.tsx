@@ -32,23 +32,13 @@ export default function addPhoto() {
             archived: project.archived,
         });
 
-        console.log("added project: ", id);
-
         router.replace({
-            pathname: "/",
+            pathname: "/editProject",
             params: {
-                project: id,
-                title: project.title,
+                projectId: id,
+                projectTitle: project.title,
             },
         });
-    };
-
-    const renderProgress = (progress) => {
-        if (progress > 0) {
-            return <Text>Upload Progress : {progress}%</Text>;
-        } else {
-            return;
-        }
     };
 
     const onSave = async () => {
@@ -63,7 +53,7 @@ export default function addPhoto() {
             <Stack.Screen
                 options={{
                     headerRight: () => (
-                        <Button title="Done" onPress={() => onSave()} />
+                        <Button title="Next" onPress={() => onSave()} />
                     ),
                 }}
             />
@@ -73,12 +63,9 @@ export default function addPhoto() {
                 onChangeText={(text) => onChangeText(text)}
                 placeholder={"Write Project Name..."}
                 value={text}
-                autoFocus
+                autoFocus={true}
                 multiline
             />
-            <View style={styles.button}>
-                <Button title="Save" onPress={onSave} />
-            </View>
         </SafeAreaView>
     );
 }

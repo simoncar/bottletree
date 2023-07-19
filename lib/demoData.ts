@@ -59,7 +59,8 @@ export const demoData = async () => {
         const postRef3 = await setDoc(
             doc(db, "calendar", "calendar11111111"),
             {
-                description: "some description",
+                description:
+                    "Here is the details of the installer https://kitchen.com or give them a call",
                 title: "Install the Kitchen",
                 dateBegin: Timestamp.fromDate(new Date()),
                 dateEnd: Timestamp.fromDate(new Date()),
@@ -77,7 +78,8 @@ export const demoData = async () => {
         const postRef4 = await setDoc(
             doc(db, "calendar", "calendar22222222"),
             {
-                description: "some description",
+                description:
+                    "Will use quality paint from Bunnings color code Cool Grey (#8D99AE)",
                 title: "Paint the walls",
                 dateBegin: Timestamp.fromDate(new Date()),
                 dateEnd: Timestamp.fromDate(date),

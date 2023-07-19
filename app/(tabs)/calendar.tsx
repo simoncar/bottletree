@@ -4,7 +4,7 @@ import { Agenda, DateData, AgendaEntry } from "react-native-calendars";
 import { getItems } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
-import { View, Text } from "../../components/Themed";
+import { View, Text, ParsedText } from "../../components/Themed";
 import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
@@ -100,9 +100,11 @@ export default function Calendar() {
                     ]}>
                     {reservation.extensionTitle}
                 </Text>
-                <Text style={styles.description}>
-                    {reservation.description}
-                </Text>
+                <ParsedText
+                    style={styles.description}
+                    text={reservation.description}
+                    selectable
+                />
 
                 {renderTime(reservation)}
             </TouchableOpacity>
