@@ -20,6 +20,7 @@ import Colors from "../constants/Colors";
 import { ICalendarEvent } from "../lib/types";
 import { Timestamp } from "firebase/firestore";
 import { useAuth } from "../lib/authProvider";
+import { Image } from "expo-image";
 
 export default function editCalendar() {
     const { sharedDataProject } = useProject();
@@ -143,6 +144,8 @@ export default function editCalendar() {
         setDateEndTime(selectedDate);
     };
 
+    console.log("shareddataproject", sharedDataProject);
+
     return (
         <SafeAreaView>
             <Stack.Screen
@@ -225,6 +228,20 @@ export default function editCalendar() {
                 </View>
             </View>
 
+            <View style={[styles.itemView, styles.line]}>
+                <View style={styles.avatar}>
+                    <Image
+                        style={styles.projectAvatar}
+                        source={sharedDataProject.icon}
+                    />
+                </View>
+                <View style={styles.title}>
+                    <Text style={styles.actionTitle}>
+                        {sharedDataProject.title}
+                    </Text>
+                </View>
+            </View>
+
             <Pressable style={styles.itemView} onPress={() => doDelete()}>
                 <View style={styles.avatar}>
                     <Ionicons
@@ -245,6 +262,7 @@ const styles = StyleSheet.create({
     actionTitle: {
         fontSize: 20,
     },
+    projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
     avatar: { alignItems: "center", justifyContent: "center", width: 48 },
     date: {
         alignItems: "flex-start",
@@ -259,6 +277,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         padding: 8,
     },
+
     line: {
         borderBottomColor: "#CED0CE",
         borderBottomWidth: StyleSheet.hairlineWidth,
