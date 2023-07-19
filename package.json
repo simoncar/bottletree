@@ -19,7 +19,7 @@
         "@react-native-community/datetimepicker": "6.7.3",
         "@react-navigation/native": "^6.0.2",
         "@sentry/react-native": "4.15.2",
-        "expo": "^48.0.0",
+        "expo": "^49.0.0",
         "expo-application": "~5.1.1",
         "expo-camera": "~13.2.1",
         "expo-constants": "~14.2.1",
