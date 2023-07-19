@@ -225,19 +225,6 @@ export default function editCalendar() {
                 </View>
             </View>
 
-            <Pressable style={styles.itemView} onPress={() => save()}>
-                <View style={styles.avatar}>
-                    <Ionicons
-                        name="save-outline"
-                        size={25}
-                        color={Colors[colorScheme ?? "light"].text}
-                    />
-                </View>
-                <View>
-                    <Text style={styles.actionTitle}>Save</Text>
-                </View>
-            </Pressable>
-
             <Pressable style={styles.itemView} onPress={() => doDelete()}>
                 <View style={styles.avatar}>
                     <Ionicons

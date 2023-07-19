@@ -9,15 +9,19 @@ import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
+import { reload } from "firebase/auth/react-native";
 
 export default function Calendar() {
     const [items, setItems] = useState({});
+    const [reload, setReload] = useState();
     const { sharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
 
     let currentProject: IProject = sharedDataProject;
 
     const itemsRead = (calendarItemsDB) => {
+        console.log("Calendar: itemsRead");
+
         setItems(calendarItemsDB);
     };
 
@@ -30,6 +34,8 @@ export default function Calendar() {
     }
 
     useEffect(() => {
+        console.log("Calendar: useEffect");
+
         if (undefined != currentProject) {
             const unsubscribe = getItems(currentProject.key, itemsRead);
             return () => {

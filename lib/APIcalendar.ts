@@ -6,6 +6,7 @@ import {
     Timestamp,
     setDoc,
     doc,
+    deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { ICalendarEvent } from "./types";
@@ -40,7 +41,7 @@ export async function getItems(projectId: string, callback: itemsRead) {
                 extensionTimeBegin: doc
                     .data()
                     .dateBegin.toDate()
-                   .toLocaleTimeString([], {
+                    .toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                     }),
@@ -174,4 +175,14 @@ export function setCalendarEvent(
     }
 
     return;
+}
+
+export function deleteCalendarEvent(
+    calendarEvent: ICalendarEvent,
+    callback: deleteDone,
+) {
+    const calRef = doc(db, "calendar", calendarEvent.key);
+    deleteDoc(calRef).then(() => {
+        callback(calendarEvent.key);
+    });
 }
