@@ -54,6 +54,10 @@ function useProtectedRoute(user) {
         } else if (user && inAuthGroup) {
             // Redirect away from the sign-in page.
             //router.replace("/");
+            console.log(
+                "user logged in, redirect away from sign in page",
+                user,
+            );
 
             if (Platform.OS === "ios") {
                 setTimeout(() => {
