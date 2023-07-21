@@ -23,3 +23,5 @@ jobs:
         run: yarn install
       - name: Build on EAS
         run: eas build --platform ios --non-interactive
+      - name: Submit via EAS
+        run: eas submit --platform ios --latest
