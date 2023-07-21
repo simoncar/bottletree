@@ -1,4 +1,4 @@
-name: Update abnd Code Push
+name: 1 Update and Code Push
 on: 
   workflow_dispatch:
   push:
