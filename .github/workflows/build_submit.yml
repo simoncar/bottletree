@@ -1,4 +1,4 @@
-name: EAS Build
+name: Build and Submit
 on:
   workflow_dispatch:
   push:
