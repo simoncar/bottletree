@@ -167,6 +167,18 @@ export default function Calendar() {
                 onDayPress={(day: DateData) => {
                     console.log("day pressed", day);
                 }}
+                onDayChange={(day) => {
+                    console.log("day changed", day);
+                }}
+                renderEmptyDate={(day) => {
+                    console.log("empty date", day);
+
+                    return (
+                        <View>
+                            <Text>Empty:{day.toString()}</Text>
+                        </View>
+                    );
+                }}
             />
         </View>
     );
