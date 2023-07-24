@@ -5,15 +5,12 @@ import { getItems } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
 import { View, Text, ParsedText } from "../../components/Themed";
-import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
-import { reload } from "firebase/auth/react-native";
 
 export default function Calendar() {
     const [items, setItems] = useState({});
-    const [reload, setReload] = useState();
     const { sharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
 

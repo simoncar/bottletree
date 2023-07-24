@@ -21,7 +21,7 @@ export const unstable_settings = {
 //SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-    let [fontsLoaded, error] = useFonts({
+    const [fontsLoaded, error] = useFonts({
         SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
         FuturaBold: require("../assets/fonts/FuturaBold.otf"),
         ...FontAwesome.font,

@@ -2,12 +2,11 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs, router } from "expo-router";
 import React, { useContext } from "react";
 import { Pressable, useColorScheme } from "react-native";
-import { BigText, Text } from "../../components/StyledText";
+import { BigText } from "../../components/StyledText";
 import { View } from "../../components/Themed";
 import { UserAvatar } from "../../components/UserAvatar";
 import Colors from "../../constants/Colors";
 import { IUser } from "../../lib/types";
-import { useAuth } from "../../lib/authProvider";
 import AuthContext from "../../lib/authContext";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import * as Device from "expo-device";
@@ -27,7 +26,7 @@ if (!Device.isDevice) {
 
 export default function TabLayout() {
     const colorScheme = useColorScheme();
-    const { sharedDataUser, updateSharedDataUser } = useContext(AuthContext);
+    const { sharedDataUser } = useContext(AuthContext);
     let loggedInUser: IUser = sharedDataUser;
 
     if (null == sharedDataUser) {
@@ -110,7 +109,7 @@ export default function TabLayout() {
                 name="addPost"
                 options={{
                     title: "Empty",
-                    tabBarButton: ({ color }) => (
+                    tabBarButton: () => (
                         <Pressable
                             onPress={() => {
                                 openActionSheet();
