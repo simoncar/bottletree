@@ -1,5 +1,6 @@
-name: update
+name: 1. Update and Code Push
 on: 
+  workflow_dispatch:
   push:
     branches:
       - production
@@ -36,3 +37,11 @@ jobs:
 
       - name: Publish update
         run: eas update --auto
+        
+      - name: Automated Version Bump
+        uses: phips28/gh-action-bump-version@v10.0.1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            version-type:  'minor'
+

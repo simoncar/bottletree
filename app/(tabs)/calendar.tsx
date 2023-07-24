@@ -5,23 +5,18 @@ import { getItems } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
 import { View, Text, ParsedText } from "../../components/Themed";
-import Feather from "@expo/vector-icons/Feather";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
-import { reload } from "firebase/auth/react-native";
 
 export default function Calendar() {
     const [items, setItems] = useState({});
-    const [reload, setReload] = useState();
     const { sharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
 
     let currentProject: IProject = sharedDataProject;
 
     const itemsRead = (calendarItemsDB) => {
-        console.log("Calendar: itemsRead");
-
         setItems(calendarItemsDB);
     };
 
@@ -34,8 +29,6 @@ export default function Calendar() {
     }
 
     useEffect(() => {
-        console.log("Calendar: useEffect");
-
         if (undefined != currentProject) {
             const unsubscribe = getItems(currentProject.key, itemsRead);
             return () => {
@@ -139,6 +132,7 @@ export default function Calendar() {
                     project={currentProject.key}
                     title={currentProject.title}
                     icon={currentProject.icon}
+                    page="calendar"
                 />
             </View>
             <Agenda
@@ -172,6 +166,18 @@ export default function Calendar() {
                 reservationsKeyExtractor={reservationsKeyExtractor}
                 onDayPress={(day: DateData) => {
                     console.log("day pressed", day);
+                }}
+                onDayChange={(day) => {
+                    console.log("day changed", day);
+                }}
+                renderEmptyDate={(day) => {
+                    console.log("empty date", day);
+
+                    return (
+                        <View>
+                            <Text>Empty:{day.toString()}</Text>
+                        </View>
+                    );
                 }}
             />
         </View>

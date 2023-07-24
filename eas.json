@@ -20,6 +20,16 @@
 		}
 	},
 	"submit": {
-		"production": {}
+		"production": {
+		      "android": {
+		        "serviceAccountKeyPath": "../path/to/api-xxx-yyy-zzz.json",
+		        "track": "internal"
+		      },
+		      "ios": {
+		        "appleId": "simoncar@gmail.com",
+		        "ascAppId": "6449942716",
+		        "appleTeamId": "Z6FTZSKM3X"
+		      }
+		    }
 	}
 }

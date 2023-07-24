@@ -1,10 +1,8 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { router } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
-    Platform,
     Pressable,
     StyleSheet,
     TouchableOpacity,
@@ -17,7 +15,11 @@ import { getProjects } from "../lib/APIproject";
 import ProjectContext from "../lib/projectContext";
 import { IProject } from "../lib/types";
 
-export default function ModalScreen() {
+const ModalScreen = (props) => {
+    const { page } = useLocalSearchParams<{
+        page: string;
+    }>();
+
     const [projects, setProjects] = useState<IProject[] | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -27,6 +29,8 @@ export default function ModalScreen() {
     const projectsRead = (projectsDB: IProject[]) => {
         setProjects(projectsDB);
     };
+
+    console.log("project lists: ", page);
 
     useEffect(() => {
         const unsubscribe = getProjects(projectsRead);
@@ -106,7 +110,7 @@ export default function ModalScreen() {
                         });
 
                         router.push({
-                            pathname: "/",
+                            pathname: "/" + page,
                             params: {
                                 projectId: data.key,
                                 title: data.title,
@@ -165,7 +169,7 @@ export default function ModalScreen() {
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     avatar: {
@@ -211,3 +215,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
     },
 });
+
+export default ModalScreen;

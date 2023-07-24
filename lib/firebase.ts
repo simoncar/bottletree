@@ -1,5 +1,4 @@
 import { fbConfig } from "../env";
-import * as Device from "expo-device";
 import { initializeApp } from "firebase/app";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
