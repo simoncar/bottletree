@@ -20,8 +20,6 @@ export default function Calendar() {
     let currentProject: IProject = sharedDataProject;
 
     const itemsRead = (calendarItemsDB) => {
-        console.log("Calendar: itemsRead");
-
         setItems(calendarItemsDB);
     };
 
@@ -34,8 +32,6 @@ export default function Calendar() {
     }
 
     useEffect(() => {
-        console.log("Calendar: useEffect");
-
         if (undefined != currentProject) {
             const unsubscribe = getItems(currentProject.key, itemsRead);
             return () => {
@@ -139,6 +135,7 @@ export default function Calendar() {
                     project={currentProject.key}
                     title={currentProject.title}
                     icon={currentProject.icon}
+                    page="calendar"
                 />
             </View>
             <Agenda

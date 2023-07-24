@@ -7,6 +7,7 @@ import {
     setDoc,
     doc,
     deleteDoc,
+    where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { ICalendarEvent } from "./types";
@@ -14,8 +15,10 @@ import { ICalendarEvent } from "./types";
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
 
 export async function getItems(projectId: string, callback: itemsRead) {
-    const q = query(collection(db, "calendar"));
-    console.log("getting items");
+    const q = query(
+        collection(db, "calendar"),
+        where("projectId", "==", projectId),
+    );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const calendarEvents: ICalendarEvent[] = [];

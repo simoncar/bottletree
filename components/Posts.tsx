@@ -78,6 +78,7 @@ export const Posts = () => {
                     project={currentProject.key}
                     title={currentProject.title}
                     icon={currentProject.icon}
+                    page=""
                 />
             </View>
             <View>

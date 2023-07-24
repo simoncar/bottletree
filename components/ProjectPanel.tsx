@@ -9,9 +9,11 @@ import Colors from "../constants/Colors";
 import { Text } from "../components/Themed";
 
 const Project = (props) => {
-    const { project, title, icon } = props;
+    const { project, title, icon, page } = props;
     const { updateSharedDataProject } = useContext(ProjectContext);
     const colorScheme = useColorScheme();
+
+    console.log("project panel : ", props);
 
     return (
         <View
@@ -56,22 +58,29 @@ const Project = (props) => {
                     )}
                 </View>
             </Pressable>
-            <Link href="/projectList" asChild>
-                <Pressable style={styles.pressableRight}>
-                    <View style={styles.projectText}>
-                        <Text style={styles.updateText}>
-                            {title || "Select Project"}
-                        </Text>
-                    </View>
-                    <View style={styles.rightChevron}>
-                        <FontAwesome5
-                            name="angle-down"
-                            size={25}
-                            color={Colors[colorScheme ?? "light"].text}
-                        />
-                    </View>
-                </Pressable>
-            </Link>
+            <Pressable
+                style={styles.pressableRight}
+                onPress={() => {
+                    router.push({
+                        pathname: "/projectList",
+                        params: {
+                            page: page,
+                        },
+                    });
+                }}>
+                <View style={styles.projectText}>
+                    <Text style={styles.updateText}>
+                        {title || "Select Project"}
+                    </Text>
+                </View>
+                <View style={styles.rightChevron}>
+                    <FontAwesome5
+                        name="angle-down"
+                        size={25}
+                        color={Colors[colorScheme ?? "light"].text}
+                    />
+                </View>
+            </Pressable>
         </View>
     );
 };
