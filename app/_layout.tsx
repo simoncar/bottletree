@@ -37,28 +37,21 @@ export default function RootLayout() {
         },
     };
 
-    console.log("AAA");
-
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
     useEffect(() => {
         if (error) throw error;
     }, [error]);
 
     const RootLayoutNav = useCallback(async () => {
-        console.log("CCC");
         if (fontsLoaded) {
-            console.log("BBBB");
             await SplashScreen.hideAsync();
-            console.log("DDD");
         }
     }, [fontsLoaded]);
 
     if (!fontsLoaded) {
-        console.log("EEE");
         return null;
     }
 
-    console.log("FFF");
     return (
         <>
             <ThemeProvider value={colorScheme === "dark" ? DarkTheme : MyTheme}>
