@@ -1,5 +1,5 @@
 name: 1. Update and Code Push
-on: 
+on:
   workflow_dispatch:
   push:
     branches:
@@ -38,5 +38,3 @@ jobs:
 
       - name: Publish update
         run: eas update --auto
-
-
