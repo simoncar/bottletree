@@ -59,6 +59,28 @@ export default function Calendar() {
         return <Text style={styles.timeText}>{time}</Text>;
     };
 
+       const renderLocation = (reservation: any) => {
+           let location = "";
+
+           if (reservation.extensionNumDays == 1) {
+               time =
+                   reservation.extensionTimeBegin +
+                   " - " +
+                   reservation.extensionTimeEnd;
+           } else {
+               if (reservation.extensionDay == 1) {
+                   time = reservation.extensionTimeBegin;
+               } else if (
+                   reservation.extensionDay == reservation.extensionNumDays
+               ) {
+                   time = "Ends " + reservation.extensionTimeEnd;
+               } else {
+                   time = "All day";
+               }
+           }
+           return <Text style={styles.timeText}>{time}</Text>;
+       };
+
     const renderItem = (reservation: any, isFirst: boolean) => {
         const colorPanel = Colors[colorScheme ?? "light"].calendarPanel;
 
@@ -100,6 +122,7 @@ export default function Calendar() {
                 />
 
                 {renderTime(reservation)}
+                { renderLocation(reservation)}
             </TouchableOpacity>
         );
     };

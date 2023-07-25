@@ -34,7 +34,7 @@ export async function getProjects(callback: projectsRead) {
         callback(projects);
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe;
 }
 
 export async function getProjectUsers(

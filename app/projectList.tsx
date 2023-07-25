@@ -6,6 +6,7 @@ import {
     Pressable,
     StyleSheet,
     TouchableOpacity,
+    ScrollView,
     useColorScheme,
 } from "react-native";
 import { ShortList } from "../components/sComponent";
@@ -34,8 +35,9 @@ const ModalScreen = (props) => {
 
     useEffect(() => {
         const unsubscribe = getProjects(projectsRead);
+        unsubscribe;
         return () => {
-            unsubscribe;
+            // unsubscribe;
         };
     }, []);
 
@@ -155,7 +157,7 @@ const ModalScreen = (props) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.projectList}>
+            <ScrollView style={styles.projectList}>
                 <View>{renderAdd()}</View>
                 {loading === false && (
                     <View>
@@ -166,7 +168,7 @@ const ModalScreen = (props) => {
                         />
                     </View>
                 )}
-            </View>
+            </ScrollView>
         </View>
     );
 };
