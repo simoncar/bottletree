@@ -2,7 +2,7 @@
     "expo": {
         "name": "One Build",
         "slug": "bottletree",
-        "version": "1.0.27",
+        "version": "1.0.28",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
         "scheme": "bottletree",
@@ -16,7 +16,7 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "com.simoncar.bottletree",
-            "buildNumber": "27",
+            "buildNumber": "28",
             "config": {
                 "usesNonExemptEncryption": false
             }
