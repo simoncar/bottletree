@@ -122,7 +122,7 @@ export default function Calendar() {
   const renderEmptyDate = () => {
     return (
       <View style={styles.emptyDate}>
-        <Text>Testing : This is empty date!</Text>
+        <Text>Testing 2 : This is empty date!</Text>
       </View>
     );
   };
