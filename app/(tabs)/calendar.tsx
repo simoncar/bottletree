@@ -172,16 +172,6 @@ export default function Calendar() {
               marginTop: 100,
             },
           },
-          "stylesheet.day.basic": {
-            base: {
-              width: 40,
-              height: 40,
-              alignItems: "center",
-              alignSelf: "center",
-              justifyContent: "center",
-              marginTop: 100,
-            },
-          },
         }}
         disabledByDefault
         hideExtraDays={false}
