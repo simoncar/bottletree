@@ -153,12 +153,8 @@ const AuthProvider = ({ children }) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      if (errorCode === "auth/wrong-password") {
-        callback("Wrong password.");
-      } else {
-        callback(errorMessage);
-      }
-      //setLoading(false);
+
+      callback(errorMessage);
       console.log(error);
 
       return { error: error };

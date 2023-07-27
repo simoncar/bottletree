@@ -25,9 +25,7 @@ export default function SignIn() {
   };
 
   const loginError = (error) => {
-    setNotification(
-      ERROR_MAP[error] || "An error occurred during login. Please try again.",
-    );
+    setNotification(ERROR_MAP[error] || error);
   };
 
   return (
@@ -63,7 +61,6 @@ export default function SignIn() {
 
       <TouchableOpacity
         onPress={async () => {
-
           signIn(email, password, loginError);
           //const resp = await appSignIn("simoncar@gmail.com", "password");
           //console.log("resp: ", resp);
