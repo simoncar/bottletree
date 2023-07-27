@@ -1,4 +1,4 @@
-import { router, useSegments } from "expo-router";
+import { router, useSegments, useRootNavigation } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
 import React, { useEffect, useState } from "react";
@@ -26,12 +26,26 @@ const unsub = onAuthStateChanged(auth, (user) => {
 
 // This hook will protect the route access based on user authentication.
 function useProtectedRoute(user) {
+  const [isNavigationReady, setNavigationReady] = useState(false);
+  const rootNavigation = useRootNavigation();
   const segments = useSegments();
+
+  useEffect(() => {
+    const unsubscribe = rootNavigation?.addListener("state", (event) => {
+      // console.log("INFO: rootNavigation?.addListener('state')", event);
+      setNavigationReady(true);
+    });
+    return function cleanup() {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [rootNavigation]);
 
   React.useEffect(() => {
     const inAuthGroup = segments[0] === "(auth)";
 
-    if (user === undefined) {
+    if (user === undefined || !isNavigationReady) {
       return;
     }
 
