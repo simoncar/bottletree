@@ -10,6 +10,7 @@ import {
   View as DefaultView,
   Button as DefaultButton,
   StyleSheet,
+  TouchableOpacity,
 } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -81,7 +82,11 @@ export function Button(props: ButtonProps) {
 
   return (
     <View style={styles.button}>
-      <DefaultButton style={[{ color }, style]} {...otherProps} />
+      <TouchableOpacity
+        style={[{ color }, style, { borderWidth: 0, elevation: 0 }]}
+        {...otherProps}
+      />
+      <Text style={styles.loginText}>{props.text}</Text>
     </View>
   );
 }
@@ -100,7 +105,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
     borderColor: "lightgray",
     borderRadius: 100,
-    borderWidth: 1,
+
     padding: 10,
+  },
+  loginText: {
+    color: "white",
   },
 });
