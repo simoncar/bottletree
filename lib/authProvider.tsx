@@ -27,7 +27,7 @@ export function useAuth() {
 }
 
 const unsub = onAuthStateChanged(auth, (user) => {
-  //console.log("onAuthStateChange", user);
+  console.log("onAuthStateChange", user);
 });
 
 // This hook will protect the route access based on user authentication.
@@ -84,10 +84,12 @@ function useProtectedRoute(user) {
 
       if (Platform.OS === "ios") {
         setTimeout(() => {
+          console.log("CCCC./");
           router.replace("/");
         }, 1);
       } else {
         setImmediate(() => {
+          console.log("CCCC./");
           router.replace("/");
         });
       }

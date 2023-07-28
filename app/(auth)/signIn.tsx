@@ -21,6 +21,8 @@ export default function SignIn() {
     "Firebase: Error (auth/user-not-found).": "No account with this email.",
     "Firebase: Error (auth/invalid-email).":
       "The entered email address is not valid.",
+    "Firebase: Error (auth/network-request-failed).":
+      "Network error. Check your internet connection.",
   };
 
   const loginError = (error) => {
