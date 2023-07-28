@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
-import { View, Button } from "../components/Themed";
+import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text } from "../components/Themed";
 import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
 import { IPost, IProject } from "../lib/types";
@@ -55,15 +55,15 @@ export const Posts = () => {
 
   const renderEmpty = () => {
     return (
-      <View style={styles.addPost}>
-        <Button
-          title="Add a new post"
+      <View style={styles.loginBtn}>
+        <TouchableOpacity
           onPress={() => {
             router.push({
               pathname: "/addPost",
             });
-          }}
-        />
+          }}>
+          <Text style={styles.buttonText}>Add the first post</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -102,11 +102,8 @@ export const Posts = () => {
 };
 
 const styles = StyleSheet.create({
-  addPost: {
-    alignItems: "center",
-    flex: 1,
-    justifyContent: "center",
-    marginTop: 200,
+  buttonText: {
+    color: "white",
   },
   footer: {
     paddingTop: 100,
@@ -116,6 +113,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 4,
     padding: 10,
+    width: "100%",
+  },
+  loginBtn: {
+    alignItems: "center",
+    backgroundColor: "#2196F3",
+    borderRadius: 25,
+    height: 50,
+    justifyContent: "center",
+    marginTop: 100,
     width: "100%",
   },
 });
