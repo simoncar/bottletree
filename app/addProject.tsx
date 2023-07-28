@@ -10,81 +10,71 @@ import { addProject } from "../lib/APIproject";
 import { IProject } from "../lib/types";
 
 export default function addPhoto() {
-    const { sharedDataProject, updateSharedDataProject } =
-        useContext(ProjectContext);
+  const { sharedDataProject, updateSharedDataProject } =
+    useContext(ProjectContext);
 
-    const [image, setImage] = useState(null);
-    const [progress, setProgress] = useState(0);
-    const [text, onChangeText] = useState("");
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [text, onChangeText] = useState("");
 
-    var project: IProject = {
-        key: "",
-        title: "",
-        icon: "",
-        archived: false,
-    };
+  const project: IProject = {
+    key: "",
+    title: "",
+    icon: "",
+    archived: false,
+  };
 
-    const saveDone = (id) => {
-        updateSharedDataProject({
-            key: id,
-            title: project.title,
-            icon: project.icon,
-            archived: project.archived,
-        });
+  const saveDone = (id) => {
+    updateSharedDataProject({
+      key: id,
+      title: project.title,
+      icon: project.icon,
+      archived: project.archived,
+    });
 
-        router.replace({
-            pathname: "/editProject",
-            params: {
-                projectId: id,
-                projectTitle: project.title,
-            },
-        });
-    };
+    router.replace({
+      pathname: "/editProject",
+      params: {
+        projectId: id,
+        projectTitle: project.title,
+      },
+    });
+  };
 
-    const onSave = async () => {
-        project.title = text;
-        addProject(project, saveDone);
-    };
+  const onSave = async () => {
+    project.title = text;
+    addProject(project, saveDone);
+  };
 
-    const pickImage = async () => {};
+  const pickImage = async () => {};
 
-    return (
-        <SafeAreaView>
-            <Stack.Screen
-                options={{
-                    headerRight: () => (
-                        <Button title="Next" onPress={() => onSave()} />
-                    ),
-                }}
-            />
+  return (
+    <SafeAreaView>
+      <Stack.Screen
+        options={{
+          headerRight: () => <Button title="Next" onPress={() => onSave()} />,
+        }}
+      />
 
-            <TextInput
-                style={styles.input}
-                onChangeText={(text) => onChangeText(text)}
-                placeholder={"Write Project Name..."}
-                value={text}
-                autoFocus={true}
-                multiline
-            />
-        </SafeAreaView>
-    );
+      <TextInput
+        style={styles.input}
+        onChangeText={(text) => onChangeText(text)}
+        placeholder={"Write Project Name..."}
+        value={text}
+        autoFocus={true}
+        multiline
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    input: {
-        height: 140,
-        margin: 12,
-        padding: 10,
-        paddingLeft: 20,
-        width: "98%",
-        fontSize: 20,
-    },
-
-    button: {
-        borderWidth: 1,
-        borderColor: "lightgray",
-        backgroundColor: "#E4E6C3",
-        padding: 10,
-        borderRadius: 100,
-    },
+  input: {
+    fontSize: 20,
+    height: 140,
+    margin: 12,
+    padding: 10,
+    paddingLeft: 20,
+    width: "98%",
+  },
 });

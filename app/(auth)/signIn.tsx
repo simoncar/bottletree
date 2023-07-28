@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../../lib/authProvider";
-import { Image } from "expo-image";
 import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     alignItems: "center",
-    backgroundColor: "#E4E6C3",
+    backgroundColor: "#2196F3",
     borderRadius: 25,
     height: 50,
     justifyContent: "center",
@@ -138,6 +137,6 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   loginText: {
-    color: "#000",
+    color: "white",
   },
 });
