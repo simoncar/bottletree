@@ -78,9 +78,9 @@ export default function addPhoto() {
   };
 
   const pickImage = async () => {
-    console.log("pickImage: ", sharedDataProject.key);
+     const multiple = true;
 
-    addImage(progressCallback, addImageCallback);
+    addImage(multiple, progressCallback, addImageCallback);
   };
 
   if (undefined === sharedDataProject.key || "" === sharedDataProject.key) {

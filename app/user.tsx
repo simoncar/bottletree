@@ -40,7 +40,7 @@ export default function editUser() {
   const save = () => {
     console.log("save: " + sharedDataUser.displayName);
 
-    updateAccountName(text); //firebease auth update function
+    updateAccountName(text); 
 
     updateSharedDataUser({ displayName: text });
     router.push({
@@ -67,9 +67,10 @@ export default function editUser() {
     //  );
   };
 
-  const pickImage = async () => {
-    console.log("pickImage: ");
-    addImage(progressCallback, addImageCallback);
+  const pickImage = async () =>
+  {
+    const multiple = false;
+    addImage(multiple, progressCallback, addImageCallback);
   };
 
   const openActionSheet = async () => {

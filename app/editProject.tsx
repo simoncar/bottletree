@@ -62,8 +62,8 @@ export default function editPost() {
     };
 
     const pickImage = async () => {
-        console.log("pickImage: ");
-        addImage(progressCallback, addImageCallback);
+          const multiple = false;
+        addImage(multiple, progressCallback, addImageCallback);
     };
 
     const openActionSheet = async () => {

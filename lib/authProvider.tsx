@@ -164,9 +164,7 @@ const AuthProvider = ({ children }) => {
       };
       setSharedDataUser(user);
       AsyncStorage.setItem("@USER", JSON.stringify(user));
-      if (!Device.isDevice) {
-        demoData();
-      }
+      demoData();
       return { user: auth.currentUser };
     } catch (error) {
       // Handle Errors here.
