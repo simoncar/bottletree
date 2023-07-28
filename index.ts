@@ -1,7 +1,7 @@
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import "expo-router/entry";
-import { demoData } from "./lib/demoData";
+
 // import * as Sentry from "sentry-expo";
 
 // Sentry.init({
@@ -18,9 +18,7 @@ Notifications.setNotificationHandler({
     }),
 });
 
-if (!Device.isDevice) {
-    demoData();
-}
+
 
 async function registerForPushNotificationsAsync() {
     let token;

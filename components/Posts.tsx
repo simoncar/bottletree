@@ -7,108 +7,115 @@ import { IPost, IProject } from "../lib/types";
 import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
+import { useAuth } from "../lib/authProvider";
 
 export const Posts = () => {
-    const { sharedDataProject } = useContext(ProjectContext);
-    let currentProject: IProject = sharedDataProject;
-    const [posts, setPosts] = useState([]);
+  const { sharedDataUser } = useAuth();
+  const { sharedDataProject } = useContext(ProjectContext);
+  let currentProject: IProject = sharedDataProject;
+  const [posts, setPosts] = useState([]);
 
-    if (null == sharedDataProject) {
-        currentProject = {
-            key: "",
-            title: "",
-            icon: "",
-        };
+  if (null == sharedDataProject) {
+    currentProject = {
+      key: "",
+      title: "",
+      icon: "",
+    };
+  }
+
+  const postsRead = (postsDB) => {
+    setPosts(postsDB);
+  };
+
+  console.log("Posts.tsx: currentProject:", currentProject, sharedDataUser);
+
+  useEffect(() => {
+    if (sharedDataUser && undefined != currentProject) {
+      const unsubscribe = getPosts(currentProject.key, postsRead);
+      return () => {
+        unsubscribe;
+      };
     }
+  }, []);
 
-    const postsRead = (postsDB) => {
-        setPosts(postsDB);
-    };
+  useEffect(() => {
+    if (sharedDataUser && undefined != currentProject?.key) {
+      const unsubscribe = getPosts(currentProject.key, postsRead);
+      return () => {
+        unsubscribe;
+      };
+    }
+  }, [currentProject]);
 
-    useEffect(() => {
-        if (undefined != currentProject) {
-            const unsubscribe = getPosts(currentProject.key, postsRead);
-            return () => {
-                unsubscribe;
-            };
-        }
-    }, []);
+  const renderItems = (item) => {
+    const post: IPost = item.item;
 
-    useEffect(() => {
-        if (undefined != currentProject?.key) {
-            const unsubscribe = getPosts(currentProject.key, postsRead);
-            return () => {
-                unsubscribe;
-            };
-        }
-    }, [currentProject]);
+    return <Post post={post} />;
+  };
 
-    const renderItems = (item) => {
-        const post: IPost = item.item;
-
-        return <Post post={post} />;
-    };
-
-    const renderEmpty = () => {
-        return (
-            <View style={styles.addPost}>
-                <Button
-                    title="Add a new post"
-                    onPress={() => {
-                        router.push({
-                            pathname: "/addPost",
-                        });
-                    }}
-                />
-            </View>
-        );
-    };
-
-    const renderFooter = () => {
-        return <View style={styles.footer}></View>;
-    };
-    const getKey = (item) => {
-        return item.key;
-    };
-
+  const renderEmpty = () => {
     return (
-        <View style={styles.list}>
-            <View>
-                <Project
-                    project={currentProject.key}
-                    title={currentProject.title}
-                    icon={currentProject.icon}
-                    page=""
-                />
-            </View>
-            <View>
-                <FlatList
-                    data={posts}
-                    renderItem={renderItems}
-                    keyExtractor={(item, index) => getKey(item)}
-                    ListEmptyComponent={renderEmpty}
-                    ListFooterComponent={renderFooter}
-                />
-            </View>
+      <View style={styles.addPost}>
+        <Button
+          title="Add a new post"
+          onPress={() => {
+            router.push({
+              pathname: "/addPost",
+            });
+          }}
+        />
+      </View>
+    );
+  };
+
+  const renderFooter = () => {
+    return <View style={styles.footer}></View>;
+  };
+  const getKey = (item) => {
+    return item.key;
+  };
+
+  if (null == sharedDataUser) {
+    return;
+  } else
+    return (
+      <View style={styles.list}>
+        <View>
+          <Project
+            project={currentProject.key}
+            title={currentProject.title}
+            icon={currentProject.icon}
+            page=""
+          />
         </View>
+        <View>
+          <FlatList
+            data={posts}
+            renderItem={renderItems}
+            keyExtractor={(item, index) => getKey(item)}
+            ListEmptyComponent={renderEmpty}
+            ListFooterComponent={renderFooter}
+          />
+        </View>
+      </View>
     );
 };
 
 const styles = StyleSheet.create({
-    addPost: {
-        alignItems: "center",
-        flex: 1,
-        justifyContent: "center",
-        marginTop: 200,
-    },
-    footer: {
-        paddingTop: 100,
-    },
+  addPost: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+    marginTop: 200,
+  },
+  footer: {
+    paddingTop: 100,
+  },
 
-    list: {
-        flex: 1,
-        paddingTop: 4,
-        padding: 10,
-        width: "100%",
-    },
+  list: {
+    flex: 1,
+    paddingTop: 4,
+    padding: 10,
+    width: "100%",
+  },
 });

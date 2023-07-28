@@ -1,4 +1,9 @@
-import { router, useSegments, useRootNavigation } from "expo-router";
+import {
+  router,
+  useSegments,
+  useRootNavigation,
+  SplashScreen,
+} from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
 import React, { useEffect, useState } from "react";
@@ -14,6 +19,7 @@ import {
 import { Platform } from "react-native";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
+import { demoData } from "../lib/demoData";
 
 // This hook can be used to access the user info.
 export function useAuth() {
@@ -43,9 +49,12 @@ function useProtectedRoute(user) {
   }, [rootNavigation]);
 
   React.useEffect(() => {
+    console.log("useProtectedRoute", user, segments);
+
     const inAuthGroup = segments[0] === "(auth)";
 
-    if (user === undefined || !isNavigationReady) {
+    if (!isNavigationReady) {
+      console.log("AAAA:", isNavigationReady, user);
       return;
     }
 
@@ -55,17 +64,21 @@ function useProtectedRoute(user) {
       !user &&
       !inAuthGroup
     ) {
+      console.log("BBB");
       // Redirect to the sign-in page.
       if (Platform.OS === "ios") {
         setTimeout(() => {
+          console.log("BBB.1");
           router.replace("/signIn");
         }, 1);
       } else {
+        console.log("BBB.2");
         setImmediate(() => {
           router.replace("/signIn");
         });
       }
     } else if (user && inAuthGroup) {
+      console.log("CCCC");
       // Redirect away from the sign-in page.
       //router.replace("/");
 
@@ -78,8 +91,11 @@ function useProtectedRoute(user) {
           router.replace("/");
         });
       }
+    } else {
+      console.log("DDD");
+      SplashScreen.hideAsync();
     }
-  }, [user, segments]);
+  }, [user, segments, isNavigationReady]);
 }
 
 const AuthProvider = ({ children }) => {
@@ -148,6 +164,9 @@ const AuthProvider = ({ children }) => {
       };
       setSharedDataUser(user);
       AsyncStorage.setItem("@USER", JSON.stringify(user));
+      if (!Device.isDevice) {
+        demoData();
+      }
       return { user: auth.currentUser };
     } catch (error) {
       // Handle Errors here.
