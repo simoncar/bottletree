@@ -63,7 +63,7 @@ export default function addPhoto() {
   const progressCallback = (progress: number) => {
     setProgress(progress);
   };
-  const addImageCallback = (downloadURLarray) => {
+  const completedCallback = (downloadURLarray) => {
     console.log("addImageCallback: ", downloadURLarray);
 
     setImage(null);
@@ -82,7 +82,7 @@ export default function addPhoto() {
   const pickImage = async () => {
     const multiple = true;
 
-    addImage(multiple, progressCallback, addImageCallback);
+    addImage(multiple, progressCallback, completedCallback);
   };
 
   if (undefined === sharedDataProject.key || "" === sharedDataProject.key) {

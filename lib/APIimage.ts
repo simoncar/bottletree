@@ -7,7 +7,7 @@ import * as Crypto from "expo-crypto";
 export const addImage = async (
   multiple,
   progressCallback,
-  addImageCallback,
+  completedCallback,
 ) => {
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -16,44 +16,23 @@ export const addImage = async (
   });
 
   if (!result.canceled) {
-    processArrayAsync(result, progressCallback, addImageCallback);
+    try {
+      const promises = result.assets.map((item) =>
+        processItemAsync(item, progressCallback),
+      );
+      const processedResults = await Promise.all(promises);
+      completedCallback(processedResults);
+    } catch (error) {
+      console.error("Error occurred during processing:", error);
+    }
   }
 };
-
-async function processArrayAsync(
-  imageArray,
-  progressCallback,
-  addImageCallback,
-) {
-  try {
-    const promises = imageArray.assets.map((item) =>
-      processItemAsync(item, progressCallback),
-    );
-    const processedResults = await Promise.all(promises);
-
-    console.log("Processed results:", processedResults);
-    addImageCallback(processedResults);
-    // Further processing with the processedResults, if needed.
-  } catch (error) {
-    console.error("Error occurred during processing:", error);
-  }
-}
 
 async function processItemAsync(asset, progressCallback) {
   return new Promise((resolve, reject) => {
     const promises = [];
     {
       try {
-        const convertedImage = new ImageManipulator.manipulateAsync(
-          asset.uri,
-          [{ resize: { height: 1000 } }],
-          {
-            compress: 0,
-          },
-        );
-
-        fileToUpload = convertedImage.uri;
-
         const blob = getBlobAsync(asset.uri).then((blob) => {
           const storageRef = getStorageRef();
           const uploadTask = uploadBytesResumable(storageRef, blob);
@@ -83,8 +62,6 @@ async function processItemAsync(asset, progressCallback) {
                 (downloadURL) => {
                   console.log("File available at", downloadURL);
 
-                  // return addImageCallback(downloadURL);
-                  //return downloadURL;
                   resolve(downloadURL);
                 },
               );
@@ -93,7 +70,7 @@ async function processItemAsync(asset, progressCallback) {
         });
       } catch (error) {
         console.error(`Error occurred while processing ${asset}:`, error);
-        reject(error); // Return null or an error string, depending on your error handling needs.
+        reject(error);
       }
     }
   });
@@ -104,7 +81,7 @@ function getStorageRef() {
   const d = new Date();
 
   const fileName =
-    "posts2/" +
+    "posts/" +
     d.getUTCFullYear() +
     ("0" + (d.getMonth() + 1)).slice(-2) +
     "/" +
