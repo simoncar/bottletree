@@ -24,7 +24,6 @@ export function addPost(post: IPost, callback: saveDone) {
                 timestamp: Timestamp.now(),
             },
         ).then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
             callback(docRef.id);
         });
     } catch (e) {
@@ -114,7 +113,6 @@ export function addComment(
             collection(db, "projects", project, "posts", post, "comments"),
             comment,
         ).then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
             const newData = { key: docRef.id };
 
             console.log("callback: ", { ...comment, ...newData });

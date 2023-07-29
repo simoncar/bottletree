@@ -2,11 +2,11 @@ import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Text, View, Button } from "../../components/Themed";
-import { addPost } from "../../lib/APIpost";
-import { addImage } from "../../lib/APIimage";
-import ProjectContext from "../../lib/projectContext";
-import { IPost } from "../../lib/types";
+import { Text, View, Button } from "../components/Themed";
+import { addPost } from "../lib/APIpost";
+import { addImage } from "../lib/APIimage";
+import ProjectContext from "../lib/projectContext";
+import { IPost } from "../lib/types";
 import * as Progress from "react-native-progress";
 
 export default function addPhoto() {
@@ -47,7 +47,7 @@ export default function addPhoto() {
     if (null == image && progress == 0) {
       return (
         <TouchableOpacity
-          key={"createAccount"}
+          key={"pickImage"}
           onPress={() => {
             pickImage();
           }}
@@ -64,6 +64,8 @@ export default function addPhoto() {
     setProgress(progress);
   };
   const addImageCallback = (downloadURL: string) => {
+    console.log("addImageCallback: ", downloadURL);
+
     setImage(null);
 
     const post: IPost = {
@@ -78,7 +80,7 @@ export default function addPhoto() {
   };
 
   const pickImage = async () => {
-     const multiple = true;
+    const multiple = true;
 
     addImage(multiple, progressCallback, addImageCallback);
   };
