@@ -4,7 +4,11 @@ import { storage } from "./firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import * as Crypto from "expo-crypto";
 
-export const addImage = async (multiple , progressCallback, addImageCallback) => {
+export const addImage = async (
+  multiple,
+  progressCallback,
+  addImageCallback,
+) => {
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     quality: 1,
@@ -13,9 +17,12 @@ export const addImage = async (multiple , progressCallback, addImageCallback) =>
 
   if (!result.canceled) {
     let fileToUpload = "";
-    console.log("result", result);
 
     const promises = result.assets.map(async (asset, index) => {
+      console.log("result uri:", asset.uri);
+      console.log("result height:", asset.height);
+        console.log("result width:", asset.width);
+        
       const convertedImage = await new ImageManipulator.manipulateAsync(
         asset.uri,
         [{ resize: { height: 1000 } }],

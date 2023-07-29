@@ -27,8 +27,6 @@ export const Posts = () => {
     setPosts(postsDB);
   };
 
-  console.log("Posts.tsx: currentProject:", currentProject, sharedDataUser);
-
   useEffect(() => {
     if (sharedDataUser && undefined != currentProject) {
       const unsubscribe = getPosts(currentProject.key, postsRead);

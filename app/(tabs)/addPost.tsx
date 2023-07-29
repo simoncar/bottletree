@@ -2,11 +2,11 @@ import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Text, View, Button } from "../components/Themed";
-import { addPost } from "../lib/APIpost";
-import { addImage } from "../lib/APIimage";
-import ProjectContext from "../lib/projectContext";
-import { IPost } from "../lib/types";
+import { Text, View, Button } from "../../components/Themed";
+import { addPost } from "../../lib/APIpost";
+import { addImage } from "../../lib/APIimage";
+import ProjectContext from "../../lib/projectContext";
+import { IPost } from "../../lib/types";
 import * as Progress from "react-native-progress";
 
 export default function addPhoto() {
