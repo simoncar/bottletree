@@ -49,8 +49,6 @@ function useProtectedRoute(user) {
   }, [rootNavigation]);
 
   React.useEffect(() => {
-    console.log("useProtectedRoute", user, segments);
-
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!isNavigationReady) {

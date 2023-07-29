@@ -63,8 +63,8 @@ export default function addPhoto() {
   const progressCallback = (progress: number) => {
     setProgress(progress);
   };
-  const addImageCallback = (downloadURL: string) => {
-    console.log("addImageCallback: ", downloadURL);
+  const addImageCallback = (downloadURLarray) => {
+    console.log("addImageCallback: ", downloadURLarray);
 
     setImage(null);
 
@@ -72,7 +72,7 @@ export default function addPhoto() {
       key: "",
       caption: "",
       projectId: sharedDataProject.key,
-      images: [downloadURL],
+      images: downloadURLarray,
     };
 
     addPost(post, saveDone);
