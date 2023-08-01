@@ -35,6 +35,8 @@ export default function editCalendar() {
       puid: string;
     }>();
 
+  console.log("pkey", pkey);
+
   const [title, onChangeTitle] = useState(ptitle);
   const [description, onChangeDescription] = useState(pdescription);
 
@@ -144,6 +146,27 @@ export default function editCalendar() {
     setDateEndTime(selectedDate);
   };
 
+  const renderDelete = () => {
+    if (pkey == undefined) {
+      return null;
+    } else {
+      return (
+        <Pressable style={styles.itemView} onPress={() => doDelete()}>
+          <View style={styles.avatar}>
+            <Ionicons
+              name="trash"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
+          <View>
+            <Text style={styles.actionTitle}>Delete</Text>
+          </View>
+        </Pressable>
+      );
+    }
+  };
+
   console.log("shareddataproject", sharedDataProject);
 
   return (
@@ -237,18 +260,7 @@ export default function editCalendar() {
         </View>
       </View>
 
-      <Pressable style={styles.itemView} onPress={() => doDelete()}>
-        <View style={styles.avatar}>
-          <Ionicons
-            name="trash"
-            size={25}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </View>
-        <View>
-          <Text style={styles.actionTitle}>Delete</Text>
-        </View>
-      </Pressable>
+      {renderDelete()}
     </SafeAreaView>
   );
 }
