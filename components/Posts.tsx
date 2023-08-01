@@ -20,6 +20,7 @@ export const Posts = () => {
       key: "",
       title: "",
       icon: "",
+      archived: false,
     };
   }
 
@@ -83,6 +84,7 @@ export const Posts = () => {
             project={currentProject.key}
             title={currentProject.title}
             icon={currentProject.icon}
+            archived={currentProject.archived}
             page=""
           />
         </View>

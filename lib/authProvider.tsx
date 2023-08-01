@@ -61,7 +61,7 @@ function useProtectedRoute(user) {
         //router.replace("/signIn");
         //SplashScreen.hideAsync();
       } else {
-        console.log("onAuthStateChange We have a User: ", user);
+        //console.log("onAuthStateChange We have a User: ", user);
         setUserReady(true);
         //@ts-ignore
         //navigation?.navigate("(tabs)");
@@ -104,7 +104,7 @@ function useProtectedRoute(user) {
     }, {});
 
     if (Object.keys(changedDeps).length) {
-      console.log("[use-effect-debugger] ", changedDeps);
+      //console.log("[use-effect-debugger] ", changedDeps);
     }
 
     useEffect(effectHook, dependencies);

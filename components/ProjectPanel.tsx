@@ -9,7 +9,7 @@ import Colors from "../constants/Colors";
 import { Text } from "../components/Themed";
 
 const Project = (props) => {
-  const { project, title, icon, page } = props;
+  const { project, title, icon, archived, page } = props;
   const { updateSharedDataProject } = useContext(ProjectContext);
   const colorScheme = useColorScheme();
 
@@ -36,6 +36,7 @@ const Project = (props) => {
               projectId: project,
               projectTitle: title,
               photoURL: icon,
+              archived: archived,
             },
           });
         }}>
