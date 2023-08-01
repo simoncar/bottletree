@@ -18,6 +18,7 @@ export default function Calendar() {
 
   const itemsRead = (calendarItemsDB) => {
     setItems(calendarItemsDB);
+    console.log("calendarItemsDB", calendarItemsDB);
   };
 
   if (null == sharedDataProject) {
@@ -58,7 +59,7 @@ export default function Calendar() {
   const renderLocation = (reservation: any) => {
     const location = "123 Long Street, City, State";
 
-    return <Text style={styles.timeText}>{location}</Text>;
+    return;
   };
 
   const renderItem = (reservation: any, isFirst: boolean) => {
@@ -95,12 +96,7 @@ export default function Calendar() {
           ]}>
           {reservation.extensionTitle}
         </Text>
-        <ParsedText
-          style={styles.description}
-          text={reservation.description}
-          selectable
-        />
-
+        <ParsedText style={styles.description} text={reservation.description} />
         {renderTime(reservation)}
         {renderLocation(reservation)}
       </TouchableOpacity>
@@ -110,7 +106,7 @@ export default function Calendar() {
   const renderEmptyDate = () => {
     return (
       <View style={styles.emptyDate}>
-        <Text>Testing 3 : This is empty date!</Text>
+        <Text></Text>
       </View>
     );
   };
@@ -127,6 +123,8 @@ export default function Calendar() {
   const reservationsKeyExtractor = (item, index) => {
     return `${item?.reservation?.day}${index}`;
   };
+
+  const realInitialDate = "2023-08-01";
 
   return (
     <View style={styles.list}>
@@ -161,7 +159,6 @@ export default function Calendar() {
             },
           },
         }}
-        disabledByDefault
         hideExtraDays={false}
         reservationsKeyExtractor={reservationsKeyExtractor}
         onDayPress={(day: DateData) => {
@@ -171,6 +168,10 @@ export default function Calendar() {
           console.log("day changed", day);
         }}
         renderEmptyDate={renderEmptyDate}
+        loadItemsForMonth={(month) => {
+          console.log("trigger items loading:", month);
+        }}
+        pastScrollRange={50}
       />
     </View>
   );
