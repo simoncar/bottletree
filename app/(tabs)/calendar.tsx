@@ -37,6 +37,16 @@ export default function Calendar() {
     }
   }, []);
 
+  useEffect(() => {
+    if (sharedDataProject && undefined != currentProject?.key) {
+      setItems({});
+      const unsubscribe = getItems(currentProject.key, itemsRead);
+      return () => {
+        unsubscribe;
+      };
+    }
+  }, [currentProject]);
+
   const renderTime = (reservation: any) => {
     let time = "";
 
