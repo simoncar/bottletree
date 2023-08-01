@@ -18,7 +18,6 @@ export default function Calendar() {
 
   const itemsRead = (calendarItemsDB) => {
     setItems(calendarItemsDB);
-    console.log("calendarItemsDB", calendarItemsDB);
   };
 
   if (null == sharedDataProject) {
@@ -57,8 +56,6 @@ export default function Calendar() {
   };
 
   const renderLocation = (reservation: any) => {
-    const location = "123 Long Street, City, State";
-
     return;
   };
 
