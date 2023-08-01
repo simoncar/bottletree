@@ -12,6 +12,7 @@ import {
 import { Text, TextInput, View } from "../components/Themed";
 import { setCalendarEvent, deleteCalendarEvent } from "../lib/APIcalendar";
 import { useProject } from "../lib/projectProvider";
+import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker, {
   DateTimePickerEvent,
@@ -34,9 +35,6 @@ export default function editCalendar() {
       pdateEnd: string;
       puid: string;
     }>();
-  
-
-  
 
   console.log("pkey", pkey);
 
@@ -52,9 +50,6 @@ export default function editCalendar() {
   const [dateEndTime, setDateEndTime] = useState<Date>(new Date(pdateEnd));
 
   const colorScheme = useColorScheme();
-
-
-
 
   const saveDone = (id: string) => {
     router.push({
@@ -162,7 +157,7 @@ export default function editCalendar() {
             <Ionicons
               name="trash"
               size={25}
-              color={Colors[colorScheme ?? "light"].text}
+              color={Colors[colorScheme ?? "light"].textPlaceholder}
             />
           </View>
           <View>
@@ -242,19 +237,24 @@ export default function editCalendar() {
         </View>
       </View>
 
-      <View style={[styles.itemView, styles.line]}>
-        <View style={styles.avatar}></View>
-        <View style={styles.title}>
-          <TextInput
-            style={styles.textDescription}
-            onChangeText={(description) => onChangeDescription(description)}
-            placeholder={"Add description"}
-            value={description}
-            multiline={true}
-            numberOfLines={4}
-            autoCapitalize="none"
+      <View style={[styles.descriptionView, styles.line]}>
+        <View style={styles.avatar}>
+          <Feather
+            name="align-left"
+            size={25}
+            color={Colors[colorScheme ?? "light"].textPlaceholder}
           />
         </View>
+        <TextInput
+          style={styles.textDescription}
+          onChangeText={(description) => onChangeDescription(description)}
+          placeholder={"Add description"}
+          value={description}
+          multiline
+          numberOfLines={6}
+          autoCapitalize="none"
+          textAlignVertical="top"
+        />
       </View>
 
       <View style={[styles.itemView, styles.line]}>
@@ -275,12 +275,21 @@ const styles = StyleSheet.create({
   actionTitle: {
     fontSize: 20,
   },
-  avatar: { alignItems: "center", justifyContent: "center", width: 48 },
+  avatar: { alignItems: "center", justifyContent: "flex-start", width: 48 },
   date: {
     alignItems: "flex-start",
     flex: 1,
     justifyContent: "flex-start",
     width: 50,
+  },
+  descriptionView: {
+    alignItems: "center",
+    flexDirection: "row",
+
+    justifyContent: "flex-start",
+    paddingVertical: 8,
+    padding: 8,
+    width: "90%",
   },
   itemView: {
     alignItems: "center",
@@ -298,8 +307,7 @@ const styles = StyleSheet.create({
 
   right: { paddingRight: 8 },
   textDescription: {
-    fontSize: 20,
-    height: 80,
+    fontSize: 16,
   },
   title: { flex: 1, justifyContent: "flex-start" },
 

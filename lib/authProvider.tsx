@@ -2,11 +2,12 @@ import {
   router,
   useSegments,
   useRootNavigation,
+  useNavigation,
   SplashScreen,
 } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "./authContext";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -26,17 +27,90 @@ export function useAuth() {
   return React.useContext(AuthContext);
 }
 
-const unsub = onAuthStateChanged(auth, (user) => {
-  console.log("onAuthStateChange", user);
-});
+// const unsub = onAuthStateChanged(auth, (user) => {
+//   const navigation = useNavigation();
+
+//   console.log("onAuthStateChange", user);
+
+//   if (!user) {
+//     //@ts-ignore
+//     navigation?.navigate("(auth)");
+//   } else {
+//     //@ts-ignore
+//     navigation?.navigate("(tabs)");
+//   }
+// });
 
 // This hook will protect the route access based on user authentication.
 function useProtectedRoute(user) {
   const [isNavigationReady, setNavigationReady] = useState(false);
+  const [isUserReady, setUserReady] = useState(false);
   const rootNavigation = useRootNavigation();
   const segments = useSegments();
 
+  const navigation = useNavigation();
+
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+      if (!user) {
+        //@ts-ignore
+        console.log("onAuthStateChange USEEFFET", user);
+        setUserReady(true);
+
+        //navigation?.navigate("(auth)");
+        //router.replace("/signIn");
+        //SplashScreen.hideAsync();
+      } else {
+        console.log("onAuthStateChange We have a User: ", user);
+        setUserReady(true);
+        //@ts-ignore
+        //navigation?.navigate("(tabs)");
+        //router.replace("/");
+        //SplashScreen.hideAsync();
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const usePrevious = (value, initialValue) => {
+    const ref = useRef(initialValue);
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  };
+
+  const useEffectDebugger = (
+    effectHook,
+    dependencies,
+    dependencyNames = [],
+  ) => {
+    const previousDeps = usePrevious(dependencies, []);
+
+    const changedDeps = dependencies.reduce((accum, dependency, index) => {
+      if (dependency !== previousDeps[index]) {
+        const keyName = dependencyNames[index] || index;
+        return {
+          ...accum,
+          [keyName]: {
+            before: previousDeps[index],
+            after: dependency,
+          },
+        };
+      }
+
+      return accum;
+    }, {});
+
+    if (Object.keys(changedDeps).length) {
+      console.log("[use-effect-debugger] ", changedDeps);
+    }
+
+    useEffect(effectHook, dependencies);
+  };
+
+  useEffectDebugger(() => {
     const unsubscribe = rootNavigation?.addListener("state", (event) => {
       // console.log("INFO: rootNavigation?.addListener('state')", event);
       setNavigationReady(true);
@@ -48,13 +122,18 @@ function useProtectedRoute(user) {
     };
   }, [rootNavigation]);
 
-  React.useEffect(() => {
-    const inAuthGroup = segments[0] === "(auth)";
-
+  useEffectDebugger(() => {
     if (!isNavigationReady) {
-      console.log("AAAA:", isNavigationReady, user);
       return;
     }
+
+    const inAuthGroup = segments[0] === "(auth)";
+
+    if (!isNavigationReady || !isUserReady) {
+      console.log("AAAA1111:", isNavigationReady, isUserReady, segments, user);
+      return;
+    }
+    console.log("AAAA2222:", isNavigationReady, isUserReady, segments, user);
 
     if (
       // If the user is not signed in and the initial segment is not anything in the auth group.
@@ -62,40 +141,40 @@ function useProtectedRoute(user) {
       !user &&
       !inAuthGroup
     ) {
-      console.log("BBB");
+      console.log("BBB", isNavigationReady, isUserReady, segments, user);
       // Redirect to the sign-in page.
       if (Platform.OS === "ios") {
         setTimeout(() => {
-          console.log("BBB.1");
+          console.log("BBB.1", isNavigationReady, isUserReady, segments, user);
           router.replace("/signIn");
         }, 1);
       } else {
-        console.log("BBB.2");
+        console.log("BBB.2", isNavigationReady, isUserReady, segments, user);
         setImmediate(() => {
           router.replace("/signIn");
         });
       }
-    } else if (user && inAuthGroup) {
-      console.log("CCCC");
+    } else if (user && inAuthGroup && isUserReady) {
+      console.log("CCCC", isNavigationReady, isUserReady, segments, user);
       // Redirect away from the sign-in page.
       //router.replace("/");
 
       if (Platform.OS === "ios") {
         setTimeout(() => {
-          console.log("CCCC./");
+          console.log("CCCC./", isNavigationReady, isUserReady, segments, user);
           router.replace("/");
         }, 1);
       } else {
         setImmediate(() => {
-          console.log("CCCC./");
+          console.log("CCCC./", isNavigationReady, isUserReady, segments, user);
           router.replace("/");
         });
       }
     } else {
-      console.log("DDD");
+      console.log("DDD:", isNavigationReady, isUserReady, segments, user);
       SplashScreen.hideAsync();
     }
-  }, [user, segments, isNavigationReady]);
+  }, [user, isUserReady, segments, isNavigationReady]);
 }
 
 const AuthProvider = ({ children }) => {
@@ -108,6 +187,8 @@ const AuthProvider = ({ children }) => {
         const user = JSON.parse(jsonValue);
         if (user && user.uid) {
           setSharedDataUser(user);
+        } else {
+          setSharedDataUser("");
         }
       }
     });
@@ -179,6 +260,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const signOut = async () => {
+    console.log("signOut");
+    auth.signOut(); //sign out of firebase
     AsyncStorage.removeItem("@USER");
     setSharedDataUser(null);
   };
