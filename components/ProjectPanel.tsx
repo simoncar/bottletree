@@ -31,8 +31,6 @@ const Project = (props) => {
             icon: icon,
           });
 
-          console.log("ggggggg:", archived);
-
           router.push({
             pathname: "/editProject",
             params: {
