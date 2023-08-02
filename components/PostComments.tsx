@@ -135,7 +135,13 @@ const styles = StyleSheet.create({
   },
   commentText: {},
   commentUserName: { fontWeight: "bold", paddingRight: 4 },
-  commentView: { flexDirection: "row", paddingLeft: 10, paddingTop: 10 },
+  commentView: {
+    flexDirection: "row",
+    marginRight: 20,
+    paddingLeft: 10,
+    paddingRight: 20,
+    paddingTop: 10,
+  },
   commentsOverall: {},
   inputAction: { marginHorizontal: 8, paddingTop: 5 },
   inputContainer: {
