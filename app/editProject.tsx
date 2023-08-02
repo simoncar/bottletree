@@ -22,15 +22,24 @@ import { ProjectUsers } from "../components/ProjectUsers";
 
 export default function editPost() {
   const { sharedData, updateSharedDataProject } = useProject();
-  const { projectId, projectTitle, photoURL, archived } = useLocalSearchParams<{
-    projectId: string;
-    projectTitle: string;
-    photoURL: string;
-    archived: boolean;
-  }>();
+  const { projectId, projectTitle, photoURL, pArchived } =
+    useLocalSearchParams<{
+      projectId: string;
+      projectTitle: string;
+      photoURL: string;
+      pArchived: boolean;
+    }>();
+
+  console.log("ffffffffffff", pArchived);
+
+  const archived: boolean = pArchived === "true";
+  console.log("TypeOf param:", typeof archived);
+
+  console.log("editProject", archived);
+
   const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
   const [text, onChangeText] = useState(projectTitle);
-  const [archivedFlag, onChangeArchived] = useState(archived);
+  const [archivedFlag, onChangeArchived] = useState<boolean>(archived);
   const colorScheme = useColorScheme();
 
   const { showActionSheetWithOptions } = useActionSheet();
@@ -49,6 +58,8 @@ export default function editPost() {
   };
 
   const save = (downloadURL: string, archived: boolean) => {
+    console.log("save", archived);
+
     updateProject(
       {
         key: projectId,
@@ -122,6 +133,8 @@ export default function editPost() {
     );
   };
 
+  console.log("editProject - archiveFlag:", archivedFlag);
+
   return (
     <SafeAreaView>
       <Stack.Screen
@@ -148,6 +161,12 @@ export default function editPost() {
             multiline
           />
         </View>
+        <View style={styles.archiveBox}>
+          <Text style={styles.archiveMessage}>
+            {" "}
+            {archivedFlag == true ? "Project Archived" : ""}
+          </Text>
+        </View>
       </View>
 
       <ProjectUsers project={projectId} />
@@ -155,8 +174,14 @@ export default function editPost() {
       <Pressable
         style={styles.outerView}
         onPress={() => {
-          onChangeArchived(!archivedFlag);
-          save(textPhotoURL, archivedFlag);
+          const currentArchivedFlag = archivedFlag;
+          console.log("1111", currentArchivedFlag);
+          console.log("222", !currentArchivedFlag);
+          console.log(typeof archivedFlag);
+          console.log("onPress", currentArchivedFlag, !currentArchivedFlag);
+
+          onChangeArchived(!currentArchivedFlag);
+          save(textPhotoURL, !currentArchivedFlag);
         }}>
         <View style={styles.avatar}>
           <Ionicons
@@ -167,22 +192,38 @@ export default function editPost() {
         </View>
         <View>
           <Text style={styles.name}>
-            {archivedFlag ? "Unarchive Project" : "Archive Project"}
+            {archivedFlag == true ? "Unarchive Project" : "Archive Project"}
           </Text>
         </View>
       </Pressable>
+
+      <View style={styles.diagBox}>
+        <Text style={styles.archiveMessage}>Project ID: {projectId}</Text>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  archiveBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    width: "85%",
+  },
+  archiveMessage: {
+    color: "grey",
+    fontSize: 16,
+    paddingLeft: 20,
+  },
+
   avatar: { alignItems: "center", justifyContent: "center", width: 48 },
+
   avatarAContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 20,
   },
-
   avatarBView: {},
   camera: {
     color: "white",
@@ -201,10 +242,18 @@ const styles = StyleSheet.create({
     top: 115,
     width: 30,
   },
+  diagBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    paddingTop: 100,
+    width: "85%",
+  },
   name: {
     fontSize: 20,
     paddingLeft: 20,
   },
+
   outerView: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
@@ -214,7 +263,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
-
   profilePhoto: {
     borderColor: "grey",
     borderRadius: 150 / 2,

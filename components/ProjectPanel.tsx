@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { Link, router } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -12,6 +12,7 @@ const Project = (props) => {
   const { project, title, icon, archived, page } = props;
   const { updateSharedDataProject } = useContext(ProjectContext);
   const colorScheme = useColorScheme();
+  const router = useRouter();
 
   return (
     <View
@@ -30,13 +31,15 @@ const Project = (props) => {
             icon: icon,
           });
 
-          router.replace({
+          console.log("ggggggg:", archived);
+
+          router.push({
             pathname: "/editProject",
             params: {
               projectId: project,
               projectTitle: title,
               photoURL: icon,
-              archived: archived,
+              pArchived: archived,
             },
           });
         }}>

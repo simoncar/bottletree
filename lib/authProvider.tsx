@@ -130,10 +130,8 @@ function useProtectedRoute(user) {
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!isNavigationReady || !isUserReady) {
-      console.log("AAAA1111:", isNavigationReady, isUserReady, segments, user);
       return;
     }
-    console.log("AAAA2222:", isNavigationReady, isUserReady, segments, user);
 
     if (
       // If the user is not signed in and the initial segment is not anything in the auth group.
@@ -141,37 +139,30 @@ function useProtectedRoute(user) {
       !user &&
       !inAuthGroup
     ) {
-      console.log("BBB", isNavigationReady, isUserReady, segments, user);
       // Redirect to the sign-in page.
       if (Platform.OS === "ios") {
         setTimeout(() => {
-          console.log("BBB.1", isNavigationReady, isUserReady, segments, user);
           router.replace("/signIn");
         }, 1);
       } else {
-        console.log("BBB.2", isNavigationReady, isUserReady, segments, user);
         setImmediate(() => {
           router.replace("/signIn");
         });
       }
     } else if (user && inAuthGroup && isUserReady) {
-      console.log("CCCC", isNavigationReady, isUserReady, segments, user);
       // Redirect away from the sign-in page.
       //router.replace("/");
 
       if (Platform.OS === "ios") {
         setTimeout(() => {
-          console.log("CCCC./", isNavigationReady, isUserReady, segments, user);
           router.replace("/");
         }, 1);
       } else {
         setImmediate(() => {
-          console.log("CCCC./", isNavigationReady, isUserReady, segments, user);
           router.replace("/");
         });
       }
     } else {
-      console.log("DDD:", isNavigationReady, isUserReady, segments, user);
       SplashScreen.hideAsync();
     }
   }, [user, isUserReady, segments, isNavigationReady]);

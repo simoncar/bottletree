@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -42,6 +42,9 @@
     },
     "updates": {
       "url": "https://u.expo.dev/c4340333-f23a-41cb-a647-97dee3bc0a01"
+    },
+    "experiments": {
+      "typedRoutes": true
     },
     "plugins": [
       [
