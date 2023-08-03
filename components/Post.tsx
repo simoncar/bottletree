@@ -16,6 +16,11 @@ const Post = (props) => {
   const imageUrls = post.images && post.images.map((image) => image);
 
   let caption = "";
+  let ratio = 0.66666;
+  if (typeof post.ratio === "number") {
+    ratio = Number(post.ratio);
+  }
+  console.log("ratio: ", ratio);
 
   if (post.caption != undefined) {
     caption = post.caption;
@@ -50,6 +55,7 @@ const Post = (props) => {
                 project: post.projectId,
                 key: post.key,
                 image: imageUrls,
+                raio: post.ratio,
                 caption: caption,
               },
             });
@@ -72,7 +78,7 @@ const Post = (props) => {
           panGestureHandlerProps={{
             activeOffsetX: [-10, 10],
           }}
-          height={width / 1.5}
+          height={width * ratio}
           data={imageUrls}
           renderItem={({ index }) => (
             <Pressable
@@ -100,6 +106,7 @@ const Post = (props) => {
                     uri: imageUrls[index],
                   }}
                   placeholder={blurhash}
+                  contentFit="contain"
                 />
               </View>
             </Pressable>

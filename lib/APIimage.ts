@@ -1,4 +1,3 @@
-import * as ImageManipulator from "expo-image-manipulator";
 import * as ImagePicker from "expo-image-picker";
 import { storage } from "./firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -61,8 +60,9 @@ async function processItemAsync(asset, progressCallback) {
               const p = getDownloadURL(uploadTask.snapshot.ref).then(
                 (downloadURL) => {
                   console.log("File available at", downloadURL);
-
-                  resolve(downloadURL);
+                  console.log("dimensions", asset.height, asset.width);
+                  const ratio = asset.height / asset.width;
+                  resolve(ratio + "*" + downloadURL);
                 },
               );
             },

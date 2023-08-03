@@ -63,8 +63,18 @@ export default function addPhoto() {
   const progressCallback = (progress: number) => {
     setProgress(progress);
   };
-  const completedCallback = (downloadURLarray) => {
-    console.log("addImageCallback: ", downloadURLarray);
+  const completedCallback = (sourceDownloadURLarray) => {
+    console.log("addImageCallback >>>>>>>: ", sourceDownloadURLarray);
+    let ratio = 0.66666;
+    const downloadURLarray = sourceDownloadURLarray.map((element) => {
+      const myArray = element.split("*");
+      console.log("myArray: ", myArray);
+      if (myArray[0] > ratio) {
+        ratio = myArray[0];
+      }
+
+      return myArray[1]; // For example, creating a new array with each element doubled.
+    });
 
     setImage(null);
 
@@ -73,7 +83,10 @@ export default function addPhoto() {
       caption: "",
       projectId: sharedDataProject.key,
       images: downloadURLarray,
+      ratio: ratio,
     };
+
+    console.log(post);
 
     addPost(post, saveDone);
     setProgress(0);
