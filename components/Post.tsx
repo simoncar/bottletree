@@ -20,7 +20,6 @@ const Post = (props) => {
   if (typeof post.ratio === "number") {
     ratio = Number(post.ratio);
   }
-  console.log("ratio: ", ratio);
 
   if (post.caption != undefined) {
     caption = post.caption;

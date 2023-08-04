@@ -36,8 +36,6 @@ export default function editCalendar() {
       puid: string;
     }>();
 
-  console.log("pkey", pkey);
-
   const [title, onChangeTitle] = useState(ptitle);
   const [description, onChangeDescription] = useState(pdescription);
 

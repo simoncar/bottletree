@@ -106,14 +106,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name="addPost"
         options={{
-          title: "Empty",
+          title: "Add",
           tabBarButton: () => (
             <Pressable
               onPress={() => {
                 openActionSheet();
               }}
               style={styles.tabButton}>
-              <TabBarIcon name="plus-square" color={"white"} />
+              <TabBarIcon
+                style={styles.tabIcon}
+                name="plus-square"
+                color={"white"}
+              />
             </Pressable>
           ),
         }}
@@ -146,8 +150,10 @@ const styles = StyleSheet.create({
     borderRadius: 55 / 2,
     height: 55,
     justifyContent: "center",
-    marginTop: -9,
-    paddingLeft: 0,
     width: 55,
+  },
+  tabIcon: {
+    paddingBottom: 0,
+    paddingLeft: 1,
   },
 });

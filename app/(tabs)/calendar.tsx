@@ -65,10 +65,6 @@ export default function Calendar() {
     return <Text style={styles.timeText}>{time}</Text>;
   };
 
-  const renderLocation = (reservation: any) => {
-    return;
-  };
-
   const renderItem = (reservation: any, isFirst: boolean) => {
     const colorPanel = Colors[colorScheme ?? "light"].calendarPanel;
 
@@ -105,7 +101,6 @@ export default function Calendar() {
         </Text>
         <ParsedText style={styles.description} text={reservation.description} />
         {renderTime(reservation)}
-        {renderLocation(reservation)}
       </TouchableOpacity>
     );
   };

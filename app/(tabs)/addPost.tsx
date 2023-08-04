@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View, Button } from "../../components/Themed";
 import { addPost } from "../../lib/APIpost";
@@ -14,6 +14,10 @@ export default function addPhoto() {
 
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    pickImage();
+  }, []);
 
   const saveDone = () => {
     router.push({
