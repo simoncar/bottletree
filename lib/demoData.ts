@@ -60,12 +60,12 @@ export const demoData = async () => {
       doc(db, "calendar", "calendar11111111"),
       {
         description:
-          "Here is the details of the installer https://kitchen.com or give them a call",
+          "A. Here is the details of the installer https://kitchen.com or give them a call",
         title: "Install the Kitchen",
         dateBegin: Timestamp.fromDate(new Date()),
         dateEnd: Timestamp.fromDate(new Date()),
         uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-        projectId: "73JwAXeOEhLXUggpVKK9",
+        projectId: "project22222222",
       },
       { merge: true },
     );
@@ -79,12 +79,12 @@ export const demoData = async () => {
       doc(db, "calendar", "calendar22222222"),
       {
         description:
-          "Will use quality paint from Bunnings color code Cool Grey (#8D99AE)",
+          "B. Will use quality paint from Bunnings color code Cool Grey (#8D99AE)",
         title: "Paint the walls",
         dateBegin: Timestamp.fromDate(new Date()),
         dateEnd: Timestamp.fromDate(date),
         uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-        projectId: "73JwAXeOEhLXUggpVKK9",
+        projectId: "project11111111",
       },
       { merge: true },
     );

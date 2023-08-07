@@ -58,7 +58,7 @@ export default function editPost() {
   };
 
   const save = (downloadURL: string, archived: boolean) => {
-    console.log("save", archived);
+    console.log("save", archived, downloadURL);
 
     updateProject(
       {
@@ -75,13 +75,27 @@ export default function editPost() {
     console.log("progressCallback: " + progress);
   };
 
-  const addImageCallback = (downloadURL: string) => {
-    onChangeTextPhotoURL(downloadURL);
+  const completedCallback = (sourceDownloadURLarray) => {
+    console.log("completedCallback:", sourceDownloadURLarray);
+    let ratio = 0.66666;
+    const downloadURLarray = sourceDownloadURLarray.map((element) => {
+      const myArray = element.split("*");
+      console.log("myArray: ", myArray);
+      if (myArray[0] > ratio) {
+        ratio = myArray[0];
+      }
+
+      return myArray[1]; // For example, creating a new array with each element doubled.
+    });
+
+    onChangeTextPhotoURL(downloadURLarray[0]);
+
+    console.log("onChangeTextPhotoURL:", downloadURLarray);
   };
 
   const pickImage = async () => {
     const multiple = false;
-    addImage(multiple, progressCallback, addImageCallback);
+    addImage(multiple, progressCallback, completedCallback);
   };
 
   const openActionSheet = async () => {
@@ -163,7 +177,6 @@ export default function editPost() {
         </View>
         <View style={styles.archiveBox}>
           <Text style={styles.archiveMessage}>
-            {" "}
             {archivedFlag == true ? "Project Archived" : ""}
           </Text>
         </View>

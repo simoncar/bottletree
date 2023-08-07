@@ -107,7 +107,7 @@ export default function addPhoto() {
       <View style={styles.container}>
         <Text style={styles.title}>
           Select a Project first and then try again.
-        </Text>
+        </Text>p
       </View>
     );
   } else {
