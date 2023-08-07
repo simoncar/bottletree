@@ -40,7 +40,7 @@ export default function editUser() {
   const save = () => {
     console.log("save: " + sharedDataUser.displayName);
 
-    updateAccountName(text); 
+    updateAccountName(text);
 
     updateSharedDataUser({ displayName: text });
     router.push({
@@ -52,10 +52,23 @@ export default function editUser() {
     console.log("progressCallback: " + progress);
   };
 
-  const addImageCallback = (downloadURL: string) => {
-    onChangeTextPhotoURL(downloadURL);
-    updateAccountPhotoURL(downloadURL); //firebease auth update function
-    updateSharedDataUser({ photoURL: downloadURL });
+  const completedCallback = (sourceDownloadURLarray) => {
+    console.log("completedCallback:", sourceDownloadURLarray);
+
+    let ratio = 0.66666;
+    const downloadURLarray = sourceDownloadURLarray.map((element) => {
+      const myArray = element.split("*");
+      console.log("myArray: ", myArray);
+      if (myArray[0] > ratio) {
+        ratio = myArray[0];
+      }
+
+      return myArray[1]; // For example, creating a new array with each element doubled.
+    });
+
+    onChangeTextPhotoURL(downloadURLarray[0]);
+    updateAccountPhotoURL(downloadURLarray[0]); //firebease auth update function
+    updateSharedDataUser({ photoURL: downloadURLarray[0] });
     //  setImage(null);
     //  addPost(
     //      {
@@ -67,10 +80,9 @@ export default function editUser() {
     //  );
   };
 
-  const pickImage = async () =>
-  {
+  const pickImage = async () => {
     const multiple = false;
-    addImage(multiple, progressCallback, addImageCallback);
+    addImage(multiple, progressCallback, completedCallback);
   };
 
   const openActionSheet = async () => {
