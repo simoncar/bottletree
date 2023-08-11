@@ -290,7 +290,6 @@ const styles = StyleSheet.create({
   descriptionView: {
     alignItems: "center",
     flexDirection: "row",
-
     justifyContent: "flex-start",
     paddingVertical: 8,
     padding: 8,

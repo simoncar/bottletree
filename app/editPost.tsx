@@ -84,14 +84,17 @@ export default function editPost() {
         }}
       />
       <ScrollView>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => onChangeText(text)}
-          placeholder={"Write a caption..."}
-          value={text}
-          autoFocus
-          multiline
-        />
+        <View style={styles.descriptionView}>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => onChangeText(text)}
+            placeholder={"Write a caption..."}
+            value={text}
+            autoFocus
+            multiline
+            textAlignVertical="top"
+          />
+        </View>
         {image && <Image source={image} style={styles.storyPhoto} />}
         <View style={styles.outerView}>
           <View style={styles.leftContent}></View>
@@ -111,9 +114,15 @@ export default function editPost() {
 }
 
 const styles = StyleSheet.create({
+  descriptionView: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingVertical: 8,
+    padding: 8,
+  },
   input: {
     fontSize: 20,
-    height: 140,
     margin: 12,
     padding: 10,
     paddingLeft: 20,
