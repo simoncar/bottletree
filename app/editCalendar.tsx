@@ -22,6 +22,7 @@ import { ICalendarEvent } from "../lib/types";
 import { Timestamp } from "firebase/firestore";
 import { useAuth } from "../lib/authProvider";
 import { Image } from "expo-image";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function editCalendar() {
   const { sharedDataProject } = useProject();
@@ -177,94 +178,99 @@ export default function editCalendar() {
           ),
         }}
       />
+      <ScrollView>
+        <View style={[styles.itemView, styles.line]}>
+          <View style={styles.avatar}></View>
+          <View style={styles.title}>
+            <TextInput
+              style={styles.titleText}
+              onChangeText={(title) => onChangeTitle(title)}
+              placeholder={"Add title"}
+              value={title}
+              autoFocus={true}
+            />
+          </View>
+        </View>
 
-      <View style={[styles.itemView, styles.line]}>
-        <View style={styles.avatar}></View>
-        <View style={styles.title}>
+        <View style={styles.itemView}>
+          <View style={styles.avatar}></View>
+          <View style={styles.date}>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateBegin}
+              mode={"date"}
+              is24Hour={true}
+              onChange={onChangedateBegin}
+            />
+          </View>
+          <View style={styles.right}>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateBeginTime}
+              mode={"time"}
+              is24Hour={true}
+              onChange={onChangeBeginTime}
+            />
+          </View>
+        </View>
+
+        <View style={styles.itemView}>
+          <View style={styles.avatar}></View>
+          <View style={styles.date}>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateEnd}
+              mode={"date"}
+              is24Hour={true}
+              onChange={onChangedateEnd}
+            />
+          </View>
+          <View style={styles.right}>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateEndTime}
+              mode={"time"}
+              is24Hour={true}
+              onChange={onChangeEndTime}
+            />
+          </View>
+        </View>
+
+        <View style={[styles.descriptionView, styles.line]}>
+          <View style={styles.avatar}>
+            <Feather
+              name="align-left"
+              size={25}
+              color={Colors[colorScheme ?? "light"].textPlaceholder}
+            />
+          </View>
           <TextInput
-            style={styles.titleText}
-            onChangeText={(title) => onChangeTitle(title)}
-            placeholder={"Add title"}
-            value={title}
-            autoFocus={true}
+            style={styles.textDescription}
+            onChangeText={(description) => onChangeDescription(description)}
+            placeholder={"Add description"}
+            value={description}
+            multiline
+            numberOfLines={6}
+            autoCapitalize="none"
+            textAlignVertical="top"
           />
         </View>
-      </View>
 
-      <View style={styles.itemView}>
-        <View style={styles.avatar}></View>
-        <View style={styles.date}>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={dateBegin}
-            mode={"date"}
-            is24Hour={true}
-            onChange={onChangedateBegin}
-          />
+        <View style={[styles.itemView, styles.line]}>
+          <View style={styles.avatar}>
+            <Image
+              style={styles.projectAvatar}
+              source={sharedDataProject.icon}
+            />
+          </View>
+          <View style={styles.title}>
+            <Text style={styles.actionTitle}>{sharedDataProject.title}</Text>
+          </View>
         </View>
-        <View style={styles.right}>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={dateBeginTime}
-            mode={"time"}
-            is24Hour={true}
-            onChange={onChangeBeginTime}
-          />
-        </View>
-      </View>
 
-      <View style={styles.itemView}>
-        <View style={styles.avatar}></View>
-        <View style={styles.date}>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={dateEnd}
-            mode={"date"}
-            is24Hour={true}
-            onChange={onChangedateEnd}
-          />
-        </View>
-        <View style={styles.right}>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={dateEndTime}
-            mode={"time"}
-            is24Hour={true}
-            onChange={onChangeEndTime}
-          />
-        </View>
-      </View>
-
-      <View style={[styles.descriptionView, styles.line]}>
-        <View style={styles.avatar}>
-          <Feather
-            name="align-left"
-            size={25}
-            color={Colors[colorScheme ?? "light"].textPlaceholder}
-          />
-        </View>
-        <TextInput
-          style={styles.textDescription}
-          onChangeText={(description) => onChangeDescription(description)}
-          placeholder={"Add description"}
-          value={description}
-          multiline
-          numberOfLines={6}
-          autoCapitalize="none"
-          textAlignVertical="top"
-        />
-      </View>
-
-      <View style={[styles.itemView, styles.line]}>
-        <View style={styles.avatar}>
-          <Image style={styles.projectAvatar} source={sharedDataProject.icon} />
-        </View>
-        <View style={styles.title}>
-          <Text style={styles.actionTitle}>{sharedDataProject.title}</Text>
-        </View>
-      </View>
-
-      {renderDelete()}
+        {renderDelete()}
+        <View style={styles.bottom}></View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -274,6 +280,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   avatar: { alignItems: "center", justifyContent: "flex-start", width: 48 },
+  bottom: { paddingBottom: 500 },
   date: {
     alignItems: "flex-start",
     flex: 1,
@@ -296,19 +303,19 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
+
   line: {
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
 
   projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
-
   right: { paddingRight: 8 },
   textDescription: {
     fontSize: 16,
   },
-  title: { flex: 1, justifyContent: "flex-start" },
 
+  title: { flex: 1, justifyContent: "flex-start" },
   titleText: {
     fontSize: 20,
   },
