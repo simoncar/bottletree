@@ -14,11 +14,12 @@ import { updatePost, deletePost } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
 import { TextInput, View } from "../components/Themed";
 import Colors from "../constants/Colors";
-import { IPost } from "../lib/types";
+import { IPost, IProject } from "../lib/types";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function editPost() {
-  const { sharedDataProject } = useContext(ProjectContext);
+  const { sharedDataProject } = useContext<IProject>(ProjectContext);
+
   const { key, image, caption } = useLocalSearchParams();
   const [text, onChangeText] = useState(caption?.toString() ?? "");
   const colorScheme = useColorScheme();
@@ -34,6 +35,10 @@ export default function editPost() {
   };
 
   const save = () => {
+    console.log("save:", sharedDataProject);
+    console.log("sharedDataProject.key:", sharedDataProject.key);
+    console.log("sharedDataProject.caption:", sharedDataProject.title);
+
     const post: IPost = {
       projectId: sharedDataProject.key,
       key: key?.toString() ?? "",
