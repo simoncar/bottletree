@@ -66,6 +66,7 @@ const Comments = ({ project, post }: Props) => {
             }}
             value={text}
             autoFocus
+            multiline
           />
           <Pressable
             style={styles.inputAction}

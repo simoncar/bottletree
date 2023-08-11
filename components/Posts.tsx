@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   footer: {
+    paddingBottom: 500,
     paddingTop: 100,
   },
 

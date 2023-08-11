@@ -15,6 +15,7 @@ import ProjectContext from "../lib/projectContext";
 import { TextInput, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { IPost } from "../lib/types";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function editPost() {
   const { sharedDataProject } = useContext(ProjectContext);
@@ -77,27 +78,29 @@ export default function editPost() {
           headerRight: () => <Button title="Done" onPress={() => save()} />,
         }}
       />
-      {image && <Image source={image} style={styles.storyPhoto} />}
-      <View style={styles.outerView}>
-        <View style={styles.leftContent}></View>
-        <TouchableOpacity onPress={onDelete}>
-          <View style={styles.rightChevron}>
-            <FontAwesome5
-              name="trash-alt"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => onChangeText(text)}
-        placeholder={"Write a caption..."}
-        value={text}
-        autoFocus
-        multiline
-      />
+      <ScrollView>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => onChangeText(text)}
+          placeholder={"Write a caption..."}
+          value={text}
+          autoFocus
+          multiline
+        />
+        {image && <Image source={image} style={styles.storyPhoto} />}
+        <View style={styles.outerView}>
+          <View style={styles.leftContent}></View>
+          <TouchableOpacity onPress={onDelete}>
+            <View style={styles.rightChevron}>
+              <FontAwesome5
+                name="trash-alt"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

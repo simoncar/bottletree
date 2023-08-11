@@ -59,6 +59,14 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/notification.png",
+          "color": "#ffffff",
+          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
+        }
+      ],
       "sentry-expo",
       "expo-router"
     ]
