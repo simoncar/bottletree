@@ -8,7 +8,7 @@ import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
-import { registerForPushNotificationsAsync } from "../lib/notifications";
+
 import { demoData } from "../lib/demoData";
 
 export const Posts = () => {
@@ -44,8 +44,6 @@ export const Posts = () => {
       );
       demoData();
 
-      registerForPushNotificationsAsync();
-
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {
         unsubscribe;
@@ -61,6 +59,7 @@ export const Posts = () => {
     );
     if (sharedDataUser && undefined != currentProject?.key) {
       const unsubscribe = getPosts(currentProject.key, postsRead);
+
       return () => {
         unsubscribe;
       };

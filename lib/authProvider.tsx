@@ -6,6 +6,7 @@ import {
   SplashScreen,
 } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { registerForPushNotificationsAsync } from "../lib/notifications";
 import AuthContext from "./authContext";
 import React, { useEffect, useState, useRef } from "react";
 import {
@@ -20,7 +21,6 @@ import {
 import { Platform } from "react-native";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
-
 
 // This hook can be used to access the user info.
 export function useAuth() {
@@ -63,6 +63,8 @@ function useProtectedRoute(user) {
       } else {
         //console.log("onAuthStateChange We have a User: ", user);
         setUserReady(true);
+        registerForPushNotificationsAsync();
+        console.log("onAuthStateChange We have a User: ", user);
         //@ts-ignore
         //navigation?.navigate("(tabs)");
         //router.replace("/");
@@ -241,9 +243,7 @@ const AuthProvider = ({ children }) => {
       AsyncStorage.setItem("@USER", JSON.stringify(user));
 
       return { user: auth.currentUser };
-    
-    } catch (error)
-    {
+    } catch (error) {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;

@@ -33,6 +33,14 @@ export interface IComment {
   uid: string;
 }
 
+export interface IPushToken {
+  key: string;
+  pushToken: string;
+  uid?: string;
+  displayName?: string;
+  timestamp?: Timestamp;
+}
+
 export interface ICalendarEvent {
   key?: string;
   dateBegin: Timestamp;

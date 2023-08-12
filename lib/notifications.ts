@@ -1,5 +1,7 @@
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import { setToken } from "./APINotification";
+import { IPushToken } from "./types";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -9,7 +11,13 @@ Notifications.setNotificationHandler({
   }),
 });
 
+const saveDone = (id: string) => {
+  console.log("saveDone", id);
+};
+
 export async function registerForPushNotificationsAsync() {
+  console.log("registerForPushNotificationsAsync");
+
   let token;
   if (Device.isDevice) {
     const { status: existingStatus } =
@@ -28,6 +36,19 @@ export async function registerForPushNotificationsAsync() {
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     console.log(token);
+
+    if (token) {
+      let safeToken = token.replace("[", "");
+      safeToken = safeToken.replace("]", "");
+      safeToken = safeToken.replace("ExponentPushToken", "");
+
+      const pushToken: IPushToken = {
+        key: safeToken,
+        pushToken: token,
+      };
+
+      setToken(pushToken, saveDone);
+    }
   } else {
     //alert("Must use physical device for Push Notifications");
   }
