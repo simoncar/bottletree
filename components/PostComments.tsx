@@ -53,6 +53,11 @@ const Comments = ({ project, post }: Props) => {
     addComment(project, post, comment, saveDone);
   };
 
+  const displayName = (displayName: string) => {
+    const replacedString = displayName.replace(/ /g, " #");
+    return "#" + replacedString;
+  };
+
   const renderInput = () => {
     if (action) {
       return (
@@ -70,6 +75,7 @@ const Comments = ({ project, post }: Props) => {
           />
           <Pressable
             style={styles.inputAction}
+            hitSlop={10}
             onPress={() => {
               save();
             }}>
@@ -107,7 +113,7 @@ const Comments = ({ project, post }: Props) => {
             <ParsedText
               selectable
               style={styles.commentText}
-              text={"#" + item.displayName + " " + item.comment}
+              text={displayName(item.displayName) + " " + item.comment}
             />
           </View>
         )}

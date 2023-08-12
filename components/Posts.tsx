@@ -10,6 +10,7 @@ import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
 
 import { demoData } from "../lib/demoData";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const Posts = () => {
   const { sharedDataUser } = useAuth();
@@ -117,6 +118,7 @@ export const Posts = () => {
             keyExtractor={(item, index) => getKey(item)}
             ListEmptyComponent={renderEmpty}
             ListFooterComponent={renderFooter}
+            keyboardShouldPersistTaps={"handled"}
           />
         </View>
       </View>
