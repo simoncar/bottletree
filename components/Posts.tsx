@@ -73,18 +73,20 @@ export const Posts = () => {
   };
 
   const renderEmpty = () => {
-    return (
-      <View style={styles.loginBtn}>
-        <TouchableOpacity
-          onPress={() => {
-            router.push({
-              pathname: "/addPost",
-            });
-          }}>
-          <Text style={styles.buttonText}>Add the first post</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if (undefined != currentProject?.key) {
+      return (
+        <View style={styles.loginBtn}>
+          <TouchableOpacity
+            onPress={() => {
+              router.push({
+                pathname: "/addPost",
+              });
+            }}>
+            <Text style={styles.buttonText}>Add the first post</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   };
 
   const renderFooter = () => {
