@@ -99,6 +99,8 @@ export async function getComments(projectId: string, postId: string) {
     });
   });
 
+  console.log("comments: ", comments);
+
   return comments;
 }
 
