@@ -31,6 +31,7 @@ const Comments = ({ project, post }: Props) => {
   useEffect(() => {
     getComments(project, post).then((comments) => {
       setComments(comments);
+      setSaved(false);
     });
   }, [saved]);
 
