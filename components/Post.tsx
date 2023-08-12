@@ -55,12 +55,13 @@ const Post = (props) => {
                 key: post.key,
                 image: imageUrls,
                 caption: caption || "",
+                ratio: ratio,
               },
             });
           }}>
           <View style={styles.imageContainer}>
             <Image
-              style={styles.image}
+              style={[styles.image, { height: width * ratio }]}
               source={{
                 uri: imageUrls[0],
               }}
@@ -88,6 +89,7 @@ const Post = (props) => {
                     key: post.key,
                     image: imageUrls[index],
                     caption: caption,
+                    ratio: ratio,
                   },
                 });
               }}
@@ -99,7 +101,7 @@ const Post = (props) => {
               ]}>
               <View style={styles.imageContainer}>
                 <Image
-                  style={styles.image}
+                  style={[styles.image, { height: width * ratio }]}
                   source={{
                     uri: imageUrls[index],
                   }}
@@ -130,7 +132,6 @@ const styles = StyleSheet.create({
   image: {
     backgroundColor: "#0553",
     flex: 1,
-    height: 300,
     width: "100%",
   },
   imageContainer: {

@@ -7,6 +7,7 @@ import {
   Alert,
   useColorScheme,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { Image } from "expo-image";
 import { router, useLocalSearchParams, Stack } from "expo-router";
@@ -20,9 +21,10 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function editPost() {
   const { sharedDataProject } = useContext<IProject>(ProjectContext);
 
-  const { key, image, caption } = useLocalSearchParams();
+  const { key, image, caption, ratio } = useLocalSearchParams();
   const [text, onChangeText] = useState(caption?.toString() ?? "");
   const colorScheme = useColorScheme();
+  const { width } = Dimensions.get("window");
 
   const saveDone = () => {
     router.push({
@@ -95,7 +97,12 @@ export default function editPost() {
             textAlignVertical="top"
           />
         </View>
-        {image && <Image source={image} style={styles.storyPhoto} />}
+        {image && (
+          <Image
+            source={image}
+            style={[styles.storyPhoto, { height: width * ratio }]}
+          />
+        )}
         <View style={styles.outerView}>
           <View style={styles.leftContent}></View>
           <TouchableOpacity onPress={onDelete}>
