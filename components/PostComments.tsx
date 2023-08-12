@@ -104,13 +104,10 @@ const Comments = ({ project, post }: Props) => {
         data={comments}
         renderItem={({ item }) => (
           <View style={styles.commentView}>
-            <Text selectable style={styles.commentUserName}>
-              {item.displayName}
-            </Text>
             <ParsedText
               selectable
               style={styles.commentText}
-              text={item.comment}
+              text={"#" + item.displayName + " " + item.comment}
             />
           </View>
         )}
@@ -135,12 +132,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   commentText: {},
-  commentUserName: { fontWeight: "bold", paddingRight: 4 },
   commentView: {
     flexDirection: "row",
     marginRight: 20,
-    paddingLeft: 10,
-    paddingRight: 20,
     paddingTop: 10,
   },
   commentsOverall: {},
