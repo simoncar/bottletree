@@ -48,15 +48,6 @@ const Post = (props) => {
       return (
         <Pressable
           onPress={() => {
-            console.log(
-              "editPost:",
-              post.projectId,
-              post.key,
-              imageUrls,
-              post.ratio,
-              caption,
-            );
-
             router.push({
               pathname: "/editPost",
               params: {
