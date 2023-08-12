@@ -20,7 +20,7 @@ import {
 import { Platform } from "react-native";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
-import { demoData } from "../lib/demoData";
+
 
 // This hook can be used to access the user info.
 export function useAuth() {
@@ -228,17 +228,22 @@ const AuthProvider = ({ children }) => {
         screenEmail,
         screenPassword,
       );
+
       const user: IUser = {
         uid: convertToString(auth.currentUser.uid),
         email: convertToString(auth.currentUser.email),
         displayName: convertToString(auth.currentUser.displayName),
         photoURL: convertToString(auth.currentUser.photoURL),
       };
+
       setSharedDataUser(user);
+
       AsyncStorage.setItem("@USER", JSON.stringify(user));
-      demoData();
+
       return { user: auth.currentUser };
-    } catch (error) {
+    
+    } catch (error)
+    {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;

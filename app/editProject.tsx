@@ -188,11 +188,6 @@ export default function editPost() {
         style={styles.outerView}
         onPress={() => {
           const currentArchivedFlag = archivedFlag;
-          console.log("1111", currentArchivedFlag);
-          console.log("222", !currentArchivedFlag);
-          console.log(typeof archivedFlag);
-          console.log("onPress", currentArchivedFlag, !currentArchivedFlag);
-
           onChangeArchived(!currentArchivedFlag);
           save(textPhotoURL, !currentArchivedFlag);
         }}>

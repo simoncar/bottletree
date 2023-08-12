@@ -8,6 +8,8 @@ import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
+import { registerForPushNotificationsAsync } from "../lib/notifications";
+import { demoData } from "../lib/demoData";
 
 export const Posts = () => {
   const { sharedDataUser } = useAuth();
@@ -34,6 +36,9 @@ export const Posts = () => {
         "Posts: useEffect: currentProject.key",
         currentProject.archived,
       );
+      demoData();
+
+      registerForPushNotificationsAsync();
 
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {

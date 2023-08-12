@@ -56,6 +56,64 @@ export const demoData = async () => {
       { merge: true },
     );
 
+    const postRef2b = await setDoc(
+      doc(
+        db,
+        "projects",
+        "project22222222",
+        "users",
+        "Ml82nbzqwApMf5ogbB7EN2zll1sn",
+      ),
+      {
+        uid: "uid111111",
+        displayName: "Jenny Smith",
+        email: "simon@simon.co",
+        photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
+      },
+      { merge: true },
+    );
+    const postRef2c = await setDoc(
+      doc(db, "projects", "project22222222", "users", "user222222"),
+      {
+        uid: "uid22222",
+        displayName: "Chris Pater",
+        email: "simon@simon.co",
+        photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69",
+      },
+      { merge: true },
+    );
+
+    const postRef2d = await setDoc(
+      doc(
+        db,
+        "projects",
+        "project11111111",
+        "users",
+        "Ml82nbzqwApMf5ogbB7EN2zll1sn",
+      ),
+      {
+        uid: "uid111111",
+        displayName: "Jenny Smith",
+        email: "simon@simon.co",
+        photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
+      },
+      { merge: true },
+    );
+    const postRef2e = await setDoc(
+      doc(db, "projects", "project11111111", "users", "user222222"),
+      {
+        uid: "uid22222",
+        displayName: "Chris Pater",
+        email: "simon@simon.co",
+        photoURL:
+          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69",
+      },
+      { merge: true },
+    );
+
     const postRef3 = await setDoc(
       doc(db, "calendar", "calendar11111111"),
       {
