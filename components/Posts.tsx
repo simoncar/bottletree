@@ -31,6 +31,12 @@ export const Posts = () => {
   };
 
   useEffect(() => {
+    console.log(
+      "AAAA Posts: useEffect: currentProject.key",
+      currentProject,
+      sharedDataUser,
+    );
+
     if (sharedDataUser && undefined != currentProject) {
       console.log(
         "Posts: useEffect: currentProject.key",
@@ -48,17 +54,18 @@ export const Posts = () => {
   }, []);
 
   useEffect(() => {
+    console.log(
+      "BBBBPosts: useEffect: currentProject.key",
+      currentProject,
+      sharedDataUser,
+    );
     if (sharedDataUser && undefined != currentProject?.key) {
-      console.log(
-        "Posts: useEffect: currentProject.key",
-        currentProject.archived,
-      );
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {
         unsubscribe;
       };
     }
-  }, [currentProject]);
+  }, [currentProject, sharedDataUser]);
 
   const renderItems = (item) => {
     const post: IPost = item.item;

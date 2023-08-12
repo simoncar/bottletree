@@ -20,7 +20,10 @@ export async function registerForPushNotificationsAsync() {
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!");
+      console.log(
+        "Failed to get push token for push notification!",
+        finalStatus,
+      );
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
