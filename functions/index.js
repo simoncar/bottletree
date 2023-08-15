@@ -76,12 +76,12 @@ exports.pushsend = onDocumentCreated("/messages/{documentId}", async (event) => 
 
 	if (data.data[0].status === "error") {
 		const message = data.data[0]
-		return event.data.ref.set({ response: message }, { merge: true });
+		return event.data.ref.set({ complete: true, response: message }, { merge: true });
 
 	}
 	if (data.data[0].status === "ok") {
 		const message = data.data[0];
-		return event.data.ref.set({ response: message }, { merge: true });
+		return event.data.ref.set({ complete: true, response: message }, { merge: true });
 
 	}
 
