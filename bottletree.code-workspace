@@ -2,10 +2,9 @@
   "folders": [
     {
       "path": "."
-    },
-    {
-      "path": "../bottlefunctions"
     }
   ],
-  "settings": {}
+  "settings": {
+    "eslint.validate": []
+  }
 }

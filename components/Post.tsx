@@ -6,6 +6,7 @@ import { Image } from "expo-image";
 import { View, Text, ParsedText } from "../components/Themed";
 import { blurhash } from "../constants/Colors";
 import Comments from "./PostComments";
+import Status from "./Status";
 import Dots from "../components/dots";
 
 const { width } = Dimensions.get("window");
@@ -32,6 +33,7 @@ const Post = (props) => {
       <View style={styles.postView}>
         {renderImage()}
         <Dots images={imageUrls} />
+        <Status project={post.projectId} post={post.key} status={post.status} />
         <View style={styles.commentBlock}>
           <ParsedText style={styles.comment} text={caption} />
           <Text style={styles.commentTime}>
@@ -138,12 +140,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  postView: { flex: 1 },
+
   listItemHeader: {
     alignItems: "center",
     flexDirection: "row",
     padding: 8,
   },
-  postView: { flex: 1 },
 });
 
 export default Post;

@@ -7,6 +7,8 @@ export const demoData2 = async () => {
 };
 
 export const demoData = async () => {
+  console.log("DEMO DATA SEEDING");
+
   try {
     const projectRef1 = await setDoc(
       doc(db, "projects", "project11111111"),

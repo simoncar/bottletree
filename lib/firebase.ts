@@ -38,6 +38,8 @@ const db = getFirestore();
 const storage = getStorage(app);
 
 if (!Device.isDevice) {
+  console.log("Connecting to Firebase Emulator");
+
   connectFirestoreEmulator(db, "localhost", 8080);
   connectStorageEmulator(storage, "localhost", 9199);
   connectAuthEmulator(auth, "http://localhost:9099/auth");
