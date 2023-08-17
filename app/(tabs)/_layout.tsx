@@ -82,6 +82,22 @@ export default function TabLayout() {
       }}>
       <Tabs.Screen
         name="index"
+        listeners={{
+          tabPress: (e) => {
+            // Prevent default action
+            // e.preventDefault();
+            //Any custom code here
+            // alert(123);
+            console.log("tabPress router push projectList");
+
+            router.push({
+              pathname: "/projectList",
+              params: {
+                page: "",
+              },
+            });
+          },
+        }}
         options={{
           title: "",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,

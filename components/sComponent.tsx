@@ -55,26 +55,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   submitButtonStyle: {
+    alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: 25,
     elevation: 4,
     height: 50,
-    alignItems: "center",
-
-    justifyContent: "center",
-    marginBottom: 30,
-    shadowColor: "rgba(0,0,0, .4)",
-    shadowOffset: { height: 2, width: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    width: 250,
-  },
-  dddddd: {
-    backgroundColor: "#fff",
-    borderRadius: 25,
-    elevation: 4,
-    height: 50,
-    alignItems: "center",
 
     justifyContent: "center",
     marginBottom: 30,

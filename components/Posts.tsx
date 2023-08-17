@@ -38,12 +38,13 @@ export const Posts = () => {
       sharedDataUser,
     );
 
+    demoData();
+
     if (sharedDataUser && undefined != currentProject) {
       console.log(
         "Posts: useEffect: currentProject.key",
         currentProject.archived,
       );
-      demoData();
 
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {
@@ -58,6 +59,7 @@ export const Posts = () => {
       currentProject,
       sharedDataUser,
     );
+
     if (sharedDataUser && undefined != currentProject?.key) {
       const unsubscribe = getPosts(currentProject.key, postsRead);
 

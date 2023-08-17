@@ -33,15 +33,6 @@ const Status = ({ project, post }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  statusOverall: { flexDirection: "row", marginTop: 5 },
-  statusStart: {
-    borderColor: "green",
-    borderRadius: 7,
-    borderWidth: 1,
-    flexDirection: "row",
-    padding: 3,
-    marginRight: 3,
-  },
   status: {
     borderColor: "lightgray",
     borderRadius: 7,
@@ -55,17 +46,19 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderWidth: 1,
     flexDirection: "row",
-    padding: 3,
     marginLeft: 3,
+    padding: 3,
   },
-  statusEnddddd: {
-    borderColor: "lightgray",
+  statusOverall: { flexDirection: "row", marginTop: 5 },
+  statusStart: {
+    borderColor: "green",
     borderRadius: 7,
     borderWidth: 1,
     flexDirection: "row",
+    marginRight: 3,
     padding: 3,
-    marginLeft: 3,
   },
+
 });
 
 export default Status;
