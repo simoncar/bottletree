@@ -123,7 +123,7 @@ export async function addComment(
   const newData = { key: docRef.id };
 
   const messageRef = await addDoc(collection(db, "messages"), {
-    title: "Comment from " + comment.displayName,
+    title: comment.displayName + " commented on Project " + project,
     body: comment.comment,
     timestamp: Timestamp.now(),
   });
