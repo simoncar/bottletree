@@ -38,7 +38,6 @@ exports.addmessage = onRequest(async (req, res) => {
 
 
 
-// firebase deploy --only functions:sendPushNotificationFromQueue
 exports.pushsend = onDocumentCreated("/messages/{documentId}", async (event) => {
 	const original = event.data.data().original;
 	const title = event.data.data().title;
