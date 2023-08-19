@@ -1,10 +1,28 @@
 import { addDoc, doc, collection, Timestamp, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  createUserWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  deleteUser,
+} from "firebase/auth/react-native";
+import { db, auth } from "./firebase";
+import { IUser } from "./types";
 import { setBadgeCountAsync } from "expo-notifications";
 
 export const demoData2 = async () => {
   //console.log("Skip demo data");
 };
+
+function convertToString(value: string | null): string {
+  if (value === null) {
+    return "";
+  } else {
+    return value;
+  }
+}
 
 export const demoData = async () => {
   console.log("DEMO DATA SEEDING");
@@ -148,6 +166,31 @@ export const demoData = async () => {
       },
       { merge: true },
     );
+
+    const user1 = await createUserWithEmailAndPassword(
+      auth,
+      "simon@simon.co",
+      "password",
+    );
+
+    const user: IUser = {
+      uid: user1.user.uid,
+      email: "simon@simon.co",
+      displayName: convertToString("simon"),
+      photoURL: convertToString(""),
+    };
+
+    const userDoc1 = await setDoc(
+      doc(db, "users", user.uid),
+      {
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: "",
+      },
+      { merge: true },
+    );
+
+    console.log("user:", user);
   } catch (e) {
     console.error("Error adding document: ", e);
   }

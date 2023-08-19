@@ -30,8 +30,6 @@ firebase deploy --only functions
 
 firebase deploy --only functions --project builder-403d5
 
-
 http://127.0.0.1:5001/builder-403d5/us-central1/addmessage?text=uppercaseme
-
 
 https://us-central1-builder-403d5.cloudfunctions.net/addmessage?text=uppercaseme
