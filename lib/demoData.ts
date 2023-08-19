@@ -17,16 +17,64 @@ export const demoData2 = async () => {
   //console.log("Skip demo data");
 };
 
-function convertToString(value: string | null): string {
-  if (value === null) {
-    return "";
-  } else {
-    return value;
-  }
-}
-
 export const demoData = async () => {
   console.log("DEMO DATA SEEDING");
+
+  const users: IUser[] = [];
+
+  users.push({
+    displayName: "Simon Car",
+    email: "simon@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface4.jpeg?alt=media&token=f8a0c905-5e0c-45c8-b91a-1e387fba33db",
+  });
+
+  users.push({
+    displayName: "Lloyd Fox",
+    email: "lloyd@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69",
+  });
+
+  users.push({
+    displayName: "Sue Wheeler",
+    email: "sue@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
+  });
+
+  users.push({
+    displayName: "Scarlett Hale",
+    email: "scarlett@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface3.jpeg?alt=media&token=dc2bca16-60e3-44d8-8e5b-aaab28ab7dc5",
+  });
+  users.push({
+    displayName: "Louella Barrett",
+    email: "louelle@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface8.jpeg?alt=media&token=706f834e-0e01-47a3-9e54-a1e602a0911d",
+  });
+  users.push({
+    displayName: "Aubree Mendoza",
+    email: "aubree@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface11.jpeg?alt=media&token=2a87c0ba-d4fa-405e-89eb-689e8ca4b05c",
+  });
+  users.push({
+    displayName: "Armando Bradley",
+    email: "armando@simon.co",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Ffacemale1.jpg?alt=media&token=2fbef981-e857-4e1d-af4b-38c5fbf14512",
+  });
+
+  users[0].uid = await createUser(users[0]);
+  users[1].uid = await createUser(users[1]);
+  users[2].uid = await createUser(users[2]);
+  users[3].uid = await createUser(users[3]);
+  users[4].uid = await createUser(users[4]);
+  users[5].uid = await createUser(users[5]);
+  users[6].uid = await createUser(users[6]);
 
   try {
     const projectRef1 = await setDoc(
@@ -77,63 +125,17 @@ export const demoData = async () => {
       { merge: true },
     );
 
-    const postRef2b = await setDoc(
-      doc(
-        db,
-        "projects",
-        "project22222222",
-        "users",
-        "Ml82nbzqwApMf5ogbB7EN2zll1sn",
-      ),
-      {
-        uid: "uid111111",
-        displayName: "Jenny Smith",
-        email: "simon@simon.co",
-        photoURL:
-          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
-      },
-      { merge: true },
-    );
-    const postRef2c = await setDoc(
-      doc(db, "projects", "project22222222", "users", "user222222"),
-      {
-        uid: "uid22222",
-        displayName: "Chris Pater",
-        email: "simon@simon.co",
-        photoURL:
-          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69",
-      },
-      { merge: true },
-    );
+    await newProjectUser("project22222222", users[0]);
+    await newProjectUser("project22222222", users[1]);
+    await newProjectUser("project22222222", users[2]);
+    await newProjectUser("project22222222", users[5]);
 
-    const postRef2d = await setDoc(
-      doc(
-        db,
-        "projects",
-        "project11111111",
-        "users",
-        "Ml82nbzqwApMf5ogbB7EN2zll1sn",
-      ),
-      {
-        uid: "uid111111",
-        displayName: "Jenny Smith",
-        email: "simon@simon.co",
-        photoURL:
-          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
-      },
-      { merge: true },
-    );
-    const postRef2e = await setDoc(
-      doc(db, "projects", "project11111111", "users", "user222222"),
-      {
-        uid: "uid22222",
-        displayName: "Chris Pater",
-        email: "simon@simon.co",
-        photoURL:
-          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69",
-      },
-      { merge: true },
-    );
+    await newProjectUser("project11111111", users[0]);
+    await newProjectUser("project11111111", users[1]);
+    await newProjectUser("project11111111", users[2]);
+    await newProjectUser("project11111111", users[3]);
+    await newProjectUser("project11111111", users[4]);
+    await newProjectUser("project11111111", users[5]);
 
     const postRef3 = await setDoc(
       doc(db, "calendar", "calendar11111111"),
@@ -171,118 +173,47 @@ export const demoData = async () => {
     console.error("Error adding document: ", e);
   }
 
-  try {
-    const fsi1 = await fetchSignInMethodsForEmail(auth, "simon@simon.co");
-    console.log("fsi1:", fsi1);
-
-    let user1 = null;
-    if (fsi1.length === 0) {
-      user1 = await createUserWithEmailAndPassword(
-        auth,
-        "simon@simon.co",
-        "password",
-      );
-    } else {
-      user1 = await signInWithEmailAndPassword(
-        auth,
-        "simon@simon.co",
-        "password",
-      );
-    }
-
-    const userD1: IUser = {
-      uid: user1.user.uid,
-      email: "simon@simon.co",
-      displayName: "Simon",
-      photoURL: "",
-    };
-
-    const userDoc1 = await setDoc(
-      doc(db, "users", userD1.uid),
+  async function newProjectUser(projectId: string, user: IUser) {
+    return await setDoc(
+      doc(db, "projects", projectId, "users", user.uid),
       {
-        displayName: userD1.displayName,
-        email: userD1.email,
-        photoURL: "",
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
       },
       { merge: true },
     );
-  } catch (e) {
-    console.log("user1 already exists");
   }
 
-  try {
-    const fsi2 = await fetchSignInMethodsForEmail(auth, "test1@simon.co");
-    console.log("fsi2:", fsi2);
+  async function createUser(user: IUser) {
+    console.log("createUser: ", user.email);
+
+    const fsi2 = await fetchSignInMethodsForEmail(auth, user.email);
+    console.log("fsi2fsi2fsi2fsi2fsi2fsi2fsi2fsi2: ", fsi2);
+
+    console.log("fsi2.length:: ", fsi2.length);
+
     let user2 = null;
     if (fsi2.length === 0) {
       user2 = await createUserWithEmailAndPassword(
         auth,
-        "test1@simon.co",
+        user.email,
         "password",
       );
+      console.log("user2user2user2user2user2user2user2user2: ", user2);
     } else {
-      user2 = await signInWithEmailAndPassword(
-        auth,
-        "test1@simon.co",
-        "password",
-      );
+      console.log("signInWithEmailAndPassword:", user.email);
+
+      user2 = await signInWithEmailAndPassword(auth, user.email, "password");
     }
 
-    const userD2: IUser = {
-      uid: user2.user.uid,
-      email: "test1@simon.co",
-      displayName: "Timmy One",
-      photoURL: "",
-    };
+    console.log("UID: ", user2.user.uid);
 
-    const userDoc2 = await setDoc(
-      doc(db, "users", userD2.uid),
-      {
-        displayName: userD2.displayName,
-        email: userD2.email,
-        photoURL: "",
-      },
-      { merge: true },
-    );
-  } catch (e) {
-    console.log("user2 already exists");
-  }
-  try {
-    const fsi3 = await fetchSignInMethodsForEmail(auth, "test2@simon.co");
-    console.log("fsi3:", fsi3, fsi3.length);
-    let user3 = null;
-    if (fsi3.length === 0) {
-      user3 = await createUserWithEmailAndPassword(
-        auth,
-        "test2@simon.co",
-        "password",
-      );
-    } else {
-      user3 = await signInWithEmailAndPassword(
-        auth,
-        "test2@simon.co",
-        "password",
-      );
-      console.log("usesignInWithEmailAndPasswordr3:", user3);
-    }
+    const userDoc2 = await setDoc(doc(db, "users", user2.user.uid), user, {
+      merge: true,
+    });
 
-    const userD3: IUser = {
-      uid: user3.user.uid,
-      email: "test2@simon.co",
-      displayName: "Tessy Two",
-      photoURL: "",
-    };
-
-    const userDoc3 = await setDoc(
-      doc(db, "users", userD3.uid),
-      {
-        displayName: userD3.displayName,
-        email: userD3.email,
-        photoURL: "",
-      },
-      { merge: true },
-    );
-  } catch (e) {
-    console.log("user3 already exists:", e);
+    return user2.user.uid;
   }
 };

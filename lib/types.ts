@@ -19,7 +19,7 @@ export interface IProject {
 }
 
 export interface IUser {
-  uid: string;
+  uid?: string;
   photoURL: string;
   displayName: string;
   email: string;
