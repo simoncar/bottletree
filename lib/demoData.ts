@@ -166,32 +166,86 @@ export const demoData = async () => {
       },
       { merge: true },
     );
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 
+  try {
     const user1 = await createUserWithEmailAndPassword(
       auth,
       "simon@simon.co",
       "password",
     );
 
-    const user: IUser = {
+    const userD1: IUser = {
       uid: user1.user.uid,
       email: "simon@simon.co",
-      displayName: convertToString("simon"),
-      photoURL: convertToString(""),
+      displayName: "Simon",
+      photoURL: "",
     };
 
     const userDoc1 = await setDoc(
-      doc(db, "users", user.uid),
+      doc(db, "users", userD1.uid),
       {
-        displayName: user.displayName,
-        email: user.email,
+        displayName: userD1.displayName,
+        email: userD1.email,
         photoURL: "",
       },
       { merge: true },
     );
-
-    console.log("user:", user);
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.log("user already exists");
+  }
+  try {
+    const user2 = await createUserWithEmailAndPassword(
+      auth,
+      "test1@simon.co",
+      "password",
+    );
+
+    const userD2: IUser = {
+      uid: user2.user.uid,
+      email: "test1@simon.co",
+      displayName: "Timmy One",
+      photoURL: "",
+    };
+
+    const userDoc2 = await setDoc(
+      doc(db, "users", userD2.uid),
+      {
+        displayName: userD2.displayName,
+        email: userD2.email,
+        photoURL: "",
+      },
+      { merge: true },
+    );
+  } catch (e) {
+    console.log("user already exists");
+  }
+  try {
+    const user3 = await createUserWithEmailAndPassword(
+      auth,
+      "test2@simon.co",
+      "password",
+    );
+
+    const userD3: IUser = {
+      uid: user3.user.uid,
+      email: "test2@simon.co",
+      displayName: "Tessy Two",
+      photoURL: "",
+    };
+
+    const userDoc3 = await setDoc(
+      doc(db, "users", userD2.uid),
+      {
+        displayName: userD2.displayName,
+        email: userD2.email,
+        photoURL: "",
+      },
+      { merge: true },
+    );
+  } catch (e) {
+    console.log("user already exists");
   }
 };
