@@ -19,6 +19,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import Colors from "../constants/Colors";
 import { ProjectUsers } from "../components/ProjectUsers";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function editPost() {
   const { sharedData, updateSharedDataProject } = useProject();
@@ -161,53 +162,54 @@ export default function editPost() {
           ),
         }}
       />
-
-      <View style={styles.avatarAContainer}>
-        <View style={styles.avatarBView}>{profilePic()}</View>
-      </View>
-      <View style={styles.projectNameContainer}>
-        <View style={styles.projectBox}>
-          <TextInput
-            style={styles.project}
-            onChangeText={(text) => onChangeText(text)}
-            placeholder={"Project Title"}
-            value={text}
-            multiline
-          />
+      <ScrollView>
+        <View style={styles.avatarAContainer}>
+          <View style={styles.avatarBView}>{profilePic()}</View>
         </View>
-        <View style={styles.archiveBox}>
-          <Text style={styles.archiveMessage}>
-            {archivedFlag == true ? "Project Archived" : ""}
-          </Text>
+        <View style={styles.projectNameContainer}>
+          <View style={styles.projectBox}>
+            <TextInput
+              style={styles.project}
+              onChangeText={(text) => onChangeText(text)}
+              placeholder={"Project Title"}
+              value={text}
+              multiline
+            />
+          </View>
+          <View style={styles.archiveBox}>
+            <Text style={styles.archiveMessage}>
+              {archivedFlag == true ? "Project Archived" : ""}
+            </Text>
+          </View>
         </View>
-      </View>
 
-      <ProjectUsers project={projectId} />
+        <ProjectUsers project={projectId} />
 
-      <Pressable
-        style={styles.outerView}
-        onPress={() => {
-          const currentArchivedFlag = archivedFlag;
-          onChangeArchived(!currentArchivedFlag);
-          save(textPhotoURL, !currentArchivedFlag);
-        }}>
-        <View style={styles.avatar}>
-          <Ionicons
-            name="archive"
-            size={25}
-            color={Colors[colorScheme ?? "light"].textPlaceholder}
-          />
+        <Pressable
+          style={styles.outerView}
+          onPress={() => {
+            const currentArchivedFlag = archivedFlag;
+            onChangeArchived(!currentArchivedFlag);
+            save(textPhotoURL, !currentArchivedFlag);
+          }}>
+          <View style={styles.avatar}>
+            <Ionicons
+              name="archive"
+              size={25}
+              color={Colors[colorScheme ?? "light"].textPlaceholder}
+            />
+          </View>
+          <View>
+            <Text style={styles.archiveName}>
+              {archivedFlag == true ? "Unarchive Project" : "Archive Project"}
+            </Text>
+          </View>
+        </Pressable>
+
+        <View style={styles.diagBox}>
+          <Text style={styles.archiveMessage}>Project ID: {projectId}</Text>
         </View>
-        <View>
-          <Text style={styles.name}>
-            {archivedFlag == true ? "Unarchive Project" : "Archive Project"}
-          </Text>
-        </View>
-      </Pressable>
-
-      <View style={styles.diagBox}>
-        <Text style={styles.archiveMessage}>Project ID: {projectId}</Text>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -225,8 +227,13 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
-  avatar: { alignItems: "center", justifyContent: "center", width: 48 },
+  archiveName: {
+    color: "red",
+    fontSize: 20,
+    paddingLeft: 20,
+  },
 
+  avatar: { alignItems: "center", justifyContent: "center", width: 48 },
   avatarAContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -250,26 +257,23 @@ const styles = StyleSheet.create({
     top: 115,
     width: 30,
   },
+
   diagBox: {
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
     paddingTop: 100,
+    paddingBottom: 100,
     width: "85%",
-  },
-  name: {
-    fontSize: 20,
-    paddingLeft: 20,
   },
 
   outerView: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
-    height: 80,
     paddingVertical: 8,
     padding: 8,
+    paddingTop: 60,
   },
   profilePhoto: {
     borderColor: "grey",
