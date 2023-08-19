@@ -70,7 +70,7 @@ export const ProjectUsers = (props) => {
       <View>
         {renderHeader({
           key: "header",
-          displayName: "Access List to Project",
+          displayName: "Project Access List",
         })}
       </View>
       <View>
