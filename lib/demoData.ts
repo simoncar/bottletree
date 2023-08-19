@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   signOut,
   updateProfile,
   deleteUser,
@@ -171,11 +172,23 @@ export const demoData = async () => {
   }
 
   try {
-    const user1 = await createUserWithEmailAndPassword(
-      auth,
-      "simon@simon.co",
-      "password",
-    );
+    const fsi1 = await fetchSignInMethodsForEmail(auth, "simon@simon.co");
+    console.log("fsi1:", fsi1);
+
+    let user1 = null;
+    if (fsi1.length === 0) {
+      user1 = await createUserWithEmailAndPassword(
+        auth,
+        "simon@simon.co",
+        "password",
+      );
+    } else {
+      user1 = await signInWithEmailAndPassword(
+        auth,
+        "simon@simon.co",
+        "password",
+      );
+    }
 
     const userD1: IUser = {
       uid: user1.user.uid,
@@ -194,14 +207,26 @@ export const demoData = async () => {
       { merge: true },
     );
   } catch (e) {
-    console.log("user already exists");
+    console.log("user1 already exists");
   }
+
   try {
-    const user2 = await createUserWithEmailAndPassword(
-      auth,
-      "test1@simon.co",
-      "password",
-    );
+    const fsi2 = await fetchSignInMethodsForEmail(auth, "test1@simon.co");
+    console.log("fsi2:", fsi2);
+    let user2 = null;
+    if (fsi2.length === 0) {
+      user2 = await createUserWithEmailAndPassword(
+        auth,
+        "test1@simon.co",
+        "password",
+      );
+    } else {
+      user2 = await signInWithEmailAndPassword(
+        auth,
+        "test1@simon.co",
+        "password",
+      );
+    }
 
     const userD2: IUser = {
       uid: user2.user.uid,
@@ -220,14 +245,26 @@ export const demoData = async () => {
       { merge: true },
     );
   } catch (e) {
-    console.log("user already exists");
+    console.log("user2 already exists");
   }
   try {
-    const user3 = await createUserWithEmailAndPassword(
-      auth,
-      "test2@simon.co",
-      "password",
-    );
+    const fsi3 = await fetchSignInMethodsForEmail(auth, "test2@simon.co");
+    console.log("fsi3:", fsi3, fsi3.length);
+    let user3 = null;
+    if (fsi3.length === 0) {
+      user3 = await createUserWithEmailAndPassword(
+        auth,
+        "test2@simon.co",
+        "password",
+      );
+    } else {
+      user3 = await signInWithEmailAndPassword(
+        auth,
+        "test2@simon.co",
+        "password",
+      );
+      console.log("usesignInWithEmailAndPasswordr3:", user3);
+    }
 
     const userD3: IUser = {
       uid: user3.user.uid,
@@ -237,15 +274,15 @@ export const demoData = async () => {
     };
 
     const userDoc3 = await setDoc(
-      doc(db, "users", userD2.uid),
+      doc(db, "users", userD3.uid),
       {
-        displayName: userD2.displayName,
-        email: userD2.email,
+        displayName: userD3.displayName,
+        email: userD3.email,
         photoURL: "",
       },
       { merge: true },
     );
   } catch (e) {
-    console.log("user already exists");
+    console.log("user3 already exists:", e);
   }
 };
