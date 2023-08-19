@@ -34,9 +34,7 @@ export const ProjectUsers = (props) => {
       <Pressable
         style={styles.outerView}
         onPress={() => {
-          const currentArchivedFlag = archivedFlag;
-          onChangeArchived(!currentArchivedFlag);
-          save(textPhotoURL, !currentArchivedFlag);
+          console.log("ProjectUsers: renderHeader: onPress: ", data);
         }}>
         <View style={styles.avatar}>
           <AntDesign

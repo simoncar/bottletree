@@ -161,6 +161,32 @@ export default function editUser() {
         </View>
       </View>
 
+      <TouchableOpacity>
+        <View style={styles.outerView}>
+          <View style={styles.leftContent}>
+            <FontAwesome5
+              name="envelope"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+
+            <Text style={styles.settingName}>simon@simon.co</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <View style={styles.outerView}>
+          <View style={styles.leftContent}>
+            <FontAwesome5
+              name="phone-alt"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+            <Text style={styles.settingName}>555-111-222</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+
       <TouchableOpacity
         key={"deleteAccount"}
         onPress={() =>

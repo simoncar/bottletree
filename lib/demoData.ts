@@ -25,6 +25,7 @@ export const demoData = async () => {
   users.push({
     displayName: "Simon Car",
     email: "simon@simon.co",
+    pushToken: "ExponentPushToken[en5SSANZy96dpSJ302wi6z]",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface4.jpeg?alt=media&token=f8a0c905-5e0c-45c8-b91a-1e387fba33db",
   });
@@ -32,6 +33,7 @@ export const demoData = async () => {
   users.push({
     displayName: "Lloyd Fox",
     email: "lloyd@simon.co",
+    pushToken: "ExponentPushToken[en5SSANZy96dpSJ302wi6z]",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface12.jpeg?alt=media&token=c048eee1-3673-4d5a-b35a-0e3c45a25c69",
   });
@@ -39,6 +41,7 @@ export const demoData = async () => {
   users.push({
     displayName: "Sue Wheeler",
     email: "sue@simon.co",
+    pushToken: "void",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface10.jpeg?alt=media&token=ec4a6ece-d8a6-4d57-b960-622e451f5c18",
   });
@@ -46,24 +49,28 @@ export const demoData = async () => {
   users.push({
     displayName: "Scarlett Hale",
     email: "scarlett@simon.co",
+    pushToken: "void",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface3.jpeg?alt=media&token=dc2bca16-60e3-44d8-8e5b-aaab28ab7dc5",
   });
   users.push({
     displayName: "Louella Barrett",
     email: "louelle@simon.co",
+    pushToken: "void",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface8.jpeg?alt=media&token=706f834e-0e01-47a3-9e54-a1e602a0911d",
   });
   users.push({
     displayName: "Aubree Mendoza",
     email: "aubree@simon.co",
+    pushToken: "void",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface11.jpeg?alt=media&token=2a87c0ba-d4fa-405e-89eb-689e8ca4b05c",
   });
   users.push({
     displayName: "Armando Bradley",
     email: "armando@simon.co",
+    pushToken: "void",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Ffacemale1.jpg?alt=media&token=2fbef981-e857-4e1d-af4b-38c5fbf14512",
   });

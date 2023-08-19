@@ -23,6 +23,7 @@ export interface IUser {
   photoURL: string;
   displayName: string;
   email: string;
+  pushToken?: string;
 }
 
 export interface IComment {
