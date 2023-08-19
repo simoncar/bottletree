@@ -11,18 +11,18 @@ exports.httphit_addmessage = onRequest(async (req, res) => {
 	const title = req.query.title;
 	const body = req.query.body;
 	const writeResult = await getFirestore()
-		.collection("messages")
+		.collection("notifications")
 		.add({ title: title, body: body });
 	res.json({ result: `Message with ID: ${writeResult.id} added.` });
 });
 
-exports.onDocumentCreated_messages = onDocumentCreated("/messages/{documentId}", async (event) => {
+exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{documentId}", async (event) => {
 	const original = event.data.data().original;
 	const title = event.data.data().title;
 	const body = event.data.data().body;
-	var messages = [];
+	var notifications = [];
 
-	messages.push({
+	notifications.push({
 		to: "ExponentPushToken[en5SSANZy96dpSJ302wi6z]",
 		title: title,
 		sound: "default",
@@ -37,7 +37,7 @@ exports.onDocumentCreated_messages = onDocumentCreated("/messages/{documentId}",
 			'Accept-encoding': 'gzip, deflate',
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(messages),
+		body: JSON.stringify(notifications),
 	});
 
 	if (!response.ok) {

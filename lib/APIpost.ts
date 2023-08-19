@@ -26,7 +26,10 @@ export async function addPost(post: IPost, callback: saveDone) {
     },
   );
 
-  const messageRef = await addDoc(collection(db, "messages"), {
+  // get all the users in the project from firebase
+  // for each user, add a notification to the notifications collection
+
+  const messageRef = await addDoc(collection(db, "notifications"), {
     title: "New Post Added",
     body: "Some Post Name TODO",
     timestamp: Timestamp.now(),
@@ -122,7 +125,7 @@ export async function addComment(
 
   const newData = { key: docRef.id };
 
-  const messageRef = await addDoc(collection(db, "messages"), {
+  const messageRef = await addDoc(collection(db, "notifications"), {
     title: comment.displayName + " commented on Project " + project,
     body: comment.comment,
     timestamp: Timestamp.now(),

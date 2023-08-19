@@ -13,6 +13,7 @@ import { db, auth } from "./firebase";
 import { IUser } from "./types";
 import { setBadgeCountAsync } from "expo-notifications";
 
+
 export const demoData2 = async () => {
   //console.log("Skip demo data");
 };
@@ -24,7 +25,7 @@ export const demoData = async () => {
 
   users.push({
     displayName: "Simon Car",
-    email: "simon@simon.co",
+    email: "car@simon.co",
     pushToken: "ExponentPushToken[en5SSANZy96dpSJ302wi6z]",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fface4.jpeg?alt=media&token=f8a0c905-5e0c-45c8-b91a-1e387fba33db",
