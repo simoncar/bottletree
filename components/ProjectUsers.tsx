@@ -45,6 +45,7 @@ export const ProjectUsers = (props) => {
         </View>
         <View>
           <Text style={styles.name}>{data.displayName || ""}</Text>
+          <Text style={styles.nameSubtitle}>{data.subTitle || ""}</Text>
         </View>
       </Pressable>
     );
@@ -52,7 +53,7 @@ export const ProjectUsers = (props) => {
 
   function renderRow(data: any) {
     return (
-      <View style={styles.outerView}>
+      <View key={data.uid} style={styles.outerView}>
         <View style={styles.avatar}>
           <Image style={styles.avatarFace} source={data.photoURL} />
         </View>
@@ -69,13 +70,14 @@ export const ProjectUsers = (props) => {
         {renderHeader({
           key: "header",
           displayName: "Project Access List",
+          subTitle: "Who can see this project",
         })}
       </View>
       <View>
         {loading === false && (
           <View>
             <ShortList
-              key={projectUsers.key}
+              key={projectUsers.uid}
               data={projectUsers}
               renderItem={renderRow}
             />
@@ -92,6 +94,12 @@ const styles = StyleSheet.create({
 
   name: {
     fontSize: 20,
+    paddingLeft: 20,
+  },
+
+  nameSubtitle: {
+    color: "grey",
+    fontSize: 16,
     paddingLeft: 20,
   },
 
