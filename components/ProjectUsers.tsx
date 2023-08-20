@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Pressable, useColorScheme } from "react-native";
+import { StyleSheet, Pressable, useColorScheme, Button } from "react-native";
 import { View, Text, ParsedText } from "./Themed";
 import { getProjectUsers } from "../lib/APIproject";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -8,13 +8,16 @@ import { ShortList } from "../components/sComponent";
 import { Image } from "expo-image";
 import Colors from "../constants/Colors";
 import { router, useLocalSearchParams } from "expo-router";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 export const ProjectUsers = (props) => {
   const { project } = props;
   const colorScheme = useColorScheme();
-  const { sharedDataUser } = useAuth();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
+
+  let prevOpenedRow;
+  const row: Array<any> = [];
 
   useEffect(() => {
     getProjectUsers(project, projectUsersRead);
@@ -57,18 +60,58 @@ export const ProjectUsers = (props) => {
     );
   }
 
-  function renderRow(data: any) {
+  const renderRightActions = (progress, dragX, data, index) => {
     return (
-      <View key={data.uid} style={styles.outerView}>
-        <View style={styles.avatar}>
-          <Image style={styles.avatarFace} source={data.photoURL} />
-        </View>
+      <Pressable
+        style={styles.rightDeleteBox}
+        onPress={() => {
+          console.log("doDelete:", data, index);
+          
+
+
+        }}>
+        <AntDesign
+          name="delete"
+          size={25}
+          color={Colors[colorScheme ?? "light"].text}
+        />
+        <Text>Delete</Text>
+      </Pressable>
+    );
+  };
+
+  function renderRow(data: any, index: number) {
+    return (
+      <Swipeable
+        key={index}
+        renderRightActions={(progress, dragX) =>
+          renderRightActions(progress, dragX, data, index)
+        }
+        onSwipeableOpen={() => closeRow(index)}
+        ref={(ref) => (row[index] = ref)}
+        rightOpenValue={-100}>
         <View>
-          <Text style={styles.name}>{data.displayName || ""}</Text>
+          <View key={data.uid} style={styles.outerView}>
+            <View style={styles.avatar}>
+              <Image style={styles.avatarFace} source={data.photoURL} />
+            </View>
+            <View>
+              <Text style={styles.name}>{data.displayName || ""}</Text>
+            </View>
+          </View>
         </View>
-      </View>
+      </Swipeable>
     );
   }
+
+  const closeRow = (index) => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
+
+  const doDelete = ({ item, index }) => {};
 
   return (
     <View>
@@ -108,7 +151,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 20,
   },
-
   outerView: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
@@ -117,5 +159,15 @@ const styles = StyleSheet.create({
     height: 80,
     paddingVertical: 8,
     padding: 8,
+  },
+
+  rightDeleteBox: {
+    alignContent: "center",
+    alignItems: "center",
+    backgroundColor: "red",
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: 0,
+    width: 70,
   },
 });

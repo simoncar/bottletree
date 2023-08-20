@@ -13,7 +13,9 @@ import { ShortList } from "../components/sComponent";
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { getUsers } from "../lib/APIuser";
+import { addProjectUser } from "../lib/APIproject";
 import { IUser } from "../lib/types";
+import ProjectContext from "../lib/projectContext";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -22,7 +24,8 @@ const ModalScreen = (props) => {
 
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const { sharedDataProject, updateSharedDataProject } =
+    useContext(ProjectContext);
   const colorScheme = useColorScheme();
 
   const usersRead = (usersDB: IUser[]) => {
@@ -43,9 +46,9 @@ const ModalScreen = (props) => {
     }
   }, [users]);
 
-  function renderAdd() {
-    return;
-  }
+  const saveDone = (id) => {
+    console.log("saveDone: ", id);
+  };
 
   function renderRow(data: IUser) {
     return (
@@ -54,15 +57,7 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            router.push({
-              pathname: "/" + page,
-              params: {
-                projectId: data.key,
-                title: data.title,
-                icon: data.icon,
-                archived: data.archived,
-              },
-            });
+            addProjectUser(sharedDataProject.key, data, saveDone);
           }}>
           <View style={styles.avatar}>
             <Image style={styles.avatarFace} source={data.photoURL} />

@@ -10,6 +10,8 @@ import {
   getDocs,
   documentId,
   orderBy,
+  setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { IProject, IUser } from "./types";
@@ -69,7 +71,6 @@ export async function getProjectUsers(
     });
   }
 
-
   callback(userList);
 }
 
@@ -103,6 +104,54 @@ export function addProject(
     });
   } catch (e) {
     console.error("Error adding project: ", e);
+  }
+
+  return;
+}
+
+export function addProjectUser(
+  projectId: string,
+  user: IUser,
+  callback: { (id: string): void; (arg0: string): void },
+) {
+  try {
+    console.log("addProjectUser: ", projectId, user.key, user.displayName);
+
+    const docRef = doc(db, "projects", projectId, "users", user.key);
+
+    setDoc(
+      docRef,
+      {
+        uid: user.key,
+        displayName: user.displayName,
+        timestamp: Timestamp.now(),
+      },
+      { merge: true },
+    ).then((docRef) => {
+      callback(user.uid);
+    });
+  } catch (e) {
+    console.error("Error adding user to project: ", e);
+  }
+
+  return;
+}
+
+export function deleteProjectUser(
+  projectId: string,
+  user: IUser,
+  callback: { (id: string): void; (arg0: string): void },
+) {
+  try {
+    console.log("deleteProjectUser: ", projectId, user.key, user.displayName);
+
+    const docRef = doc(db, "projects", projectId, "users", user.key);
+
+    deleteDoc(docRef).then(() => {
+      callback(user.key);
+    });
+  } catch (e) {
+    console.error("Error deleting user from project: ", e);
   }
 
   return;

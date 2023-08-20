@@ -37,8 +37,8 @@ export function ShortList(props) {
   const features = props.data ? props.data : [];
   return (
     <View>
-      {features.map((el) => {
-        return props.renderItem(el);
+      {features.map((el, index) => {
+        return props.renderItem(el, index);
       })}
     </View>
   );
