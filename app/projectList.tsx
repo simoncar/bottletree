@@ -52,8 +52,6 @@ const ModalScreen = (props) => {
       <TouchableOpacity
         key={"addProject"}
         onPress={() => {
-          console.log("Add Project");
-
           router.replace({
             pathname: "/addProject",
             params: {

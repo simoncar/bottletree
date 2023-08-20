@@ -7,6 +7,7 @@ import { useAuth } from "../lib/authProvider";
 import { ShortList } from "../components/sComponent";
 import { Image } from "expo-image";
 import Colors from "../constants/Colors";
+import { router, useLocalSearchParams } from "expo-router";
 
 export const ProjectUsers = (props) => {
   const { project } = props;
@@ -34,7 +35,12 @@ export const ProjectUsers = (props) => {
       <Pressable
         style={styles.outerView}
         onPress={() => {
-          console.log("ProjectUsers: renderHeader: onPress: ", data);
+          router.push({
+            pathname: "/userList",
+            params: {
+              project: "post.projectId",
+            },
+          });
         }}>
         <View style={styles.avatar}>
           <AntDesign

@@ -69,6 +69,13 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
+                  name="userList"
+                  options={{
+                    presentation: "modal",
+                    title: "Users",
+                  }}
+                />
+                <Stack.Screen
                   name="editPost"
                   options={() => ({
                     title: "Edit",
