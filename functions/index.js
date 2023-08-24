@@ -27,17 +27,15 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 	//for each token, create a notification object and push it to the notifications array
 	tokens.forEach((tokenDoc) => {
-		if (tokenDoc.data().pushToken == "ExponentPushToken[vtgZnrL-rx5viXmTI19u0u]" || tokenDoc.data().pushToken == "ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]") {
-			notifications.push({
-				to: tokenDoc.data().pushToken,
-				title: title,
-				sound: "default",
-				body: body,
-				data: { someData: 'goes here' },
-			});
-		} else {
-			console.log("skipping: " + tokenDoc.data().token);
-		}
+
+		notifications.push({
+			to: tokenDoc.data().pushToken,
+			title: title,
+			sound: "default",
+			body: body,
+			data: { someData: 'goes here' },
+		});
+
 	}
 	);
 
