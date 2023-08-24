@@ -20,7 +20,7 @@ import { updateAccountName, updateAccountPhotoURL } from "../lib/APIuser";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
-
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function editUser() {
   const { uid, photoURL, displayName } = useLocalSearchParams();
@@ -37,8 +37,6 @@ export default function editUser() {
     } else {
       onChangeText("");
     }
-
-
   }, []);
 
   const save = () => {
@@ -144,96 +142,98 @@ export default function editUser() {
 
   return (
     <SafeAreaView>
-      <Stack.Screen
-        options={{
-          headerRight: () => <Button title="Done" onPress={() => save()} />,
-        }}
-      />
-      <View style={styles.avatarAContainer}>
-        <View style={styles.avatarBView}>{profilePic()}</View>
+      <ScrollView>
+        <Stack.Screen
+          options={{
+            headerRight: () => <Button title="Done" onPress={() => save()} />,
+          }}
+        />
+        <View style={styles.avatarAContainer}>
+          <View style={styles.avatarBView}>{profilePic()}</View>
 
-        <View style={styles.projectNameContainer}>
-          <View style={styles.projectBox}>
-            <TextInput
-              style={styles.project}
-              onChangeText={(text) => onChangeText(text)}
-              placeholder={"Your Name"}
-              value={text}
-              multiline
-            />
+          <View style={styles.projectNameContainer}>
+            <View style={styles.projectBox}>
+              <TextInput
+                style={styles.project}
+                onChangeText={(text) => onChangeText(text)}
+                placeholder={"Your Name"}
+                value={text}
+                multiline
+              />
+            </View>
           </View>
         </View>
-      </View>
 
-      <TouchableOpacity>
-        <View style={styles.outerView}>
-          <View style={styles.leftContent}>
-            <FontAwesome5
-              name="envelope"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
+        <TouchableOpacity>
+          <View style={styles.outerView}>
+            <View style={styles.leftContent}>
+              <FontAwesome5
+                name="envelope"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
 
-            <Text style={styles.settingName}>simon@simon.co</Text>
+              <Text style={styles.settingName}>simon@simon.co</Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <View style={styles.outerView}>
-          <View style={styles.leftContent}>
-            <FontAwesome5
-              name="phone-alt"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-            <Text style={styles.settingName}>555-111-222</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        key={"deleteAccount"}
-        onPress={() =>
-          router.push({
-            pathname: "/deleteAccount",
-          })
-        }>
-        <View style={styles.outerView}>
-          <View style={styles.leftContent}>
-            <FontAwesome5
-              name="trash-alt"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-            <Text style={styles.settingName}>Delete Account</Text>
-          </View>
-          <View style={styles.rightChevron}>
-            <FontAwesome5
-              name="chevron-right"
-              size={20}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-
-      <View style={styles.outerView}>
-        <TouchableOpacity key={"signOut"} onPress={() => signOut()}>
-          <View style={styles.leftContent}>
-            <MaterialIcons
-              name="logout"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-            <Text style={styles.settingName}>Log Out</Text>
-          </View>
-          <View style={styles.rightChevron}></View>
         </TouchableOpacity>
-      </View>
+        <TouchableOpacity>
+          <View style={styles.outerView}>
+            <View style={styles.leftContent}>
+              <FontAwesome5
+                name="phone-alt"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+              <Text style={styles.settingName}>555-111-222</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
 
-      <View style={styles.aboutContainer}>
-        <About />
-      </View>
+        <TouchableOpacity
+          key={"deleteAccount"}
+          onPress={() =>
+            router.push({
+              pathname: "/deleteAccount",
+            })
+          }>
+          <View style={styles.outerView}>
+            <View style={styles.leftContent}>
+              <FontAwesome5
+                name="trash-alt"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+              <Text style={styles.settingName}>Delete Account</Text>
+            </View>
+            <View style={styles.rightChevron}>
+              <FontAwesome5
+                name="chevron-right"
+                size={20}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        <View style={styles.outerView}>
+          <TouchableOpacity key={"signOut"} onPress={() => signOut()}>
+            <View style={styles.leftContent}>
+              <MaterialIcons
+                name="logout"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+              <Text style={styles.settingName}>Log Out</Text>
+            </View>
+            <View style={styles.rightChevron}></View>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.aboutContainer}>
+          <About />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -243,6 +243,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
+    paddingBottom: 50,
   },
   avatarAContainer: {
     alignItems: "center",

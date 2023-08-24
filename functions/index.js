@@ -22,40 +22,62 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 	const body = event.data.data().body;
 	var notifications = [];
 
-	notifications.push({
-		to: "ExponentPushToken[en5SSANZy96dpSJ302wi6z]",
-		title: title,
-		sound: "default",
-		body: body,
-		data: { someData: 'goes here' },
-	});
+	//retrieve all the tokens from firebase
+	const tokens = await getFirestore().collection("tokens").get();
 
-	const response = await fetch("https://exp.host/--/api/v2/push/send", {
-		method: "POST",
-		headers: {
-			Accept: "application/json",
-			'Accept-encoding': 'gzip, deflate',
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(notifications),
-	});
+	//for each token, create a notification object and push it to the notifications array
+	tokens.forEach((tokenDoc) => {
+		if (tokenDoc.data().pushToken == "ExponentPushToken[vtgZnrL-rx5viXmTI19u0u]" || tokenDoc.data().pushToken == "ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]") {
+			notifications.push({
+				to: tokenDoc.data().pushToken,
+				title: title,
+				sound: "default",
+				body: body,
+				data: { someData: 'goes here' },
+			});
+		} else {
+			console.log("skipping: " + tokenDoc.data().token);
+		}
+	}
+	);
 
-	if (!response.ok) {
-		throw new Error(`HTTP error! Status: ${response.status}`);
+	console.log("notifications: " + JSON.stringify(notifications));
+
+	if (notifications.length > 0) {
+		const response = await fetch("https://exp.host/--/api/v2/push/send", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				'Accept-encoding': 'gzip, deflate',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(notifications),
+		});
+
+
+		if (!response.ok) {
+			console.log("response: " + JSON.stringify(response));
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+
+		const data = await response.json();
+
+		if (data.data[0].status === "error") {
+			const message = data.data[0]
+			return event.data.ref.set({ complete: true, response: message }, { merge: true });
+
+		}
+		if (data.data[0].status === "ok") {
+			const message = data;
+			return event.data.ref.set({ complete: true, response: message }, { merge: true });
+
+		}
+
+	} else {
+		console.log("no notifications to send");
+		return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
 	}
 
-	const data = await response.json();
-
-	if (data.data[0].status === "error") {
-		const message = data.data[0]
-		return event.data.ref.set({ complete: true, response: message }, { merge: true });
-
-	}
-	if (data.data[0].status === "ok") {
-		const message = data.data[0];
-		return event.data.ref.set({ complete: true, response: message }, { merge: true });
-
-	}
 });
 
 

@@ -13,7 +13,6 @@ import { db, auth } from "./firebase";
 import { IUser } from "./types";
 import { setBadgeCountAsync } from "expo-notifications";
 
-
 export const demoData2 = async () => {
   //console.log("Skip demo data");
 };
@@ -144,6 +143,27 @@ export const demoData = async () => {
     await newProjectUser("project11111111", users[3]);
     await newProjectUser("project11111111", users[4]);
     await newProjectUser("project11111111", users[5]);
+
+    const token1 = await setDoc(
+      doc(db, "tokens", "vtgZnrL-rx5viXmTI19u0u"),
+      {
+        displayName: "Demo User",
+        pushToken: "ExponentPushToken[vtgZnrL-rx5viXmTI19u0u]",
+        timestamp: Timestamp.now(),
+        uid: users[0].uid,
+      },
+      { merge: true },
+    );
+    const token2 = await setDoc(
+      doc(db, "tokens", "z-50OyGeRPth6nxZSWk_A4"),
+      {
+        displayName: "Demo User iPad",
+        pushToken: "ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]",
+        timestamp: Timestamp.now(),
+        uid: users[0].uid,
+      },
+      { merge: true },
+    );
 
     const postRef3 = await setDoc(
       doc(db, "calendar", "calendar11111111"),
