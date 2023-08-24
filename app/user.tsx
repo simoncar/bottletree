@@ -21,8 +21,10 @@ import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 
+
 export default function editUser() {
   const { uid, photoURL, displayName } = useLocalSearchParams();
+
   const [text, onChangeText] = useState(displayName);
   const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
   const colorScheme = useColorScheme();
@@ -35,6 +37,8 @@ export default function editUser() {
     } else {
       onChangeText("");
     }
+
+
   }, []);
 
   const save = () => {

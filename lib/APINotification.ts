@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { IPushToken, IUser } from "./types";
+import * as Notifications from "expo-notifications";
 
 // ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]
 
@@ -47,4 +48,10 @@ export function setToken(
   }
 
   return;
+}
+
+export async function getToken() {
+  const token = (await Notifications.getExpoPushTokenAsync()).data;
+  console.log("UUUUUU:", token);
+  return token;
 }
