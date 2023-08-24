@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, FlatList, useColorScheme, Pressable } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  useColorScheme,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { View, Text, TextInput, ParsedText } from "./Themed";
 import { addComment, getComments } from "../lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";

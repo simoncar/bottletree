@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 import { View, Text } from "../components/Themed";
 import { getPosts } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
@@ -10,6 +15,7 @@ import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
 
 import { demoData } from "../lib/demoData";
+import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
 
 export const Posts = () => {
@@ -32,12 +38,6 @@ export const Posts = () => {
   };
 
   useEffect(() => {
-    console.log(
-      "AAAA Posts: useEffect: currentProject.key",
-      currentProject,
-      sharedDataUser,
-    );
-
     demoData();
 
     if (sharedDataUser && undefined != currentProject) {
@@ -54,12 +54,6 @@ export const Posts = () => {
   }, []);
 
   useEffect(() => {
-    console.log(
-      "BBBBPosts: useEffect: currentProject.key",
-      currentProject,
-      sharedDataUser,
-    );
-
     if (sharedDataUser && undefined != currentProject?.key) {
       const unsubscribe = getPosts(currentProject.key, postsRead);
 
@@ -114,7 +108,7 @@ export const Posts = () => {
           />
         </View>
         <View>
-          <FlatList
+          <KeyboardAwareFlatList
             data={posts}
             renderItem={renderItems}
             keyExtractor={(item, index) => getKey(item)}
