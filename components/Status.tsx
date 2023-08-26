@@ -16,6 +16,7 @@ type Props = {
 
 const Status = ({ project, post }: Props) => {
   const colorScheme = useColorScheme();
+  return;
 
   return (
     <View style={styles.statusOverall}>
@@ -58,7 +59,6 @@ const styles = StyleSheet.create({
     marginRight: 3,
     padding: 3,
   },
-
 });
 
 export default Status;

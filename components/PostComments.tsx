@@ -123,6 +123,9 @@ const Comments = ({ project, post }: Props) => {
               style={styles.commentText}
               text={displayName(item.displayName) + " " + item.comment}
             />
+            <Text style={styles.commentTime}>
+              {new Date(item.timestamp.toDate()).toDateString()}
+            </Text>
           </View>
         )}
       />
@@ -146,6 +149,12 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   commentText: {},
+  commentTime: {
+    color: "#999",
+    fontSize: 12,
+    paddingLeft: 6,
+    paddingTop: 2,
+  },
   commentView: {
     flexDirection: "row",
     marginRight: 20,
