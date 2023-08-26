@@ -121,11 +121,15 @@ const Comments = ({ project, post }: Props) => {
             <ParsedText
               selectable
               style={styles.commentText}
-              text={displayName(item.displayName) + " " + item.comment}
+              text={
+                displayName(item.displayName) +
+                " " +
+                item.comment +
+                " [" +
+                new Date(item.timestamp.toDate()).toDateString() +
+                "]"
+              }
             />
-            <Text style={styles.commentTime}>
-              {new Date(item.timestamp.toDate()).toDateString()}
-            </Text>
           </View>
         )}
       />

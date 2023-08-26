@@ -23,6 +23,14 @@ export const ParsedTextUnthemed = (props) => {
     return sName.slice(1);
   };
 
+  function trimFirstLastChars(inputString: string) {
+    if (inputString.length <= 2) {
+      return "";
+    } else {
+      return inputString.slice(1, -1);
+    }
+  }
+
   return (
     <ParsedText
       style={{
@@ -69,6 +77,14 @@ export const ParsedTextUnthemed = (props) => {
             fontWeight: "bold",
           },
           renderText: renderName,
+        },
+        {
+          pattern: /\[(.*?)\]/,
+          style: {
+            color: "grey",
+            fontSize: 12,
+          },
+          renderText: trimFirstLastChars,
         },
       ]}
       childrenProps={{ allowFontScaling: false }}>
