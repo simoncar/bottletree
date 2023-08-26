@@ -63,11 +63,8 @@ const Post = (props) => {
           }}>
           <View style={styles.imageContainer}>
             <Image
-              style={[styles.image, { height: width * ratio }]}
-              source={{
-                uri: imageUrls[0],
-              }}
-              placeholder={blurhash}
+              style={[styles.storyPhoto, { height: width * ratio }]}
+              source={imageUrls[0]}
             />
           </View>
         </Pressable>
@@ -103,12 +100,8 @@ const Post = (props) => {
               ]}>
               <View style={styles.imageContainer}>
                 <Image
-                  style={[styles.image, { height: width * ratio }]}
-                  source={{
-                    uri: imageUrls[index],
-                  }}
-                  placeholder={blurhash}
-                  contentFit="contain"
+                  style={[styles.storyPhoto, { height: width * ratio }]}
+                  source={imageUrls[index]}
                 />
               </View>
             </Pressable>
@@ -139,6 +132,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     justifyContent: "center",
+    borderWidth: 3,
   },
   postView: { flex: 1 },
 
@@ -146,6 +140,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     padding: 8,
+  },
+  storyPhoto: {
+    alignSelf: "center",
+    borderColor: "lightgray",
+    height: 300,
+    marginBottom: 12,
+    marginTop: 12,
+    padding: 8,
+    width: "98%",
   },
 });
 
