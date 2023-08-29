@@ -50,39 +50,6 @@ function useProtectedRoute(user) {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      if (!user) {
-        //@ts-ignore
-        console.log("onAuthStateChange USEEFFET", user);
-        setUserReady(true);
-
-        //navigation?.navigate("(auth)");
-        //router.replace("/signIn");
-        //SplashScreen.hideAsync();
-      } else {
-        //console.log("onAuthStateChange We have a User: ", user);
-        setUserReady(true);
-        registerForPushNotificationsAsync();
-        console.log("onAuthStateChange We have a User: ", user);
-        //@ts-ignore
-        //navigation?.navigate("(tabs)");
-        //router.replace("/");
-        //SplashScreen.hideAsync();
-      }
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const usePrevious = (value, initialValue) => {
-    const ref = useRef(initialValue);
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  };
-
   const useEffectDebugger = (
     effectHook,
     dependencies,
@@ -106,11 +73,45 @@ function useProtectedRoute(user) {
     }, {});
 
     if (Object.keys(changedDeps).length) {
-      //console.log("[use-effect-debugger] ", changedDeps);
+      console.log("[use-effect-debugger] ", changedDeps);
     }
 
     useEffect(effectHook, dependencies);
   };
+
+  const usePrevious = (value, initialValue) => {
+    const ref = useRef(initialValue);
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  };
+  useEffectDebugger(() => {
+    console.log("AUTH PROVIDER INITIAL [] useEffect", auth.currentUser);
+
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+      if (!user) {
+        //@ts-ignore
+        console.log("onAuthStateChange USEEFFET", user);
+        setUserReady(true);
+
+        //navigation?.navigate("(auth)");
+        //router.replace("/signIn");
+        //SplashScreen.hideAsync();
+      } else {
+        //console.log("onAuthStateChange We have a User: ", user);
+        setUserReady(true);
+        registerForPushNotificationsAsync();
+        console.log("onAuthStateChange We have a User: ", user);
+        //@ts-ignore
+        //navigation?.navigate("(tabs)");
+        //router.replace("/");
+        //SplashScreen.hideAsync();
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffectDebugger(() => {
     const unsubscribe = rootNavigation?.addListener("state", (event) => {

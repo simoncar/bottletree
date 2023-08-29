@@ -38,7 +38,7 @@ export const Posts = () => {
   };
 
   useEffect(() => {
-    demoData();
+    // demoData();
 
     if (sharedDataUser && undefined != currentProject) {
       console.log(

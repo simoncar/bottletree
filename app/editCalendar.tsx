@@ -267,9 +267,28 @@ export default function editCalendar() {
             <Text style={styles.actionTitle}>{sharedDataProject.title}</Text>
           </View>
         </View>
+        <Pressable
+          style={styles.pressableRight}
+          onPress={() => {
+            router.push({
+              pathname: "/colorList",
+              params: {
+                color: "red",
+              },
+            });
+          }}>
+          <View style={[styles.itemView, styles.line]}>
+            <View style={styles.avatar}>
+              <View style={styles.colorAvatar} />
+            </View>
+            <View style={styles.title}>
+              <Text style={styles.actionTitle}>Blue</Text>
+            </View>
+          </View>
 
-        {renderDelete()}
-        <View style={styles.bottom}></View>
+          {renderDelete()}
+          <View style={styles.bottom}></View>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
@@ -309,6 +328,13 @@ const styles = StyleSheet.create({
   },
 
   projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
+  colorAvatar: {
+    borderRadius: 35 / 2,
+    height: 35,
+    width: 35,
+
+    backgroundColor: "blue",
+  },
   right: { paddingRight: 8 },
   textDescription: {
     fontSize: 16,

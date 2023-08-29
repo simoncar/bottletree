@@ -43,6 +43,8 @@ export default function RootLayout() {
   }, [error]);
 
   const RootLayoutNav = useCallback(async () => {
+    console.log("RootLayoutNav");
+
     if (fontsLoaded) {
       //await SplashScreen.hideAsync();
     }
@@ -66,6 +68,13 @@ export default function RootLayout() {
                   options={{
                     presentation: "modal",
                     title: "Projects",
+                  }}
+                />
+                <Stack.Screen
+                  name="colorList"
+                  options={{
+                    presentation: "modal",
+                    title: "Colors",
                   }}
                 />
                 <Stack.Screen
