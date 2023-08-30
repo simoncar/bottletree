@@ -70,29 +70,31 @@ const Comments = ({ project, post }: Props) => {
     if (action) {
       return (
         <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.commentInput}
-            placeholder={defaultComment}
-            onChangeText={(text) => {
-              setComment(text);
-              setAction(true);
-            }}
-            value={text}
-            autoFocus
-            multiline
-          />
-          <Pressable
-            style={styles.inputAction}
-            hitSlop={10}
-            onPress={() => {
-              save();
-            }}>
-            <MaterialIcons
-              name="send"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
+          <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
+            <TextInput
+              style={styles.commentInput}
+              placeholder={defaultComment}
+              onChangeText={(text) => {
+                setComment(text);
+                setAction(true);
+              }}
+              value={text}
+              autoFocus
+              multiline
             />
-          </Pressable>
+            <Pressable
+              style={styles.inputAction}
+              hitSlop={10}
+              onPress={() => {
+                save();
+              }}>
+              <MaterialIcons
+                name="send"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </Pressable>
+          </KeyboardAvoidingView>
         </View>
       );
     } else {
