@@ -9,8 +9,6 @@ import Comments from "./PostComments";
 import Status from "./Status";
 import Dots from "../components/dots";
 
-const { width } = Dimensions.get("window");
-
 const Post = (props) => {
   const { post } = props;
 
@@ -18,8 +16,13 @@ const Post = (props) => {
 
   let caption = "";
   let ratio = 0.66666;
+  let width = Dimensions.get("window").width;
+
   if (typeof post.ratio === "number") {
     ratio = Number(post.ratio);
+    if (ratio > 1) {
+      width = Dimensions.get("window").width * 0.7;
+    }
   }
 
   if (post.caption != undefined) {
@@ -63,7 +66,10 @@ const Post = (props) => {
           }}>
           <View style={styles.imageContainer}>
             <Image
-              style={[styles.storyPhoto, { height: width * ratio }]}
+              style={[
+                styles.storyPhoto,
+                { width: width, height: width * ratio },
+              ]}
               source={imageUrls[0]}
             />
           </View>
@@ -100,7 +106,10 @@ const Post = (props) => {
               ]}>
               <View style={styles.imageContainer}>
                 <Image
-                  style={[styles.storyPhoto, { height: width * ratio }]}
+                  style={[
+                    styles.storyPhoto,
+                    { width: width, height: width * ratio },
+                  ]}
                   source={imageUrls[index]}
                 />
               </View>
@@ -124,23 +133,19 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingTop: 4,
   },
-  image: {
-    backgroundColor: "#0553",
-    flex: 1,
-    width: "100%",
-  },
+
   imageContainer: {
+    borderWidth: 3,
     flex: 1,
     justifyContent: "center",
-    borderWidth: 3,
   },
-  postView: { flex: 1 },
-
   listItemHeader: {
     alignItems: "center",
     flexDirection: "row",
     padding: 8,
   },
+
+  postView: { flex: 1 },
   storyPhoto: {
     alignSelf: "center",
     borderColor: "lightgray",
@@ -148,7 +153,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginTop: 12,
     padding: 8,
-    width: "98%",
   },
 });
 
