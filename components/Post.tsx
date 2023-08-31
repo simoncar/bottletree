@@ -21,7 +21,7 @@ const Post = (props) => {
   if (typeof post.ratio === "number") {
     ratio = Number(post.ratio);
     if (ratio > 1) {
-      width = Dimensions.get("window").width * 0.7;
+      width = Dimensions.get("window").width * 0.68;
     }
   }
 
@@ -77,45 +77,47 @@ const Post = (props) => {
       );
     } else {
       return (
-        <Carousel
-          width={width}
-          panGestureHandlerProps={{
-            activeOffsetX: [-10, 10],
-          }}
-          height={width * ratio}
-          data={imageUrls}
-          renderItem={({ index }) => (
-            <Pressable
-              onPress={() => {
-                router.push({
-                  pathname: "/editPost",
-                  params: {
-                    project: post.projectId,
-                    key: post.key,
-                    image: imageUrls[index],
-                    caption: caption,
-                    ratio: ratio,
+        <View style={styles.imageContainer}>
+          <Carousel
+            width={width}
+            panGestureHandlerProps={{
+              activeOffsetX: [-10, 10],
+            }}
+            height={width * ratio}
+            data={imageUrls}
+            renderItem={({ index }) => (
+              <Pressable
+                onPress={() => {
+                  router.push({
+                    pathname: "/editPost",
+                    params: {
+                      project: post.projectId,
+                      key: post.key,
+                      image: imageUrls[index],
+                      caption: caption,
+                      ratio: ratio,
+                    },
+                  });
+                }}
+                style={({ pressed }) => [
+                  {
+                    flex: 1,
+                    justifyContent: "center",
                   },
-                });
-              }}
-              style={({ pressed }) => [
-                {
-                  flex: 1,
-                  justifyContent: "center",
-                },
-              ]}>
-              <View style={styles.imageContainer}>
-                <Image
-                  style={[
-                    styles.storyPhoto,
-                    { width: width, height: width * ratio },
-                  ]}
-                  source={imageUrls[index]}
-                />
-              </View>
-            </Pressable>
-          )}
-        />
+                ]}>
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={[
+                      styles.storyPhoto,
+                      { width: width, height: width * ratio },
+                    ]}
+                    source={imageUrls[index]}
+                  />
+                </View>
+              </Pressable>
+            )}
+          />
+        </View>
       );
     }
   }
@@ -137,6 +139,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     borderWidth: 3,
     flex: 1,
+    flexDirection: "row",
     justifyContent: "center",
   },
   listItemHeader: {
