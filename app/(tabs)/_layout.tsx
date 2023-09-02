@@ -152,6 +152,19 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="calendarLarge"
+        options={{
+          title: "",
+          headerTitle: () => (
+            <BigText style={styles.headerTitle}>Calendar Large</BigText>
+          ),
+          headerTitleAlign: "left",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="calendar" color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
