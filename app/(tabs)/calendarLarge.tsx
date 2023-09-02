@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  Pressable,
+} from "react-native";
 import { Agenda, DateData, AgendaEntry } from "react-native-calendars";
 import { getItems, getItemsBigCalendar } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
@@ -8,6 +13,7 @@ import { View, Text, ParsedText } from "../../components/Themed";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
+import dayjs from "dayjs";
 
 import {
   Calendar,
@@ -70,6 +76,7 @@ const renderEvent = <T extends ICalendarEventBase>(
 
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
+  const [calendarDate, setDate] = useState(dayjs());
   const { sharedDataProject } = useContext(ProjectContext);
   const colorScheme = useColorScheme();
 
@@ -167,18 +174,30 @@ export default function CalendarLarge() {
   };
 
   return (
-    <Calendar
-      events={items}
-      height={600}
-      mode="month"
-      showTime={true}
-      showAdjacentMonths={true}
-      swipeEnabled={true}
-      renderEvent={renderEvent}
-      theme={darkTheme}
-      eventCellStyle={styles.calendarCellStyle}
-      dayHeaderStyle={styles.calendarDayHeaderStyle}
-    />
+    <View>
+      <Text>Header</Text>
+      <Pressable
+        onPress={() => {
+          setDate(calendarDate.add(6, "week")), [calendarDate];
+        }}>
+        <View>
+          <Text>DO IT</Text>
+        </View>
+      </Pressable>
+      <Calendar
+        events={items}
+        height={600}
+        mode="month"
+        showTime={true}
+        showAdjacentMonths={true}
+        swipeEnabled={true}
+        renderEvent={renderEvent}
+        theme={darkTheme}
+        eventCellStyle={styles.calendarCellStyle}
+        dayHeaderStyle={styles.calendarDayHeaderStyle}
+        date={calendarDate.toDate()}
+      />
+    </View>
   );
 }
 
