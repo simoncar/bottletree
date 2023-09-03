@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.37",
+    "version": "1.0.39",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#F9D96C"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
@@ -66,10 +64,7 @@
         {
           "icon": "./assets/images/notification.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/hammer.wav",
-            "./assets/sounds/drill.wav"
-          ]
+          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
         }
       ],
       "sentry-expo",

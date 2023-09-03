@@ -19,20 +19,19 @@ export async function getItemsBigCalendar(
   callback: itemsRead,
 ) {
   const q = query(
-    collection(db, "calendar"),
-    where("projectId", "==", projectId),
+    collection(db, "calendar"), //,
+    //where("projectId", "==", projectId),
   );
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const calendarEvents = [];
     querySnapshot.forEach((doc) => {
       const data = {
-        start: new Date(2023, 8, 2, 0, 0),
-        end: new Date(2023, 8, 20, 0, 0),
+        start: doc.data().dateBegin.toDate(),
+        end: doc.data().dateEnd.toDate(),
         title: doc.data().title,
-        color: "red",
+        color: "#30A7E2",
       };
-
       calendarEvents.push(data);
     });
 
