@@ -12,11 +12,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#F9D96C"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "37",
+      "buildNumber": "38",
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -64,7 +66,10 @@
         {
           "icon": "./assets/images/notification.png",
           "color": "#ffffff",
-          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
+          "sounds": [
+            "./assets/sounds/hammer.wav",
+            "./assets/sounds/drill.wav"
+          ]
         }
       ],
       "sentry-expo",
