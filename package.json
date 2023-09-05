@@ -1,6 +1,7 @@
 {
   "name": "bottletree",
   "version": "1.2.0",
+  "license": "MIT",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
