@@ -83,19 +83,45 @@ export default function CalendarLarge() {
   //   }
   // }, [currentProject]);
 
-  const onChangeDate = ([start, end]) => {
+  const setNavOptions = () => {
     navigation.setOptions({
       headerTitle: () => (
-        <View style={styles.buttonBar}>
-          <Button title="Today" onPress={_onToday} />
-          <Button title="<" onPress={_onPrevDate} />
-          <Button title=">" onPress={_onNextDate} />
-          <BigText style={styles.headerTitle}>
-            {dayjs(start).format("MMMM YYYY")}
-          </BigText>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{ width: 50, height: 50 }}>
+            <Pressable onPress={_onPrevDate}>
+              <FontAwesome5
+                name="chevron-left"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </Pressable>
+          </View>
+
+          <View style={{ width: 50, height: 50 }}>
+            <Pressable onPress={_onNextDate}>
+              <FontAwesome5
+                name="chevron-right"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </Pressable>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              height: 50,
+            }}>
+            <BigText style={styles.headerTitle}>
+              {dayjs(calendarDate.toDate()).format("MMMM YYYY")}
+            </BigText>
+          </View>
         </View>
       ),
     });
+  };
+
+  const onChangeDate = ([start, end]) => {
+    setNavOptions();
   };
 
   const renderEvent = <T extends ICalendarEventBase>(
@@ -125,7 +151,6 @@ export default function CalendarLarge() {
 
   const _onPrevDate = () => {
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
-    //setDate(dayjs(calendarDate).add(modeToNum("month", calendarDate), "day"));
   };
 
   const _onNextDate = () => {
@@ -142,44 +167,7 @@ export default function CalendarLarge() {
     return current.daysInMonth() - current.date() + 1;
   }
 
-  const _onToday = () => {
-    setDate(dayjs());
-  };
-
-  navigation.setOptions({
-    headerTitle: () => (
-      <View style={{ flex: 1, flexDirection: "row" }}>
-        <View style={{ width: 50, height: 50 }}>
-          <Pressable onPress={_onPrevDate}>
-            <FontAwesome5
-              name="chevron-left"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </Pressable>
-        </View>
-
-        <View style={{ width: 50, height: 50 }}>
-          <Pressable onPress={_onNextDate}>
-            <FontAwesome5
-              name="chevron-right"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </Pressable>
-        </View>
-        <View
-          style={{
-            width: "100%",
-            height: 50,
-          }}>
-          <BigText style={styles.headerTitle}>
-            {dayjs(calendarDate.toDate()).format("MMMM YYYY")}
-          </BigText>
-        </View>
-      </View>
-    ),
-  });
+  setNavOptions();
 
   return (
     <View>
