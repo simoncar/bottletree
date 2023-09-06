@@ -24,6 +24,7 @@ import {
   ICalendarEventBase,
   CalendarTouchableOpacityProps,
 } from "react-native-big-calendar";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
@@ -72,6 +73,7 @@ export default function CalendarLarge() {
   }
 
   useEffect(() => {
+    setNavOptions();
     if (undefined != currentProject) {
       const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
       return () => {
@@ -94,21 +96,21 @@ export default function CalendarLarge() {
     navigation.setOptions({
       headerTitle: () => (
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={{ width: 50, height: 50 }}>
+          <View style={{ width: 50, height: 50, paddingTop: 3 }}>
             <Pressable onPress={_onPrevDate}>
               <FontAwesome5
                 name="chevron-left"
-                size={25}
+                size={23}
                 color={Colors[colorScheme ?? "light"].text}
               />
             </Pressable>
           </View>
 
-          <View style={{ width: 50, height: 50 }}>
+          <View style={{ width: 40, height: 50, paddingTop: 3 }}>
             <Pressable onPress={_onNextDate}>
               <FontAwesome5
                 name="chevron-right"
-                size={25}
+                size={23}
                 color={Colors[colorScheme ?? "light"].text}
               />
             </Pressable>
@@ -162,16 +164,12 @@ export default function CalendarLarge() {
     return current.daysInMonth() - current.date() + 1;
   }
 
-  setNavOptions();
-
   return (
-    <View>
+    <ScrollView>
       <Calendar
         events={items}
-        height={height - 70}
+        height={height - 200}
         mode="month"
-        showTime={true}
-        showAdjacentMonths={true}
         swipeEnabled={true}
         renderEvent={renderEvent}
         theme={darkTheme}
@@ -179,7 +177,7 @@ export default function CalendarLarge() {
         date={calendarDate}
         onChangeDate={onChangeDate}
       />
-    </View>
+    </ScrollView>
   );
 }
 
@@ -187,7 +185,9 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
   },
-  calendarEvent: {},
+  calendarEvent: {
+    padding: 3,
+  },
   calendarEventText: {
     color: "white",
   },
@@ -197,7 +197,8 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   headerTitle: {
-    fontSize: 28,
+    paddingTop: 3,
+    fontSize: 24,
   },
   text: {},
 

@@ -140,19 +140,6 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="calendar"
-        options={{
-          title: "",
-          headerTitle: () => (
-            <BigText style={styles.headerTitle}>Calendar</BigText>
-          ),
-          headerTitleAlign: "left",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="calendar" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="calendarLarge"
         options={{
           title: "",

@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    borderWidth: 3,
+    borderWidth: 0,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
