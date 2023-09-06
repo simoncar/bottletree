@@ -88,7 +88,6 @@ export default function TabLayout() {
             // e.preventDefault();
             //Any custom code here
             // alert(123);
-            console.log("tabPress router push projectList");
 
             router.push({
               pathname: "/projectList",

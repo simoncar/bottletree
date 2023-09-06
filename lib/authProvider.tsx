@@ -73,7 +73,7 @@ function useProtectedRoute(user) {
     }, {});
 
     if (Object.keys(changedDeps).length) {
-      console.log("[use-effect-debugger] ", changedDeps);
+      // console.log("[use-effect-debugger] ", changedDeps);
     }
 
     useEffect(effectHook, dependencies);
@@ -87,12 +87,9 @@ function useProtectedRoute(user) {
     return ref.current;
   };
   useEffectDebugger(() => {
-    console.log("AUTH PROVIDER INITIAL [] useEffect", auth.currentUser);
-
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
       if (!user) {
         //@ts-ignore
-        console.log("onAuthStateChange USEEFFET", user);
         setUserReady(true);
 
         //navigation?.navigate("(auth)");
@@ -102,7 +99,7 @@ function useProtectedRoute(user) {
         //console.log("onAuthStateChange We have a User: ", user);
         setUserReady(true);
         registerForPushNotificationsAsync();
-        console.log("onAuthStateChange We have a User: ", user);
+        //console.log("onAuthStateChange We have a User: ", user);
         //@ts-ignore
         //navigation?.navigate("(tabs)");
         //router.replace("/");

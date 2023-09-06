@@ -43,7 +43,6 @@ export default function RootLayout() {
   }, [error]);
 
   const RootLayoutNav = useCallback(async () => {
-    console.log("RootLayoutNav");
 
     if (fontsLoaded) {
       //await SplashScreen.hideAsync();

@@ -16,8 +16,6 @@ const saveDone = (id: string) => {
 };
 
 export async function registerForPushNotificationsAsync() {
-  console.log("registerForPushNotificationsAsync");
-
   let token;
   if (Device.isDevice) {
     const { status: existingStatus } =

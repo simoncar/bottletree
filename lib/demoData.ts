@@ -215,12 +215,8 @@ export const demoData = async () => {
   }
 
   async function createUser(user: IUser) {
-    console.log("createUser: ", user.email);
 
     const fsi2 = await fetchSignInMethodsForEmail(auth, user.email);
-    console.log("fsi2fsi2fsi2fsi2fsi2fsi2fsi2fsi2: ", fsi2);
-
-    console.log("fsi2.length:: ", fsi2.length);
 
     let user2 = null;
     if (fsi2.length === 0) {
@@ -229,14 +225,11 @@ export const demoData = async () => {
         user.email,
         "password",
       );
-      console.log("user2user2user2user2user2user2user2user2: ", user2);
     } else {
-      console.log("signInWithEmailAndPassword:", user.email);
 
       user2 = await signInWithEmailAndPassword(auth, user.email, "password");
     }
 
-    console.log("UID: ", user2.user.uid);
 
     const userDoc2 = await setDoc(doc(db, "users", user2.user.uid), user, {
       merge: true,

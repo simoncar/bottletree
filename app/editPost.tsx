@@ -38,8 +38,6 @@ export default function editPost() {
 
   const save = () => {
     console.log("save:", sharedDataProject);
-    console.log("sharedDataProject.key:", sharedDataProject.key);
-    console.log("sharedDataProject.caption:", sharedDataProject.title);
 
     const post: IPost = {
       projectId: sharedDataProject.key,

@@ -39,7 +39,6 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 	}
 	);
 
-	console.log("notifications: " + JSON.stringify(notifications));
 
 	if (notifications.length > 0) {
 		const response = await fetch("https://exp.host/--/api/v2/push/send", {
@@ -54,7 +53,6 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 
 		if (!response.ok) {
-			console.log("response: " + JSON.stringify(response));
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 
@@ -72,7 +70,6 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 		}
 
 	} else {
-		console.log("no notifications to send");
 		return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
 	}
 

@@ -24,7 +24,7 @@ const ModalScreen = (props) => {
   const colorScheme = useColorScheme();
   const { updateSharedDataProject } = useContext(ProjectContext);
 
-  function renderColor(myColor: string) {
+  function renderColor(name: string, code: string) {
     return (
       <TouchableOpacity
         key={"addProject"}
@@ -39,10 +39,10 @@ const ModalScreen = (props) => {
         <View style={styles.outerView}>
           <View style={styles.innerView}>
             <View style={styles.avatar}>
-              <View style={styles.colorAvatar} />
+              <View style={[styles.colorAvatar, { backgroundColor: code }]} />
             </View>
             <View>
-              <Text style={styles.project}>Blue</Text>
+              <Text style={styles.project}>{name}</Text>
             </View>
           </View>
         </View>
@@ -53,10 +53,16 @@ const ModalScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
-        <View>{renderColor("red")}</View>
-        <View>{renderColor("blue")}</View>
-        <View>{renderColor("green")}</View>
-        <View>{renderColor("yellow")}</View>
+        <View>{renderColor("Red Rocks", "#DB4545")}</View>
+        <View>{renderColor("Orange", "#F16D44")}</View>
+        <View>{renderColor("Mango", "#EDC148")}</View>
+        <View>{renderColor("Avocado", "#3C9065")}</View>
+        <View>{renderColor("MCG Turf", "#49B382")}</View>
+        <View>{renderColor("Surf", "#30A7E2")}</View>
+        <View>{renderColor("Aubergine", "#6172BA")}</View>
+        <View>{renderColor("Plum Jam", "#9F52B2")}</View>
+        <View>{renderColor("Dragon Fruit", "#E085D2")}</View>
+        <View>{renderColor("Back Pocket Mud", "#7b5656")}</View>
       </ScrollView>
     </View>
   );
@@ -68,16 +74,14 @@ const styles = StyleSheet.create({
     width: 50,
   },
 
-  avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
-  container: {
-    flex: 1,
-    height: 200,
-  },
   colorAvatar: {
     borderRadius: 35 / 2,
     height: 35,
     width: 35,
-    backgroundColor: "blue",
+  },
+  container: {
+    flex: 1,
+    height: 200,
   },
   innerView: {
     alignItems: "center",
@@ -100,16 +104,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-  projectArchived: {
-    color: "grey",
-    fontSize: 18,
-    marginBottom: 5,
-  },
-  projectList: {},
 
-  rightChevron: {
-    marginHorizontal: 8,
-  },
+  projectList: {},
 });
 
 export default ModalScreen;

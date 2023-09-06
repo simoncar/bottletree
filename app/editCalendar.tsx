@@ -52,7 +52,7 @@ export default function editCalendar() {
 
   const saveDone = (id: string) => {
     router.push({
-      pathname: "/calendar",
+      pathname: "/calendarLarge",
       params: {
         id: id,
       },
@@ -166,8 +166,6 @@ export default function editCalendar() {
       );
     }
   };
-
-  console.log("shareddataproject", sharedDataProject);
 
   return (
     <SafeAreaView>
@@ -300,6 +298,13 @@ const styles = StyleSheet.create({
   },
   avatar: { alignItems: "center", justifyContent: "flex-start", width: 48 },
   bottom: { paddingBottom: 500 },
+  colorAvatar: {
+    backgroundColor: "#30A7E2",
+    borderRadius: 35 / 2,
+    height: 35,
+
+    width: 35,
+  },
   date: {
     alignItems: "flex-start",
     flex: 1,
@@ -314,6 +319,7 @@ const styles = StyleSheet.create({
     padding: 8,
     width: "90%",
   },
+
   itemView: {
     alignItems: "center",
     flexDirection: "row",
@@ -326,15 +332,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-
   projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
-  colorAvatar: {
-    borderRadius: 35 / 2,
-    height: 35,
-    width: 35,
-
-    backgroundColor: "blue",
-  },
   right: { paddingRight: 8 },
   textDescription: {
     fontSize: 16,

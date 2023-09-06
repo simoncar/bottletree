@@ -41,10 +41,7 @@ export const Posts = () => {
     demoData();
 
     if (sharedDataUser && undefined != currentProject) {
-      console.log(
-        "Posts: useEffect: currentProject.key",
-        currentProject.archived,
-      );
+  
 
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {

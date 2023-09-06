@@ -9,4 +9,3 @@ import "expo-router/entry";
 // 	debug: true // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
 // });
 
-console.log("index.ts");

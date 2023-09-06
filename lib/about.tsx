@@ -13,7 +13,6 @@ export const About = () => {
     const fetchToken = async () => {
       const returnToken = await getToken();
       setToken(returnToken);
-      console.log("empToken", returnToken);
     };
 
     fetchToken()
