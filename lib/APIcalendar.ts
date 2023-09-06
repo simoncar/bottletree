@@ -35,8 +35,6 @@ export async function getItemsBigCalendar(
       calendarEvents.push(data);
     });
 
-    console.log("Callback events: ", calendarEvents);
-
     callback(calendarEvents);
   });
 

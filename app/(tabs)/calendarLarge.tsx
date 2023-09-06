@@ -17,6 +17,7 @@ import { router } from "expo-router";
 import dayjs from "dayjs";
 import { useNavigation } from "expo-router";
 import { BigText } from "../../components/StyledText";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 import {
   Calendar,
@@ -72,22 +73,27 @@ export default function CalendarLarge() {
     }
   }, []);
 
-  useEffect(() => {
-    if (sharedDataProject && undefined != currentProject?.key) {
-      setItems([]);
-      const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
-      return () => {
-        unsubscribe;
-      };
-    }
-  }, [currentProject]);
+  // useEffect(() => {
+  //   if (sharedDataProject && undefined != currentProject?.key) {
+  //     setItems([]);
+  //     const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
+  //     return () => {
+  //       unsubscribe;
+  //     };
+  //   }
+  // }, [currentProject]);
 
   const onChangeDate = ([start, end]) => {
     navigation.setOptions({
       headerTitle: () => (
-        <BigText style={styles.headerTitle}>
-          {dayjs(start).format("MMMM")}
-        </BigText>
+        <View style={styles.buttonBar}>
+          <Button title="Today" onPress={_onToday} />
+          <Button title="<" onPress={_onPrevDate} />
+          <Button title=">" onPress={_onNextDate} />
+          <BigText style={styles.headerTitle}>
+            {dayjs(start).format("MMMM YYYY")}
+          </BigText>
+        </View>
       ),
     });
   };
@@ -96,8 +102,6 @@ export default function CalendarLarge() {
     event: T,
     touchableOpacityProps: CalendarTouchableOpacityProps,
   ) => {
-    console.log("renderEvent: ", touchableOpacityProps);
-
     return (
       <TouchableOpacity {...touchableOpacityProps}>
         <View style={[styles.calendarEvent, { backgroundColor: event.color }]}>
@@ -107,24 +111,78 @@ export default function CalendarLarge() {
     );
   };
 
+  const Button = ({
+    onPress,
+    title,
+  }: {
+    onPress: () => any;
+    title: string;
+  }) => (
+    <TouchableOpacity onPress={onPress} style={styles.button}>
+      <Text style={styles.text}>{title}</Text>
+    </TouchableOpacity>
+  );
+
+  const _onPrevDate = () => {
+    setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
+    //setDate(dayjs(calendarDate).add(modeToNum("month", calendarDate), "day"));
+  };
+
+  const _onNextDate = () => {
+    setDate(dayjs(calendarDate).add(modeToNum("month", calendarDate), "day"));
+  };
+
+  function modeToNum(mode: Mode, current?: dayjs.Dayjs | Date): number {
+    if (!current) {
+      throw new Error("You must specify current date if mode is month");
+    }
+    if (current instanceof Date) {
+      current = dayjs(current);
+    }
+    return current.daysInMonth() - current.date() + 1;
+  }
+
+  const _onToday = () => {
+    setDate(dayjs());
+  };
+
+  navigation.setOptions({
+    headerTitle: () => (
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <View style={{ width: 50, height: 50 }}>
+          <Pressable onPress={_onPrevDate}>
+            <FontAwesome5
+              name="chevron-left"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </Pressable>
+        </View>
+
+        <View style={{ width: 50, height: 50 }}>
+          <Pressable onPress={_onNextDate}>
+            <FontAwesome5
+              name="chevron-right"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </Pressable>
+        </View>
+        <View
+          style={{
+            width: "100%",
+            height: 50,
+          }}>
+          <BigText style={styles.headerTitle}>
+            {dayjs(calendarDate.toDate()).format("MMMM YYYY")}
+          </BigText>
+        </View>
+      </View>
+    ),
+  });
+
   return (
     <View>
-      <Text>Header</Text>
-      <Pressable
-        onPress={() => {
-          navigation.setOptions({
-            headerTitle: () => (
-              <BigText style={styles.headerTitle}>
-                {calendarDate.format("MMMM")}
-              </BigText>
-            ),
-          });
-          setDate(calendarDate.add(6, "week")), [calendarDate];
-        }}>
-        <View>
-          <Text>DO IT</Text>
-        </View>
-      </Pressable>
       <Calendar
         events={items}
         height={height - 150}
@@ -135,7 +193,7 @@ export default function CalendarLarge() {
         renderEvent={renderEvent}
         theme={darkTheme}
         eventCellStyle={styles.calendarCellStyle}
-        date={calendarDate.toDate()}
+        date={calendarDate}
         onChangeDate={onChangeDate}
       />
     </View>
@@ -143,6 +201,28 @@ export default function CalendarLarge() {
 }
 
 const styles = StyleSheet.create({
+  innerView: {
+    alignItems: "center",
+    flexDirection: "row",
+
+    paddingHorizontal: 8,
+  },
+  outerView: {
+    alignItems: "center",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    height: 80,
+    paddingVertical: 8,
+    padding: 8,
+  },
+
+  buttonBar: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontSize: 28,
+  },
   calendarCellStyle: {
     borderWidth: 0,
     color: "white",
@@ -150,5 +230,10 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 28,
+  },
+  text: {},
+
+  rightChevron: {
+    marginHorizontal: 8,
   },
 });
