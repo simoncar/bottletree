@@ -25,23 +25,6 @@ import {
   CalendarTouchableOpacityProps,
 } from "react-native-big-calendar";
 
-const darkTheme = {
-  palette: {
-    primary: {
-      main: "#6185d0",
-      contrastText: "#000",
-    },
-    gray: {
-      "100": "#333",
-      "200": "#666",
-      "300": "#888",
-      "500": "#aaa",
-      "800": "#ccc",
-    },
-  },
-  eventCellOverlappings: "#6185d0",
-};
-
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
   const [calendarDate, setDate] = useState(dayjs());
@@ -51,6 +34,30 @@ export default function CalendarLarge() {
   const navigation = useNavigation();
 
   let currentProject: IProject = sharedDataProject;
+
+  const darkTheme = {
+    palette: {
+      primary: {
+        main: "#007bff", //'today' color
+        contrastText: "#000",
+      },
+      nowIndicator: "#d06184",
+      gray: {
+        "100": "#333",
+        "200": Colors[colorScheme ?? "light"].bigCalendarBoxes, //boxes around days
+        "300": "#888",
+        "500": "#aaa",
+        "800": Colors[colorScheme ?? "light"].bigCalendarDayNumberInactive, // day nuumber
+      },
+      typography: {
+        fontFamily: "FuturaBold",
+        xs: { fontSize: 12 },
+        sm: { fontSize: 14 },
+        xl: { fontSize: 16 },
+      },
+    },
+    eventCellOverlappings: "#d0c161",
+  };
 
   const itemsRead = (calendarItemsDB) => {
     setItems(calendarItemsDB);
@@ -173,7 +180,7 @@ export default function CalendarLarge() {
     <View>
       <Calendar
         events={items}
-        height={height - 150}
+        height={height - 70}
         mode="month"
         showTime={true}
         showAdjacentMonths={true}

@@ -15,6 +15,9 @@ export default {
     projectPanel: "#e9f0fd",
     dots: "#232323",
     dotsActive: "#3265cb",
+    bigCalendarBoxes: "#e9f0fd",
+    bigCalendarDayNumberInactive: "#2d4150",
+    bigCalendarActive: "#3265cb",
   },
   dark: {
     text: "#fff",
@@ -29,6 +32,9 @@ export default {
     projectPanel: "#232323",
     dots: "#e9f0fd",
     dotsActive: "#3265cb",
+    bigCalendarBoxes: "#2d4150",
+    bigCalendarDayNumberInactive: "#e9f0fd",
+    bigCalendarActive: "#3265cb",
   },
 };
 
