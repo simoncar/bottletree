@@ -18,6 +18,7 @@ export default {
     bigCalendarBoxes: "#e9f0fd",
     bigCalendarDayNumberInactive: "#2d4150",
     bigCalendarActive: "#3265cb",
+    bigCalendarContrastText: "#fff",
   },
   dark: {
     text: "#fff",
@@ -35,6 +36,7 @@ export default {
     bigCalendarBoxes: "#2d4150",
     bigCalendarDayNumberInactive: "#e9f0fd",
     bigCalendarActive: "#3265cb",
+    bigCalendarContrastText: "#fff",
   },
 };
 

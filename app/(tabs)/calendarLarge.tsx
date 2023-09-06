@@ -39,7 +39,7 @@ export default function CalendarLarge() {
     palette: {
       primary: {
         main: "#007bff", //'today' color
-        contrastText: "#000",
+        contrastText: Colors[colorScheme ?? "light"].bigCalendarContrastText,
       },
       nowIndicator: "#d06184",
       gray: {
@@ -138,23 +138,11 @@ export default function CalendarLarge() {
     return (
       <TouchableOpacity {...touchableOpacityProps}>
         <View style={[styles.calendarEvent, { backgroundColor: event.color }]}>
-          <Text>{event.title}</Text>
+          <Text style={styles.calendarEventText}>{event.title}</Text>
         </View>
       </TouchableOpacity>
     );
   };
-
-  const Button = ({
-    onPress,
-    title,
-  }: {
-    onPress: () => any;
-    title: string;
-  }) => (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Text style={styles.text}>{title}</Text>
-    </TouchableOpacity>
-  );
 
   const _onPrevDate = () => {
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
@@ -196,27 +184,12 @@ export default function CalendarLarge() {
 }
 
 const styles = StyleSheet.create({
-  innerView: {
-    alignItems: "center",
-    flexDirection: "row",
-
-    paddingHorizontal: 8,
-  },
-  outerView: {
-    alignItems: "center",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: "row",
-    height: 80,
-    paddingVertical: 8,
-    padding: 8,
-  },
-
-  buttonBar: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
   headerTitle: {
     fontSize: 28,
+  },
+  calendarEvent: {},
+  calendarEventText: {
+    color: "white",
   },
   calendarCellStyle: {
     borderWidth: 0,
