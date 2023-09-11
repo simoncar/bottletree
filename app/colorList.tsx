@@ -32,7 +32,8 @@ const ModalScreen = (props) => {
           router.push({
             pathname: "/editCalendar",
             params: {
-              project: "post.projectId",
+              xcolor: code,
+              xcolorName: name,
             },
           });
         }}>
@@ -53,16 +54,16 @@ const ModalScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
-        <View>{renderColor("Red Rocks", "#DB4545")}</View>
+        <View>{renderColor("Red", "#DB4545")}</View>
         <View>{renderColor("Orange", "#F16D44")}</View>
         <View>{renderColor("Mango", "#EDC148")}</View>
         <View>{renderColor("Avocado", "#3C9065")}</View>
-        <View>{renderColor("MCG Turf", "#49B382")}</View>
+        <View>{renderColor("Grass", "#49B382")}</View>
         <View>{renderColor("Surf", "#30A7E2")}</View>
         <View>{renderColor("Aubergine", "#6172BA")}</View>
         <View>{renderColor("Plum Jam", "#9F52B2")}</View>
         <View>{renderColor("Dragon Fruit", "#E085D2")}</View>
-        <View>{renderColor("Back Pocket Mud", "#7b5656")}</View>
+        <View>{renderColor("Mud", "#7b5656")}</View>
       </ScrollView>
     </View>
   );

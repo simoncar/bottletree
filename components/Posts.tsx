@@ -38,11 +38,9 @@ export const Posts = () => {
   };
 
   useEffect(() => {
-    demoData();
+    // demoData();
 
     if (sharedDataUser && undefined != currentProject) {
-  
-
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {
         unsubscribe;

@@ -6,8 +6,7 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import { Agenda, DateData, AgendaEntry } from "react-native-calendars";
-import { getItems, getItemsBigCalendar } from "../../lib/APIcalendar";
+import { getItemsBigCalendar } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
 import Project from "../../components/ProjectPanel";
 import { View, Text, ParsedText } from "../../components/Themed";
@@ -42,6 +41,7 @@ export default function CalendarLarge() {
         main: "#007bff", //'today' color
         contrastText: Colors[colorScheme ?? "light"].bigCalendarContrastText,
       },
+      moreLabel: Colors[colorScheme ?? "light"].text,
       nowIndicator: "#d06184",
       gray: {
         "100": "#333",
@@ -50,11 +50,11 @@ export default function CalendarLarge() {
         "500": "#aaa",
         "800": Colors[colorScheme ?? "light"].bigCalendarDayNumberInactive, // day nuumber
       },
-      typography: {
-        fontFamily: "FuturaBold",
-        xs: { fontSize: 12 },
-        sm: { fontSize: 14 },
-        xl: { fontSize: 16 },
+    },
+    typography: {
+      moreLabel: {
+        fontSize: 10,
+        fontWeight: "normal",
       },
     },
     eventCellOverlappings: "#d0c161",
@@ -146,6 +146,22 @@ export default function CalendarLarge() {
     );
   };
 
+  const onPressEvent = (event: ICalendarEventBase) => {
+    console.log("onPressEvent:", event);
+    router.push({
+      pathname: "/editCalendar",
+      params: {
+        pkey: event.key,
+        ptitle: event.title,
+        pdescription: event.description,
+        pdateBegin: event.start,
+        pdateEnd: event.end,
+        puid: event.uid,
+        pcolor: event.color,
+      },
+    });
+  };
+
   const _onPrevDate = () => {
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
   };
@@ -176,6 +192,9 @@ export default function CalendarLarge() {
         eventCellStyle={styles.calendarCellStyle}
         date={calendarDate}
         onChangeDate={onChangeDate}
+        onPressEvent={onPressEvent}
+        eventMinHeightForMonthView={25}
+        maxVisibleEventCount={3}
       />
     </ScrollView>
   );
@@ -183,7 +202,8 @@ export default function CalendarLarge() {
 
 const styles = StyleSheet.create({
   headerTitle: {
-    fontSize: 28,
+    fontSize: 24,
+    paddingTop: 3,
   },
   calendarEvent: {
     padding: 3,
@@ -196,11 +216,6 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 0,
   },
-  headerTitle: {
-    paddingTop: 3,
-    fontSize: 24,
-  },
-  text: {},
 
   rightChevron: {
     marginHorizontal: 8,

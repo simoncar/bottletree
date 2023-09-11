@@ -87,6 +87,7 @@ export default function Calendar() {
               pdateBegin: reservation.dateBegin.toDate(),
               pdateEnd: reservation.dateEnd.toDate(),
               puid: reservation.uid,
+              pcolor: reservation.color,
             },
           });
         }}>

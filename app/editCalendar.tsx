@@ -1,5 +1,10 @@
-import { Stack, useLocalSearchParams, router } from "expo-router";
-import React, { useState } from "react";
+import {
+  Stack,
+  useLocalSearchParams,
+  useNavigation,
+  router,
+} from "expo-router";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -27,20 +32,40 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function editCalendar() {
   const { sharedDataProject } = useProject();
   const { sharedDataUser } = useAuth();
-  const { pkey, ptitle, pdescription, pdateBegin, pdateEnd, puid } =
-    useLocalSearchParams<{
-      pkey: string;
-      ptitle: string;
-      pdescription: string;
-      pdateBegin: string;
-      pdateEnd: string;
-      puid: string;
-    }>();
+  const {
+    pkey,
+    ptitle,
+    pcolor,
+    pcolorName,
+    pdescription,
+    pdateBegin,
+    pdateEnd,
+    puid,
+    xcolor,
+    xcolorName,
+  } = useLocalSearchParams<{
+    pkey: string;
+    ptitle: string;
+    pcolor: string;
+    pcolorName: string;
+    pdescription: string;
+    pdateBegin: string;
+    pdateEnd: string;
+    puid: string;
+    xcolor: string;
+    xcolorName: string;
+  }>();
+
+  console.log("useLocalSearchParams/editCalendar:", pcolor, xcolor);
 
   const [title, onChangeTitle] = useState(ptitle);
   const [description, onChangeDescription] = useState(pdescription);
+  const [color, onChangeColor] = useState(pcolor);
+  const [colorName, onChangeColorName] = useState(pcolorName);
 
   const [dateBegin, setDateBegin] = useState<Date>(new Date(pdateBegin));
+  const [dateBeginShow, setDateBeginShow] = useState<boolean>(true);
+
   const [dateBeginTime, setDateBeginTime] = useState<Date>(
     new Date(pdateBegin),
   );
@@ -49,6 +74,21 @@ export default function editCalendar() {
   const [dateEndTime, setDateEndTime] = useState<Date>(new Date(pdateEnd));
 
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      console.log("useLocalSearchParams:", useLocalSearchParams);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("xcolor:", xcolor);
+    if (xcolor != undefined) {
+      onChangeColor(xcolor);
+      onChangeColorName(xcolorName);
+    }
+  }, [xcolor]);
 
   const saveDone = (id: string) => {
     router.push({
@@ -72,6 +112,8 @@ export default function editCalendar() {
       dateEnd: Timestamp.fromDate(d2),
       description: description || "",
       title: title || "",
+      color: color || "",
+      colorName: colorName || "",
       projectId: sharedDataProject.key,
       uid: sharedDataUser.uid,
     };
@@ -130,17 +172,27 @@ export default function editCalendar() {
     selectedDate: Date,
   ) => {
     setDateBegin(selectedDate);
-    console.log("dateBegin: " + selectedDate);
+
+    if (selectedDate > dateEnd) {
+      console.log("selectedDate:", selectedDate);
+
+      setDateEnd(selectedDate);
+    }
+
+    setDateBeginShow(false);
   };
+
   const onChangeBeginTime = (
     event: DateTimePickerEvent,
     selectedDate: Date,
   ) => {
     setDateBeginTime(selectedDate);
-    console.log("beginTime: " + selectedDate);
   };
   const onChangedateEnd = (event: DateTimePickerEvent, selectedDate: Date) => {
     setDateEnd(selectedDate);
+    if (selectedDate < dateBegin) {
+      setDateBegin(selectedDate);
+    }
   };
   const onChangeEndTime = (event: DateTimePickerEvent, selectedDate: Date) => {
     setDateEndTime(selectedDate);
@@ -194,7 +246,7 @@ export default function editCalendar() {
           <View style={styles.avatar}></View>
           <View style={styles.date}>
             <DateTimePicker
-              testID="dateTimePicker"
+              testID="dateTimePicker1"
               value={dateBegin}
               mode={"date"}
               is24Hour={true}
@@ -203,7 +255,7 @@ export default function editCalendar() {
           </View>
           <View style={styles.right}>
             <DateTimePicker
-              testID="dateTimePicker"
+              testID="dateTimePicker2"
               value={dateBeginTime}
               mode={"time"}
               is24Hour={true}
@@ -216,7 +268,7 @@ export default function editCalendar() {
           <View style={styles.avatar}></View>
           <View style={styles.date}>
             <DateTimePicker
-              testID="dateTimePicker"
+              testID="dateTimePicker3"
               value={dateEnd}
               mode={"date"}
               is24Hour={true}
@@ -225,7 +277,7 @@ export default function editCalendar() {
           </View>
           <View style={styles.right}>
             <DateTimePicker
-              testID="dateTimePicker"
+              testID="dateTimePicker4"
               value={dateEndTime}
               mode={"time"}
               is24Hour={true}
@@ -271,16 +323,16 @@ export default function editCalendar() {
             router.push({
               pathname: "/colorList",
               params: {
-                color: "red",
+                color: color,
               },
             });
           }}>
           <View style={[styles.itemView, styles.line]}>
             <View style={styles.avatar}>
-              <View style={styles.colorAvatar} />
+              <View style={[styles.colorAvatar, { backgroundColor: color }]} />
             </View>
             <View style={styles.title}>
-              <Text style={styles.actionTitle}>Blue</Text>
+              <Text style={styles.actionTitle}>{xcolorName}</Text>
             </View>
           </View>
 
@@ -299,10 +351,8 @@ const styles = StyleSheet.create({
   avatar: { alignItems: "center", justifyContent: "flex-start", width: 48 },
   bottom: { paddingBottom: 500 },
   colorAvatar: {
-    backgroundColor: "#30A7E2",
     borderRadius: 35 / 2,
     height: 35,
-
     width: 35,
   },
   date: {

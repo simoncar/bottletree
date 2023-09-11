@@ -49,6 +49,8 @@ export interface ICalendarEvent {
   description: string;
   projectId?: string;
   title: string;
+  color: string;
+  colorName: string;
   uid: string;
   extensionTitle?: string;
   extensionDateBeginSplit?: string;

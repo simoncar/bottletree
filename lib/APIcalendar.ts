@@ -14,6 +14,13 @@ import { ICalendarEvent } from "./types";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
 
+const translateColor = (color: string) => {
+  if (color === undefined || color === "") {
+    return "#30A7E2";
+  } else {
+    return color;
+  }
+};
 export async function getItemsBigCalendar(
   projectId: string,
   callback: itemsRead,
@@ -27,12 +34,24 @@ export async function getItemsBigCalendar(
     const calendarEvents = [];
     querySnapshot.forEach((doc) => {
       const data = {
+        key: doc.id,
         start: doc.data().dateBegin.toDate(),
         end: doc.data().dateEnd.toDate(),
         title: doc.data().title,
-        color: "#30A7E2",
+        color: translateColor(doc.data().color),
+        colorName: doc.data().colorName,
+        description: doc.data().description,
+        projectId: doc.data().projectId,
+        uid: doc.data().uid,
       };
       calendarEvents.push(data);
+      console.log(
+        "EVENT: ",
+        doc.data().dateBegin.toDate(),
+        doc.data().dateEnd.toDate(),
+        doc.data().title,
+        doc.data().colorName,
+      );
     });
 
     callback(calendarEvents);
@@ -54,6 +73,7 @@ export async function getItems(projectId: string, callback: itemsRead) {
         key: doc.id,
         dateBegin: doc.data().dateBegin,
         dateEnd: doc.data().dateEnd,
+        color: doc.data().color,
         description: doc.data().description,
         projectId: doc.data().projectId,
         title: doc.data().title,
@@ -176,6 +196,8 @@ export function setCalendarEvent(
         projectId: calendarEvent.projectId,
         title: calendarEvent.title,
         uid: calendarEvent.uid,
+        color: calendarEvent.color,
+        colorName: calendarEvent.colorName,
       }).then((docRef) => {
         callback(docRef.id);
       });
@@ -187,6 +209,8 @@ export function setCalendarEvent(
         projectId: calendarEvent.projectId,
         title: calendarEvent.title,
         uid: calendarEvent.uid,
+        color: calendarEvent.color,
+        colorName: calendarEvent.colorName,
       }).then((docRef) => {
         callback(calendarEvent.key);
       });
