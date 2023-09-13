@@ -73,7 +73,9 @@ export default function CalendarLarge() {
   }
 
   useEffect(() => {
-    setNavOptions();
+    console.log("useEffect setNavOptions:", calendarDate);
+
+    setNavOptions(calendarDate);
     if (undefined != currentProject) {
       const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
       return () => {
@@ -92,7 +94,7 @@ export default function CalendarLarge() {
   //   }
   // }, [currentProject]);
 
-  const setNavOptions = () => {
+  const setNavOptions = (start) => {
     navigation.setOptions({
       headerTitle: () => (
         <View style={{ flex: 1, flexDirection: "row" }}>
@@ -121,7 +123,7 @@ export default function CalendarLarge() {
               height: 50,
             }}>
             <BigText style={styles.headerTitle}>
-              {dayjs(calendarDate.toDate()).format("MMMM YYYY")}
+              {dayjs(start.toDate()).format("MMMM YYYY")}
             </BigText>
           </View>
         </View>
@@ -130,7 +132,9 @@ export default function CalendarLarge() {
   };
 
   const onChangeDate = ([start, end]) => {
-    setNavOptions();
+    console.log("onChangeDate:", start, end);
+    setDate(start);
+    setNavOptions(dayjs(start));
   };
 
   const renderEvent = <T extends ICalendarEventBase>(
