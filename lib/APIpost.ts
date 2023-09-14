@@ -10,6 +10,7 @@ import {
   doc,
   updateDoc,
   getDocs,
+  getDoc,
 } from "firebase/firestore";
 import { IPost, IComment } from "./types";
 
@@ -125,8 +126,12 @@ export async function addComment(
 
   const newData = { key: docRef.id };
 
+  const projectRef = doc(db, "projects", project);
+  const projectDoc = await getDoc(projectRef);
+  const projectData = projectDoc.data();
+
   const messageRef = await addDoc(collection(db, "notifications"), {
-    title: comment.displayName + ": " + project,
+    title: comment.displayName + ": " + projectData?.title,
     body: comment.comment,
     timestamp: Timestamp.now(),
   });
