@@ -58,6 +58,7 @@ export default function editCalendar() {
 
   console.log("useLocalSearchParams/editCalendar:", pcolor, xcolor);
 
+  const [key, onChangeKey] = useState(pkey);
   const [title, onChangeTitle] = useState(ptitle);
   const [description, onChangeDescription] = useState(pdescription);
   const [color, onChangeColor] = useState(pcolor);
@@ -107,7 +108,7 @@ export default function editCalendar() {
     d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
 
     const calendarEvent: ICalendarEvent = {
-      key: pkey,
+      key: key,
       dateBegin: Timestamp.fromDate(d1),
       dateEnd: Timestamp.fromDate(d2),
       description: description || "",
@@ -117,6 +118,7 @@ export default function editCalendar() {
       projectId: sharedDataProject.key,
       uid: sharedDataUser.uid,
     };
+    console.log("save:", calendarEvent);
 
     setCalendarEvent(calendarEvent, saveDone);
   };
