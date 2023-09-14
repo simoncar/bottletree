@@ -28,7 +28,7 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 	//for each token, create a notification object and push it to the notifications array
 	tokens.forEach((tokenDoc) => {
-		if (tokenDoc.data().pushToken !== uid) {   //dont send notification to the user who created the notification
+		if (tokenDoc.data().uid !== uid) {   //dont send notification to the user who created the notification
 			notifications.push({
 				to: tokenDoc.data().pushToken,
 				title: title,
