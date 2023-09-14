@@ -134,6 +134,7 @@ export async function addComment(
     title: comment.displayName + ": " + projectData?.title,
     body: comment.comment,
     timestamp: Timestamp.now(),
+    uid: comment.uid,
   });
 
   console.log("callback: ", { ...comment, ...newData });

@@ -20,6 +20,7 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 	const original = event.data.data().original;
 	const title = event.data.data().title;
 	const body = event.data.data().body;
+	const uid = event.data.data().uid;
 	var notifications = [];
 
 	//retrieve all the tokens from firebase
@@ -27,14 +28,15 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 	//for each token, create a notification object and push it to the notifications array
 	tokens.forEach((tokenDoc) => {
-
-		notifications.push({
-			to: tokenDoc.data().pushToken,
-			title: title,
-			sound: "default",
-			body: body,
-			data: { someData: 'goes here' },
-		});
+		if (tokenDoc.data().pushToken !== uid) {   //dont send notification to the user who created the notification
+			notifications.push({
+				to: tokenDoc.data().pushToken,
+				title: title,
+				sound: "default",
+				body: body,
+				data: { uid: uid },
+			});
+		}
 
 	}
 	);
