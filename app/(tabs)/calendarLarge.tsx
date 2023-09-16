@@ -67,7 +67,6 @@ export default function CalendarLarge() {
   if (null == sharedDataProject) {
     currentProject = {
       key: "",
-      title: "",
       icon: "",
     };
   }
@@ -162,6 +161,7 @@ export default function CalendarLarge() {
         pdateEnd: event.end,
         puid: event.uid,
         pcolor: event.color,
+        pcolorName: event.colorName,
       },
     });
   };

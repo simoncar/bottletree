@@ -67,6 +67,8 @@ export default function TabLayout() {
               params: {
                 pdateBegin: dateBegin,
                 pdateEnd: dateEnd,
+                pcolor: "#49B382",
+                pcolorName: "Grass",
               },
             });
             break;

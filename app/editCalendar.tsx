@@ -56,8 +56,6 @@ export default function editCalendar() {
     xcolorName: string;
   }>();
 
-  console.log("useLocalSearchParams/editCalendar:", pcolor, xcolor);
-
   const [key, onChangeKey] = useState(pkey);
   const [title, onChangeTitle] = useState(ptitle);
   const [description, onChangeDescription] = useState(pdescription);
@@ -92,12 +90,12 @@ export default function editCalendar() {
   }, [xcolor]);
 
   const saveDone = (id: string) => {
-    router.push({
-      pathname: "/calendarLarge",
-      params: {
-        id: id,
-      },
-    });
+    // router.push({
+    //   pathname: "/calendarLarge",
+    //   params: {
+    //     id: id,
+    //   },
+    // });
   };
 
   const save = () => {
@@ -121,14 +119,14 @@ export default function editCalendar() {
     console.log("save:", calendarEvent);
 
     setCalendarEvent(calendarEvent, saveDone);
+    router.push({
+      pathname: "/calendarLarge",
+    });
   };
 
   const deleteDone = (id: string) => {
     router.push({
-      pathname: "/calendar",
-      params: {
-        id: id,
-      },
+      pathname: "/calendarLarge",
     });
   };
 
@@ -334,7 +332,7 @@ export default function editCalendar() {
               <View style={[styles.colorAvatar, { backgroundColor: color }]} />
             </View>
             <View style={styles.title}>
-              <Text style={styles.actionTitle}>{xcolorName}</Text>
+              <Text style={styles.actionTitle}>{colorName}</Text>
             </View>
           </View>
 
@@ -369,7 +367,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingVertical: 8,
     padding: 8,
-    width: "90%",
   },
 
   itemView: {

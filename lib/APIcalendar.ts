@@ -32,6 +32,19 @@ export async function getItemsBigCalendar(
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const calendarEvents = [];
+
+    querySnapshot.docChanges().forEach((change) => {
+      if (change.type === "added") {
+        console.log("New city: ", change.doc.data());
+      }
+      if (change.type === "modified") {
+        console.log("Modified city: ", change.doc.data());
+      }
+      if (change.type === "removed") {
+        console.log("Removed city: ", change.doc.data());
+      }
+    });
+
     querySnapshot.forEach((doc) => {
       const data = {
         key: doc.id,
@@ -46,7 +59,7 @@ export async function getItemsBigCalendar(
       };
       calendarEvents.push(data);
       console.log(
-        "EVENT: ",
+        "EVENT2: ",
         doc.data().dateBegin.toDate(),
         doc.data().dateEnd.toDate(),
         doc.data().title,
