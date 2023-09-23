@@ -35,13 +35,13 @@ export async function getItemsBigCalendar(
 
     querySnapshot.docChanges().forEach((change) => {
       if (change.type === "added") {
-        console.log("New city: ", change.doc.data());
+        console.log("New event: ", change.doc.data());
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
+        console.log("Modified event: ", change.doc.data());
       }
       if (change.type === "removed") {
-        console.log("Removed city: ", change.doc.data());
+        console.log("Removed event: ", change.doc.data());
       }
     });
 
