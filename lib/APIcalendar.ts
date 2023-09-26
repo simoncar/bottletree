@@ -33,16 +33,15 @@ export async function getItemsBigCalendar(
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const calendarEvents: ICalendarEvent[] = [];
 
-
     querySnapshot.docChanges().forEach((change) => {
       if (change.type === "added") {
-        console.log("New event: ", change.doc.data());
+        //console.log("New event: ", change.doc.data());
       }
       if (change.type === "modified") {
-        console.log("Modified event: ", change.doc.data());
+        //console.log("Modified event: ", change.doc.data());
       }
       if (change.type === "removed") {
-        console.log("Removed event: ", change.doc.data());
+        //console.log("Removed event: ", change.doc.data());
       }
     });
 
@@ -60,7 +59,6 @@ export async function getItemsBigCalendar(
       };
 
       calendarEvents.push(data);
-      
     });
 
     callback(calendarEvents);
