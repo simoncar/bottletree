@@ -241,10 +241,12 @@ const AuthProvider = ({ children }) => {
       AsyncStorage.setItem("@USER", JSON.stringify(user));
 
       return { user: auth.currentUser };
-    } catch (error) {
+    } catch (error: any) {
       // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      if (error instanceof Error) {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      }
 
       callback(errorMessage);
       console.log(error);

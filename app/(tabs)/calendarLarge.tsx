@@ -83,6 +83,12 @@ export default function CalendarLarge() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(">>>>>>>>>:", calendarDate);
+    console.log(">>>>>>>>>:", dayjs(calendarDate).format("YYYY-MM-DD"));
+    setNavOptions(calendarDate);
+  }, [calendarDate]);
+
   // useEffect(() => {
   //   if (sharedDataProject && undefined != currentProject?.key) {
   //     setItems([]);
@@ -122,7 +128,7 @@ export default function CalendarLarge() {
               height: 50,
             }}>
             <BigText style={styles.headerTitle}>
-              {dayjs(start.toDate()).format("MMMM YYYY")}
+              {dayjs(calendarDate).format("MMMM YYYY")}
             </BigText>
           </View>
         </View>
@@ -133,7 +139,7 @@ export default function CalendarLarge() {
   const onChangeDate = ([start, end]) => {
     console.log("onChangeDate:", start, end);
     setDate(start);
-    setNavOptions(dayjs(start));
+    setNavOptions(start);
   };
 
   const renderEvent = <T extends ICalendarEventBase>(

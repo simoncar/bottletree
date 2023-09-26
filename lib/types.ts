@@ -44,8 +44,12 @@ export interface IPushToken {
 
 export interface ICalendarEvent {
   key?: string;
-  dateBegin: Timestamp;
-  dateEnd: Timestamp;
+  dateBegin?: Timestamp;
+  dateEnd?: Timestamp;
+  start?: Date;
+  end?: Date;
+  color?: string;
+  colorName?: string;
   description: string;
   projectId?: string;
   title: string;

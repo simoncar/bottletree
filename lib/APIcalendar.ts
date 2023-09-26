@@ -31,7 +31,8 @@ export async function getItemsBigCalendar(
   );
 
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const calendarEvents = [];
+    const calendarEvents: ICalendarEvent[] = [];
+
 
     querySnapshot.docChanges().forEach((change) => {
       if (change.type === "added") {
@@ -57,14 +58,9 @@ export async function getItemsBigCalendar(
         projectId: doc.data().projectId,
         uid: doc.data().uid,
       };
+
       calendarEvents.push(data);
-      console.log(
-        "EVENT2: ",
-        doc.data().dateBegin.toDate(),
-        doc.data().dateEnd.toDate(),
-        doc.data().title,
-        doc.data().colorName,
-      );
+      
     });
 
     callback(calendarEvents);

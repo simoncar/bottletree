@@ -1,29 +1,9 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Image } from "expo-image";
-import { router, useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  useColorScheme,
-} from "react-native";
-import { ShortList } from "../components/sComponent";
+import { router } from "expo-router";
+import React from "react";
+import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { Text, View } from "../components/Themed";
-import Colors from "../constants/Colors";
-import { getProjects } from "../lib/APIproject";
-import ProjectContext from "../lib/projectContext";
-import { IProject } from "../lib/types";
 
-const ModalScreen = (props) => {
-  const { color } = useLocalSearchParams<{
-    color: string;
-  }>();
-
-  const colorScheme = useColorScheme();
-  const { updateSharedDataProject } = useContext(ProjectContext);
-
+const ModalScreen = () => {
   function renderColor(name: string, code: string) {
     return (
       <TouchableOpacity
