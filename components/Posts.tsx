@@ -74,7 +74,7 @@ export const Posts = () => {
                 pathname: "/addPost",
               });
             }}>
-            <Text style={styles.buttonText}>Add the first post</Text>
+            <Text style={styles.buttonText}>Add a post</Text>
           </TouchableOpacity>
         </View>
       );
