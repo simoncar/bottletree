@@ -15,6 +15,7 @@ import { updateProject } from "../lib/APIproject";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import Colors from "../constants/Colors";
@@ -133,8 +134,8 @@ export default function editPost() {
           {textPhotoURL ? (
             <Image style={styles.profilePhoto} source={textPhotoURL} />
           ) : (
-            <Ionicons
-              name="ios-person"
+            <MaterialIcons
+              name="house-siding"
               size={100}
               color="#999999"
               style={styles.profilePic}

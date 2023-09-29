@@ -4,6 +4,7 @@ import { Link, useRouter } from "expo-router";
 import React, { useContext } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import ProjectContext from "../lib/projectContext";
 import Colors from "../constants/Colors";
 import { Text } from "../components/Themed";
@@ -46,8 +47,8 @@ const Project = (props) => {
             <Image style={styles.projectAvatar} source={icon}></Image>
           ) : (
             <View style={styles.projectAvatar}>
-              <Ionicons
-                name="ios-person"
+              <MaterialIcons
+                name="house-siding"
                 color="#999999"
                 style={styles.avatarIcon}
               />
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
 
   avatarIcon: {
     fontSize: 25,
+    paddingTop: 5,
     textAlign: "center",
   },
   outerView: {

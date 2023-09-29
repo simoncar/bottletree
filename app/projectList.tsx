@@ -15,6 +15,7 @@ import Colors from "../constants/Colors";
 import { getProjects } from "../lib/APIproject";
 import ProjectContext from "../lib/projectContext";
 import { IProject } from "../lib/types";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -95,6 +96,7 @@ const ModalScreen = (props) => {
   }
 
   function renderRow(data: IProject) {
+    const icon = data.icon;
     return (
       <View key={data.key} style={styles.outerView}>
         <TouchableOpacity
@@ -119,7 +121,17 @@ const ModalScreen = (props) => {
             });
           }}>
           <View style={styles.avatar}>
-            <Image style={styles.avatarFace} source={data.icon} />
+            {icon ? (
+              <Image style={styles.avatarFace} source={data.icon} />
+            ) : (
+              <View style={styles.avatarFace}>
+                <MaterialIcons
+                  name="house-siding"
+                  color="#999999"
+                  style={styles.avatarIcon}
+                />
+              </View>
+            )}
           </View>
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
@@ -181,12 +193,23 @@ const styles = StyleSheet.create({
     width: 50,
   },
 
-  avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
+  avatarFace: {
+    borderColor: "lightgrey",
+    borderRadius: 48 / 2,
+    borderWidth: StyleSheet.hairlineWidth,
+    height: 48,
+    width: 48,
+  },
+  avatarIcon: {
+    fontSize: 35,
+    paddingTop: 5,
+    textAlign: "center",
+  },
+
   container: {
     flex: 1,
     height: 200,
   },
-
   innerView: {
     alignItems: "center",
     flex: 1,
