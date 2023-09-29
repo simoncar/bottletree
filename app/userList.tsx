@@ -48,6 +48,9 @@ const ModalScreen = (props) => {
 
   const saveDone = (id) => {
     console.log("saveDone: ", id);
+    router.push({
+      pathname: "/editProject",
+    });
   };
 
   function renderRow(data: IUser) {
