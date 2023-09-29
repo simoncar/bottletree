@@ -80,7 +80,7 @@ export const ProjectUsers = (props) => {
         onPress={() => {
           console.log("doDelete:", data, index);
           deleteProjectUser(project, data, deleteDone);
-          closeRow(index);
+          row[index].close();
         }}>
         <AntDesign
           name="delete"
