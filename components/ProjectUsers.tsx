@@ -29,18 +29,15 @@ export const ProjectUsers = (props) => {
 
   useEffect(() => {
     getProjectUsers(project, projectUsersRead);
-    console.log(" use Effec1t: ");
   }, []);
 
   useEffect(() => {
-    console.log(" use Effec2t: ");
     if (projectUsers !== "" && loading === true) {
       setLoading(false);
     }
   }, [projectUsers]);
 
   useEffect(() => {
-    console.log(" use Effec2t:updateUsersupdateUsersupdateUsers ", project);
     getProjectUsers(project, projectUsersRead);
   }, [updateUsers]);
 
@@ -101,27 +98,25 @@ export const ProjectUsers = (props) => {
 
   function renderRow(data: any, index: number) {
     return (
-      <View>
-        <Swipeable
-          key={index}
-          renderRightActions={(progress, dragX) =>
-            renderRightActions(progress, dragX, data, index)
-          }
-          onSwipeableOpen={() => closeRow(index)}
-          ref={(ref) => (row[index] = ref)}
-          rightOpenValue={-100}>
-          <View>
-            <View key={data.uid} style={styles.outerView}>
-              <View style={styles.avatar}>
-                <Image style={styles.avatarFace} source={data.photoURL} />
-              </View>
-              <View>
-                <Text style={styles.name}>{data.displayName || ""}</Text>
-              </View>
+      <Swipeable
+        key={index}
+        renderRightActions={(progress, dragX) =>
+          renderRightActions(progress, dragX, data, index)
+        }
+        onSwipeableOpen={() => closeRow(index)}
+        ref={(ref) => (row[index] = ref)}
+        rightOpenValue={-100}>
+        <View>
+          <View key={data.uid} style={styles.outerView}>
+            <View style={styles.avatar}>
+              <Image style={styles.avatarFace} source={data.photoURL} />
+            </View>
+            <View>
+              <Text style={styles.name}>{data.displayName || ""}</Text>
             </View>
           </View>
-        </Swipeable>
-      </View>
+        </View>
+      </Swipeable>
     );
   }
 
@@ -130,11 +125,27 @@ export const ProjectUsers = (props) => {
       <View>
         <View>
           <View key="skeleton" style={styles.outerView}>
-            <SkeletonContainer isLoading={true} Gradient={Gradient}>
+            <SkeletonContainer
+              isLoading={true}
+              Gradient={Gradient}
+              colors={["#e1e1e1", "#f2f2f2", "#e1e1e1"]}
+              style={{
+                backgroundColor:
+                  Colors[colorScheme ?? "light"].skeletonBackground,
+              }}
+              duration={2000}>
               <View style={styles.skeletonAvatarFace}></View>
             </SkeletonContainer>
             <View style={styles.skeletonSpace}></View>
-            <SkeletonContainer isLoading={true} Gradient={Gradient}>
+            <SkeletonContainer
+              isLoading={true}
+              Gradient={Gradient}
+              colors={["#e1e1e1", "#f2f2f2", "#e1e1e1"]}
+              style={{
+                backgroundColor:
+                  Colors[colorScheme ?? "light"].skeletonBackground,
+              }}
+              duration={2000}>
               <View style={styles.skeletonName}></View>
             </SkeletonContainer>
           </View>

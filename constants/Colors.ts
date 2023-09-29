@@ -19,6 +19,7 @@ export default {
     bigCalendarDayNumberInactive: "#2d4150",
     bigCalendarActive: "#3265cb",
     bigCalendarContrastText: "#fff",
+    skeletonBackground: "#e1e1e1",
   },
   dark: {
     text: "#fff",
@@ -37,6 +38,7 @@ export default {
     bigCalendarDayNumberInactive: "#e9f0fd",
     bigCalendarActive: "#3265cb",
     bigCalendarContrastText: "#fff",
+    skeletonBackground: "#2d4150",
   },
 };
 
