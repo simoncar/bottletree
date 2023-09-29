@@ -10,6 +10,13 @@ import Colors from "../constants/Colors";
 import { router, useLocalSearchParams } from "expo-router";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { deleteProjectUser } from "../lib/APIproject";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+  SkeletonContainer,
+  GradientProps,
+} from "react-native-dynamic-skeletons";
+
+const Gradient = (props: GradientProps) => <LinearGradient {...props} />;
 
 export const ProjectUsers = (props) => {
   const { project, updateUsers } = props;
@@ -94,25 +101,45 @@ export const ProjectUsers = (props) => {
 
   function renderRow(data: any, index: number) {
     return (
-      <Swipeable
-        key={index}
-        renderRightActions={(progress, dragX) =>
-          renderRightActions(progress, dragX, data, index)
-        }
-        onSwipeableOpen={() => closeRow(index)}
-        ref={(ref) => (row[index] = ref)}
-        rightOpenValue={-100}>
-        <View>
-          <View key={data.uid} style={styles.outerView}>
-            <View style={styles.avatar}>
-              <Image style={styles.avatarFace} source={data.photoURL} />
-            </View>
-            <View>
-              <Text style={styles.name}>{data.displayName || ""}</Text>
+      <View>
+        <Swipeable
+          key={index}
+          renderRightActions={(progress, dragX) =>
+            renderRightActions(progress, dragX, data, index)
+          }
+          onSwipeableOpen={() => closeRow(index)}
+          ref={(ref) => (row[index] = ref)}
+          rightOpenValue={-100}>
+          <View>
+            <View key={data.uid} style={styles.outerView}>
+              <View style={styles.avatar}>
+                <Image style={styles.avatarFace} source={data.photoURL} />
+              </View>
+              <View>
+                <Text style={styles.name}>{data.displayName || ""}</Text>
+              </View>
             </View>
           </View>
+        </Swipeable>
+      </View>
+    );
+  }
+
+  function renderSkeletonRow() {
+    return (
+      <View>
+        <View>
+          <View key="skeleton" style={styles.outerView}>
+            <SkeletonContainer isLoading={true} Gradient={Gradient}>
+              <View style={styles.skeletonAvatarFace}></View>
+            </SkeletonContainer>
+            <View style={styles.skeletonSpace}></View>
+            <SkeletonContainer isLoading={true} Gradient={Gradient}>
+              <View style={styles.skeletonName}></View>
+            </SkeletonContainer>
+          </View>
         </View>
-      </Swipeable>
+      </View>
     );
   }
 
@@ -134,7 +161,9 @@ export const ProjectUsers = (props) => {
           subTitle: "Who can see this project",
         })}
       </View>
+
       <View>
+        {loading === true && <View>{renderSkeletonRow()}</View>}
         {loading === false && (
           <View>
             <ShortList
@@ -158,6 +187,17 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
+  skeletonAvatarFace: {
+    borderRadius: 48 / 2,
+    height: 48,
+    width: 48,
+  },
+  skeletonSpace: { padding: 10 },
+  skeletonName: {
+    borderRadius: 5,
+    height: 48,
+    width: 300,
+  },
   nameSubtitle: {
     color: "grey",
     fontSize: 16,

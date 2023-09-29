@@ -5407,6 +5407,11 @@ expo-keep-awake@~12.3.0:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-12.3.0.tgz#c42449ae19c993274ddc43aafa618792b6aec408"
   integrity sha512-ujiJg1p9EdCOYS05jh5PtUrfiZnK0yyLy+UewzqrjUqIT8eAGMQbkfOn3C3fHE7AKd5AefSMzJnS3lYZcZYHDw==
 
+expo-linear-gradient@~12.3.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-12.3.0.tgz#7abd8fedbf0138c86805aebbdfbbf5e5fa865f19"
+  integrity sha512-f9e+Oxe5z7fNQarTBZXilMyswlkbYWQHONVfq8MqmiEnW3h9XsxxmVJLG8uVQSQPUsbW+x1UUT/tnU6mkMWeLg==
+
 expo-linking@~5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/expo-linking/-/expo-linking-5.0.2.tgz#273c9dfec0c5542a13638bd422ef9acbf4638bc5"
@@ -9002,6 +9007,11 @@ react-native-collapsible-tab-view@2.0.2:
   integrity sha512-83fme3FnMFIMIbhE6J7Iqmt2HG5q7A8d49X38VrSRegC1UG4sIAVjS3MSSVMgCip+WscqBc0aiJFQInTUzkUEw==
   dependencies:
     use-debounce "^5.1.0"
+
+react-native-dynamic-skeletons@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-dynamic-skeletons/-/react-native-dynamic-skeletons-0.5.0.tgz#23f2aa3b96794ad69b0fe0956c93a64d949f9774"
+  integrity sha512-yUDWeXxMhs6JIv7eVmJoLssid1E03DP17NFPrte9h//+j+Rd1Um3uy4QWSojlxDqrnosJmFYUKH73BLFMh+6Tg==
 
 react-native-gesture-handler@~2.12.0:
   version "2.12.0"
