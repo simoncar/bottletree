@@ -78,4 +78,24 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 });
 
 
+exports.onDocumentCreated_post = onDocumentCreated("/projects/{projectId}/posts/{postId}", async (event) => {
+	const timestamp = event.data.data().timestamp;
+	const projectId = event.data.projectId;
+
+	console.log('timestamp: ', timestamp);
+	console.log('projectId: ', event.params.projectId);
+
+
+	const coll = getFirestore().collection("projects").doc(event.params.projectId).collection("posts");
+	const snapshot = await coll.count().get();
+	console.log('count of posts for project Id : ', snapshot.data().count);
+
+	const writeResult = await getFirestore()
+		.collection("projects")
+		.doc(event.params.projectId)
+		.set({ count: snapshot.data().count }, { merge: true });
+
+}
+);
+
 

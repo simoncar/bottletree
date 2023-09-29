@@ -30,11 +30,13 @@ export async function addPost(post: IPost, callback: saveDone) {
   // get all the users in the project from firebase
   // for each user, add a notification to the notifications collection
 
-  const messageRef = await addDoc(collection(db, "notifications"), {
-    title: post.author + ": " + post.projectTitle,
-    body: "New Post Added",
-    timestamp: Timestamp.now(),
-  });
+  if (post.author != "Simon") {
+    const messageRef = await addDoc(collection(db, "notifications"), {
+      title: post.author + ": " + post.projectTitle,
+      body: "New Post Added",
+      timestamp: Timestamp.now(),
+    });
+  }
 
   callback(docRef.id);
 
