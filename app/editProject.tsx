@@ -23,21 +23,23 @@ import { ProjectUsers } from "../components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function editPost() {
+  const [updateUsers, setUpdateUsers] = useState(true);
   const { sharedData, updateSharedDataProject } = useProject();
-  const { projectId, projectTitle, photoURL, pArchived } =
+  const { projectId, projectTitle, photoURL, pArchived, pUpdateUsers } =
     useLocalSearchParams<{
       projectId: string;
       projectTitle: string;
       photoURL: string;
       pArchived: boolean;
+      pUpdateUsers: boolean;
     }>();
 
-  console.log("ffffffffffff", pArchived);
+  useEffect(() => {
+    console.log(" pUpdateUsers useEffect: ", projectId);
+    setUpdateUsers(!updateUsers);
+  }, [pUpdateUsers]);
 
   const archived: boolean = pArchived === "true";
-  console.log("TypeOf param:", typeof archived);
-
-  console.log("editProject", archived);
 
   const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
   const [text, onChangeText] = useState(projectTitle);
@@ -184,7 +186,7 @@ export default function editPost() {
           </View>
         </View>
 
-        <ProjectUsers project={projectId} />
+        <ProjectUsers project={projectId} updateUsers={updateUsers} />
 
         <Pressable
           style={styles.outerView}

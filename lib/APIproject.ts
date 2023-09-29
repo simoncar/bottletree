@@ -128,7 +128,7 @@ export function addProjectUser(
       },
       { merge: true },
     ).then((docRef) => {
-      callback(user.uid);
+      callback(user.key);
     });
   } catch (e) {
     console.error("Error adding user to project: ", e);
@@ -143,12 +143,12 @@ export function deleteProjectUser(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    console.log("deleteProjectUser: ", projectId, user.key, user.displayName);
+    console.log("deleteProjectUser: ", projectId, user.uid, user.displayName);
 
-    const docRef = doc(db, "projects", projectId, "users", user.key);
+    const docRef = doc(db, "projects", projectId, "users", user.uid);
 
     deleteDoc(docRef).then(() => {
-      callback(user.key);
+      callback(user.uid);
     });
   } catch (e) {
     console.error("Error deleting user from project: ", e);

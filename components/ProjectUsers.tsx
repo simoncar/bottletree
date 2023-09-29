@@ -9,9 +9,10 @@ import { Image } from "expo-image";
 import Colors from "../constants/Colors";
 import { router, useLocalSearchParams } from "expo-router";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { deleteProjectUser } from "../lib/APIproject";
 
 export const ProjectUsers = (props) => {
-  const { project } = props;
+  const { project, updateUsers } = props;
   const colorScheme = useColorScheme();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
@@ -21,16 +22,28 @@ export const ProjectUsers = (props) => {
 
   useEffect(() => {
     getProjectUsers(project, projectUsersRead);
+    console.log(" use Effec1t: ");
   }, []);
 
   useEffect(() => {
+    console.log(" use Effec2t: ");
     if (projectUsers !== "" && loading === true) {
       setLoading(false);
     }
   }, [projectUsers]);
 
+  useEffect(() => {
+    console.log(" use Effec2t:updateUsersupdateUsersupdateUsers ", project);
+    getProjectUsers(project, projectUsersRead);
+  }, [updateUsers]);
+
   const projectUsersRead = (projectUsersDB) => {
     setProjectUsers(projectUsersDB);
+  };
+
+  const deleteDone = (id) => {
+    console.log("deleteDone: ", id);
+    getProjectUsers(project, projectUsersRead);
   };
 
   function renderHeader(data: any) {
@@ -66,9 +79,8 @@ export const ProjectUsers = (props) => {
         style={styles.rightDeleteBox}
         onPress={() => {
           console.log("doDelete:", data, index);
-          
-
-
+          deleteProjectUser(project, data, deleteDone);
+          closeRow(index);
         }}>
         <AntDesign
           name="delete"
@@ -105,13 +117,13 @@ export const ProjectUsers = (props) => {
   }
 
   const closeRow = (index) => {
+    console.log("closeRow:", index);
+
     if (prevOpenedRow && prevOpenedRow !== row[index]) {
       prevOpenedRow.close();
     }
     prevOpenedRow = row[index];
   };
-
-  const doDelete = ({ item, index }) => {};
 
   return (
     <View>

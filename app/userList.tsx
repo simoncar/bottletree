@@ -50,6 +50,10 @@ const ModalScreen = (props) => {
     console.log("saveDone: ", id);
     router.push({
       pathname: "/editProject",
+      params: {
+        pUpdateUsers: id,
+        projectId: sharedDataProject.key,
+      },
     });
   };
 
