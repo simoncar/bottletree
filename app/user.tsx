@@ -71,7 +71,6 @@ export default function editUser() {
     onChangeTextPhotoURL(downloadURLarray[0]);
     updateAccountPhotoURL(downloadURLarray[0]); //firebease auth update function
     updateSharedDataUser({ photoURL: downloadURLarray[0] });
-    
   };
 
   const pickImage = async () => {
@@ -117,7 +116,7 @@ export default function editUser() {
           ) : (
             <View style={styles.profileCircleIcon}>
               <Ionicons
-                name="home"
+                name="ios-person"
                 size={100}
                 color="#999999"
                 style={styles.profilePic}
