@@ -3,6 +3,7 @@ import { Timestamp } from "firebase/firestore";
 export interface IPost {
   key: string;
   projectId: string;
+  projectTitle?: string;
   caption: string;
   author?: string;
   images?: string[];

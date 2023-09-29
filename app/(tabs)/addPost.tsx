@@ -7,11 +7,12 @@ import { addPost } from "../../lib/APIpost";
 import { addImage } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
 import { IPost } from "../../lib/types";
+import { useAuth } from "../../lib/authProvider";
 import * as Progress from "react-native-progress";
 
 export default function addPhoto() {
   const { sharedDataProject } = useContext(ProjectContext);
-
+  const { sharedDataUser } = useAuth();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
 
@@ -86,6 +87,8 @@ export default function addPhoto() {
       key: "",
       caption: "",
       projectId: sharedDataProject.key,
+      projectTitle: sharedDataProject.title,
+      author: sharedDataUser.displayName,
       images: downloadURLarray,
       ratio: ratio,
     };
@@ -107,7 +110,7 @@ export default function addPhoto() {
       <View style={styles.container}>
         <Text style={styles.title}>
           Select a Project first and then try again.
-        </Text>p
+        </Text>
       </View>
     );
   } else {

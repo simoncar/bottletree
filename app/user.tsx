@@ -71,15 +71,7 @@ export default function editUser() {
     onChangeTextPhotoURL(downloadURLarray[0]);
     updateAccountPhotoURL(downloadURLarray[0]); //firebease auth update function
     updateSharedDataUser({ photoURL: downloadURLarray[0] });
-    //  setImage(null);
-    //  addPost(
-    //      {
-    //          projectId: sharedData.projectId,
-    //          author: "DDDD",
-    //          images: [downloadURL],
-    //      },
-    //      saveDone,
-    //  );
+    
   };
 
   const pickImage = async () => {
