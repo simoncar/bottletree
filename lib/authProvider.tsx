@@ -316,8 +316,6 @@ const AuthProvider = ({ children }) => {
 };
 
 export const appSignIn = async (email, password) => {
-  console.log("appSignIn: ", email, password);
-
   try {
     const resp = await signInWithEmailAndPassword(auth, email, password);
 
@@ -348,8 +346,6 @@ export const appSignOut = async () => {
 
 export const appSignUp = async (email, password, displayName) => {
   try {
-    console.log("appSignUp: ", email, password, displayName);
-
     const resp = await createUserWithEmailAndPassword(auth, email, password);
 
     await updateProfile(resp.user, { displayName });
