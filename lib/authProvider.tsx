@@ -222,8 +222,6 @@ const AuthProvider = ({ children }) => {
     screenPassword: string,
     callback: loginError,
   ) => {
-    console.log("signIn: ", screenEmail, screenPassword);
-
     try {
       const resp = await auth().signInWithEmailAndPassword(
         screenEmail,
