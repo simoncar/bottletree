@@ -10,6 +10,8 @@ import {
 } from "firebase/auth/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 
 export const firebaseErrors: Record<string, string> = {
   "Firebase: Error (auth/email-already-in-use).":
@@ -32,20 +34,20 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = initializeAuth(app, {
+const auth_js = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 const db = getFirestore();
 const storage = getStorage(app);
-
-console.log("expo version: ", Constants.expoVersion);
 
 if (!Device.isDevice) {
   console.log("Connecting to Firebase Emulator");
 
   connectFirestoreEmulator(db, "127.0.0.1", 8080);
   connectStorageEmulator(storage, "localhost", 9199);
-  connectAuthEmulator(auth, "http://localhost:9099/auth");
+  connectAuthEmulator(auth_js, "http://localhost:9099/auth");
 }
 
-export { db, storage, auth };
+//firestore().disableNetwork();
+
+export { db, storage, auth_js, auth };

@@ -12,9 +12,12 @@ import {
   getDocs,
   getDoc,
 } from "firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
 import { IPost, IComment } from "./types";
 
 export async function addPost(post: IPost, callback: saveDone) {
+  console.log("addPost: FBJS");
+
   const docRef = await addDoc(
     collection(db, "projects", post.projectId, "posts"),
     {
@@ -44,6 +47,8 @@ export async function addPost(post: IPost, callback: saveDone) {
 }
 
 export function updatePost(post: IPost, callback: saveDone) {
+  console.log("updatePost: FBJS");
+
   const postRef = doc(db, "projects", post.projectId, "posts", post.key);
   updateDoc(postRef, {
     caption: post.caption,
@@ -53,6 +58,8 @@ export function updatePost(post: IPost, callback: saveDone) {
 }
 
 export function deletePost(post: IPost, callback: saveDone) {
+  console.log("deletePost: FBJS");
+
   const postRef = doc(db, "projects", post.projectId, "posts", post.key);
   deleteDoc(postRef).then(() => {
     callback(post.key);
@@ -63,18 +70,28 @@ export async function getPosts(
   projectId: string | null | undefined,
   callback: postsRead,
 ) {
+  console.log("getPosts: FBNATIVE");
+
   if (undefined === projectId || null === projectId || "" === projectId) {
     projectId = "void";
   }
 
-  const q = query(
-    collection(db, "projects", projectId, "posts"),
-    orderBy("timestamp", "desc"),
-  );
+  // const q = query(
+  //   collection(db, "projects", projectId, "posts"),
+  //   orderBy("timestamp", "desc"),
+  // );
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const q = firestore()
+    .collection("projects")
+    .doc(projectId)
+    .collection("posts")
+    .orderBy("timestamp", "desc");
+
+  const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
     querySnapshot.forEach((doc) => {
+      console.log("getPosts onSnapshot: FBNATIVE");
+
       posts.push({
         key: doc.id,
         projectId: projectId,
@@ -88,18 +105,47 @@ export async function getPosts(
     callback(posts);
   });
 
+  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //   const posts: IPost[] = [];
+  //   querySnapshot.forEach((doc) => {
+  //     console.log("getPosts onSnapshot: FBJS");
+
+  //     posts.push({
+  //       key: doc.id,
+  //       projectId: projectId,
+  //       author: doc.data().author,
+  //       images: doc.data().images,
+  //       ratio: doc.data().ratio,
+  //       timestamp: doc.data().timestamp,
+  //       caption: doc.data().caption,
+  //     });
+  //   });
+  //   callback(posts);
+  // });
+
   return () => unsubscribe();
 }
 
 export async function getComments(projectId: string, postId: string) {
+  console.log("getComments: FBNATIVE");
+
   const comments: IComment[] = [];
 
-  const qComments = query(
-    collection(db, "projects", projectId, "posts", postId, "comments"),
-    orderBy("timestamp", "asc"),
-  );
+  // const qComments = query(
+  //   collection(db, "projects", projectId, "posts", postId, "comments"),
+  //   orderBy("timestamp", "asc"),
+  // );
 
-  const commentsSnapshot = await getDocs(qComments);
+  const qComments = firestore()
+    .collection("projects")
+    .doc(projectId)
+    .collection("posts")
+    .doc(postId)
+    .collection("comments")
+    .orderBy("timestamp", "asc");
+
+  const commentsSnapshot = await qComments.get();
+
   commentsSnapshot.forEach((doc) => {
     comments.push({
       key: doc.id,
@@ -121,6 +167,8 @@ export async function addComment(
   comment: IComment,
   callback: { (comment: IComment): void; (arg0: string): void },
 ) {
+  console.log("addComment: FBJS");
+
   const docRef = await addDoc(
     collection(db, "projects", project, "posts", post, "comments"),
     comment,

@@ -2,6 +2,7 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { setToken } from "./APINotification";
 import { IPushToken } from "./types";
+import Constants from "expo-constants";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -32,7 +33,18 @@ export async function registerForPushNotificationsAsync() {
       );
       return;
     }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
+
+    console.log(
+      "push notifications project: ",
+      Constants.expoConfig.extra.eas.projectId,
+    );
+
+    token = (
+      await Notifications.getExpoPushTokenAsync({
+        projectId: Constants.expoConfig?.extra
+        ?.eas.projectId,
+      })
+    ).data;
     console.log(token);
 
     if (token) {

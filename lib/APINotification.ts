@@ -21,22 +21,24 @@ export function setToken(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
+    console.log("setToken FBJS");
+
     const docRef = doc(db, "tokens", token.key);
 
     console.log(
       "setToken",
       token.key,
       token.pushToken,
-      auth.currentUser?.uid,
-      auth.currentUser?.displayName,
+      auth().currentUser?.uid,
+      auth().currentUser?.displayName,
     );
 
     setDoc(
       docRef,
       {
         pushToken: token.pushToken,
-        uid: auth.currentUser?.uid,
-        displayName: auth.currentUser?.displayName,
+        uid: auth().currentUser?.uid,
+        displayName: auth().currentUser?.displayName,
         timestamp: Timestamp.now(),
       },
       { merge: true },
@@ -52,6 +54,5 @@ export function setToken(
 
 export async function getToken() {
   const token = (await Notifications.getExpoPushTokenAsync()).data;
-  console.log("UUUUUU:", token);
   return token;
 }

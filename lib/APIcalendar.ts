@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { ICalendarEvent } from "./types";
+import firestore from "@react-native-firebase/firestore";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
 
@@ -25,12 +26,16 @@ export async function getItemsBigCalendar(
   projectId: string,
   callback: itemsRead,
 ) {
-  const q = query(
-    collection(db, "calendar"), //,
-    //where("projectId", "==", projectId),
-  );
+  console.log("getItemsBigCalendar: FBNATIVE");
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  // const q = query(
+  //   collection(db, "calendar"), //,
+  //   //where("projectId", "==", projectId),
+  // );
+
+  const q = firestore().collection("calendar");
+
+  const unsubscribe = q.onSnapshot((querySnapshot) => {
     const calendarEvents: ICalendarEvent[] = [];
 
     querySnapshot.docChanges().forEach((change) => {
@@ -68,6 +73,8 @@ export async function getItemsBigCalendar(
 }
 
 export async function getItems(projectId: string, callback: itemsRead) {
+  console.log("getItems: FBJS");
+
   const q = query(
     collection(db, "calendar"),
     where("projectId", "==", projectId),
@@ -195,6 +202,8 @@ export function setCalendarEvent(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
+    console.log("setCalendarEvent FBJS");
+
     if (calendarEvent.key == undefined) {
       addDoc(collection(db, "calendar"), {
         dateBegin: calendarEvent.dateBegin,
@@ -233,6 +242,8 @@ export function deleteCalendarEvent(
   calendarEvent: ICalendarEvent,
   callback: deleteDone,
 ) {
+  console.log("deleteCalendarEvent: FBJS");
+
   const calRef = doc(db, "calendar", calendarEvent.key);
   deleteDoc(calRef).then(() => {
     callback(calendarEvent.key);

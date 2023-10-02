@@ -19,7 +19,7 @@ import {
   deleteUser,
 } from "firebase/auth/react-native";
 import { Platform } from "react-native";
-import { auth } from "../lib/firebase";
+import { auth, auth_js } from "../lib/firebase";
 import { IUser } from "./types";
 
 // This hook can be used to access the user info.
@@ -87,7 +87,7 @@ function useProtectedRoute(user) {
     return ref.current;
   };
   useEffectDebugger(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+    const unsubscribe = auth().onAuthStateChanged((user: any) => {
       if (!user) {
         //@ts-ignore
         setUserReady(true);
@@ -204,7 +204,7 @@ const AuthProvider = ({ children }) => {
     createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
       .then(() => {
         const user: IUser = {
-          uid: auth.currentUser.uid,
+          uid: auth().currentUser.uid,
           email: screenEmail,
           displayName: convertToString(screenName),
           photoURL: convertToString(""),
@@ -222,25 +222,32 @@ const AuthProvider = ({ children }) => {
     screenPassword: string,
     callback: loginError,
   ) => {
+    console.log("signIn: ", screenEmail, screenPassword);
+
     try {
-      const resp = await signInWithEmailAndPassword(
-        auth,
+      const resp = await auth().signInWithEmailAndPassword(
+        screenEmail,
+        screenPassword,
+      );
+
+      const resp_js = await signInWithEmailAndPassword(
+        auth_js,
         screenEmail,
         screenPassword,
       );
 
       const user: IUser = {
-        uid: convertToString(auth.currentUser.uid),
-        email: convertToString(auth.currentUser.email),
-        displayName: convertToString(auth.currentUser.displayName),
-        photoURL: convertToString(auth.currentUser.photoURL),
+        uid: convertToString(auth().currentUser.uid),
+        email: convertToString(auth().currentUser.email),
+        displayName: convertToString(auth().currentUser.displayName),
+        photoURL: convertToString(auth().currentUser.photoURL),
       };
 
       setSharedDataUser(user);
 
       AsyncStorage.setItem("@USER", JSON.stringify(user));
 
-      return { user: auth.currentUser };
+      return { user: auth().currentUser };
     } catch (error: any) {
       // Handle Errors here.
       if (error instanceof Error) {
@@ -257,7 +264,7 @@ const AuthProvider = ({ children }) => {
 
   const signOut = async () => {
     console.log("signOut");
-    auth.signOut(); //sign out of firebase
+    auth().signOut(); //sign out of firebase
     AsyncStorage.removeItem("@USER");
     setSharedDataUser(null);
   };
@@ -274,7 +281,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const deleteAccount = async (callback: resetError) => {
-    const user = auth.currentUser;
+    const user = auth().currentUser;
 
     deleteUser(user)
       .then(() => callback("deleting the user"))
@@ -311,6 +318,8 @@ const AuthProvider = ({ children }) => {
 };
 
 export const appSignIn = async (email, password) => {
+  console.log("appSignIn: ", email, password);
+
   try {
     const resp = await signInWithEmailAndPassword(auth, email, password);
 
@@ -320,7 +329,7 @@ export const appSignIn = async (email, password) => {
     // 	store.user = resp.user;
     // 	store.isLoggedIn = resp.user ? true : false;
     // });
-    return { user: auth.currentUser };
+    return { user: auth().currentUser };
   } catch (e) {
     return { error: e };
   }
@@ -341,6 +350,8 @@ export const appSignOut = async () => {
 
 export const appSignUp = async (email, password, displayName) => {
   try {
+    console.log("appSignUp: ", email, password, displayName);
+
     const resp = await createUserWithEmailAndPassword(auth, email, password);
 
     await updateProfile(resp.user, { displayName });
@@ -350,7 +361,7 @@ export const appSignUp = async (email, password, displayName) => {
     // 	store.isLoggedIn = true;
     // });
 
-    return { user: auth.currentUser };
+    return { user: auth().currentUser };
   } catch (e) {
     return { error: e };
   }
