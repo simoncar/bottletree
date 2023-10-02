@@ -1,35 +1,36 @@
 {
-	"cli": {
-		"version": ">= 3.13.3"
-	},
-	"build": {
-		"development": {
-			"developmentClient": true,
-			"distribution": "internal",
-			"channel": "development"
-		},
-		"preview": {
-			"ios": {
-				"simulator": true
-			},
-			"channel": "preview"
-		},
-		"production": {
-			"channel": "production",
-			"autoIncrement": true
-		}
-	},
-	"submit": {
-		"production": {
-		      "android": {
-		        "serviceAccountKeyPath": "../path/to/api-xxx-yyy-zzz.json",
-		        "track": "internal"
-		      },
-		      "ios": {
-		        "appleId": "simoncar@gmail.com",
-		        "ascAppId": "6449942716",
-		        "appleTeamId": "Z6FTZSKM3X"
-		      }
-		    }
-	}
+  "cli": {
+    "version": ">= 3.13.3"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development"
+    },
+    "development-simulator": {
+      "extends": "development",
+      "ios": {
+        "simulator": true
+      }
+    },
+
+    "production": {
+      "channel": "production",
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "../path/to/api-xxx-yyy-zzz.json",
+        "track": "internal"
+      },
+      "ios": {
+        "appleId": "simoncar@gmail.com",
+        "ascAppId": "6449942716",
+        "appleTeamId": "Z6FTZSKM3X"
+      }
+    }
+  }
 }

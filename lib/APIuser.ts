@@ -8,11 +8,14 @@ import {
   orderBy,
   onSnapshot,
 } from "firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
 
 export const updateAccountName = (displayName: string) => {
-  const docRef = doc(db, "users", auth.currentUser.uid);
+  console.log("updateAccountName: FBJS");
 
-  updateProfile(auth.currentUser, {
+  const docRef = doc(db, "users", auth().currentUser.uid);
+
+  updateProfile(auth().currentUser, {
     displayName: displayName,
   })
     .then(() => {
@@ -20,8 +23,8 @@ export const updateAccountName = (displayName: string) => {
         docRef,
         {
           displayName: displayName,
-          email: auth.currentUser.email,
-          photoURL: auth.currentUser.photoURL,
+          email: auth().currentUser.email,
+          photoURL: auth().currentUser.photoURL,
         },
         { merge: true },
       );
@@ -35,9 +38,11 @@ export const updateAccountName = (displayName: string) => {
 
 export const updateAccountPhotoURL = (photoURL: string) => {
   //const { sharedData, updateSharedData } = useContext(AuthContext);
-  const docRef = doc(db, "users", auth.currentUser.uid);
+  console.log("updateAccountPhotoURL: FBJS");
 
-  updateProfile(auth.currentUser, {
+  const docRef = doc(db, "users", auth().currentUser.uid);
+
+  updateProfile(auth().currentUser, {
     photoURL: photoURL,
   })
     .then(() => {
@@ -45,8 +50,8 @@ export const updateAccountPhotoURL = (photoURL: string) => {
         docRef,
         {
           photoURL: photoURL,
-          email: auth.currentUser.email,
-          displayName: auth.currentUser.displayName,
+          email: auth().currentUser.email,
+          displayName: auth().currentUser.displayName,
         },
         { merge: true },
       );
@@ -63,20 +68,41 @@ export const updateAccountPhotoURL = (photoURL: string) => {
 };
 
 export async function getUsers(callback: usersRead) {
-  const q = query(collection(db, "users"), orderBy("displayName", "asc"));
+  // const q = query(collection(db, "users"), orderBy("displayName", "asc"));
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const users: IUser[] = [];
-    querySnapshot.forEach((doc) => {
-      users.push({
-        key: doc.id,
-        displayName: doc.data().displayName,
-        email: doc.data().email,
-        photoURL: doc.data().photoURL,
-      });
+  console.log("getUsers: FBNATIVE");
+  const users: IUser[] = [];
+
+  const q = firestore().collection("users");
+
+  const usersSnapshot = await q.get();
+
+  usersSnapshot.forEach((doc) => {
+    users.push({
+      key: doc.id,
+      displayName: doc.data().displayName,
+      email: doc.data().email,
+      photoURL: doc.data().photoURL,
     });
-    callback(users);
   });
 
-  return () => unsubscribe;
+  callback(users);
+
+  // const unsubscribe = q.onSnapshot((querySnapshot) => {
+  //   console.log("AAA");
+  //   const users: IUser[] = [];
+  //   console.log("GGG");
+  //   querySnapshot.forEach((doc) => {
+  //     console.log("FFF");
+  //     users.push({
+  //       key: doc.id,
+  //       displayName: doc.data().displayName,
+  //       email: doc.data().email,
+  //       photoURL: doc.data().photoURL,
+  //     });
+  //   });
+  //   callback(users);
+  // });
+
+  //return () => unsubscribe;
 }

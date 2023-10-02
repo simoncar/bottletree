@@ -7,3 +7,51 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 Sep 29, 2023 9:03:32 AM com.google.cloud.pubsub.testing.v1.Main main
 INFO: Server started, listening on 8085
+Oct 02, 2023 1:25:41 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:25:41 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:25:49 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:25:49 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:25:50 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:25:50 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:25:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:25:51 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:25:52 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:25:52 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:25:53 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:25:53 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:26:03 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:26:04 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:26:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:26:05 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:26:06 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:26:06 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:26:07 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:26:07 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 1:26:08 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 1:26:08 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 02, 2023 5:38:05 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 02, 2023 5:38:05 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
