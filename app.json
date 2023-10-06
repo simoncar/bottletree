@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.47",
+    "version": "1.0.49",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
