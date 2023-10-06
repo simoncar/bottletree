@@ -14,6 +14,7 @@ import Colors from "../constants/Colors";
 import { IComment } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
 import { Timestamp } from "firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
 
 type Props = {
   project: string;
@@ -54,7 +55,7 @@ const Comments = ({ project, post }: Props) => {
     const comment: IComment = {
       comment: text,
       displayName: sharedDataUser.displayName,
-      timestamp: Timestamp.now(),
+      timestamp: firestore.Timestamp.now(),
       uid: sharedDataUser.uid,
     };
 
@@ -111,6 +112,7 @@ const Comments = ({ project, post }: Props) => {
       );
     }
   };
+
 
   return (
     <View style={styles.commentsOverall}>

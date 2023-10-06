@@ -248,8 +248,9 @@ const AuthProvider = ({ children }) => {
       return { user: auth().currentUser };
     } catch (error: any) {
       // Handle Errors here.
+      let errorMessage = "";
       if (error instanceof Error) {
-        const errorMessage = error.message;
+        errorMessage = error.message;
         console.log(errorMessage);
       }
 

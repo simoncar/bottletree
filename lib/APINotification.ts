@@ -13,6 +13,7 @@ import {
 import { auth, db } from "./firebase";
 import { IPushToken, IUser } from "./types";
 import * as Notifications from "expo-notifications";
+import firestore from "@react-native-firebase/firestore";
 
 // ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]
 
@@ -39,7 +40,7 @@ export function setToken(
         pushToken: token.pushToken,
         uid: auth().currentUser?.uid,
         displayName: auth().currentUser?.displayName,
-        timestamp: Timestamp.now(),
+        timestamp: firestore.Timestamp.now(),
       },
       { merge: true },
     ).then((docRef) => {

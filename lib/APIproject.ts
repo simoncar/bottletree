@@ -22,15 +22,11 @@ const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
 export async function getProjects(callback: projectsRead) {
-  console.log("getProjects: FBNATIVE");
-
-  //const q = query(collection(db, "projects"), orderBy("archived", "asc"));
   const q = firestore().collection("projects").orderBy("archived", "asc");
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const projects: IProject[] = [];
     querySnapshot.forEach((doc) => {
-      console.log("getProjects onSnapshot: FBNATIVE");
       projects.push({
         key: doc.id,
         title: doc.data().title,
@@ -48,10 +44,6 @@ export async function getProjectUsers(
   projectId: string,
   callback: { (projectUsersDB: any): void; (arg0: IUser[]): void },
 ) {
-  console.log("getProjectUsers: FBNATIVE", projectId);
-
-  //firestore().collection("todos");
-  //const q1 = query(collection(db, "projects", projectId, "users"));
   const q1 = firestore()
     .collection("projects")
     .doc(projectId)
@@ -114,7 +106,7 @@ export function addProject(
     addDoc(collection(db, "projects"), {
       title: project.title,
       icon: stockHouseIcon,
-      timestamp: Timestamp.now(),
+      timestamp: firestore.Timestamp.now(),
       archived: false,
     }).then((docRef) => {
       console.log("Project written with ID: ", docRef.id);
@@ -133,14 +125,6 @@ export function addProjectUser(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    console.log(
-      "addProjectUser: FBNATIVE ",
-      projectId,
-      user.key,
-      user.displayName,
-    );
-
-    //const docRef = doc(db, "projects", projectId, "users", user.key);
     const docRef = firestore()
       .collection("projects")
       .doc(projectId)
@@ -152,7 +136,7 @@ export function addProjectUser(
         {
           uid: user.key,
           displayName: user.displayName,
-          timestamp: Timestamp.now(),
+          timestamp: firestore.Timestamp.now(),
         },
         { merge: true },
       )
@@ -172,16 +156,13 @@ export function deleteProjectUser(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    console.log(
-      "deleteProjectUser: FBJS",
-      projectId,
-      user.uid,
-      user.displayName,
-    );
+    const docRef = firestore()
+      .collection("projects")
+      .doc(projectId)
+      .collection("users")
+      .doc(user.uid);
 
-    const docRef = doc(db, "projects", projectId, "users", user.uid);
-
-    deleteDoc(docRef).then(() => {
+    docRef.delete().then(() => {
       callback(user.uid);
     });
   } catch (e) {

@@ -29,6 +29,8 @@ const Post = (props) => {
     caption = post.caption;
   }
 
+  console.log("post: ", post.timestamp.toDate());
+
   return (
     <View>
       <View style={styles.listItemHeader}></View>

@@ -13,14 +13,15 @@ import firestore from "@react-native-firebase/firestore";
 export const updateAccountName = (displayName: string) => {
   console.log("updateAccountName: FBJS");
 
-  const docRef = doc(db, "users", auth().currentUser.uid);
+  const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
-  updateProfile(auth().currentUser, {
+  console.log("FBJS******* UPDATE REQUIRED auth:");
+
+  const docRef2 = updateProfile(auth().currentUser, {
     displayName: displayName,
   })
     .then(() => {
-      setDoc(
-        docRef,
+      docRef1.set(
         {
           displayName: displayName,
           email: auth().currentUser.email,
@@ -30,24 +31,20 @@ export const updateAccountName = (displayName: string) => {
       );
     })
     .catch((error) => {
-      // An error occurred
-      // ...
-      console.log("user update ERROR updated", error);
+      console.log("upupdateAccountName update ERROR ", error);
     });
 };
 
 export const updateAccountPhotoURL = (photoURL: string) => {
-  //const { sharedData, updateSharedData } = useContext(AuthContext);
-  console.log("updateAccountPhotoURL: FBJS");
+  const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
-  const docRef = doc(db, "users", auth().currentUser.uid);
+  console.log("FBJS******* UPDATE REQUIRED auth:");
 
   updateProfile(auth().currentUser, {
     photoURL: photoURL,
   })
     .then(() => {
-      setDoc(
-        docRef,
+      docRef1.set(
         {
           photoURL: photoURL,
           email: auth().currentUser.email,
@@ -56,21 +53,13 @@ export const updateAccountPhotoURL = (photoURL: string) => {
         { merge: true },
       );
     })
-    .then(() => {
-      //callback(project.key);
-      console.log("its done-  account update:", photoURL);
-    })
+    .then(() => {})
     .catch((error) => {
-      // An error occurred
-      // ...
-      console.log("user update ERROR updated", error);
+      console.log("updateAccountPhotoURL update ERROR ", error);
     });
 };
 
 export async function getUsers(callback: usersRead) {
-  // const q = query(collection(db, "users"), orderBy("displayName", "asc"));
-
-  console.log("getUsers: FBNATIVE");
   const users: IUser[] = [];
 
   const q = firestore().collection("users");
@@ -87,22 +76,4 @@ export async function getUsers(callback: usersRead) {
   });
 
   callback(users);
-
-  // const unsubscribe = q.onSnapshot((querySnapshot) => {
-  //   console.log("AAA");
-  //   const users: IUser[] = [];
-  //   console.log("GGG");
-  //   querySnapshot.forEach((doc) => {
-  //     console.log("FFF");
-  //     users.push({
-  //       key: doc.id,
-  //       displayName: doc.data().displayName,
-  //       email: doc.data().email,
-  //       photoURL: doc.data().photoURL,
-  //     });
-  //   });
-  //   callback(users);
-  // });
-
-  //return () => unsubscribe;
 }

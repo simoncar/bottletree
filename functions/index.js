@@ -37,10 +37,8 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 				data: { uid: uid },
 			});
 		}
-
 	}
 	);
-
 
 	if (notifications.length > 0) {
 		const response = await fetch("https://exp.host/--/api/v2/push/send", {

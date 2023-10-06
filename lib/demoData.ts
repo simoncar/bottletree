@@ -9,7 +9,7 @@ import {
   updateProfile,
   deleteUser,
 } from "firebase/auth/react-native";
-import { db, auth } from "./firebase";
+import { db, auth_js } from "./firebase";
 import { IUser } from "./types";
 import { setBadgeCountAsync } from "expo-notifications";
 
@@ -74,8 +74,11 @@ export const demoData = async () => {
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Ffacemale1.jpg?alt=media&token=2fbef981-e857-4e1d-af4b-38c5fbf14512",
   });
+  console.log("a");
 
   users[0].uid = await createUser(users[0]);
+  console.log("b");
+
   users[1].uid = await createUser(users[1]);
   users[2].uid = await createUser(users[2]);
   users[3].uid = await createUser(users[3]);
@@ -215,21 +218,18 @@ export const demoData = async () => {
   }
 
   async function createUser(user: IUser) {
-
-    const fsi2 = await fetchSignInMethodsForEmail(auth, user.email);
+    const fsi2 = await fetchSignInMethodsForEmail(auth_js, user.email);
 
     let user2 = null;
     if (fsi2.length === 0) {
       user2 = await createUserWithEmailAndPassword(
-        auth,
+        auth_js,
         user.email,
         "password",
       );
     } else {
-
-      user2 = await signInWithEmailAndPassword(auth, user.email, "password");
+      user2 = await signInWithEmailAndPassword(auth_js, user.email, "password");
     }
-
 
     const userDoc2 = await setDoc(doc(db, "users", user2.user.uid), user, {
       merge: true,

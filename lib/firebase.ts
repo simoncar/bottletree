@@ -9,7 +9,8 @@ import {
   connectAuthEmulator,
 } from "firebase/auth/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Constants from "expo-constants";
+
+import "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 
@@ -42,6 +43,8 @@ const storage = getStorage(app);
 
 if (!Device.isDevice) {
   console.log("Connecting to Firebase Emulator");
+  firestore().useEmulator("127.0.0.1", 8080);
+  auth().useEmulator("http://localhost:9099");
 
   connectFirestoreEmulator(db, "127.0.0.1", 8080);
   connectStorageEmulator(storage, "localhost", 9199);
