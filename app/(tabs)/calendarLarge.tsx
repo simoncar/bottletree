@@ -157,6 +157,17 @@ export default function CalendarLarge() {
 
   const onPressEvent = (event: ICalendarEventBase) => {
     console.log("onPressEvent:", event);
+    console.log("onPressEventAAA:", {
+      pkey: event.key,
+      ptitle: event.title,
+      pdescription: event.description,
+      pdateBegin: event.start,
+      pdateEnd: event.end,
+      puid: event.uid,
+      pcolor: event.color,
+      pcolorName: event.colorName,
+    });
+
     router.push({
       pathname: "/editCalendar",
       params: {
@@ -167,7 +178,7 @@ export default function CalendarLarge() {
         pdateEnd: event.end,
         puid: event.uid,
         pcolor: event.color,
-        pcolorName: event.colorName,
+        pcolorName: event.colorName || "",
       },
     });
   };
