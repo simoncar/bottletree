@@ -1,17 +1,5 @@
-import {
-  addDoc,
-  collection,
-  onSnapshot,
-  query,
-  Timestamp,
-  setDoc,
-  doc,
-  deleteDoc,
-  where,
-} from "firebase/firestore";
-import { db } from "./firebase";
+import { firestore } from "./firebase";
 import { ICalendarEvent } from "./types";
-import firestore from "@react-native-firebase/firestore";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
 
@@ -68,12 +56,11 @@ export async function getItemsBigCalendar(
 export async function getItems(projectId: string, callback: itemsRead) {
   console.log("getItems: FBJS");
 
-  const q = query(
-    collection(db, "calendar"),
-    where("projectId", "==", projectId),
-  );
+  const q = firestore()
+    .collection("calendar")
+    .where("projectId", "==", projectId);
 
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const unsubscribe = q.onSnapshot((querySnapshot) => {
     const calendarEvents: ICalendarEvent[] = [];
     querySnapshot.forEach((doc) => {
       const data = {
@@ -113,8 +100,8 @@ export async function getItems(projectId: string, callback: itemsRead) {
 
     calendarEvents.push({
       key: "emptyKey",
-      dateBegin: Timestamp.fromDate(new Date("2023-01-01")),
-      dateEnd: Timestamp.fromDate(new Date("2025-01-01")),
+      dateBegin: firestore.Timestamp.fromDate(new Date("2023-01-01")),
+      dateEnd: firestore.Timestamp.fromDate(new Date("2025-01-01")),
       description: "",
       projectId: "",
       title: "",
@@ -198,31 +185,38 @@ export function setCalendarEvent(
     console.log("setCalendarEvent FBJS");
 
     if (calendarEvent.key == undefined) {
-      addDoc(collection(db, "calendar"), {
-        dateBegin: calendarEvent.dateBegin,
-        dateEnd: calendarEvent.dateEnd,
-        description: calendarEvent.description,
-        projectId: calendarEvent.projectId,
-        title: calendarEvent.title,
-        uid: calendarEvent.uid,
-        color: calendarEvent.color,
-        colorName: calendarEvent.colorName,
-      }).then((docRef) => {
-        callback(docRef.id);
-      });
+      firestore()
+        .collection("calendar")
+        .add({
+          dateBegin: calendarEvent.dateBegin,
+          dateEnd: calendarEvent.dateEnd,
+          description: calendarEvent.description,
+          projectId: calendarEvent.projectId,
+          title: calendarEvent.title,
+          uid: calendarEvent.uid,
+          color: calendarEvent.color,
+          colorName: calendarEvent.colorName,
+        })
+        .then((docRef) => {
+          callback(docRef.id);
+        });
     } else {
-      setDoc(doc(db, "calendar", calendarEvent.key), {
-        dateBegin: calendarEvent.dateBegin,
-        dateEnd: calendarEvent.dateEnd,
-        description: calendarEvent.description,
-        projectId: calendarEvent.projectId,
-        title: calendarEvent.title,
-        uid: calendarEvent.uid,
-        color: calendarEvent.color,
-        colorName: calendarEvent.colorName,
-      }).then((docRef) => {
-        callback(calendarEvent.key);
-      });
+      firestore()
+        .collection("calendar")
+        .doc(calendarEvent.key)
+        .set({
+          dateBegin: calendarEvent.dateBegin,
+          dateEnd: calendarEvent.dateEnd,
+          description: calendarEvent.description,
+          projectId: calendarEvent.projectId,
+          title: calendarEvent.title,
+          uid: calendarEvent.uid,
+          color: calendarEvent.color,
+          colorName: calendarEvent.colorName,
+        })
+        .then((docRef) => {
+          callback(calendarEvent.key);
+        });
     }
   } catch (e) {
     console.error("Error adding calendar event: ", e);
@@ -235,10 +229,8 @@ export function deleteCalendarEvent(
   calendarEvent: ICalendarEvent,
   callback: deleteDone,
 ) {
-  console.log("deleteCalendarEvent: FBJS");
-
-  const calRef = doc(db, "calendar", calendarEvent.key);
-  deleteDoc(calRef).then(() => {
+  const calRef = firestore().collection("calendar").doc(calendarEvent.key);
+  calRef.delete().then(() => {
     callback(calendarEvent.key);
   });
 }

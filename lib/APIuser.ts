@@ -1,25 +1,13 @@
-import { updateProfile } from "firebase/auth/react-native";
-import { auth, db } from "../lib/firebase";
-import {
-  doc,
-  setDoc,
-  query,
-  collection,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
-import firestore from "@react-native-firebase/firestore";
+import { auth, firestore } from "../lib/firebase";
 
 export const updateAccountName = (displayName: string) => {
-  console.log("updateAccountName: FBJS");
-
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
-  console.log("FBJS******* UPDATE REQUIRED auth:");
-
-  const docRef2 = updateProfile(auth().currentUser, {
-    displayName: displayName,
-  })
+  const user = auth().currentUser;
+  const docRef2 = user
+    .updateProfile({
+      displayName: displayName,
+    })
     .then(() => {
       docRef1.set(
         {
@@ -38,11 +26,12 @@ export const updateAccountName = (displayName: string) => {
 export const updateAccountPhotoURL = (photoURL: string) => {
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
-  console.log("FBJS******* UPDATE REQUIRED auth:");
+  const user = auth().currentUser;
 
-  updateProfile(auth().currentUser, {
-    photoURL: photoURL,
-  })
+  user
+    .updateProfile({
+      photoURL: photoURL,
+    })
     .then(() => {
       docRef1.set(
         {

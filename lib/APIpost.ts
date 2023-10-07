@@ -1,18 +1,4 @@
-import { db } from "./firebase";
-import {
-  collection,
-  query,
-  addDoc,
-  deleteDoc,
-  onSnapshot,
-  Timestamp,
-  orderBy,
-  doc,
-  updateDoc,
-  getDocs,
-  getDoc,
-} from "firebase/firestore";
-import firestore from "@react-native-firebase/firestore";
+import { firestore } from "./firebase";
 import { IPost, IComment } from "./types";
 
 export async function addPost(post: IPost, callback: saveDone) {

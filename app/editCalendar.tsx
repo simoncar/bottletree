@@ -13,6 +13,7 @@ import {
   Pressable,
   Alert,
 } from "react-native";
+import { firestore } from "../lib/firebase";
 
 import { Text, TextInput, View } from "../components/Themed";
 import { setCalendarEvent, deleteCalendarEvent } from "../lib/APIcalendar";
@@ -24,7 +25,6 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import Colors from "../constants/Colors";
 import { ICalendarEvent } from "../lib/types";
-import { Timestamp } from "firebase/firestore";
 import { useAuth } from "../lib/authProvider";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
@@ -107,8 +107,8 @@ export default function editCalendar() {
 
     const calendarEvent: ICalendarEvent = {
       key: key,
-      dateBegin: Timestamp.fromDate(d1),
-      dateEnd: Timestamp.fromDate(d2),
+      dateBegin: firestore.Timestamp.fromDate(d1),
+      dateEnd: firestore.Timestamp.fromDate(d2),
       description: description || "",
       title: title || "",
       color: color || "",
@@ -139,8 +139,8 @@ export default function editCalendar() {
 
     const calendarEvent: ICalendarEvent = {
       key: pkey,
-      dateBegin: Timestamp.fromDate(d1),
-      dateEnd: Timestamp.fromDate(d2),
+      dateBegin: firestore.Timestamp.fromDate(d1),
+      dateEnd: firestore.Timestamp.fromDate(d2),
       description: description || "",
       title: title || "",
       projectId: sharedDataProject.key,

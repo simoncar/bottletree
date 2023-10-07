@@ -1,4 +1,8 @@
-import { Timestamp } from "firebase/firestore";
+import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
+
+export type CollectionReference = FirebaseFirestoreTypes.CollectionReference;
+export type DocumentReference = FirebaseFirestoreTypes.DocumentReference;
+export type Timestamp = FirebaseFirestoreTypes.Timestamp;
 
 export interface IPost {
   key: string;
@@ -14,7 +18,7 @@ export interface IPost {
 
 export interface IProject {
   key: string;
-  title: string;
+  title: string; 
   icon: string;
   archived?: boolean;
 }

@@ -1,20 +1,4 @@
-import {
-  addDoc,
-  doc,
-  updateDoc,
-  collection,
-  onSnapshot,
-  query,
-  Timestamp,
-  where,
-  getDocs,
-  documentId,
-  orderBy,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { db } from "./firebase";
-import firestore from "@react-native-firebase/firestore";
+import { firestore } from "./firebase";
 import { IProject, IUser } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
@@ -58,11 +42,6 @@ export async function getProjectUsers(
   const userList: IUser[] = [];
 
   if (idList.length > 0) {
-    // const q2 = query(
-    //   collection(db, "users"),
-    //   where(documentId(), "in", idList),
-    // );
-
     const q2 = firestore()
       .collection("users")
       .where(firestore.FieldPath.documentId(), "in", idList);
@@ -83,17 +62,17 @@ export async function getProjectUsers(
 }
 
 export function updateProject(project: IProject, callback: saveDone) {
-  const ref = doc(db, "projects", project.key);
+  const ref = firestore().collection("projects").doc(project.key);
 
-  console.log("updateProject FBJS:", project);
-
-  updateDoc(ref, {
-    title: project.title,
-    icon: project?.icon ?? stockHouseIcon,
-    archived: project?.archived ?? false,
-  }).then(() => {
-    callback(project.key);
-  });
+  ref
+    .update({
+      title: project.title,
+      icon: project?.icon ?? stockHouseIcon,
+      archived: project?.archived ?? false,
+    })
+    .then(() => {
+      callback(project.key);
+    });
 }
 
 export function addProject(
@@ -103,15 +82,18 @@ export function addProject(
   try {
     console.log("addProject FBJS: ", project.title);
 
-    addDoc(collection(db, "projects"), {
-      title: project.title,
-      icon: stockHouseIcon,
-      timestamp: firestore.Timestamp.now(),
-      archived: false,
-    }).then((docRef) => {
-      console.log("Project written with ID: ", docRef.id);
-      callback(docRef.id);
-    });
+    firestore()
+      .collection("projects")
+      .add({
+        title: project.title,
+        icon: stockHouseIcon,
+        timestamp: firestore.Timestamp.now(),
+        archived: false,
+      })
+      .then((docRef) => {
+        console.log("Project written with ID: ", docRef.id);
+        callback(docRef.id);
+      });
   } catch (e) {
     console.error("Error adding project: ", e);
   }
@@ -129,9 +111,7 @@ export function addProjectUser(
       .collection("projects")
       .doc(projectId)
       .collection("users")
-      .doc(user.key);
-
-    docRef
+      .doc(user.key)
       .set(
         {
           uid: user.key,
@@ -161,6 +141,7 @@ export function deleteProjectUser(
       .doc(projectId)
       .collection("users")
       .doc(user.uid);
+    X;
 
     docRef.delete().then(() => {
       callback(user.uid);

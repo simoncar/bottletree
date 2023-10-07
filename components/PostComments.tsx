@@ -13,8 +13,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
 import { IComment } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
-import { Timestamp } from "firebase/firestore";
-import firestore from "@react-native-firebase/firestore";
+import { firestore } from "../lib/firebase";
 
 type Props = {
   project: string;
@@ -112,7 +111,6 @@ const Comments = ({ project, post }: Props) => {
       );
     }
   };
-
 
   return (
     <View style={styles.commentsOverall}>

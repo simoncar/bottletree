@@ -9,17 +9,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { registerForPushNotificationsAsync } from "../lib/notifications";
 import AuthContext from "./authContext";
 import React, { useEffect, useState, useRef } from "react";
-import {
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  createUserWithEmailAndPassword,
-  signOut,
-  updateProfile,
-  deleteUser,
-} from "firebase/auth/react-native";
+
 import { Platform } from "react-native";
-import { auth, auth_js } from "../lib/firebase";
+import { auth } from "../lib/firebase";
 import { IUser } from "./types";
 
 // This hook can be used to access the user info.
@@ -201,7 +193,8 @@ const AuthProvider = ({ children }) => {
     screenPassword: string,
     callback: createAccountCallback,
   ) => {
-    createUserWithEmailAndPassword(auth, screenEmail, screenPassword)
+    auth()
+      .createUserWithEmailAndPassword(screenEmail, screenPassword)
       .then(() => {
         const user: IUser = {
           uid: auth().currentUser.uid,
@@ -228,11 +221,11 @@ const AuthProvider = ({ children }) => {
         screenPassword,
       );
 
-      const resp_js = await signInWithEmailAndPassword(
-        auth_js,
-        screenEmail,
-        screenPassword,
-      );
+      // const resp_js = await signInWithEmailAndPassword(
+      //   auth_js,
+      //   screenEmail,
+      //   screenPassword,
+      // );
 
       const user: IUser = {
         uid: convertToString(auth().currentUser.uid),
@@ -262,15 +255,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const signOut = async () => {
-    console.log("signOut");
     auth().signOut(); //sign out of firebase
     AsyncStorage.removeItem("@USER");
     setSharedDataUser(null);
   };
 
   const resetPassword = (screenEmail: string, callback: resetError) => {
-    sendPasswordResetEmail(auth, screenEmail)
-      .then(() => callback("some stuff"))
+    auth()
+      .sendPasswordResetEmail(screenEmail)
+      .then(() => callback("sendPasswordResetEmail"))
       .catch((error) => {
         const errorMessage = error.message;
         callback(errorMessage);
@@ -282,7 +275,8 @@ const AuthProvider = ({ children }) => {
   const deleteAccount = async (callback: resetError) => {
     const user = auth().currentUser;
 
-    deleteUser(user)
+    user
+      .delete()
       .then(() => callback("deleting the user"))
       .catch((error) => {
         const errorMessage = error.message;
@@ -318,7 +312,7 @@ const AuthProvider = ({ children }) => {
 
 export const appSignIn = async (email, password) => {
   try {
-    const resp = await signInWithEmailAndPassword(auth, email, password);
+    const resp = await auth().signInWithEmailAndPassword(email, password);
 
     //setSharedDataUser(user);
 
@@ -334,11 +328,7 @@ export const appSignIn = async (email, password) => {
 
 export const appSignOut = async () => {
   try {
-    await signOut(auth);
-    // AuthStore.update((store) => {
-    // 	store.user = null;
-    // 	store.isLoggedIn = false;
-    // });
+    auth().signOut();
     return { user: null };
   } catch (e) {
     return { error: e };
@@ -347,14 +337,9 @@ export const appSignOut = async () => {
 
 export const appSignUp = async (email, password, displayName) => {
   try {
-    const resp = await createUserWithEmailAndPassword(auth, email, password);
+    const resp = await auth().createUserWithEmailAndPassword(email, password);
 
-    await updateProfile(resp.user, { displayName });
-
-    // AuthStore.update((store) => {
-    // 	store.user = auth.currentUser;
-    // 	store.isLoggedIn = true;
-    // });
+    await resp.user.updateProfile({ displayName });
 
     return { user: auth().currentUser };
   } catch (e) {
