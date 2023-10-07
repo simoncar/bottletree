@@ -5134,10 +5134,10 @@ expo-updates-interface@~0.10.0:
   resolved "https://registry.yarnpkg.com/expo-updates-interface/-/expo-updates-interface-0.10.1.tgz#cab075641cd381718ccd9264bf133dc393430a44"
   integrity sha512-I6JMR7EgjXwckrydDmrkBEX/iw750dcqpzQVsjznYWfi0HTEOxajLHB90fBFqQkUV5i5s4Fd3hYQ1Cn0oMzUbA==
 
-expo-updates@~0.18.14:
-  version "0.18.14"
-  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.18.14.tgz#dd67ef729a1d81ab5ca551a47dd2bf6254a49ce3"
-  integrity sha512-RHlo44Xo4mgXrLqhDK52s0xE1nOFdf0FAMfuQD5O5+uKLk6vbNqwwX8FejiIbrVLhlYTkldUPBPlTsp0G9vB8A==
+expo-updates@~0.18.16:
+  version "0.18.16"
+  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.18.16.tgz#d81bff0178d7d9dd279aad51ee25bc71d237f8ab"
+  integrity sha512-5/3Yh6FHG8oRDz1pqpn7NEO6GQBH5GV/sygnkkn3JxsiXzlOsuOY7+x+gFr4CdKVyreaoJV863ZxKvxplVE4fA==
   dependencies:
     "@expo/code-signing-certificates" "0.0.5"
     "@expo/config" "~8.1.0"
@@ -8548,6 +8548,11 @@ react-native-collapsible-tab-view@2.0.2:
   integrity sha512-83fme3FnMFIMIbhE6J7Iqmt2HG5q7A8d49X38VrSRegC1UG4sIAVjS3MSSVMgCip+WscqBc0aiJFQInTUzkUEw==
   dependencies:
     use-debounce "^5.1.0"
+
+react-native-compressor@^1.8.12:
+  version "1.8.12"
+  resolved "https://registry.yarnpkg.com/react-native-compressor/-/react-native-compressor-1.8.12.tgz#6e50247d3d2a12845eb27cfa983ef4c56a00738f"
+  integrity sha512-KyS9hk2LnWiuZyqQcUrQv38kW0R9C8B9FLTc4ML3S9MglXhzbarfBMECxc+23GR7r/NkImMzQc0j9mgIDtRp9A==
 
 react-native-dynamic-skeletons@^0.5.0:
   version "0.5.0"

@@ -1,6 +1,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { storage } from "./firebase";
 import * as Crypto from "expo-crypto";
+import { Image } from "react-native-compressor";
 
 export const addImage = async (
   multiple,
@@ -27,14 +28,19 @@ export const addImage = async (
 };
 
 async function processItemAsync(asset, progressCallback) {
+  const result = await Image.compress(asset.uri, {
+    progressDivider: 10,
+    downloadProgress: (progress) => {
+      console.log("downloadProgress: ", progress);
+    },
+  });
+
   return new Promise((resolve, reject) => {
     const promises = [];
     {
       try {
-        // const blob = getBlobAsync(asset.uri).then((blob) => {
         const storageRef = getStorageRef();
-        //const task = storageRef.putFile(file.uri);
-        const uploadTask = storageRef.putFile(asset.uri);
+        const uploadTask = storageRef.putFile(result);
 
         uploadTask.on(
           "state_changed",
