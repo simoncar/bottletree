@@ -93,13 +93,11 @@ export default function editPost() {
     });
 
     onChangeTextPhotoURL(downloadURLarray[0]);
-
-    console.log("onChangeTextPhotoURL:", downloadURLarray);
   };
 
   const pickImage = async () => {
     const multiple = false;
-    addImage(multiple,"project", progressCallback, completedCallback);
+    addImage(multiple, "project", progressCallback, completedCallback);
   };
 
   const openActionSheet = async () => {

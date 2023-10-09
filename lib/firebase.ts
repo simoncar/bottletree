@@ -25,11 +25,17 @@ const firebaseConfig = {
   appId: `${fbConfig.appId}`,
 };
 
-if (!Device.isDevice) {
-  console.log("Connecting to Firebase Emulator");
-  firestore().useEmulator("127.0.0.1", 8080);
-  auth().useEmulator("http://localhost:9099");
-  storage().useEmulator("127.0.0.1", 9199);
-}
+// if (!Device.isDevice) {
+//   console.log("Connecting to Firebase Emulator");
+//   firestore().useEmulator("127.0.0.1", 8080);
+//   auth().useEmulator("http://localhost:9099");
+//   storage().useEmulator("127.0.0.1", 9199);
+// }
+
+// firestore()
+//   .clearPersistence()
+//   .catch((error) => {
+//     console.error("Could not enable persistence:", error.code);
+//   });
 
 export { firestore, storage, auth };

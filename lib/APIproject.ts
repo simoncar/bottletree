@@ -7,29 +7,32 @@ const stockHouseIcon =
 
 export async function getProjects(uid: string, callback: projectsRead) {
   var query;
+  var q;
+  const projectList: string[] = ["X"];
 
-  let accessRef = firestore().collectionGroup("accessList");
   if (uid != "") {
+    let accessRef = firestore().collectionGroup("accessList");
+
     query = accessRef.where("uid", "==", uid);
-    console.log("filter to uid: ", uid);
-  } else {
-    query = accessRef;
-  }
 
-  const projectList: string[] = [];
-
-  await query.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      projectList.indexOf(doc.data().projectId) === -1
-        ? projectList.push(doc.data().projectId)
-        : console.log("This item already exists");
-      //
+    await query.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        projectList.indexOf(doc.data().projectId) === -1
+          ? projectList.push(doc.data().projectId)
+          : console.log("This item already exists");
+        //
+      });
     });
-  });
+    console.log("projectList: ", projectList);
 
-  const q = firestore()
-    .collection("projects")
-    .where(firestore.FieldPath.documentId(), "in", projectList);
+    // q = firestore()
+    //   .collection("projects")
+    //   .where(firestore.FieldPath.documentId(), "in", projectList);
+
+    q = firestore().collection("projects").orderBy("archived", "asc");
+  } else {
+    q = firestore().collection("projects").orderBy("archived", "asc");
+  }
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const projects: IProject[] = [];

@@ -112,8 +112,6 @@ export default function editUser() {
   };
 
   const profilePic = () => {
-    console.log("textPhotoURL: ", textPhotoURL);
-
     return (
       <View style={styles.profilePicContainer}>
         <TouchableOpacity
