@@ -21,6 +21,8 @@ export default function addPhoto() {
   }, []);
 
   const saveDone = () => {
+    console.log("saveDone - push to home");
+
     router.push({
       pathname: "/",
       params: {
@@ -102,7 +104,7 @@ export default function addPhoto() {
   const pickImage = async () => {
     const multiple = true;
 
-    addImage(multiple, progressCallback, completedCallback);
+    addImage(multiple, "posts", progressCallback, completedCallback);
   };
 
   if (undefined === sharedDataProject.key || "" === sharedDataProject.key) {

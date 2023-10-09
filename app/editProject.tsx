@@ -99,7 +99,7 @@ export default function editPost() {
 
   const pickImage = async () => {
     const multiple = false;
-    addImage(multiple, progressCallback, completedCallback);
+    addImage(multiple,"project", progressCallback, completedCallback);
   };
 
   const openActionSheet = async () => {

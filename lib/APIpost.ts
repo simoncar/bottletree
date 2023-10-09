@@ -15,7 +15,7 @@ export async function addPost(post: IPost, callback: saveDone) {
       timestamp: firestore.Timestamp.now(),
     })
     .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
+      console.log("Post Document written with ID: ", docRef.id);
       if (post.author != "Simon") {
         const messageRef = firestore()
           .collection("notifications")
@@ -25,12 +25,14 @@ export async function addPost(post: IPost, callback: saveDone) {
             timestamp: firestore.Timestamp.now(),
           })
           .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
+            console.log("Notification Document written with ID: ", docRef.id);
             callback(docRef.id);
           })
           .catch((error) => {
             console.error("Error adding document: ", error);
           });
+      } else {
+        callback(docRef.id);
       }
     })
     .catch((error) => {

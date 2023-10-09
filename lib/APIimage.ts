@@ -5,6 +5,7 @@ import { Image } from "react-native-compressor";
 
 export const addImage = async (
   multiple,
+  folder,
   progressCallback,
   completedCallback,
 ) => {
@@ -17,7 +18,7 @@ export const addImage = async (
   if (!result.canceled) {
     try {
       const promises = result.assets.map((item) =>
-        processItemAsync(item, progressCallback),
+        processItemAsync(folder, item, progressCallback),
       );
       const processedResults = await Promise.all(promises);
       completedCallback(processedResults);
@@ -27,7 +28,7 @@ export const addImage = async (
   }
 };
 
-async function processItemAsync(asset, progressCallback) {
+async function processItemAsync(folder: string, asset, progressCallback) {
   const result = await Image.compress(asset.uri, {
     progressDivider: 10,
     downloadProgress: (progress) => {
@@ -39,7 +40,7 @@ async function processItemAsync(asset, progressCallback) {
     const promises = [];
     {
       try {
-        const storageRef = getStorageRef();
+        const storageRef = getStorageRef(folder);
         const uploadTask = storageRef.putFile(result);
 
         uploadTask.on(
@@ -78,12 +79,13 @@ async function processItemAsync(asset, progressCallback) {
   });
 }
 
-function getStorageRef() {
+function getStorageRef(folder: string) {
   const UUID = Crypto.randomUUID();
   const d = new Date();
 
   const fileName =
-    "posts/" +
+    folder +
+    "/" +
     d.getUTCFullYear() +
     ("0" + (d.getMonth() + 1)).slice(-2) +
     "/" +

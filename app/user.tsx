@@ -75,7 +75,7 @@ export default function editUser() {
 
   const pickImage = async () => {
     const multiple = false;
-    addImage(multiple, progressCallback, completedCallback);
+    addImage(multiple, "profile", progressCallback, completedCallback);
   };
 
   const openActionSheet = async () => {
@@ -105,6 +105,8 @@ export default function editUser() {
   };
 
   const profilePic = () => {
+    console.log("textPhotoURL: ", textPhotoURL);
+
     return (
       <View style={styles.profilePicContainer}>
         <TouchableOpacity
