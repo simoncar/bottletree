@@ -120,8 +120,6 @@ export async function getComments(projectId: string, postId: string) {
   const commentsSnapshot = await qComments.get();
 
   commentsSnapshot.forEach((doc) => {
-    console.log("doc: ", doc.data());
-
     comments.push({
       key: doc.id,
       comment: doc.data().comment,

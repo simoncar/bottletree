@@ -214,14 +214,14 @@ export const demoData = async () => {
     return await firestore()
       .collection("projects")
       .doc(projectId)
-      .collection("users")
+      .collection("accessList")
       .doc(user.uid)
       .set(
         {
           uid: user.uid,
           displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL,
+          projectId: projectId,
+          timestamp: firestore.Timestamp.now(),
         },
         { merge: true },
       );

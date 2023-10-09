@@ -35,7 +35,7 @@ const ModalScreen = (props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = getProjects(uid, projectsRead);
+    const unsubscribe = getProjects("", projectsRead);
     unsubscribe;
     return () => {
       // unsubscribe;
@@ -47,6 +47,14 @@ const ModalScreen = (props) => {
       setLoading(false);
     }
   }, [projects]);
+
+  function renderAdmin() {
+    return (
+      <View style={styles.admin}>
+        <Text style={styles.project}>Supervisor Mode</Text>
+      </View>
+    );
+  }
 
   function renderAdd() {
     return (
@@ -172,6 +180,7 @@ const ModalScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
+        <View>{renderAdmin()}</View>
         <View>{renderAdd()}</View>
         {loading === false && (
           <View>
@@ -188,11 +197,18 @@ const ModalScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
+  admin: {
+    alignItems: "center",
+    textAlign: "center",
+    color: "red",
+    backgroundColor: "red",
+    height: 50,
+    paddingTop: 10,
+  },
   avatar: {
     marginRight: 12,
     width: 50,
   },
-
   avatarFace: {
     borderColor: "lightgrey",
     borderRadius: 48 / 2,

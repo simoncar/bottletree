@@ -43,7 +43,6 @@ export default function RootLayout() {
   }, [error]);
 
   const RootLayoutNav = useCallback(async () => {
-
     if (fontsLoaded) {
       //await SplashScreen.hideAsync();
     }
@@ -67,6 +66,12 @@ export default function RootLayout() {
                   options={{
                     presentation: "modal",
                     title: "Projects",
+                  }}
+                />
+                <Stack.Screen
+                  name="projectListAdmin"
+                  options={{
+                    title: "Administration",
                   }}
                 />
                 <Stack.Screen

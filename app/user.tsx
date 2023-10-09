@@ -15,6 +15,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Colors from "../constants/Colors";
 import { updateAccountName, updateAccountPhotoURL } from "../lib/APIuser";
 import { About } from "../lib/about";
@@ -76,6 +77,12 @@ export default function editUser() {
   const pickImage = async () => {
     const multiple = false;
     addImage(multiple, "profile", progressCallback, completedCallback);
+  };
+
+  const administration = async () => {
+    router.push({
+      pathname: "/projectListAdmin",
+    });
   };
 
   const openActionSheet = async () => {
@@ -192,6 +199,22 @@ export default function editUser() {
                 color={Colors[colorScheme ?? "light"].text}
               />
               <Text style={styles.settingName}>Log Out</Text>
+            </View>
+            <View style={styles.rightChevron}></View>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.outerView}>
+          <TouchableOpacity key={"admin"} onPress={() => administration()}>
+            <View style={styles.leftContent}>
+              <MaterialCommunityIcons
+                name="shield-lock"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+              <Text style={styles.settingName}>
+                Administration (Eddie Mode)
+              </Text>
             </View>
             <View style={styles.rightChevron}></View>
           </TouchableOpacity>

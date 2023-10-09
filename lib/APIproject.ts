@@ -5,8 +5,31 @@ type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
-export async function getProjects(callback: projectsRead) {
-  const q = firestore().collection("projects").orderBy("archived", "asc");
+export async function getProjects(uid: string, callback: projectsRead) {
+  var query;
+
+  let accessRef = firestore().collectionGroup("accessList");
+  if (uid != "") {
+    query = accessRef.where("uid", "==", uid);
+    console.log("filter to uid: ", uid);
+  } else {
+    query = accessRef;
+  }
+
+  const projectList: string[] = [];
+
+  await query.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      projectList.indexOf(doc.data().projectId) === -1
+        ? projectList.push(doc.data().projectId)
+        : console.log("This item already exists");
+      //
+    });
+  });
+
+  const q = firestore()
+    .collection("projects")
+    .where(firestore.FieldPath.documentId(), "in", projectList);
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const projects: IProject[] = [];
@@ -31,7 +54,7 @@ export async function getProjectUsers(
   const q1 = firestore()
     .collection("projects")
     .doc(projectId)
-    .collection("users");
+    .collection("accessList");
 
   const idSnapshot = await q1.get();
   const idList: string[] = [];
@@ -110,13 +133,14 @@ export function addProjectUser(
     const docRef = firestore()
       .collection("projects")
       .doc(projectId)
-      .collection("users")
+      .collection("accessList")
       .doc(user.key)
       .set(
         {
           uid: user.key,
           displayName: user.displayName,
           timestamp: firestore.Timestamp.now(),
+          projectId: projectId,
         },
         { merge: true },
       )
@@ -139,9 +163,8 @@ export function deleteProjectUser(
     const docRef = firestore()
       .collection("projects")
       .doc(projectId)
-      .collection("users")
+      .collection("accessList")
       .doc(user.uid);
-    X;
 
     docRef.delete().then(() => {
       callback(user.uid);
