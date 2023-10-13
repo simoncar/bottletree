@@ -7,6 +7,7 @@ import {
 } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { registerForPushNotificationsAsync } from "../lib/notifications";
+import * as Device from "expo-device";
 import AuthContext from "./authContext";
 import React, { useEffect, useState, useRef } from "react";
 
@@ -90,7 +91,10 @@ function useProtectedRoute(user) {
       } else {
         //console.log("onAuthStateChange We have a User: ", user);
         setUserReady(true);
-        registerForPushNotificationsAsync();
+        if (Device.isDevice) {
+          registerForPush;
+          Async();
+        }
         //console.log("onAuthStateChange We have a User: ", user);
         //@ts-ignore
         //navigation?.navigate("(tabs)");

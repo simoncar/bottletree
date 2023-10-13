@@ -4,21 +4,20 @@ import { setToken } from "./APINotification";
 import { IPushToken } from "./types";
 import Constants from "expo-constants";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
-
 const saveDone = (id: string) => {
   console.log("saveDone", id);
 };
 
 export async function registerForPushNotificationsAsync() {
-  let token;
+  let token = "";
   if (Device.isDevice) {
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+      }),
+    });
     const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -34,18 +33,11 @@ export async function registerForPushNotificationsAsync() {
       return;
     }
 
-    console.log(
-      "push notifications project: ",
-      Constants.expoConfig.extra.eas.projectId,
-    );
-
     token = (
       await Notifications.getExpoPushTokenAsync({
-        projectId: Constants.expoConfig?.extra
-        ?.eas.projectId,
+        projectId: Constants.expoConfig?.extra?.eas.projectId,
       })
     ).data;
-    console.log(token);
 
     if (token) {
       let safeToken = token.replace("[", "");
@@ -59,17 +51,16 @@ export async function registerForPushNotificationsAsync() {
 
       setToken(pushToken, saveDone);
     }
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
   } else {
     //alert("Must use physical device for Push Notifications");
-  }
-
-  if (Platform.OS === "android") {
-    Notifications.setNotificationChannelAsync("default", {
-      name: "default",
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
-    });
   }
 
   return token;

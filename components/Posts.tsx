@@ -16,7 +16,6 @@ import { useAuth } from "../lib/authProvider";
 
 import { demoData } from "../lib/demoData";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
-import { ScrollView } from "react-native-gesture-handler";
 
 export const Posts = () => {
   const { sharedDataUser } = useAuth();

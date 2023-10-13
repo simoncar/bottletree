@@ -1,4 +1,4 @@
-import { firestore } from "./firebase";
+import { db, firestore } from "./firebase";
 import { IProject, IUser } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
@@ -11,7 +11,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
   const projectList: string[] = ["X"];
 
   if (uid != "") {
-    let accessRef = firestore().collectionGroup("accessList");
+    let accessRef = db.collectionGroup("accessList");
 
     query = accessRef.where("uid", "==", uid);
 
@@ -25,13 +25,13 @@ export async function getProjects(uid: string, callback: projectsRead) {
     });
     console.log("projectList: ", projectList);
 
-    // q = firestore()
+    // q = db
     //   .collection("projects")
     //   .where(firestore.FieldPath.documentId(), "in", projectList);
 
-    q = firestore().collection("projects").orderBy("archived", "asc");
+    q = db.collection("projects").orderBy("archived", "asc");
   } else {
-    q = firestore().collection("projects").orderBy("archived", "asc");
+    q = db.collection("projects").orderBy("archived", "asc");
   }
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
@@ -54,10 +54,7 @@ export async function getProjectUsers(
   projectId: string,
   callback: { (projectUsersDB: any): void; (arg0: IUser[]): void },
 ) {
-  const q1 = firestore()
-    .collection("projects")
-    .doc(projectId)
-    .collection("accessList");
+  const q1 = db.collection("projects").doc(projectId).collection("accessList");
 
   const idSnapshot = await q1.get();
   const idList: string[] = [];
@@ -68,7 +65,7 @@ export async function getProjectUsers(
   const userList: IUser[] = [];
 
   if (idList.length > 0) {
-    const q2 = firestore()
+    const q2 = db
       .collection("users")
       .where(firestore.FieldPath.documentId(), "in", idList);
 
@@ -88,7 +85,7 @@ export async function getProjectUsers(
 }
 
 export function updateProject(project: IProject, callback: saveDone) {
-  const ref = firestore().collection("projects").doc(project.key);
+  const ref = db.collection("projects").doc(project.key);
 
   ref
     .update({
@@ -108,8 +105,7 @@ export function addProject(
   try {
     console.log("addProject FBJS: ", project.title);
 
-    firestore()
-      .collection("projects")
+    db.collection("projects")
       .add({
         title: project.title,
         icon: stockHouseIcon,
@@ -133,7 +129,7 @@ export function addProjectUser(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    const docRef = firestore()
+    const docRef = db
       .collection("projects")
       .doc(projectId)
       .collection("accessList")
@@ -163,7 +159,7 @@ export function deleteProjectUser(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    const docRef = firestore()
+    const docRef = db
       .collection("projects")
       .doc(projectId)
       .collection("accessList")

@@ -1,4 +1,4 @@
-import { firestore, auth } from "./firebase";
+import { db, firestore, auth } from "./firebase";
 import { IUser } from "./types";
 import { setBadgeCountAsync } from "expo-notifications";
 
@@ -73,19 +73,16 @@ export const demoData = async () => {
   users[6].uid = await createUser(users[6]);
 
   try {
-    const projectRef1 = firestore()
-      .collection("projects")
-      .doc("project11111111")
-      .set(
-        {
-          title: "(Local) 106 Jolimont",
-          icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
-          archived: false,
-        },
-        { merge: true },
-      );
+    const projectRef1 = db.collection("projects").doc("project11111111").set(
+      {
+        title: "(Local) 106 Jolimont",
+        icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
+        archived: false,
+      },
+      { merge: true },
+    );
 
-    const postRef1 = await firestore()
+    const postRef1 = await db
       .collection("projects")
       .doc("project11111111")
       .collection("posts")
@@ -102,7 +99,7 @@ export const demoData = async () => {
         { merge: true },
       );
 
-    const projectRef2 = await firestore()
+    const projectRef2 = await db
       .collection("projects")
       .doc("project22222222")
       .set(
@@ -114,7 +111,7 @@ export const demoData = async () => {
         { merge: true },
       );
 
-    const postRef2 = firestore()
+    const postRef2 = db
       .collection("projects")
       .doc("project22222222")
       .collection("posts")
@@ -145,7 +142,7 @@ export const demoData = async () => {
     await newProjectUser("project11111111", users[4]);
     await newProjectUser("project11111111", users[5]);
 
-    const token1 = await firestore()
+    const token1 = await db
       .collection("tokens")
       .doc("vtgZnrL-rx5viXmTI19u0u")
       .set(
@@ -157,7 +154,7 @@ export const demoData = async () => {
         },
         { merge: true },
       );
-    const token2 = await firestore()
+    const token2 = await db
       .collection("tokens")
       .doc("z-50OyGeRPth6nxZSWk_A4")
       .set(
@@ -170,7 +167,7 @@ export const demoData = async () => {
         { merge: true },
       );
 
-    const postRef3 = await firestore()
+    const postRef3 = await db
       .collection("calendar")
       .doc("calendar22222222")
       .set(
@@ -191,7 +188,7 @@ export const demoData = async () => {
     date.setMinutes(50);
     date.setHours(16);
 
-    const postRef4 = await firestore()
+    const postRef4 = await db
       .collection("calendar")
       .doc("calendar22222222")
       .set(
@@ -211,7 +208,7 @@ export const demoData = async () => {
   }
 
   async function newProjectUser(projectId: string, user: IUser) {
-    return await firestore()
+    return await db
       .collection("projects")
       .doc(projectId)
       .collection("accessList")
@@ -240,7 +237,7 @@ export const demoData = async () => {
       user2 = await auth().signInWithEmailAndPassword(user.email, "password");
     }
 
-    const ud = await firestore()
+    const ud = await db
       .collection("users")
       .doc(user2.user.uid)
       .set(user, { merge: true });

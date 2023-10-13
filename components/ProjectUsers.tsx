@@ -86,12 +86,8 @@ export const ProjectUsers = (props) => {
           deleteProjectUser(project, data, deleteDone);
           row[index].close();
         }}>
-        <AntDesign
-          name="delete"
-          size={25}
-          color={Colors[colorScheme ?? "light"].text}
-        />
-        <Text>Delete</Text>
+        <AntDesign name="delete" size={25} color={"white"} />
+        <Text style={{ color: "white" }}>Delete</Text>
       </Pressable>
     );
   };

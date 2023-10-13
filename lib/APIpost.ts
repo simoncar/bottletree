@@ -1,9 +1,9 @@
-import { firestore } from "./firebase";
+import { db, firestore } from "./firebase";
 import { IPost, IComment } from "./types";
+import * as Device from "expo-device";
 
 export async function addPost(post: IPost, callback: saveDone) {
-  firestore()
-    .collection("projects")
+  db.collection("projects")
     .doc(post.projectId)
     .collection("posts")
     .add({
@@ -16,8 +16,8 @@ export async function addPost(post: IPost, callback: saveDone) {
     })
     .then((docRef) => {
       console.log("Post Document written with ID: ", docRef.id);
-      if (post.author != "Simon") {
-        const messageRef = firestore()
+      if (post.author != "Simon" && Device.isDevice) {
+        const messageRef = db
           .collection("notifications")
           .add({
             title: post.author + ": " + post.projectTitle,
@@ -43,7 +43,7 @@ export async function addPost(post: IPost, callback: saveDone) {
 }
 
 export function updatePost(post: IPost, callback: saveDone) {
-  const postRef = firestore()
+  const postRef = db
     .collection("projects")
     .doc(post.projectId)
     .collection("posts")
