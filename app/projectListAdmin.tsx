@@ -51,8 +51,20 @@ const ModalScreen = (props) => {
   function renderAdmin() {
     return (
       <View style={styles.admin}>
-        <Text style={styles.project}>Supervisor Mode</Text>
-        <Text style={styles.project}>(Control who can see what projects)</Text>
+        <Text
+          style={[
+            styles.project,
+            { color: Colors[colorScheme ?? "light"].background },
+          ]}>
+          Supervisor Mode
+        </Text>
+        <Text
+          style={[
+            styles.project,
+            { color: Colors[colorScheme ?? "light"].background },
+          ]}>
+          (Control who can see what projects)
+        </Text>
       </View>
     );
   }

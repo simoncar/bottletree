@@ -32,6 +32,11 @@ export default function editUser() {
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
 
+  const admins = [
+    "X8vGMDVZkheErQmpn4d6wFba8dz2",
+    "OG6lbdICVNhCdhLRDfT6GMhtYWA2",
+  ];
+
   useEffect(() => {
     if (null != sharedDataUser) {
       onChangeText(sharedDataUser.displayName);
@@ -86,6 +91,14 @@ export default function editUser() {
     router.push({
       pathname: "/projectListAdmin",
     });
+  };
+
+  const isAdmin = (uid) => {
+    if (admins.includes(uid)) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const openActionSheet = async () => {
@@ -204,22 +217,23 @@ export default function editUser() {
             <View style={styles.rightChevron}></View>
           </TouchableOpacity>
         </View>
-
-        <View style={styles.outerView}>
-          <TouchableOpacity key={"admin"} onPress={() => administration()}>
-            <View style={styles.leftContent}>
-              <MaterialCommunityIcons
-                name="shield-lock"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-              <Text style={styles.settingName}>
-                Administration (Eddie Mode)
-              </Text>
-            </View>
-            <View style={styles.rightChevron}></View>
-          </TouchableOpacity>
-        </View>
+        {isAdmin(sharedDataUser.uid) && (
+          <View style={styles.outerView}>
+            <TouchableOpacity key={"admin"} onPress={() => administration()}>
+              <View style={styles.leftContent}>
+                <MaterialCommunityIcons
+                  name="shield-lock"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+                <Text style={styles.settingName}>
+                  Administration (Eddie Mode)
+                </Text>
+              </View>
+              <View style={styles.rightChevron}></View>
+            </TouchableOpacity>
+          </View>
+        )}
 
         <View style={styles.aboutContainer}>
           <About />
