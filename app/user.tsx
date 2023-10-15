@@ -41,11 +41,10 @@ export default function editUser() {
   }, []);
 
   const save = () => {
-    console.log("save: " + sharedDataUser.displayName);
-
+    console.log("save: " + text, sharedDataUser.displayName);
+    updateSharedDataUser({ displayName: text });
     updateAccountName(text);
 
-    updateSharedDataUser({ displayName: text });
     router.push({
       pathname: "/",
     });
@@ -77,6 +76,11 @@ export default function editUser() {
   const pickImage = async () => {
     const multiple = false;
     addImage(multiple, "profile", progressCallback, completedCallback);
+  };
+
+  const nameUpdate = (textName) => {
+    console.log("nameUpdate:", textName);
+    onChangeText(textName);
   };
 
   const administration = async () => {
@@ -153,7 +157,7 @@ export default function editUser() {
             <View style={styles.projectBox}>
               <TextInput
                 style={styles.project}
-                onChangeText={(text) => onChangeText(text)}
+                onChangeText={(text) => nameUpdate(text)}
                 placeholder={"Your Name"}
                 value={text}
                 multiline

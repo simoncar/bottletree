@@ -2,6 +2,7 @@ import { auth, firestore } from "../lib/firebase";
 
 export const updateAccountName = (displayName: string) => {
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
+  console.log("displayName:  ", auth().currentUser.uid, displayName);
 
   const user = auth().currentUser;
   const docRef2 = user

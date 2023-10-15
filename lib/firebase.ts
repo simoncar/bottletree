@@ -26,13 +26,12 @@ const firebaseConfig = {
 };
 
 const db = firestore();
-db.useEmulator("127.0.0.1", 8080);
 
-if (!Device.isDevice) {
-  console.log("Connecting to Firebase Emulator");
-  db.useEmulator("127.0.0.1", 8080);
-  auth().useEmulator("http://localhost:9099");
-  storage().useEmulator("127.0.0.1", 9199);
-}
+// if (!Device.isDevice) {
+//   console.log("Connecting to Firebase Emulator");
+//   db.useEmulator("127.0.0.1", 8080);
+//   auth().useEmulator("http://localhost:9099");
+//   storage().useEmulator("127.0.0.1", 9199);
+// }
 
 export { db, storage, auth, firestore };
