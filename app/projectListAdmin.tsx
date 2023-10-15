@@ -56,41 +56,6 @@ const ModalScreen = (props) => {
     );
   }
 
-  function renderAdd() {
-    return (
-      <TouchableOpacity
-        key={"addProject"}
-        onPress={() => {
-          router.replace({
-            pathname: "/addProject",
-            params: {
-              project: "post.projectId",
-            },
-          });
-        }}>
-        <View style={styles.outerView}>
-          <View style={styles.innerView}>
-            <View style={styles.avatar}>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome5
-                    name="plus"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                    style={{ opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </View>
-            <View>
-              <Text style={styles.project}>Add Project</Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
   function renderTitle(data: IProject) {
     if (!data.archived) {
       return <Text style={styles.project}>{data.title || ""}</Text>;
@@ -119,11 +84,11 @@ const ModalScreen = (props) => {
             });
 
             router.push({
-              pathname: "/" + page,
+              pathname: "/editProject",
               params: {
                 projectId: data.key,
-                title: data.title,
-                icon: data.icon,
+                projectTitle: data.title,
+                photoURL: data.icon,
                 archived: data.archived,
               },
             });
@@ -144,35 +109,6 @@ const ModalScreen = (props) => {
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
         <View style={styles.redCircle}></View>
-        <TouchableOpacity
-          key={"chevron." + data.key}
-          onPress={() => {
-            updateSharedDataProject({
-              key: data.key,
-              title: data.title,
-              icon: data.icon,
-              archived: data.archived,
-            });
-            console.log("Edit Project: ", data.archived);
-
-            router.replace({
-              pathname: "/editProject",
-              params: {
-                projectId: data.key,
-                projectTitle: data.title,
-                photoURL: data.icon,
-                archived: data.archived,
-              },
-            });
-          }}>
-          <View style={styles.rightChevron}>
-            <FontAwesome5
-              name="chevron-right"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -181,7 +117,6 @@ const ModalScreen = (props) => {
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
         <View>{renderAdmin()}</View>
-        <View>{renderAdd()}</View>
         {loading === false && (
           <View>
             <ShortList

@@ -23,13 +23,13 @@ export async function getProjects(uid: string, callback: projectsRead) {
         //
       });
     });
-    console.log("projectList: ", projectList);
+    console.log("projectList: ", projectList, uid);
 
-    // q = db
-    //   .collection("projects")
-    //   .where(firestore.FieldPath.documentId(), "in", projectList);
+    q = db
+      .collection("projects")
+      .where(firestore.FieldPath.documentId(), "in", projectList);
 
-    q = db.collection("projects").orderBy("archived", "asc");
+    // q = db.collection("projects").orderBy("archived", "asc");
   } else {
     q = db.collection("projects").orderBy("archived", "asc");
   }

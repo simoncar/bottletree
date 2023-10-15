@@ -79,7 +79,6 @@ export default function editUser() {
   };
 
   const nameUpdate = (textName) => {
-    console.log("nameUpdate:", textName);
     onChangeText(textName);
   };
 
