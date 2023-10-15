@@ -52,6 +52,7 @@ const ModalScreen = (props) => {
     return (
       <View style={styles.admin}>
         <Text style={styles.project}>Supervisor Mode</Text>
+        <Text style={styles.project}>(Control who can see what projects)</Text>
       </View>
     );
   }
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "red",
     backgroundColor: "red",
-    height: 50,
+    height: 70,
     paddingTop: 10,
   },
   avatar: {
