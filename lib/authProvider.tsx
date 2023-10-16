@@ -92,8 +92,7 @@ function useProtectedRoute(user) {
         //console.log("onAuthStateChange We have a User: ", user);
         setUserReady(true);
         if (Device.isDevice) {
-          registerForPush;
-          Async();
+          registerForPushNotificationsAsync();
         }
         //console.log("onAuthStateChange We have a User: ", user);
         //@ts-ignore

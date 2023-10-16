@@ -23,7 +23,7 @@ const ModalScreen = (props) => {
     page: string;
   }>();
   const { sharedDataUser } = useAuth();
-  const uid = sharedDataUser.uid;
+  const uid = sharedDataUser?.uid;
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState(true);
 

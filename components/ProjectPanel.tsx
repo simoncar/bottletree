@@ -31,16 +31,17 @@ const Project = (props) => {
             title: title,
             icon: icon,
           });
-
-          router.push({
-            pathname: "/editProject",
-            params: {
-              projectId: project,
-              projectTitle: title,
-              photoURL: icon,
-              pArchived: archived,
-            },
-          });
+          if (title) {
+            router.push({
+              pathname: "/editProject",
+              params: {
+                projectId: project,
+                projectTitle: title,
+                photoURL: icon,
+                pArchived: archived,
+              },
+            });
+          }
         }}>
         <View style={styles.avatar}>
           {icon ? (
