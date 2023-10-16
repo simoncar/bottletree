@@ -136,12 +136,17 @@ const ModalScreen = (props) => {
           </View>
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
-        <View style={styles.blueCircle}>
-          <Text style={styles.redNumber}>1</Text>
-        </View>
-        <View style={styles.redCircle}>
-          <Text style={styles.redNumber}>99</Text>
-        </View>
+
+        {data.count && (
+          <View>
+            <View style={styles.blueCircle}>
+              <Text style={styles.redNumber}>1</Text>
+            </View>
+            <View style={styles.redCircle}>
+              <Text style={styles.redNumber}>{data.count}</Text>
+            </View>
+          </View>
+        )}
         <TouchableOpacity
           key={"chevron." + data.key}
           onPress={() => {
