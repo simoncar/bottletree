@@ -11,6 +11,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { deleteProjectUser } from "../lib/APIproject";
 import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   SkeletonContainer,
   GradientProps,
@@ -105,8 +106,19 @@ export const ProjectUsers = (props) => {
         <View>
           <View key={data.uid} style={styles.outerView}>
             <View style={styles.avatar}>
-              <Image style={styles.avatarFace} source={data.photoURL} />
+              {data.photoURL ? (
+                <Image style={styles.avatarFace} source={data.photoURL} />
+              ) : (
+                <View style={styles.avatarFace}>
+                  <Ionicons
+                    name="ios-person"
+                    color="#999999"
+                    style={styles.avatarIcon}
+                  />
+                </View>
+              )}
             </View>
+
             <View>
               <Text style={styles.name}>{data.displayName || ""}</Text>
             </View>
@@ -151,8 +163,6 @@ export const ProjectUsers = (props) => {
   }
 
   const closeRow = (index) => {
-    console.log("closeRow:", index);
-
     if (prevOpenedRow && prevOpenedRow !== row[index]) {
       prevOpenedRow.close();
     }
@@ -189,21 +199,15 @@ const styles = StyleSheet.create({
   avatar: { alignItems: "center", justifyContent: "center", width: 48 },
   avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
 
+  avatarIcon: {
+    fontSize: 35,
+    paddingTop: 5,
+    textAlign: "center",
+  },
+
   name: {
     fontSize: 20,
     paddingLeft: 20,
-  },
-
-  skeletonAvatarFace: {
-    borderRadius: 48 / 2,
-    height: 48,
-    width: 48,
-  },
-  skeletonSpace: { padding: 10 },
-  skeletonName: {
-    borderRadius: 5,
-    height: 48,
-    width: 300,
   },
   nameSubtitle: {
     color: "grey",
@@ -219,7 +223,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
-
   rightDeleteBox: {
     alignContent: "center",
     alignItems: "center",
@@ -229,4 +232,16 @@ const styles = StyleSheet.create({
     margin: 0,
     width: 70,
   },
+  skeletonAvatarFace: {
+    borderRadius: 48 / 2,
+    height: 48,
+    width: 48,
+  },
+  skeletonName: {
+    borderRadius: 5,
+    height: 48,
+    width: 300,
+  },
+
+  skeletonSpace: { padding: 10 },
 });

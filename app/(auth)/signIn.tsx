@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
     flex: 1,
+    fontSize: 18,
     height: 50,
     marginLeft: 20,
     padding: 10,
@@ -120,6 +121,7 @@ const styles = StyleSheet.create({
   },
   forgot_button: {
     height: 30,
+    fontSize: 18,
     marginTop: 30,
   },
 
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 45,
     marginBottom: 20,
-    width: "70%",
+    width: "80%",
   },
   loginBtn: {
     alignItems: "center",
@@ -140,5 +142,6 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white",
+    fontSize: 18,
   },
 });

@@ -217,7 +217,7 @@ export default function editUser() {
             <View style={styles.rightChevron}></View>
           </TouchableOpacity>
         </View>
-        {isAdmin(sharedDataUser.uid) && (
+        {isAdmin(sharedDataUser?.uid) && (
           <View style={styles.outerView}>
             <TouchableOpacity key={"admin"} onPress={() => administration()}>
               <View style={styles.leftContent}>

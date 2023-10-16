@@ -87,11 +87,7 @@ const Comments = ({ project, post }: Props) => {
             onPress={() => {
               save();
             }}>
-            <MaterialIcons
-              name="send"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
+            <MaterialIcons name="send" size={25} color="#2196F3" />
           </Pressable>
         </View>
       );

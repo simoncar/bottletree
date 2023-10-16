@@ -23,7 +23,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
         //
       });
     });
-    console.log("projectList: ", projectList, uid);
+    console.log("projectList: ", projectList,uid);
 
     q = db
       .collection("projects")
