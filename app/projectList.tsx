@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   blueCircle: {
     alignItems: "center",
-    backgroundColor: "blue",
+    backgroundColor: "grey",
     borderRadius: 25 / 2,
     height: 25,
     justifyContent: "center",
