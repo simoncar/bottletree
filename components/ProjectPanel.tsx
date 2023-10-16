@@ -1,19 +1,32 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import ProjectContext from "../lib/projectContext";
 import Colors from "../constants/Colors";
 import { Text } from "../components/Themed";
+import { getUserProjectCount } from "../lib/APIuser";
+import { IUser } from "../lib/types";
+import { useAuth } from "../lib/authProvider";
 
 const Project = (props) => {
   const { project, title, icon, archived, page } = props;
   const { updateSharedDataProject } = useContext(ProjectContext);
   const colorScheme = useColorScheme();
   const router = useRouter();
+  const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
+
+  useEffect(() => {
+    getUserProjectCount(userProjectCountRead);
+  }, []);
+
+  const userProjectCountRead = (user: IUser) => {
+    console.log("userProjectCountRead: " + JSON.stringify(user));
+    updateSharedDataUser({ postCount: user.postCount });
+  };
 
   return (
     <View

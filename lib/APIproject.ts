@@ -42,6 +42,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
         title: doc.data().title,
         icon: doc.data().icon,
         archived: doc.data().archived,
+        count: doc.data().count,
       });
     });
     callback(projects);

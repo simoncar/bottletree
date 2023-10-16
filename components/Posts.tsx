@@ -13,7 +13,6 @@ import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
-
 import { demoData } from "../lib/demoData";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 
@@ -56,6 +55,14 @@ export const Posts = () => {
       };
     }
   }, [currentProject, sharedDataUser]);
+
+  useEffect(() => {
+    console.log(
+      "Red Dot Count Set: " + currentProject?.key,
+      currentProject?.title,
+      currentProject?.count,
+    );
+  }, [currentProject]);
 
   const renderItems = (item) => {
     const post: IPost = item.item;

@@ -18,9 +18,10 @@ export interface IPost {
 
 export interface IProject {
   key: string;
-  title: string; 
+  title: string;
   icon: string;
   archived?: boolean;
+  count: number;
 }
 
 export interface IUser {
@@ -29,6 +30,7 @@ export interface IUser {
   displayName: string;
   email: string;
   pushToken?: string;
+  postCount?: Map<string, number>;
 }
 
 export interface IComment {

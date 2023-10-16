@@ -1,4 +1,5 @@
 import { auth, firestore } from "../lib/firebase";
+import { IUser } from "./types";
 
 export const updateAccountName = (displayName: string) => {
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
@@ -66,4 +67,25 @@ export async function getUsers(callback: usersRead) {
   });
 
   callback(users);
+}
+
+export async function getUserProjectCount(callback: userProjectCountRead) {
+  let user: IUser;
+
+  firestore()
+    .collection("users")
+    .doc(auth().currentUser.uid)
+    .get()
+    .then((doc) => {
+      user = {
+        uid: doc.id,
+        displayName: doc.data().displayName,
+        email: doc.data().email,
+        photoURL: doc.data().photoURL,
+        postCount: doc.data().postCount,
+      };
+      console.log("getUserProjectCount: ", user);
+
+      callback(user);
+    });
 }

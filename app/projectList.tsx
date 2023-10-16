@@ -108,6 +108,7 @@ const ModalScreen = (props) => {
               title: data.title,
               icon: data.icon,
               archived: data.archived,
+              count: data.count ?? 0,
             });
 
             router.push({
@@ -135,7 +136,12 @@ const ModalScreen = (props) => {
           </View>
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
-        <View style={styles.redCircle}></View>
+        <View style={styles.blueCircle}>
+          <Text style={styles.redNumber}>1</Text>
+        </View>
+        <View style={styles.redCircle}>
+          <Text style={styles.redNumber}>99</Text>
+        </View>
         <TouchableOpacity
           key={"chevron." + data.key}
           onPress={() => {
@@ -237,15 +243,26 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   projectList: {},
-
   redCircle: {
     alignItems: "center",
     backgroundColor: "red",
-    borderRadius: 15 / 2,
-    height: 15,
+    borderRadius: 25 / 2,
+    height: 25,
     justifyContent: "center",
-    marginRight: 15,
-    width: 15,
+    marginRight: 25,
+    width: 25,
+  },
+  blueCircle: {
+    alignItems: "center",
+    backgroundColor: "blue",
+    borderRadius: 25 / 2,
+    height: 25,
+    justifyContent: "center",
+    marginRight: 5,
+    width: 25,
+  },
+  redNumber: {
+    color: "white",
   },
   rightChevron: {
     marginHorizontal: 8,
