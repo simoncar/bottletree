@@ -46,7 +46,16 @@ const ModalScreen = (props) => {
     if (projects !== null && loading === true) {
       setLoading(false);
     }
+    console.log("AAAA: ", sharedDataUser.postCount);
   }, [projects]);
+
+  function findValueByKey(
+    obj: Record<string, number>,
+    keyToFind: string,
+  ): number | undefined {
+    const value = obj[keyToFind];
+    return value !== undefined ? value : 0; // Return 0 or any default value if the key doesn't exist in the object.
+  }
 
   function renderAdd() {
     return (
@@ -97,6 +106,9 @@ const ModalScreen = (props) => {
 
   function renderRow(data: IProject) {
     const icon = data.icon;
+
+    const postCount = findValueByKey(sharedDataUser.postCount, data.key);
+
     return (
       <View key={data.key} style={styles.outerView}>
         <TouchableOpacity
@@ -140,7 +152,7 @@ const ModalScreen = (props) => {
         {data.count && (
           <View>
             <View style={styles.blueCircle}>
-              <Text style={styles.redNumber}>1</Text>
+              <Text style={styles.redNumber}>{postCount ?? 0}</Text>
             </View>
             <View style={styles.redCircle}>
               <Text style={styles.redNumber}>{data.count}</Text>
