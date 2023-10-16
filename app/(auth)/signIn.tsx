@@ -42,6 +42,7 @@ export default function SignIn() {
           autoCapitalize="none"
           autoFocus
           autoComplete="email"
+          spellCheck={false}
           onChangeText={(email) => setEmail(email)}
         />
       </View>
