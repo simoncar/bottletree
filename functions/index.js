@@ -91,7 +91,7 @@ exports.onDocumentCreated_post = onDocumentCreated("/projects/{projectId}/posts/
 	const writeResult = await getFirestore()
 		.collection("projects")
 		.doc(event.params.projectId)
-		.set({ count: snapshot.data().count }, { merge: true });
+		.set({ postCount: snapshot.data().count }, { merge: true });
 
 }
 );

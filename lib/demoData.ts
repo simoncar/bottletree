@@ -78,6 +78,7 @@ export const demoData = async () => {
         title: "(Local) 106 Jolimont",
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
         archived: false,
+        postCount: 109,
       },
       { merge: true },
     );
@@ -92,6 +93,7 @@ export const demoData = async () => {
           author: "John Doe",
           avatar: "https://",
           timestamp: firestore.Timestamp.now(),
+
           images: [
             "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202307%2F36442255-2444-4043-AFA8-57E171FC0559?alt=media&token=ff922597-1dec-4822-abd0-83750e40a865",
           ],
@@ -107,6 +109,7 @@ export const demoData = async () => {
           title: "(Local) Placa Rovira",
           icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
           archived: false,
+          postCount: 7,
         },
         { merge: true },
       );

@@ -11,19 +11,21 @@ export async function getProjects(uid: string, callback: projectsRead) {
   const projectList: string[] = ["X"];
 
   if (uid != "") {
-    let accessRef = db.collectionGroup("accessList");
+    const accessRef = db.collectionGroup("accessList");
 
     query = accessRef.where("uid", "==", uid);
+    console.log("access list : ", uid);
 
     await query.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        console.log(" get projects +++++ ");
         projectList.indexOf(doc.data().projectId) === -1
           ? projectList.push(doc.data().projectId)
           : console.log("This item already exists");
         //
       });
     });
-    console.log("projectList: ", projectList,uid);
+    console.log("projectList: ", projectList, uid);
 
     q = db
       .collection("projects")
@@ -42,7 +44,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
         title: doc.data().title,
         icon: doc.data().icon,
         archived: doc.data().archived,
-        count: doc.data().count,
+        postCount: doc.data().postCount,
       });
     });
     callback(projects);

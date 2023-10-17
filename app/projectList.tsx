@@ -46,13 +46,16 @@ const ModalScreen = (props) => {
     if (projects !== null && loading === true) {
       setLoading(false);
     }
-    console.log("AAAA: ", sharedDataUser.postCount);
+    console.log("AAAA: ", sharedDataUser?.postCount);
   }, [projects]);
 
   function findValueByKey(
     obj: Record<string, number>,
     keyToFind: string,
   ): number | undefined {
+    if (obj == undefined) {
+      return 0;
+    }
     const value = obj[keyToFind];
     return value !== undefined ? value : 0; // Return 0 or any default value if the key doesn't exist in the object.
   }
@@ -120,7 +123,7 @@ const ModalScreen = (props) => {
               title: data.title,
               icon: data.icon,
               archived: data.archived,
-              count: data.count ?? 0,
+              postCount: data.postCount ?? 0,
             });
 
             router.push({
@@ -149,13 +152,13 @@ const ModalScreen = (props) => {
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
 
-        {data.count && (
+        {data.postCount && (
           <View>
             <View style={styles.blueCircle}>
               <Text style={styles.redNumber}>{postCount ?? 0}</Text>
             </View>
             <View style={styles.redCircle}>
-              <Text style={styles.redNumber}>{data.count}</Text>
+              <Text style={styles.redNumber}>{data.postCount}</Text>
             </View>
           </View>
         )}

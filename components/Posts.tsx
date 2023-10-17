@@ -28,6 +28,7 @@ export const Posts = () => {
       title: "",
       icon: "",
       archived: false,
+      postCount: 0,
     };
   }
 
@@ -36,7 +37,7 @@ export const Posts = () => {
   };
 
   useEffect(() => {
-    //demoData();
+    // demoData();
 
     if (sharedDataUser && undefined != currentProject) {
       const unsubscribe = getPosts(currentProject.key, postsRead);
@@ -60,7 +61,7 @@ export const Posts = () => {
     console.log(
       "Red Dot Count Set: " + currentProject?.key,
       currentProject?.title,
-      currentProject?.count,
+      currentProject?.postCount,
     );
   }, [currentProject]);
 

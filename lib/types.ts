@@ -21,7 +21,7 @@ export interface IProject {
   title: string;
   icon: string;
   archived?: boolean;
-  count: number;
+  postCount: number;
 }
 
 export interface IUser {

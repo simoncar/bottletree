@@ -32,10 +32,7 @@ export default function editUser() {
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const admins = [
-    "X8vGMDVZkheErQmpn4d6wFba8dz2",
-    "OG6lbdICVNhCdhLRDfT6GMhtYWA2",
-  ];
+  const admins = ["simoncar@gmail.com", "simon@simon.co"];
 
   useEffect(() => {
     if (null != sharedDataUser) {
@@ -93,8 +90,8 @@ export default function editUser() {
     });
   };
 
-  const isAdmin = (uid) => {
-    if (admins.includes(uid)) {
+  const isAdmin = (email) => {
+    if (admins.includes(email)) {
       return true;
     } else {
       return false;
@@ -217,7 +214,7 @@ export default function editUser() {
             <View style={styles.rightChevron}></View>
           </TouchableOpacity>
         </View>
-        {isAdmin(sharedDataUser?.uid) && (
+        {isAdmin(sharedDataUser?.email) && (
           <View style={styles.outerView}>
             <TouchableOpacity key={"admin"} onPress={() => administration()}>
               <View style={styles.leftContent}>
