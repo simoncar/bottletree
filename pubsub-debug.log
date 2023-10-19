@@ -127,3 +127,15 @@ Oct 19, 2023 10:20:29 AM io.gapi.emulators.netty.HttpVersionRoutingHandler chann
 INFO: Detected non-HTTP/2 connection.
 Oct 19, 2023 10:20:29 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
 INFO: Unknown request URI: /status
+Oct 19, 2023 10:31:11 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 19, 2023 10:31:11 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 19, 2023 11:38:19 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 19, 2023 11:38:19 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status
+Oct 19, 2023 11:41:00 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Oct 19, 2023 11:41:00 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status

@@ -53,7 +53,7 @@ export const updateAccountPhotoURL = (photoURL: string) => {
 export async function getUsers(callback: usersRead) {
   const users: IUser[] = [];
 
-  const q = firestore().collection("users");
+  const q = firestore().collection("users").orderBy("displayName", "asc");
 
   const usersSnapshot = await q.get();
 

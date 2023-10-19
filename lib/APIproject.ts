@@ -12,9 +12,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
 
   if (uid != "") {
     const accessRef = db.collectionGroup("accessList");
-
     query = accessRef.where("uid", "==", uid);
-    console.log("access list : ", uid);
 
     await query.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -25,7 +23,6 @@ export async function getProjects(uid: string, callback: projectsRead) {
         //
       });
     });
-    console.log("projectList: ", projectList, uid);
 
     q = db
       .collection("projects")

@@ -32,7 +32,11 @@ export default function editUser() {
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const admins = ["simoncar@gmail.com", "simon@simon.co"];
+  const admins = [
+    "simoncar@gmail.com",
+    "simon@simon.co",
+    "eddymitchell133@gmail.com",
+  ];
 
   useEffect(() => {
     if (null != sharedDataUser) {
