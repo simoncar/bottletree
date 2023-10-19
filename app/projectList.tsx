@@ -52,7 +52,7 @@ const ModalScreen = (props) => {
   function findValueByKey(
     obj: Record<string, number>,
     keyToFind: string,
-  ): number | undefined {
+  ): number {
     if (obj == undefined) {
       return 0;
     }
@@ -111,6 +111,7 @@ const ModalScreen = (props) => {
     const icon = data.icon;
 
     const postCount = findValueByKey(sharedDataUser.postCount, data.key);
+    let postCountDelta = data.postCount - postCount;
 
     return (
       <View key={data.key} style={styles.outerView}>
@@ -118,6 +119,8 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
+            console.log("updateSharedDataProject========: ", data.postCount);
+
             updateSharedDataProject({
               key: data.key,
               title: data.title,
@@ -125,6 +128,7 @@ const ModalScreen = (props) => {
               archived: data.archived,
               postCount: data.postCount ?? 0,
             });
+            postCountDelta == 0;
 
             router.push({
               pathname: "/" + page,
@@ -152,13 +156,10 @@ const ModalScreen = (props) => {
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
 
-        {data.postCount && (
+        {postCountDelta > 0 && (
           <View>
-            <View style={styles.blueCircle}>
-              <Text style={styles.redNumber}>{postCount ?? 0}</Text>
-            </View>
             <View style={styles.redCircle}>
-              <Text style={styles.redNumber}>{data.postCount}</Text>
+              <Text style={styles.redNumber}>{postCountDelta}</Text>
             </View>
           </View>
         )}

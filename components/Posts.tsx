@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { View, Text } from "../components/Themed";
 import { getPosts } from "../lib/APIpost";
+import { updateUserProjectCount } from "../lib/APIuser";
 import ProjectContext from "../lib/projectContext";
 import { IPost, IProject } from "../lib/types";
 import Post from "./Post";
@@ -58,12 +59,31 @@ export const Posts = () => {
   }, [currentProject, sharedDataUser]);
 
   useEffect(() => {
-    console.log(
-      "Red Dot Count Set: " + currentProject?.key,
-      currentProject?.title,
-      currentProject?.postCount,
-    );
+    if (undefined != currentProject?.key) {
+      console.log(
+        "Red Dot Count Set: " + currentProject?.key,
+        currentProject?.title,
+        currentProject?.postCount,
+      );
+      updateUserProjectCount(currentProject?.key, currentProject?.postCount);
+      if (sharedDataUser != null) {
+        updateSharedDataUserProjectCount(
+          sharedDataUser,
+          currentProject?.key,
+          currentProject?.postCount,
+        );
+      }
+    }
   }, [currentProject]);
+
+  function updateSharedDataUserProjectCount(
+    obj: Record<string, number>,
+    project: string,
+    postCount: number,
+  ) {
+    console.log("updateSharedDataUserProjectCount: ", obj, project, postCount);
+    obj.postCount[project] = postCount;
+  }
 
   const renderItems = (item) => {
     const post: IPost = item.item;

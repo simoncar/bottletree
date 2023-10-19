@@ -3,7 +3,6 @@ import { IUser } from "./types";
 
 export const updateAccountName = (displayName: string) => {
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
-  console.log("displayName:  ", auth().currentUser.uid, displayName);
 
   const user = auth().currentUser;
   const docRef2 = user
@@ -16,6 +15,9 @@ export const updateAccountName = (displayName: string) => {
           displayName: displayName,
           email: auth().currentUser.email,
           photoURL: auth().currentUser.photoURL,
+          postCount: {
+            project22222222: 4,
+          },
         },
         { merge: true },
       );
@@ -23,6 +25,19 @@ export const updateAccountName = (displayName: string) => {
     .catch((error) => {
       console.log("upupdateAccountName update ERROR ", error);
     });
+};
+
+export const updateUserProjectCount = (project: string, count: number) => {
+  const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
+
+  docRef1.set(
+    {
+      postCount: {
+        [project]: count,
+      },
+    },
+    { merge: true },
+  );
 };
 
 export const updateAccountPhotoURL = (photoURL: string) => {
