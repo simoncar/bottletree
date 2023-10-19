@@ -23,7 +23,6 @@ const ModalScreen = (props) => {
   const [loading, setLoading] = useState(true);
   const { sharedDataProject, updateSharedDataProject } =
     useContext(ProjectContext);
-  const colorScheme = useColorScheme();
 
   const usersRead = (usersDB: IUser[]) => {
     setUsers(usersDB);
@@ -56,9 +55,8 @@ const ModalScreen = (props) => {
 
   function renderRow(data: IUser) {
     return (
-      <View key={data.key} style={styles.outerView}>
+      <View key={data.uid} style={styles.outerView}>
         <TouchableOpacity
-          key={data.key}
           style={styles.innerView}
           onPress={() => {
             addProjectUser(sharedDataProject.key, data, saveDone);
@@ -80,7 +78,7 @@ const ModalScreen = (props) => {
       <ScrollView style={styles.projectList}>
         {loading === false && (
           <View>
-            <ShortList key={users.key} data={users} renderItem={renderRow} />
+            <ShortList data={users} renderItem={renderRow} />
           </View>
         )}
       </ScrollView>

@@ -20,7 +20,7 @@ export function Button(props) {
   const { style, ...rest } = props;
 
   return (
-    <View style={styles.buttonView}>
+    <View key={rest.key} style={styles.buttonView}>
       <TouchableOpacity
         style={[styles.submitButtonStyle, style]}
         activeOpacity={0.5}

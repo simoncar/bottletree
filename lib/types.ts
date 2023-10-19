@@ -26,6 +26,7 @@ export interface IProject {
 
 export interface IUser {
   uid?: string;
+  key?: string;
   photoURL: string;
   displayName: string;
   email: string;

@@ -260,9 +260,12 @@ const AuthProvider = ({ children }) => {
   };
 
   const signOut = async () => {
-    auth().signOut(); //sign out of firebase
+    console.log("signOut");
+
     AsyncStorage.removeItem("@USER");
     setSharedDataUser(null);
+
+    auth().signOut(); //sign out of firebase
   };
 
   const resetPassword = (screenEmail: string, callback: resetError) => {
@@ -336,7 +339,7 @@ export const appSignOut = async () => {
     auth().signOut();
     return { user: null };
   } catch (e) {
-    return { error: e };
+    return { error: "appSignOut:" + e };
   }
 };
 

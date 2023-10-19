@@ -60,6 +60,7 @@ export async function getUsers(callback: usersRead) {
   usersSnapshot.forEach((doc) => {
     users.push({
       key: doc.id,
+      uid: doc.id,
       displayName: doc.data().displayName,
       email: doc.data().email,
       photoURL: doc.data().photoURL,
@@ -78,6 +79,7 @@ export async function getUserProjectCount(callback: userProjectCountRead) {
     .get()
     .then((doc) => {
       user = {
+        key: doc.id,
         uid: doc.id,
         displayName: doc.data().displayName,
         email: doc.data().email,

@@ -36,14 +36,14 @@ export default function editUser() {
 
   useEffect(() => {
     if (null != sharedDataUser) {
-      onChangeText(sharedDataUser.displayName);
+      onChangeText(sharedDataUser?.displayName);
     } else {
       onChangeText("");
     }
   }, []);
 
   const save = () => {
-    console.log("save: " + text, sharedDataUser.displayName);
+    console.log("save: " + text, sharedDataUser?.displayName);
     updateSharedDataUser({ displayName: text });
     updateAccountName(text);
 

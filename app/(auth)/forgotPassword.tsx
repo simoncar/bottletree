@@ -30,8 +30,10 @@ export default function SignIn() {
           keyboardType="email-address"
           inputMode="email"
           placeholder="Email"
+          autoCapitalize="none"
           autoFocus
-          autocomplete="email"
+          autoComplete="email"
+          spellCheck={false}
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
     flex: 1,
+    fontSize: 18,
     height: 50,
     marginLeft: 20,
     padding: 10,
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 45,
     marginBottom: 20,
-    width: "70%",
+    width: "90%",
   },
   loginBtn: {
     alignItems: "center",
@@ -98,8 +101,10 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white",
+    fontSize: 18,
   },
   resetDetail: {
+    fontSize: 18,
     paddingTop: 20,
   },
   resetHeader: {

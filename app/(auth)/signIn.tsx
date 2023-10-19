@@ -26,6 +26,8 @@ export default function SignIn() {
   };
 
   const loginError = (error) => {
+    console.log("loginError: ", error);
+
     setNotification(ERROR_MAP[error] || error);
   };
 
@@ -121,8 +123,8 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   forgot_button: {
-    height: 30,
     fontSize: 18,
+    height: 30,
     marginTop: 30,
   },
 
