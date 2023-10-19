@@ -121,6 +121,7 @@ export const ProjectUsers = (props) => {
 
             <View>
               <Text style={styles.name}>{data.displayName || ""}</Text>
+              <Text style={styles.email}>{data.email || ""}</Text>
             </View>
           </View>
         </View>
@@ -205,6 +206,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
+  email: {
+    color: "#888",
+    fontSize: 20,
+    paddingLeft: 20,
+  },
   name: {
     fontSize: 20,
     paddingLeft: 20,
