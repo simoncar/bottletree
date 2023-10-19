@@ -28,16 +28,19 @@ export const updateAccountName = (displayName: string) => {
 };
 
 export const updateUserProjectCount = (project: string, count: number) => {
-  const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
+  const a = auth().currentUser;
+  if (a != null) {
+    const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
-  docRef1.set(
-    {
-      postCount: {
-        [project]: count,
+    docRef1.set(
+      {
+        postCount: {
+          [project]: count,
+        },
       },
-    },
-    { merge: true },
-  );
+      { merge: true },
+    );
+  }
 };
 
 export const updateAccountPhotoURL = (photoURL: string) => {
