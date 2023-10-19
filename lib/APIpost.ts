@@ -89,7 +89,7 @@ export async function getPosts(
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
-    querySnapshot.forEach((doc) => {
+    querySnapshot?.forEach((doc) => {
       posts.push({
         key: doc.id,
         projectId: projectId,

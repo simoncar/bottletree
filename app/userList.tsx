@@ -1,9 +1,7 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Pressable,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
@@ -11,7 +9,6 @@ import {
 } from "react-native";
 import { ShortList } from "../components/sComponent";
 import { Text, View } from "../components/Themed";
-import Colors from "../constants/Colors";
 import { getUsers } from "../lib/APIuser";
 import { addProjectUser } from "../lib/APIproject";
 import { IUser } from "../lib/types";
@@ -70,7 +67,8 @@ const ModalScreen = (props) => {
             <Image style={styles.avatarFace} source={data.photoURL} />
           </View>
           <View>
-            <Text style={styles.project}>{data.displayName || ""}</Text>
+            <Text style={styles.username}>{data.displayName || ""}</Text>
+            <Text style={styles.userdata}>{data.email || ""}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -119,20 +117,17 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 
-  project: {
+  username: {
     fontSize: 18,
     marginBottom: 5,
   },
-  projectArchived: {
-    color: "grey",
+  userdata: {
     fontSize: 18,
+    color: "#888",
     marginBottom: 5,
   },
-  projectList: {},
 
-  rightChevron: {
-    marginHorizontal: 8,
-  },
+  projectList: {},
 });
 
 export default ModalScreen;
