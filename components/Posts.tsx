@@ -82,7 +82,9 @@ export const Posts = () => {
     postCount: number,
   ) {
     console.log("updateSharedDataUserProjectCount: ", obj, project, postCount);
-    obj.postCount[project] = postCount;
+    if (obj.postCount != undefined) {
+      obj.postCount[project] = postCount;
+    }
   }
 
   const renderItems = (item) => {
