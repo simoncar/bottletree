@@ -22,7 +22,7 @@ import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
-import crashlytics from "@react-native-firebase/crashlytics";
+import * as Sentry from "sentry-expo";
 
 export default function editUser() {
   const { uid, photoURL, displayName } = useLocalSearchParams();
@@ -130,13 +130,7 @@ export default function editUser() {
   };
 
   const crashTest = () => {
-    crashlytics().log("some log message.");
-    crashlytics().setUserId(uid),
-      crashlytics().setAttributes({
-        email: sharedDataUser?.email,
-        displayName: sharedDataUser?.displayName,
-      }),
-      crashlytics().crash();
+    Sentry.Native.captureMessage("Crash Text 222 ");
   };
 
   const profilePic = () => {

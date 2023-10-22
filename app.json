@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#F9D96C"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
@@ -51,6 +49,17 @@
     "experiments": {
       "typedRoutes": true
     },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "simon-co",
+            "project": "bottletree"
+          }
+        }
+      ]
+    },
     "plugins": [
       "@react-native-firebase/app",
       "@react-native-firebase/crashlytics",
@@ -71,10 +80,7 @@
         {
           "icon": "./assets/images/notification.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/hammer.wav",
-            "./assets/sounds/drill.wav"
-          ]
+          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
         }
       ],
       "sentry-expo",
