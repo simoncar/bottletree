@@ -130,7 +130,13 @@ export default function editUser() {
   };
 
   const crashTest = () => {
-    Sentry.Native.captureMessage("Crash Text 222 ");
+    const i = undefined;
+    if (i.test == 1)
+      throw new Error("This is a test javascript error from the app");
+
+    //Sentry.Native.captureMessage("Crash Text 111 ");
+
+    //Sentry.Native.captureMessage("Crash Text 222 ");
   };
 
   const profilePic = () => {
