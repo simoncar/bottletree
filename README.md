@@ -59,4 +59,4 @@ node_modules/@sentry/cli/bin/sentry-cli releases \
 
     	com.simoncar.bottletree@1.0.58+60
 
-node_modules/@sentry/cli/bin/sentry-cli sourcemaps explain 9cc2cce97a974460b63784cdeb565f01
+node_modules/@sentry/cli/bin/sentry-cli sourcemaps explain e9baf8881bb34a35bd28d267e655f3c2 --org simon-co --project bottletree
