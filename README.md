@@ -49,14 +49,13 @@ node_modules/@sentry/cli/bin/sentry-cli releases \
  dist/bundles/main.jsbundle dist/bundles/ios-<hash>.map
 
 node_modules/@sentry/cli/bin/sentry-cli releases \
- files com.simoncar.bottletree@1.0.58+60 \
+ files bottletree@1.0.58 \
  upload-sourcemaps \
  --dist 60 \
  --rewrite \
- dist/bundles/main.jsbundle dist/bundles/ios-213a00226696e21f13b19a5cf1aa067b.map --org simon-co --project bottletree
+ dist/bundles/main.jsbundle dist/bundles/ios-289b31390df1f238595055d49e6d9b60.map --org simon-co --project bottletree
 
-    	${bundleIdentifier}@${version}+${buildNumber}
-
-    	com.simoncar.bottletree@1.0.58+60
 
 node_modules/@sentry/cli/bin/sentry-cli sourcemaps explain e9baf8881bb34a35bd28d267e655f3c2 --org simon-co --project bottletree
+
+node_modules/@sentry/cli/bin/sentry-cli releases list --org simon-co --project bottletree
