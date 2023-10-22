@@ -58,3 +58,5 @@ node_modules/@sentry/cli/bin/sentry-cli releases \
     	${bundleIdentifier}@${version}+${buildNumber}
 
     	com.simoncar.bottletree@1.0.58+60
+
+node_modules/@sentry/cli/bin/sentry-cli sourcemaps explain 9cc2cce97a974460b63784cdeb565f01
