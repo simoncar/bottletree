@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.58",
+    "version": "1.0.63",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -12,14 +12,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#F9D96C"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "59",
+      "buildNumber": "62",
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -51,9 +49,19 @@
     "experiments": {
       "typedRoutes": true
     },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "simon-co",
+            "project": "bottletree"
+          }
+        }
+      ]
+    },
     "plugins": [
       "@react-native-firebase/app",
-      "@react-native-firebase/crashlytics",
       [
         "expo-image-picker",
         {
@@ -71,10 +79,7 @@
         {
           "icon": "./assets/images/notification.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/hammer.wav",
-            "./assets/sounds/drill.wav"
-          ]
+          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
         }
       ],
       "sentry-expo",

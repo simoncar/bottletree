@@ -22,6 +22,7 @@ import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
+import * as Sentry from "sentry-expo";
 
 export default function editUser() {
   const { uid, photoURL, displayName } = useLocalSearchParams();
@@ -128,6 +129,16 @@ export default function editUser() {
     );
   };
 
+  const crashTest = () => {
+    const i = undefined;
+    if (i.test61 == 1)
+      throw new Error("This is a test javascript error from the app");
+
+    //Sentry.Native.captureMessage("Crash Text 111 ");
+
+    //Sentry.Native.captureMessage("Crash Text 222 ");
+  };
+
   const profilePic = () => {
     return (
       <View style={styles.profilePicContainer}>
@@ -230,6 +241,17 @@ export default function editUser() {
                 <Text style={styles.settingName}>
                   Administration (Eddie Mode)
                 </Text>
+              </View>
+              <View style={styles.rightChevron}></View>
+            </TouchableOpacity>
+            <TouchableOpacity key={"crashs"} onPress={() => crashTest()}>
+              <View style={styles.leftContent}>
+                <MaterialCommunityIcons
+                  name="shield-lock"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+                <Text style={styles.settingName}>Crash Text</Text>
               </View>
               <View style={styles.rightChevron}></View>
             </TouchableOpacity>
