@@ -51,15 +51,15 @@ node_modules/@sentry/cli/bin/sentry-cli releases \
 node_modules/@sentry/cli/bin/sentry-cli releases \
  files bottletree@1.0.61 \
  upload-sourcemaps \
- --dist 61 \
+ --dist 62 \
  --rewrite \
- dist/bundles/ios-e6afb0ed84a60d5b8d89efef8df5aa34.map --org simon-co --project bottletree
+ dist/bundles/main.jsbundle dist/bundles/ios-37afeeb0754c2257b8c1bf48d124dc72.map --org simon-co --project bottletree
 
 node_modules/@sentry/cli/bin/sentry-cli sourcemaps explain 27cdcfe548544edeabc0bc6ba334f282 --org simon-co --project bottletree
 
 node_modules/@sentry/cli/bin/sentry-cli releases list --org simon-co --project bottletree
 
 node_modules/@sentry/cli/bin/sentry-cli sourcemaps resolve \
- dist/bundles/ios-4a9209da3e36e6aa9f68a8214ba07361.map \
+ dist/bundles/ios-37afeeb0754c2257b8c1bf48d124dc72.map \
  -r bottletree@1.0.58 \
- --org simon-co --project bottletree -l 2295723
+ --org simon-co --project bottletree -l 1:2295727
