@@ -84,8 +84,6 @@ export default function CalendarLarge() {
   }, []);
 
   useEffect(() => {
-    console.log(">>>>>>>>>:", calendarDate);
-    console.log(">>>>>>>>>:", dayjs(calendarDate).format("YYYY-MM-DD"));
     setNavOptions(calendarDate);
   }, [calendarDate]);
 

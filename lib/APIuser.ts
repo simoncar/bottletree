@@ -104,7 +104,6 @@ export async function getUserProjectCount(callback: userProjectCountRead) {
         photoURL: doc.data().photoURL,
         postCount: doc.data().postCount,
       };
-      console.log("getUserProjectCount: ", user);
 
       callback(user);
     });

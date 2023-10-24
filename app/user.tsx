@@ -131,7 +131,7 @@ export default function editUser() {
 
   const crashTest = () => {
     const i = undefined;
-    if (i.test61 == 1)
+    if (i.test62 == 1)
       throw new Error("This is a test javascript error from the app");
 
     //Sentry.Native.captureMessage("Crash Text 111 ");
@@ -241,17 +241,6 @@ export default function editUser() {
                 <Text style={styles.settingName}>
                   Administration (Eddie Mode)
                 </Text>
-              </View>
-              <View style={styles.rightChevron}></View>
-            </TouchableOpacity>
-            <TouchableOpacity key={"crashs"} onPress={() => crashTest()}>
-              <View style={styles.leftContent}>
-                <MaterialCommunityIcons
-                  name="shield-lock"
-                  size={25}
-                  color={Colors[colorScheme ?? "light"].text}
-                />
-                <Text style={styles.settingName}>Crash Text</Text>
               </View>
               <View style={styles.rightChevron}></View>
             </TouchableOpacity>

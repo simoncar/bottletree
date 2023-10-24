@@ -46,7 +46,6 @@ const ModalScreen = (props) => {
     if (projects !== null && loading === true) {
       setLoading(false);
     }
-    console.log("AAAA: ", sharedDataUser?.postCount);
   }, [projects]);
 
   function findValueByKey(

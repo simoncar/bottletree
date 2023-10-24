@@ -16,7 +16,6 @@ export async function getProjects(uid: string, callback: projectsRead) {
 
     await query.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(" get projects +++++ ");
         projectList.indexOf(doc.data().projectId) === -1
           ? projectList.push(doc.data().projectId)
           : console.log("This item already exists");

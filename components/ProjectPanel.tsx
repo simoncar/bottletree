@@ -24,7 +24,6 @@ const Project = (props) => {
   }, []);
 
   const userProjectCountRead = (user: IUser) => {
-    console.log("userProjectCountRead: " + JSON.stringify(user));
     updateSharedDataUser({ postCount: user.postCount });
   };
 
