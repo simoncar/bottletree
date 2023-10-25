@@ -23,6 +23,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Sentry from "sentry-expo";
+import { demoData } from "../lib/demoData";
 
 export default function editUser() {
   const { uid, photoURL, displayName } = useLocalSearchParams();
@@ -230,20 +231,35 @@ export default function editUser() {
           </TouchableOpacity>
         </View>
         {isAdmin(sharedDataUser?.email) && (
-          <View style={styles.outerView}>
-            <TouchableOpacity key={"admin"} onPress={() => administration()}>
-              <View style={styles.leftContent}>
-                <MaterialCommunityIcons
-                  name="shield-lock"
-                  size={25}
-                  color={Colors[colorScheme ?? "light"].text}
-                />
-                <Text style={styles.settingName}>
-                  Administration (Eddie Mode)
-                </Text>
-              </View>
-              <View style={styles.rightChevron}></View>
-            </TouchableOpacity>
+          <View>
+            <View style={styles.outerView}>
+              <TouchableOpacity key={"admin"} onPress={() => administration()}>
+                <View style={styles.leftContent}>
+                  <MaterialCommunityIcons
+                    name="shield-lock"
+                    size={25}
+                    color={Colors[colorScheme ?? "light"].text}
+                  />
+                  <Text style={styles.settingName}>
+                    Administration (Eddie Mode)
+                  </Text>
+                </View>
+                <View style={styles.rightChevron}></View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.outerView}>
+              <TouchableOpacity key={"admin"} onPress={() => demoData()}>
+                <View style={styles.leftContent}>
+                  <MaterialCommunityIcons
+                    name="shield-lock"
+                    size={25}
+                    color={Colors[colorScheme ?? "light"].text}
+                  />
+                  <Text style={styles.settingName}>Seed Demo Data</Text>
+                </View>
+                <View style={styles.rightChevron}></View>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
 

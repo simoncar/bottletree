@@ -70,6 +70,7 @@ export default function addPhoto() {
   const progressCallback = (progress: number) => {
     setProgress(progress);
   };
+  
   const completedCallback = (sourceDownloadURLarray) => {
     console.log("addImageCallback >>>>>>>: ", sourceDownloadURLarray);
     let ratio = 0.66666;

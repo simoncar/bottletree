@@ -4,6 +4,7 @@ import { Text, View } from "../components/Themed";
 import * as Application from "expo-application";
 import { useAuth, appSignIn } from "../lib/authProvider";
 import { getToken } from "../lib/APINotification";
+import { auth } from "../lib/firebase";
 
 export const About = () => {
   const { sharedDataUser, updateSharedData, signOut } = useAuth();
@@ -36,7 +37,8 @@ export const About = () => {
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion})
         </Text>
-        <Text style={styles.version}>{sharedDataUser.uid}</Text>
+        <Text style={styles.version}>SDU - {sharedDataUser.uid}</Text>
+        <Text style={styles.version}>Auth - {auth().currentUser.uid}</Text>
         <Text style={styles.version}>{token}</Text>
       </View>
     );

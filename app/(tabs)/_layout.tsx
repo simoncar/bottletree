@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs, router } from "expo-router";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet } from "react-native";
 import { BigText } from "../../components/StyledText";
 import { View } from "../../components/Themed";
@@ -9,7 +9,10 @@ import Colors from "../../constants/Colors";
 import { IUser } from "../../lib/types";
 import AuthContext from "../../lib/authContext";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import ProjectContext from "../../lib/projectContext";
 import * as Device from "expo-device";
+import { addImage } from "../../lib/APIimage";
+import { addPost } from "../../lib/APIpost";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -27,6 +30,9 @@ if (!Device.isDevice) {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { sharedDataUser } = useContext(AuthContext);
+  const { sharedDataProject } = useContext(ProjectContext);
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
   let loggedInUser: IUser = sharedDataUser;
 
   if (null == sharedDataUser) {
@@ -37,6 +43,59 @@ export default function TabLayout() {
       photoURL: "",
     };
   }
+
+  const saveDone = () => {
+    console.log("saveDone - push to home");
+
+    // router.push({
+    //   pathname: "/",
+    //   params: {
+    //     project: sharedDataProject.key,
+    //     title: sharedDataProject.title,
+    //   },
+    // });
+  };
+
+  const pickImage = async () => {
+    const multiple = true;
+
+    addImage(multiple, "posts", progressCallback, completedCallback);
+  };
+
+  const progressCallback = (progress: number) => {
+    setProgress(progress);
+  };
+
+  const completedCallback = (sourceDownloadURLarray) => {
+    console.log("addImageCallback >>>>>>>: ", sourceDownloadURLarray);
+    let ratio = 0.66666;
+    const downloadURLarray = sourceDownloadURLarray.map((element) => {
+      const myArray = element.split("*");
+      console.log("myArray: ", myArray);
+      if (myArray[0] > ratio) {
+        ratio = myArray[0];
+      }
+
+      return myArray[1]; // For example, creating a new array with each element doubled.
+    });
+
+    setImage(null);
+
+    const post: IPost = {
+      key: "",
+      caption: "",
+      projectId: sharedDataProject.key,
+      projectTitle: sharedDataProject.title,
+      author: sharedDataUser.displayName,
+      images: downloadURLarray,
+      ratio: ratio,
+    };
+
+    console.log(post);
+
+    addPost(post, saveDone);
+    setProgress(0);
+  };
 
   const { showActionSheetWithOptions } = useActionSheet();
 
@@ -57,9 +116,7 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            router.push({
-              pathname: "/addPost",
-            });
+            pickImage();
             break;
           case 1:
             router.push({

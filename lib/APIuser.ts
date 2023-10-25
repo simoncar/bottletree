@@ -10,6 +10,8 @@ export const updateAccountName = (displayName: string) => {
       displayName: displayName,
     })
     .then(() => {
+      console.log("FFFF:", auth().currentUser.uid);
+
       docRef1.set(
         {
           displayName: displayName,
