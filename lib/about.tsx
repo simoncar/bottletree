@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "../app/(app)/components/Themed";
 import * as Application from "expo-application";
 import { useAuth, appSignIn } from "../lib/authProvider";
 import { getToken } from "../lib/APINotification";
