@@ -142,6 +142,8 @@ const styles = StyleSheet.create({
   },
 
   inputView: {
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderRadius: 5,
     flexDirection: "row",
     height: 45,
@@ -172,12 +174,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     alignItems: "flex-start",
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
     flex: 1,
     fontSize: 18,
     height: 50,
-    marginLeft: 20,
+    marginLeft: 10,
     padding: 10,
   },
 });
