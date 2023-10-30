@@ -90,49 +90,49 @@ export default function RootLayout() {
                 />
                 <Stack.Screen
                   name="editPost"
-                  options={() => ({
+                  options={{
                     title: "Edit",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },
-                  })}
+                  }}
                 />
 
                 <Stack.Screen
                   name="editProject"
-                  options={() => ({
+                  options={{
                     title: "Project",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },
-                  })}
+                  }}
                 />
                 <Stack.Screen
                   name="addProject"
-                  options={() => ({
+                  options={{
                     title: "Add Project",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },
-                  })}
+                  }}
                 />
                 <Stack.Screen
                   name="editCalendar"
-                  options={() => ({
+                  options={{
                     title: "Add Event",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },
-                  })}
+                  }}
                 />
                 <Stack.Screen
                   name="user"
-                  options={() => ({
+                  options={{
                     title: "",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },
-                  })}
+                  }}
                 />
               </Stack>
             </ProjectProvider>
