@@ -66,6 +66,8 @@ export const Posts = () => {
         currentProject?.postCount,
       );
       updateUserProjectCount(currentProject?.key, currentProject?.postCount);
+      console.log("aaaaa:", sharedDataUser);
+
       if (sharedDataUser != null) {
         updateSharedDataUserProjectCount(
           sharedDataUser,

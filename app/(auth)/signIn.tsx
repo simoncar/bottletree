@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  Pressable,
+} from "react-native";
 import { useAuth } from "../../lib/authProvider";
 import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Colors from "../../constants/Colors";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setNotification] = useState("");
+  const [secureEntry, setSecureEntry] = useState(true);
   const { signIn } = useAuth();
+  const colorScheme = useColorScheme();
 
   const ERROR_MAP = {
     "Firebase: Error (auth/email-already-in-use).":
@@ -37,7 +46,7 @@ export default function SignIn() {
 
       <View style={styles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={styles.textInput}
           keyboardType="email-address"
           inputMode="email"
           placeholder="Email"
@@ -50,17 +59,25 @@ export default function SignIn() {
       </View>
       <View style={styles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={styles.textInput}
           placeholder="Password"
-          secureTextEntry={true}
+          secureTextEntry={secureEntry}
           onChangeText={(password) => {
             setPassword(password);
             setNotification("");
           }}
         />
+        <Pressable onPress={() => setSecureEntry(!secureEntry)}>
+          <AntDesign
+            name="eye"
+            size={25}
+            style={styles.eye}
+            color={Colors[colorScheme ?? "light"].text}
+          />
+        </Pressable>
       </View>
-      <View>
-        <Text>{notification}</Text>
+      <View style={styles.notificationView}>
+        <Text style={styles.notificationText}>{notification}</Text>
       </View>
 
       <TouchableOpacity
@@ -107,21 +124,12 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  TextInput: {
-    alignItems: "flex-start",
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flex: 1,
-    fontSize: 18,
-    height: 50,
-    marginLeft: 20,
-    padding: 10,
-  },
   container: {
     alignItems: "center",
     flex: 1,
     paddingTop: 40,
   },
+  eye: { color: "grey", paddingTop: 10 },
   forgot_button: {
     fontSize: 18,
     height: 30,
@@ -130,6 +138,7 @@ const styles = StyleSheet.create({
 
   inputView: {
     borderRadius: 5,
+    flexDirection: "row",
     height: 45,
     marginBottom: 20,
     width: "80%",
@@ -146,5 +155,26 @@ const styles = StyleSheet.create({
   loginText: {
     color: "white",
     fontSize: 18,
+  },
+  notificationText: {
+    color: "red",
+    fontSize: 18,
+  },
+  notificationView: {
+    borderRadius: 5,
+    height: 45,
+
+    marginBottom: 20,
+    width: "80%",
+  },
+  textInput: {
+    alignItems: "flex-start",
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flex: 1,
+    fontSize: 18,
+    height: 50,
+    marginLeft: 20,
+    padding: 10,
   },
 });

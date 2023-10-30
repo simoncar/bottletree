@@ -272,15 +272,7 @@ const styles = StyleSheet.create({
     marginRight: 25,
     width: 25,
   },
-  blueCircle: {
-    alignItems: "center",
-    backgroundColor: "grey",
-    borderRadius: 25 / 2,
-    height: 25,
-    justifyContent: "center",
-    marginRight: 5,
-    width: 25,
-  },
+
   redNumber: {
     color: "white",
   },

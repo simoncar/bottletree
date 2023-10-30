@@ -97,7 +97,7 @@ function useProtectedRoute(user) {
         //console.log("onAuthStateChange We have a User: ", user);
         //@ts-ignore
         //navigation?.navigate("(tabs)");
-        //router.replace("/");
+        router.replace("/");
         //SplashScreen.hideAsync();
       }
     });
@@ -174,7 +174,7 @@ const AuthProvider = ({ children }) => {
         if (user && user.uid) {
           setSharedDataUser(user);
         } else {
-          setSharedDataUser("");
+          setSharedDataUser(null);
         }
       }
     });

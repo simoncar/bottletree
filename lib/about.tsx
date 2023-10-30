@@ -38,7 +38,7 @@ export const About = () => {
           {Application.nativeBuildVersion})
         </Text>
         <Text style={styles.version}>SDU - {sharedDataUser.uid}</Text>
-        <Text style={styles.version}>Auth - {auth().currentUser.uid}</Text>
+        <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>{token}</Text>
       </View>
     );

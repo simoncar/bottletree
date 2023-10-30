@@ -1,3 +1,4 @@
+import { CurrentRenderContext } from "@react-navigation/native";
 import { auth, firestore } from "../lib/firebase";
 import { IUser } from "./types";
 
@@ -30,9 +31,10 @@ export const updateAccountName = (displayName: string) => {
 };
 
 export const updateUserProjectCount = (project: string, count: number) => {
-  const a = auth().currentUser;
-  if (a != null) {
-    const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
+  const u = auth().currentUser?.uid;
+
+  if (u && count) {
+    const docRef1 = firestore().collection("users").doc(u);
 
     docRef1.set(
       {
@@ -46,28 +48,31 @@ export const updateUserProjectCount = (project: string, count: number) => {
 };
 
 export const updateAccountPhotoURL = (photoURL: string) => {
-  const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
+  const a = auth().currentUser;
+  if (a) {
+    const docRef1 = firestore().collection("users").doc(a?.uid);
 
-  const user = auth().currentUser;
+    const user = auth().currentUser;
 
-  user
-    .updateProfile({
-      photoURL: photoURL,
-    })
-    .then(() => {
-      docRef1.set(
-        {
-          photoURL: photoURL,
-          email: auth().currentUser.email,
-          displayName: auth().currentUser.displayName,
-        },
-        { merge: true },
-      );
-    })
-    .then(() => {})
-    .catch((error) => {
-      console.log("updateAccountPhotoURL update ERROR ", error);
-    });
+    user
+      .updateProfile({
+        photoURL: photoURL,
+      })
+      .then(() => {
+        docRef1.set(
+          {
+            photoURL: photoURL,
+            email: auth().currentUser.email,
+            displayName: auth().currentUser.displayName,
+          },
+          { merge: true },
+        );
+      })
+      .then(() => {})
+      .catch((error) => {
+        console.log("updateAccountPhotoURL update ERROR ", error);
+      });
+  }
 };
 
 export async function getUsers(callback: usersRead) {
@@ -92,6 +97,7 @@ export async function getUsers(callback: usersRead) {
 
 export async function getUserProjectCount(callback: userProjectCountRead) {
   let user: IUser;
+  console.log("getUserProjectCount", auth().currentUser.uid);
 
   firestore()
     .collection("users")
