@@ -27,11 +27,14 @@ export default function SignIn() {
       "Password must be at least 6 characters long.",
     "Firebase: Error (auth/wrong-password).":
       "Wrong password. Try again or click Forgot password to reset it.",
-    "Firebase: Error (auth/user-not-found).": "No account with this email.",
-    "Firebase: Error (auth/invalid-email).":
+    "[auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
+      "No account found with this email.",
+    "[auth/invalid-email] The email address is badly formatted.":
       "The entered email address is not valid.",
     "Firebase: Error (auth/network-request-failed).":
       "Network error. Check your internet connection.",
+    "[auth/wrong-password] The password is invalid or the user does not have a password.":
+      "The password is invalid.",
   };
 
   const loginError = (error) => {
@@ -77,7 +80,9 @@ export default function SignIn() {
         </Pressable>
       </View>
       <View style={styles.notificationView}>
-        <Text style={styles.notificationText}>{notification}</Text>
+        <Text numberOfLines={3} style={styles.notificationText}>
+          {notification}
+        </Text>
       </View>
 
       <TouchableOpacity
@@ -162,8 +167,6 @@ const styles = StyleSheet.create({
   },
   notificationView: {
     borderRadius: 5,
-    height: 45,
-
     marginBottom: 20,
     width: "80%",
   },

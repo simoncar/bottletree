@@ -92,8 +92,10 @@ export default function SignIn() {
           }}
         />
       </View>
-      <View>
-        <Text>{errorMessage}</Text>
+      <View style={styles.notificationView}>
+        <Text numberOfLines={3} style={styles.notificationText}>
+          {errorMessage}
+        </Text>
       </View>
 
       {renderAction(errorMessage)}
@@ -124,7 +126,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: "80%",
   },
-
   loginBtn: {
     alignItems: "center",
     backgroundColor: "#2196F3",
@@ -137,5 +138,13 @@ const styles = StyleSheet.create({
   loginText: {
     color: "white",
     fontSize: 18,
+  },
+  notificationText: {
+    fontSize: 18,
+  },
+  notificationView: {
+    borderRadius: 5,
+    marginBottom: 20,
+    width: "80%",
   },
 });
