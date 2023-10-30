@@ -89,6 +89,12 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
+                  name="language"
+                  options={{
+                    title: "Language",
+                  }}
+                />
+                <Stack.Screen
                   name="editPost"
                   options={{
                     title: "Edit",

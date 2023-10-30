@@ -5,6 +5,7 @@ const AuthContext = React.createContext({
   displayName: "",
   email: "",
   photoURL: "",
+  language: "en",
 });
 
 export default AuthContext;

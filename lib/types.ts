@@ -32,6 +32,7 @@ export interface IUser {
   email: string;
   pushToken?: string;
   postCount?: Map<string, number>;
+  language?: string;
 }
 
 export interface IComment {

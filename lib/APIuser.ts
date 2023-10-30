@@ -89,6 +89,7 @@ export async function getUsers(callback: usersRead) {
       displayName: doc.data().displayName,
       email: doc.data().email,
       photoURL: doc.data().photoURL,
+      language: doc.data().language,
     });
   });
 
@@ -111,6 +112,7 @@ export async function getUserProjectCount(callback: userProjectCountRead) {
         email: doc.data().email,
         photoURL: doc.data().photoURL,
         postCount: doc.data().postCount,
+        language: doc.data().language,
       };
 
       callback(user);

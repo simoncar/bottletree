@@ -11,6 +11,7 @@ import { Text, View, TextInput } from "../components/Themed";
 import { useAuth, appSignIn } from "../lib/authProvider";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -190,6 +191,32 @@ export default function editUser() {
             </View>
           </View>
         </View>
+
+        <TouchableOpacity
+          key={"language"}
+          onPress={() =>
+            router.push({
+              pathname: "/language",
+            })
+          }>
+          <View style={styles.outerView}>
+            <View style={styles.leftContent}>
+              <FontAwesome
+                name="language"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+              <Text style={styles.settingName}>Language</Text>
+            </View>
+            <View style={styles.rightChevron}>
+              <FontAwesome5
+                name="chevron-right"
+                size={20}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
 
         <TouchableOpacity
           key={"deleteAccount"}
