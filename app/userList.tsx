@@ -13,6 +13,7 @@ import { getUsers } from "../lib/APIuser";
 import { addProjectUser } from "../lib/APIproject";
 import { IUser } from "../lib/types";
 import ProjectContext from "../lib/projectContext";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -62,7 +63,17 @@ const ModalScreen = (props) => {
             addProjectUser(sharedDataProject.key, data, saveDone);
           }}>
           <View style={styles.avatar}>
-            <Image style={styles.avatarFace} source={data.photoURL} />
+            {data.photoURL ? (
+              <Image style={styles.avatarFace} source={data.photoURL} />
+            ) : (
+              <View style={styles.avatarFace}>
+                <Ionicons
+                  name="ios-person"
+                  color="#999999"
+                  style={styles.avatarIcon}
+                />
+              </View>
+            )}
           </View>
           <View>
             <Text style={styles.username}>{data.displayName || ""}</Text>
@@ -90,6 +101,11 @@ const styles = StyleSheet.create({
   avatar: {
     marginRight: 12,
     width: 50,
+  },
+  avatarIcon: {
+    fontSize: 35,
+    paddingTop: 5,
+    textAlign: "center",
   },
 
   avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
