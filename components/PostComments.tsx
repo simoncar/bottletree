@@ -108,27 +108,43 @@ const Comments = ({ project, post }: Props) => {
     }
   };
 
+  const renderBubble = (item: IComment) => {
+    let bubbleBackgroundColor =
+      Colors[colorScheme ?? "light"].bubbleBackgroundColorOther;
+    let bubbbleTextColor = Colors[colorScheme ?? "light"].bubbleTextColorOther;
+    if (item.displayName == sharedDataUser.displayName) {
+      bubbleBackgroundColor =
+        Colors[colorScheme ?? "light"].bubbleBackgroundColorMe;
+      bubbbleTextColor = Colors[colorScheme ?? "light"].bubbleTextColorMe;
+    }
+
+    return (
+      <View
+        style={[
+          styles.commentBubble,
+          { backgroundColor: bubbleBackgroundColor },
+        ]}>
+        <ParsedText
+          selectable
+          lightColor={bubbbleTextColor}
+          darkColor={bubbbleTextColor}
+          style={styles.commentText}
+          text={
+            displayName(item.displayName) +
+            " " +
+            item.comment +
+            " [" +
+            new Date(item.timestamp.toDate()).toDateString() +
+            "]"
+          }
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.commentsOverall}>
-      <FlatList
-        data={comments}
-        renderItem={({ item }) => (
-          <View style={styles.commentBubble}>
-            <ParsedText
-              selectable
-              style={styles.commentText}
-              text={
-                displayName(item.displayName) +
-                " " +
-                item.comment +
-                " [" +
-                new Date(item.timestamp.toDate()).toDateString() +
-                "]"
-              }
-            />
-          </View>
-        )}
-      />
+      <FlatList data={comments} renderItem={({ item }) => renderBubble(item)} />
       {renderInput()}
     </View>
   );
@@ -161,7 +177,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginBottom: 10,
-    backgroundColor: "#E9E8EA",
   },
   commentsOverall: {
     marginTop: 20,

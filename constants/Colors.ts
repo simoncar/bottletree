@@ -20,6 +20,10 @@ export default {
     bigCalendarActive: "#3265cb",
     bigCalendarContrastText: "#fff",
     skeletonBackground: "#e1e1e1",
+    bubbleBackgroundColorMe: "#057EFD",
+    bubbleBackgroundColorOther: "#e9f0fd",
+    bubbleTextColorMe: "#fff",
+    bubbleTextColorOther: "#000",
   },
   dark: {
     text: "#fff",
@@ -39,6 +43,10 @@ export default {
     bigCalendarActive: "#3265cb",
     bigCalendarContrastText: "#fff",
     skeletonBackground: "#2d4150",
+    bubbleBackgroundColorMe: "#057EFD",
+    bubbleBackgroundColorOther: "#262529",
+    bubbleTextColorMe: "#fff",
+    bubbleTextColorOther: "#fff",
   },
 };
 
