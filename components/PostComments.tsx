@@ -113,7 +113,7 @@ const Comments = ({ project, post }: Props) => {
       <FlatList
         data={comments}
         renderItem={({ item }) => (
-          <View style={styles.commentView}>
+          <View style={styles.commentBubble}>
             <ParsedText
               selectable
               style={styles.commentText}
@@ -155,12 +155,17 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
     paddingTop: 2,
   },
-  commentView: {
+  commentBubble: {
     flexDirection: "row",
     marginRight: 20,
-    paddingTop: 10,
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+    backgroundColor: "#E9E8EA",
   },
-  commentsOverall: {},
+  commentsOverall: {
+    marginTop: 20,
+  },
   inputAction: { marginHorizontal: 8, paddingTop: 5 },
   inputContainer: {
     borderColor: "lightgray",
