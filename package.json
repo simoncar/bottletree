@@ -16,6 +16,7 @@
     "@bacons/expo-router-top-tabs": "^0.1.0",
     "@expo/react-native-action-sheet": "^4.0.1",
     "@expo/vector-icons": "^13.0.0",
+    "@likashefqet/react-native-image-zoom": "^2.1.1",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-firebase/app": "^18.5.0",

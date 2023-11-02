@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { getLocales } from "expo-localization";
 import { Text, View } from "../components/Themed";
 import * as Application from "expo-application";
 import { useAuth, appSignIn } from "../lib/authProvider";
@@ -9,6 +10,7 @@ import { auth } from "../lib/firebase";
 export const About = () => {
   const { sharedDataUser, updateSharedData, signOut } = useAuth();
   const [token, setToken] = useState("");
+  const deviceLanguage = getLocales()[0].languageCode;
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -39,6 +41,7 @@ export const About = () => {
         </Text>
         <Text style={styles.version}>SDU - {sharedDataUser.uid}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
+        <Text style={styles.version}>Language - {deviceLanguage}</Text>
         <Text style={styles.version}>{token}</Text>
       </View>
     );

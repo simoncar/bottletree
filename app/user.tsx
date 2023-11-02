@@ -11,6 +11,7 @@ import { Text, View, TextInput } from "../components/Themed";
 import { useAuth, appSignIn } from "../lib/authProvider";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
+
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
