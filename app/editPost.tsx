@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from "react-native";
 import { Image } from "expo-image";
+import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import { router, useLocalSearchParams, Stack } from "expo-router";
 import { updatePost, deletePost } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
@@ -76,45 +77,31 @@ export default function editPost() {
     );
   };
 
+  // <Stack.Screen
+  //   options={{
+  //     headerRight: () => <Button title="Done" onPress={() => save()} />,
+  //   }}
+  // />;
+
   return (
-    <SafeAreaView>
-      <Stack.Screen
-        options={{
-          headerRight: () => <Button title="Done" onPress={() => save()} />,
-        }}
-      />
-      <ScrollView>
-        <View style={styles.descriptionView}>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => onChangeText(text)}
-            placeholder={"Write a caption..."}
-            value={text}
-            autoFocus
-            multiline
-            textAlignVertical="top"
-          />
-        </View>
-        {image && (
-          <Image
-            source={image}
-            style={[styles.storyPhoto, { height: width * ratio }]}
-          />
-        )}
-        <View style={styles.outerView}>
-          <View style={styles.leftContent}></View>
-          <TouchableOpacity onPress={onDelete}>
-            <View style={styles.rightChevron}>
-              <FontAwesome5
-                name="trash-alt"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        height: Dimensions.get("window").height,
+        backgroundColor: "#010101",
+      }}>
+      {image && (
+        <ImageZoom
+          uri={image}
+          style={{
+            flex: 1,
+            width: "100%",
+            height: Dimensions.get("window").height,
+            resizeMode: "contain",
+          }}
+        />
+      )}
+    </View>
   );
 }
 
@@ -155,7 +142,6 @@ const styles = StyleSheet.create({
   storyPhoto: {
     alignSelf: "center",
     borderColor: "lightgray",
-    height: 300,
     marginBottom: 12,
     marginTop: 12,
     width: "98%",

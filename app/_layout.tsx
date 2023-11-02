@@ -97,7 +97,7 @@ export default function RootLayout() {
                 <Stack.Screen
                   name="editPost"
                   options={{
-                    title: "Edit",
+                    title: "View",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },

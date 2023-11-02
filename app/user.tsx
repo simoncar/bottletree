@@ -24,7 +24,6 @@ import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
-import * as Sentry from "sentry-expo";
 import { demoData } from "../lib/demoData";
 
 export default function editUser() {
