@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   },
   card: {
     alignSelf: "center",
-    backgroundColor: "#fff",
     borderRadius: 15,
     marginBottom: 12,
     padding: 10,
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
   },
   imageStyleCheckOff: {
     alignSelf: "center",
-    color: "#FFF",
     fontSize: 30,
     height: 30,
     marginLeft: 15,
