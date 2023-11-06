@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, useColorScheme, Dimensions, View } from "react-native";
+import { StyleSheet, Dimensions, View, Text } from "react-native";
 import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import { router, useLocalSearchParams, Stack } from "expo-router";
-import ProjectContext from "../lib/projectContext";
 
 export default function viewPost() {
   const { key, image, caption, ratio } = useLocalSearchParams();
@@ -11,18 +10,26 @@ export default function viewPost() {
     <View
       style={{
         flex: 1,
-        height: Dimensions.get("window").height,
+        height: Dimensions.get("window").height - 200,
         backgroundColor: "#010101",
       }}>
+      <View>
+        <Text>AAA</Text>
+      </View>
       {image && (
         <ImageZoom
           uri={image}
           style={{
-            flex: 1,
-            width: "100%",
-            height: Dimensions.get("window").height,
+            height: Dimensions.get("window").height - 200,
             resizeMode: "contain",
+            overflow: "hidden",
           }}
+          onInteractionStart={() => console.log("Interaction started")}
+          onInteractionEnd={() => console.log("Interaction ended")}
+          onPinchStart={() => console.log("Pinch gesture started")}
+          onPinchEnd={() => console.log("Pinch gesture ended")}
+          onPanStart={() => console.log("Pan gesture started")}
+          onPanEnd={() => console.log("Pan gesture ended")}
         />
       )}
     </View>
