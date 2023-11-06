@@ -24,7 +24,7 @@ const Comments = ({ project, post }: Props) => {
   const defaultComment = "Add a comment...";
   const [comments, setComments] = useState([]);
   const [text, setComment] = useState(defaultComment);
-  const [action, setAction] = useState(false);
+  const [action, setAction] = useState(true);
   const [saved, setSaved] = useState(false);
   const colorScheme = useColorScheme();
   const { sharedDataUser } = useAuth();
@@ -69,7 +69,7 @@ const Comments = ({ project, post }: Props) => {
   const renderInput = () => {
     if (action) {
       return (
-        <View style={styles.inputContainer}>
+        <View style={styles.inputBubble}>
           <TextInput
             style={styles.commentInput}
             placeholder={defaultComment}
@@ -151,6 +151,13 @@ const Comments = ({ project, post }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  commentBubble: {
+    borderRadius: 10,
+    flexDirection: "row",
+    marginBottom: 10,
+    marginRight: 10,
+    padding: 10,
+  },
   commentInput: {
     flex: 1,
     paddingBottom: 10,
@@ -171,28 +178,21 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
     paddingTop: 2,
   },
-  commentBubble: {
-    flexDirection: "row",
-    marginRight: 20,
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
   commentsOverall: {
     marginTop: 20,
   },
   inputAction: { marginHorizontal: 8, paddingTop: 5 },
-  inputContainer: {
+  inputBubble: {
     borderColor: "lightgray",
     borderRadius: 10,
     borderWidth: 1,
     flexDirection: "row",
-    margin: 10,
+    marginRight: 10,
   },
   inputContainerHidden: {
     borderRadius: 10,
     flexDirection: "row",
-    margin: 10,
+    marginRight: 10,
   },
 });
 
