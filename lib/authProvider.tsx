@@ -150,11 +150,11 @@ function useProtectedRoute(user) {
 
       if (Platform.OS === "ios") {
         setTimeout(() => {
-          router.replace("/");
+          router.replace("/(tabs)/");
         }, 1);
       } else {
         setImmediate(() => {
-          router.replace("/");
+          router.replace("/(tabs)/");
         });
       }
     } else {
