@@ -103,7 +103,15 @@ export default function RootLayout() {
                     },
                   }}
                 />
-
+                <Stack.Screen
+                  name="viewPost"
+                  options={{
+                    title: "View & Zoom",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
                 <Stack.Screen
                   name="editProject"
                   options={{

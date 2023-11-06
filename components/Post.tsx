@@ -55,7 +55,7 @@ const Post = (props) => {
         <Pressable
           onPress={() => {
             router.push({
-              pathname: "/editPost",
+              pathname: "/viewPost",
               params: {
                 project: post.projectId,
                 key: post.key,
@@ -90,7 +90,7 @@ const Post = (props) => {
               <Pressable
                 onPress={() => {
                   router.push({
-                    pathname: "/editPost",
+                    pathname: "/viewPost",
                     params: {
                       project: post.projectId,
                       key: post.key,
