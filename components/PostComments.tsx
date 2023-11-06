@@ -24,7 +24,7 @@ const Comments = ({ project, post }: Props) => {
   const defaultComment = "Add a comment...";
   const [comments, setComments] = useState([]);
   const [text, setComment] = useState(defaultComment);
-  const [action, setAction] = useState(true);
+  const [action, setAction] = useState(false);
   const [saved, setSaved] = useState(false);
   const colorScheme = useColorScheme();
   const { sharedDataUser } = useAuth();
@@ -93,7 +93,7 @@ const Comments = ({ project, post }: Props) => {
       );
     } else {
       return (
-        <View style={styles.inputContainerHidden}>
+        <View style={styles.inputBubble}>
           <Text
             style={styles.commentInputPlaceholder}
             onPress={() => {
