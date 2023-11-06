@@ -1,87 +1,11 @@
 import React, { useContext, useState } from "react";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import {
-  StyleSheet,
-  SafeAreaView,
-  Button,
-  Alert,
-  useColorScheme,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
-import { Image } from "expo-image";
+import { StyleSheet, useColorScheme, Dimensions, View } from "react-native";
 import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import { router, useLocalSearchParams, Stack } from "expo-router";
-import { updatePost, deletePost } from "../lib/APIpost";
 import ProjectContext from "../lib/projectContext";
-import { TextInput, View } from "../components/Themed";
-import Colors from "../constants/Colors";
-import { IPost, IProject } from "../lib/types";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function viewPost() {
-  const { sharedDataProject } = useContext<IProject>(ProjectContext);
-
   const { key, image, caption, ratio } = useLocalSearchParams();
-  const [text, onChangeText] = useState(caption?.toString() ?? "");
-  const colorScheme = useColorScheme();
-  const { width } = Dimensions.get("window");
-
-  const saveDone = () => {
-    router.push({
-      pathname: "/",
-      params: {
-        project: sharedDataProject.key,
-        title: sharedDataProject.title,
-      },
-    });
-  };
-
-  const save = () => {
-    console.log("save:", sharedDataProject);
-
-    const post: IPost = {
-      projectId: sharedDataProject.key,
-      key: key?.toString() ?? "",
-      caption: text?.toString() ?? "",
-    };
-
-    updatePost(post, saveDone);
-  };
-
-  const onDelete = () => {
-    Alert.alert(
-      "Delete",
-      "Are you sure?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          onPress: () => {
-            deletePost(
-              {
-                projectId: sharedDataProject.key,
-                key: key?.toString() ?? "",
-                caption: text?.toString() ?? "",
-              },
-              saveDone,
-            );
-          },
-        },
-      ],
-      { cancelable: false },
-    );
-  };
-
-  // <Stack.Screen
-  //   options={{
-  //     headerRight: () => <Button title="Done" onPress={() => save()} />,
-  //   }}
-  // />;
 
   return (
     <View
