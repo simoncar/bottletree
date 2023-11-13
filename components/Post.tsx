@@ -4,8 +4,6 @@ import { router } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text, ParsedText } from "../components/Themed";
-import { blurhash } from "../constants/Colors";
-import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import Comments from "./PostComments";
 import Status from "./Status";
 import Dots from "../components/dots";

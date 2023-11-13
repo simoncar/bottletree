@@ -8658,10 +8658,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-big-calendar@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-big-calendar/-/react-native-big-calendar-4.6.0.tgz#bf8a2dddd3c57398181407043db7f26b921c6e05"
-  integrity sha512-MZNinLLt4I6NllYsh9nSdoACP6FTw9quqzJ893sYMWJ5DCxSIUmaz1OslrX1uB/X952YYweTb6OA9UHgOcLnOg==
+react-native-big-calendar@^4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/react-native-big-calendar/-/react-native-big-calendar-4.7.2.tgz#14eca9155bd298d77066d0a8867881eab8a29918"
+  integrity sha512-mJ9KYXzsdslUPdDD3MzjUs04lnB7E0uS6OPGPGy54eUlgkVpFVLIPmykXjTNLHDAgWdMm5hErIqiY9adFDtcmQ==
   dependencies:
     calendarize "^1.1.1"
     dayjs "^1.11.10"

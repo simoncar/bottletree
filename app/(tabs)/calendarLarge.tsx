@@ -30,7 +30,7 @@ export default function CalendarLarge() {
   const [calendarDate, setDate] = useState(dayjs());
   const { sharedDataProject } = useContext(ProjectContext);
   const colorScheme = useColorScheme();
-  const { width, height } = Dimensions.get("window");
+  const { height } = Dimensions.get("window");
   const navigation = useNavigation();
 
   let currentProject: IProject = sharedDataProject;
@@ -100,8 +100,8 @@ export default function CalendarLarge() {
   const setNavOptions = (start) => {
     navigation.setOptions({
       headerTitle: () => (
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={{ width: 50, height: 50, paddingTop: 3 }}>
+        <View style={styles.headerTitleA}>
+          <View style={styles.headerTitleB}>
             <Pressable onPress={_onPrevDate}>
               <FontAwesome5
                 name="chevron-left"
@@ -111,7 +111,7 @@ export default function CalendarLarge() {
             </Pressable>
           </View>
 
-          <View style={{ width: 40, height: 50, paddingTop: 3 }}>
+          <View style={styles.pressable}>
             <Pressable onPress={_onNextDate}>
               <FontAwesome5
                 name="chevron-right"
@@ -120,11 +120,7 @@ export default function CalendarLarge() {
               />
             </Pressable>
           </View>
-          <View
-            style={{
-              width: "100%",
-              height: 50,
-            }}>
+          <View style={styles.headerTitleDate}>
             <BigText style={styles.headerTitle}>
               {dayjs(calendarDate).format("MMMM YYYY")}
             </BigText>
@@ -220,9 +216,10 @@ export default function CalendarLarge() {
 }
 
 const styles = StyleSheet.create({
-  headerTitle: {
-    fontSize: 24,
-    paddingTop: 3,
+  calendarCellStyle: {
+    borderWidth: 0,
+    color: "white",
+    padding: 0,
   },
   calendarEvent: {
     padding: 3,
@@ -230,13 +227,26 @@ const styles = StyleSheet.create({
   calendarEventText: {
     color: "white",
   },
-  calendarCellStyle: {
-    borderWidth: 0,
-    color: "white",
-    padding: 0,
+  headerTitle: {
+    fontSize: 24,
+    paddingTop: 3,
   },
-
-  rightChevron: {
-    marginHorizontal: 8,
+  headerTitleA: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  headerTitleB: {
+    height: 50,
+    paddingTop: 3,
+    width: 50,
+  },
+  headerTitleDate: {
+    height: 50,
+    width: "100%",
+  },
+  pressable: {
+    height: 50,
+    paddingTop: 3,
+    width: 40,
   },
 });

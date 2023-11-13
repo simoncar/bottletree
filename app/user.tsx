@@ -302,8 +302,8 @@ const styles = StyleSheet.create({
   aboutContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 50,
     paddingBottom: 50,
+    paddingTop: 50,
   },
   avatarAContainer: {
     alignItems: "center",

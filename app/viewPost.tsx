@@ -7,23 +7,14 @@ export default function viewPost() {
   const { key, image, caption, ratio } = useLocalSearchParams();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        height: Dimensions.get("window").height - 200,
-        backgroundColor: "#010101",
-      }}>
+    <View style={styles.overall}>
       <View>
         <Text>AAA</Text>
       </View>
       {image && (
         <ImageZoom
           uri={image}
-          style={{
-            height: Dimensions.get("window").height - 200,
-            resizeMode: "contain",
-            overflow: "hidden",
-          }}
+          style={styles.imageZoom}
           onInteractionStart={() => console.log("Interaction started")}
           onInteractionEnd={() => console.log("Interaction ended")}
           onPinchStart={() => console.log("Pinch gesture started")}
@@ -37,44 +28,14 @@ export default function viewPost() {
 }
 
 const styles = StyleSheet.create({
-  descriptionView: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    paddingVertical: 8,
-    padding: 8,
+  imageZoom: {
+    height: Dimensions.get("window").height - 200,
+    overflow: "hidden",
+    resizeMode: "contain",
   },
-  input: {
-    fontSize: 20,
-    margin: 12,
-    padding: 10,
-    paddingLeft: 20,
-    width: "98%",
-  },
-  leftContent: {
-    alignItems: "center",
+  overall: {
+    backgroundColor: "#010101",
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    paddingHorizontal: 8,
-  },
-  outerView: {
-    alignItems: "center",
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: "row",
-    paddingVertical: 8,
-    padding: 8,
-  },
-  rightChevron: {
-    marginHorizontal: 8,
-  },
-
-  storyPhoto: {
-    alignSelf: "center",
-    borderColor: "lightgray",
-    marginBottom: 12,
-    marginTop: 12,
-    width: "98%",
+    height: Dimensions.get("window").height - 200,
   },
 });

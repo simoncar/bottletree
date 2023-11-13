@@ -202,7 +202,8 @@ export default function TabLayout() {
         options={{
           title: "",
           headerTitle: () => (
-            <BigText style={styles.headerTitle}>Calendar Large</BigText>
+            // eslint-disable-next-line react-native/no-raw-text
+            <BigText style={styles.headerTitle}>Calendar</BigText>
           ),
           headerTitleAlign: "left",
           tabBarIcon: ({ color }) => (
