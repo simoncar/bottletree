@@ -14,6 +14,8 @@ export async function getItemsBigCalendar(
   projectId: string,
   callback: itemsRead,
 ) {
+  console.log("getItemsBigCalendar: FBJS");
+
   const q = firestore().collection("calendar");
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {

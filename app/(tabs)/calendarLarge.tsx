@@ -8,8 +8,7 @@ import {
 } from "react-native";
 import { getItemsBigCalendar } from "../../lib/APIcalendar";
 import { IProject } from "../../lib/types";
-import Project from "../../components/ProjectPanel";
-import { View, Text, ParsedText } from "../../components/Themed";
+import { View, Text } from "../../components/Themed";
 import ProjectContext from "../../lib/projectContext";
 import Colors from "../../constants/Colors";
 import { router } from "expo-router";
@@ -24,6 +23,7 @@ import {
   CalendarTouchableOpacityProps,
 } from "react-native-big-calendar";
 import { ScrollView } from "react-native-gesture-handler";
+import { longPressHandlerName } from "react-native-gesture-handler/lib/typescript/handlers/LongPressGestureHandler";
 
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
@@ -84,6 +84,8 @@ export default function CalendarLarge() {
   }, []);
 
   useEffect(() => {
+    console.log("useEffect setNavOptions:", calendarDate);
+
     setNavOptions(calendarDate);
   }, [calendarDate]);
 
@@ -132,14 +134,16 @@ export default function CalendarLarge() {
 
   const onChangeDate = ([start, end]) => {
     console.log("onChangeDate:", start, end);
-    setDate(start);
-    setNavOptions(start);
+    //setDate(start);
+    //setNavOptions(start);
   };
 
   const renderEvent = <T extends ICalendarEventBase>(
     event: T,
     touchableOpacityProps: CalendarTouchableOpacityProps,
   ) => {
+    console.log("renderEvent:", event);
+
     return (
       <TouchableOpacity {...touchableOpacityProps}>
         <View style={[styles.calendarEvent, { backgroundColor: event.color }]}>
@@ -178,10 +182,14 @@ export default function CalendarLarge() {
   };
 
   const _onPrevDate = () => {
+    console.log("onPrevDate:", calendarDate, modeToNum("month", calendarDate));
+
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
   };
 
   const _onNextDate = () => {
+    console.log("onNextDate:", calendarDate, modeToNum("month", calendarDate));
+
     setDate(dayjs(calendarDate).add(modeToNum("month", calendarDate), "day"));
   };
 
@@ -206,10 +214,10 @@ export default function CalendarLarge() {
         theme={darkTheme}
         eventCellStyle={styles.calendarCellStyle}
         date={calendarDate}
-        onChangeDate={onChangeDate}
+        // onChangeDate={onChangeDate}
         onPressEvent={onPressEvent}
         eventMinHeightForMonthView={25}
-        maxVisibleEventCount={3}
+        maxVisibleEventCount={10}
       />
     </ScrollView>
   );
