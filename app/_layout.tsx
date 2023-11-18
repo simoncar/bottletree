@@ -148,6 +148,15 @@ export default function RootLayout() {
                     },
                   }}
                 />
+                <Stack.Screen
+                  name="camera"
+                  options={{
+                    title: "Take Photo",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
               </Stack>
             </ProjectProvider>
           </ActionSheetProvider>

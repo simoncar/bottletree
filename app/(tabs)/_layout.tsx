@@ -100,7 +100,12 @@ export default function TabLayout() {
   const { showActionSheetWithOptions } = useActionSheet();
 
   const openActionSheet = async () => {
-    const options = ["Add Photo", "Add Calendar Event", "Cancel"];
+    const options = [
+      "Take Photo",
+      "Add From Camera Roll",
+      "Add Calendar Event",
+      "Cancel",
+    ];
     const cancelButtonIndex = options.length - 1;
     const dateBegin = new Date();
     dateBegin.setMinutes(0);
@@ -116,9 +121,20 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            pickImage();
+            router.push({
+              pathname: "/camera",
+              params: {
+                pdateBegin: dateBegin,
+                pdateEnd: dateEnd,
+                pcolor: "#49B382",
+                pcolorName: "Grass",
+              },
+            });
             break;
           case 1:
+            pickImage();
+            break;
+          case 2:
             router.push({
               pathname: "/editCalendar",
               params: {
