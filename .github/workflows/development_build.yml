@@ -1,0 +1,32 @@
+name: 3. Development Build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - appstore
+jobs:
+  build:
+    name: Development Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Build on EAS
+        run: eas build --profile development-simulator --platform ios --non-interactive
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit_message: Automated Commit on Version Bump in Action workflow
