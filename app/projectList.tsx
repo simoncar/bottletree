@@ -110,7 +110,7 @@ const ModalScreen = (props) => {
     const icon = data.icon;
 
     const postCount = findValueByKey(sharedDataUser.postCount, data.key);
-    let postCountDelta = data.postCount - postCount;
+    const postCountDelta = data.postCount - postCount;
 
     return (
       <View key={data.key} style={styles.outerView}>
@@ -152,7 +152,7 @@ const ModalScreen = (props) => {
               </View>
             )}
           </View>
-          <View>{renderTitle(data)}</View>
+          <View style={styles.projectTitle}>{renderTitle(data)}</View>
         </TouchableOpacity>
 
         {postCountDelta > 0 && (
@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
     marginRight: 12,
     width: 50,
   },
-
   avatarFace: {
     borderColor: "lightgrey",
     borderRadius: 48 / 2,
@@ -226,16 +225,17 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
   },
+
   avatarIcon: {
     fontSize: 35,
     paddingTop: 5,
     textAlign: "center",
   },
-
   container: {
     flex: 1,
     height: 200,
   },
+
   innerView: {
     alignItems: "center",
     flex: 1,
@@ -252,17 +252,20 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
-
   project: {
     fontSize: 18,
     marginBottom: 5,
   },
+
   projectArchived: {
     color: "grey",
     fontSize: 18,
     marginBottom: 5,
   },
   projectList: {},
+  projectTitle: {
+    width: 250,
+  },
   redCircle: {
     alignItems: "center",
     backgroundColor: "red",
