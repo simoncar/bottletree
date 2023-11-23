@@ -28,7 +28,10 @@ export default function App() {
         <Text style={styles.permission}>
           We need your permission to show the camera
         </Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <Button
+          onPress={requestPermission}
+          title="Grant Permission to use the Camera"
+        />
       </View>
     );
   }
@@ -42,14 +45,25 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Ionicons
-              name="ios-camera-reverse-outline"
-              size={45}
-              color={Colors[colorScheme ?? "light"].textPlaceholder}
-            />
+        <View style={styles.buttonRow}>
+          <TouchableOpacity onPress={toggleCameraType}>
+            <View style={styles.circleOuter}>
+              <View style={styles.circleMiddle}>
+                <View style={styles.circleInner}></View>
+              </View>
+            </View>
           </TouchableOpacity>
+          <View style={styles.toggleContainer}>
+            <TouchableOpacity
+              style={styles.toggleContainerButton}
+              onPress={toggleCameraType}>
+              <Ionicons
+                name="ios-camera-reverse-outline"
+                size={45}
+                color={Colors[colorScheme ?? "light"].textPlaceholder}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </Camera>
     </View>
@@ -57,19 +71,37 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    alignSelf: "flex-end",
-    flex: 1,
-  },
-  buttonContainer: {
-    backgroundColor: "transparent",
+  buttonRow: {
+    bottom: 0,
     flex: 1,
     flexDirection: "row",
-    margin: 64,
+    justifyContent: "space-around",
+    position: "absolute",
   },
   camera: {
     flex: 1,
+  },
+  circleInner: {
+    backgroundColor: "white",
+    borderRadius: 86 / 2, // Use half of the width and height to create a circle
+    height: 86,
+    width: 86, // Adjust the inner circle size as needed
+  },
+  circleMiddle: {
+    alignItems: "center",
+    backgroundColor: "black",
+    borderRadius: 90 / 2, // Use half of the width and height to create a circle
+    height: 90,
+    justifyContent: "center",
+    width: 90, // Adjust the inner circle size as needed
+  },
+  circleOuter: {
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 50, // Use half of the width and height to create a circle
+    height: 100,
+    justifyContent: "center",
+    width: 100,
   },
   container: {
     flex: 1,
@@ -77,5 +109,13 @@ const styles = StyleSheet.create({
   },
   permission: {
     textAlign: "center",
+  },
+  toggleContainer: {
+    backgroundColor: "transparent",
+    margin: 64,
+  },
+  toggleContainerButton: {
+    alignItems: "center",
+    alignSelf: "flex-end",
   },
 });

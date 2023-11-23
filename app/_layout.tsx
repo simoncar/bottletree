@@ -157,6 +157,15 @@ export default function RootLayout() {
                     },
                   }}
                 />
+                <Stack.Screen
+                  name="note"
+                  options={{
+                    title: "Add Note",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
               </Stack>
             </ProjectProvider>
           </ActionSheetProvider>
