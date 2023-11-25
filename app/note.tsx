@@ -1,68 +1,68 @@
-import { Camera, CameraType } from "expo-camera";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
-  Button,
   StyleSheet,
-  Text,
-  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
   View,
+  TextInput,
+  Button as NativeButton,
   useColorScheme,
 } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import Colors from "../constants/Colors";
+import { Stack } from "expo-router";
+import { IPost, IProject } from "../lib/types";
+import ProjectContext from "../lib/projectContext";
 
-export default function App() {
+export default function adNote() {
+  const { sharedDataProject } = useContext<IProject>(ProjectContext);
+  const [title, onChangeTitle] = useState("");
   const colorScheme = useColorScheme();
 
-  return <View style={styles.container}></View>;
+  const save = () => {
+    console.log("save:", sharedDataProject);
+
+    const post: IPost = {
+      projectId: sharedDataProject.key,
+      key: key?.toString() ?? "",
+      caption: text?.toString() ?? "",
+    };
+
+    addPost(post, saveDone);
+  };
+
+  return (
+    <SafeAreaView>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <NativeButton title="Done" onPress={() => save()} />
+          ),
+        }}
+      />
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.title}>
+            <TextInput
+              style={styles.titleText}
+              onChangeText={(title) => onChangeTitle(title)}
+              placeholder={"Add Note"}
+              value={title}
+              autoFocus={true}
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-  buttonRow: {
-    bottom: 0,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    position: "absolute",
-  },
-  camera: {
-    flex: 1,
-  },
-  circleInner: {
-    backgroundColor: "white",
-    borderRadius: 86 / 2, // Use half of the width and height to create a circle
-    height: 86,
-    width: 86, // Adjust the inner circle size as needed
-  },
-  circleMiddle: {
-    alignItems: "center",
-    backgroundColor: "black",
-    borderRadius: 90 / 2, // Use half of the width and height to create a circle
-    height: 90,
-    justifyContent: "center",
-    width: 90, // Adjust the inner circle size as needed
-  },
-  circleOuter: {
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 50, // Use half of the width and height to create a circle
-    height: 100,
-    justifyContent: "center",
-    width: 100,
-  },
   container: {
     flex: 1,
     justifyContent: "center",
+    padding: 20,
   },
-  permission: {
-    textAlign: "center",
-  },
-  toggleContainer: {
-    backgroundColor: "transparent",
-    margin: 64,
-  },
-  toggleContainerButton: {
-    alignItems: "center",
-    alignSelf: "flex-end",
+  title: { flex: 1, justifyContent: "flex-start" },
+  titleText: {
+    fontSize: 25,
   },
 });
