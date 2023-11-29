@@ -35,6 +35,7 @@ export const ParsedTextUnthemed = (props) => {
     <ParsedText
       style={{
         color: textColor,
+        fontSize: 16,
       }}
       testID="story.parsedText"
       parse={[
@@ -87,7 +88,7 @@ export const ParsedTextUnthemed = (props) => {
           renderText: trimFirstLastChars,
         },
       ]}
-      childrenProps={{ allowFontScaling: false }}>
+      childrenProps={{ allowFontScaling: true }}>
       {text}
     </ParsedText>
   );
