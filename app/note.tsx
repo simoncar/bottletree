@@ -11,8 +11,9 @@ import {
 import { Stack } from "expo-router";
 import { IPost, IProject } from "../lib/types";
 import ProjectContext from "../lib/projectContext";
+import { addPost } from "../lib/APIpost";
 
-export default function adNote() {
+export default function Note() {
   const { sharedDataProject } = useContext<IProject>(ProjectContext);
   const [title, onChangeTitle] = useState("");
   const colorScheme = useColorScheme();
@@ -22,7 +23,6 @@ export default function adNote() {
 
     const post: IPost = {
       projectId: sharedDataProject.key,
-      key: key?.toString() ?? "",
       caption: text?.toString() ?? "",
     };
 
