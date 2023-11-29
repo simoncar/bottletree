@@ -12,7 +12,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import ProjectContext from "../../lib/projectContext";
 import * as Device from "expo-device";
 import { addImage } from "../../lib/APIimage";
-import { addPost } from "../../lib/APIpost";
+import { addPostImage } from "../../lib/APIpost";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -93,7 +93,7 @@ export default function TabLayout() {
 
     console.log(post);
 
-    addPost(post, saveDone);
+    addPostImage(post, saveDone);
     setProgress(0);
   };
 

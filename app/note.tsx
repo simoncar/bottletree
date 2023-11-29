@@ -8,25 +8,42 @@ import {
   Button as NativeButton,
   useColorScheme,
 } from "react-native";
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import { IPost, IProject } from "../lib/types";
 import ProjectContext from "../lib/projectContext";
-import { addPost } from "../lib/APIpost";
+import { useAuth } from "../lib/authProvider";
+import { addPostNote } from "../lib/APIpost";
 
 export default function Note() {
   const { sharedDataProject } = useContext<IProject>(ProjectContext);
+  const { sharedDataUser } = useAuth();
   const [title, onChangeTitle] = useState("");
   const colorScheme = useColorScheme();
+
+  const saveDone = () => {
+    console.log("saveDone - push to home");
+
+    router.push({
+      pathname: "/",
+      params: {
+        project: sharedDataProject.key,
+        title: sharedDataProject.title,
+      },
+    });
+  };
 
   const save = () => {
     console.log("save:", sharedDataProject);
 
     const post: IPost = {
+      key: "",
+      caption: title?.toString() ?? "",
       projectId: sharedDataProject.key,
-      caption: text?.toString() ?? "",
+      projectTitle: sharedDataProject.title,
+      author: sharedDataUser.displayName,
     };
 
-    addPost(post, saveDone);
+    addPostNote(post, saveDone);
   };
 
   return (

@@ -74,7 +74,7 @@ const Post = (props) => {
           </View>
         </Pressable>
       );
-    } else {
+    } else if (imageUrls.length > 1) {
       return (
         <View style={styles.imageContainer}>
           <Carousel
@@ -124,7 +124,7 @@ const Post = (props) => {
 
 const styles = StyleSheet.create({
   comment: {
-    fontSize: 16,
+    fontSize: 26,
   },
   commentBlock: {
     padding: 8,

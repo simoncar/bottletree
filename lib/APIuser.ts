@@ -108,11 +108,11 @@ export async function getUserProjectCount(callback: userProjectCountRead) {
       user = {
         key: doc.id,
         uid: doc.id,
-        displayName: doc.data().displayName,
-        email: doc.data().email,
-        photoURL: doc.data().photoURL,
-        postCount: doc.data().postCount,
-        language: doc.data().language,
+        displayName: doc.data()?.displayName,
+        email: doc.data()?.email,
+        photoURL: doc.data()?.photoURL,
+        postCount: doc.data()?.postCount,
+        language: doc.data()?.language,
       };
 
       callback(user);

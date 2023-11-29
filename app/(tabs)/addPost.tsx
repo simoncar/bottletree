@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View, Button } from "../../components/Themed";
-import { addPost } from "../../lib/APIpost";
+import { addPostImage } from "../../lib/APIpost";
 import { addImage } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
 import { IPost } from "../../lib/types";
@@ -98,7 +98,7 @@ export default function addPhoto() {
 
     console.log(post);
 
-    addPost(post, saveDone);
+    addPostImage(post, saveDone);
     setProgress(0);
   };
 
