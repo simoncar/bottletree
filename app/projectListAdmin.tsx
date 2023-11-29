@@ -147,11 +147,11 @@ const ModalScreen = (props) => {
 const styles = StyleSheet.create({
   admin: {
     alignItems: "center",
-    textAlign: "center",
-    color: "red",
     backgroundColor: "red",
+    color: "red",
     height: 70,
     paddingTop: 10,
+    textAlign: "center",
   },
   avatar: {
     marginRight: 12,
@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
   project: {
     fontSize: 18,
     marginBottom: 5,
+    width: "90%",
   },
   projectArchived: {
     color: "grey",

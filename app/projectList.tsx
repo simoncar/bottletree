@@ -118,7 +118,6 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            console.log("updateSharedDataProject========: ", data.postCount);
 
             updateSharedDataProject({
               key: data.key,
