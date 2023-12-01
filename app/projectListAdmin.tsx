@@ -121,7 +121,6 @@ const ModalScreen = (props) => {
           </View>
           <View>{renderTitle(data)}</View>
         </TouchableOpacity>
-        <View style={styles.redCircle}></View>
       </View>
     );
   }
@@ -202,19 +201,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   projectList: {},
-
-  redCircle: {
-    alignItems: "center",
-    backgroundColor: "red",
-    borderRadius: 15 / 2,
-    height: 15,
-    justifyContent: "center",
-    marginRight: 15,
-    width: 15,
-  },
-  rightChevron: {
-    marginHorizontal: 8,
-  },
 });
 
 export default ModalScreen;
