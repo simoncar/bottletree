@@ -16,7 +16,7 @@ import { getProjects } from "../lib/APIproject";
 import ProjectContext from "../lib/projectContext";
 import { IProject } from "../lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useAuth, appSignIn } from "../lib/authProvider";
+import { useAuth } from "../lib/authProvider";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -25,7 +25,7 @@ const ModalScreen = (props) => {
   const { sharedDataUser } = useAuth();
   const uid = sharedDataUser?.uid;
   const [projects, setProjects] = useState<IProject[] | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const colorScheme = useColorScheme();
   const { updateSharedDataProject } = useContext(ProjectContext);
@@ -118,7 +118,6 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-
             updateSharedDataProject({
               key: data.key,
               title: data.title,

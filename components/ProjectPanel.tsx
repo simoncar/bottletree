@@ -43,7 +43,7 @@ const Project = (props) => {
             title: title,
             icon: icon,
           });
-          if (title) {
+          if (project) {
             router.push({
               pathname: "/editProject",
               params: {

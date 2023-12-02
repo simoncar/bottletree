@@ -6,8 +6,8 @@ const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
 export async function getProjects(uid: string, callback: projectsRead) {
-  var query;
-  var q;
+  let query;
+  let q;
   const projectList: string[] = ["X"];
 
   if (uid != "") {
@@ -37,7 +37,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
     querySnapshot.forEach((doc) => {
       projects.push({
         key: doc.id,
-        title: doc.data().title,
+        title: doc.data().title || "Untitled",
         icon: doc.data().icon,
         archived: doc.data().archived,
         postCount: doc.data().postCount,
