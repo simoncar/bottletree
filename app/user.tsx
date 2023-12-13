@@ -25,6 +25,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "../lib/demoData";
+import * as Sentry from "@sentry/react-native";
 
 export default function editUser() {
   const { uid, photoURL, displayName } = useLocalSearchParams();
