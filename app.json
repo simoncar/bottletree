@@ -12,12 +12,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#F9D96C"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "67",
+      "buildNumber": "68",
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -49,7 +51,6 @@
     "experiments": {
       "typedRoutes": true
     },
-    
     "plugins": [
       "@react-native-firebase/app",
       [
@@ -69,7 +70,10 @@
         {
           "icon": "./assets/images/notification.png",
           "color": "#ffffff",
-          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
+          "sounds": [
+            "./assets/sounds/hammer.wav",
+            "./assets/sounds/drill.wav"
+          ]
         }
       ],
       "expo-router",
