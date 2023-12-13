@@ -49,17 +49,7 @@
     "experiments": {
       "typedRoutes": true
     },
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "sentry-expo/upload-sourcemaps",
-          "config": {
-            "organization": "simon-co",
-            "project": "bottletree"
-          }
-        }
-      ]
-    },
+    
     "plugins": [
       "@react-native-firebase/app",
       [
@@ -82,7 +72,6 @@
           "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
         }
       ],
-      "sentry-expo",
       "expo-router",
       [
         "expo-build-properties",

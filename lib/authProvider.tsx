@@ -3,8 +3,9 @@ import {
   useSegments,
   useRootNavigation,
   useNavigation,
-  SplashScreen,
+
 } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { registerForPushNotificationsAsync } from "../lib/notifications";
 import * as Device from "expo-device";
