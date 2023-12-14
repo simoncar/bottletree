@@ -73,12 +73,14 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Projects",
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
                     name="projectListAdmin"
                     options={{
                       title: "Administration",
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -86,6 +88,7 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Colors",
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -93,12 +96,14 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Users",
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
                     name="language"
                     options={{
                       title: "Language",
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -108,6 +113,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -117,6 +123,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -126,6 +133,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -135,6 +143,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -144,6 +153,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -153,6 +163,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -162,6 +173,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -171,6 +183,7 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
+                      headerBackTitle: "Back",
                     }}
                   />
                 </Stack>
