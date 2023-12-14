@@ -129,14 +129,7 @@ const Comments = ({ project, post }: Props) => {
           lightColor={bubbbleTextColor}
           darkColor={bubbbleTextColor}
           style={styles.commentText}
-          text={
-            displayName(item.displayName) +
-            " " +
-            item.comment +
-            +" [" +
-            new Date(item.timestamp.toDate()).toDateString() +
-            "]"
-          }
+          text={displayName(item.displayName) + " " + item.comment}
         />
       </View>
     );

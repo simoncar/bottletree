@@ -165,7 +165,7 @@ export async function getComments(projectId: string, postId: string) {
   commentsSnapshot.forEach((doc) => {
     comments.push({
       key: doc.id,
-      comment: doc.data().comment,
+      comment: doc.data().comment !== null ? doc.data().comment : "",
       displayName: doc.data().displayName,
       timestamp: doc.data().timestamp,
       uid: doc.data().uid,

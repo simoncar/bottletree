@@ -1,9 +1,8 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useContext, useEffect } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import ProjectContext from "../lib/projectContext";
 import Colors from "../constants/Colors";
@@ -109,7 +108,6 @@ const styles = StyleSheet.create({
   },
   outerView: {
     alignItems: "center",
-    backgroundColor: "#F0F8FF",
     borderRadius: 5,
     flexDirection: "row",
     marginTop: 10,

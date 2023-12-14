@@ -1,10 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { View, Text } from "../components/Themed";
 import { getPosts } from "../lib/APIpost";
 import { updateUserProjectCount } from "../lib/APIuser";
@@ -14,7 +9,6 @@ import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
-import { demoData } from "../lib/demoData";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 
 export const Posts = () => {
