@@ -133,7 +133,7 @@ const Comments = ({ project, post }: Props) => {
             displayName(item.displayName) +
             " " +
             item.comment +
-            " [" +
+            +" [" +
             new Date(item.timestamp.toDate()).toDateString() +
             "]"
           }
