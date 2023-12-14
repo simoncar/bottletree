@@ -45,7 +45,14 @@ export default function SignIn() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: "Sign In" }} />
+      <Stack.Screen
+        options={{
+          title: "Sign In",
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+          },
+        }}
+      />
 
       <View style={styles.inputView}>
         <TextInput

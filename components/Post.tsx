@@ -30,17 +30,12 @@ const Post = (props) => {
 
   return (
     <View>
-      <View style={styles.listItemHeader}></View>
-
       <View style={styles.postView}>
         {renderImage()}
         <Dots images={imageUrls} />
         <Status project={post.projectId} post={post.key} status={post.status} />
         <View style={styles.commentBlock}>
           <ParsedText style={styles.comment} text={caption} />
-          <Text style={styles.commentTime}>
-            {new Date(post.timestamp.toDate()).toDateString()}
-          </Text>
           <Comments project={post.projectId} post={post.key} />
         </View>
       </View>
@@ -128,11 +123,6 @@ const styles = StyleSheet.create({
   },
   commentBlock: {
     padding: 8,
-  },
-  commentTime: {
-    color: "#999",
-    fontSize: 12,
-    paddingTop: 4,
   },
 
   imageContainer: {

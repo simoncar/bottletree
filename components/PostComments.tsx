@@ -171,9 +171,7 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
     paddingTop: 2,
   },
-  commentsOverall: {
-    marginTop: 20,
-  },
+  commentsOverall: {},
   inputAction: { marginHorizontal: 8, paddingTop: 5 },
   inputBubble: {
     borderColor: "lightgray",

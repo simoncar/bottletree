@@ -10,11 +10,9 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F9D96C"
+      "backgroundColor": "#5D5CE7"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
@@ -28,7 +26,7 @@
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#F9D96C"
+        "backgroundColor": "#5D5CE7"
       },
       "versionCode": 4,
       "package": "com.simoncar.bottletree"
@@ -70,10 +68,7 @@
         {
           "icon": "./assets/images/notification.png",
           "color": "#ffffff",
-          "sounds": [
-            "./assets/sounds/hammer.wav",
-            "./assets/sounds/drill.wav"
-          ]
+          "sounds": ["./assets/sounds/hammer.wav", "./assets/sounds/drill.wav"]
         }
       ],
       "expo-router",

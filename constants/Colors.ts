@@ -1,13 +1,10 @@
-const tintColorLight = "#2f95dc";
-const tintColorDark = "#fff";
-
 export default {
   light: {
     text: "#000",
     orangeButtonIcon: "#fff",
     textPlaceholder: "#ccc",
     background: "#FAF3F3",
-    tint: tintColorLight,
+    tint: "#5D5CE7",
     calendarPanel: "#e9f0fd",
     calendarTitle: "#3265cb",
     calendarDayTextColor: "#2d4150",
@@ -30,7 +27,7 @@ export default {
     orangeButtonIcon: "#000",
     textPlaceholder: "#ccc",
     background: "#2F203C",
-    tint: tintColorDark,
+    tint: "#5D5CE7",
     calendarPanel: "#2f95dc",
     calendarTitle: "#fff",
     calendarDayTextColor: "#fff",
@@ -44,7 +41,7 @@ export default {
     bigCalendarContrastText: "#fff",
     skeletonBackground: "#2d4150",
     bubbleBackgroundColorMe: "#057EFD",
-    bubbleBackgroundColorOther: "#262529",
+    bubbleBackgroundColorOther: "#53425A",
     bubbleTextColorMe: "#fff",
     bubbleTextColorOther: "#fff",
   },

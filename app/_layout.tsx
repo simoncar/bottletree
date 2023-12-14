@@ -35,7 +35,6 @@ export default function RootLayout() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: "#FFF",
     },
   };
 
@@ -64,7 +63,9 @@ export default function RootLayout() {
                 <Stack>
                   <Stack.Screen
                     name="(tabs)"
-                    options={{ headerShown: false }}
+                    options={{
+                      headerShown: false,
+                    }}
                   />
 
                   <Stack.Screen

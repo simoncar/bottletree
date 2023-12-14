@@ -171,11 +171,6 @@ export default function TabLayout() {
         name="index"
         listeners={{
           tabPress: (e) => {
-            // Prevent default action
-            // e.preventDefault();
-            //Any custom code here
-            // alert(123);
-
             router.push({
               pathname: "/projectList",
               params: {
@@ -186,7 +181,16 @@ export default function TabLayout() {
         }}
         options={{
           title: "",
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+          },
+
+          headerTintColor: "white",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+            height: 80,
+          },
           headerTitle: () => (
             <BigText style={styles.headerTitle}>{appName}</BigText>
           ),
@@ -234,9 +238,16 @@ export default function TabLayout() {
             <BigText style={styles.headerTitle}>Calendar</BigText>
           ),
           headerTitleAlign: "left",
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+          },
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="calendar" color={color} />
           ),
+          tabBarStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+            height: 80,
+          },
         }}
       />
     </Tabs>
@@ -249,7 +260,7 @@ const styles = StyleSheet.create({
   },
   tabButton: {
     alignItems: "center",
-    backgroundColor: "#ec562a",
+    backgroundColor: "#5D5CE7",
     borderRadius: 55 / 2,
     height: 55,
     justifyContent: "center",
