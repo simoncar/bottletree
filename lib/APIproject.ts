@@ -99,17 +99,25 @@ export function updateProject(project: IProject, callback: saveDone) {
 
 export function addProject(
   project: IProject,
+  user: IUser,
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    console.log("addProject FBJS: ", project.title);
-
     db.collection("projects")
       .add({
         title: project.title,
         icon: stockHouseIcon,
         timestamp: firestore.Timestamp.now(),
         archived: false,
+        postCount: 0,
+      })
+      .then((docRef) => {
+        console.log(
+          "Project written with ID, now add the currenly logged in user to the newly created project: ",
+          docRef.id,
+        );
+
+        addProjectUser(docRef.id, user);
       })
       .then((docRef) => {
         console.log("Project written with ID: ", docRef.id);
@@ -125,8 +133,10 @@ export function addProject(
 export function addProjectUser(
   projectId: string,
   user: IUser,
-  callback: { (id: string): void; (arg0: string): void },
+  callback?: { (id: string): void; (arg0: string): void },
 ) {
+  console.log("Adding user to project: ", user);
+
   try {
     const docRef = db
       .collection("projects")
@@ -135,7 +145,7 @@ export function addProjectUser(
       .doc(user.key)
       .set(
         {
-          uid: user.key,
+          uid: user.uid,
           displayName: user.displayName,
           timestamp: firestore.Timestamp.now(),
           projectId: projectId,
@@ -143,7 +153,11 @@ export function addProjectUser(
         { merge: true },
       )
       .then((docRef) => {
-        callback(user.key);
+        if (callback) {
+          callback(user.key);
+        } else {
+          console.log("Callback not provided.");
+        }
       });
   } catch (e) {
     console.error("Error adding user to project: ", e);

@@ -1,21 +1,31 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Button, SafeAreaView } from "react-native";
-import { Image } from "expo-image";
 import { router, Stack } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
-import { Text, View, TextInput } from "../components/Themed";
+import { TextInput } from "../components/Themed";
+
 import ProjectContext from "../lib/projectContext";
+import AuthContext from "../lib/authContext";
+
 import { addProject } from "../lib/APIproject";
-import { IProject } from "../lib/types";
+import { IProject, IUser } from "../lib/types";
 
 export default function addPhoto() {
   const { sharedDataProject, updateSharedDataProject } =
     useContext(ProjectContext);
-
+  const { sharedDataUser } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [text, onChangeText] = useState("");
+  let loggedInUser: IUser = sharedDataUser;
+
+  if (null == sharedDataUser) {
+    loggedInUser = {
+      uid: "",
+      displayName: "",
+      email: "",
+      photoURL: "",
+    };
+  }
 
   const project: IProject = {
     key: "",
@@ -43,7 +53,7 @@ export default function addPhoto() {
 
   const onSave = async () => {
     project.title = text;
-    addProject(project, saveDone);
+    addProject(project, loggedInUser, saveDone);
   };
 
   const pickImage = async () => {};
