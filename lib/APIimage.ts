@@ -4,10 +4,15 @@ import * as Crypto from "expo-crypto";
 import { Image } from "react-native-compressor";
 
 export const addImageFromCameraRoll = async (
-  multiple,
-  folder,
-  progressCallback,
-  completedCallback,
+  multiple: boolean,
+  folder: string,
+  progressCallback: {
+    (progress: any): void;
+  },
+  completedCallback: {
+    (sourceDownloadURLarray: any): void;
+    (arg0: unknown[]): void;
+  },
 ) => {
   const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -29,10 +34,10 @@ export const addImageFromCameraRoll = async (
 };
 
 export const addImageFromPhoto = async (
-  photo,
-  folder,
-  progressCallback,
-  completedCallback,
+  photo: any,
+  folder: string,
+  progressCallback: (progress: any) => void,
+  completedCallback: { (sourceDownloadURL: any): void; (arg0: unknown): void },
 ) => {
   try {
     const processedResults = await processItemAsync(
@@ -46,7 +51,7 @@ export const addImageFromPhoto = async (
   }
 };
 
-async function processItemAsync(folder: string, asset, progressCallback) {
+async function processItemAsync(folder: string, asset: any, progressCallback) {
   const result = await Image.compress(asset.uri, {
     progressDivider: 10,
     downloadProgress: (progress) => {
@@ -55,44 +60,42 @@ async function processItemAsync(folder: string, asset, progressCallback) {
   });
 
   return new Promise((resolve, reject) => {
-    const promises = [];
-    {
-      try {
-        const storageRef = getStorageRef(folder);
-        const uploadTask = storageRef.putFile(result);
+    try {
+      const storageRef = getStorageRef(folder);
+      const uploadTask = storageRef.putFile(result);
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const uploadProgress = Math.floor(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-            );
-            progressCallback(uploadProgress);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const uploadProgress = Math.floor(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          );
+          progressCallback(uploadProgress);
 
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-            }
-          },
-          (error) => {
-            console.log("error file upload:", error);
-          },
-          () => {
-            const p = storageRef.getDownloadURL().then((downloadURL) => {
-              console.log("File available at", downloadURL);
-              console.log("dimensions", asset.height, asset.width);
-              const ratio = asset.height / asset.width;
-              resolve(ratio + "*" + downloadURL);
-            });
-          },
-        );
-      } catch (error) {
-        console.log("processItemAsync error:", error);
-      }
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          console.log("error file upload:", error);
+        },
+        () => {
+          const p = storageRef.getDownloadURL().then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            console.log("dimensions", asset.height, asset.width);
+            const ratio = asset.height / asset.width;
+            resolve(ratio + "*" + downloadURL);
+          });
+        },
+      );
+    } catch (error) {
+      console.log("processItemAsync error:", error);
+      reject(error);
     }
   });
 }
