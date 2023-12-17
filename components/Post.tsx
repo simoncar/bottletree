@@ -43,6 +43,8 @@ const Post = (props) => {
   );
 
   function renderImage() {
+    console.log("renderImage: ", imageUrls);
+
     if (imageUrls.length == 1) {
       return (
         <Pressable
@@ -52,7 +54,7 @@ const Post = (props) => {
               params: {
                 project: post.projectId,
                 key: post.key,
-                image: imageUrls,
+                image: encodeURIComponent(imageUrls),
                 caption: caption || "",
                 ratio: ratio,
               },
@@ -87,7 +89,7 @@ const Post = (props) => {
                     params: {
                       project: post.projectId,
                       key: post.key,
-                      image: imageUrls[index],
+                      image: encodeURIComponent(imageUrls[index]),
                       caption: caption,
                       ratio: ratio,
                     },

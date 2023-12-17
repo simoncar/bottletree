@@ -6,6 +6,8 @@ import { router, useLocalSearchParams, Stack } from "expo-router";
 export default function viewPost() {
   const { key, image, caption, ratio } = useLocalSearchParams();
 
+  console.log("viewPost: ", key, image, caption, ratio);
+
   return (
     <View style={styles.overall}>
       <View>
