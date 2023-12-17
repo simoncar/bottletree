@@ -99,17 +99,6 @@ export default function App() {
     //setProgress(0);
   };
 
-  const takePhoto = async () => {
-    if (!permission) return;
-
-    if (camera) {
-      const options = { quality: 0.7 };
-      const photo = await camera.takePictureAsync(options);
-
-      addImageFromPhoto(photo, "project", progressCallback, completedCallback);
-    }
-  };
-
   const handlePressIn = () => {
     Animated.timing(scaleValue, {
       toValue: 0.6,
@@ -122,7 +111,7 @@ export default function App() {
     setBackgroundInnerColor("#b92929");
   };
 
-  const handlePressOut = () => {
+  const handlePressOut = async () => {
     Animated.timing(scaleValue, {
       toValue: 1,
       duration: 150,
@@ -130,10 +119,17 @@ export default function App() {
       useNativeDriver: true,
     }).start();
 
+    if (!permission) return;
+
+    if (camera) {
+      const options = { quality: 0.7 };
+      const photo = await camera.takePictureAsync(options);
+
+      addImageFromPhoto(photo, "project", progressCallback, completedCallback);
+    }
+
     setBackgroundColor("#3498db");
     setBackgroundInnerColor("white");
-
-    // Add your logic for taking a photo here
   };
 
   const animatedStyle = {
