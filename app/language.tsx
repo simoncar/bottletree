@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { SettingsListItem } from "../components/SettingsListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { getUser } from "../lib/APIuser";
 import { useLocalSearchParams } from "expo-router";
+import AuthContext from "../lib/authContext";
+import { IUser } from "../lib/types";
 
 interface TProps {
   navigation: any;
 }
 
 export default function SelectLanguage(props: TProps) {
-  const language = "en";
+  let language = "en";
+  const { sharedDataUser } = useContext(AuthContext);
   const getStyle = (pass: string) => {
     if (language === pass) {
       return styles.imageStyleCheckOn;
@@ -19,9 +22,6 @@ export default function SelectLanguage(props: TProps) {
       return styles.imageStyleCheckOff;
     }
   };
-  const local = useLocalSearchParams<{
-    uid: string;
-  }>();
 
   const changeLanguage = (newLanguage: string) => {
     //setLanguage(newLanguage);
@@ -32,13 +32,13 @@ export default function SelectLanguage(props: TProps) {
     });
   };
 
-  useEffect(() => {
-    getUser(local?.uid || "", (user) => {
-      if (user) {
-        console.log("user: ", user);
-      }
-    });
-  }, []);
+  const loggedInUser: IUser = sharedDataUser;
+  console.log("SelectLanguage - loggedInUser: " + loggedInUser);
+  console.log(loggedInUser);
+
+  if (loggedInUser?.language !== undefined) {
+    language = loggedInUser.language;
+  }
 
   return (
     <SafeAreaView style={styles.adminContainer}>
