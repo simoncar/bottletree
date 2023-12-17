@@ -305,8 +305,8 @@ export default function editUser() {
             <View style={styles.outerView}>
               <TouchableOpacity key={"admin"} onPress={() => demoData()}>
                 <View style={styles.leftContent}>
-                  <MaterialCommunityIcons
-                    name="shield-lock"
+                  <FontAwesome5
+                    name="seedling"
                     size={25}
                     color={Colors[colorScheme ?? "light"].text}
                   />
