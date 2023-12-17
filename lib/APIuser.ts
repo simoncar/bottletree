@@ -2,6 +2,30 @@ import { CurrentRenderContext } from "@react-navigation/native";
 import { auth, firestore } from "../lib/firebase";
 import { IUser } from "./types";
 
+
+// create an export function that loads a single user from firebase into a return object that can be used by the app
+export async function getUser(
+  uid: string,
+  callback: { (user: IUser): void; (arg0: IUser): void },
+) {
+  const q = firestore().collection("users").doc(uid);
+
+  const unsubscribe = q.onSnapshot((doc) => {
+    const user: IUser = {
+      key: doc.id,
+      uid: doc.id,
+      displayName: doc.data()?.displayName,
+      email: doc.data()?.email,
+      photoURL: doc.data()?.photoURL,
+      language: doc.data()?.language,
+    };
+
+    callback(user);
+  });
+
+  return () => unsubscribe();
+}
+
 export const updateAccountName = (displayName: string) => {
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 

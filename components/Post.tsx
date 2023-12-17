@@ -43,8 +43,6 @@ const Post = (props) => {
   );
 
   function renderImage() {
-    console.log("renderImage: ", imageUrls);
-
     if (imageUrls.length == 1) {
       return (
         <Pressable

@@ -10,9 +10,6 @@ export default function viewPost() {
 
   return (
     <View style={styles.overall}>
-      <View>
-        <Text>AAA</Text>
-      </View>
       {image && (
         <ImageZoom
           uri={image}

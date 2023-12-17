@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-native";
 import { Text, View, TextInput } from "../components/Themed";
-import { useAuth, appSignIn } from "../lib/authProvider";
+import { useAuth } from "../lib/authProvider";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
 
@@ -19,22 +19,33 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Colors from "../constants/Colors";
-import { updateAccountName, updateAccountPhotoURL } from "../lib/APIuser";
+import {
+  updateAccountName,
+  updateAccountPhotoURL,
+  getUser,
+} from "../lib/APIuser";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImage } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "../lib/demoData";
-import * as Sentry from "@sentry/react-native";
+import { IUser } from "../lib/types";
 
 export default function editUser() {
-  const { uid, photoURL, displayName } = useLocalSearchParams();
+  const local = useLocalSearchParams<{
+    uid: string;
+  }>();
 
-  const [text, onChangeText] = useState(displayName);
-  const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
-  const colorScheme = useColorScheme();
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
+  const colorScheme = useColorScheme();
+
+  const [user, setUser] = useState<IUser>({
+    uid: "",
+    displayName: "",
+    email: "",
+    photoURL: "",
+  });
 
   const admins = [
     "simoncar@gmail.com",
@@ -43,17 +54,18 @@ export default function editUser() {
   ];
 
   useEffect(() => {
-    if (null != sharedDataUser) {
-      onChangeText(sharedDataUser?.displayName);
-    } else {
-      onChangeText("");
-    }
+    getUser(local?.uid || "", (user) => {
+      if (user) {
+        setUser(user);
+        updateSharedDataUser(user);
+      }
+    });
   }, []);
 
   const save = () => {
-    console.log("save: " + text, sharedDataUser?.displayName);
-    updateSharedDataUser({ displayName: text });
-    updateAccountName(text);
+    console.log("save: " + user.displayName, sharedDataUser?.displayName);
+    updateSharedDataUser({ displayName: user.displayName });
+    updateAccountName(user.displayName);
 
     router.push({
       pathname: "/",
@@ -78,7 +90,7 @@ export default function editUser() {
       return myArray[1]; // For example, creating a new array with each element doubled.
     });
 
-    onChangeTextPhotoURL(downloadURLarray[0]);
+    setUser({ ...user, photoURL: downloadURLarray[0] });
     updateAccountPhotoURL(downloadURLarray[0]); //firebease auth update function
     updateSharedDataUser({ photoURL: downloadURLarray[0] });
   };
@@ -86,10 +98,6 @@ export default function editUser() {
   const pickImage = async () => {
     const multiple = false;
     addImage(multiple, "profile", progressCallback, completedCallback);
-  };
-
-  const nameUpdate = (textName) => {
-    onChangeText(textName);
   };
 
   const administration = async () => {
@@ -124,22 +132,12 @@ export default function editUser() {
           case 1:
             updateAccountPhotoURL("");
             updateSharedDataUser({ photoURL: "" });
-            onChangeTextPhotoURL("");
+            setUser({ ...user, photoURL: "" });
 
             break;
         }
       },
     );
-  };
-
-  const crashTest = () => {
-    const i = undefined;
-    if (i.test62 == 1)
-      throw new Error("This is a test javascript error from the app");
-
-    //Sentry.Native.captureMessage("Crash Text 111 ");
-
-    //Sentry.Native.captureMessage("Crash Text 222 ");
   };
 
   const profilePic = () => {
@@ -149,8 +147,8 @@ export default function editUser() {
           onPress={() => {
             openActionSheet();
           }}>
-          {textPhotoURL ? (
-            <Image style={styles.profilePhoto} source={textPhotoURL} />
+          {user.photoURL ? (
+            <Image style={styles.profilePhoto} source={user.photoURL} />
           ) : (
             <View style={styles.profileCircleIcon}>
               <Ionicons
@@ -184,9 +182,9 @@ export default function editUser() {
             <View style={styles.projectBox}>
               <TextInput
                 style={styles.project}
-                onChangeText={(text) => nameUpdate(text)}
+                onChangeText={(text) => setUser({ ...user, displayName: text })}
                 placeholder={"Your Name"}
-                value={text}
+                value={user.displayName}
                 multiline
               />
             </View>

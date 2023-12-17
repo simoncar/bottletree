@@ -42,7 +42,7 @@ export default function editPost() {
   });
 
   useEffect(() => {
-    getProject(local.projectId, (project) => {
+    getProject(local?.projectId || "", (project) => {
       if (project) {
         setProject(project);
         updateSharedDataProject(project);
