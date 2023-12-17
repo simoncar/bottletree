@@ -127,13 +127,10 @@ const ModalScreen = (props) => {
             });
             postCountDelta == 0;
 
-            router.push({
+            router.replace({
               pathname: "/" + page,
               params: {
                 projectId: data.key,
-                title: data.title,
-                icon: data.icon,
-                archived: data.archived,
               },
             });
           }}>

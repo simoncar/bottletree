@@ -10,6 +10,7 @@ import { Text } from "../components/Themed";
 import { getUserProjectCount } from "../lib/APIuser";
 import { IUser } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
+import { RollInRight } from "react-native-reanimated";
 
 const Project = (props) => {
   const { project, title, icon, archived, page } = props;
