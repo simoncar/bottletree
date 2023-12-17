@@ -16,10 +16,9 @@ export default function App() {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const colorScheme = useColorScheme();
-  const cameraRef = useRef();
+  const [camera, setCamera] = useState(null);
 
   if (!permission) {
-    // Camera permissions are still loading
     return <View />;
   }
 
@@ -38,7 +37,7 @@ export default function App() {
     );
   }
 
-  function toggleCameraType() {
+  function flipCamera() {
     setType((current) =>
       current === CameraType.back ? CameraType.front : CameraType.back,
     );
@@ -53,34 +52,19 @@ export default function App() {
   };
 
   const takePhoto = async () => {
-    console.log("takePhoto", permission, cameraRef);
-
     if (!permission) return;
-    if (cameraRef.current) {
+
+    if (camera) {
       const options = { quality: 0.7 };
-      const photo = await cameraRef.current.takePictureAsync(options);
-      console.log(photo);
+      const photo = await camera.takePictureAsync(options);
 
       processItemAsync("posts", photo, progressCallback);
-
-      // saveProfilePic(photo.uri).then((downloadURL) => {
-      //   setGPhotoURL(downloadURL);
-      //   props.navigation.pop();
-      // });
-
-      // setPreviewVisible(true);
-      // setCapturedImage(photo);
     }
-
-    // const photo = await Camera.takePictureAsync();
-    // console.log(photo);
-    // setPreviewVisible(true);
-    // setCapturedImage(photo);
   };
 
   function flipCameraButton() {
     return (
-      <TouchableOpacity style={styles.flipCamera} onPress={takePhoto}>
+      <TouchableOpacity style={styles.flipCamera} onPress={flipCamera}>
         <Ionicons
           name="ios-camera-reverse-outline"
           size={45}
@@ -104,7 +88,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Camera ref={cameraRef.current} style={styles.camera} type={type}>
+      <Camera ref={(ref) => setCamera(ref)} style={styles.camera} type={type}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
           <View style={styles.a}>{takePhotoButton()}</View>
