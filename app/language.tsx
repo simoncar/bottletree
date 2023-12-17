@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { SettingsListItem } from "../components/SettingsListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { getUser } from "../lib/APIuser";
+import { useLocalSearchParams } from "expo-router";
 
 interface TProps {
   navigation: any;
 }
 
 export default function SelectLanguage(props: TProps) {
-  // const [language, setLanguage, languageIsUpdated] = useLanguage();
   const language = "en";
   const getStyle = (pass: string) => {
     if (language === pass) {
@@ -18,6 +19,9 @@ export default function SelectLanguage(props: TProps) {
       return styles.imageStyleCheckOff;
     }
   };
+  const local = useLocalSearchParams<{
+    uid: string;
+  }>();
 
   const changeLanguage = (newLanguage: string) => {
     //setLanguage(newLanguage);
@@ -27,6 +31,14 @@ export default function SelectLanguage(props: TProps) {
       pathname: "/user",
     });
   };
+
+  useEffect(() => {
+    getUser(local?.uid || "", (user) => {
+      if (user) {
+        console.log("user: ", user);
+      }
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.adminContainer}>
