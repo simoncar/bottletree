@@ -1,5 +1,5 @@
 import { Camera, CameraType } from "expo-camera";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import {
   Button,
   StyleSheet,
@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   View,
   useColorScheme,
+  Animated,
+  Easing,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../constants/Colors";
@@ -24,6 +26,9 @@ export default function App() {
   const [camera, setCamera] = useState(null);
   const { sharedDataProject } = useContext(ProjectContext);
   const { sharedDataUser } = useAuth();
+  const scaleValue = useRef(new Animated.Value(1)).current;
+  const [backgroundColor, setBackgroundColor] = useState("#3498db");
+  const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
 
   if (!permission) {
     return <View />;
@@ -105,18 +110,56 @@ export default function App() {
     }
   };
 
+  const handlePressIn = () => {
+    Animated.timing(scaleValue, {
+      toValue: 0.6,
+      duration: 250,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: true,
+    }).start();
+
+    setBackgroundColor("#b92929");
+    setBackgroundInnerColor("#b92929");
+  };
+
+  const handlePressOut = () => {
+    Animated.timing(scaleValue, {
+      toValue: 1,
+      duration: 150,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: true,
+    }).start();
+
+    setBackgroundColor("#3498db");
+    setBackgroundInnerColor("white");
+
+    // Add your logic for taking a photo here
+  };
+
+  const animatedStyle = {
+    transform: [{ scale: scaleValue }],
+    backgroundColor: backgroundColor,
+  };
+
+  const animatedInnerStyle = {
+    backgroundColor: backgroundInnerColor,
+  };
+
   return (
     <View style={styles.container}>
       <Camera ref={(ref) => setCamera(ref)} style={styles.camera} type={type}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
           <View style={styles.a}>
-            <TouchableOpacity onPress={takePhoto}>
-              <View style={styles.circleOuter}>
+            <TouchableOpacity
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
+              activeOpacity={1}>
+              <Animated.View style={[styles.circleOuter, animatedStyle]}>
                 <View style={styles.circleMiddle}>
-                  <View style={styles.circleInner}></View>
+                  <View style={[styles.circleInner, animatedInnerStyle]}></View>
                 </View>
-              </View>
+              </Animated.View>
             </TouchableOpacity>
           </View>
           <View style={styles.a}>
