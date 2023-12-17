@@ -28,7 +28,11 @@ export const addImage = async (
   }
 };
 
-export async function processItemAsync(folder: string, asset, progressCallback) {
+export async function processItemAsync(
+  folder: string,
+  asset,
+  progressCallback,
+) {
   const result = await Image.compress(asset.uri, {
     progressDivider: 10,
     downloadProgress: (progress) => {
@@ -95,29 +99,4 @@ function getStorageRef(folder: string) {
   const storageRef = storage().ref(fileName);
 
   return storageRef;
-}
-async function getBlobAsync(uri) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      resolve(xhr.response);
-    };
-    xhr.onerror = function (e) {
-      console.log(e);
-      reject(new TypeError("Network request failed"));
-    };
-    xhr.responseType = "blob";
-    xhr.open("GET", uri, true);
-    xhr.send(null);
-  });
-}
-
-function x() {
-  const promises = result.assets.map(async (asset, index) => {
-    console.log("result uri:", asset.uri);
-    console.log("result height:", asset.height);
-    console.log("result width:", asset.width);
-
-    return Promise.all(promises);
-  });
 }
