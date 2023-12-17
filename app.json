@@ -70,6 +70,12 @@
           }
         }
       ],
+      [
+        "expo-updates",
+        {
+          "username": "simoncar@gmail.com"
+        }
+      ],
       "react-native-compressor",
       "expo-localization"
     ]

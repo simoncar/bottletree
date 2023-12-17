@@ -6,6 +6,7 @@ import {
   useColorScheme,
   TouchableOpacity,
   Button,
+  Pressable,
 } from "react-native";
 import { Text, View, TextInput } from "../components/Themed";
 import { useAuth } from "../lib/authProvider";
@@ -30,6 +31,8 @@ import { addImageFromCameraRoll } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "../lib/demoData";
 import { IUser } from "../lib/types";
+import { StatusBar } from "expo-status-bar";
+import * as Updates from "expo-updates";
 
 export default function editUser() {
   const local = useLocalSearchParams<{
@@ -39,6 +42,13 @@ export default function editUser() {
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
+
+  const {
+    currentlyRunning,
+    availableUpdate,
+    isUpdateAvailable,
+    isUpdatePending,
+  } = Updates.useUpdates();
 
   const [user, setUser] = useState<IUser>({
     uid: "",
@@ -53,6 +63,13 @@ export default function editUser() {
     "eddymitchell133@gmail.com",
   ];
 
+  const showDownloadButton = isUpdateAvailable;
+
+  // Show whether or not we are running embedded code or an update
+  const runTypeMessage = currentlyRunning.isEmbeddedLaunch
+    ? "This app is running from built-in code"
+    : "This app is running an update";
+
   useEffect(() => {
     getUser(local?.uid || "", (user) => {
       if (user) {
@@ -61,6 +78,13 @@ export default function editUser() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (isUpdatePending) {
+      // Update has successfully downloaded
+      runUpdate();
+    }
+  }, [isUpdatePending]);
 
   const save = () => {
     console.log("save: " + user.displayName, sharedDataUser?.displayName);
@@ -290,6 +314,40 @@ export default function editUser() {
                 </View>
                 <View style={styles.rightChevron}></View>
               </TouchableOpacity>
+            </View>
+            <View style={styles.outerView}>
+              <TouchableOpacity
+                key={"admin"}
+                onPress={() => Updates.checkForUpdateAsync()}>
+                <View style={styles.leftContent}>
+                  <MaterialIcons
+                    name="system-update-alt"
+                    size={25}
+                    color={Colors[colorScheme ?? "light"].text}
+                  />
+                  <Text style={styles.settingName}>Update</Text>
+                  <Text>{runTypeMessage}</Text>
+                </View>
+                <View style={styles.rightChevron}></View>
+              </TouchableOpacity>
+
+              {showDownloadButton ? (
+                <TouchableOpacity
+                  key={"admin"}
+                  onPress={() => Updates.fetchUpdateAsync()}>
+                  <View style={styles.leftContent}>
+                    <MaterialIcons
+                      name="system-update-alt"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].text}
+                    />
+                    <Text style={styles.settingName}>
+                      Download and run update
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ) : null}
+              <StatusBar style="auto" />
             </View>
           </View>
         )}
