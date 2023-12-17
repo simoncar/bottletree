@@ -1,5 +1,5 @@
 import { Camera, CameraType } from "expo-camera";
-import React, { useState, useRef } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   StyleSheet,
@@ -10,13 +10,20 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../constants/Colors";
-import { processItemAsync } from "../lib/APIimage";
+import { addImageFromPhoto } from "../lib/APIimage";
+import ProjectContext from "../lib/projectContext";
+import { IPost } from "../lib/types";
+import { useAuth } from "../lib/authProvider";
+import { addPostImage } from "../lib/APIpost";
+import { router } from "expo-router";
 
 export default function App() {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const colorScheme = useColorScheme();
   const [camera, setCamera] = useState(null);
+  const { sharedDataProject } = useContext(ProjectContext);
+  const { sharedDataUser } = useAuth();
 
   if (!permission) {
     return <View />;
@@ -44,11 +51,47 @@ export default function App() {
   }
 
   const progressCallback = (progress) => {
-    console.log("progressCallback: " + progress);
+    console.log("progressCallback CAMERA : " + progress);
   };
 
-  const completedCallback = (sourceDownloadURLarray) => {
-    console.log("completedCallback:", sourceDownloadURLarray);
+  const saveDone = () => {
+    console.log("saveDone - push to home");
+
+    router.push({
+      pathname: "/",
+      params: {
+        project: sharedDataProject.key,
+        title: sharedDataProject.title,
+      },
+    });
+  };
+
+  const completedCallback = (sourceDownloadURL) => {
+    console.log("addImageCallback CAMERA >>>>>>>: ", sourceDownloadURL);
+    let ratio = 0.66666;
+    const myArray = sourceDownloadURL.split("*");
+    console.log("myArray: ", myArray);
+    if (myArray[0] > ratio) {
+      ratio = myArray[0];
+    }
+    const downloadURL = myArray[1]; // For example, creating a new array with each element doubled.
+
+    //setImage(null);
+
+    const post: IPost = {
+      key: "",
+      caption: "",
+      projectId: sharedDataProject.key,
+      projectTitle: sharedDataProject.title,
+      author: sharedDataUser.displayName,
+      images: [downloadURL],
+      ratio: ratio,
+    };
+
+    console.log(post);
+
+    addPostImage(post, saveDone);
+    //setProgress(0);
   };
 
   const takePhoto = async () => {
@@ -58,41 +101,33 @@ export default function App() {
       const options = { quality: 0.7 };
       const photo = await camera.takePictureAsync(options);
 
-      processItemAsync("posts", photo, progressCallback);
+      addImageFromPhoto(photo, "project", progressCallback, completedCallback);
     }
   };
-
-  function flipCameraButton() {
-    return (
-      <TouchableOpacity style={styles.flipCamera} onPress={flipCamera}>
-        <Ionicons
-          name="ios-camera-reverse-outline"
-          size={45}
-          color={Colors[colorScheme ?? "light"].textPlaceholder}
-        />
-      </TouchableOpacity>
-    );
-  }
-
-  function takePhotoButton() {
-    return (
-      <TouchableOpacity onPress={takePhoto}>
-        <View style={styles.circleOuter}>
-          <View style={styles.circleMiddle}>
-            <View style={styles.circleInner}></View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
 
   return (
     <View style={styles.container}>
       <Camera ref={(ref) => setCamera(ref)} style={styles.camera} type={type}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
-          <View style={styles.a}>{takePhotoButton()}</View>
-          <View style={styles.a}>{flipCameraButton()}</View>
+          <View style={styles.a}>
+            <TouchableOpacity onPress={takePhoto}>
+              <View style={styles.circleOuter}>
+                <View style={styles.circleMiddle}>
+                  <View style={styles.circleInner}></View>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.a}>
+            <TouchableOpacity style={styles.flipCamera} onPress={flipCamera}>
+              <Ionicons
+                name="ios-camera-reverse-outline"
+                size={45}
+                color={Colors[colorScheme ?? "light"].textPlaceholder}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </Camera>
     </View>

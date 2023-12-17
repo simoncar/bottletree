@@ -3,7 +3,7 @@ import { storage } from "./firebase";
 import * as Crypto from "expo-crypto";
 import { Image } from "react-native-compressor";
 
-export const addImage = async (
+export const addImageFromCameraRoll = async (
   multiple,
   folder,
   progressCallback,
@@ -28,11 +28,25 @@ export const addImage = async (
   }
 };
 
-export async function processItemAsync(
-  folder: string,
-  asset,
+export const addImageFromPhoto = async (
+  photo,
+  folder,
   progressCallback,
-) {
+  completedCallback,
+) => {
+  try {
+    const processedResults = await processItemAsync(
+      folder,
+      photo,
+      progressCallback,
+    );
+    completedCallback(processedResults);
+  } catch (error) {
+    console.error("Error occurred during processing:", error);
+  }
+};
+
+async function processItemAsync(folder: string, asset, progressCallback) {
   const result = await Image.compress(asset.uri, {
     progressDivider: 10,
     downloadProgress: (progress) => {

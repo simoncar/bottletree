@@ -11,7 +11,7 @@ import AuthContext from "../../lib/authContext";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import ProjectContext from "../../lib/projectContext";
 import * as Device from "expo-device";
-import { addImage } from "../../lib/APIimage";
+import { addImageFromCameraRoll } from "../../lib/APIimage";
 import { addPostImage } from "../../lib/APIpost";
 
 function TabBarIcon(props: {
@@ -59,7 +59,12 @@ export default function TabLayout() {
   const pickImage = async () => {
     const multiple = true;
 
-    addImage(multiple, "posts", progressCallback, completedCallback);
+    addImageFromCameraRoll(
+      multiple,
+      "posts",
+      progressCallback,
+      completedCallback,
+    );
   };
 
   const progressCallback = (progress: number) => {

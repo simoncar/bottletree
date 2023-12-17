@@ -4,7 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View, Button } from "../../components/Themed";
 import { addPostImage } from "../../lib/APIpost";
-import { addImage } from "../../lib/APIimage";
+import { addImageFromCameraRoll } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
 import { IPost } from "../../lib/types";
 import { useAuth } from "../../lib/authProvider";
@@ -70,7 +70,7 @@ export default function addPhoto() {
   const progressCallback = (progress: number) => {
     setProgress(progress);
   };
-  
+
   const completedCallback = (sourceDownloadURLarray) => {
     console.log("addImageCallback >>>>>>>: ", sourceDownloadURLarray);
     let ratio = 0.66666;
@@ -105,7 +105,12 @@ export default function addPhoto() {
   const pickImage = async () => {
     const multiple = true;
 
-    addImage(multiple, "posts", progressCallback, completedCallback);
+    addImageFromCameraRoll(
+      multiple,
+      "posts",
+      progressCallback,
+      completedCallback,
+    );
   };
 
   if (undefined === sharedDataProject.key || "" === sharedDataProject.key) {

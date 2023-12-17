@@ -17,7 +17,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addImage } from "../lib/APIimage";
+import { addImageFromCameraRoll } from "../lib/APIimage";
 import Colors from "../constants/Colors";
 import { ProjectUsers } from "../components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
@@ -84,7 +84,12 @@ export default function editPost() {
 
   const pickImage = async () => {
     const multiple = false;
-    addImage(multiple, "project", progressCallback, completedCallback);
+    addImageFromCameraRoll(
+      multiple,
+      "project",
+      progressCallback,
+      completedCallback,
+    );
   };
 
   const openActionSheet = async () => {

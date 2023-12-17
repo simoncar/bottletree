@@ -26,7 +26,7 @@ import {
 } from "../lib/APIuser";
 import { About } from "../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addImage } from "../lib/APIimage";
+import { addImageFromCameraRoll } from "../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "../lib/demoData";
 import { IUser } from "../lib/types";
@@ -97,7 +97,12 @@ export default function editUser() {
 
   const pickImage = async () => {
     const multiple = false;
-    addImage(multiple, "profile", progressCallback, completedCallback);
+    addImageFromCameraRoll(
+      multiple,
+      "profile",
+      progressCallback,
+      completedCallback,
+    );
   };
 
   const administration = async () => {
