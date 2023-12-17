@@ -20,6 +20,7 @@ const Project = (props) => {
 
   useEffect(() => {
     getUserProjectCount(userProjectCountRead);
+    console.log("ICON:", icon);
   }, []);
 
   const userProjectCountRead = (user: IUser) => {

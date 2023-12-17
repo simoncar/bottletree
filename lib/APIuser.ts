@@ -98,7 +98,6 @@ export async function getUsers(callback: usersRead) {
 
 export async function getUserProjectCount(callback: userProjectCountRead) {
   let user: IUser;
-  console.log("getUserProjectCount", auth().currentUser.uid);
 
   firestore()
     .collection("users")

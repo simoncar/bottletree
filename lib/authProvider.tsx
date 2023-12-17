@@ -3,11 +3,10 @@ import {
   useSegments,
   useRootNavigation,
   useNavigation,
-
 } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { registerForPushNotificationsAsync } from "../lib/notifications";
+import { registerForPushNotificationsAsync } from "../lib/APINotification";
 import * as Device from "expo-device";
 import AuthContext from "./authContext";
 import React, { useEffect, useState, useRef } from "react";
@@ -93,7 +92,7 @@ function useProtectedRoute(user) {
         //console.log("onAuthStateChange We have a User: ", user);
         setUserReady(true);
         if (Device.isDevice) {
-          registerForPushNotificationsAsync();
+          // registerForPushNotificationsAsync();
         }
         //console.log("onAuthStateChange We have a User: ", user);
         //@ts-ignore

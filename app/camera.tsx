@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "../constants/Colors";
+import { processItemAsync } from "../lib/APIimage";
 
 export default function App() {
   const [type, setType] = useState(CameraType.back);
@@ -43,20 +44,38 @@ export default function App() {
     );
   }
 
+  const progressCallback = (progress) => {
+    console.log("progressCallback: " + progress);
+  };
+
+  const completedCallback = (sourceDownloadURLarray) => {
+    console.log("completedCallback:", sourceDownloadURLarray);
+  };
+
   const takePhoto = async () => {
+    console.log("takePhoto", permission, cameraRef);
+
     if (!permission) return;
     if (cameraRef.current) {
       const options = { quality: 0.7 };
       const photo = await cameraRef.current.takePictureAsync(options);
       console.log(photo);
-      setPreviewVisible(true);
-      setCapturedImage(photo);
+
+      processItemAsync("posts", photo, progressCallback);
+
+      // saveProfilePic(photo.uri).then((downloadURL) => {
+      //   setGPhotoURL(downloadURL);
+      //   props.navigation.pop();
+      // });
+
+      // setPreviewVisible(true);
+      // setCapturedImage(photo);
     }
 
-    const photo = await Camera.takePictureAsync();
-    console.log(photo);
-    setPreviewVisible(true);
-    setCapturedImage(photo);
+    // const photo = await Camera.takePictureAsync();
+    // console.log(photo);
+    // setPreviewVisible(true);
+    // setCapturedImage(photo);
   };
 
   function flipCameraButton() {
@@ -73,7 +92,7 @@ export default function App() {
 
   function takePhotoButton() {
     return (
-      <TouchableOpacity onPress={toggleCameraType}>
+      <TouchableOpacity onPress={takePhoto}>
         <View style={styles.circleOuter}>
           <View style={styles.circleMiddle}>
             <View style={styles.circleInner}></View>
@@ -146,9 +165,5 @@ const styles = StyleSheet.create({
   },
   permission: {
     textAlign: "center",
-  },
-  toggleContainer: {
-    backgroundColor: "transparent",
-    margin: 64,
   },
 });

@@ -5,46 +5,44 @@ import { IUser } from "./types";
 
 // This hook can be used to access the user info.
 export function useProject() {
-    return React.useContext(ProjectContext);
+  return React.useContext(ProjectContext);
 }
 
 const ProjectProvider = ({ children }) => {
-    const INITIAL_PROJECT: IUser = {
-        uid: "",
-        displayName: "",
-        email: "",
-        photoURL: "",
-    };
+  const INITIAL_PROJECT: IUser = {
+    uid: "",
+    displayName: "",
+    email: "",
+    photoURL: "",
+  };
 
-    const [sharedDataProject, setSharedDataProject] = useState(INITIAL_PROJECT);
+  const [sharedDataProject, setSharedDataProject] = useState(INITIAL_PROJECT);
 
-    useEffect(() => {
-        AsyncStorage.getItem("@PROJECT").then((jsonValue) => {
-            if (jsonValue) {
-                setSharedDataProject(JSON.parse(jsonValue));
-            }
-        });
-    }, []);
+  useEffect(() => {
+    AsyncStorage.getItem("@PROJECT").then((jsonValue) => {
+      if (jsonValue) {
+        setSharedDataProject(JSON.parse(jsonValue));
+      }
+    });
+  }, []);
 
-    const updateSharedDataProject = (newData) => {
-        try {
-            const jsonValue = JSON.stringify({
-                ...sharedDataProject,
-                ...newData,
-            });
-            setSharedDataProject({ ...sharedDataProject, ...newData });
-            AsyncStorage.setItem("@PROJECT", jsonValue);
-        } catch (e) {
-            console.log("updateSharedDataProject Error: ", e);
-        }
-    };
+  async function updateSharedDataProject(newData) {
+    const jsonValue = JSON.stringify({
+      ...sharedDataProject,
+      ...newData,
+    });
+    setSharedDataProject({ ...sharedDataProject, ...newData });
+    AsyncStorage.setItem("@PROJECT", jsonValue).then(() => {
+      return jsonValue;
+    });
+  }
 
-    return (
-        <ProjectContext.Provider
-            value={{ sharedDataProject, updateSharedDataProject }}>
-            {children}
-        </ProjectContext.Provider>
-    );
+  return (
+    <ProjectContext.Provider
+      value={{ sharedDataProject, updateSharedDataProject }}>
+      {children}
+    </ProjectContext.Provider>
+  );
 };
 
 export default ProjectProvider;

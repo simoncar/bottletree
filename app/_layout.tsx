@@ -14,6 +14,7 @@ import AuthProvider from "../lib/authProvider";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 export { ErrorBoundary } from "expo-router";
+import Colors from "../constants/Colors";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -31,10 +32,18 @@ export default function RootLayout() {
 
   const colorScheme = useColorScheme();
 
-  const MyTheme = {
+  const myLightTheme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
+      background: Colors[colorScheme ?? "light"].background,
+    },
+  };
+
+  const myDarkTheme = {
+    ...DarkTheme,
+    colors: {
+      background: Colors[colorScheme ?? "light"].background,
     },
   };
 
@@ -55,12 +64,20 @@ export default function RootLayout() {
 
   return (
     <>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : MyTheme}>
+      <ThemeProvider
+        value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
         <AuthProvider>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <ActionSheetProvider>
               <ProjectProvider>
-                <Stack>
+                <Stack
+                  screenOptions={{
+                    headerStyle: {
+                      backgroundColor:
+                        Colors[colorScheme ?? "light"].background,
+                    },
+                    headerBackTitle: "Back",
+                  }}>
                   <Stack.Screen
                     name="(tabs)"
                     options={{
@@ -73,14 +90,12 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Projects",
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
                     name="projectListAdmin"
                     options={{
                       title: "Administration",
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -88,7 +103,6 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Colors",
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -96,14 +110,12 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Users",
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
                     name="language"
                     options={{
                       title: "Language",
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -113,7 +125,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -123,7 +134,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -133,7 +143,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -143,7 +152,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -153,7 +161,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -163,7 +170,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -173,7 +179,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                   <Stack.Screen
@@ -183,7 +188,6 @@ export default function RootLayout() {
                       headerTitleStyle: {
                         fontWeight: "bold",
                       },
-                      headerBackTitle: "Back",
                     }}
                   />
                 </Stack>

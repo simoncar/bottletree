@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
 import { Posts } from "../../components/Posts";
 import { View } from "../../components/Themed";
 

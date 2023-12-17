@@ -5,6 +5,28 @@ type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
+// create an export function that loads a single project from firebase into a return object that can be used by the app
+export async function getProject(
+  projectId: string,
+  callback: { (project: IProject): void; (arg0: IProject): void },
+) {
+  const q = db.collection("projects").doc(projectId);
+
+  const unsubscribe = q.onSnapshot((doc) => {
+    const project: IProject = {
+      key: doc.id,
+      title: doc.data().title || "Untitled",
+      icon: doc.data().icon,
+      archived: doc.data().archived,
+      postCount: doc.data().postCount,
+    };
+
+    callback(project);
+  });
+
+  return () => unsubscribe();
+}
+
 export async function getProjects(uid: string, callback: projectsRead) {
   let query;
   let q;
@@ -53,6 +75,8 @@ export async function getProjectUsers(
   projectId: string,
   callback: { (projectUsersDB: any): void; (arg0: IUser[]): void },
 ) {
+  console.log("getProjectUsers: FBJS+", projectId, "AAA");
+
   const q1 = db.collection("projects").doc(projectId).collection("accessList");
 
   const idSnapshot = await q1.get();

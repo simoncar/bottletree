@@ -20,7 +20,7 @@ import {
 const Gradient = (props: GradientProps) => <LinearGradient {...props} />;
 
 export const ProjectUsers = (props) => {
-  const { project, updateUsers } = props;
+  const { projectId, updateUsers } = props;
   const colorScheme = useColorScheme();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ export const ProjectUsers = (props) => {
   const row: Array<any> = [];
 
   useEffect(() => {
-    getProjectUsers(project, projectUsersRead);
+    getProjectUsers(projectId, projectUsersRead);
   }, []);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const ProjectUsers = (props) => {
   }, [projectUsers]);
 
   useEffect(() => {
-    getProjectUsers(project, projectUsersRead);
+    getProjectUsers(projectId, projectUsersRead);
   }, [updateUsers]);
 
   const projectUsersRead = (projectUsersDB) => {
@@ -48,7 +48,7 @@ export const ProjectUsers = (props) => {
 
   const deleteDone = (id) => {
     console.log("deleteDone: ", id);
-    getProjectUsers(project, projectUsersRead);
+    getProjectUsers(projectId, projectUsersRead);
   };
 
   function renderHeader(data: any) {

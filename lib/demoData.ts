@@ -1,6 +1,5 @@
 import { db, firestore, auth } from "./firebase";
 import { IUser } from "./types";
-import { setBadgeCountAsync } from "expo-notifications";
 
 export const demoData2 = async () => {
   //console.log("Skip demo data");
@@ -75,7 +74,7 @@ export const demoData = async () => {
   try {
     const projectRef1 = db.collection("projects").doc("project11111111").set(
       {
-        title: "(Local) 106 Jolimont",
+        title: "Local 106 Jolimont",
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
         archived: false,
         postCount: 109,
@@ -106,7 +105,7 @@ export const demoData = async () => {
       .doc("project22222222")
       .set(
         {
-          title: "(Local) Placa Rovira",
+          title: "Local Placa Rovira",
           icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
           archived: false,
           postCount: 7,

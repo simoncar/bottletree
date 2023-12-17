@@ -28,7 +28,7 @@ export const addImage = async (
   }
 };
 
-async function processItemAsync(folder: string, asset, progressCallback) {
+export async function processItemAsync(folder: string, asset, progressCallback) {
   const result = await Image.compress(asset.uri, {
     progressDivider: 10,
     downloadProgress: (progress) => {

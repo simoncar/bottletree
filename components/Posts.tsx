@@ -54,13 +54,7 @@ export const Posts = () => {
 
   useEffect(() => {
     if (undefined != currentProject?.key) {
-      console.log(
-        "Red Dot Count Set: " + currentProject?.key,
-        currentProject?.title,
-        currentProject?.postCount,
-      );
       updateUserProjectCount(currentProject?.key, currentProject?.postCount);
-      console.log("aaaaa:", sharedDataUser);
 
       if (sharedDataUser != null) {
         updateSharedDataUserProjectCount(
@@ -77,7 +71,6 @@ export const Posts = () => {
     project: string,
     postCount: number,
   ) {
-    console.log("updateSharedDataUserProjectCount: ", obj, project, postCount);
     if (obj.postCount != undefined) {
       obj.postCount[project] = postCount;
     }

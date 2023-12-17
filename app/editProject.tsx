@@ -10,8 +10,8 @@ import {
   Pressable,
 } from "react-native";
 
-import { Text, TextInput, View, Button } from "../components/Themed";
-import { updateProject } from "../lib/APIproject";
+import { Text, TextInput, View } from "../components/Themed";
+import { updateProject, getProject } from "../lib/APIproject";
 import { useProject } from "../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -21,58 +21,45 @@ import { addImage } from "../lib/APIimage";
 import Colors from "../constants/Colors";
 import { ProjectUsers } from "../components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
+import { IProject } from "../lib/types";
 
 export default function editPost() {
   const [updateUsers, setUpdateUsers] = useState(true);
   const { sharedData, updateSharedDataProject } = useProject();
-  const { projectId, projectTitle, photoURL, pArchived, pUpdateUsers } =
-    useLocalSearchParams<{
-      projectId: string;
-      projectTitle: string;
-      photoURL: string;
-      pArchived: boolean;
-      pUpdateUsers: boolean;
-    }>();
+  const local = useLocalSearchParams<{
+    projectId: string;
+  }>();
 
-  useEffect(() => {
-    console.log(" pUpdateUsers useEffect: ", projectId);
-    setUpdateUsers(!updateUsers);
-  }, [pUpdateUsers]);
-
-  const archived: boolean = pArchived === "true";
-
-  const [textPhotoURL, onChangeTextPhotoURL] = useState(photoURL);
-  const [text, onChangeText] = useState(projectTitle);
-  const [archivedFlag, onChangeArchived] = useState<boolean>(archived);
   const colorScheme = useColorScheme();
-
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const saveDone = (id: string) => {
-    updateSharedDataProject({
-      key: id,
-      title: text,
-      icon: textPhotoURL,
-      archived: archivedFlag,
+  const [project, setProject] = useState<IProject>({
+    key: "",
+    title: "",
+    icon: "",
+    archived: false,
+    postCount: 0,
+  });
+
+  useEffect(() => {
+    getProject(local.projectId, (project) => {
+      if (project) {
+        setProject(project);
+        updateSharedDataProject(project);
+      }
     });
+  }, []);
+
+  const saveDone = (id: string) => {
+    updateSharedDataProject(project);
 
     router.push({
       pathname: "/",
     });
   };
 
-  const save = (downloadURL: string, archived: boolean) => {
-    console.log("save", archived, downloadURL);
-
-    updateProject(
-      {
-        key: projectId,
-        title: text,
-        icon: downloadURL,
-        archived: archived,
-      },
-      saveDone,
-    );
+  const save = () => {
+    updateProject(project, saveDone);
   };
 
   const progressCallback = (progress) => {
@@ -92,7 +79,7 @@ export default function editPost() {
       return myArray[1]; // For example, creating a new array with each element doubled.
     });
 
-    onChangeTextPhotoURL(downloadURLarray[0]);
+    setProject({ ...project, icon: downloadURLarray[0] });
   };
 
   const pickImage = async () => {
@@ -117,7 +104,7 @@ export default function editPost() {
             pickImage();
             break;
           case 1:
-            onChangeTextPhotoURL("");
+            setProject({ ...project, icon: "" });
             break;
         }
       },
@@ -131,8 +118,8 @@ export default function editPost() {
           onPress={() => {
             openActionSheet();
           }}>
-          {textPhotoURL ? (
-            <Image style={styles.profilePhoto} source={textPhotoURL} />
+          {project.icon ? (
+            <Image style={styles.profilePhoto} source={project.icon} />
           ) : (
             <MaterialIcons
               name="house-siding"
@@ -149,17 +136,12 @@ export default function editPost() {
     );
   };
 
-  console.log("editProject - archiveFlag:", archivedFlag);
-
   return (
     <SafeAreaView>
       <Stack.Screen
         options={{
           headerRight: () => (
-            <NativeButton
-              title="Done"
-              onPress={() => save(textPhotoURL, false)}
-            />
+            <NativeButton title="Done" onPress={() => save()} />
           ),
         }}
       />
@@ -171,27 +153,26 @@ export default function editPost() {
           <View style={styles.projectBox}>
             <TextInput
               style={styles.project}
-              onChangeText={(text) => onChangeText(text)}
+              onChangeText={(text) => setProject({ ...project, title: text })}
               placeholder={"Project Title"}
-              value={text}
+              value={project.title}
               multiline
             />
           </View>
           <View style={styles.archiveBox}>
             <Text style={styles.archiveMessage}>
-              {archivedFlag == true ? "Project Archived" : ""}
+              {project.archived == true ? "Project Archived" : ""}
             </Text>
           </View>
         </View>
 
-        <ProjectUsers project={projectId} updateUsers={updateUsers} />
+        <ProjectUsers projectId={local.projectId} updateUsers={updateUsers} />
 
         <Pressable
           style={styles.outerView}
           onPress={() => {
-            const currentArchivedFlag = archivedFlag;
-            onChangeArchived(!currentArchivedFlag);
-            save(textPhotoURL, !currentArchivedFlag);
+            setProject({ ...project, archived: !project.archived });
+            save();
           }}>
           <View style={styles.avatar}>
             <Ionicons
@@ -202,13 +183,15 @@ export default function editPost() {
           </View>
           <View>
             <Text style={styles.archiveName}>
-              {archivedFlag == true ? "Unarchive Project" : "Archive Project"}
+              {project.archived == true
+                ? "Unarchive Project"
+                : "Archive Project"}
             </Text>
           </View>
         </Pressable>
 
         <View style={styles.diagBox}>
-          <Text style={styles.archiveMessage}>Project ID: {projectId}</Text>
+          <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -263,8 +246,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
-    paddingTop: 100,
     paddingBottom: 100,
+    paddingTop: 100,
     width: "85%",
   },
 
