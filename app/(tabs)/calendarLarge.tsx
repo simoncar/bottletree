@@ -142,8 +142,6 @@ export default function CalendarLarge() {
     event: T,
     touchableOpacityProps: CalendarTouchableOpacityProps,
   ) => {
-    console.log("renderEvent:", event);
-
     return (
       <TouchableOpacity {...touchableOpacityProps}>
         <View style={[styles.calendarEvent, { backgroundColor: event.color }]}>
