@@ -67,8 +67,8 @@ export default function editUser() {
 
   // Show whether or not we are running embedded code or an update
   const runTypeMessage = currentlyRunning.isEmbeddedLaunch
-    ? "This app is running from built-in code"
-    : "This app is running an update";
+    ? "Running code from Appp Store build"
+    : "You App is up to date";
 
   useEffect(() => {
     getUser(local?.uid || "", (user) => {
@@ -82,7 +82,8 @@ export default function editUser() {
   useEffect(() => {
     if (isUpdatePending) {
       // Update has successfully downloaded
-      runUpdate();
+      //runUpdate();
+      console.log("Update has successfully downloaded");
     }
   }, [isUpdatePending]);
 
@@ -315,42 +316,41 @@ export default function editUser() {
                 <View style={styles.rightChevron}></View>
               </TouchableOpacity>
             </View>
-            <View style={styles.outerView}>
-              <TouchableOpacity
-                key={"admin"}
-                onPress={() => Updates.checkForUpdateAsync()}>
-                <View style={styles.leftContent}>
-                  <MaterialIcons
-                    name="system-update-alt"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                  <Text style={styles.settingName}>Update</Text>
-                  <Text>{runTypeMessage}</Text>
-                </View>
-                <View style={styles.rightChevron}></View>
-              </TouchableOpacity>
-
-              {showDownloadButton ? (
-                <TouchableOpacity
-                  key={"admin"}
-                  onPress={() => Updates.fetchUpdateAsync()}>
-                  <View style={styles.leftContent}>
-                    <MaterialIcons
-                      name="system-update-alt"
-                      size={25}
-                      color={Colors[colorScheme ?? "light"].text}
-                    />
-                    <Text style={styles.settingName}>
-                      Download and run update
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ) : null}
-              <StatusBar style="auto" />
-            </View>
           </View>
         )}
+        <View style={styles.outerView}>
+          <TouchableOpacity
+            key={"admin"}
+            onPress={() => Updates.checkForUpdateAsync()}>
+            <View style={styles.leftContent}>
+              <MaterialIcons
+                name="system-update-alt"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+              <Text style={styles.settingName}>{runTypeMessage}</Text>
+              <Text></Text>
+            </View>
+            <View style={styles.rightChevron}></View>
+          </TouchableOpacity>
+        </View>
+        {showDownloadButton ? (
+          <View style={styles.outerView}>
+            <TouchableOpacity
+              key={"admin"}
+              onPress={() => Updates.fetchUpdateAsync()}>
+              <View style={styles.leftContent}>
+                <MaterialIcons
+                  name="system-update-alt"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+                <Text style={styles.settingName}>Download and run update</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+        <StatusBar style="auto" />
 
         <View style={styles.aboutContainer}>
           <About />
@@ -443,18 +443,23 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "85%",
   },
-
   projectNameContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 50,
     paddingTop: 20,
   },
+
   rightChevron: {
     marginHorizontal: 8,
   },
   settingName: {
     fontSize: 20,
     paddingLeft: 20,
+  },
+  vertical: {
+    flex: 1,
+    flexDirection: "column",
+    paddingHorizontal: 8,
   },
 });
