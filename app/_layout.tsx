@@ -99,13 +99,6 @@ export default function RootLayout() {
                     }}
                   />
                   <Stack.Screen
-                    name="colorList"
-                    options={{
-                      presentation: "modal",
-                      title: "Colors",
-                    }}
-                  />
-                  <Stack.Screen
                     name="userList"
                     options={{
                       presentation: "modal",

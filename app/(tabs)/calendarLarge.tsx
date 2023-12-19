@@ -167,14 +167,7 @@ export default function CalendarLarge() {
     router.push({
       pathname: "/editCalendar",
       params: {
-        pkey: event.key,
-        ptitle: event.title,
-        pdescription: event.description,
-        pdateBegin: event.start,
-        pdateEnd: event.end,
-        puid: event.uid,
-        pcolor: event.color,
-        pcolorName: event.colorName || "",
+        calendarId: event.key,
       },
     });
   };

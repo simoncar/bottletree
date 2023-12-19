@@ -55,6 +55,39 @@ export async function getItemsBigCalendar(
   return () => unsubscribe();
 }
 
+// export method to get 1 item from the calendar collection based on the key
+export async function getCalendarEvent(
+  calendarId: string,
+  callback: {
+    (calendarEvent: ICalendarEvent): void;
+    (arg0: ICalendarEvent): void;
+  },
+) {
+  const q = firestore().collection("calendar").doc(calendarId);
+
+  q.get().then((doc) => {
+    if (doc.exists) {
+      const calendarEvent: ICalendarEvent = {
+        key: doc.id,
+        dateBegin: doc.data().dateBegin,
+        dateEnd: doc.data().dateEnd,
+        color: doc.data().color,
+        colorName: doc.data().colorName,
+        description: doc.data().description,
+        projectId: doc.data().projectId,
+        title: doc.data().title,
+        uid: doc.data().uid,
+      };
+
+      callback(calendarEvent);
+    } else {
+      console.log("No such calendarId:", calendarId);
+    }
+  });
+
+  return () => q;
+}
+
 export async function getItems(projectId: string, callback: itemsRead) {
   console.log("getItems: FBJS");
 
@@ -179,12 +212,12 @@ function expandDateRanges(dateRanges: ICalendarEvent[]): ExpandedDates {
   return expandedDates;
 }
 
-export function setCalendarEvent(
+export function saveCalendarEvent(
   calendarEvent: ICalendarEvent,
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    console.log("setCalendarEvent FBJS");
+    console.log("save CalendarEvent FBJS", calendarEvent);
 
     if (calendarEvent.key == undefined) {
       firestore()
@@ -196,8 +229,8 @@ export function setCalendarEvent(
           projectId: calendarEvent.projectId,
           title: calendarEvent.title,
           uid: calendarEvent.uid,
-          color: calendarEvent.color,
-          colorName: calendarEvent.colorName,
+          color: calendarEvent.color ? calendarEvent.color : "#30A7E2",
+          colorName: calendarEvent.colorName ? calendarEvent.colorName : "Blue",
         })
         .then((docRef) => {
           callback(docRef.id);
@@ -213,8 +246,8 @@ export function setCalendarEvent(
           projectId: calendarEvent.projectId,
           title: calendarEvent.title,
           uid: calendarEvent.uid,
-          color: calendarEvent.color,
-          colorName: calendarEvent.colorName,
+          color: calendarEvent.color ? calendarEvent.color : "#30A7E2",
+          colorName: calendarEvent.colorName ? calendarEvent.colorName : "Blue",
         })
         .then((docRef) => {
           callback(calendarEvent.key);

@@ -54,6 +54,11 @@ export const Posts = () => {
 
   useEffect(() => {
     if (undefined != currentProject?.key) {
+      console.log(
+        "Red Dot Count Set: " + currentProject?.key,
+        currentProject?.title,
+        currentProject?.postCount,
+      );
       updateUserProjectCount(currentProject?.key, currentProject?.postCount);
 
       if (sharedDataUser != null) {
@@ -92,7 +97,7 @@ export const Posts = () => {
                 pathname: "/addPost",
               });
             }}>
-            <Text style={styles.buttonText}>Add a post</Text>
+            <Text style={styles.buttonText}>ADD FIRST POST</Text>
           </TouchableOpacity>
         </View>
       );

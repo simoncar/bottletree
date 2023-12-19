@@ -16,7 +16,11 @@ import {
 import { firestore } from "../lib/firebase";
 
 import { Text, TextInput, View } from "../components/Themed";
-import { setCalendarEvent, deleteCalendarEvent } from "../lib/APIcalendar";
+import {
+  getCalendarEvent,
+  saveCalendarEvent,
+  deleteCalendarEvent,
+} from "../lib/APIcalendar";
 import { useProject } from "../lib/projectProvider";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -28,74 +32,58 @@ import { ICalendarEvent } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
+import { ColorRow } from "../components/ColorRow";
 
 export default function editCalendar() {
   const { sharedDataProject } = useProject();
   const { sharedDataUser } = useAuth();
-  const {
-    pkey,
-    ptitle,
-    pcolor,
-    pcolorName,
-    pdescription,
-    pdateBegin,
-    pdateEnd,
-    puid,
-    xcolor,
-    xcolorName,
-  } = useLocalSearchParams<{
-    pkey: string;
-    ptitle: string;
-    pcolor: string;
-    pcolorName: string;
-    pdescription: string;
-    pdateBegin: string;
-    pdateEnd: string;
-    puid: string;
-    xcolor: string;
-    xcolorName: string;
-  }>();
-
-  const [key, onChangeKey] = useState(pkey);
-  const [title, onChangeTitle] = useState(ptitle);
-  const [description, onChangeDescription] = useState(pdescription);
-  const [color, onChangeColor] = useState(pcolor);
-  const [colorName, onChangeColorName] = useState(pcolorName);
-
-  const [dateBegin, setDateBegin] = useState<Date>(new Date(pdateBegin));
-  const [dateBeginShow, setDateBeginShow] = useState<boolean>(true);
-
-  const [dateBeginTime, setDateBeginTime] = useState<Date>(
-    new Date(pdateBegin),
-  );
-
-  const [dateEnd, setDateEnd] = useState<Date>(new Date(pdateEnd));
-  const [dateEndTime, setDateEndTime] = useState<Date>(new Date(pdateEnd));
-
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
 
+  const local = useLocalSearchParams<{
+    calendarId: string;
+  }>();
+
+  const [calendarEvent, setCalendarEvent] = useState<ICalendarEvent>({
+    key: "",
+    color: "#000000",
+    colorName: "",
+    description: "",
+    projectId: "",
+    title: "",
+    uid: "",
+  });
+
+  const [dateBegin, setDateBegin] = useState<Date>(new Date());
+  const [dateBeginTime, setDateBeginTime] = useState<Date>(new Date());
+  const [dateEnd, setDateEnd] = useState<Date>(new Date());
+  const [dateEndTime, setDateEndTime] = useState<Date>(new Date());
+
+  const [showColor, setShowColor] = useState<boolean>(false);
+
   useEffect(() => {
+    getCalendarEvent(local?.calendarId || "", (calendarEvent) => {
+      if (calendarEvent) {
+        setCalendarEvent(calendarEvent);
+        setDateBegin(calendarEvent.dateBegin?.toDate() || new Date());
+        setDateBeginTime(calendarEvent.dateBegin?.toDate() || new Date());
+        setDateEnd(calendarEvent.dateEnd?.toDate() || new Date());
+        setDateEndTime(calendarEvent.dateEnd?.toDate() || new Date());
+      }
+    });
+
     navigation.addListener("focus", () => {
       console.log("useLocalSearchParams:", useLocalSearchParams);
     });
   }, []);
 
-  useEffect(() => {
-    console.log("xcolor:", xcolor);
-    if (xcolor != undefined) {
-      onChangeColor(xcolor);
-      onChangeColorName(xcolorName);
-    }
-  }, [xcolor]);
-
   const saveDone = (id: string) => {
-    // router.push({
-    //   pathname: "/calendarLarge",
-    //   params: {
-    //     id: id,
-    //   },
-    // });
+    router.push({
+      pathname: "/calendarLarge",
+      params: {
+        id: id,
+      },
+    });
   };
 
   const save = () => {
@@ -105,23 +93,14 @@ export default function editCalendar() {
     d1.setHours(dateBeginTime.getHours(), dateBeginTime.getMinutes(), 0, 0);
     d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
 
-    const calendarEvent: ICalendarEvent = {
-      key: key,
-      dateBegin: firestore.Timestamp.fromDate(d1),
-      dateEnd: firestore.Timestamp.fromDate(d2),
-      description: description || "",
-      title: title || "",
-      color: color || "",
-      colorName: colorName || "",
-      projectId: sharedDataProject.key,
-      uid: sharedDataUser.uid,
-    };
-    console.log("save:", calendarEvent);
-
-    setCalendarEvent(calendarEvent, saveDone);
-    router.push({
-      pathname: "/calendarLarge",
-    });
+    saveCalendarEvent(
+      {
+        ...calendarEvent,
+        dateBegin: firestore.Timestamp.fromDate(d1),
+        dateEnd: firestore.Timestamp.fromDate(d2),
+      },
+      saveDone,
+    );
   };
 
   const deleteDone = (id: string) => {
@@ -171,35 +150,64 @@ export default function editCalendar() {
     event: DateTimePickerEvent,
     selectedDate: Date,
   ) => {
-    setDateBegin(selectedDate);
+    const currentDate = selectedDate || dateBegin;
+
+    setDateBegin(currentDate);
+    setCalendarEvent({
+      ...calendarEvent,
+      dateBegin: firestore.Timestamp.fromDate(currentDate),
+    });
 
     if (selectedDate > dateEnd) {
-      console.log("selectedDate:", selectedDate);
-
-      setDateEnd(selectedDate);
+      setDateEnd(currentDate);
+      setCalendarEvent({
+        ...calendarEvent,
+        dateEnd: firestore.Timestamp.fromDate(currentDate),
+      });
     }
-
-    setDateBeginShow(false);
   };
 
   const onChangeBeginTime = (
     event: DateTimePickerEvent,
     selectedDate: Date,
   ) => {
-    setDateBeginTime(selectedDate);
+    console.log("onChangeBeginTime:", selectedDate);
+
+    const currentDate = selectedDate || dateBegin;
+    setDateBeginTime(currentDate);
   };
+
   const onChangedateEnd = (event: DateTimePickerEvent, selectedDate: Date) => {
-    setDateEnd(selectedDate);
-    if (selectedDate < dateBegin) {
-      setDateBegin(selectedDate);
+    const currentDate = selectedDate || dateEnd;
+    setDateEnd(currentDate);
+    setCalendarEvent({
+      ...calendarEvent,
+      dateEnd: firestore.Timestamp.fromDate(currentDate),
+    });
+    if (currentDate < dateBegin) {
+      setDateBegin(currentDate);
+      setCalendarEvent({
+        ...calendarEvent,
+        dateBegin: firestore.Timestamp.fromDate(currentDate),
+      });
     }
   };
+
   const onChangeEndTime = (event: DateTimePickerEvent, selectedDate: Date) => {
-    setDateEndTime(selectedDate);
+    console.log("onChangeEndTime:", selectedDate);
+
+    const currentDate = selectedDate || dateEnd;
+    setDateEndTime(currentDate);
+  };
+
+  const handleSelectColor = (colorName, code) => {
+    // Handle button press event
+    setCalendarEvent({ ...calendarEvent, colorName: colorName, color: code });
+    setShowColor(false);
   };
 
   const renderDelete = () => {
-    if (pkey == undefined) {
+    if (calendarEvent.key == undefined) {
       return null;
     } else {
       return (
@@ -234,9 +242,11 @@ export default function editCalendar() {
           <View style={styles.title}>
             <TextInput
               style={styles.titleText}
-              onChangeText={(title) => onChangeTitle(title)}
+              onChangeText={(text) =>
+                setCalendarEvent({ ...calendarEvent, title: text })
+              }
               placeholder={"Add title"}
-              value={title}
+              value={calendarEvent.title}
               autoFocus={true}
             />
           </View>
@@ -263,7 +273,6 @@ export default function editCalendar() {
             />
           </View>
         </View>
-
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
           <View style={styles.date}>
@@ -285,7 +294,6 @@ export default function editCalendar() {
             />
           </View>
         </View>
-
         <View style={[styles.descriptionView, styles.line]}>
           <View style={styles.avatar}>
             <Feather
@@ -296,16 +304,17 @@ export default function editCalendar() {
           </View>
           <TextInput
             style={styles.textDescription}
-            onChangeText={(description) => onChangeDescription(description)}
+            onChangeText={(description) =>
+              setCalendarEvent({ ...calendarEvent, description: description })
+            }
             placeholder={"Add description"}
-            value={description}
+            value={calendarEvent.description}
             multiline
             numberOfLines={6}
             autoCapitalize="none"
             textAlignVertical="top"
           />
         </View>
-
         <View style={[styles.itemView, styles.line]}>
           <View style={styles.avatar}>
             <Image
@@ -320,21 +329,31 @@ export default function editCalendar() {
         <Pressable
           style={styles.pressableRight}
           onPress={() => {
-            router.push({
-              pathname: "/colorList",
-              params: {
-                color: color,
-              },
-            });
+            console.log("color press:");
+            setShowColor(!showColor);
           }}>
-          <View style={[styles.itemView, styles.line]}>
+          <View style={styles.itemView}>
             <View style={styles.avatar}>
-              <View style={[styles.colorAvatar, { backgroundColor: color }]} />
+              <View
+                style={[
+                  styles.colorAvatar,
+                  { backgroundColor: calendarEvent.color },
+                ]}
+              />
             </View>
             <View style={styles.title}>
-              <Text style={styles.actionTitle}>{colorName}</Text>
+              <Text style={styles.actionTitle}>{calendarEvent.colorName}</Text>
             </View>
           </View>
+          {showColor && (
+            <View style={styles.itemViewRow}>
+              <ColorRow
+                onPress={handleSelectColor}
+                selectedColor={calendarEvent.colorName}
+              />
+            </View>
+          )}
+          <View style={styles.line}></View>
 
           {renderDelete()}
           <View style={styles.bottom}></View>
@@ -376,6 +395,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
+  itemViewRow: {
+    alignItems: "center",
+    flexDirection: "row",
+    height: 80,
+    paddingVertical: 8,
+    padding: 8,
+  },
 
   line: {
     borderBottomColor: "#CED0CE",
@@ -385,10 +411,12 @@ const styles = StyleSheet.create({
   right: { paddingRight: 8 },
   textDescription: {
     fontSize: 16,
+    width: 350,
   },
 
   title: { flex: 1, justifyContent: "flex-start" },
   titleText: {
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });
