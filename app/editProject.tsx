@@ -58,8 +58,10 @@ export default function editPost() {
     });
   };
 
-  const save = () => {
-    updateProject(project, saveDone);
+  const toggleArchive = () => {
+    const updatedProject = { ...project, archived: !project.archived };
+    setProject(updatedProject);
+    updateProject(updatedProject, saveDone);
   };
 
   const progressCallback = (progress) => {
@@ -146,7 +148,10 @@ export default function editPost() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <NativeButton title="Done" onPress={() => save()} />
+            <NativeButton
+              title="Done"
+              onPress={() => updateProject(project, saveDone)}
+            />
           ),
         }}
       />
@@ -173,12 +178,7 @@ export default function editPost() {
 
         <ProjectUsers projectId={local.projectId} updateUsers={updateUsers} />
 
-        <Pressable
-          style={styles.outerView}
-          onPress={() => {
-            setProject({ ...project, archived: !project.archived });
-            save();
-          }}>
+        <Pressable style={styles.outerView} onPress={toggleArchive}>
           <View style={styles.avatar}>
             <Ionicons
               name="archive"

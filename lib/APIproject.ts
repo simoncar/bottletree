@@ -108,6 +108,8 @@ export async function getProjectUsers(
 }
 
 export function updateProject(project: IProject, callback: saveDone) {
+  console.log("updateProject: FBJS: ", project);
+
   const ref = db.collection("projects").doc(project.key);
 
   ref
