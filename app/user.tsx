@@ -361,10 +361,12 @@ export default function editUser() {
         ) : null}
         <StatusBar style="auto" />
         <View style={styles.aboutContainer}>
-          <Text>isUpdatePending: {isUpdatePending.toString()}</Text>
-          <Text>isUpdateAvailable : {isUpdateAvailable.toString()}</Text>
-        </View>
-        <View style={styles.aboutContainer}>
+          <Text style={styles.version}>
+            Update Pending: {isUpdatePending.toString()}
+          </Text>
+          <Text style={styles.version}>
+            Update Available : {isUpdateAvailable.toString()}
+          </Text>
           <About />
         </View>
       </ScrollView>
@@ -409,7 +411,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingHorizontal: 8,
   },
-
   outerView: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
@@ -419,6 +420,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
+
   profileCircleIcon: {
     alignItems: "center",
     borderColor: "lightgray",
@@ -461,12 +463,16 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
     paddingTop: 20,
   },
-
   rightChevron: {
     marginHorizontal: 8,
   },
+
   settingName: {
     fontSize: 20,
     paddingLeft: 20,
+  },
+  version: {
+    color: "grey",
+    fontSize: 14,
   },
 });
