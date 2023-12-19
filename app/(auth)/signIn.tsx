@@ -14,6 +14,7 @@ import Colors from "../../constants/Colors";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [notificationHeader, setNotificationHeader] = useState("");
   const [notification, setNotification] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
   const { signIn } = useAuth();
@@ -30,16 +31,16 @@ export default function SignIn() {
     "[auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
       "No account found with this email.",
     "[auth/invalid-email] The email address is badly formatted.":
-      "The entered email address is not valid.",
+      "The email address is not valid.",
     "Firebase: Error (auth/network-request-failed).":
       "Network error. Check your internet connection.",
     "[auth/wrong-password] The password is invalid or the user does not have a password.":
-      "The password is invalid.",
+      "Incorrect Password. Please check the password and try again",
   };
 
   const loginError = (error) => {
     console.log("loginError: ", error);
-
+    setNotificationHeader("Something went wrong");
     setNotification(ERROR_MAP[error] || error);
   };
 
@@ -74,6 +75,7 @@ export default function SignIn() {
           secureTextEntry={secureEntry}
           onChangeText={(password) => {
             setPassword(password);
+            setNotificationHeader("");
             setNotification("");
           }}
         />
@@ -87,6 +89,7 @@ export default function SignIn() {
         </Pressable>
       </View>
       <View style={styles.notificationView}>
+        <Text style={styles.notificationTextHeader}>{notificationHeader}</Text>
         <Text numberOfLines={3} style={styles.notificationText}>
           {notification}
         </Text>
@@ -171,11 +174,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   notificationText: {
-    color: "red",
+    color: "white",
     fontSize: 18,
+    textAlign: "center",
+  },
+  notificationTextHeader: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    textAlign: "center",
   },
   notificationView: {
+    alignItems: "center",
     borderRadius: 5,
+    justifyContent: "center",
     marginBottom: 20,
     width: "80%",
   },
