@@ -59,12 +59,7 @@ export default function TabLayout() {
   const pickImage = async () => {
     const multiple = true;
 
-    addImageFromCameraRoll(
-      multiple,
-      "posts",
-      progressCallback,
-      completedCallback,
-    );
+    addImageFromCameraRoll(multiple, "posts", progressCallback, completedCallback);
   };
 
   const progressCallback = (progress: number) => {
@@ -171,6 +166,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tintInactive,
         tabBarStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,
           height: 80,
