@@ -1,5 +1,10 @@
 import React from "react";
-import { Dimensions, StyleSheet, Pressable } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  Pressable,
+  useColorScheme,
+} from "react-native";
 import { router } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
@@ -7,15 +12,17 @@ import { View, Text, ParsedText } from "../components/Themed";
 import Comments from "./PostComments";
 import Status from "./Status";
 import Dots from "../components/dots";
+import Colors from "../constants/Colors";
 
 const Post = (props) => {
+  const colorScheme = useColorScheme();
   const { post } = props;
 
   const imageUrls = post.images && post.images.map((image) => image);
 
   let caption = "";
   let ratio = 0.66666;
-  let width = Dimensions.get("window").width;
+  let width = Dimensions.get("window").width - 50;
 
   if (typeof post.ratio === "number") {
     ratio = Number(post.ratio);
@@ -30,11 +37,22 @@ const Post = (props) => {
 
   return (
     <View>
-      <View style={styles.postView}>
+      <View
+        style={[
+          styles.postView,
+          {
+            backgroundColor: Colors[colorScheme ?? "light"].postBackground,
+            borderColor: Colors[colorScheme ?? "light"].postBackground,
+          },
+        ]}>
         {renderImage()}
         <Dots images={imageUrls} />
         <Status project={post.projectId} post={post.key} status={post.status} />
-        <View style={styles.commentBlock}>
+        <View
+          style={[
+            styles.commentBlock,
+            { backgroundColor: Colors[colorScheme ?? "light"].postBackground },
+          ]}>
           <Text style={styles.comment}>{caption}</Text>
           <Comments project={post.projectId} post={post.key} />
         </View>
@@ -124,11 +142,13 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   commentBlock: {
+    borderRadius: 10,
     padding: 8,
   },
 
   imageContainer: {
-    borderWidth: 0,
+    backgroundColor: "transparent",
+    borderRadius: 10,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
@@ -138,11 +158,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 8,
   },
-
-  postView: { flex: 1 },
+  postView: {
+    borderRadius: 10,
+    borderWidth: 10,
+    flex: 1,
+    marginBottom: 5,
+    marginHorizontal: 5,
+    marginTop: 5,
+    paddingVertical: 8,
+  },
   storyPhoto: {
     alignSelf: "center",
     borderColor: "lightgray",
+    borderRadius: 5,
     height: 300,
     marginBottom: 12,
     marginTop: 12,

@@ -3,7 +3,7 @@ export default {
     text: "#000",
     orangeButtonIcon: "#fff",
     textPlaceholder: "#ccc",
-    background: "#FAF3F3",
+    background: "#faf3f3d8",
     tint: "#5D5CE7",
     tintInactive: "#5f7587",
     calendarPanel: "#e9f0fd",
@@ -22,6 +22,7 @@ export default {
     bubbleBackgroundColorOther: "#e9f0fd",
     bubbleTextColorMe: "#fff",
     bubbleTextColorOther: "#000",
+    postBackground: "#fff",
   },
   dark: {
     text: "#fff",
@@ -46,6 +47,7 @@ export default {
     bubbleBackgroundColorOther: "#53425A",
     bubbleTextColorMe: "#fff",
     bubbleTextColorOther: "#fff",
+    postBackground: "#2d4150",
   },
 };
 

@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     width: 5,
   },
   dotContainer: {
+    backgroundColor: "transparent",
     flexDirection: "row",
     justifyContent: "center",
     marginTop: 10,
