@@ -71,10 +71,17 @@ const ModalScreen = (props) => {
 
   function renderTitle(data: IProject) {
     if (!data.archived) {
-      return <Text style={styles.project}>{data.title || ""}</Text>;
+      return (
+        <Text numberOfLines={2} ellipsizeMode="tail" style={styles.project}>
+          {data.title || ""}
+        </Text>
+      );
     } else {
       return (
-        <Text style={styles.projectArchived}>
+        <Text
+          numberOfLines={2}
+          ellipsizeMode="tail"
+          style={styles.projectArchived}>
           {data.title || ""} (Archived)
         </Text>
       );
@@ -193,7 +200,7 @@ const styles = StyleSheet.create({
   project: {
     fontSize: 18,
     marginBottom: 5,
-    width: "90%",
+    width: 300,
   },
   projectArchived: {
     color: "grey",
