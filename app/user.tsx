@@ -457,9 +457,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 20,
   },
-  vertical: {
-    flex: 1,
-    flexDirection: "column",
-    paddingHorizontal: 8,
-  },
 });

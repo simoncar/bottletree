@@ -180,13 +180,13 @@ export default function CalendarLarge() {
   };
 
   const _onPrevDate = () => {
-    console.log("onPrevDate:", calendarDate, modeToNum("month", calendarDate));
+    console.log("_onPrevDate:", calendarDate, modeToNum("month", calendarDate));
 
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
   };
 
   const _onNextDate = () => {
-    console.log("onNextDate:", calendarDate, modeToNum("month", calendarDate));
+    console.log("_onNextDate:", calendarDate, modeToNum("month", calendarDate));
 
     setDate(dayjs(calendarDate).add(modeToNum("month", calendarDate), "day"));
   };
@@ -207,12 +207,11 @@ export default function CalendarLarge() {
         events={items}
         height={height - 200}
         mode="month"
-        swipeEnabled={true}
         renderEvent={renderEvent}
         theme={darkTheme}
         eventCellStyle={styles.calendarCellStyle}
         date={calendarDate}
-        // onChangeDate={onChangeDate}
+        onChangeDate={onChangeDate}
         onPressEvent={onPressEvent}
         eventMinHeightForMonthView={25}
         maxVisibleEventCount={10}
