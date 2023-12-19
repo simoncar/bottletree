@@ -180,7 +180,7 @@ export default function editUser() {
       }
     } catch (error) {
       // You can also add an alert() to see the error message in case of an error when fetching updates.
-      alert(`Error fetching latest Expo update: ${error}`);
+      alert(`Error fetching latest update: ${error}`);
     }
   }
 
@@ -361,8 +361,8 @@ export default function editUser() {
         ) : null}
         <StatusBar style="auto" />
         <View style={styles.aboutContainer}>
-          <Text>{isUpdatePending}</Text>
-          <Text>{isUpdateAvailable}</Text>
+          <Text>isUpdatePending: {isUpdatePending.toString()}</Text>
+          <Text>isUpdateAvailable : {isUpdateAvailable.toString()}</Text>
         </View>
         <View style={styles.aboutContainer}>
           <About />
