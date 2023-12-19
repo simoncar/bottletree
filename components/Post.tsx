@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 8,
   },
+
   postView: {
     borderRadius: 10,
     borderWidth: 10,
@@ -165,12 +166,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginHorizontal: 5,
     marginTop: 5,
-    paddingVertical: 8,
   },
   storyPhoto: {
     alignSelf: "center",
     borderColor: "lightgray",
-    borderRadius: 5,
+    borderRadius: 10,
     height: 300,
     marginBottom: 12,
     marginTop: 12,
