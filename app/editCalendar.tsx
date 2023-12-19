@@ -323,7 +323,12 @@ export default function editCalendar() {
             />
           </View>
           <View style={styles.title}>
-            <Text style={styles.actionTitle}>{sharedDataProject.title}</Text>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.actionTitle}>
+              {sharedDataProject.title}
+            </Text>
           </View>
         </View>
         <Pressable
