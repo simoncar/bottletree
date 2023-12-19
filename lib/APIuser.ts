@@ -2,7 +2,6 @@ import { CurrentRenderContext } from "@react-navigation/native";
 import { auth, firestore } from "../lib/firebase";
 import { IUser } from "./types";
 
-
 // create an export function that loads a single user from firebase into a return object that can be used by the app
 export async function getUser(
   uid: string,
@@ -10,20 +9,24 @@ export async function getUser(
 ) {
   const q = firestore().collection("users").doc(uid);
 
-  const unsubscribe = q.onSnapshot((doc) => {
-    const user: IUser = {
-      key: doc.id,
-      uid: doc.id,
-      displayName: doc.data()?.displayName,
-      email: doc.data()?.email,
-      photoURL: doc.data()?.photoURL,
-      language: doc.data()?.language,
-    };
+  q.get().then((doc) => {
+    if (doc.exists) {
+      const user: IUser = {
+        key: doc.id,
+        uid: doc.id,
+        displayName: doc.data()?.displayName,
+        email: doc.data()?.email,
+        photoURL: doc.data()?.photoURL,
+        language: doc.data()?.language,
+      };
 
-    callback(user);
+      callback(user);
+    } else {
+      console.log("No such user:", uid);
+    }
   });
 
-  return () => unsubscribe();
+  return () => q;
 }
 
 export const updateAccountName = (displayName: string) => {
@@ -35,8 +38,6 @@ export const updateAccountName = (displayName: string) => {
       displayName: displayName,
     })
     .then(() => {
-      console.log("FFFF:", auth().currentUser.uid);
-
       docRef1.set(
         {
           displayName: displayName,

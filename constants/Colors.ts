@@ -47,7 +47,7 @@ export default {
     bubbleBackgroundColorOther: "#53425A",
     bubbleTextColorMe: "#fff",
     bubbleTextColorOther: "#fff",
-    postBackground: "#2d4150",
+    postBackground: "#373544",
   },
 };
 
