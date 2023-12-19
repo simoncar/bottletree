@@ -136,7 +136,7 @@ export default function editUser() {
     });
   };
 
-  const isAdmin = (email) => {
+  const isAdmin = (email: string) => {
     if (admins.includes(email)) {
       return true;
     } else {

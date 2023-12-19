@@ -226,18 +226,13 @@ const AuthProvider = ({ children }) => {
         screenPassword,
       );
 
-      // const resp_js = await signInWithEmailAndPassword(
-      //   auth_js,
-      //   screenEmail,
-      //   screenPassword,
-      // );
-
       const user: IUser = {
         uid: convertToString(auth().currentUser.uid),
         email: convertToString(auth().currentUser.email),
         displayName: convertToString(auth().currentUser.displayName),
         photoURL: convertToString(auth().currentUser.photoURL),
       };
+      console.log("signIn: ", user);
 
       setSharedDataUser(user);
 

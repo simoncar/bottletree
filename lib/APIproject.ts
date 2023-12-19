@@ -5,7 +5,8 @@ type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
-// create an export function that loads a single project from firebase into a return object that can be used by the app
+// create an export function that loads a single
+
 export async function getProject(
   projectId: string,
   callback: { (project: IProject): void; (arg0: IProject): void },
@@ -75,8 +76,6 @@ export async function getProjectUsers(
   projectId: string,
   callback: { (projectUsersDB: any): void; (arg0: IUser[]): void },
 ) {
-  console.log("getProjectUsers: FBJS+", projectId, "AAA");
-
   const q1 = db.collection("projects").doc(projectId).collection("accessList");
 
   const idSnapshot = await q1.get();
@@ -108,8 +107,6 @@ export async function getProjectUsers(
 }
 
 export function updateProject(project: IProject, callback: saveDone) {
-  console.log("updateProject: FBJS: ", project);
-
   const ref = db.collection("projects").doc(project.key);
 
   ref
@@ -138,14 +135,6 @@ export function addProject(
         postCount: 0,
       })
       .then((docRef) => {
-        console.log(
-          "Project written with ID, now add the currenly logged in user to the newly created project: ",
-          docRef.id,
-        );
-
-        addProjectUser(docRef.id, user);
-      })
-      .then((docRef) => {
         console.log("Project written with ID: ", docRef.id);
         callback(docRef.id);
       });
@@ -159,16 +148,15 @@ export function addProject(
 export function addProjectUser(
   projectId: string,
   user: IUser,
-  callback?: { (id: string): void; (arg0: string): void },
+  callback: { (id: string): void; (arg0: string): void },
 ) {
-  console.log("Adding user to project: ", user);
+  console.log("Adding user to project: ", projectId, user);
 
   try {
-    const docRef = db
-      .collection("projects")
+    db.collection("projects")
       .doc(projectId)
       .collection("accessList")
-      .doc(user.key)
+      .doc(user.uid)
       .set(
         {
           uid: user.uid,
@@ -180,7 +168,7 @@ export function addProjectUser(
       )
       .then((docRef) => {
         if (callback) {
-          callback(user.key);
+          callback(projectId);
         } else {
           console.log("Callback not provided.");
         }

@@ -6,7 +6,7 @@ import { TextInput } from "../components/Themed";
 import ProjectContext from "../lib/projectContext";
 import AuthContext from "../lib/authContext";
 
-import { addProject } from "../lib/APIproject";
+import { addProject, addProjectUser } from "../lib/APIproject";
 import { IProject, IUser } from "../lib/types";
 
 export default function addPhoto() {
@@ -32,9 +32,20 @@ export default function addPhoto() {
     title: "",
     icon: "",
     archived: false,
+    postCount: 0,
   };
 
-  const saveDone = (id) => {
+  const saveDoneUser = (projectId: string) => {
+    router.replace({
+      pathname: "/editProject",
+      params: {
+        projectId: projectId,
+        projectTitle: project.title,
+      },
+    });
+  };
+
+  const saveDone = (id: string) => {
     updateSharedDataProject({
       key: id,
       title: project.title,
@@ -42,21 +53,13 @@ export default function addPhoto() {
       archived: project.archived,
     });
 
-    router.replace({
-      pathname: "/editProject",
-      params: {
-        projectId: id,
-        projectTitle: project.title,
-      },
-    });
+    addProjectUser(id, loggedInUser, saveDoneUser);
   };
 
   const onSave = async () => {
     project.title = text;
     addProject(project, loggedInUser, saveDone);
   };
-
-  const pickImage = async () => {};
 
   return (
     <SafeAreaView>
