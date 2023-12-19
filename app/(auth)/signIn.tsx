@@ -174,13 +174,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   notificationText: {
-    color: "white",
     fontSize: 18,
     textAlign: "center",
   },
   notificationTextHeader: {
-    color: "white",
-    fontSize: 18,
+sdfggs    fontSize: 18,
     fontWeight: "bold",
     paddingBottom: 10,
     textAlign: "center",
