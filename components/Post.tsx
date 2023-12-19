@@ -35,7 +35,7 @@ const Post = (props) => {
         <Dots images={imageUrls} />
         <Status project={post.projectId} post={post.key} status={post.status} />
         <View style={styles.commentBlock}>
-          <ParsedText style={styles.comment} text={caption} />
+          <Text style={styles.comment}>{caption}</Text>
           <Comments project={post.projectId} post={post.key} />
         </View>
       </View>
@@ -119,7 +119,9 @@ const Post = (props) => {
 
 const styles = StyleSheet.create({
   comment: {
-    fontSize: 26,
+    fontSize: 20,
+    padding: 8,
+    paddingVertical: 12,
   },
   commentBlock: {
     padding: 8,

@@ -64,6 +64,8 @@ export default function Note() {
               placeholder={"Add Note"}
               value={title}
               autoFocus={true}
+              multiline={true}
+              numberOfLines={10}
             />
           </View>
         </View>
