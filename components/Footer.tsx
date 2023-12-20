@@ -77,7 +77,13 @@ const Footer = ({ project, post }: Props) => {
         <View style={styles.boxContainer}>
           <View style={styles.box}>
             <View style={styles.actionRow}>
-              <Text style={styles.actionLeftText}>Share</Text>
+              <Text
+                style={[
+                  styles.actionLeftText,
+                  { textDecorationLine: "line-through" },
+                ]}>
+                Share
+              </Text>
 
               <Ionicons
                 style={[
@@ -90,7 +96,13 @@ const Footer = ({ project, post }: Props) => {
             </View>
             <View style={styles.line} />
             <View style={styles.actionRow}>
-              <Text style={styles.actionLeftText}>Edit</Text>
+              <Text
+                style={[
+                  styles.actionLeftText,
+                  { textDecorationLine: "line-through" },
+                ]}>
+                Edit
+              </Text>
 
               <Ionicons
                 style={[

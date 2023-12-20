@@ -13,6 +13,7 @@ import { IPost, IProject } from "../lib/types";
 import ProjectContext from "../lib/projectContext";
 import { useAuth } from "../lib/authProvider";
 import { addPostNote } from "../lib/APIpost";
+import Colors from "../constants/Colors";
 
 export default function Note() {
   const { sharedDataProject } = useContext<IProject>(ProjectContext);
@@ -59,7 +60,10 @@ export default function Note() {
         <View style={styles.container}>
           <View style={styles.title}>
             <TextInput
-              style={styles.titleText}
+              style={[
+                styles.titleText,
+                { color: Colors[colorScheme ?? "light"].text },
+              ]}
               onChangeText={(title) => onChangeTitle(title)}
               placeholder={"Add Note"}
               value={title}
