@@ -110,22 +110,6 @@ export default function editCalendar() {
   };
 
   const doDelete = () => {
-    const d1 = new Date(dateBegin);
-    const d2 = new Date(dateEnd);
-
-    d1.setHours(dateBeginTime.getHours(), dateBeginTime.getMinutes(), 0, 0);
-    d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
-
-    const calendarEvent: ICalendarEvent = {
-      key: pkey,
-      dateBegin: firestore.Timestamp.fromDate(d1),
-      dateEnd: firestore.Timestamp.fromDate(d2),
-      description: description || "",
-      title: title || "",
-      projectId: sharedDataProject.key,
-      uid: sharedDataUser.uid,
-    };
-
     Alert.alert(
       "Delete",
       "Are you sure?",
