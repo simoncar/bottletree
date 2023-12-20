@@ -148,14 +148,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "row",
     marginBottom: 10,
-    marginRight: 10,
     padding: 10,
   },
   commentInput: {
     flex: 1,
     paddingBottom: 10,
-    paddingLeft: 10,
-    paddingTop: 10,
   },
   commentInputPlaceholder: {
     color: "lightgray",
@@ -165,25 +162,14 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   commentText: {},
-  commentTime: {
-    color: "#999",
-    fontSize: 12,
-    paddingLeft: 6,
-    paddingTop: 2,
-  },
+
   commentsOverall: { backgroundColor: "transparent" },
-  inputAction: { marginHorizontal: 8, paddingTop: 5 },
+  inputAction: { paddingTop: 5 },
   inputBubble: {
     borderColor: "lightgray",
     borderRadius: 10,
     borderWidth: 1,
     flexDirection: "row",
-    marginRight: 10,
-  },
-  inputContainerHidden: {
-    borderRadius: 10,
-    flexDirection: "row",
-    marginRight: 10,
   },
 });
 

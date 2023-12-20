@@ -10,8 +10,8 @@ import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { View, Text, ParsedText } from "../components/Themed";
 import Comments from "./PostComments";
-import Status from "./Status";
 import Dots from "../components/dots";
+import Footer from "../components/Footer";
 import Colors from "../constants/Colors";
 
 const Post = (props) => {
@@ -34,31 +34,6 @@ const Post = (props) => {
   if (post.caption != undefined) {
     caption = post.caption;
   }
-
-  return (
-    <View>
-      <View
-        style={[
-          styles.postView,
-          {
-            backgroundColor: Colors[colorScheme ?? "light"].postBackground,
-            borderColor: Colors[colorScheme ?? "light"].postBackground,
-          },
-        ]}>
-        {renderImage()}
-        <Dots images={imageUrls} />
-        <Status project={post.projectId} post={post.key} status={post.status} />
-        <View
-          style={[
-            styles.commentBlock,
-            { backgroundColor: Colors[colorScheme ?? "light"].postBackground },
-          ]}>
-          <Text style={styles.comment}>{caption}</Text>
-          <Comments project={post.projectId} post={post.key} />
-        </View>
-      </View>
-    </View>
-  );
 
   function renderImage() {
     if (imageUrls.length == 1) {
@@ -133,17 +108,38 @@ const Post = (props) => {
       );
     }
   }
+
+  return (
+    <View>
+      <View
+        style={[
+          styles.postView,
+          {
+            backgroundColor: Colors[colorScheme ?? "light"].postBackground,
+            borderColor: Colors[colorScheme ?? "light"].postBackground,
+          },
+        ]}>
+        {renderImage()}
+        <Dots images={imageUrls} />
+
+        <View style={styles.commentView}>
+          <Text style={styles.comment}>{caption}</Text>
+          <Comments project={post.projectId} post={post.key} />
+        </View>
+
+        <Footer project={post.projectId} post={post} />
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   comment: {
     fontSize: 20,
-    padding: 8,
-    paddingVertical: 12,
+    paddingBottom: 12,
   },
-  commentBlock: {
-    borderRadius: 10,
-    padding: 8,
+  commentView: {
+    backgroundColor: "transparent",
   },
 
   imageContainer: {
@@ -152,11 +148,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-  },
-  listItemHeader: {
-    alignItems: "center",
-    flexDirection: "row",
-    padding: 8,
   },
 
   postView: {
