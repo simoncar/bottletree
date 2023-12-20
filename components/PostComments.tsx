@@ -11,20 +11,22 @@ import { View, Text, TextInput, ParsedText } from "./Themed";
 import { addComment, getComments } from "../lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "../constants/Colors";
-import { IComment } from "../lib/types";
+import { IComment, IPost } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
 import { firestore } from "../lib/firebase";
 
 type Props = {
   project: string;
-  post: string;
+  post: IPost;
+  commentShow: boolean;
+  setCommentShow: (commentShow: boolean) => void;
 };
 
-const Comments = ({ project, post }: Props) => {
+const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   const defaultComment = "Add a comment...";
   const [comments, setComments] = useState([]);
   const [text, setComment] = useState(defaultComment);
-  const [action, setAction] = useState(false);
+
   const [saved, setSaved] = useState(false);
   const colorScheme = useColorScheme();
   const { sharedDataUser } = useAuth();
@@ -50,7 +52,7 @@ const Comments = ({ project, post }: Props) => {
   };
 
   const save = () => {
-    setAction(false);
+    setCommentShow(false);
     const comment: IComment = {
       comment: text,
       displayName: sharedDataUser.displayName,
@@ -61,10 +63,9 @@ const Comments = ({ project, post }: Props) => {
     addComment(project, post, comment, saveDone);
   };
 
-  const showCommentInputBlock = () =>
-  {
-    setAction(true)
-  }
+  const showCommentInputBlock = () => {
+    setCommentShow(true);
+  };
 
   const displayName = (displayName: string) => {
     const replacedString = displayName.replace(/ /g, " #");
@@ -72,7 +73,7 @@ const Comments = ({ project, post }: Props) => {
   };
 
   const renderInput = () => {
-    if (action) {
+    if (commentShow) {
       return (
         <View style={styles.inputBubble}>
           <TextInput
@@ -80,7 +81,7 @@ const Comments = ({ project, post }: Props) => {
             placeholder={defaultComment}
             onChangeText={(text) => {
               setComment(text);
-              setAction(true);
+              setCommentShow(true);
             }}
             value={text}
             autoFocus
@@ -102,7 +103,7 @@ const Comments = ({ project, post }: Props) => {
           <Text
             style={styles.commentInputPlaceholder}
             onPress={() => {
-              setAction(true);
+              setCommentShow(true);
               setComment(null);
             }}>
             {text}

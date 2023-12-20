@@ -46,8 +46,8 @@ export default function editCalendar() {
 
   const [calendarEvent, setCalendarEvent] = useState<ICalendarEvent>({
     key: "",
-    color: "#000000",
-    colorName: "",
+    color: "#30A7E2",
+    colorName: "Blue",
     description: "",
     projectId: "",
     title: "",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -16,6 +16,7 @@ import Colors from "../constants/Colors";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
+  const [commentShow, setCommentShow] = useState(false);
   const { post } = props;
 
   const imageUrls = post.images && post.images.map((image) => image);
@@ -124,10 +125,20 @@ const Post = (props) => {
 
         <View style={styles.commentView}>
           <Text style={styles.comment}>{caption}</Text>
-          <Comments project={post.projectId} post={post.key} />
+          <Comments
+            project={post.projectId}
+            post={post.key}
+            commentShow={commentShow}
+            setCommentShow={setCommentShow}
+          />
         </View>
 
-        <Footer project={post.projectId} post={post} />
+        <Footer
+          project={post.projectId}
+          post={post}
+          commentShow={commentShow}
+          setCommentShow={setCommentShow}
+        />
       </View>
     </View>
   );

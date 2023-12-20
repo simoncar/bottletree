@@ -13,9 +13,11 @@ import { deletePost } from "../lib/APIpost";
 type Props = {
   project: string;
   post: IPost;
+  commentShow: boolean;
+  setCommentShow: (commentShow: boolean) => void;
 };
 
-const Footer = ({ post }: Props) => {
+const Footer = ({ post, setCommentShow }: Props) => {
   const colorScheme = useColorScheme();
   const [footer, setFooter] = useState<boolean>(false);
 
@@ -35,6 +37,7 @@ const Footer = ({ post }: Props) => {
   const askComment = () => {
     console.log("comment");
     setFooter(!footer);
+    setCommentShow(true);
   };
 
   const askDelete = () => {

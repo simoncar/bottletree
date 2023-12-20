@@ -31,7 +31,7 @@ export const ColorRow = ({ onPress, selectedColor }) => {
       <View>{renderColor("Mango", "#EDC148")}</View>
       <View>{renderColor("Avocado", "#3C9065")}</View>
       <View>{renderColor("Grass", "#49B382")}</View>
-      <View>{renderColor("Surf", "#30A7E2")}</View>
+      <View>{renderColor("Blue", "#30A7E2")}</View>
       <View>{renderColor("Aubergine", "#6172BA")}</View>
       <View>{renderColor("Plum Jam", "#9F52B2")}</View>
       <View>{renderColor("Dragon Fruit", "#E085D2")}</View>
