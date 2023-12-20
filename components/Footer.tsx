@@ -1,26 +1,20 @@
 import React, { useState } from "react";
 
-import {
-  Dimensions,
-  StyleSheet,
-  Pressable,
-  useColorScheme,
-  Alert,
-} from "react-native";
-import { View, Text, ParsedText } from "../components/Themed";
+import { StyleSheet, Pressable, useColorScheme, Alert } from "react-native";
+import { View, Text } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { IPost } from "../lib/types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { updatePost, deletePost } from "../lib/APIpost";
+import { deletePost } from "../lib/APIpost";
 
 type Props = {
   project: string;
   post: IPost;
 };
 
-const Footer = ({ project, post }: Props) => {
+const Footer = ({ post }: Props) => {
   const colorScheme = useColorScheme();
   const [footer, setFooter] = useState<boolean>(false);
 
