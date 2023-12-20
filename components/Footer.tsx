@@ -11,6 +11,7 @@ import Colors from "../constants/Colors";
 import { IPost } from "../lib/types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 type Props = {
   project: string;
@@ -31,22 +32,39 @@ const Footer = ({ project, post }: Props) => {
   };
 
   return (
-    <View style={styles.footnoteView}>
-      <Text style={styles.footnote}>
-        {post.author} · {getRelativeTime(post.timestamp?.toDate() ?? 0)}
-      </Text>
+    <View style={styles.container}>
+      <View style={styles.row}>
+        <Text style={styles.leftText}>
+          {post.author} · {getRelativeTime(post.timestamp?.toDate() ?? 0)}
+        </Text>
+        <Text style={styles.rightText}>
+          <Ionicons name="ellipsis-horizontal" size={20} />
+        </Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  footnote: {
-    color: "grey",
-  },
-  footnoteView: {
+  container: {
     backgroundColor: "transparent",
-    paddingLeft: 10,
     paddingTop: 10,
+  },
+  leftText: {
+    color: "grey",
+    fontSize: 12,
+  },
+  rightText: {
+    color: "grey",
+    fontSize: 16,
+    textAlign: "right",
+  },
+  row: {
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    width: "100%",
   },
 });
 
