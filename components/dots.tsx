@@ -38,7 +38,6 @@ const Dots = ({ images, activeImage }: Props) => {
             />
           ))}
       </View>
-      <Text> {activeImage}</Text>
     </View>
   );
 };
