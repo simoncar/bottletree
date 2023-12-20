@@ -1,12 +1,7 @@
 import React from "react";
 
-import {
-  Dimensions,
-  StyleSheet,
-  Pressable,
-  useColorScheme,
-} from "react-native";
-import { View, Text, ParsedText } from "../components/Themed";
+import { StyleSheet, useColorScheme } from "react-native";
+import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 
 type Props = {
@@ -15,29 +10,26 @@ type Props = {
 };
 
 const Dots = ({ images, activeImage }: Props) => {
-  const numberImages = 1;
   const imageArray = images;
   const colorScheme = useColorScheme();
 
   return (
-    <View>
-      <View style={styles.dotContainer}>
-        {imageArray.length > 1 &&
-          images.map((image, index) => (
-            <View
-              key={index}
-              style={[
-                styles.dot,
-                {
-                  backgroundColor:
-                    index === activeImage
-                      ? Colors[colorScheme ?? "light"].dotsActive
-                      : Colors[colorScheme ?? "light"].dots,
-                },
-              ]}
-            />
-          ))}
-      </View>
+    <View style={styles.dotContainer}>
+      {imageArray.length > 1 &&
+        images.map((image, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              {
+                backgroundColor:
+                  index === activeImage
+                    ? Colors[colorScheme ?? "light"].dotsActive
+                    : Colors[colorScheme ?? "light"].dots,
+              },
+            ]}
+          />
+        ))}
     </View>
   );
 };
