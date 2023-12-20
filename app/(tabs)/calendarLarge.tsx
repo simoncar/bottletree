@@ -208,6 +208,7 @@ export default function CalendarLarge() {
         onPressEvent={onPressEvent}
         eventMinHeightForMonthView={25}
         maxVisibleEventCount={10}
+        swipeEnabled={false}
       />
     </ScrollView>
   );
