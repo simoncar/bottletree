@@ -17,6 +17,7 @@ import Colors from "../constants/Colors";
 const Post = (props) => {
   const colorScheme = useColorScheme();
   const [commentShow, setCommentShow] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
   const { post } = props;
 
   const imageUrls = post.images && post.images.map((image) => image);
@@ -73,6 +74,11 @@ const Post = (props) => {
             }}
             height={width * ratio}
             data={imageUrls}
+            onSnapToItem={(index) => {
+              console.log("onSnapToItem: ", index);
+              setActiveImage(index);
+              index;
+            }}
             renderItem={({ index }) => (
               <Pressable
                 onPress={() => {
@@ -121,7 +127,7 @@ const Post = (props) => {
           },
         ]}>
         {renderImage()}
-        <Dots images={imageUrls} />
+        <Dots images={imageUrls} activeImage={activeImage} />
 
         <View style={styles.commentView}>
           <Text style={styles.comment}>{caption}</Text>

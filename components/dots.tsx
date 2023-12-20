@@ -9,28 +9,36 @@ import {
 import { View, Text, ParsedText } from "../components/Themed";
 import Colors from "../constants/Colors";
 
-const Dots = (props) => {
-  const numberImages = 1; //props.images[].length
-  const imageArray = props.images;
+type Props = {
+  images: [];
+  activeImage: number;
+};
+
+const Dots = ({ images, activeImage }: Props) => {
+  const numberImages = 1;
+  const imageArray = images;
   const colorScheme = useColorScheme();
 
   return (
-    <View style={styles.dotContainer}>
-      {imageArray.length > 1 &&
-        props.images.map((image, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              {
-                backgroundColor:
-                  index === props.activeIndex
-                    ? "yellow"
-                    : Colors[colorScheme ?? "light"].dots,
-              },
-            ]}
-          />
-        ))}
+    <View>
+      <View style={styles.dotContainer}>
+        {imageArray.length > 1 &&
+          images.map((image, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                {
+                  backgroundColor:
+                    index === activeImage
+                      ? Colors[colorScheme ?? "light"].dotsActive
+                      : Colors[colorScheme ?? "light"].dots,
+                },
+              ]}
+            />
+          ))}
+      </View>
+      <Text> {activeImage}</Text>
     </View>
   );
 };

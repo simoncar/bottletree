@@ -11,7 +11,7 @@ export default {
     calendarDayTextColor: "#2d4150",
     textDisabledColor: "#2d4150",
     projectPanel: "#e9f0fd",
-    dots: "#232323",
+    dots: "#ccc",
     dotsActive: "#3265cb",
     bigCalendarBoxes: "#e9f0fd",
     bigCalendarDayNumberInactive: "#2d4150",
