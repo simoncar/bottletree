@@ -21,11 +21,7 @@ function TabBarIcon(props: {
   return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
-let appName = "One Build";
-
-if (!Device.isDevice) {
-  appName = "One Build (Emulator)";
-}
+const appName = "One Build";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -59,7 +55,12 @@ export default function TabLayout() {
   const pickImage = async () => {
     const multiple = true;
 
-    addImageFromCameraRoll(multiple, "posts", progressCallback, completedCallback);
+    addImageFromCameraRoll(
+      multiple,
+      "posts",
+      progressCallback,
+      completedCallback,
+    );
   };
 
   const progressCallback = (progress: number) => {

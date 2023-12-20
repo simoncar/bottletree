@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Pressable,
   useColorScheme,
+  Alert,
 } from "react-native";
 import { View, Text, ParsedText } from "../components/Themed";
 import Colors from "../constants/Colors";
@@ -12,6 +13,7 @@ import { IPost } from "../lib/types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { updatePost, deletePost } from "../lib/APIpost";
 
 type Props = {
   project: string;
@@ -22,7 +24,6 @@ const Footer = ({ project, post }: Props) => {
   const colorScheme = useColorScheme();
   const [footer, setFooter] = useState<boolean>(false);
 
-  // create a functiont that accepts a timestamp and returns a string of the relative time from now
   const getRelativeTime = (timestamp: number) => {
     if (timestamp) {
       dayjs.extend(relativeTime);
@@ -30,6 +31,34 @@ const Footer = ({ project, post }: Props) => {
     } else {
       return "";
     }
+  };
+
+  const saveDone = () => {
+    console.log("saveDone");
+  };
+
+  const askDelete = () => {
+    console.log("delete");
+    setFooter(!footer);
+
+    Alert.alert(
+      "Delete",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => {
+            deletePost(post, saveDone);
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   return (
@@ -73,17 +102,21 @@ const Footer = ({ project, post }: Props) => {
               />
             </View>
             <View style={styles.line} />
-
-            <View style={styles.actionRow}>
-              <Text style={[styles.actionLeftText, { color: "red" }]}>
-                Delete
-              </Text>
-              <Ionicons
-                style={[styles.actionRightIcon, { color: "red" }]}
-                name="md-trash-outline"
-                size={25}
-              />
-            </View>
+            <Pressable
+              onPress={() => {
+                askDelete();
+              }}>
+              <View style={styles.actionRow}>
+                <Text style={[styles.actionLeftText, { color: "red" }]}>
+                  Delete
+                </Text>
+                <Ionicons
+                  style={[styles.actionRightIcon, { color: "red" }]}
+                  name="md-trash-outline"
+                  size={25}
+                />
+              </View>
+            </Pressable>
           </View>
         </View>
       )}

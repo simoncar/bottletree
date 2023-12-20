@@ -49,39 +49,7 @@ export default function editPost() {
     updatePost(post, saveDone);
   };
 
-  const onDelete = () => {
-    Alert.alert(
-      "Delete",
-      "Are you sure?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          onPress: () => {
-            deletePost(
-              {
-                projectId: sharedDataProject.key,
-                key: key?.toString() ?? "",
-                caption: text?.toString() ?? "",
-              },
-              saveDone,
-            );
-          },
-        },
-      ],
-      { cancelable: false },
-    );
-  };
-
-  // <Stack.Screen
-  //   options={{
-  //     headerRight: () => <Button title="Done" onPress={() => save()} />,
-  //   }}
-  // />;
+  
 
   return (
     <View
