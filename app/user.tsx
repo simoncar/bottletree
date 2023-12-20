@@ -68,7 +68,7 @@ export default function editUser() {
   // Show whether or not we are running embedded code or an update
   const runTypeMessage = currentlyRunning.isEmbeddedLaunch
     ? "Running code from Appp Store build"
-    : "You App is up to date";
+    : "Check for updates";
 
   useEffect(() => {
     getUser(local?.uid || "", (user) => {
