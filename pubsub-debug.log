@@ -7,3 +7,7 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 Dec 16, 2023 12:13:04 PM com.google.cloud.pubsub.testing.v1.Main main
 INFO: Server started, listening on 8085
+Dec 20, 2023 3:55:13 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Dec 20, 2023 3:55:13 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /status

@@ -7,6 +7,7 @@ import { IPost } from "../lib/types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { deletePost } from "../lib/APIpost";
 
 type Props = {
@@ -29,6 +30,11 @@ const Footer = ({ post }: Props) => {
 
   const saveDone = () => {
     console.log("saveDone");
+  };
+
+  const askComment = () => {
+    console.log("comment");
+    setFooter(!footer);
   };
 
   const askDelete = () => {
@@ -59,7 +65,8 @@ const Footer = ({ post }: Props) => {
     <View style={styles.container}>
       <View style={styles.row}>
         <Text style={styles.leftText}>
-          {post.author} · {getRelativeTime(post.timestamp?.toDate() ?? 0)}
+          {post.author} ·{" "}
+          {getRelativeTime(post.timestamp?.toDate()?.getTime() ?? 0)}
         </Text>
         <Pressable onPress={() => setFooter(!footer)}>
           <Text style={styles.rightText}>
@@ -89,24 +96,22 @@ const Footer = ({ post }: Props) => {
               />
             </View>
             <View style={styles.line} />
-            <View style={styles.actionRow}>
-              <Text
-                style={[
-                  styles.actionLeftText,
-                  { textDecorationLine: "line-through" },
-                ]}>
-                Edit
-              </Text>
-
-              <Ionicons
-                style={[
-                  styles.actionRightIcon,
-                  { color: Colors[colorScheme ?? "light"].text },
-                ]}
-                name="ios-pencil"
-                size={25}
-              />
-            </View>
+            <Pressable
+              onPress={() => {
+                askComment();
+              }}>
+              <View style={styles.actionRow}>
+                <Text style={styles.actionLeftText}>Comment</Text>
+                <MaterialIcons
+                  name="send"
+                  style={[
+                    styles.actionRightIcon,
+                    { color: Colors[colorScheme ?? "light"].text },
+                  ]}
+                  size={25}
+                />
+              </View>
+            </Pressable>
             <View style={styles.line} />
             <Pressable
               onPress={() => {

@@ -61,6 +61,11 @@ const Comments = ({ project, post }: Props) => {
     addComment(project, post, comment, saveDone);
   };
 
+  const showCommentInputBlock = () =>
+  {
+    setAction(true)
+  }
+
   const displayName = (displayName: string) => {
     const replacedString = displayName.replace(/ /g, " #");
     return "#" + replacedString;
@@ -153,18 +158,24 @@ const styles = StyleSheet.create({
   commentInput: {
     flex: 1,
     paddingBottom: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10,
   },
   commentInputPlaceholder: {
     color: "lightgray",
     flex: 1,
     paddingBottom: 10,
-    paddingLeft: 10,
+    paddingHorizontal: 10,
     paddingTop: 10,
   },
   commentText: {},
 
   commentsOverall: { backgroundColor: "transparent" },
-  inputAction: { paddingTop: 5 },
+  inputAction: {
+    backgroundColor: "transparent",
+    paddingRight: 10,
+    paddingTop: 5,
+  },
   inputBubble: {
     borderColor: "lightgray",
     borderRadius: 10,

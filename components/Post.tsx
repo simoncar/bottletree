@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
   comment: {
     fontSize: 20,
     paddingBottom: 12,
+    paddingLeft: 10,
   },
   commentView: {
     backgroundColor: "transparent",
