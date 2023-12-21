@@ -125,6 +125,10 @@ export default function TabLayout() {
           case 0:
             router.push({
               pathname: "/note",
+              params: {
+                projectId: sharedDataProject.key,
+                postId: "",
+              },
             });
             break;
           case 1:

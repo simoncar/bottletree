@@ -12,7 +12,7 @@ import { Stack, router, useLocalSearchParams } from "expo-router";
 import { IPost, IProject } from "../lib/types";
 import ProjectContext from "../lib/projectContext";
 import { useAuth } from "../lib/authProvider";
-import { addPostNote, getPost } from "../lib/APIpost";
+import { setPostNote, getPost } from "../lib/APIpost";
 import Colors from "../constants/Colors";
 
 export default function Note() {
@@ -20,21 +20,24 @@ export default function Note() {
     projectId: string;
     postId: string;
   }>();
+  const { sharedDataUser } = useAuth();
 
   const [post, setPost] = useState<IPost>({
     key: "",
     caption: "",
-    projectId: "",
+    projectId: local?.projectId || "",
     projectTitle: "",
+    author: sharedDataUser.displayName,
   });
 
-  console.log("Note:", local.projectId, local.postId);
+  console.log("Note:", "pro : " + local.projectId, "Post:" + local.postId);
 
   const { sharedDataProject } = useContext<IProject>(ProjectContext);
-  const { sharedDataUser } = useAuth();
   const colorScheme = useColorScheme();
 
   useEffect(() => {
+    console.log("Note - useEffect");
+
     getPost(local?.projectId || "", local?.postId || "", (post) => {
       if (post) {
         setPost(post);
@@ -56,8 +59,11 @@ export default function Note() {
 
   const save = () => {
     console.log("save:", sharedDataProject);
+    if (post.key == "") {
+      post.key = "post_" + Date.now();
+    }
 
-    addPostNote(post, saveDone);
+    setPostNote(post, saveDone);
   };
 
   return (
