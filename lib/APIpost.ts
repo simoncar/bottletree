@@ -2,6 +2,37 @@ import { db, firestore } from "./firebase";
 import { IPost, IComment } from "./types";
 import * as Device from "expo-device";
 
+//create a export function that gets a single post from firebase into a return object that can be used by the app
+export async function getPost(
+  projectId: string,
+  postId: string,
+  callback: { (post: IPost): void; (arg0: IPost): void },
+) {
+  const q = db
+    .collection("projects")
+    .doc(projectId)
+    .collection("posts")
+    .doc(postId);
+
+  q.get().then((doc) => {
+    if (doc.exists) {
+      const post: IPost = {
+        key: doc.id,
+        projectId: projectId,
+        projectTitle: doc.data()?.projectTitle,
+        caption: doc.data()?.caption,
+        author: doc.data()?.author,
+        images: doc.data()?.images,
+        ratio: doc.data()?.ratio,
+        timestamp: doc.data()?.timestamp,
+      };
+      callback(post);
+    } else {
+      console.log("No such post:", projectId, postId);
+    }
+  });
+}
+
 export async function addPostImage(post: IPost, callback: saveDone) {
   db.collection("projects")
     .doc(post.projectId)

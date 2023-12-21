@@ -125,12 +125,6 @@ export default function TabLayout() {
           case 0:
             router.push({
               pathname: "/note",
-              params: {
-                pdateBegin: dateBegin,
-                pdateEnd: dateEnd,
-                pcolor: "#49B382",
-                pcolorName: "Grass",
-              },
             });
             break;
           case 1:

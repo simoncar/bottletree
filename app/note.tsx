@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,18 +8,39 @@ import {
   Button as NativeButton,
   useColorScheme,
 } from "react-native";
-import { Stack, router } from "expo-router";
+import { Stack, router, useLocalSearchParams } from "expo-router";
 import { IPost, IProject } from "../lib/types";
 import ProjectContext from "../lib/projectContext";
 import { useAuth } from "../lib/authProvider";
-import { addPostNote } from "../lib/APIpost";
+import { addPostNote, getPost } from "../lib/APIpost";
 import Colors from "../constants/Colors";
 
 export default function Note() {
+  const local = useLocalSearchParams<{
+    projectId: string;
+    postId: string;
+  }>();
+
+  const [post, setPost] = useState<IPost>({
+    key: "",
+    caption: "",
+    projectId: "",
+    projectTitle: "",
+  });
+
+  console.log("Note:", local.projectId, local.postId);
+
   const { sharedDataProject } = useContext<IProject>(ProjectContext);
   const { sharedDataUser } = useAuth();
-  const [title, onChangeTitle] = useState("");
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    getPost(local?.projectId || "", local?.postId || "", (post) => {
+      if (post) {
+        setPost(post);
+      }
+    });
+  }, []);
 
   const saveDone = () => {
     console.log("saveDone - push to home");
@@ -35,14 +56,6 @@ export default function Note() {
 
   const save = () => {
     console.log("save:", sharedDataProject);
-
-    const post: IPost = {
-      key: "",
-      caption: title?.toString() ?? "",
-      projectId: sharedDataProject.key,
-      projectTitle: sharedDataProject.title,
-      author: sharedDataUser.displayName,
-    };
 
     addPostNote(post, saveDone);
   };
@@ -64,9 +77,9 @@ export default function Note() {
                 styles.titleText,
                 { color: Colors[colorScheme ?? "light"].text },
               ]}
-              onChangeText={(title) => onChangeTitle(title)}
+              onChangeText={(title) => setPost({ ...post, caption: title })}
               placeholder={"Add Note"}
-              value={title}
+              value={post.caption}
               autoFocus={true}
               multiline={true}
               numberOfLines={10}

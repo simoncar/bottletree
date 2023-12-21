@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { router } from "expo-router";
 import { StyleSheet, Pressable, useColorScheme, Alert } from "react-native";
 import { View, Text } from "../components/Themed";
 import Colors from "../constants/Colors";
@@ -38,6 +38,17 @@ const Footer = ({ post, setCommentShow }: Props) => {
     console.log("comment");
     setFooter(!footer);
     setCommentShow(true);
+  };
+
+  const openEdit = () => {
+    console.log("edit:" + post);
+    router.push({
+      pathname: "/note",
+			params: {
+				projectId: post.projectId,
+        postId: post.key
+      },
+    });
   };
 
   const askDelete = () => {
@@ -80,24 +91,24 @@ const Footer = ({ post, setCommentShow }: Props) => {
       {footer && (
         <View style={styles.boxContainer}>
           <View style={styles.box}>
-            <View style={styles.actionRow}>
-              <Text
-                style={[
-                  styles.actionLeftText,
-                  { textDecorationLine: "line-through" },
-                ]}>
-                Share
-              </Text>
+            <Pressable
+              onPress={() => {
+                setFooter(!footer);
+                openEdit();
+              }}>
+              <View style={styles.actionRow}>
+                <Text style={styles.actionLeftText}>Edit</Text>
 
-              <Ionicons
-                style={[
-                  styles.actionRightIcon,
-                  { color: Colors[colorScheme ?? "light"].text },
-                ]}
-                name="share-outline"
-                size={25}
-              />
-            </View>
+                <Ionicons
+                  style={[
+                    styles.actionRightIcon,
+                    { color: Colors[colorScheme ?? "light"].text },
+                  ]}
+                  name="ios-pencil"
+                  size={25}
+                />
+              </View>
+            </Pressable>
             <View style={styles.line} />
             <Pressable
               onPress={() => {
