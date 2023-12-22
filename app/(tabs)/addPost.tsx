@@ -6,7 +6,7 @@ import { Text, View, Button } from "../../components/Themed";
 import { addPostImage } from "../../lib/APIpost";
 import { addImageFromCameraRoll } from "../../lib/APIimage";
 import ProjectContext from "../../lib/projectContext";
-import { IPost } from "../../lib/types";
+import { IPost, IProject } from "../../lib/types";
 import { useAuth } from "../../lib/authProvider";
 import * as Progress from "react-native-progress";
 

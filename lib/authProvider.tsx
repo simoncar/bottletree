@@ -6,7 +6,7 @@ import {
 } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { registerForPushNotificationsAsync } from "../lib/APINotification";
+
 import * as Device from "expo-device";
 import AuthContext from "./authContext";
 import React, { useEffect, useState, useRef } from "react";
