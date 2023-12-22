@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.72",
+    "version": "1.0.73",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -17,7 +17,7 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "71",
+      "buildNumber": "73",
       "config": {
         "usesNonExemptEncryption": false
       }
