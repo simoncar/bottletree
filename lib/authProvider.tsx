@@ -173,8 +173,7 @@ function useProtectedRoute(user) {
   }, [user, isUserReady, segments, isNavigationReady]);
 }
 export function AuthProvider(props: React.PropsWithChildren) {
-	const [[isLoading, session], setSession] = useStorageState("session");
-
+  const [[isLoading, session], setSession] = useStorageState("session");
 
   const INITIAL_USER = null;
   const [sharedDataUser, setSharedDataUser] = useState(INITIAL_USER);
@@ -323,7 +322,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const appSignIn = async (email, password) => {
   try {
