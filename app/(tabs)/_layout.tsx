@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs, router } from "expo-router";
+import { Link, Tabs, Redirect, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet } from "react-native";
 import { BigText } from "../../components/StyledText";
@@ -13,6 +13,8 @@ import ProjectContext from "../../lib/projectContext";
 import * as Device from "expo-device";
 import { addImageFromCameraRoll } from "../../lib/APIimage";
 import { addPostImage } from "../../lib/APIpost";
+import { useAuth } from "../../lib/authProvider";
+import { Text } from "../../components/Themed";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -29,6 +31,23 @@ export default function TabLayout() {
   const { sharedDataProject } = useContext(ProjectContext);
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+
+  const { session, isLoading } = useAuth();
+
+  if (isLoading) {
+    console.log("(tabls)/_layout/isLoading");
+
+    return <Text>Loading...</Text>;
+  }
+
+  if (!session) {
+    // On web, static rendering will stop here as the user is not authenticated
+    // in the headless Node process that the pages are rendered in.
+    console.log("(tabls)/_layout/!session");
+
+    return <Redirect href="/(auth)/signIn" />;
+  }
+
   let loggedInUser: IUser = sharedDataUser;
 
   if (null == sharedDataUser) {

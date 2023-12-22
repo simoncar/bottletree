@@ -11,13 +11,23 @@ import * as Device from "expo-device";
 import AuthContext from "./authContext";
 import React, { useEffect, useState, useRef } from "react";
 
+import { useStorageState } from "./useStorageState";
+
 import { Platform } from "react-native";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
 
 // This hook can be used to access the user info.
 export function useAuth() {
-  return React.useContext(AuthContext);
+  //return React.useContext(AuthContext);
+  const value = React.useContext(AuthContext);
+  if (process.env.NODE_ENV !== "production") {
+    if (!value) {
+      throw new Error("useSession must be wrapped in a <SessionProvider />");
+    }
+  }
+
+  return value;
 }
 
 // const unsub = onAuthStateChanged(auth, (user) => {
@@ -162,8 +172,10 @@ function useProtectedRoute(user) {
     }
   }, [user, isUserReady, segments, isNavigationReady]);
 }
+export function AuthProvider(props: React.PropsWithChildren) {
+	const [[isLoading, session], setSession] = useStorageState("session");
 
-const AuthProvider = ({ children }) => {
+
   const INITIAL_USER = null;
   const [sharedDataUser, setSharedDataUser] = useState(INITIAL_USER);
 
@@ -180,7 +192,7 @@ const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  useProtectedRoute(sharedDataUser);
+  //useProtectedRoute(sharedDataUser);
 
   const updateSharedDataUser = (newData) => {
     try {

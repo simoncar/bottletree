@@ -4,7 +4,11 @@ npx expo start
 firebase emulators:start
 
 
+loginError:  [auth/network-request-failed] A network error has occurred, please try again.
+ LOG  [Error: [auth/network-request-failed] A network error has occurred, please try again.]
 
+
+ 
 
 
 

@@ -97,7 +97,15 @@ export default function SignIn() {
 
       <TouchableOpacity
         onPress={async () => {
-          signIn(email, password, loginError);
+          signIn(email, password, loginError).then((result) => {
+            if (result) {
+              console.log("result: ", result);
+
+              router.push({
+                pathname: "/(tabs)",
+              });
+            }
+          });
         }}
         style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>
