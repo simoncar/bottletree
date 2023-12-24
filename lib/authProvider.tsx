@@ -40,7 +40,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
       } else {
         setSession(null);
         setSharedDataUser(null);
-        router.navigate("/signIn");
+        router.replace("/signIn");
       }
     });
     return () => unsubscribeAuth();
