@@ -5,7 +5,6 @@ import {
   useColorScheme,
   Pressable,
 } from "react-native";
-import { useAuth } from "../../lib/authProvider";
 import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -19,26 +18,7 @@ export default function SignIn() {
   const [notification, setNotification] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
   const [showSignIn, setShowSignIn] = useState(false);
-  const { signIn } = useAuth();
   const colorScheme = useColorScheme();
-
-  const ERROR_MAP = {
-    "Firebase: Error (auth/email-already-in-use).":
-      "Email is already in use, try a different one.",
-    "Username already exists": "Username already exists, try a different one.",
-    "Firebase: Password should be at least 6 characters (auth/weak-password).":
-      "Password must be at least 6 characters long.",
-    "Firebase: Error (auth/wrong-password).":
-      "Wrong password. Try again or click Forgot password to reset it.",
-    "[auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
-      "No account found with this email.",
-    "[auth/invalid-email] The email address is badly formatted.":
-      "The email address is not valid.",
-    "Firebase: Error (auth/network-request-failed).":
-      "Network error. Check your internet connection.",
-    "[auth/wrong-password] The password is invalid or the user does not have a password.":
-      "Incorrect Password. Please check the password and try again",
-  };
 
   return (
     <View style={styles.container}>
