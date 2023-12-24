@@ -3,14 +3,8 @@
 npx expo start
 firebase emulators:start
 
-
-loginError:  [auth/network-request-failed] A network error has occurred, please try again.
- LOG  [Error: [auth/network-request-failed] A network error has occurred, please try again.]
-
-
- 
-
-
+loginError: [auth/network-request-failed] A network error has occurred, please try again.
+LOG [Error: [auth/network-request-failed] A network error has occurred, please try again.]
 
 curl -v -X DELETE "http://127.0.0.1:8080/emulator/v1/projects/firestore-emulator-example/databases/(default)/documents"
 
@@ -46,29 +40,13 @@ firebase deploy --only functions
 
 firebase deploy --only functions --project builder-403d5
 
-http://127.0.0.1:5001/builder-403d5/us-central1/addmessage?text=uppercaseme
+import { useNavigation } from 'expo-router';
 
-https://us-central1-builder-403d5.cloudfunctions.net/addmessage?text=uppercaseme
+...
 
-node_modules/@sentry/cli/bin/sentry-cli releases \
- files <release name> \
- upload-sourcemaps \
- --dist <iOS Update ID> \
- --rewrite \
- dist/bundles/main.jsbundle dist/bundles/ios-<hash>.map
+const navigation = useNavigation()
 
-node_modules/@sentry/cli/bin/sentry-cli releases \
- files bottletree@1.0.61 \
- upload-sourcemaps \
- --dist 62 \
- --rewrite \
- dist/bundles/main.jsbundle dist/bundles/ios-37afeeb0754c2257b8c1bf48d124dc72.map --org simon-co --project bottletree
+...
+console.log(JSON.stringify(navigation.getState()))
 
-node_modules/@sentry/cli/bin/sentry-cli sourcemaps explain 27cdcfe548544edeabc0bc6ba334f282 --org simon-co --project bottletree
-
-node_modules/@sentry/cli/bin/sentry-cli releases list --org simon-co --project bottletree
-
-node_modules/@sentry/cli/bin/sentry-cli sourcemaps resolve \
- dist/bundles/ios-37afeeb0754c2257b8c1bf48d124dc72.map \
- -r bottletree@1.0.58 \
- --org simon-co --project bottletree -l 1:2295727
+navigation.navigate("index", { screen: "index" })

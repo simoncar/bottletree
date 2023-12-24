@@ -1,5 +1,5 @@
 import React from "react";
-import Note from "../note";
+import Note from "../(dashboard)/note";
 import renderer from "react-test-renderer";
 
 jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");

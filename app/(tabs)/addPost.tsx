@@ -24,7 +24,7 @@ export default function addPhoto() {
     console.log("saveDone - push to home");
 
     router.push({
-      pathname: "/",
+      pathname: "/(tabs)",
       params: {
         project: sharedDataProject.key,
         title: sharedDataProject.title,
@@ -95,8 +95,6 @@ export default function addPhoto() {
       images: downloadURLarray,
       ratio: ratio,
     };
-
-    console.log(post);
 
     addPostImage(post, saveDone);
     setProgress(0);

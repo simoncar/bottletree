@@ -11,12 +11,12 @@ import {
   Easing,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Colors from "../constants/Colors";
-import { addImageFromPhoto } from "../lib/APIimage";
-import ProjectContext from "../lib/projectContext";
-import { IPost } from "../lib/types";
-import { useAuth } from "../lib/authProvider";
-import { addPostImage } from "../lib/APIpost";
+import Colors from "../../constants/Colors";
+import { addImageFromPhoto } from "../../lib/APIimage";
+import ProjectContext from "../../lib/projectContext";
+import { IPost } from "../../lib/types";
+import { useAuth } from "../../lib/authProvider";
+import { addPostImage } from "../../lib/APIpost";
 import { router } from "expo-router";
 
 export default function App() {
@@ -63,7 +63,7 @@ export default function App() {
     console.log("saveDone - push to home");
 
     router.push({
-      pathname: "/",
+      pathname: "/(tabs)",
       params: {
         project: sharedDataProject.key,
         title: sharedDataProject.title,
@@ -92,8 +92,6 @@ export default function App() {
       images: [downloadURL],
       ratio: ratio,
     };
-
-    console.log(post);
 
     addPostImage(post, saveDone);
     //setProgress(0);

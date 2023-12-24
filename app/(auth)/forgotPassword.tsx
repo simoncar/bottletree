@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { useAuth, appSignIn } from "../../lib/authProvider";
-import { Image } from "expo-image";
+import { useAuth } from "../../lib/authProvider";
 import { Stack } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 
@@ -47,14 +46,6 @@ export default function SignIn() {
           console.log("touchable opacity signin");
 
           resetPassword(email, resetError);
-          //const resp = await appSignIn("simoncar@gmail.com", "password");
-          //console.log("resp: ", resp);
-          // if (resp?.user) {
-          // 	router.replace("/(tabs)/home");
-          // } else {
-          // 	console.log(resp.error);
-          // 	Alert.alert("Login Error", resp.error?.message);
-          // }
         }}
         style={styles.loginBtn}>
         <Text style={styles.loginText}>SEND RESET LINK</Text>

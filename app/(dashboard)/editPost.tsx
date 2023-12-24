@@ -12,11 +12,11 @@ import {
 import { Image } from "expo-image";
 import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import { router, useLocalSearchParams, Stack } from "expo-router";
-import { updatePost, deletePost } from "../lib/APIpost";
-import ProjectContext from "../lib/projectContext";
-import { TextInput, View } from "../components/Themed";
-import Colors from "../constants/Colors";
-import { IPost, IProject } from "../lib/types";
+import { updatePost, deletePost } from "../../lib/APIpost";
+import ProjectContext from "../../lib/projectContext";
+import { TextInput, View } from "../../components/Themed";
+import Colors from "../../constants/Colors";
+import { IPost, IProject } from "../../lib/types";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function editPost() {
@@ -29,7 +29,7 @@ export default function editPost() {
 
   const saveDone = () => {
     router.push({
-      pathname: "/",
+      pathname: "/(tabs)",
       params: {
         project: sharedDataProject.key,
         title: sharedDataProject.title,
@@ -48,8 +48,6 @@ export default function editPost() {
 
     updatePost(post, saveDone);
   };
-
-  
 
   return (
     <View

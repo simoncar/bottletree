@@ -6,11 +6,10 @@ import {
   useColorScheme,
   TouchableOpacity,
   Button,
-  Pressable,
 } from "react-native";
-import { Text, View, TextInput } from "../components/Themed";
-import { useAuth } from "../lib/authProvider";
-import { router, Stack } from "expo-router";
+import { Text, View, TextInput } from "../../components/Themed";
+import { useAuth } from "../../lib/authProvider";
+import { router, Stack, useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -19,29 +18,33 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import {
   updateAccountName,
   updateAccountPhotoURL,
   getUser,
-} from "../lib/APIuser";
-import { About } from "../lib/about";
+} from "../../lib/APIuser";
+import { About } from "../../lib/about";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addImageFromCameraRoll } from "../lib/APIimage";
+import { addImageFromCameraRoll } from "../../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
-import { demoData } from "../lib/demoData";
-import { IUser } from "../lib/types";
+import { demoData } from "../../lib/demoData";
+import { IUser } from "../../lib/types";
 import { StatusBar } from "expo-status-bar";
 import * as Updates from "expo-updates";
+import { auth } from "../../lib/firebase";
 
 export default function editUser() {
   const local = useLocalSearchParams<{
     uid: string;
   }>();
 
-  const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
+  const { sharedDataUser, updateSharedDataUser } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
+  const navigation = useNavigation();
+
+  //console.log("navigation data:",JSON.stringify(navigation.getState()));
 
   const {
     currentlyRunning,
@@ -92,9 +95,7 @@ export default function editUser() {
     updateSharedDataUser({ displayName: user.displayName });
     updateAccountName(user.displayName);
 
-    router.push({
-      pathname: "/",
-    });
+    router.back();
   };
 
   const progressCallback = (progress) => {
@@ -217,6 +218,10 @@ export default function editUser() {
         <Stack.Screen
           options={{
             headerRight: () => <Button title="Done" onPress={() => save()} />,
+            title: "",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
           }}
         />
         <View style={styles.avatarAContainer}>
@@ -285,7 +290,18 @@ export default function editUser() {
           </View>
         </TouchableOpacity>
         <View style={styles.outerView}>
-          <TouchableOpacity key={"signOut"} onPress={() => signOut()}>
+          <TouchableOpacity
+            key={"signOut"}
+            onPress={() => {
+              auth()
+                .signOut()
+                .then(() => {
+                  console.log("Sign-out successful.");
+                })
+                .catch((error) => {
+                  console.log(error.message);
+                });
+            }}>
             <View style={styles.leftContent}>
               <MaterialIcons
                 name="logout"
@@ -367,6 +383,7 @@ export default function editUser() {
           <Text style={styles.version}>
             Update Available : {isUpdateAvailable.toString()}
           </Text>
+
           <About />
         </View>
       </ScrollView>

@@ -10,6 +10,7 @@ import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "../../constants/Colors";
+import { auth } from "../../lib/firebase";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -96,16 +97,15 @@ export default function SignIn() {
       </View>
 
       <TouchableOpacity
-        onPress={async () => {
-          signIn(email, password, loginError).then((result) => {
-            if (result) {
-              console.log("result: ", result);
-
-              router.push({
-                pathname: "/(tabs)",
-              });
-            }
-          });
+        onPress={() => {
+          auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              console.log("logged in:", userCredential);
+            })
+            .catch((error) => {
+              setNotification(error.code);
+            });
         }}
         style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>

@@ -7,12 +7,12 @@ import {
   ScrollView,
   useColorScheme,
 } from "react-native";
-import { ShortList } from "../components/sComponent";
-import { Text, View } from "../components/Themed";
-import { getUsers } from "../lib/APIuser";
-import { addProjectUser } from "../lib/APIproject";
-import { IUser } from "../lib/types";
-import ProjectContext from "../lib/projectContext";
+import { ShortList } from "../../components/sComponent";
+import { Text, View } from "../../components/Themed";
+import { getUsers } from "../../lib/APIuser";
+import { addProjectUser } from "../../lib/APIproject";
+import { IUser } from "../../lib/types";
+import ProjectContext from "../../lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ModalScreen = (props) => {
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     marginRight: 12,
     width: 50,
   },
+  avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
+
   avatarIcon: {
     fontSize: 35,
     paddingTop: 5,
     textAlign: "center",
   },
-
-  avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
   container: {
     flex: 1,
     height: 200,
@@ -131,17 +131,17 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 
+  projectList: {},
+  userdata: {
+    color: "#888",
+    fontSize: 18,
+    marginBottom: 5,
+  },
+
   username: {
     fontSize: 18,
     marginBottom: 5,
   },
-  userdata: {
-    fontSize: 18,
-    color: "#888",
-    marginBottom: 5,
-  },
-
-  projectList: {},
 });
 
 export default ModalScreen;

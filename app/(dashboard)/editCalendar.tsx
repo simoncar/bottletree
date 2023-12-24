@@ -13,26 +13,26 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { firestore } from "../lib/firebase";
+import { firestore } from "../../lib/firebase";
 
-import { Text, TextInput, View } from "../components/Themed";
+import { Text, TextInput, View } from "../../components/Themed";
 import {
   getCalendarEvent,
   saveCalendarEvent,
   deleteCalendarEvent,
-} from "../lib/APIcalendar";
-import { useProject } from "../lib/projectProvider";
+} from "../../lib/APIcalendar";
+import { useProject } from "../../lib/projectProvider";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import Colors from "../constants/Colors";
-import { ICalendarEvent } from "../lib/types";
-import { useAuth } from "../lib/authProvider";
+import Colors from "../../constants/Colors";
+import { ICalendarEvent } from "../../lib/types";
+import { useAuth } from "../../lib/authProvider";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
-import { ColorRow } from "../components/ColorRow";
+import { ColorRow } from "../../components/ColorRow";
 
 export default function editCalendar() {
   const { sharedDataProject } = useProject();

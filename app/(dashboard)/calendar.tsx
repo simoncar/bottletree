@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { Agenda, DateData, AgendaEntry } from "react-native-calendars";
-import { getItems } from "../lib/APIcalendar";
-import { IProject } from "../lib/types";
-import Project from "../components/ProjectPanel";
-import { View, Text, ParsedText } from "../components/Themed";
-import ProjectContext from "../lib/projectContext";
-import Colors from "../constants/Colors";
+import { getItems } from "../../lib/APIcalendar";
+import { IProject } from "../../lib/types";
+import Project from "../../components/ProjectPanel";
+import { View, Text, ParsedText } from "../../components/Themed";
+import ProjectContext from "../../lib/projectContext";
+import Colors from "../../constants/Colors";
 import { router } from "expo-router";
 
 export default function Calendar() {
