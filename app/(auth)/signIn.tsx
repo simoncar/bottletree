@@ -55,7 +55,7 @@ export default function SignIn() {
         </TouchableOpacity>
       )}
       {showSignIn && (
-        <View style={styles.container}>
+        <View style={styles.signInContainer}>
           <View>
             <Text style={styles.welcomeText}>Sign in</Text>
           </View>
@@ -195,6 +195,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 20,
     width: "80%",
+  },
+  signInContainer: {
+    alignItems: "center",
+    flex: 1,
+    paddingTop: 10,
   },
   textInput: {
     alignItems: "flex-start",
