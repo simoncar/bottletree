@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs, router } from "expo-router";
+import { Link, Tabs, Redirect, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet } from "react-native";
 import { BigText } from "../../components/StyledText";
@@ -7,12 +7,12 @@ import { View } from "../../components/Themed";
 import { UserAvatar } from "../../components/UserAvatar";
 import Colors from "../../constants/Colors";
 import { IUser } from "../../lib/types";
-import AuthContext from "../../lib/authContext";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import ProjectContext from "../../lib/projectContext";
-import * as Device from "expo-device";
 import { addImageFromCameraRoll } from "../../lib/APIimage";
 import { addPostImage } from "../../lib/APIpost";
+import { useAuth } from "../../lib/authProvider";
+import { Text } from "../../components/Themed";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -25,10 +25,24 @@ const appName = "One Build";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { sharedDataUser } = useContext(AuthContext);
   const { sharedDataProject } = useContext(ProjectContext);
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+
+  const { sharedDataUser, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (!sharedDataUser) {
+    // On web, static rendering will stop here as the user is not authenticated
+    // in the headless Node process that the pages are rendered in.
+    console.log("(tabls)/_layout/!session");
+
+    return <Redirect href="/(auth)/signIn" />;
+  }
+
   let loggedInUser: IUser = sharedDataUser;
 
   if (null == sharedDataUser) {
@@ -91,8 +105,6 @@ export default function TabLayout() {
       images: downloadURLarray,
       ratio: ratio,
     };
-
-    console.log(post);
 
     addPostImage(post, saveDone);
     setProgress(0);
@@ -201,7 +213,7 @@ export default function TabLayout() {
           headerTitleAlign: "left",
           headerRight: () => (
             <View>
-              <Link href="/user">
+              <Link href="user">
                 <UserAvatar
                   uid={loggedInUser.uid}
                   photoURL={loggedInUser.photoURL}

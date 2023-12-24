@@ -84,7 +84,7 @@ export const ProjectUsers = (props) => {
         style={styles.rightDeleteBox}
         onPress={() => {
           console.log("doDelete:", data, index);
-          deleteProjectUser(project, data, deleteDone);
+          deleteProjectUser(projectId, data, deleteDone);
           row[index].close();
         }}>
         <AntDesign name="delete" size={25} color={"white"} />

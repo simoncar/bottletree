@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native";
 import { getLocales } from "expo-localization";
 import { Text, View } from "../components/Themed";
 import * as Application from "expo-application";
-import { useAuth, appSignIn } from "../lib/authProvider";
+import { useAuth } from "../lib/authProvider";
 import { getToken } from "../lib/APINotification";
 import { auth } from "../lib/firebase";
 
 export const About = () => {
-  const { sharedDataUser, updateSharedData, signOut } = useAuth();
+  const { sharedDataUser } = useAuth();
   const [token, setToken] = useState("");
   const deviceLanguage = getLocales()[0].languageCode;
 
@@ -32,9 +32,9 @@ export const About = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
+        <Text style={styles.version}>{sharedDataUser.providerData}</Text>
         <Text style={styles.version}>{sharedDataUser.displayName}</Text>
         <Text style={styles.version}>{sharedDataUser.email}</Text>
-
         <Text style={styles.version}>
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion})

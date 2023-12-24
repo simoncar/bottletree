@@ -59,6 +59,7 @@
     "expo-localization": "~14.8.0",
     "expo-notifications": "~0.27.1",
     "expo-router": "~3.4.0",
+    "expo-secure-store": "~12.8.1",
     "expo-splash-screen": "~0.26.0",
     "expo-status-bar": "~1.11.0",
     "expo-system-ui": "~2.9.1",

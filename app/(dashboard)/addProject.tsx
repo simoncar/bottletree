@@ -1,18 +1,18 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Button, SafeAreaView } from "react-native";
 import { router, Stack } from "expo-router";
-import { TextInput } from "../components/Themed";
+import { TextInput } from "../../components/Themed";
 
-import ProjectContext from "../lib/projectContext";
-import AuthContext from "../lib/authContext";
+import ProjectContext from "../../lib/projectContext";
+import { useAuth } from "../../lib/authProvider";
 
-import { addProject, addProjectUser } from "../lib/APIproject";
-import { IProject, IUser } from "../lib/types";
+import { addProject, addProjectUser } from "../../lib/APIproject";
+import { IProject, IUser } from "../../lib/types";
 
 export default function addPhoto() {
   const { sharedDataProject, updateSharedDataProject } =
     useContext(ProjectContext);
-  const { sharedDataUser } = useContext(AuthContext);
+  const { sharedDataUser } = useAuth();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [text, onChangeText] = useState("");
