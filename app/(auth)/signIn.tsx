@@ -168,12 +168,12 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     alignItems: "center",
-    backgroundColor: "#2196F3",
+    backgroundColor: "#9D5BD0",
     borderRadius: 10,
     height: 50,
     justifyContent: "center",
     marginBottom: 40,
-    width: 200,
+    width: 300,
   },
   loginText: {
     color: "white",
