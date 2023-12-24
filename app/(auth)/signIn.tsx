@@ -129,6 +129,12 @@ export default function SignIn() {
           </TouchableOpacity>
         </View>
       )}
+      {!showSignIn && (
+        <View style={styles.sloganView}>
+          <Text style={styles.sloganText}>The ultimate app</Text>
+          <Text style={styles.sloganText}>for modern house builders</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -200,6 +206,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     paddingTop: 10,
+  },
+  sloganText: {
+    fontSize: 25,
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  sloganView: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 40,
+    marginTop: 80,
   },
   textInput: {
     alignItems: "flex-start",
