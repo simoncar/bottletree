@@ -12,12 +12,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#5D5CE7"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "74",
+      "buildNumber": "75",
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -61,7 +63,6 @@
         }
       ],
       "expo-router",
-
       [
         "expo-build-properties",
         {
