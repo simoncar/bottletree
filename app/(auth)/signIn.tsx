@@ -18,6 +18,7 @@ export default function SignIn() {
   const [notificationHeader, setNotificationHeader] = useState("");
   const [notification, setNotification] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
+  const [showSignIn, setShowSignIn] = useState(false);
   const { signIn } = useAuth();
   const colorScheme = useColorScheme();
 
@@ -39,91 +40,20 @@ export default function SignIn() {
       "Incorrect Password. Please check the password and try again",
   };
 
-  const loginError = (error) => {
-    console.log("loginError: ", error);
-    setNotificationHeader("Something went wrong");
-    setNotification(ERROR_MAP[error] || error);
-  };
-
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Sign In",
-          headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-          },
+          headerShown: false,
         }}
       />
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.textInput}
-          keyboardType="email-address"
-          inputMode="email"
-          placeholder="Email"
-          autoCapitalize="none"
-          autoFocus
-          autoComplete="email"
-          spellCheck={false}
-          onChangeText={(email) => setEmail(email)}
-        />
+      <View style={styles.welcomeView}>
+        <Text style={styles.welcomeText}>Welcome to</Text>
+        <Text style={styles.welcomeApp}>Builder App</Text>
       </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Password"
-          secureTextEntry={secureEntry}
-          onChangeText={(password) => {
-            setPassword(password);
-            setNotificationHeader("");
-            setNotification("");
-          }}
-        />
-        <Pressable onPress={() => setSecureEntry(!secureEntry)}>
-          <AntDesign
-            name="eye"
-            size={25}
-            style={styles.eye}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </Pressable>
-      </View>
-      <View style={styles.notificationView}>
-        <Text style={styles.notificationTextHeader}>{notificationHeader}</Text>
-        <Text numberOfLines={3} style={styles.notificationText}>
-          {notification}
-        </Text>
-      </View>
-
-      <TouchableOpacity
-        onPress={() => {
-          auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-              console.log("logged in:", userCredential);
-            })
-            .catch((error) => {
-              setNotification(error.code);
-            });
-        }}
-        style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        key={"forgotPassword"}
-        onPress={() => {
-          router.push({
-            pathname: "/forgotPassword",
-            params: {
-              email: email,
-            },
-          });
-        }}>
-        <Text style={styles.forgot_button}>Forgot password?</Text>
-      </TouchableOpacity>
       <TouchableOpacity
         key={"createAccount"}
+        style={styles.createBtn}
         onPress={() => {
           router.push({
             pathname: "/createAccount",
@@ -132,8 +62,93 @@ export default function SignIn() {
             },
           });
         }}>
-        <Text style={styles.forgot_button}>Create an account</Text>
+        <Text style={styles.createText}>Create a new account</Text>
       </TouchableOpacity>
+      {!showSignIn && (
+        <TouchableOpacity
+          key={"signIn"}
+          style={styles.createBtn}
+          onPress={() => {
+            setShowSignIn(true);
+          }}>
+          <Text style={styles.createText}>Sign in</Text>
+        </TouchableOpacity>
+      )}
+      {showSignIn && (
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.welcomeText}>Sign in</Text>
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.textInput}
+              keyboardType="email-address"
+              inputMode="email"
+              placeholder="Email"
+              autoCapitalize="none"
+              autoFocus
+              autoComplete="email"
+              spellCheck={false}
+              onChangeText={(email) => setEmail(email)}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Password"
+              secureTextEntry={secureEntry}
+              onChangeText={(password) => {
+                setPassword(password);
+                setNotificationHeader("");
+                setNotification("");
+              }}
+            />
+            <Pressable onPress={() => setSecureEntry(!secureEntry)}>
+              <AntDesign
+                name="eye"
+                size={25}
+                style={styles.eye}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </Pressable>
+          </View>
+          <View style={styles.notificationView}>
+            <Text style={styles.notificationTextHeader}>
+              {notificationHeader}
+            </Text>
+            <Text numberOfLines={3} style={styles.notificationText}>
+              {notification}
+            </Text>
+          </View>
+
+          <TouchableOpacity
+            onPress={() => {
+              auth()
+                .signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                  console.log("logged in:", userCredential);
+                })
+                .catch((error) => {
+                  setNotification(error.code);
+                });
+            }}
+            style={styles.loginBtn}>
+            <Text style={styles.loginText}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            key={"forgotPassword"}
+            onPress={() => {
+              router.push({
+                pathname: "/forgotPassword",
+                params: {
+                  email: email,
+                },
+              });
+            }}>
+            <Text style={styles.forgot_button}>Forgot password?</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -144,13 +159,24 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
   },
+  createBtn: {
+    alignItems: "center",
+    backgroundColor: "#9D5BD0",
+    borderRadius: 10,
+    height: 50,
+    justifyContent: "center",
+    marginBottom: 40,
+    width: "80%",
+  },
+  createText: {
+    color: "white",
+    fontSize: 18,
+  },
   eye: { color: "grey", paddingTop: 10 },
   forgot_button: {
     fontSize: 18,
     height: 30,
-    marginTop: 30,
   },
-
   inputView: {
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -163,11 +189,11 @@ const styles = StyleSheet.create({
   loginBtn: {
     alignItems: "center",
     backgroundColor: "#2196F3",
-    borderRadius: 25,
+    borderRadius: 10,
     height: 50,
     justifyContent: "center",
-    marginTop: 40,
-    width: "80%",
+    marginBottom: 40,
+    width: 200,
   },
   loginText: {
     color: "white",
@@ -197,5 +223,19 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 10,
     padding: 10,
+  },
+  welcomeApp: {
+    color: "#9D5BD0",
+    fontSize: 45,
+    fontWeight: "bold",
+  },
+  welcomeText: {
+    fontSize: 25,
+    marginBottom: 10,
+  },
+  welcomeView: {
+    alignItems: "center",
+    marginBottom: 40,
+    marginTop: 80,
   },
 });
