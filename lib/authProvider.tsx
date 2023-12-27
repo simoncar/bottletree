@@ -1,12 +1,16 @@
-import { router, useSegments, useRootNavigationState } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useStorageState } from "./useStorageState";
 import { auth } from "../lib/firebase";
 import { IUser } from "./types";
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
-const AuthContext = createContext<IUser | undefined | null>(undefined);
+const AuthContext = createContext<
+  | (IUser & { sharedDataUser?: IUser } & {
+      updateSharedDataUser: (user: IUser) => void;
+    })
+  | undefined
+  | null
+>(undefined);
 
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -20,7 +24,7 @@ export function useAuth() {
 
 export function AuthProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
-  const [sharedDataUser, setSharedDataUser] = useState(null);
+  const [sharedDataUser, setSharedDataUser] = useState<IUser | null>(null);
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {

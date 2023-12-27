@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Text, View, TextInput } from "../../components/Themed";
 import { useAuth } from "../../lib/authProvider";
-import { router, Stack, useNavigation } from "expo-router";
+import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -40,18 +40,14 @@ export default function editUser() {
   }>();
 
   const { sharedDataUser, updateSharedDataUser } = useAuth();
+
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
-  const navigation = useNavigation();
 
   //console.log("navigation data:",JSON.stringify(navigation.getState()));
 
-  const {
-    currentlyRunning,
-    availableUpdate,
-    isUpdateAvailable,
-    isUpdatePending,
-  } = Updates.useUpdates();
+  const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
+    Updates.useUpdates();
 
   const [user, setUser] = useState<IUser>({
     uid: "",
@@ -92,17 +88,17 @@ export default function editUser() {
 
   const save = () => {
     console.log("save: " + user.displayName, sharedDataUser?.displayName);
-    updateSharedDataUser({ displayName: user.displayName });
+    updateSharedDataUser({  displayName: user.displayName });
     updateAccountName(user.displayName);
 
     router.back();
   };
 
-  const progressCallback = (progress) => {
+  const progressCallback = (progress: string) => {
     console.log("progressCallback: " + progress);
   };
 
-  const completedCallback = (sourceDownloadURLarray) => {
+  const completedCallback = (sourceDownloadURLarray: any[]) => {
     console.log("completedCallback:", sourceDownloadURLarray);
 
     let ratio = 0.66666;
@@ -180,7 +176,6 @@ export default function editUser() {
         await Updates.reloadAsync();
       }
     } catch (error) {
-      // You can also add an alert() to see the error message in case of an error when fetching updates.
       alert(`Error fetching latest update: ${error}`);
     }
   }
