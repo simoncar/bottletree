@@ -8,7 +8,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 function renderPhotoURL(photoURL) {
   const colorScheme = useColorScheme();
-  if (photoURL == "") {
+  if (!photoURL) {
     return (
       <View>
         <Ionicons

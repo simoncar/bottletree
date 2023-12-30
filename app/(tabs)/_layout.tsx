@@ -44,6 +44,7 @@ export default function TabLayout() {
   }
 
   let loggedInUser: IUser = sharedDataUser;
+  console.log("loggedInUser: ", loggedInUser);
 
   if (null == sharedDataUser) {
     loggedInUser = {
