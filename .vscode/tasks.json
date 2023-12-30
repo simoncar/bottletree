@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "npm: start",
+      "detail": "expo start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Firebase Emulator",
+      "command": "firebase",
+      "args": ["emulators:start"],
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^Error\\s+:\\s+(.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": false,
+          "beginsPattern": "Starting emulators",
+          "endsPattern": "All emulators ready! It is now safe to connect your app."
+        }
+      }
+    }
+  ]
+}

@@ -40,11 +40,8 @@ export default function editUser() {
   }>();
 
   const { sharedDataUser, updateSharedDataUser } = useAuth();
-
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
-
-  //console.log("navigation data:",JSON.stringify(navigation.getState()));
 
   const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
     Updates.useUpdates();
@@ -88,7 +85,7 @@ export default function editUser() {
 
   const save = () => {
     console.log("save: " + user.displayName, sharedDataUser?.displayName);
-    updateSharedDataUser({  displayName: user.displayName });
+    updateSharedDataUser({ displayName: user.displayName });
     updateAccountName(user.displayName);
 
     router.back();

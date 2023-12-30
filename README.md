@@ -3,11 +3,6 @@
 npx expo start
 firebase emulators:start
 
-loginError: [auth/network-request-failed] A network error has occurred, please try again.
-LOG [Error: [auth/network-request-failed] A network error has occurred, please try again.]
-
-curl -v -X DELETE "http://127.0.0.1:8080/emulator/v1/projects/firestore-emulator-example/databases/(default)/documents"
-
 eas build -p ios --profile development
 eas build -p android --profile preview
 
@@ -19,10 +14,6 @@ eas update --branch production --message "Updating the app"
 
 npx expo start --offline
 npx expo start --dev-client
-
-?
-
-open "rndebugger://set-debugger-loc?host=localhost&port=19000"
 
 ------ development build -------
 
