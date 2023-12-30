@@ -85,21 +85,22 @@ export async function getProjectUsers(
   });
 
   const userList: IUser[] = [];
+  console.log("idList: ", idList);
 
   if (idList.length > 0) {
-    const q2 = db
-      .collection("users")
-      .where(firestore.FieldPath.documentId(), "in", idList);
+    const q2 = db.collection("users");
 
     const usersSnapshot = await q2.get();
 
     usersSnapshot.forEach((doc) => {
-      userList.push({
-        uid: doc.id,
-        displayName: doc.data().displayName,
-        email: doc.data().email,
-        photoURL: doc.data().photoURL,
-      });
+      if (idList.includes(doc.id)) {
+        userList.push({
+          uid: doc.id,
+          displayName: doc.data().displayName,
+          email: doc.data().email,
+          photoURL: doc.data().photoURL,
+        });
+      }
     });
   }
 
