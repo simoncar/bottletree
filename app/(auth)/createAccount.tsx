@@ -29,7 +29,11 @@ export default function SignIn() {
     } else {
       updateSharedDataUser(null);
     }
-    setErrorMessage(error);
+    setErrorMessage(strip(error));
+  };
+
+  const strip = (str: string) => {
+    return str.substring(str.lastIndexOf("]") + 1).trim();
   };
 
   const renderAction = (errorMessage: string) => {
@@ -121,14 +125,6 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  textInput: {
-    alignItems: "flex-start",
-    flex: 1,
-    fontSize: 18,
-    height: 50,
-    marginLeft: 10,
-    padding: 10,
-  },
   container: {
     alignItems: "center",
     flex: 1,
@@ -146,8 +142,8 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     alignItems: "center",
-    backgroundColor: "#2196F3",
-    borderRadius: 25,
+    backgroundColor: "#9D5BD0",
+    borderRadius: 10,
     height: 50,
     justifyContent: "center",
     marginTop: 40,
@@ -164,5 +160,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     width: "80%",
+  },
+  textInput: {
+    alignItems: "flex-start",
+    flex: 1,
+    fontSize: 18,
+    height: 50,
+    marginLeft: 10,
+    padding: 10,
   },
 });

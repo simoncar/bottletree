@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  Pressable,
-} from "react-native";
+import { TouchableOpacity, useColorScheme, Pressable } from "react-native";
 import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "../../constants/Colors";
 import { auth } from "../../lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
+import { styles } from "./signIn";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -169,101 +165,3 @@ export default function SignIn() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 40,
-  },
-  createBtn: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 40,
-    width: "80%",
-  },
-  createText: {
-    color: "white",
-    fontSize: 18,
-  },
-  eye: { color: "grey", paddingTop: 10 },
-  forgot_button: {
-    fontSize: 18,
-    height: 30,
-  },
-  inputView: {
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderRadius: 5,
-    flexDirection: "row",
-    height: 45,
-    marginBottom: 20,
-    width: "80%",
-  },
-  loginBtn: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 40,
-    width: 300,
-  },
-  loginText: {
-    color: "white",
-    fontSize: 18,
-  },
-  notificationText: {
-    fontSize: 18,
-    textAlign: "center",
-  },
-  notificationTextHeader: {
-    fontSize: 18,
-    fontWeight: "bold",
-    paddingBottom: 10,
-    textAlign: "center",
-  },
-  notificationView: {
-    alignItems: "center",
-    borderRadius: 5,
-    justifyContent: "center",
-    marginBottom: 20,
-    width: "80%",
-  },
-  signInContainer: {
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 10,
-  },
-  sloganText: {
-    fontSize: 25,
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-  sloganView: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 40,
-    marginTop: 80,
-  },
-  textInput: {
-    alignItems: "flex-start",
-    flex: 1,
-    fontSize: 18,
-    height: 50,
-    marginLeft: 10,
-    padding: 10,
-  },
-  welcomeApp: {
-    color: "#9D5BD0",
-    fontSize: 45,
-    fontWeight: "bold",
-  },
-  welcomeText: {
-    fontSize: 25,
-    marginBottom: 10,
-  },
-});
