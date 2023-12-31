@@ -24,7 +24,7 @@ export default function SignIn() {
   const welcomeFontSize = useSharedValue(50);
 
   //create a function that accepts the error code and returns a user friendly message
-  const errorMessage = (errorCode) => {
+  const errorMessage = (errorCode: string) => {
     switch (errorCode) {
       case "auth/invalid-email":
         return "Invalid email address format.";
