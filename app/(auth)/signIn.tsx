@@ -10,6 +10,7 @@ import { Text, View, TextInput } from "../../components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "../../constants/Colors";
 import { auth } from "../../lib/firebase";
+import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -19,6 +20,8 @@ export default function SignIn() {
   const [secureEntry, setSecureEntry] = useState(true);
   const [showSignIn, setShowSignIn] = useState(false);
   const colorScheme = useColorScheme();
+  const welcomeMarginTop = useSharedValue(100);
+  const welcomeFontSize = useSharedValue(50);
 
   return (
     <View style={styles.container}>
@@ -27,10 +30,21 @@ export default function SignIn() {
           headerShown: false,
         }}
       />
-      <View style={styles.welcomeView}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
+      <Animated.View
+        style={{
+          alignItems: "center",
+          marginBottom: 40,
+          marginTop: welcomeMarginTop,
+        }}>
+        <Animated.View
+          style={{
+            height: welcomeFontSize,
+          }}>
+          <Text style={styles.welcomeText}>Welcome to</Text>
+        </Animated.View>
+
         <Text style={styles.welcomeApp}>Builder App</Text>
-      </View>
+      </Animated.View>
       <TouchableOpacity
         key={"createAccount"}
         style={styles.createBtn}
@@ -49,6 +63,8 @@ export default function SignIn() {
           key={"signIn"}
           style={styles.createBtn}
           onPress={() => {
+            welcomeMarginTop.value = withSpring(welcomeMarginTop.value - 50);
+            welcomeFontSize.value = welcomeFontSize.value - 50;
             setShowSignIn(true);
           }}>
           <Text style={styles.createText}>Sign in</Text>
