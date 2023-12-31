@@ -23,6 +23,22 @@ export default function SignIn() {
   const welcomeMarginTop = useSharedValue(100);
   const welcomeFontSize = useSharedValue(50);
 
+  //create a function that accepts the error code and returns a user friendly message
+  const errorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-email":
+        return "Invalid email address format.";
+      case "auth/user-disabled":
+        return "User account has been disabled.";
+      case "auth/user-not-found":
+        return "User account not found.";
+      case "auth/wrong-password":
+        return "Incorrect password.";
+      default:
+        return "Check your internet connection.";
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -125,7 +141,7 @@ export default function SignIn() {
                   console.log("logged in:", userCredential);
                 })
                 .catch((error) => {
-                  setNotification(error.code);
+                  setNotification(errorMessage(error.code));
                 });
             }}
             style={styles.loginBtn}>
