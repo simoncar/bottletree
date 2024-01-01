@@ -1,6 +1,6 @@
 import { fbConfig } from "../env";
 import * as Device from "expo-device";
-import "@react-native-firebase/app";
+import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
@@ -40,4 +40,5 @@ firestore()
     }
   });
 
-export { db, storage, auth, firestore };
+export { firebase, db, storage, auth, firestore };
+//export default firebase;

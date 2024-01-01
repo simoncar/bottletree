@@ -1,8 +1,5 @@
 import "expo-router/entry";
 
-import * as Sentry from "@sentry/react-native";
-import * as Device from "expo-device";
-
 // if (Device.isDevice) {
 //   Sentry.init({
 //     dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.sentry.io/4506092928827392",
@@ -14,9 +11,9 @@ import * as Device from "expo-device";
 //   });
 // }
 
-Sentry.init({
-  dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.sentry.io/4506092928827392",
-});
+// Sentry.init({
+//   dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.sentry.io/4506092928827392",
+// });
 
 // Sentry.Native.captureMessage(
 //   "Bottletree started : " +
