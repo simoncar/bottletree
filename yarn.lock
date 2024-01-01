@@ -8950,15 +8950,15 @@ react-native-collapsible-tab-view@2.0.2:
   dependencies:
     use-debounce "^5.1.0"
 
-react-native-compressor@^1.8.12:
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/react-native-compressor/-/react-native-compressor-1.8.12.tgz#6e50247d3d2a12845eb27cfa983ef4c56a00738f"
-  integrity sha512-KyS9hk2LnWiuZyqQcUrQv38kW0R9C8B9FLTc4ML3S9MglXhzbarfBMECxc+23GR7r/NkImMzQc0j9mgIDtRp9A==
+react-native-compressor@^1.8.23:
+  version "1.8.23"
+  resolved "https://registry.yarnpkg.com/react-native-compressor/-/react-native-compressor-1.8.23.tgz#87fef6759d776e05753cee5e723696119c2f6b32"
+  integrity sha512-llqV+BRgRL8xdUDFpYfaP/HSo9sUcqewlzXa6obgoXCTJT8ZmT0zUFYgGTtb0Urz2o2T15PqTij5f2Sg8phPjw==
 
-react-native-dynamic-skeletons@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-dynamic-skeletons/-/react-native-dynamic-skeletons-0.5.0.tgz#23f2aa3b96794ad69b0fe0956c93a64d949f9774"
-  integrity sha512-yUDWeXxMhs6JIv7eVmJoLssid1E03DP17NFPrte9h//+j+Rd1Um3uy4QWSojlxDqrnosJmFYUKH73BLFMh+6Tg==
+react-native-dynamic-skeletons@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-dynamic-skeletons/-/react-native-dynamic-skeletons-0.7.0.tgz#f5c45c9281bcdafa49020f3e5b4b33b32529bc9a"
+  integrity sha512-oZctZFPFEP59Bt2J+GbjmZjgzgOH2btXl4K5xrfYTwJs6eTuuFEUZN/be9xyTcsI4SsqhSDUzdNz3CF1rBny2g==
 
 react-native-gesture-handler@~2.14.0:
   version "2.14.0"

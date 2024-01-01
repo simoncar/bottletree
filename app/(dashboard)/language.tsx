@@ -33,8 +33,6 @@ export default function SelectLanguage(props: TProps) {
   };
 
   const loggedInUser: IUser = sharedDataUser;
-  console.log("SelectLanguage - loggedInUser: " + loggedInUser);
-  console.log(loggedInUser);
 
   if (loggedInUser?.language !== undefined) {
     language = loggedInUser.language;
