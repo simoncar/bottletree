@@ -10,6 +10,7 @@ import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
+import { FlatList } from "react-native-gesture-handler";
 
 export const Posts = () => {
   const { sharedDataUser } = useAuth();
@@ -123,8 +124,8 @@ export const Posts = () => {
             page=""
           />
         </View>
-        <View>
-          <KeyboardAwareFlatList
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <FlatList
             data={posts}
             renderItem={renderItems}
             keyExtractor={(item, index) => getKey(item)}
