@@ -5,7 +5,7 @@ import {
   StyleSheet,
   useColorScheme,
   TouchableOpacity,
-  Button,
+  Pressable,
 } from "react-native";
 import { Text, View, TextInput } from "../../components/Themed";
 import { useAuth } from "../../lib/authProvider";
@@ -25,13 +25,14 @@ import {
   getUser,
 } from "../../lib/APIuser";
 import { About } from "../../lib/about";
+import { Update } from "../../lib/update";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImageFromCameraRoll } from "../../lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "../../lib/demoData";
 import { IUser } from "../../lib/types";
 import { StatusBar } from "expo-status-bar";
-import * as Updates from "expo-updates";
+
 import { auth } from "../../lib/firebase";
 
 export default function editUser() {
@@ -42,9 +43,6 @@ export default function editUser() {
   const { sharedDataUser, updateSharedDataUser } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
-
-  const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
-    Updates.useUpdates();
 
   const [user, setUser] = useState<IUser>({
     uid: "",
@@ -59,13 +57,6 @@ export default function editUser() {
     "eddymitchell133@gmail.com",
   ];
 
-  const showDownloadButton = isUpdateAvailable;
-
-  // Show whether or not we are running embedded code or an update
-  const runTypeMessage = currentlyRunning.isEmbeddedLaunch
-    ? "Running code from Appp Store build"
-    : "Check for updates";
-
   useEffect(() => {
     getUser(local?.uid || "", (user) => {
       if (user) {
@@ -74,14 +65,6 @@ export default function editUser() {
       }
     });
   }, []);
-
-  useEffect(() => {
-    if (isUpdatePending) {
-      // Update has successfully downloaded
-      //runUpdate();
-      console.log("Update has successfully downloaded");
-    }
-  }, [isUpdatePending]);
 
   const save = () => {
     console.log("save: " + user.displayName, sharedDataUser?.displayName);
@@ -164,19 +147,6 @@ export default function editUser() {
     );
   };
 
-  async function fetchandRunUpdatesAsync() {
-    try {
-      const update = await Updates.checkForUpdateAsync();
-
-      if (update.isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
-      }
-    } catch (error) {
-      alert(`Error fetching latest update: ${error}`);
-    }
-  }
-
   const profilePic = () => {
     return (
       <View style={styles.profilePicContainer}>
@@ -209,7 +179,11 @@ export default function editUser() {
       <ScrollView>
         <Stack.Screen
           options={{
-            headerRight: () => <Button title="Done" onPress={() => save()} />,
+            headerRight: () => (
+              <Pressable onPress={() => save()}>
+                <Text style={{ fontSize: 16 }}>Save</Text>
+              </Pressable>
+            ),
             title: "",
             headerTitleStyle: {
               fontWeight: "bold",
@@ -337,45 +311,10 @@ export default function editUser() {
             </View>
           </View>
         )}
-        <View style={styles.outerView}>
-          <TouchableOpacity
-            key={"admin"}
-            onPress={() => Updates.checkForUpdateAsync()}>
-            <View style={styles.leftContent}>
-              <MaterialIcons
-                name="system-update-alt"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-              <Text style={styles.settingName}>{runTypeMessage}</Text>
-              <Text></Text>
-            </View>
-            <View style={styles.rightChevron}></View>
-          </TouchableOpacity>
-        </View>
-        {showDownloadButton ? (
-          <View style={styles.outerView}>
-            <TouchableOpacity key={"admin"} onPress={fetchandRunUpdatesAsync}>
-              <View style={styles.leftContent}>
-                <MaterialIcons
-                  name="system-update-alt"
-                  size={25}
-                  color={Colors[colorScheme ?? "light"].text}
-                />
-                <Text style={styles.settingName}>Download and run update</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        ) : null}
+
         <StatusBar style="auto" />
         <View style={styles.aboutContainer}>
-          <Text style={styles.version}>
-            Update Pending: {isUpdatePending.toString()}
-          </Text>
-          <Text style={styles.version}>
-            Update Available : {isUpdateAvailable.toString()}
-          </Text>
-
+          <Update />
           <About />
         </View>
       </ScrollView>

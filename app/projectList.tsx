@@ -9,14 +9,14 @@ import {
   ScrollView,
   useColorScheme,
 } from "react-native";
-import { ShortList } from "../../components/sComponent";
-import { Text, View } from "../../components/Themed";
-import Colors from "../../constants/Colors";
-import { getProjects } from "../../lib/APIproject";
-import ProjectContext from "../../lib/projectContext";
-import { IProject } from "../../lib/types";
+import { ShortList } from "../components/sComponent";
+import { Text, View } from "../components/Themed";
+import Colors from "../constants/Colors";
+import { getProjects } from "../lib/APIproject";
+import ProjectContext from "../lib/projectContext";
+import { IProject } from "../lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useAuth } from "../../lib/authProvider";
+import { useAuth } from "../lib/authProvider";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{

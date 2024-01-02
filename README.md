@@ -42,5 +42,7 @@ console.log(JSON.stringify(navigation.getState()))
 
 navigation.navigate("index", { screen: "index" })
 
-
 npx expo install --fix
+
+sudo lsof -i :5000
+sudo kill -9 PID

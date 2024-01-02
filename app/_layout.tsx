@@ -26,8 +26,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded, error] = useFonts({
-    SpaceMono: require("./assets/fonts/SpaceMono-Regular.ttf"),
-    FuturaBold: require("./assets/fonts/FuturaBold.otf"),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    FuturaBold: require("../assets/fonts/FuturaBold.otf"),
     ...FontAwesome.font,
   });
 
@@ -85,33 +85,33 @@ export default function RootLayout() {
                 />
 
                 <Stack.Screen
-                  name="(dashboard)/projectList"
+                  name="projectList"
                   options={{
                     presentation: "modal",
                     title: "Projects",
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/projectListAdmin"
+                  name="projectListAdmin"
                   options={{
                     title: "Administration",
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/userList"
+                  name="userList"
                   options={{
                     presentation: "modal",
                     title: "Users",
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/language"
+                  name="language"
                   options={{
                     title: "Language",
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/editPost"
+                  name="editPost"
                   options={{
                     title: "View",
                     headerTitleStyle: {
@@ -120,7 +120,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/viewPost"
+                  name="viewPost"
                   options={{
                     title: "View & Zoom",
                     headerTitleStyle: {
@@ -129,7 +129,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/editProject"
+                  name="editProject"
                   options={{
                     title: "Project",
                     headerTitleStyle: {
@@ -138,7 +138,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/addProject"
+                  name="addProject"
                   options={{
                     title: "Add Project",
                     headerTitleStyle: {
@@ -147,7 +147,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/editCalendar"
+                  name="editCalendar"
                   options={{
                     title: "Add Event",
                     headerTitleStyle: {
@@ -156,7 +156,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/user"
+                  name="user/[uid]"
                   options={{
                     title: "app/layout/user",
                     headerTitleStyle: {
@@ -165,7 +165,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/camera"
+                  name="camera"
                   options={{
                     title: "Take Photo",
                     headerTitleStyle: {
@@ -174,7 +174,7 @@ export default function RootLayout() {
                   }}
                 />
                 <Stack.Screen
-                  name="(dashboard)/note"
+                  name="note"
                   options={{
                     title: "Add Note",
                     headerTitleStyle: {

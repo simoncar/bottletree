@@ -1,7 +1,7 @@
 import React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
-import { router } from "expo-router";
+import { StyleSheet, Pressable, useColorScheme } from "react-native";
+import { router, Link } from "expo-router";
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -35,27 +35,16 @@ type Props = {
 
 export const UserAvatar = ({ uid, photoURL, displayName }: Props) => {
   return (
-    <TouchableOpacity
-      key={"editProfile"}
-      onPress={() => {
-        console.log(
-          "ROUTER PUSH AVATAR UserAvatar: ",
-          uid,
-          photoURL,
-          displayName,
-        );
-
-        router.push({
-          pathname: "(dashboard)/user",
-          params: {
-            uid: uid,
-            photoURL: photoURL,
-            displayName: displayName,
-          },
-        });
-      }}>
-      <View style={styles.avatar}>{renderPhotoURL(photoURL)}</View>
-    </TouchableOpacity>
+    <Link
+      href={{
+        pathname: "/user/[uid]",
+        params: { uid: uid },
+      }}
+      asChild>
+      <Pressable>
+        <View style={styles.avatar}>{renderPhotoURL(photoURL)}</View>
+      </Pressable>
+    </Link>
   );
 };
 

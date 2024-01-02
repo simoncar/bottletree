@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Button, SafeAreaView } from "react-native";
 import { router, Stack } from "expo-router";
-import { TextInput } from "../../components/Themed";
+import { TextInput } from "../components/Themed";
 
-import ProjectContext from "../../lib/projectContext";
-import { useAuth } from "../../lib/authProvider";
+import ProjectContext from "../lib/projectContext";
+import { useAuth } from "../lib/authProvider";
 
-import { addProject, addProjectUser } from "../../lib/APIproject";
-import { IProject, IUser } from "../../lib/types";
+import { addProject, addProjectUser } from "../lib/APIproject";
+import { IProject, IUser } from "../lib/types";
 
 export default function addPhoto() {
   const { sharedDataProject, updateSharedDataProject } =

@@ -46,6 +46,9 @@
     "updates": {
       "url": "https://u.expo.dev/c4340333-f23a-41cb-a647-97dee3bc0a01"
     },
+    "experiments": {
+      "typedRoutes": true
+    },
     "plugins": [
       "@react-native-firebase/app",
       [

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { useAuth } from "../../lib/authProvider";
+import { useAuth } from "../lib/authProvider";
 import { Stack, router } from "expo-router";
-import { Text, View } from "../../components/Themed";
+import { Text, View } from "../components/Themed";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");

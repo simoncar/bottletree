@@ -9,11 +9,11 @@ import {
   useColorScheme,
 } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { IPost, IProject } from "../../lib/types";
-import ProjectContext from "../../lib/projectContext";
-import { useAuth } from "../../lib/authProvider";
-import { setPostNote, getPost } from "../../lib/APIpost";
-import Colors from "../../constants/Colors";
+import { IPost, IProject } from "../lib/types";
+import ProjectContext from "../lib/projectContext";
+import { useAuth } from "../lib/authProvider";
+import { setPostNote, getPost } from "../lib/APIpost";
+import Colors from "../constants/Colors";
 
 export default function Note() {
   const local = useLocalSearchParams<{
