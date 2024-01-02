@@ -41,3 +41,6 @@ const navigation = useNavigation()
 console.log(JSON.stringify(navigation.getState()))
 
 navigation.navigate("index", { screen: "index" })
+
+
+npx expo install --fix
