@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
 import { getLocales } from "expo-localization";
 import { Text, View } from "../components/Themed";
 import * as Application from "expo-application";
@@ -45,12 +45,14 @@ export const Update = () => {
 
   return (
     <View style={styles.aboutContainer}>
-      <Text style={styles.version}>
-        Update Pending: {isUpdatePending.toString()}
-      </Text>
-      <Text style={styles.version}>
-        Update Available : {isUpdateAvailable.toString()}
-      </Text>
+      <Pressable onPress={fetchandRunUpdatesAsync}>
+        <Text style={styles.version}>
+          Update Pending: {isUpdatePending.toString()}
+        </Text>
+        <Text style={styles.version}>
+          Update Available : {isUpdateAvailable.toString()}
+        </Text>
+      </Pressable>
     </View>
   );
 };
