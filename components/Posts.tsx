@@ -9,7 +9,6 @@ import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
-import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import { FlatList } from "react-native-gesture-handler";
 
 export const Posts = () => {

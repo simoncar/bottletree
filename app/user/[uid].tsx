@@ -40,6 +40,8 @@ export default function editUser() {
     uid: string;
   }>();
 
+  console.log("localX: ", local.uid);
+
   const { sharedDataUser, updateSharedDataUser } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
@@ -60,6 +62,8 @@ export default function editUser() {
   useEffect(() => {
     getUser(local?.uid || "", (user) => {
       if (user) {
+        console.log("user: ", user);
+
         setUser(user);
         updateSharedDataUser(user);
       }
