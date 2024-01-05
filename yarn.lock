@@ -5764,10 +5764,10 @@ expo-build-properties@~0.11.0:
     ajv "^8.11.0"
     semver "^7.5.3"
 
-expo-camera@~14.0.1:
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-14.0.1.tgz#d3567566e5f9c1a906b3ec8f66fde1e4c08fc99d"
-  integrity sha512-72W8T9P+oYloWwFt2/ils15OS5X0R9u1p5vjRRo5fyGhbTA3qkS8UsV1tdSNTCUBcAxXHEXTO+iM4Xzabun8tg==
+expo-camera@13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-13.6.0.tgz#a38537f474da4073ca4c19b5551e5178be5c899e"
+  integrity sha512-8lxK15D2tuEZom9bhDMMqNPW+5241Ak4wIup/ebh4JekgOtSQ/egbq7qDn2FCFi+5vPFKX4nRsvGOuzfuzvmZA==
   dependencies:
     invariant "^2.2.4"
 
