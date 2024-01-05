@@ -41,16 +41,18 @@ const Post = (props) => {
   function renderImage() {
     if (imageUrls.length == 1) {
       return (
-        <ReactNativeZoomableView
-          maxZoom={1.5}
-          minZoom={0.5}
-          zoomStep={0.5}
-          initialZoom={1}
-          bindToBorders={true}
-          onZoomAfter={this.logOutZoomState}
-          style={{
-            padding: 10,
-            backgroundColor: "red",
+        <Pressable
+          onPress={() => {
+            router.push({
+              pathname: "/viewPost",
+              params: {
+                project: post.projectId,
+                key: post.key,
+                image: encodeURIComponent(imageUrls),
+                caption: caption || "",
+                ratio: ratio,
+              },
+            });
           }}>
           <View style={styles.imageContainer}>
             <Image
@@ -61,7 +63,7 @@ const Post = (props) => {
               source={imageUrls[0]}
             />
           </View>
-        </ReactNativeZoomableView>
+        </Pressable>
       );
     } else if (imageUrls.length > 100) {
       return (

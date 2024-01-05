@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, Dimensions, View, Text } from "react-native";
 import { ImageZoom } from "@likashefqet/react-native-image-zoom";
 import { router, useLocalSearchParams, Stack } from "expo-router";
+import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
+import { Image } from "expo-image";
 
 export default function viewPost() {
   const { key, image, caption, ratio } = useLocalSearchParams();
@@ -11,16 +13,17 @@ export default function viewPost() {
   return (
     <View style={styles.overall}>
       {image && (
-        <ImageZoom
-          uri={image}
-          style={styles.imageZoom}
-          onInteractionStart={() => console.log("Interaction started")}
-          onInteractionEnd={() => console.log("Interaction ended")}
-          onPinchStart={() => console.log("Pinch gesture started")}
-          onPinchEnd={() => console.log("Pinch gesture ended")}
-          onPanStart={() => console.log("Pan gesture started")}
-          onPanEnd={() => console.log("Pan gesture ended")}
-        />
+        <ReactNativeZoomableView
+          maxZoom={null}
+          // Give these to the zoomable view so it can apply the boundaries around the actual content.
+          // Need to make sure the content is actually centered and the width and height are
+          // dimensions when it's rendered naturally. Not the intrinsic size.
+          // For example, an image with an intrinsic size of 400x200 will be rendered as 300x150 in this case.
+          // Therefore, we'll feed the zoomable view the 300x150 size.
+          contentWidth={300}
+          contentHeight={150}>
+          <Image style={styles.imageZoom} source={image} />
+        </ReactNativeZoomableView>
       )}
     </View>
   );
@@ -31,6 +34,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height - 200,
     overflow: "hidden",
     resizeMode: "contain",
+    width: Dimensions.get("window").width,
   },
   overall: {
     backgroundColor: "#010101",
