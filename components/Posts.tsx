@@ -10,6 +10,7 @@ import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
 import { FlatList } from "react-native-gesture-handler";
+import Masonry from "./Masonry";
 
 export const Posts = () => {
   const { sharedDataUser } = useAuth();
@@ -124,6 +125,7 @@ export const Posts = () => {
           />
         </View>
         <View style={{ flex: 1, flexDirection: "row" }}>
+          <Masonry />
           <FlatList
             data={posts}
             renderItem={renderItems}
