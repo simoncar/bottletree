@@ -141,7 +141,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera
+        ref={(ref) => setCamera(ref)}
+        style={styles.camera}
+        type={type}
+        autoFocus={true}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
           <View style={styles.a}>
