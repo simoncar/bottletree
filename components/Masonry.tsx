@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StatusBar } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 const DATA = [
@@ -22,11 +22,13 @@ const DATA = [
 
 const Masonry = (props) => {
   return (
-    <FlashList
-      data={DATA}
-      renderItem={({ item }) => <Text>{item.title}</Text>}
-      estimatedItemSize={200}
-    />
+    <View style={{ height: 200, width: Dimensions.get("screen").width }}>
+      <FlashList
+        data={DATA}
+        renderItem={({ item }) => <Text>{item.title}</Text>}
+        estimatedItemSize={200}
+      />
+    </View>
   );
 };
 

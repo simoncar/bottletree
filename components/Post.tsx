@@ -13,6 +13,7 @@ import Comments from "./PostComments";
 import Dots from "../components/dots";
 import Footer from "../components/Footer";
 import Colors from "../constants/Colors";
+import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
@@ -40,18 +41,16 @@ const Post = (props) => {
   function renderImage() {
     if (imageUrls.length == 1) {
       return (
-        <Pressable
-          onPress={() => {
-            router.push({
-              pathname: "/viewPost",
-              params: {
-                project: post.projectId,
-                key: post.key,
-                image: encodeURIComponent(imageUrls),
-                caption: caption || "",
-                ratio: ratio,
-              },
-            });
+        <ReactNativeZoomableView
+          maxZoom={1.5}
+          minZoom={0.5}
+          zoomStep={0.5}
+          initialZoom={1}
+          bindToBorders={true}
+          onZoomAfter={this.logOutZoomState}
+          style={{
+            padding: 10,
+            backgroundColor: "red",
           }}>
           <View style={styles.imageContainer}>
             <Image
@@ -62,9 +61,9 @@ const Post = (props) => {
               source={imageUrls[0]}
             />
           </View>
-        </Pressable>
+        </ReactNativeZoomableView>
       );
-    } else if (imageUrls.length > 1) {
+    } else if (imageUrls.length > 100) {
       return (
         <View style={styles.imageContainer}>
           <Carousel
@@ -113,6 +112,38 @@ const Post = (props) => {
           />
         </View>
       );
+    } else {
+      return (
+        <View>
+          {imageUrls.map((im, index) => {
+            return (
+              <View key={index}>
+                <Pressable
+                  onPress={() => {
+                    router.push({
+                      pathname: "/viewPost",
+                      params: {
+                        project: post.projectId,
+                        key: post.key,
+                        image: encodeURIComponent(im),
+                        caption: caption || "",
+                        ratio: ratio,
+                      },
+                    });
+                  }}>
+                  <Image
+                    style={[
+                      styles.storyPhoto,
+                      { width: width, height: width * ratio },
+                    ]}
+                    source={im}
+                  />
+                </Pressable>
+              </View>
+            );
+          })}
+        </View>
+      );
     }
   }
 
@@ -127,7 +158,7 @@ const Post = (props) => {
           },
         ]}>
         {renderImage()}
-        <Dots images={imageUrls} activeImage={activeImage} />
+        {!(<Dots images={imageUrls} activeImage={activeImage} />)}
 
         <View style={styles.commentView}>
           <Text style={styles.comment}>{caption}</Text>

@@ -11,6 +11,7 @@ import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
 import { FlatList } from "react-native-gesture-handler";
 import Masonry from "./Masonry";
+import PhotoGallery from "./Gallery";
 
 export const Posts = () => {
   const { sharedDataUser } = useAuth();
@@ -83,7 +84,11 @@ export const Posts = () => {
   const renderItems = (item) => {
     const post: IPost = item.item;
 
-    return <Post post={post} />;
+    return (
+      <View>
+        <Post post={post} />
+      </View>
+    );
   };
 
   const renderEmpty = () => {
@@ -124,8 +129,8 @@ export const Posts = () => {
             page=""
           />
         </View>
+
         <View style={{ flex: 1, flexDirection: "row" }}>
-          <Masonry />
           <FlatList
             data={posts}
             renderItem={renderItems}
