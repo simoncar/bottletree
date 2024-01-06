@@ -47,12 +47,17 @@ export async function addPostImage(post: IPost, callback: saveDone) {
     })
     .then((docRef) => {
       console.log("Post Document written with ID: ", docRef.id);
-      if (post.author != "Simon" && Device.isDevice) {
+      if (post.author.substring(0, 5) != "Simon") {
+        console.log(
+          "******* SENDING NOTIFICATION ******* :",
+          post.author.substring(0, 5),
+        );
+
         const messageRef = db
           .collection("notifications")
           .add({
             title: post.author + ": " + post.projectTitle,
-            body: "New Image Added",
+            body: "New Image Added...",
             timestamp: firestore.Timestamp.now(),
           })
           .then((docRef) => {
