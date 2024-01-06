@@ -2,7 +2,7 @@ import { fbConfig } from "../env";
 // import * as Device from "expo-device";
 // import auth from "firebase/auth";
 // import firestore from "firebase/firestore";
-// import storage from "firebase/storage";
+import storage, { uploadBytes } from "firebase/storage";
 // import firebase from "firebase/compat/app";
 
 // import { initializeApp } from "firebase/app";
@@ -28,10 +28,10 @@ firebase.apps.length === 0 && firebase.initializeApp(firebaseConfig);
 // export { firebase, db, storage, auth, firestore };
 const auth = firebase.auth;
 const db = firebase.firestore();
-const storage = firebase.storage();
+//const storage = firebase.storage();
 const firestore = firebase.firestore;
 
-export { firebase, db, storage, auth, firestore };
+export { firebase, db, storage, auth, firestore, uploadBytes };
 
 // export const firebaseErrors: Record<string, string> = {
 //   "Firebase: Error (auth/email-already-in-use).":

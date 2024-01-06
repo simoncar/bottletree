@@ -1,5 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
-import { firebase, storage } from "./firebase";
+import { firebase, storage, uploadBytes } from "./firebase";
 import * as Crypto from "expo-crypto";
 import { Image } from "react-native-compressor";
 import { Platform } from "react-native";
@@ -64,40 +64,78 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
     });
   }
 
+  const getBlobFroUri = async (uri) => {
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", uri, true);
+      xhr.send(null);
+    });
+
+    return blob;
+  };
+
   return new Promise((resolve, reject) => {
     try {
       const storageRef = getStorageRef(folder);
-      const uploadTask = storageRef.putFile(result);
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const uploadProgress = Math.floor(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-          );
-          progressCallback(uploadProgress);
+      if (isWeb) {
+        console.log("uploadBytes:", result);
 
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
-        (error) => {
-          console.log("error file upload:", error);
-        },
-        () => {
-          const p = storageRef.getDownloadURL().then((downloadURL) => {
-            console.log("File available at", downloadURL);
-            console.log("dimensions", asset.height, asset.width);
-            const ratio = asset.height / asset.width;
-            resolve(ratio + "*" + downloadURL);
+        getBlobFroUri(result).then((blob) => {
+          uploadBytes(storageRef, blob).then((snapshot) => {
+            // console.log("WWWUploaded a data_url string!");
+            // console.log("WWWFile available at", downloadURL.split("?")[0]);
+            // console.log("WWWdimensions", asset.height, asset.width);
+            // const ratio = asset.height / asset.width;
+
+            const p = storageRef.getDownloadURL().then((downloadURL) => {
+              console.log("File available at", downloadURL);
+              console.log("dimensions", asset.height, asset.width);
+              const ratio = asset.height / asset.width;
+              resolve(ratio + "*" + downloadURL);
+            });
           });
-        },
-      );
+        });
+      } else {
+        const uploadTask = storageRef.putFile(result);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const uploadProgress = Math.floor(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+            );
+            progressCallback(uploadProgress);
+
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            console.log("error file upload:", error);
+          },
+          () => {
+            const p = storageRef.getDownloadURL().then((downloadURL) => {
+              console.log("File available at", downloadURL);
+              console.log("dimensions", asset.height, asset.width);
+              const ratio = asset.height / asset.width;
+              resolve(ratio + "*" + downloadURL);
+            });
+          },
+        );
+      }
     } catch (error) {
       console.log("processItemAsync error:", error);
       reject(error);
