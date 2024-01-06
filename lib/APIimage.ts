@@ -1,7 +1,8 @@
 import * as ImagePicker from "expo-image-picker";
-import { storage } from "./firebase";
+import { firebase, storage } from "./firebase";
 import * as Crypto from "expo-crypto";
 import { Image } from "react-native-compressor";
+import { Platform } from "react-native";
 
 export const addImageFromCameraRoll = async (
   multiple: boolean,
@@ -52,12 +53,16 @@ export const addImageFromPhoto = async (
 };
 
 async function processItemAsync(folder: string, asset: any, progressCallback) {
-  const result = await Image.compress(asset.uri, {
-    progressDivider: 10,
-    downloadProgress: (progress) => {
-      console.log("downloadProgress: ", progress);
-    },
-  });
+  const isWeb = Platform.OS === "web";
+  let result = asset.uri;
+  if (!isWeb) {
+    result = await Image.compress(asset.uri, {
+      progressDivider: 10,
+      downloadProgress: (progress) => {
+        console.log("downloadProgress: ", progress);
+      },
+    });
+  }
 
   return new Promise((resolve, reject) => {
     try {
@@ -112,8 +117,9 @@ function getStorageRef(folder: string) {
     "/" +
     UUID;
 
-  // const storageRef = ref(storage, fileName);
-  const storageRef = storage().ref(fileName);
+  //const storageRef = ref(storage, fileName);
+  const storageRef = firebase.storage().ref(fileName);
+  console.log("storageRef", storageRef);
 
   return storageRef;
 }

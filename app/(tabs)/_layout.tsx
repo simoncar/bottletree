@@ -21,12 +21,11 @@ function TabBarIcon(props: {
   return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
-const appName = "One Build";
+const appName = "Notebook";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { sharedDataProject } = useContext(ProjectContext);
-  const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
 
   const { sharedDataUser, isLoading } = useAuth();
@@ -93,8 +92,6 @@ export default function TabLayout() {
 
       return myArray[1]; // For example, creating a new array with each element doubled.
     });
-
-    setImage(null);
 
     const post: IPost = {
       key: "",

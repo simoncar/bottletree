@@ -29,14 +29,12 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import Colors from "../constants/Colors";
 import { ICalendarEvent } from "../lib/types";
-import { useAuth } from "../lib/authProvider";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
 import { ColorRow } from "../components/ColorRow";
 
 export default function editCalendar() {
   const { sharedDataProject } = useProject();
-  const { sharedDataUser } = useAuth();
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
 

@@ -3,9 +3,7 @@ import React, { useState, useContext, useRef } from "react";
 import {
   Button,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
   useColorScheme,
   Animated,
   Easing,
@@ -18,6 +16,8 @@ import { IPost } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
 import { addPostImage } from "../lib/APIpost";
 import { router } from "expo-router";
+import { View, Text, ParsedText } from "../components/Themed";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   const [type, setType] = useState(CameraType.back);
@@ -163,7 +163,7 @@ export default function App() {
           <View style={styles.a}>
             <TouchableOpacity style={styles.flipCamera} onPress={flipCamera}>
               <Ionicons
-                name="ios-camera-reverse-outline"
+                name="camera-reverse-outline"
                 size={45}
                 color={Colors[colorScheme ?? "light"].textPlaceholder}
               />

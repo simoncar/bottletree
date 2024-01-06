@@ -23,7 +23,6 @@ import {
   CalendarTouchableOpacityProps,
 } from "react-native-big-calendar";
 import { ScrollView } from "react-native-gesture-handler";
-import { longPressHandlerName } from "react-native-gesture-handler/lib/typescript/handlers/LongPressGestureHandler";
 
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
