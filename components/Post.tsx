@@ -40,48 +40,11 @@ const Post = (props) => {
   }
 
   function renderImage() {
-    if (imageUrls.length == 1) {
-      return (
-        <Pressable
-          onPress={() => {
-            router.push({
-              pathname: "/viewPost",
-              params: {
-                project: post.projectId,
-                key: post.key,
-                image: encodeURIComponent(imageUrls),
-                caption: caption || "",
-                ratio: ratio,
-              },
-            });
-          }}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={[
-                styles.storyPhoto,
-                { width: width, height: width * ratio },
-              ]}
-              source={imageUrls[0]}
-            />
-          </View>
-        </Pressable>
-      );
-    } else if (imageUrls.length > 100) {
-      return (
-        <View style={styles.imageContainer}>
-          <Carousel
-            width={width}
-            panGestureHandlerProps={{
-              activeOffsetX: [-10, 10],
-            }}
-            height={width * ratio}
-            data={imageUrls}
-            onSnapToItem={(index) => {
-              console.log("onSnapToItem: ", index);
-              setActiveImage(index);
-              index;
-            }}
-            renderItem={({ index }) => (
+    return (
+      <View style={{}}>
+        {imageUrls.map((im, index) => {
+          return (
+            <View style={{ borderRadius: 10, borderWidth: 10 }} key={index}>
               <Pressable
                 onPress={() => {
                   router.push({
@@ -89,66 +52,26 @@ const Post = (props) => {
                     params: {
                       project: post.projectId,
                       key: post.key,
-                      image: encodeURIComponent(imageUrls[index]),
-                      caption: caption,
+                      image: encodeURIComponent(im),
+                      caption: caption || "",
                       ratio: ratio,
                     },
                   });
-                }}
-                style={({ pressed }) => [
-                  {
-                    flex: 1,
-                    justifyContent: "center",
-                  },
-                ]}>
-                <View style={styles.imageContainer}>
-                  <Image
-                    style={[
-                      styles.storyPhoto,
-                      { width: width, height: width * ratio },
-                    ]}
-                    source={imageUrls[index]}
-                  />
-                </View>
+                }}>
+                <Image
+                  style={{
+                    width: Dimensions.get("window").width - 50,
+                    height: Dimensions.get("window").width - 50 * ratio,
+                  }}
+                  source={im}
+                  contentFit="contain"
+                />
               </Pressable>
-            )}
-          />
-        </View>
-      );
-    } else {
-      return (
-        <View style={{}}>
-          {imageUrls.map((im, index) => {
-            return (
-              <View style={{}} key={index}>
-                <Pressable
-                  onPress={() => {
-                    router.push({
-                      pathname: "/viewPost",
-                      params: {
-                        project: post.projectId,
-                        key: post.key,
-                        image: encodeURIComponent(im),
-                        caption: caption || "",
-                        ratio: ratio,
-                      },
-                    });
-                  }}>
-                  <Image
-                    style={{
-                      width: Dimensions.get("window").width - 50,
-                      height: Dimensions.get("window").width - 50 * ratio,
-                    }}
-                    source={im}
-                    contentFit="contain"
-                  />
-                </Pressable>
-              </View>
-            );
-          })}
-        </View>
-      );
-    }
+            </View>
+          );
+        })}
+      </View>
+    );
   }
 
   return (
@@ -191,14 +114,6 @@ const styles = StyleSheet.create({
   },
   commentView: {
     backgroundColor: "transparent",
-  },
-
-  imageContainer: {
-    backgroundColor: "transparent",
-    borderRadius: 10,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
   },
 
   postView: {

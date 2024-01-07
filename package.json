@@ -7,7 +7,9 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "predeploy": "expo export -p web",
+    "deploy-hosting": "npm run predeploy && firebase deploy --only hosting"
   },
   "jest": {
     "preset": "jest-expo",
