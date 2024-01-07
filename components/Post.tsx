@@ -4,11 +4,12 @@ import {
   StyleSheet,
   Pressable,
   useColorScheme,
+  View,
 } from "react-native";
 import { router } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
-import { View, Text, ParsedText } from "../components/Themed";
+import { Text, ParsedText } from "../components/Themed";
 import Comments from "./PostComments";
 import Dots from "../components/dots";
 import Footer from "../components/Footer";
@@ -116,10 +117,10 @@ const Post = (props) => {
       );
     } else {
       return (
-        <View>
+        <View style={{}}>
           {imageUrls.map((im, index) => {
             return (
-              <View key={index}>
+              <View style={{}} key={index}>
                 <Pressable
                   onPress={() => {
                     router.push({
@@ -134,11 +135,12 @@ const Post = (props) => {
                     });
                   }}>
                   <Image
-                    style={[
-                      styles.storyPhoto,
-                      { width: width, height: width * ratio },
-                    ]}
+                    style={{
+                      width: Dimensions.get("window").width - 50,
+                      height: Dimensions.get("window").width - 50 * ratio,
+                    }}
                     source={im}
+                    contentFit="contain"
                   />
                 </Pressable>
               </View>
@@ -150,35 +152,33 @@ const Post = (props) => {
   }
 
   return (
-    <View>
-      <View
-        style={[
-          styles.postView,
-          {
-            backgroundColor: Colors[colorScheme ?? "light"].postBackground,
-            borderColor: Colors[colorScheme ?? "light"].postBackground,
-          },
-        ]}>
-        {renderImage()}
-        {!(<Dots images={imageUrls} activeImage={activeImage} />)}
+    <View
+      style={[
+        styles.postView,
+        {
+          backgroundColor: Colors[colorScheme ?? "light"].postBackground,
+          borderColor: Colors[colorScheme ?? "light"].postBackground,
+        },
+      ]}>
+      {renderImage()}
+      {!(<Dots images={imageUrls} activeImage={activeImage} />)}
 
-        <View style={styles.commentView}>
-          <Text style={styles.comment}>{caption}</Text>
-          <Comments
-            project={post.projectId}
-            post={post.key}
-            commentShow={commentShow}
-            setCommentShow={setCommentShow}
-          />
-        </View>
-
-        <Footer
+      <View style={styles.commentView}>
+        <Text style={styles.comment}>{caption}</Text>
+        <Comments
           project={post.projectId}
-          post={post}
+          post={post.key}
           commentShow={commentShow}
           setCommentShow={setCommentShow}
         />
       </View>
+
+      <Footer
+        project={post.projectId}
+        post={post}
+        commentShow={commentShow}
+        setCommentShow={setCommentShow}
+      />
     </View>
   );
 };
@@ -208,15 +208,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginHorizontal: 5,
     marginTop: 5,
-  },
-  storyPhoto: {
-    alignSelf: "center",
-    borderColor: "lightgray",
-    borderRadius: 10,
-    height: 300,
-    marginBottom: 12,
-    marginTop: 12,
-    padding: 8,
   },
 });
 

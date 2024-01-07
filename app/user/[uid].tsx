@@ -163,7 +163,7 @@ export default function editUser() {
           ) : (
             <View style={styles.profileCircleIcon}>
               <Ionicons
-                name="ios-person"
+                name="person-outline"
                 size={100}
                 color="#999999"
                 style={styles.profilePic}

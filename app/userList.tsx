@@ -68,7 +68,7 @@ const ModalScreen = (props) => {
             ) : (
               <View style={styles.avatarFace}>
                 <Ionicons
-                  name="ios-person"
+                  name="person-outline"
                   color="#999999"
                   style={styles.avatarIcon}
                 />

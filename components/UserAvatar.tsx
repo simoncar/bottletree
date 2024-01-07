@@ -12,7 +12,7 @@ function renderPhotoURL(photoURL) {
     return (
       <View>
         <Ionicons
-          name="ios-person-circle-outline"
+          name="person-circle-outline"
           size={40}
           color={Colors[colorScheme ?? "light"].text}
         />
