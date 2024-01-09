@@ -60,7 +60,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
           key: doc.id,
           title: doc.data().title || "Untitled",
           icon: doc.data().icon,
-          archived: doc.data().archived,
+          archived: false,
           postCount: doc.data().postCount,
         });
       } else {
@@ -68,7 +68,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
           key: doc.id,
           title: doc.data().title || "Untitled",
           icon: doc.data().icon,
-          archived: doc.data().archived,
+          archived: true,
           postCount: doc.data().postCount,
         });
       }
