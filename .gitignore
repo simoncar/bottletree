@@ -26,3 +26,4 @@ firebase-debug.log
 
 expo-env.d.ts
 # @end expo-cli
+.firebase/hosting.*.cache
