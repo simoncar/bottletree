@@ -28,7 +28,9 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
-      console.log("onAuthStateChanged: ", user?.toJSON());
+      console.log("onAuthStateChanged1111: ", user?.toJSON());
+      console.log("onAuthStateChanged2222: ", sharedDataUser);
+      console.log("onAuthStateChanged3333: ", session);
 
       if (user) {
         const usr: IUser = {
@@ -40,10 +42,14 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
         setSession(user.uid);
         setSharedDataUser(usr);
-        router.navigate("/(tabs)");
+
+        console.log("DO NOT NAVIGATE - ALREADY LOGGED IN");
+
+        //router.navigate("/(tabs)");
       } else {
         setSession(null);
         setSharedDataUser(null);
+        console.log("NAVIGATE TO SIGNIN - NOT LOGGED IN");
         router.replace("(auth)/signIn");
       }
     });

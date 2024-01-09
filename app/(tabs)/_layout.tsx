@@ -34,12 +34,12 @@ export default function TabLayout() {
     return <Text>Loading...</Text>;
   }
 
-  if (!sharedDataUser) {
+  if (!sharedDataUser && !isLoading) {
     // On web, static rendering will stop here as the user is not authenticated
     // in the headless Node process that the pages are rendered in.
-    console.log("(tabls)/_layout/!session");
+    console.log("(tabls)/_layout/!session:", sharedDataUser);
 
-    return <Redirect href="/(auth)/signIn" />;
+    //return <Redirect href="/(auth)/signIn" />;
   }
 
   let loggedInUser: IUser = sharedDataUser;

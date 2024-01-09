@@ -5,7 +5,7 @@ import {
   useColorScheme,
   Pressable,
 } from "react-native";
-import { Stack, router } from "expo-router";
+import { Stack, router, Redirect } from "expo-router";
 import { Text, View, TextInput } from "../../components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "../../constants/Colors";
@@ -138,6 +138,7 @@ export default function SignIn() {
                 .signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                   console.log("logged in:", userCredential);
+                  router.navigate("/(tabs)");
                 })
                 .catch((error) => {
                   setNotification(errorMessage(error.code));

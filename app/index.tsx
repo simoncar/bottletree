@@ -3,7 +3,9 @@ import React from "react";
 import { Redirect } from "expo-router";
 
 const Index = () => {
-  return <Redirect href="/loading" />;
+  console.log("Index - GO TO (tabs)");
+
+  return <Redirect href="/(tabs)" />;
 };
 
 export default Index;
