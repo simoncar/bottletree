@@ -29,47 +29,56 @@ export async function getProject(
 }
 
 export async function getProjects(uid: string, callback: projectsRead) {
-  let query;
-  let q;
   const projectList: string[] = ["X"];
+  const projects: IProject[] = [];
+  const projectsArchived: IProject[] = [];
+
+  const accessRef = db.collectionGroup("accessList");
+  let query = accessRef;
 
   if (uid != "") {
-    const accessRef = db.collectionGroup("accessList");
     query = accessRef.where("uid", "==", uid);
-
-    await query.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        projectList.indexOf(doc.data().projectId) === -1
-          ? projectList.push(doc.data().projectId)
-          : console.log("This item already exists");
-        //
-      });
-    });
-
-    q = db
-      .collection("projects")
-      .where(firestore.FieldPath.documentId(), "in", projectList);
-
-    // q = db.collection("projects").orderBy("archived", "asc");
-  } else {
-    q = db.collection("projects").orderBy("archived", "asc");
   }
 
-  const unsubscribe = q.onSnapshot((querySnapshot) => {
-    const projects: IProject[] = [];
+  await query.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      projects.push({
-        key: doc.id,
-        title: doc.data().title || "Untitled",
-        icon: doc.data().icon,
-        archived: doc.data().archived,
-        postCount: doc.data().postCount,
-      });
+      projectList.indexOf(doc.data().projectId) === -1
+        ? projectList.push(doc.data().projectId)
+        : console.log("This item already exists");
+      //
     });
-    callback(projects);
   });
 
-  return () => unsubscribe;
+  const q = db.collection("projects").orderBy("timestamp", "desc");
+
+  const projectsSnapshot = await q.get();
+
+  projectsSnapshot.forEach((doc) => {
+    if (projectList.includes(doc.id)) {
+      if (!doc.data().archived) {
+        projects.push({
+          key: doc.id,
+          title: doc.data().title || "Untitled",
+          icon: doc.data().icon,
+          archived: doc.data().archived,
+          postCount: doc.data().postCount,
+        });
+      } else {
+        projectsArchived.push({
+          key: doc.id,
+          title: doc.data().title || "Untitled",
+          icon: doc.data().icon,
+          archived: doc.data().archived,
+          postCount: doc.data().postCount,
+        });
+      }
+    }
+  });
+
+  console.log("projects: ", projects);
+  callback([...projects, ...projectsArchived]);
+
+  return;
 }
 
 export async function getProjectUsers(
@@ -127,17 +136,22 @@ export function addProject(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
+    const projectId = generateProjectReference();
+
+    //TODO: check the project refernce is not already in use (unlikely)
+
     db.collection("projects")
-      .add({
+      .doc(projectId)
+      .set({
         title: project.title,
         icon: stockHouseIcon,
         timestamp: firestore.Timestamp.now(),
         archived: false,
         postCount: 0,
       })
-      .then((docRef) => {
-        console.log("Project written with ID: ", docRef.id);
-        callback(docRef.id);
+      .then(() => {
+        console.log("Project written with ID: ", projectId);
+        callback(projectId);
       });
   } catch (e) {
     console.error("Error adding project: ", e);
@@ -202,3 +216,7 @@ export function deleteProjectUser(
 
   return;
 }
+
+const generateProjectReference = (): string => {};
+
+console.log(generateProjectReference());

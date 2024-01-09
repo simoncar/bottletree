@@ -2,6 +2,7 @@
   "name": "bottletree",
   "version": "1.2.0",
   "license": "MIT",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -68,7 +69,7 @@
     "expo-system-ui": "~2.9.2",
     "expo-updates": "~0.24.6",
     "expo-web-browser": "~12.8.1",
-    "firebase": "^10.7.1",
+    "firebase": "10.6.0",
     "i18n-js": "^4.3.2",
     "metro-config": "^0.80.1",
     "react": "18.2.0",

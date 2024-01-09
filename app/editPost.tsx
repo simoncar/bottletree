@@ -17,7 +17,6 @@ import ProjectContext from "../lib/projectContext";
 import { TextInput, View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import { IPost, IProject } from "../lib/types";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function editPost() {
   const { sharedDataProject } = useContext<IProject>(ProjectContext);

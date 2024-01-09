@@ -63,10 +63,6 @@ const styles = StyleSheet.create({
 
     justifyContent: "center",
     marginBottom: 30,
-    shadowColor: "rgba(0,0,0, .4)",
-    shadowOffset: { height: 2, width: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
     width: 250,
   },
 });
