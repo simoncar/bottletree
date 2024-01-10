@@ -64,11 +64,8 @@ const ModalScreen = (props) => {
       <TouchableOpacity
         key={"addProject"}
         onPress={() => {
-          router.replace({
-            pathname: "/addProject",
-            params: {
-              project: "post.projectId",
-            },
+          router.navigate({
+            pathname: "project/add",
           });
         }}>
         <View style={styles.outerView}>

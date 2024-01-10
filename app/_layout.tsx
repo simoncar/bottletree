@@ -138,7 +138,7 @@ export default function RootLayout() {
                 }}
               />
               <Stack.Screen
-                name="addProject"
+                name="project/add"
                 options={{
                   title: "Add Project",
                   headerTitleStyle: {
