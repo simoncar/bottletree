@@ -138,7 +138,7 @@ export default function SignIn() {
                 .signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                   console.log("logged in:", userCredential);
-                  router.navigate("/(tabs)");
+                  router.navigate("/");
                 })
                 .catch((error) => {
                   setNotification(errorMessage(error.code));

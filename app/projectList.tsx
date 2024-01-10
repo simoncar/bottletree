@@ -127,10 +127,10 @@ const ModalScreen = (props) => {
             });
             postCountDelta == 0;
 
-            router.replace({
-              pathname: "/(tabs)/",
+            router.navigate({
+              pathname: "/[project]",
               params: {
-                projectId: data.key,
+                project: data.key,
               },
             });
           }}>

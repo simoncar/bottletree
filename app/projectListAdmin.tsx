@@ -12,7 +12,7 @@ import {
 import { ShortList } from "../components/sComponent";
 import { Text, View } from "../components/Themed";
 import Colors from "../constants/Colors";
-import { getProjects } from "../lib/APIproject";
+import { getAllProjects } from "../lib/APIproject";
 import ProjectContext from "../lib/projectContext";
 import { IProject } from "../lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -34,7 +34,7 @@ const ModalScreen = (props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = getProjects("", projectsRead);
+    const unsubscribe = getAllProjects(projectsRead);
     unsubscribe;
     return () => {
       // unsubscribe;

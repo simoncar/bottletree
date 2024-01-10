@@ -33,19 +33,13 @@ export async function getProjects(uid: string, callback: projectsRead) {
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
 
-  const accessRef = db.collectionGroup("accessList");
-  let query = accessRef;
-
-  if (uid != "") {
-    query = accessRef.where("uid", "==", uid);
-  }
+  const query = db.collectionGroup("accessList").where("uid", "==", uid);
 
   await query.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       projectList.indexOf(doc.data().projectId) === -1
         ? projectList.push(doc.data().projectId)
         : console.log("This item already exists");
-      //
     });
   });
 
@@ -75,7 +69,40 @@ export async function getProjects(uid: string, callback: projectsRead) {
     }
   });
 
-  console.log("projects: ", projects);
+  callback([...projects, ...projectsArchived]);
+
+  return;
+}
+
+
+export async function getAllProjects(callback: projectsRead) {
+  const projects: IProject[] = [];
+  const projectsArchived: IProject[] = [];
+
+  const q = db.collection("projects").orderBy("timestamp", "desc");
+
+  const projectsSnapshot = await q.get();
+
+  projectsSnapshot.forEach((doc) => {
+      if (!doc.data().archived) {
+        projects.push({
+          key: doc.id,
+          title: doc.data().title || "Untitled",
+          icon: doc.data().icon,
+          archived: false,
+          postCount: doc.data().postCount,
+        });
+      } else {
+        projectsArchived.push({
+          key: doc.id,
+          title: doc.data().title || "Untitled",
+          icon: doc.data().icon,
+          archived: true,
+          postCount: doc.data().postCount,
+        });
+      }
+  });
+
   callback([...projects, ...projectsArchived]);
 
   return;

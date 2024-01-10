@@ -78,6 +78,7 @@ export const demoData = async () => {
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
         archived: false,
         postCount: 109,
+        timestamp: firestore.Timestamp.now(),
       },
       { merge: true },
     );
@@ -109,6 +110,7 @@ export const demoData = async () => {
           icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
           archived: false,
           postCount: 7,
+          timestamp: firestore.Timestamp.now(),
         },
         { merge: true },
       );

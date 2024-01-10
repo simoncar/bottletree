@@ -33,6 +33,10 @@ const db = firebase.firestore();
 //const storage = firebase.storage();
 const firestore = firebase.firestore;
 
+db.useEmulator("127.0.0.1", 8080);
+auth().useEmulator("http://localhost:9099");
+//storage().useEmulator("127.0.0.1", 9199);
+//
 export { firebase, db, storage, auth, firestore, uploadBytes };
 
 // export const firebaseErrors: Record<string, string> = {

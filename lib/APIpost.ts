@@ -160,8 +160,11 @@ export async function getPosts(
   projectId: string | null | undefined,
   callback: postsRead,
 ) {
+  console.log("API getPosts", projectId);
+
   if (undefined === projectId || null === projectId || "" === projectId) {
     projectId = "void";
+    console.log("API getPosts - VOID");
   }
 
   const q = firestore()

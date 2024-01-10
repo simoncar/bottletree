@@ -10,18 +10,31 @@ import Project from "./ProjectPanel";
 import { router } from "expo-router";
 import { useAuth } from "../lib/authProvider";
 import { FlatList } from "react-native-gesture-handler";
-import Masonry from "./Masonry";
-import PhotoGallery from "./Gallery";
 
-export const Posts = () => {
+type Props = {
+  project: string;
+};
+
+export const Posts = ({ project }: Props) => {
+  const [posts, setPosts] = useState([]);
   const { sharedDataUser } = useAuth();
   const { sharedDataProject } = useContext(ProjectContext);
-  let currentProject: IProject = sharedDataProject;
-  const [posts, setPosts] = useState([]);
 
-  if (null == sharedDataProject) {
+  let currentProject: IProject;
+
+  console.log("Posts - getPosts getPosts: ", project);
+
+  if (null == project || project == "(tabs)") {
     currentProject = {
       key: "",
+      title: "",
+      icon: "",
+      archived: false,
+      postCount: 0,
+    };
+  } else {
+    currentProject = {
+      key: project,
       title: "",
       icon: "",
       archived: false,
@@ -34,6 +47,7 @@ export const Posts = () => {
   };
 
   useEffect(() => {
+    console.log("UseEffect1 ", project);
     if (sharedDataUser && undefined != currentProject) {
       const unsubscribe = getPosts(currentProject.key, postsRead);
       return () => {
@@ -43,6 +57,15 @@ export const Posts = () => {
   }, []);
 
   useEffect(() => {
+    console.log(
+      "UseEffect2 ",
+      project,
+      "c:" + currentProject,
+      "s:" + sharedDataUser,
+    );
+    console.log(currentProject);
+    console.log(sharedDataUser);
+
     if (sharedDataUser && undefined != currentProject?.key) {
       const unsubscribe = getPosts(currentProject.key, postsRead);
 
@@ -50,26 +73,26 @@ export const Posts = () => {
         unsubscribe;
       };
     }
-  }, [currentProject, sharedDataUser]);
+  }, [sharedDataUser]);
 
-  useEffect(() => {
-    if (undefined != currentProject?.key) {
-      console.log(
-        "Red Dot Count Set: " + currentProject?.key,
-        currentProject?.title,
-        currentProject?.postCount,
-      );
-      updateUserProjectCount(currentProject?.key, currentProject?.postCount);
+  // useEffect(() => {
+  //   if (undefined != currentProject?.key) {
+  //     console.log(
+  //       "Red Dot Count Set: " + currentProject?.key,
+  //       currentProject?.title,
+  //       currentProject?.postCount,
+  //     );
+  //     updateUserProjectCount(currentProject?.key, currentProject?.postCount);
 
-      if (sharedDataUser != null) {
-        updateSharedDataUserProjectCount(
-          sharedDataUser,
-          currentProject?.key,
-          currentProject?.postCount,
-        );
-      }
-    }
-  }, [currentProject]);
+  //     if (sharedDataUser != null) {
+  //       updateSharedDataUserProjectCount(
+  //         sharedDataUser,
+  //         currentProject?.key,
+  //         currentProject?.postCount,
+  //       );
+  //     }
+  //   }
+  // }, [currentProject]);
 
   function updateSharedDataUserProjectCount(
     obj: Record<string, number>,

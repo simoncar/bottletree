@@ -181,7 +181,7 @@ export default function TabLayout() {
         },
       }}>
       <Tabs.Screen
-        name="index"
+        name="[project]"
         listeners={{
           tabPress: (e) => {
             router.push({
@@ -194,6 +194,9 @@ export default function TabLayout() {
         }}
         options={{
           title: "",
+          href: {
+            pathname: "/[project]",
+          },
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
