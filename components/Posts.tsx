@@ -18,11 +18,8 @@ type Props = {
 export const Posts = ({ project }: Props) => {
   const [posts, setPosts] = useState([]);
   const { sharedDataUser } = useAuth();
-  const { sharedDataProject } = useContext(ProjectContext);
 
   let currentProject: IProject;
-
-  console.log("Posts - getPosts getPosts: ", project);
 
   if (null == project || project == "(tabs)") {
     currentProject = {
@@ -47,33 +44,11 @@ export const Posts = ({ project }: Props) => {
   };
 
   useEffect(() => {
-    console.log("UseEffect1 ", project);
-    if (sharedDataUser && undefined != currentProject) {
-      const unsubscribe = getPosts(currentProject.key, postsRead);
-      return () => {
-        unsubscribe;
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log(
-      "UseEffect2 ",
-      project,
-      "c:" + currentProject,
-      "s:" + sharedDataUser,
-    );
-    console.log(currentProject);
-    console.log(sharedDataUser);
-
-    if (sharedDataUser && undefined != currentProject?.key) {
-      const unsubscribe = getPosts(currentProject.key, postsRead);
-
-      return () => {
-        unsubscribe;
-      };
-    }
-  }, [sharedDataUser]);
+    const unsubscribe = getPosts(project, postsRead);
+    return () => {
+      unsubscribe;
+    };
+  }, [project]);
 
   // useEffect(() => {
   //   if (undefined != currentProject?.key) {
@@ -144,13 +119,7 @@ export const Posts = ({ project }: Props) => {
     return (
       <View style={styles.list}>
         <View>
-          <Project
-            project={currentProject.key}
-            title={currentProject.title}
-            icon={currentProject.icon}
-            archived={currentProject.archived}
-            page=""
-          />
+          <Project project={project} />
         </View>
 
         <View style={{ flex: 1, flexDirection: "row" }}>

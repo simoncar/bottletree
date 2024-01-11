@@ -246,7 +246,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="calendarLarge"
+        name="calendar"
         options={{
           title: "",
           headerTitle: () => (

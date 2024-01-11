@@ -6,14 +6,10 @@ import { View } from "../../components/Themed";
 
 export default function ProjectPosts() {
   const { project } = useLocalSearchParams();
-  console.log(
-    "ProjectPosts ProjectPosts ProjectPosts ProjectPosts ProjectPosts : ",
-    project,
-  );
 
   return (
     <View style={styles.container}>
-      <Posts project={project} />
+      <Posts project={project as string} />
     </View>
   );
 }

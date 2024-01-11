@@ -166,9 +166,9 @@ const ModalScreen = (props) => {
             console.log("Edit Project: ", data.archived);
 
             router.replace({
-              pathname: "/editProject",
+              pathname: "/project/[project]",
               params: {
-                projectId: data.key,
+                project: data.key,
                 projectTitle: data.title,
                 photoURL: data.icon,
                 archived: data.archived,

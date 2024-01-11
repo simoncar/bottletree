@@ -10,24 +10,24 @@ import {
   Pressable,
 } from "react-native";
 
-import { Text, TextInput, View } from "../components/Themed";
-import { updateProject, getProject } from "../lib/APIproject";
-import { useProject } from "../lib/projectProvider";
+import { Text, TextInput, View } from "../../components/Themed";
+import { updateProject, getProject } from "../../lib/APIproject";
+import { useProject } from "../../lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addImageFromCameraRoll } from "../lib/APIimage";
-import Colors from "../constants/Colors";
-import { ProjectUsers } from "../components/ProjectUsers";
+import { addImageFromCameraRoll } from "../../lib/APIimage";
+import Colors from "../../constants/Colors";
+import { ProjectUsers } from "../../components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
-import { IProject } from "../lib/types";
+import { IProject } from "../../lib/types";
 
 export default function editPost() {
   const [updateUsers, setUpdateUsers] = useState(true);
   const { sharedData, updateSharedDataProject } = useProject();
   const local = useLocalSearchParams<{
-    projectId: string;
+    project: string;
   }>();
 
   const colorScheme = useColorScheme();
@@ -42,7 +42,7 @@ export default function editPost() {
   });
 
   useEffect(() => {
-    getProject(local?.projectId || "", (project) => {
+    getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);
         updateSharedDataProject(project);
@@ -53,8 +53,11 @@ export default function editPost() {
   const saveDone = (id: string) => {
     updateSharedDataProject(project);
 
-    router.push({
-      pathname: "/(tabs)",
+    router.navigate({
+      pathname: "/[project]",
+      params: {
+        project: id,
+      },
     });
   };
 
@@ -176,7 +179,7 @@ export default function editPost() {
           </View>
         </View>
 
-        <ProjectUsers projectId={local.projectId} updateUsers={updateUsers} />
+        <ProjectUsers project={local.project} updateUsers={updateUsers} />
 
         <Pressable style={styles.outerView} onPress={toggleArchive}>
           <View style={styles.avatar}>

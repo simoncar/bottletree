@@ -17,6 +17,7 @@ export interface IPost {
 }
 
 export interface IProject {
+  project: string;
   key: string;
   title: string;
   icon: string;

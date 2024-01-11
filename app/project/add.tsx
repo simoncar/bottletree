@@ -37,9 +37,9 @@ export default function addPhoto() {
 
   const saveDoneUser = (projectId: string) => {
     router.replace({
-      pathname: "/editProject",
+      pathname: "/project/[project]",
       params: {
-        projectId: projectId,
+        project: projectId,
         projectTitle: project.title,
       },
     });

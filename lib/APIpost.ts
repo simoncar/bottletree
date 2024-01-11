@@ -4,13 +4,15 @@ import * as Device from "expo-device";
 
 //create a export function that gets a single post from firebase into a return object that can be used by the app
 export async function getPost(
-  projectId: string,
+  project: string,
   postId: string,
   callback: { (post: IPost): void; (arg0: IPost): void },
 ) {
+  console.log("getPost", project, postId);
+
   const q = db
     .collection("projects")
-    .doc(projectId)
+    .doc(project)
     .collection("posts")
     .doc(postId);
 
@@ -18,7 +20,7 @@ export async function getPost(
     if (doc.exists) {
       const post: IPost = {
         key: doc.id,
-        projectId: projectId,
+        projectId: project,
         projectTitle: doc.data()?.projectTitle,
         caption: doc.data()?.caption,
         author: doc.data()?.author,
@@ -28,7 +30,7 @@ export async function getPost(
       };
       callback(post);
     } else {
-      console.log("No such post:", projectId, postId);
+      console.log("No such post:", project, postId);
     }
   });
 }
@@ -157,19 +159,16 @@ export function deletePost(post: IPost, callback: saveDone) {
 }
 
 export async function getPosts(
-  projectId: string | null | undefined,
+  project: string | null | undefined,
   callback: postsRead,
 ) {
-  console.log("API getPosts", projectId);
-
-  if (undefined === projectId || null === projectId || "" === projectId) {
-    projectId = "void";
-    console.log("API getPosts - VOID");
+  if (undefined === project || null === project || "" === project) {
+    project = "void";
   }
 
   const q = firestore()
     .collection("projects")
-    .doc(projectId)
+    .doc(project)
     .collection("posts")
     .orderBy("timestamp", "desc");
 
@@ -178,7 +177,7 @@ export async function getPosts(
     querySnapshot?.forEach((doc) => {
       posts.push({
         key: doc.id,
-        projectId: projectId,
+        projectId: project,
         author: doc.data().author,
         images: doc.data().images ?? [],
         ratio: doc.data().ratio ?? 1,
@@ -192,12 +191,12 @@ export async function getPosts(
   return () => unsubscribe();
 }
 
-export async function getComments(projectId: string, postId: string) {
+export async function getComments(project: string, postId: string) {
   const comments: IComment[] = [];
 
   const qComments = firestore()
     .collection("projects")
-    .doc(projectId)
+    .doc(project)
     .collection("posts")
     .doc(postId)
     .collection("comments")

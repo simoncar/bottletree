@@ -77,7 +77,7 @@ export default function editCalendar() {
 
   const saveDone = (id: string) => {
     router.push({
-      pathname: "/calendarLarge",
+      pathname: "/calendar",
       params: {
         id: id,
       },
@@ -103,7 +103,7 @@ export default function editCalendar() {
 
   const deleteDone = (id: string) => {
     router.push({
-      pathname: "/calendarLarge",
+      pathname: "/calendar",
     });
   };
 

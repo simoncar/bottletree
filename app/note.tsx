@@ -37,22 +37,22 @@ export default function Note() {
 
   useEffect(() => {
     console.log("Note - useEffect");
-
-    getPost(local?.projectId || "", local?.postId || "", (post) => {
-      if (post) {
-        setPost(post);
-      }
-    });
+    if (local?.postId) {
+      getPost(local?.projectId || "", local?.postId || "", (post) => {
+        if (post) {
+          setPost(post);
+        }
+      });
+    }
   }, []);
 
   const saveDone = () => {
     console.log("saveDone - push to home");
 
-    router.push({
-      pathname: "/(tabs)",
+    router.navigate({
+      pathname: "/[project]",
       params: {
-        project: sharedDataProject.key,
-        title: sharedDataProject.title,
+        project: local?.projectId,
       },
     });
   };

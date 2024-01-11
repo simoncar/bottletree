@@ -1,27 +1,41 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import ProjectContext from "../lib/projectContext";
 import Colors from "../constants/Colors";
 import { Text } from "../components/Themed";
 import { getUserProjectCount } from "../lib/APIuser";
-import { IUser } from "../lib/types";
+import { IUser, IProject } from "../lib/types";
 import { useAuth } from "../lib/authProvider";
-import { RollInRight } from "react-native-reanimated";
+import { getProject } from "../lib/APIproject";
+import ProjectContext from "../lib/projectContext";
 
 const Project = (props) => {
-  const { project, title, icon, archived, page } = props;
-  const { updateSharedDataProject } = useContext(ProjectContext);
+  const { project } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
+  const { sharedDataProject, updateSharedDataProject } =
+    useContext(ProjectContext);
+  const [projectObj, setProject] = useState<IProject>({
+    project: "",
+    key: "",
+    title: "",
+    icon: "",
+    archived: false,
+    postCount: 0,
+  });
 
   useEffect(() => {
+    getProject(project || "", (projectObj) => {
+      if (projectObj) {
+        setProject(projectObj);
+      }
+    });
     getUserProjectCount(userProjectCountRead);
-  }, []);
+  }, [project]);
 
   const userProjectCountRead = (user: IUser) => {
     updateSharedDataUser({ postCount: user.postCount });
@@ -38,26 +52,23 @@ const Project = (props) => {
       <Pressable
         style={styles.pressableLeft}
         onPress={() => {
-          updateSharedDataProject({
-            key: project,
-            title: title,
-            icon: icon,
-          });
-          if (project) {
+          if (projectObj) {
+            updateSharedDataProject({
+              key: projectObj.project,
+            });
             router.push({
-              pathname: "/editProject",
+              pathname: "/project/[project]",
               params: {
-                projectId: project,
-                projectTitle: title,
-                photoURL: icon,
-                pArchived: archived,
+                project: projectObj.project,
               },
             });
           }
         }}>
         <View style={styles.avatar}>
-          {icon ? (
-            <Image style={styles.projectAvatar} source={icon}></Image>
+          {projectObj.icon ? (
+            <Image
+              style={styles.projectAvatar}
+              source={projectObj.icon}></Image>
           ) : (
             <View style={styles.projectAvatar}>
               <MaterialIcons
@@ -74,13 +85,12 @@ const Project = (props) => {
         onPress={() => {
           router.push({
             pathname: "/projectList",
-            params: {
-              page: page,
-            },
           });
         }}>
         <View style={styles.projectText}>
-          <Text style={styles.updateText}>{title || "Select Project"}</Text>
+          <Text style={styles.updateText}>
+            {projectObj.title || "Select Project"}
+          </Text>
         </View>
         <View style={styles.rightChevron}>
           <FontAwesome5

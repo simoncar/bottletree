@@ -8,13 +8,23 @@ const stockHouseIcon =
 // create an export function that loads a single
 
 export async function getProject(
-  projectId: string,
+  project: string,
   callback: { (project: IProject): void; (arg0: IProject): void },
 ) {
-  const q = db.collection("projects").doc(projectId);
+  if (!project) {
+    console.log("No project provided");
+    return;
+  }
+
+  const q = db.collection("projects").doc(project);
 
   const unsubscribe = q.onSnapshot((doc) => {
+    if (!doc.exists) {
+      console.log("No such project:", project);
+      return;
+    }
     const project: IProject = {
+      project: doc.id,
       key: doc.id,
       title: doc.data().title || "Untitled",
       icon: doc.data().icon,
@@ -51,6 +61,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
     if (projectList.includes(doc.id)) {
       if (!doc.data().archived) {
         projects.push({
+          project: doc.id,
           key: doc.id,
           title: doc.data().title || "Untitled",
           icon: doc.data().icon,
@@ -59,6 +70,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
         });
       } else {
         projectsArchived.push({
+          project: doc.id,
           key: doc.id,
           title: doc.data().title || "Untitled",
           icon: doc.data().icon,
@@ -74,7 +86,6 @@ export async function getProjects(uid: string, callback: projectsRead) {
   return;
 }
 
-
 export async function getAllProjects(callback: projectsRead) {
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
@@ -84,23 +95,25 @@ export async function getAllProjects(callback: projectsRead) {
   const projectsSnapshot = await q.get();
 
   projectsSnapshot.forEach((doc) => {
-      if (!doc.data().archived) {
-        projects.push({
-          key: doc.id,
-          title: doc.data().title || "Untitled",
-          icon: doc.data().icon,
-          archived: false,
-          postCount: doc.data().postCount,
-        });
-      } else {
-        projectsArchived.push({
-          key: doc.id,
-          title: doc.data().title || "Untitled",
-          icon: doc.data().icon,
-          archived: true,
-          postCount: doc.data().postCount,
-        });
-      }
+    if (!doc.data().archived) {
+      projects.push({
+        project: doc.id,
+        key: doc.id,
+        title: doc.data().title || "Untitled",
+        icon: doc.data().icon,
+        archived: false,
+        postCount: doc.data().postCount,
+      });
+    } else {
+      projectsArchived.push({
+        project: doc.id,
+        key: doc.id,
+        title: doc.data().title || "Untitled",
+        icon: doc.data().icon,
+        archived: true,
+        postCount: doc.data().postCount,
+      });
+    }
   });
 
   callback([...projects, ...projectsArchived]);
