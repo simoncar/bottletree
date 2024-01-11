@@ -145,6 +145,7 @@ export default function App() {
         ref={(ref) => setCamera(ref)}
         style={styles.camera}
         type={type}
+        useCamera2Api
         autoFocus={true}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
