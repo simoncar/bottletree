@@ -151,10 +151,12 @@ export default function editPost() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <NativeButton
-              title="Done"
-              onPress={() => updateProject(project, saveDone)}
-            />
+            <View style={{ paddingRight: 5 }}>
+              <NativeButton
+                title="Done"
+                onPress={() => updateProject(project, saveDone)}
+              />
+            </View>
           ),
         }}
       />
@@ -169,7 +171,6 @@ export default function editPost() {
               onChangeText={(text) => setProject({ ...project, title: text })}
               placeholder={"Project Title"}
               value={project.title}
-              multiline
             />
           </View>
           <View style={styles.archiveBox}>
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
   archiveMessage: {
     color: "grey",
     fontSize: 16,
-    paddingLeft: 20,
+    textAlign: "center",
   },
 
   archiveName: {
@@ -256,7 +257,6 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 100,
     paddingTop: 100,
-    width: "85%",
   },
 
   outerView: {
@@ -288,19 +288,20 @@ const styles = StyleSheet.create({
   project: {
     fontSize: 25,
     fontWeight: "bold",
+    padding: 10,
+    textAlign: "center",
   },
   projectBox: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
     justifyContent: "center",
-    padding: 10,
     width: "85%",
   },
   projectNameContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 50,
+    paddingBottom: 20,
     paddingTop: 20,
   },
 });
