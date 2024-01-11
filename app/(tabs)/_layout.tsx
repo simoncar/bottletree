@@ -90,7 +90,7 @@ export default function TabLayout() {
         ratio = myArray[0];
       }
 
-      return myArray[1]; // For example, creating a new array with each element doubled.
+      return myArray;
     });
 
     const post: IPost = {
@@ -99,7 +99,7 @@ export default function TabLayout() {
       projectId: sharedDataProject.key,
       projectTitle: sharedDataProject.title,
       author: sharedDataUser.displayName,
-      images: downloadURLarray,
+      images: sourceDownloadURLarray,
       ratio: ratio,
     };
 

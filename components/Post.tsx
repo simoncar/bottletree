@@ -23,28 +23,27 @@ const Post = (props) => {
   const { post } = props;
 
   const imageUrls = post.images && post.images.map((image) => image);
-
   let caption = "";
-  let ratio = 0.66666;
-  let width = Dimensions.get("window").width - 50;
-
-  if (typeof post.ratio === "number") {
-    ratio = Number(post.ratio);
-    if (ratio > 1) {
-      width = Dimensions.get("window").width * 0.68;
-    }
-  }
 
   if (post.caption != undefined) {
     caption = post.caption;
   }
 
+  console.log("Post: ", post.key, post.projectId, post.images, imageUrls);
+
   function renderImage() {
+    if (imageUrls.length == 0) {
+      return;
+    }
     return (
-      <View style={{}}>
+      <View style={{ paddingVertical: 5 }}>
         {imageUrls.map((im, index) => {
+          const ratio = Number(im.ratio);
+          const width = Dimensions.get("window").width - 60;
+          console.log("renderImage: ", im.url);
+
           return (
-            <View style={{ borderRadius: 10, borderWidth: 10 }} key={index}>
+            <View style={{ paddingVertical: 5 }} key={index}>
               <Pressable
                 onPress={() => {
                   router.push({
@@ -60,10 +59,10 @@ const Post = (props) => {
                 }}>
                 <Image
                   style={{
-                    width: Dimensions.get("window").width - 50,
-                    height: Dimensions.get("window").width - 50 * ratio,
+                    width: "100%",
+                    height: width * ratio,
                   }}
-                  source={im}
+                  source={im.url}
                   contentFit="contain"
                 />
               </Pressable>

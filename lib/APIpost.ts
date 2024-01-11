@@ -158,6 +158,41 @@ export function deletePost(post: IPost, callback: saveDone) {
   });
 }
 
+////function to accept an array of strings, loop through the array and parse each sting into 2 parts seperated by a * character
+// the first part is the ratio number and the second part is the image url
+// the function then returns an array of objects with the ratio and image url
+
+function containsAsteriskBeforeHttp(str) {
+  const httpIndex = str.indexOf("http");
+  if (httpIndex === -1) {
+    return false; // "http" not found in the string
+  }
+
+  const substringBeforeHttp = str.substring(0, httpIndex);
+  return substringBeforeHttp.includes("*");
+}
+
+export function parseImages(images: string[]) {
+  const parsedImages: { ratio: number; url: string }[] = [];
+  console.log("i am about to parse these images:", images);
+
+  if (images === undefined || images.length === 0) {
+    return [];
+  }
+  images.forEach((image) => {
+    if (containsAsteriskBeforeHttp(image)) {
+      const parts = image.split("*");
+      parsedImages.push({ ratio: Number(parts[0]), url: parts[1] });
+    } else {
+      parsedImages.push({ ratio: 1, url: image });
+    }
+  });
+
+  console.log("here is the output:", parsedImages);
+
+  return parsedImages;
+}
+
 export async function getPosts(
   project: string | null | undefined,
   callback: postsRead,
@@ -175,11 +210,12 @@ export async function getPosts(
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
     querySnapshot?.forEach((doc) => {
+      parseImages(doc.data().images);
       posts.push({
         key: doc.id,
         projectId: project,
         author: doc.data().author,
-        images: doc.data().images ?? [],
+        images: parseImages(doc.data().images) ?? [],
         ratio: doc.data().ratio ?? 1,
         timestamp: doc.data().timestamp,
         caption: doc.data().caption,
