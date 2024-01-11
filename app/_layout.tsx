@@ -129,7 +129,6 @@ export default function RootLayout() {
                     options={{
                       presentation: "modal",
                       title: "Users",
-                      headerTransparent: false,
                     }}
                   />
                   <Stack.Screen

@@ -188,7 +188,11 @@ const ModalScreen = (props) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: Colors[colorScheme ?? "light"].background },
+      ]}>
       <ScrollView style={styles.projectList}>
         <View>{renderAdd()}</View>
         {loading === false && (

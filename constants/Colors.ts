@@ -3,7 +3,7 @@ export default {
     text: "#000",
     orangeButtonIcon: "#fff",
     textPlaceholder: "#ccc",
-    background: "#faf3f3d8",
+    background: "#faf3f3",
     tint: "#5D5CE7",
     tintInactive: "#5f7587",
     calendarPanel: "#e9f0fd",
