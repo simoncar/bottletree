@@ -43,6 +43,7 @@ export default function RootLayout() {
   const myDarkTheme = {
     ...DarkTheme,
     colors: {
+      ...DarkTheme.colors,
       background: Colors[colorScheme ?? "light"].background,
     },
   };
@@ -99,6 +100,9 @@ export default function RootLayout() {
                     backgroundColor: Colors[colorScheme ?? "light"].background,
                   },
                   headerBackTitle: "Back",
+                  headerBackTitleStyle: {
+                    color: Colors[colorScheme ?? "light"].text,
+                  },
                 }}>
                 <Stack.Screen
                   name="(tabs)"
@@ -183,9 +187,6 @@ export default function RootLayout() {
                   name="user/[uid]"
                   options={{
                     title: "app/layout/user",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
                   }}
                 />
                 <Stack.Screen

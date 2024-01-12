@@ -158,6 +158,7 @@ export default function editPost() {
               />
             </View>
           ),
+          title: "",
         }}
       />
       <View style={styles.avatarAContainer}>

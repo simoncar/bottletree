@@ -189,6 +189,7 @@ export default function editUser() {
           title: "",
           headerTitleStyle: {
             fontWeight: "bold",
+            color: "white",
           },
         }}
       />
