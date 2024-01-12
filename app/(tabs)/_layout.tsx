@@ -27,8 +27,8 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { sharedDataProject } = useContext(ProjectContext);
   const [progress, setProgress] = useState(0);
-
   const { sharedDataUser, isLoading } = useAuth();
+  const { showActionSheetWithOptions } = useActionSheet();
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -81,7 +81,6 @@ export default function TabLayout() {
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
-    console.log("addImageCallback >>>>>>>: ", sourceDownloadURLarray);
     let ratio = 0.66666;
     const downloadURLarray = sourceDownloadURLarray.map((element) => {
       const myArray = element.split("*");
@@ -106,8 +105,6 @@ export default function TabLayout() {
     addPostImage(post, saveDone);
     setProgress(0);
   };
-
-  const { showActionSheetWithOptions } = useActionSheet();
 
   const openActionSheet = async () => {
     const options = [
