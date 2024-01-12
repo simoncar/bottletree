@@ -7,7 +7,7 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - main
 jobs:
-  build_and_deploy:
+  deploy_firebase_hosting:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,9 +27,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-      - name: Install firebase tools
-        run: npm install --save-dev firebase-tools
-      - run: npm run deploy-hosting
+
+      - run: yarn predeploy
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
