@@ -155,7 +155,7 @@ export default function editPost() {
         <meta name="description" content="VVVVV" />
         <meta
           property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202401%2F67da8eb2-7801-4930-ab8a-f2f8eaa94e5f?alt=media&token=5d167c76-43e4-4a54-8a99-2528da27103a"
+          content="https://lh3.googleusercontent.com/-p-fSsyrcG_4/AAAAAAAAAAI/AAAAAAAAAAA/Xflv9gCAst4/s64-c-no/photo.jpg"
         />
       </Head>
       <ScrollView>
