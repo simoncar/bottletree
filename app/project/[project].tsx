@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { Stack, useLocalSearchParams, router } from "expo-router";
+import { Stack, useLocalSearchParams, router, Head } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
@@ -148,60 +148,72 @@ export default function editPost() {
   };
 
   return (
-    <ScrollView>
-      <Stack.Screen
-        options={{
-          headerRight: () => (
-            <View style={{ paddingRight: 5 }}>
-              <NativeButton
-                title="Done"
-                onPress={() => updateProject(project, saveDone)}
-              />
-            </View>
-          ),
-          title: "",
-        }}
-      />
-      <View style={styles.avatarAContainer}>
-        <View style={styles.avatarBView}>{profilePic()}</View>
-      </View>
-      <View style={styles.projectNameContainer}>
-        <View style={styles.projectBox}>
-          <TextInput
-            style={styles.project}
-            onChangeText={(text) => setProject({ ...project, title: text })}
-            placeholder={"Project Title"}
-            value={project.title}
-          />
+    <>
+      <Head>
+        <title>AAAAA </title>
+        <meta name="description" content="VVVVV" />
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202401%2F67da8eb2-7801-4930-ab8a-f2f8eaa94e5f?alt=media&token=5d167c76-43e4-4a54-8a99-2528da27103a"
+        />
+      </Head>
+      <ScrollView>
+        <Stack.Screen
+          options={{
+            headerRight: () => (
+              <View style={{ paddingRight: 5 }}>
+                <NativeButton
+                  title="Done"
+                  onPress={() => updateProject(project, saveDone)}
+                />
+              </View>
+            ),
+            title: "",
+          }}
+        />
+        <View style={styles.avatarAContainer}>
+          <View style={styles.avatarBView}>{profilePic()}</View>
         </View>
-        <View style={styles.archiveBox}>
-          <Text style={styles.archiveMessage}>
-            {project.archived == true ? "Project Archived" : ""}
-          </Text>
+        <View style={styles.projectNameContainer}>
+          <View style={styles.projectBox}>
+            <TextInput
+              style={styles.project}
+              onChangeText={(text) => setProject({ ...project, title: text })}
+              placeholder={"Project Title"}
+              value={project.title}
+            />
+          </View>
+          <View style={styles.archiveBox}>
+            <Text style={styles.archiveMessage}>
+              {project.archived == true ? "Project Archived" : ""}
+            </Text>
+          </View>
         </View>
-      </View>
 
-      <ProjectUsers project={local.project} updateUsers={updateUsers} />
+        <ProjectUsers project={local.project} updateUsers={updateUsers} />
 
-      <Pressable style={styles.outerView} onPress={toggleArchive}>
-        <View style={styles.avatar}>
-          <Ionicons
-            name="archive"
-            size={25}
-            color={Colors[colorScheme ?? "light"].textPlaceholder}
-          />
-        </View>
-        <View>
-          <Text style={styles.archiveName}>
-            {project.archived == true ? "Unarchive Project" : "Archive Project"}
-          </Text>
-        </View>
-      </Pressable>
+        <Pressable style={styles.outerView} onPress={toggleArchive}>
+          <View style={styles.avatar}>
+            <Ionicons
+              name="archive"
+              size={25}
+              color={Colors[colorScheme ?? "light"].textPlaceholder}
+            />
+          </View>
+          <View>
+            <Text style={styles.archiveName}>
+              {project.archived == true
+                ? "Unarchive Project"
+                : "Archive Project"}
+            </Text>
+          </View>
+        </Pressable>
 
-      <View style={styles.diagBox}>
-        <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
-      </View>
-    </ScrollView>
+        <View style={styles.diagBox}>
+          <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
+        </View>
+      </ScrollView>
+    </>
   );
 }
 
