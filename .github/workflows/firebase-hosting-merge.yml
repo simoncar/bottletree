@@ -27,7 +27,8 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-
+      - name: Install firebase tools
+        run: npm install --save-dev firebase-tools
       - run: npm run deploy-hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
