@@ -6,8 +6,9 @@ import {
   useColorScheme,
   TouchableOpacity,
   Pressable,
+  View,
 } from "react-native";
-import { Text, View, TextInput } from "@/components/Themed";
+import { Text, TextInput } from "@/components/Themed";
 import { useAuth } from "@/lib/authProvider";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
@@ -39,8 +40,6 @@ export default function editUser() {
   const local = useLocalSearchParams<{
     uid: string;
   }>();
-
-  console.log("localX: ", local.uid);
 
   const { sharedDataUser, updateSharedDataUser } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();

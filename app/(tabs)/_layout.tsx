@@ -1,9 +1,9 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs, Redirect, router } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Pressable, useColorScheme, StyleSheet } from "react-native";
+import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { BigText } from "@/components/StyledText";
-import { View } from "@/components/Themed";
+
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
 import { IUser } from "@/lib/types";

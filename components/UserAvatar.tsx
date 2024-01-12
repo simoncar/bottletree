@@ -1,8 +1,7 @@
 import React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Pressable, useColorScheme } from "react-native";
+import { StyleSheet, Pressable, useColorScheme, View } from "react-native";
 import { router, Link } from "expo-router";
-import { View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 

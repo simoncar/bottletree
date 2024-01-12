@@ -54,9 +54,9 @@ export function View(props: ViewProps) {
   // const backgroundColor = useThemeColor(
   //   { light: lightColor, dark: darkColor },
   //   "background",
-  // );
+  // );_
 
-  return <DefaultView style={style} {...otherProps} />;
+  return <DefaultView {...props} />;
 }
 
 export function TextInput(props: TextInputProps) {
