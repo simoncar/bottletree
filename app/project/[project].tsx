@@ -157,6 +157,9 @@ export default function editPost() {
           property="og:image"
           content="https://lh3.googleusercontent.com/-p-fSsyrcG_4/AAAAAAAAAAI/AAAAAAAAAAA/Xflv9gCAst4/s64-c-no/photo.jpg"
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="b.simon.co" />
+        <meta property="og:site_name" content="VVVVVV" />
       </Head>
       <ScrollView>
         <Stack.Screen
