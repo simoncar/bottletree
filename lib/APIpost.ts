@@ -184,7 +184,6 @@ function splitOnFirst(str, character) {
 
 export function parseImages(images: string[]) {
   const parsedImages: { ratio: number; url: string }[] = [];
-  console.log("i am about to parse these images:", images);
 
   if (images === undefined || images.length === 0) {
     return [];
@@ -197,8 +196,6 @@ export function parseImages(images: string[]) {
       parsedImages.push({ ratio: 1, url: image });
     }
   });
-
-  console.log("here is the output:", parsedImages);
 
   return parsedImages;
 }

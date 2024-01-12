@@ -29,8 +29,6 @@ const Post = (props) => {
     caption = post.caption;
   }
 
-  console.log("Post: ", post.key, post.projectId, post.images, imageUrls);
-
   function renderImage() {
     if (imageUrls.length == 0) {
       return;
