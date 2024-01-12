@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - run: npm deploy-hosting
+      - run: npm run deploy-hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
