@@ -34,14 +34,6 @@ export default function TabLayout() {
     return <Text>Loading...</Text>;
   }
 
-  if (!sharedDataUser && !isLoading) {
-    // On web, static rendering will stop here as the user is not authenticated
-    // in the headless Node process that the pages are rendered in.
-    console.log("(tabls)/_layout/!session:", sharedDataUser);
-
-    //return <Redirect href="/(auth)/signIn" />;
-  }
-
   let loggedInUser: IUser = sharedDataUser;
 
   if (null == sharedDataUser) {
@@ -55,14 +47,6 @@ export default function TabLayout() {
 
   const saveDone = () => {
     console.log("saveDone - push to home");
-
-    // router.push({
-    //   pathname: "/",
-    //   params: {
-    //     project: sharedDataProject.key,
-    //     title: sharedDataProject.title,
-    //   },
-    // });
   };
 
   const pickImage = async () => {
@@ -84,7 +68,6 @@ export default function TabLayout() {
     let ratio = 0.66666;
     const downloadURLarray = sourceDownloadURLarray.map((element) => {
       const myArray = element.split("*");
-      console.log("myArray: ", myArray);
       if (myArray[0] > ratio) {
         ratio = myArray[0];
       }
