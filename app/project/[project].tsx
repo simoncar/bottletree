@@ -1,6 +1,7 @@
 import { Image } from "expo-image";
-import { Stack, useLocalSearchParams, router, Head } from "expo-router";
+import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useEffect, useState } from "react";
+import Head from "expo-router/head";
 import {
   SafeAreaView,
   StyleSheet,
