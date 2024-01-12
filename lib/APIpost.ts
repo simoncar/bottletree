@@ -172,6 +172,16 @@ function containsAsteriskBeforeHttp(str) {
   return substringBeforeHttp.includes("*");
 }
 
+function splitOnFirst(str, character) {
+  const index = str.indexOf(character);
+
+  if (index === -1) {
+    return [str]; // The character is not found, return the original string in an array
+  }
+
+  return [str.substring(0, index), str.substring(index + 1)];
+}
+
 export function parseImages(images: string[]) {
   const parsedImages: { ratio: number; url: string }[] = [];
   console.log("i am about to parse these images:", images);
@@ -181,7 +191,7 @@ export function parseImages(images: string[]) {
   }
   images.forEach((image) => {
     if (containsAsteriskBeforeHttp(image)) {
-      const parts = image.split("*");
+      const parts = splitOnFirst(image, "*");
       parsedImages.push({ ratio: Number(parts[0]), url: parts[1] });
     } else {
       parsedImages.push({ ratio: 1, url: image });
