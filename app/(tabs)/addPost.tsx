@@ -2,12 +2,12 @@ import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Text, View, Button } from "../../components/Themed";
-import { addPostImage } from "../../lib/APIpost";
-import { addImageFromCameraRoll } from "../../lib/APIimage";
-import ProjectContext from "../../lib/projectContext";
-import { IPost, IProject } from "../../lib/types";
-import { useAuth } from "../../lib/authProvider";
+import { Text, View, Button } from "@/components/Themed";
+import { addPostImage } from "@/lib/APIpost";
+import { addImageFromCameraRoll } from "@/lib/APIimage";
+import ProjectContext from "@/lib/projectContext";
+import { IPost, IProject } from "@/lib/types";
+import { useAuth } from "@/lib/authProvider";
 import * as Progress from "react-native-progress";
 
 export default function addPhoto() {

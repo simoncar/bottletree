@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, useColorScheme, Pressable } from "react-native";
 import { View, Text, TextInput, ParsedText } from "./Themed";
-import { addComment, getComments } from "../lib/APIpost";
+import { addComment, getComments } from "@/lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Colors from "../constants/Colors";
-import { IComment, IPost } from "../lib/types";
-import { useAuth } from "../lib/authProvider";
-import { firestore } from "../lib/firebase";
+import Colors from "@/constants/Colors";
+import { IComment, IPost } from "@/lib/types";
+import { useAuth } from "@/lib/authProvider";
+import { firestore } from "@/lib/firebase";
 
 type Props = {
   project: string;

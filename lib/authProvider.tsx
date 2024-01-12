@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useStorageState } from "./useStorageState";
-import { auth } from "../lib/firebase";
+import { auth } from "@/lib/firebase";
 import { IUser } from "./types";
 
 const AuthContext = createContext<

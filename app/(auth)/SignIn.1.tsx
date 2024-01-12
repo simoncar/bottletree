@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { TouchableOpacity, useColorScheme, Pressable } from "react-native";
 import { Stack, router } from "expo-router";
-import { Text, View, TextInput } from "../../components/Themed";
+import { Text, View, TextInput } from "@/components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Colors from "../../constants/Colors";
-import { auth } from "../../lib/firebase";
+import Colors from "@/constants/Colors";
+import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import { styles } from "./signIn";
 

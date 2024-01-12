@@ -9,11 +9,11 @@ import {
 import { router } from "expo-router";
 import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
-import { Text, ParsedText } from "../components/Themed";
+import { Text, ParsedText } from "@/components/Themed";
 import Comments from "./PostComments";
-import Dots from "../components/dots";
-import Footer from "../components/Footer";
-import Colors from "../constants/Colors";
+import Dots from "@/components/dots";
+import Footer from "@/components/Footer";
+import Colors from "@/constants/Colors";
 import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
 
 const Post = (props) => {

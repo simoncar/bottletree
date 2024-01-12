@@ -6,8 +6,8 @@ import {
   Pressable,
   useColorScheme,
 } from "react-native";
-import { View, Text, ParsedText } from "../components/Themed";
-import Colors from "../constants/Colors";
+import { View, Text, ParsedText } from "@/components/Themed";
+import Colors from "@/constants/Colors";
 
 export const ColorRow = ({ onPress, selectedColor }) => {
   function renderColor(name: string, code: string) {
@@ -15,7 +15,7 @@ export const ColorRow = ({ onPress, selectedColor }) => {
       <Pressable
         key={"addProject"}
         onPress={() => {
-          onPress(name,code);
+          onPress(name, code);
         }}>
         <View style={styles.avatar}>
           <View style={[styles.colorAvatar, { backgroundColor: code }]} />

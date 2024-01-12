@@ -2,17 +2,17 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs, Redirect, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet } from "react-native";
-import { BigText } from "../../components/StyledText";
-import { View } from "../../components/Themed";
-import { UserAvatar } from "../../components/UserAvatar";
-import Colors from "../../constants/Colors";
-import { IUser } from "../../lib/types";
+import { BigText } from "@/components/StyledText";
+import { View } from "@/components/Themed";
+import { UserAvatar } from "@/components/UserAvatar";
+import Colors from "@/constants/Colors";
+import { IUser } from "@/lib/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import ProjectContext from "../../lib/projectContext";
-import { addImageFromCameraRoll } from "../../lib/APIimage";
-import { addPostImage } from "../../lib/APIpost";
-import { useAuth } from "../../lib/authProvider";
-import { Text } from "../../components/Themed";
+import ProjectContext from "@/lib/projectContext";
+import { addImageFromCameraRoll } from "@/lib/APIimage";
+import { addPostImage } from "@/lib/APIpost";
+import { useAuth } from "@/lib/authProvider";
+import { Text } from "@/components/Themed";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];

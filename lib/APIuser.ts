@@ -1,5 +1,5 @@
 import { CurrentRenderContext } from "@react-navigation/native";
-import { auth, firestore } from "../lib/firebase";
+import { auth, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
 
 // create an export function that loads a single user from firebase into a return object that can be used by the app

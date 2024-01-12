@@ -13,9 +13,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import Colors from "../constants/Colors";
+import Colors from "@/constants/Colors";
 import React from "react";
-import { ParsedTextUnthemed } from "../components/ParsedText";
+import { ParsedTextUnthemed } from "@/components/ParsedText";
 
 export function useThemeColor(
   props: { light?: string; dark?: string },

@@ -3,7 +3,7 @@ import Note from "../note";
 import renderer from "react-test-renderer";
 
 jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
-jest.mock("../../lib/firebase", () => {
+jest.mock("@/lib/firebase", () => {
   return {
     firebaseFunction1: jest.fn(),
     firebaseFunction2: jest.fn(),

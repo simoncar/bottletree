@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { useAuth } from "../../lib/authProvider";
+import { useAuth } from "@/lib/authProvider";
 import { Stack } from "expo-router";
-import { Text, View, TextInput } from "../../components/Themed";
+import { Text, View, TextInput } from "@/components/Themed";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

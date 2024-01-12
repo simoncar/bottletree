@@ -4,13 +4,13 @@ import { useRouter } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Colors from "../constants/Colors";
-import { Text } from "../components/Themed";
-import { getUserProjectCount } from "../lib/APIuser";
-import { IUser, IProject } from "../lib/types";
-import { useAuth } from "../lib/authProvider";
-import { getProject } from "../lib/APIproject";
-import ProjectContext from "../lib/projectContext";
+import Colors from "@/constants/Colors";
+import { Text } from "@/components/Themed";
+import { getUserProjectCount } from "@/lib/APIuser";
+import { IUser, IProject } from "@/lib/types";
+import { useAuth } from "@/lib/authProvider";
+import { getProject } from "@/lib/APIproject";
+import ProjectContext from "@/lib/projectContext";
 
 const Project = (props) => {
   const { project } = props;

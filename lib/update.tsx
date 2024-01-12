@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Pressable } from "react-native";
 import { getLocales } from "expo-localization";
-import { Text, View } from "../components/Themed";
+import { Text, View } from "@/components/Themed";
 import * as Application from "expo-application";
-import { useAuth } from "../lib/authProvider";
-import { getToken } from "../lib/APINotification";
-import { auth } from "../lib/firebase";
+import { useAuth } from "@/lib/authProvider";
+import { getToken } from "@/lib/APINotification";
+import { auth } from "@/lib/firebase";
 import * as Updates from "expo-updates";
 
 export const Update = () => {

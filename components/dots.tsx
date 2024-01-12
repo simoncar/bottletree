@@ -1,8 +1,8 @@
 import React from "react";
 
 import { StyleSheet, useColorScheme } from "react-native";
-import { View } from "../components/Themed";
-import Colors from "../constants/Colors";
+import { View } from "@/components/Themed";
+import Colors from "@/constants/Colors";
 
 type Props = {
   images: [];

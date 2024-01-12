@@ -9,14 +9,14 @@ import {
   Easing,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Colors from "../constants/Colors";
-import { addImageFromPhoto } from "../lib/APIimage";
-import ProjectContext from "../lib/projectContext";
-import { IPost } from "../lib/types";
-import { useAuth } from "../lib/authProvider";
-import { addPostImage } from "../lib/APIpost";
+import Colors from "@/constants/Colors";
+import { addImageFromPhoto } from "@/lib/APIimage";
+import ProjectContext from "@/lib/projectContext";
+import { IPost } from "@/lib/types";
+import { useAuth } from "@/lib/authProvider";
+import { addPostImage } from "@/lib/APIpost";
 import { router } from "expo-router";
-import { View, Text, ParsedText } from "../components/Themed";
+import { View, Text, ParsedText } from "@/components/Themed";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {

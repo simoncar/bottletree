@@ -6,10 +6,10 @@ import {
   Pressable,
 } from "react-native";
 import { Stack, router, Redirect } from "expo-router";
-import { Text, View, TextInput } from "../../components/Themed";
+import { Text, View, TextInput } from "@/components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Colors from "../../constants/Colors";
-import { auth } from "../../lib/firebase";
+import Colors from "@/constants/Colors";
+import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 
 export default function SignIn() {

@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { Posts } from "../../components/Posts";
-import { View } from "../../components/Themed";
+import { Posts } from "@/components/Posts";
+import { View } from "@/components/Themed";
 
 export default function ProjectPosts() {
   const { project } = useLocalSearchParams();

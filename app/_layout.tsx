@@ -9,13 +9,13 @@ import { Stack, Redirect, Slot } from "expo-router";
 import React, { useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme, Platform } from "react-native";
-import ProjectProvider from "../lib/projectProvider";
-import AuthProvider, { useAuth } from "../lib/authProvider";
+import ProjectProvider from "@/lib/projectProvider";
+import AuthProvider, { useAuth } from "@/lib/authProvider";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 export { ErrorBoundary } from "expo-router";
-import Colors from "../constants/Colors";
-import { Text, View } from "../components/Themed";
+import Colors from "@/constants/Colors";
+import { Text, View } from "@/components/Themed";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.

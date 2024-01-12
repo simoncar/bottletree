@@ -6,15 +6,15 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
-import { getItemsBigCalendar } from "../../lib/APIcalendar";
-import { IProject } from "../../lib/types";
-import { View, Text } from "../../components/Themed";
-import ProjectContext from "../../lib/projectContext";
-import Colors from "../../constants/Colors";
+import { getItemsBigCalendar } from "@/lib/APIcalendar";
+import { IProject } from "@/lib/types";
+import { View, Text } from "@/components/Themed";
+import ProjectContext from "@/lib/projectContext";
+import Colors from "@/constants/Colors";
 import { router } from "expo-router";
 import dayjs from "dayjs";
 import { useNavigation } from "expo-router";
-import { BigText } from "../../components/StyledText";
+import { BigText } from "@/components/StyledText";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 import {

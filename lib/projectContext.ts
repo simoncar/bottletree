@@ -1,5 +1,5 @@
 import React from "react";
-import { IProject } from "../lib/types";
+import { IProject } from "@/lib/types";
 
 const ProjectContext = React.createContext<IProject>({
   key: "",

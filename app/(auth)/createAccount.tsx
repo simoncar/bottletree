@@ -5,12 +5,12 @@ import {
   Pressable,
   useColorScheme,
 } from "react-native";
-import { useAuth } from "../../lib/authProvider";
+import { useAuth } from "@/lib/authProvider";
 import { Stack, router } from "expo-router";
-import { Text, View, TextInput } from "../../components/Themed";
-import { updateAccountName } from "../../lib/APIuser";
+import { Text, View, TextInput } from "@/components/Themed";
+import { updateAccountName } from "@/lib/APIuser";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Colors from "../../constants/Colors";
+import Colors from "@/constants/Colors";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

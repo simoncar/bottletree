@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Pressable, useColorScheme, Button } from "react-native";
 import { View, Text, ParsedText } from "./Themed";
-import { getProjectUsers } from "../lib/APIproject";
+import { getProjectUsers } from "@/lib/APIproject";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useAuth } from "../lib/authProvider";
-import { ShortList } from "../components/sComponent";
+import { useAuth } from "@/lib/authProvider";
+import { ShortList } from "@/components/sComponent";
 import { Image } from "expo-image";
-import Colors from "../constants/Colors";
+import Colors from "@/constants/Colors";
 import { router, useLocalSearchParams } from "expo-router";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { deleteProjectUser } from "../lib/APIproject";
+import { deleteProjectUser } from "@/lib/APIproject";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {

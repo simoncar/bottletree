@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { View, Text } from "../components/Themed";
-import { getPosts } from "../lib/APIpost";
-import { updateUserProjectCount } from "../lib/APIuser";
-import ProjectContext from "../lib/projectContext";
-import { IPost, IProject } from "../lib/types";
+import { View, Text } from "@/components/Themed";
+import { getPosts } from "@/lib/APIpost";
+import { updateUserProjectCount } from "@/lib/APIuser";
+import ProjectContext from "@/lib/projectContext";
+import { IPost, IProject } from "@/lib/types";
 import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
-import { useAuth } from "../lib/authProvider";
+import { useAuth } from "@/lib/authProvider";
 import { FlatList } from "react-native-gesture-handler";
 
 type Props = {

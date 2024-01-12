@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { Text } from "../components/Themed";
+import { Text } from "@/components/Themed";
 
 interface TProps {
   icon: React.ReactNode;

@@ -7,12 +7,12 @@ import {
   ScrollView,
   useColorScheme,
 } from "react-native";
-import { ShortList } from "../components/sComponent";
-import { Text, View } from "../components/Themed";
-import { getUsers } from "../lib/APIuser";
-import { addProjectUser } from "../lib/APIproject";
-import { IUser } from "../lib/types";
-import ProjectContext from "../lib/projectContext";
+import { ShortList } from "@/components/sComponent";
+import { Text, View } from "@/components/Themed";
+import { getUsers } from "@/lib/APIuser";
+import { addProjectUser } from "@/lib/APIproject";
+import { IUser } from "@/lib/types";
+import ProjectContext from "@/lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ModalScreen = (props) => {

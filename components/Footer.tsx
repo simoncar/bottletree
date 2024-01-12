@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { router } from "expo-router";
 import { StyleSheet, Pressable, useColorScheme, Alert } from "react-native";
-import { View, Text } from "../components/Themed";
-import Colors from "../constants/Colors";
-import { IPost } from "../lib/types";
+import { View, Text } from "@/components/Themed";
+import Colors from "@/constants/Colors";
+import { IPost } from "@/lib/types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { deletePost } from "../lib/APIpost";
+import { deletePost } from "@/lib/APIpost";
 
 type Props = {
   project: string;
@@ -44,9 +44,9 @@ const Footer = ({ post, setCommentShow }: Props) => {
     console.log("edit:" + post);
     router.push({
       pathname: "/note",
-			params: {
-				projectId: post.projectId,
-        postId: post.key
+      params: {
+        projectId: post.projectId,
+        postId: post.key,
       },
     });
   };

@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { Text, View, TextInput } from "../../components/Themed";
-import { useAuth } from "../../lib/authProvider";
+import { Text, View, TextInput } from "@/components/Themed";
+import { useAuth } from "@/lib/authProvider";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
 
@@ -18,22 +18,22 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Colors from "../../constants/Colors";
+import Colors from "@/constants/Colors";
 import {
   updateAccountName,
   updateAccountPhotoURL,
   getUser,
-} from "../../lib/APIuser";
-import { About } from "../../lib/about";
-import { Update } from "../../lib/update";
+} from "@/lib/APIuser";
+import { About } from "@/lib/about";
+import { Update } from "@/lib/update";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addImageFromCameraRoll } from "../../lib/APIimage";
+import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
-import { demoData } from "../../lib/demoData";
-import { IUser } from "../../lib/types";
+import { demoData } from "@/lib/demoData";
+import { IUser } from "@/lib/types";
 import { StatusBar } from "expo-status-bar";
 
-import { auth } from "../../lib/firebase";
+import { auth } from "@/lib/firebase";
 
 export default function editUser() {
   const local = useLocalSearchParams<{
