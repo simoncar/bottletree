@@ -204,7 +204,6 @@ export default function editUser() {
               onChangeText={(text) => setUser({ ...user, displayName: text })}
               placeholder={"Your Name"}
               value={user.displayName}
-              multiline
             />
           </View>
         </View>
@@ -399,19 +398,20 @@ const styles = StyleSheet.create({
   project: {
     fontSize: 25,
     fontWeight: "bold",
+    padding: 10,
+    textAlign: "center",
   },
   projectBox: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
     justifyContent: "center",
-    padding: 10,
     width: "85%",
   },
   projectNameContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 50,
+    paddingBottom: 20,
     paddingTop: 20,
   },
   rightChevron: {
@@ -421,9 +421,5 @@ const styles = StyleSheet.create({
   settingName: {
     fontSize: 20,
     paddingLeft: 20,
-  },
-  version: {
-    color: "grey",
-    fontSize: 14,
   },
 });
