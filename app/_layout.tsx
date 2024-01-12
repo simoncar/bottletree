@@ -16,6 +16,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export { ErrorBoundary } from "expo-router";
 import Colors from "@/constants/Colors";
 import { Text, View } from "@/components/Themed";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -94,123 +95,120 @@ export default function RootLayout() {
         <GestureHandlerRootView style={{ flex: 1 }}>
           <ActionSheetProvider>
             <ProjectProvider>
-              <WebPadding>
-                <Stack
-                  screenOptions={{
-                    headerStyle: {
-                      backgroundColor:
-                        Colors[colorScheme ?? "light"].background,
-                    },
-                    headerBackTitle: "Back",
-                  }}>
-                  <Stack.Screen
-                    name="(tabs)"
-                    options={{
-                      title: "tt Tabs",
-                      headerShown: false,
-                    }}
-                  />
+              <Stack
+                screenOptions={{
+                  headerStyle: {
+                    backgroundColor: Colors[colorScheme ?? "light"].background,
+                  },
+                  headerBackTitle: "Back",
+                }}>
+                <Stack.Screen
+                  name="(tabs)"
+                  options={{
+                    title: "tt Tabs",
+                    headerShown: false,
+                  }}
+                />
 
-                  <Stack.Screen
-                    name="projectList"
-                    options={{
-                      presentation: "modal",
-                      title: "Projects",
-                    }}
-                  />
-                  <Stack.Screen
-                    name="projectListAdmin"
-                    options={{
-                      title: "Administration",
-                    }}
-                  />
-                  <Stack.Screen
-                    name="userList"
-                    options={{
-                      presentation: "modal",
-                      title: "Users",
-                    }}
-                  />
-                  <Stack.Screen
-                    name="language"
-                    options={{
-                      title: "Language",
-                    }}
-                  />
-                  <Stack.Screen
-                    name="editPost"
-                    options={{
-                      title: "View",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="viewPost"
-                    options={{
-                      title: "View & Zoom",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="project/[project]"
-                    options={{
-                      title: "Project",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="project/add"
-                    options={{
-                      title: "Add Project",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="editCalendar"
-                    options={{
-                      title: "Add Event",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="user/[uid]"
-                    options={{
-                      title: "app/layout/user",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="camera.web"
-                    options={{
-                      title: "Take Photo",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                  <Stack.Screen
-                    name="note"
-                    options={{
-                      title: "Add Note",
-                      headerTitleStyle: {
-                        fontWeight: "bold",
-                      },
-                    }}
-                  />
-                </Stack>
-              </WebPadding>
+                <Stack.Screen
+                  name="projectList"
+                  options={{
+                    presentation: "modal",
+                    title: "Projects",
+                  }}
+                />
+                <Stack.Screen
+                  name="projectListAdmin"
+                  options={{
+                    title: "Administration",
+                  }}
+                />
+                <Stack.Screen
+                  name="userList"
+                  options={{
+                    presentation: "modal",
+                    title: "Users",
+                  }}
+                />
+                <Stack.Screen
+                  name="language"
+                  options={{
+                    title: "Language",
+                  }}
+                />
+                <Stack.Screen
+                  name="editPost"
+                  options={{
+                    title: "View",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="viewPost"
+                  options={{
+                    title: "View & Zoom",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="project/[project]"
+                  options={{
+                    title: "Project",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="project/add"
+                  options={{
+                    title: "Add Project",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="editCalendar"
+                  options={{
+                    title: "Add Event",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="user/[uid]"
+                  options={{
+                    title: "app/layout/user",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="camera.web"
+                  options={{
+                    title: "Take Photo",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+                <Stack.Screen
+                  name="note"
+                  options={{
+                    title: "Add Note",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+              </Stack>
             </ProjectProvider>
           </ActionSheetProvider>
         </GestureHandlerRootView>

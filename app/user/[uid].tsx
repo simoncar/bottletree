@@ -179,150 +179,149 @@ export default function editUser() {
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <Stack.Screen
-          options={{
-            headerRight: () => (
-              <Pressable onPress={() => save()}>
-                <Text style={{ fontSize: 16 }}>Save</Text>
-              </Pressable>
-            ),
-            title: "",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        />
-        <View style={styles.avatarAContainer}>
-          <View style={styles.avatarBView}>{profilePic()}</View>
+    <ScrollView>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <Pressable onPress={() => save()}>
+              <Text style={{ fontSize: 16 }}>Save</Text>
+            </Pressable>
+          ),
+          title: "",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      />
 
-          <View style={styles.projectNameContainer}>
-            <View style={styles.projectBox}>
-              <TextInput
-                style={styles.project}
-                onChangeText={(text) => setUser({ ...user, displayName: text })}
-                placeholder={"Your Name"}
-                value={user.displayName}
-                multiline
-              />
-            </View>
+      <View style={styles.avatarAContainer}>
+        <View style={styles.avatarBView}>{profilePic()}</View>
+
+        <View style={styles.projectNameContainer}>
+          <View style={styles.projectBox}>
+            <TextInput
+              style={styles.project}
+              onChangeText={(text) => setUser({ ...user, displayName: text })}
+              placeholder={"Your Name"}
+              value={user.displayName}
+              multiline
+            />
           </View>
         </View>
-        <TouchableOpacity
-          key={"language"}
-          onPress={() =>
-            router.push({
-              pathname: "/language",
-            })
-          }>
-          <View style={styles.outerView}>
-            <View style={styles.leftContent}>
-              <FontAwesome
-                name="language"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-              <Text style={styles.settingName}>Language</Text>
-            </View>
-            <View style={styles.rightChevron}>
-              <FontAwesome5
-                name="chevron-right"
-                size={20}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          key={"deleteAccount"}
-          onPress={() =>
-            router.push({
-              pathname: "/deleteAccount",
-            })
-          }>
-          <View style={styles.outerView}>
-            <View style={styles.leftContent}>
-              <FontAwesome5
-                name="trash-alt"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-              <Text style={styles.settingName}>Delete Account</Text>
-            </View>
-            <View style={styles.rightChevron}>
-              <FontAwesome5
-                name="chevron-right"
-                size={20}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        key={"language"}
+        onPress={() =>
+          router.push({
+            pathname: "/language",
+          })
+        }>
         <View style={styles.outerView}>
-          <TouchableOpacity
-            key={"signOut"}
-            onPress={() => {
-              auth()
-                .signOut()
-                .then(() => {
-                  console.log("Sign-out successful.");
-                })
-                .catch((error) => {
-                  console.log(error.message);
-                });
-            }}>
-            <View style={styles.leftContent}>
-              <MaterialIcons
-                name="logout"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-              <Text style={styles.settingName}>Log Out</Text>
-            </View>
-            <View style={styles.rightChevron}></View>
-          </TouchableOpacity>
-        </View>
-        {isAdmin(sharedDataUser?.email) && (
-          <View>
-            <View style={styles.outerView}>
-              <TouchableOpacity key={"admin"} onPress={() => administration()}>
-                <View style={styles.leftContent}>
-                  <MaterialCommunityIcons
-                    name="shield-lock"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                  <Text style={styles.settingName}>
-                    Administration (Eddie Mode)
-                  </Text>
-                </View>
-                <View style={styles.rightChevron}></View>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.outerView}>
-              <TouchableOpacity key={"admin"} onPress={() => demoData()}>
-                <View style={styles.leftContent}>
-                  <FontAwesome5
-                    name="seedling"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                  />
-                  <Text style={styles.settingName}>Seed Demo Data</Text>
-                </View>
-                <View style={styles.rightChevron}></View>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.leftContent}>
+            <FontAwesome
+              name="language"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+            <Text style={styles.settingName}>Language</Text>
           </View>
-        )}
-
-        <StatusBar style="auto" />
-        <View style={styles.aboutContainer}>
-          <Update />
-          <About />
+          <View style={styles.rightChevron}>
+            <FontAwesome5
+              name="chevron-right"
+              size={20}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </TouchableOpacity>
+      <TouchableOpacity
+        key={"deleteAccount"}
+        onPress={() =>
+          router.push({
+            pathname: "/deleteAccount",
+          })
+        }>
+        <View style={styles.outerView}>
+          <View style={styles.leftContent}>
+            <FontAwesome5
+              name="trash-alt"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+            <Text style={styles.settingName}>Delete Account</Text>
+          </View>
+          <View style={styles.rightChevron}>
+            <FontAwesome5
+              name="chevron-right"
+              size={20}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.outerView}>
+        <TouchableOpacity
+          key={"signOut"}
+          onPress={() => {
+            auth()
+              .signOut()
+              .then(() => {
+                console.log("Sign-out successful.");
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
+          }}>
+          <View style={styles.leftContent}>
+            <MaterialIcons
+              name="logout"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+            <Text style={styles.settingName}>Log Out</Text>
+          </View>
+          <View style={styles.rightChevron}></View>
+        </TouchableOpacity>
+      </View>
+      {isAdmin(sharedDataUser?.email) && (
+        <View>
+          <View style={styles.outerView}>
+            <TouchableOpacity key={"admin"} onPress={() => administration()}>
+              <View style={styles.leftContent}>
+                <MaterialCommunityIcons
+                  name="shield-lock"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+                <Text style={styles.settingName}>
+                  Administration (Eddie Mode)
+                </Text>
+              </View>
+              <View style={styles.rightChevron}></View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.outerView}>
+            <TouchableOpacity key={"admin"} onPress={() => demoData()}>
+              <View style={styles.leftContent}>
+                <FontAwesome5
+                  name="seedling"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+                <Text style={styles.settingName}>Seed Demo Data</Text>
+              </View>
+              <View style={styles.rightChevron}></View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
+      <StatusBar style="auto" />
+      <View style={styles.aboutContainer}>
+        <Update />
+        <About />
+      </View>
+    </ScrollView>
   );
 }
 
