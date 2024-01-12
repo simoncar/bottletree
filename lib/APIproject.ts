@@ -90,11 +90,13 @@ export async function getAllProjects(callback: projectsRead) {
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
 
-  const q = db.collection("projects").orderBy("timestamp", "desc");
+  const q = db.collection("projects"); //.orderBy("timestamp", "desc");
 
   const projectsSnapshot = await q.get();
 
   projectsSnapshot.forEach((doc) => {
+    console.log("doc: ", doc.data());
+
     if (!doc.data().archived) {
       projects.push({
         project: doc.id,
@@ -115,6 +117,7 @@ export async function getAllProjects(callback: projectsRead) {
       });
     }
   });
+  console.log("projects: ", projects);
 
   callback([...projects, ...projectsArchived]);
 
