@@ -21,6 +21,8 @@ export const Posts = ({ project }: Props) => {
 
   let currentProject: IProject;
 
+  console.log("Posts: ", project);
+
   if (null == project || project == "(tabs)") {
     currentProject = {
       key: "",
@@ -44,30 +46,27 @@ export const Posts = ({ project }: Props) => {
   };
 
   useEffect(() => {
+    console.log("useEffect []   sharedDataUser", sharedDataUser);
+    if (sharedDataUser) {
+      console.log("we have a user");
+      if (project == "welcome" && sharedDataUser.project != undefined) {
+        router.navigate({
+          pathname: "/[project]",
+          params: {
+            project: sharedDataUser.project,
+          },
+        });
+      }
+    }
+  }, [sharedDataUser]);
+
+  useEffect(() => {
     const unsubscribe = getPosts(project, postsRead);
+    updateUserProjectCount(project, posts.length);
     return () => {
       unsubscribe;
     };
   }, [project]);
-
-  // useEffect(() => {
-  //   if (undefined != currentProject?.key) {
-  //     console.log(
-  //       "Red Dot Count Set: " + currentProject?.key,
-  //       currentProject?.title,
-  //       currentProject?.postCount,
-  //     );
-  //     updateUserProjectCount(currentProject?.key, currentProject?.postCount);
-
-  //     if (sharedDataUser != null) {
-  //       updateSharedDataUserProjectCount(
-  //         sharedDataUser,
-  //         currentProject?.key,
-  //         currentProject?.postCount,
-  //       );
-  //     }
-  //   }
-  // }, [currentProject]);
 
   function updateSharedDataUserProjectCount(
     obj: Record<string, number>,

@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack, Redirect, Slot } from "expo-router";
+import { Stack } from "expo-router";
 import React, { useEffect, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme, Platform, View } from "react-native";

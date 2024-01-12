@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useStorageState } from "./useStorageState";
 import { auth } from "@/lib/firebase";
 import { IUser } from "./types";
+import { getUser } from "@/lib/APIuser";
 
 const AuthContext = createContext<
   | (IUser & { sharedDataUser?: IUser } & {
@@ -28,28 +29,29 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
-      console.log("onAuthStateChanged1111: ", user?.toJSON());
-      console.log("onAuthStateChanged2222: ", sharedDataUser);
-      console.log("onAuthStateChanged3333: ", session);
-
       if (user) {
-        const usr: IUser = {
-          uid: auth().currentUser?.uid,
-          email: auth().currentUser?.email,
-          displayName: auth().currentUser?.displayName,
-          photoURL: auth().currentUser?.photoURL,
-        };
+        //load data from the getUser APIUser function and merge with the user object
 
-        setSession(user.uid);
-        setSharedDataUser(usr);
+        getUser(auth().currentUser?.uid, (dbuser) => {
+          if (dbuser) {
+            console.log("user: ", dbuser);
 
-        console.log("DO NOT NAVIGATE - ALREADY LOGGED IN");
+            const usr: IUser = {
+              uid: auth().currentUser?.uid,
+              email: auth().currentUser?.email,
+              displayName: auth().currentUser?.displayName,
+              photoURL: auth().currentUser?.photoURL,
+              project: dbuser.project,
+            };
 
-        //router.navigate("/(tabs)");
+            setSharedDataUser(usr);
+            setSession(user.uid);
+            console.log("MEMEMEME: ", usr);
+          }
+        });
       } else {
         setSession(null);
         setSharedDataUser(null);
-        console.log("NAVIGATE TO SIGNIN - NOT LOGGED IN");
         router.replace("(auth)/signIn");
       }
     });
@@ -58,6 +60,8 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   const updateSharedDataUser = (newData) => {
     try {
+      console.log("updateSharedDataUser: ", newData);
+
       const jsonValue = JSON.stringify({ ...sharedDataUser, ...newData });
       setSharedDataUser({ ...sharedDataUser, ...newData });
     } catch (e) {
@@ -79,6 +83,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
           email: screenEmail,
           displayName: convertToString(screenName),
           photoURL: convertToString(""),
+          project: "",
         };
         callback(user, "Success");
       })

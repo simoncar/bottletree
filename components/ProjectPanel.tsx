@@ -38,7 +38,7 @@ const Project = (props) => {
   }, [project]);
 
   const userProjectCountRead = (user: IUser) => {
-    updateSharedDataUser({ postCount: user.postCount });
+    //updateSharedDataUser({ postCount: user.postCount });
   };
 
   return (

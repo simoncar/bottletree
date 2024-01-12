@@ -34,6 +34,7 @@ export default function editPost() {
   const { showActionSheetWithOptions } = useActionSheet();
 
   const [project, setProject] = useState<IProject>({
+    project: "",
     key: "",
     title: "",
     icon: "",

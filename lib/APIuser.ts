@@ -18,6 +18,7 @@ export async function getUser(
         email: doc.data()?.email,
         photoURL: doc.data()?.photoURL,
         language: doc.data()?.language,
+        project: doc.data()?.project,
       };
 
       callback(user);
@@ -43,9 +44,6 @@ export const updateAccountName = (displayName: string) => {
           displayName: displayName,
           email: auth().currentUser.email,
           photoURL: auth().currentUser.photoURL,
-          postCount: {
-            project22222222: 4,
-          },
         },
         { merge: true },
       );
@@ -57,12 +55,14 @@ export const updateAccountName = (displayName: string) => {
 
 export const updateUserProjectCount = (project: string, count: number) => {
   const u = auth().currentUser?.uid;
+  console.log("updateUserProjectCount: ", project, count);
 
   if (u && count) {
     const docRef1 = firestore().collection("users").doc(u);
 
     docRef1.set(
       {
+        project: project,
         postCount: {
           [project]: count,
         },
@@ -115,6 +115,7 @@ export async function getUsers(callback: usersRead) {
       email: doc.data().email,
       photoURL: doc.data().photoURL,
       language: doc.data().language,
+      project: doc.data().project,
     });
   });
 
@@ -137,6 +138,7 @@ export async function getUserProjectCount(callback: userProjectCountRead) {
         photoURL: doc.data()?.photoURL,
         postCount: doc.data()?.postCount,
         language: doc.data()?.language,
+        project: doc.data()?.project,
       };
 
       callback(user);

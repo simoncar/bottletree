@@ -40,7 +40,6 @@ const Post = (props) => {
         {imageUrls.map((im, index) => {
           const ratio = Number(im.ratio);
           const width = Dimensions.get("window").width - 60;
-          console.log("renderImage: ", im.url);
 
           return (
             <View style={{ paddingVertical: 5 }} key={index}>
@@ -51,7 +50,7 @@ const Post = (props) => {
                     params: {
                       project: post.projectId,
                       key: post.key,
-                      image: encodeURIComponent(im),
+                      image: encodeURIComponent(im.url),
                       caption: caption || "",
                       ratio: ratio,
                     },
