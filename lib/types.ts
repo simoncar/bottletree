@@ -53,6 +53,14 @@ export interface IPushToken {
   timestamp?: Timestamp;
 }
 
+export interface IShareItem {
+  message: string;
+  url: string;
+  title: string;
+  dialogTitle: string;
+  subject: Timestamp;
+}
+
 export interface ICalendarEvent {
   key?: string;
   dateBegin?: Timestamp;
