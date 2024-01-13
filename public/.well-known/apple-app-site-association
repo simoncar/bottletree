@@ -5,9 +5,13 @@
         "appIDs": [
           "Z6FTZSKM3X.com.simoncar.bottletree"
         ],
+        "paths": [
+          "NOT /.well-known/*",
+          "*"
+        ],
         "components": [
           {
-            "/": "*",
+            "/": "/*",
             "comment": "Matches all routes"
           }
         ]
