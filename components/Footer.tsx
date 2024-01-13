@@ -104,7 +104,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
                     styles.actionRightIcon,
                     { color: Colors[colorScheme ?? "light"].text },
                   ]}
-                  name="ios-pencil"
+                  name="pencil"
                   size={25}
                 />
               </View>
@@ -137,7 +137,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
                 </Text>
                 <Ionicons
                   style={[styles.actionRightIcon, { color: "red" }]}
-                  name="md-trash-outline"
+                  name="trash-outline"
                   size={25}
                 />
               </View>
