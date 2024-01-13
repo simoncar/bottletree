@@ -57,7 +57,6 @@ export interface IShareItem {
   message: string;
   url: string;
   title: string;
-  dialogTitle: string;
   subject: Timestamp;
 }
 
