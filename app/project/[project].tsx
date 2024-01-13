@@ -1,7 +1,7 @@
 import { Image } from "expo-image";
 import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import Head from "expo-router/head";
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -149,18 +149,8 @@ export default function editPost() {
   };
 
   return (
-    <>
-      <Head>
-        <title>AAAAA </title>
-        <meta name="description" content="VVVVV" />
-        <meta
-          property="og:image"
-          content="https://lh3.googleusercontent.com/-p-fSsyrcG_4/AAAAAAAAAAI/AAAAAAAAAAA/Xflv9gCAst4/s64-c-no/photo.jpg"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="b.simon.co" />
-        <meta property="og:site_name" content="VVVVVV" />
-      </Head>
+  
+     
       <ScrollView>
         <Stack.Screen
           options={{
@@ -217,7 +207,7 @@ export default function editPost() {
           <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
         </View>
       </ScrollView>
-    </>
+   
   );
 }
 
