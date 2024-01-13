@@ -1,0 +1,27 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "Z6FTZSKM3X.com.simoncar.bottletree"
+        ],
+        "components": [
+          {
+            "/": "*",
+            "comment": "Matches all routes"
+          }
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "Z6FTZSKM3X.com.simoncar.bottletree"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "Z6FTZSKM3X.com.simoncar.bottletree"
+    ]
+  }
+}
