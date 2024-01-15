@@ -10,7 +10,6 @@ export const ShareItem = async (item: Props) => {
   console.log("ShareItem: " + item);
   try {
     const result = await Share.share({
-      message: item.message,
       url: item.url,
       title: item.title,
       subject: item.subject,
