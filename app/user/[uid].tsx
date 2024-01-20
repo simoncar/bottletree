@@ -307,7 +307,7 @@ export default function editUser() {
                   size={25}
                   color={Colors[colorScheme ?? "light"].text}
                 />
-                <Text style={styles.settingName}>Seed Demo Data</Text>
+                <Text style={styles.settingName}>Seed Demo Data.</Text>
               </View>
               <View style={styles.rightChevron}></View>
             </TouchableOpacity>
