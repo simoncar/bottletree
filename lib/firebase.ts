@@ -35,10 +35,10 @@ firestore()
   })
   .then(() => {
     if (!Device.isDevice) {
-      // console.log("Connecting to Firebase Emulator");
-      // db.useEmulator("127.0.0.1", 8080);
-      // auth().useEmulator("http://localhost:9099");
-      // storage().useEmulator("127.0.0.1", 9199);
+      console.log("Connecting to Firebase Emulator");
+      db.useEmulator("127.0.0.1", 8080);
+      auth().useEmulator("http://localhost:9099");
+      storage().useEmulator("127.0.0.1", 9199);
     }
   });
 

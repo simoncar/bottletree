@@ -5,14 +5,15 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import React, { useEffect, useCallback } from "react";
+import { useNavigationContainerRef, Stack } from "expo-router";
+import React, { useEffect, useRef } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme, Platform, View } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
 import AuthProvider, { useAuth } from "@/lib/authProvider";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 export { ErrorBoundary } from "expo-router";
 import Colors from "@/constants/Colors";
 
@@ -24,6 +25,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const navigationRef = useNavigationContainerRef();
   const [fontsLoaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     FuturaBold: require("../assets/fonts/FuturaBold.otf"),
@@ -47,6 +49,8 @@ export default function RootLayout() {
       background: Colors[colorScheme ?? "light"].background,
     },
   };
+
+  useReactNavigationDevTools(navigationRef);
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {

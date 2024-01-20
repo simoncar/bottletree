@@ -29,6 +29,7 @@
     ]
   },
   "dependencies": {
+    "@dev-plugins/react-navigation": "^0.0.5",
     "@expo/react-native-action-sheet": "^4.0.1",
     "@expo/vector-icons": "^14.0.0",
     "@likashefqet/react-native-image-zoom": "^2.1.1",
