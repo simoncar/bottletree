@@ -7,26 +7,37 @@ export async function getUser(
   uid: string,
   callback: { (user: IUser): void; (arg0: IUser): void },
 ) {
+  console.log("getUser: ", uid);
+
   const q = firestore().collection("users").doc(uid);
 
-  q.get().then((doc) => {
-    if (doc.exists) {
-      const user: IUser = {
-        key: doc.id,
-        uid: doc.id,
-        displayName: doc.data()?.displayName,
-        email: doc.data()?.email,
-        photoURL: doc.data()?.photoURL,
-        language: doc.data()?.language,
-        project: doc.data()?.project,
-      };
+  q.get()
+    .then((doc) => {
+      console.log("doc: ", doc);
 
-      callback(user);
-    } else {
-      console.log("No such user:", uid);
+      if (doc.exists) {
+        console.log("doc.data(): ", doc.data());
+
+        const user: IUser = {
+          key: doc.id,
+          uid: doc.id,
+          displayName: doc.data()?.displayName,
+          email: doc.data()?.email,
+          photoURL: doc.data()?.photoURL,
+          language: doc.data()?.language,
+          project: doc.data()?.project,
+        };
+
+        callback(user);
+      } else {
+        console.log("No such user:", uid);
+        callback(null);
+      }
+    })
+    .catch((error) => {
+      console.log("Error getting document:", error);
       callback(null);
-    }
-  });
+    });
 
   return () => q;
 }

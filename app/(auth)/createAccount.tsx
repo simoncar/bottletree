@@ -42,7 +42,7 @@ export default function SignIn() {
         <TouchableOpacity
           onPress={async () => {
             router.replace({
-              pathname: "/SignIn",
+              pathname: "/signIn",
               params: {},
             });
           }}

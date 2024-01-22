@@ -29,14 +29,17 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
-      console.log("AuthProvider onAuthStateChanged: ", user);
+      console.log("AuthProvider onAuthStateChanged111: ", user);
 
       if (user) {
         //load data from the getUser APIUser function and merge with the user object
+        console.log("AuthProvider onAuthStateChanged2222: ", user);
 
         getUser(auth().currentUser?.uid, (dbuser) => {
+          console.log("AuthProvider getUser333: ", dbuser);
+
           if (dbuser) {
-            console.log("user: ", dbuser);
+            console.log("user4444: ", dbuser);
 
             const usr: IUser = {
               uid: auth().currentUser?.uid,
@@ -50,19 +53,24 @@ export function AuthProvider(props: React.PropsWithChildren) {
             setSession(user.uid);
             console.log("MEMEMEME: ", usr);
           } else {
-            console.log("AuthProvider NO User : ", user);
+            console.log("AuthProvider NO User555 : ", user);
             setSession(null);
             setSharedDataUser(null);
+            console.log("GO TO SIGN IN PAGE");
+
             router.replace({
-              pathname: "/SignIn",
+              pathname: "/signIn",
+              params: {},
             });
           }
         });
       } else {
+        console.log("AuthProvider NO User6666 : ", user);
         setSession(null);
         setSharedDataUser(null);
         router.replace({
-          pathname: "/SignIn",
+          pathname: "/signIn",
+          params: {},
         });
       }
     });
