@@ -48,7 +48,7 @@ export const Posts = ({ project }: Props) => {
   useEffect(() => {
     console.log("useEffect []   sharedDataUser", sharedDataUser);
     if (sharedDataUser) {
-      console.log("we have a user");
+      console.log("we have a user (sharedDataUser):", sharedDataUser);
       if (project == "welcome" && sharedDataUser.project != undefined) {
         router.navigate({
           pathname: "/[project]",

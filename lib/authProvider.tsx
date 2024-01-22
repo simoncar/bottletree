@@ -29,6 +29,8 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
+      console.log("AuthProvider onAuthStateChanged: ", user);
+
       if (user) {
         //load data from the getUser APIUser function and merge with the user object
 
@@ -47,12 +49,21 @@ export function AuthProvider(props: React.PropsWithChildren) {
             setSharedDataUser(usr);
             setSession(user.uid);
             console.log("MEMEMEME: ", usr);
+          } else {
+            console.log("AuthProvider NO User : ", user);
+            setSession(null);
+            setSharedDataUser(null);
+            router.replace({
+              pathname: "/SignIn",
+            });
           }
         });
       } else {
         setSession(null);
         setSharedDataUser(null);
-        router.replace("(auth)/signIn");
+        router.replace({
+          pathname: "/SignIn",
+        });
       }
     });
     return () => unsubscribeAuth();

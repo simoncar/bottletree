@@ -258,5 +258,3 @@ export function deleteProjectUser(
 }
 
 const generateProjectReference = (): string => {};
-
-console.log(generateProjectReference());

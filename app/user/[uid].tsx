@@ -65,6 +65,8 @@ export default function editUser() {
 
         setUser(user);
         updateSharedDataUser(user);
+      } else {
+        console.log("no user :-(");
       }
     });
   }, []);
@@ -268,7 +270,7 @@ export default function editUser() {
                 console.log("Sign-out successful.");
               })
               .catch((error) => {
-                console.log(error.message);
+                console.log("[uid] eror: ", error.message);
               });
           }}>
           <View style={styles.leftContent}>

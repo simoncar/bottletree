@@ -7,8 +7,6 @@ import { Image } from "expo-image";
 export default function viewPost() {
   const { key, image, caption, ratio } = useLocalSearchParams();
 
-  console.log(image);
-
   return (
     <View style={styles.overall}>
       {image && (

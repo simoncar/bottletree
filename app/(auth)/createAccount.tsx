@@ -18,7 +18,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const { updateSharedDataUser, createAccount, signIn } = useAuth();
+  const { updateSharedDataUser, createAccount } = useAuth();
   const colorScheme = useColorScheme();
 
   const createAccountCallback = (user, error) => {

@@ -24,6 +24,7 @@ export async function getUser(
       callback(user);
     } else {
       console.log("No such user:", uid);
+      callback(null);
     }
   });
 
