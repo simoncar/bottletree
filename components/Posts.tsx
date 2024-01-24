@@ -28,21 +28,6 @@ export const Posts = ({ project }: Props) => {
   };
 
   useEffect(() => {
-    console.log("useEffect []   sharedDataUser", sharedDataUser);
-    if (sharedDataUser) {
-      console.log("we have a user (sharedDataUser):", sharedDataUser);
-      if (project == "welcome" && sharedDataUser.project != undefined) {
-        router.navigate({
-          pathname: "/[project]",
-          params: {
-            project: sharedDataUser.project,
-          },
-        });
-      }
-    }
-  }, [sharedDataUser]);
-
-  useEffect(() => {
     const unsubscribe = getPosts(project, postsRead);
     updateUserProjectCount(project, posts.length);
     return () => {

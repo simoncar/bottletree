@@ -45,7 +45,7 @@ const ModalScreen = (props) => {
 
   const saveDone = (id) => {
     console.log("saveDone: ", id);
-    router.push({
+    router.navigate({
       pathname: "/project/[project]",
       params: {
         pUpdateUsers: id,

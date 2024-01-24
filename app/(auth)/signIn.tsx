@@ -5,18 +5,14 @@ import {
   useColorScheme,
   Pressable,
 } from "react-native";
-import { Stack, router, Redirect } from "expo-router";
+import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "@/components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
 import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 
-import {
-  updateAccountName,
-  updateAccountPhotoURL,
-  getUser,
-} from "@/lib/APIuser";
+import { updateAccountName } from "@/lib/APIuser";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

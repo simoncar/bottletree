@@ -39,6 +39,9 @@ export async function getProject(
   return () => unsubscribe();
 }
 
+// function to get the most recent project based on timestamp
+
+
 export async function getProjects(uid: string, callback: projectsRead) {
   const projectList: string[] = ["X"];
   const projects: IProject[] = [];
