@@ -72,7 +72,7 @@ export const demoData = async () => {
   users[6].uid = await createUser(users[6]);
 
   try {
-    const projectRef1 = db.collection("projects").doc("project11111111").set(
+    const projectRef1 = db.collection("projects").doc("project106joli").set(
       {
         title: "Local 106 Jolimont",
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
@@ -85,7 +85,7 @@ export const demoData = async () => {
 
     const postRef1 = await db
       .collection("projects")
-      .doc("project11111111")
+      .doc("project106joli")
       .collection("posts")
       .doc("post1111111")
       .set(
@@ -103,7 +103,7 @@ export const demoData = async () => {
 
     const projectRef2 = await db
       .collection("projects")
-      .doc("project22222222")
+      .doc("project7rovira")
       .set(
         {
           title: "Local Placa Rovira",
@@ -117,7 +117,7 @@ export const demoData = async () => {
 
     const postRef2 = db
       .collection("projects")
-      .doc("project22222222")
+      .doc("project7rovira")
       .collection("posts")
       .doc("post2222222")
       .set(
@@ -134,17 +134,17 @@ export const demoData = async () => {
         { merge: true },
       );
 
-    await newProjectUser("project22222222", users[0]);
-    await newProjectUser("project22222222", users[1]);
-    await newProjectUser("project22222222", users[2]);
-    await newProjectUser("project22222222", users[5]);
+    await newProjectUser("project7rovira", users[0]);
+    await newProjectUser("project7rovira", users[1]);
+    await newProjectUser("project7rovira", users[2]);
+    await newProjectUser("project7rovira", users[5]);
 
-    await newProjectUser("project11111111", users[0]);
-    await newProjectUser("project11111111", users[1]);
-    await newProjectUser("project11111111", users[2]);
-    await newProjectUser("project11111111", users[3]);
-    await newProjectUser("project11111111", users[4]);
-    await newProjectUser("project11111111", users[5]);
+    await newProjectUser("project106joli", users[0]);
+    await newProjectUser("project106joli", users[1]);
+    await newProjectUser("project106joli", users[2]);
+    await newProjectUser("project106joli", users[3]);
+    await newProjectUser("project106joli", users[4]);
+    await newProjectUser("project106joli", users[5]);
 
     const token1 = await db
       .collection("tokens")
@@ -182,7 +182,7 @@ export const demoData = async () => {
           dateBegin: firestore.Timestamp.fromDate(new Date()),
           dateEnd: firestore.Timestamp.fromDate(new Date()),
           uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-          projectId: "project22222222",
+          projectId: "project7rovira",
         },
         { merge: true },
       );
@@ -203,7 +203,7 @@ export const demoData = async () => {
           dateBegin: firestore.Timestamp.fromDate(new Date()),
           dateEnd: firestore.Timestamp.fromDate(date),
           uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-          projectId: "project11111111",
+          projectId: "project106joli",
         },
         { merge: true },
       );

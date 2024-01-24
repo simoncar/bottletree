@@ -12,6 +12,12 @@ import Colors from "@/constants/Colors";
 import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 
+import {
+  updateAccountName,
+  updateAccountPhotoURL,
+  getUser,
+} from "@/lib/APIuser";
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -138,6 +144,8 @@ export default function SignIn() {
                 .signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                   console.log("logged in:", userCredential);
+                  updateAccountName(userCredential.user.displayName);
+
                   router.navigate("/");
                 })
                 .catch((error) => {

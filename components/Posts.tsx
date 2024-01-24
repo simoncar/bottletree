@@ -23,24 +23,6 @@ export const Posts = ({ project }: Props) => {
 
   console.log("Posts: ", project);
 
-  if (null == project || project == "(tabs)") {
-    currentProject = {
-      key: "",
-      title: "",
-      icon: "",
-      archived: false,
-      postCount: 0,
-    };
-  } else {
-    currentProject = {
-      key: project,
-      title: "",
-      icon: "",
-      archived: false,
-      postCount: 0,
-    };
-  }
-
   const postsRead = (postsDB) => {
     setPosts(postsDB);
   };

@@ -2,22 +2,15 @@ import { CurrentRenderContext } from "@react-navigation/native";
 import { auth, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
 
-// create an export function that loads a single user from firebase into a return object that can be used by the app
 export async function getUser(
   uid: string,
   callback: { (user: IUser): void; (arg0: IUser): void },
 ) {
-  console.log("getUser: ", uid);
-
   const q = firestore().collection("users").doc(uid);
 
   q.get()
     .then((doc) => {
-      console.log("doc: ", doc);
-
       if (doc.exists) {
-        console.log("doc.data(): ", doc.data());
-
         const user: IUser = {
           key: doc.id,
           uid: doc.id,
@@ -30,19 +23,17 @@ export async function getUser(
 
         callback(user);
       } else {
-        console.log("No such user:", uid);
         callback(null);
       }
     })
     .catch((error) => {
-      console.log("Error getting document:", error);
+      console.log("getUser Error getting document:", error);
       callback(null);
     });
 
   return () => q;
 }
 
-// create an export function that deletes the user from firebase
 export async function deleteUser(
   uid: string,
   callback: { (user: IUser): void; (arg0: IUser): void },

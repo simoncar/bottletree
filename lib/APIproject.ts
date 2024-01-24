@@ -15,6 +15,7 @@ export async function getProject(
     console.log("No project provided");
     return;
   }
+  console.log("getProject:", project);
 
   const q = db.collection("projects").doc(project);
 
@@ -23,7 +24,7 @@ export async function getProject(
       console.log("No such project:", project);
       return;
     }
-    const project: IProject = {
+    const returnProject: IProject = {
       project: doc.id,
       key: doc.id,
       title: doc.data().title || "Untitled",
@@ -32,7 +33,7 @@ export async function getProject(
       postCount: doc.data().postCount,
     };
 
-    callback(project);
+    callback(returnProject);
   });
 
   return () => unsubscribe();

@@ -7,14 +7,12 @@ import {
   View,
 } from "react-native";
 import { router } from "expo-router";
-import Carousel from "react-native-reanimated-carousel";
 import { Image } from "expo-image";
 import { Text, ParsedText } from "@/components/Themed";
 import Comments from "./PostComments";
 import Dots from "@/components/dots";
 import Footer from "@/components/Footer";
 import Colors from "@/constants/Colors";
-import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
@@ -23,11 +21,7 @@ const Post = (props) => {
   const { post } = props;
 
   const imageUrls = post.images && post.images.map((image) => image);
-  let caption = "";
-
-  if (post.caption != undefined) {
-    caption = post.caption;
-  }
+  const caption = post.caption !== undefined ? post.caption : "";
 
   function renderImage() {
     if (imageUrls.length == 0) {
