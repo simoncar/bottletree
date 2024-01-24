@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { useAuth } from "@/lib/authProvider";
 import { Stack, router } from "expo-router";
+import { deleteUser } from "@/lib/APIuser";
 import { Text, View } from "@/components/Themed";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");
-
-  const { deleteAccount } = useAuth();
+  const { deleteAccount, sharedDataUser } = useAuth();
 
   const deleteAccountCallback = (error) => {
     console.log("Delete Account Error:", error);
+    setErrorMessage(error);
+  };
+
+  const deleteUserCallback = (error) => {
+    console.log("Delete User Error:", error);
     setErrorMessage(error);
   };
 
@@ -27,6 +32,7 @@ export default function DeleteAccount() {
         {
           text: "Delete",
           onPress: () => {
+            deleteUser(sharedDataUser.uid, deleteUserCallback);
             deleteAccount(deleteAccountCallback);
           },
         },
@@ -49,7 +55,7 @@ export default function DeleteAccount() {
           onDelete();
         }}
         style={styles.loginBtn}>
-        <Text style={styles.loginText}>Yes, DELETE MY ACCOUNT</Text>
+        <Text style={styles.loginText}>YES, Delete my account</Text>
       </TouchableOpacity>
     </View>
   );

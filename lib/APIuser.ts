@@ -42,6 +42,28 @@ export async function getUser(
   return () => q;
 }
 
+// create an export function that deletes the user from firebase
+export async function deleteUser(
+  uid: string,
+  callback: { (user: IUser): void; (arg0: IUser): void },
+) {
+  console.log("deleteUser: ", uid);
+
+  const q = firestore().collection("users").doc(uid);
+
+  q.delete()
+    .then(() => {
+      console.log("User successfully deleted!");
+      callback(null);
+    })
+    .catch((error) => {
+      console.error("Error removing user: ", error);
+      callback(null);
+    });
+
+  return () => q;
+}
+
 export const updateAccountName = (displayName: string) => {
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
