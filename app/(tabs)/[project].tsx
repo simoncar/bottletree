@@ -17,8 +17,6 @@ export default function ProjectPosts() {
         //if user.project has a value then set the project variable to that value
         if (user.project) {
           dbProject = user.project;
-          console.log("index dbProject: ", dbProject);
-          console.log("VVVV");
 
           router.navigate({
             pathname: "/[project]",
