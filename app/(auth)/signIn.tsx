@@ -36,7 +36,7 @@ export default function SignIn() {
       case "auth/wrong-password":
         return "Incorrect password.";
       default:
-        return "Check your internet connection.";
+        return errorCode;
     }
   };
 
