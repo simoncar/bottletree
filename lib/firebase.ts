@@ -16,6 +16,10 @@ export const firebaseErrors: Record<string, string> = {
     "Failed to send the request. Check your connection.",
 };
 
+// firestore().settings({
+//   persistence: false, // disable offline persistence
+// });
+
 const db = firestore();
 
 console.log("__DEV__: ", __DEV__);

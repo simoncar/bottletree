@@ -41,7 +41,6 @@ export async function getProject(
 
 // function to get the most recent project based on timestamp
 
-
 export async function getProjects(uid: string, callback: projectsRead) {
   const projectList: string[] = ["X"];
   const projects: IProject[] = [];
@@ -99,6 +98,8 @@ export async function getAllProjects(callback: projectsRead) {
   const projectsSnapshot = await q.get();
 
   projectsSnapshot.forEach((doc) => {
+    console.log("doc.data().title: ", doc.data().title);
+
     if (!doc.data().archived) {
       projects.push({
         project: doc.id,
