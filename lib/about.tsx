@@ -39,12 +39,14 @@ export const About = () => {
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion})
         </Text>
-        <Text style={styles.version}>SDU2 - {sharedDataUser.uid}</Text>
+        <Text style={styles.version}>SDU - {sharedDataUser.uid}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>Language - {deviceLanguage}</Text>
         <Text style={styles.version}>Project - {sharedDataUser.project}</Text>
-        <Text style={styles.version}>Dev - {__DEV__ ? "true" : "false"}</Text>
-        <Text style={styles.version}>{token}</Text>
+        <Text style={styles.version}>
+          Dev.native - {__DEV__ ? "true" : "false"}
+        </Text>
+        <Text style={styles.version}>Toekn - {token}</Text>
       </View>
     );
   }

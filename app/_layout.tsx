@@ -17,10 +17,10 @@ import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 export { ErrorBoundary } from "expo-router";
 import Colors from "@/constants/Colors";
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "loading",
-};
+// export const unstable_settings = {
+//   // Ensure that reloading on `/modal` keeps a back button present.
+//   initialRouteName: "loading",
+// };
 
 SplashScreen.preventAutoHideAsync();
 
