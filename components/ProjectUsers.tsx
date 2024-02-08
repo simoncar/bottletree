@@ -24,9 +24,19 @@ export const ProjectUsers = (props) => {
   const colorScheme = useColorScheme();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
+  const { sharedDataUser, isLoading } = useAuth();
 
   let prevOpenedRow;
   const row: Array<any> = [];
+
+  if (null == sharedDataUser) {
+    loggedInUser = {
+      uid: "",
+      displayName: "",
+      email: "",
+      photoURL: "",
+    };
+  }
 
   useEffect(() => {
     getProjectUsers(project, projectUsersRead);
@@ -94,6 +104,10 @@ export const ProjectUsers = (props) => {
   };
 
   function renderRow(data: any, index: number) {
+    let me = "";
+    if (data.uid === sharedDataUser.uid) {
+      me = " (you have access)";
+    }
     return (
       <Swipeable
         key={index}
@@ -120,7 +134,9 @@ export const ProjectUsers = (props) => {
             </View>
 
             <View>
-              <Text style={styles.name}>{data.displayName || ""}</Text>
+              <Text style={styles.name}>
+                {data.displayName || ""} {me}
+              </Text>
               <Text style={styles.email}>{data.email || ""}</Text>
             </View>
           </View>
