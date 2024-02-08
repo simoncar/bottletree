@@ -86,7 +86,7 @@ const ModalScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.projectList}>
+      <ScrollView style={styles.userList}>
         {loading === false && (
           <View>
             <ShortList data={users} renderItem={renderRow} />
@@ -131,7 +131,9 @@ const styles = StyleSheet.create({
     padding: 8,
   },
 
-  projectList: {},
+  userList: {
+    paddingBottom: 50,
+  },
   userdata: {
     color: "#888",
     fontSize: 18,
