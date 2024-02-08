@@ -14,6 +14,7 @@ import { addProjectUser } from "@/lib/APIproject";
 import { IUser } from "@/lib/types";
 import ProjectContext from "@/lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useAuth } from "@/lib/authProvider";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -24,6 +25,7 @@ const ModalScreen = (props) => {
   const [loading, setLoading] = useState(true);
   const { sharedDataProject, updateSharedDataProject } =
     useContext(ProjectContext);
+  const { sharedDataUser, isLoading } = useAuth();
 
   const usersRead = (usersDB: IUser[]) => {
     setUsers(usersDB);
@@ -55,8 +57,14 @@ const ModalScreen = (props) => {
   };
 
   function renderRow(data: IUser) {
+    let backgroundColor = "transparent";
+    if (data.uid === sharedDataUser.uid) {
+      backgroundColor = "#3fc451";
+    }
     return (
-      <View key={data.uid} style={styles.outerView}>
+      <View
+        key={data.uid}
+        style={[styles.outerView, { backgroundColor: backgroundColor }]}>
         <TouchableOpacity
           style={styles.innerView}
           onPress={() => {
@@ -116,9 +124,9 @@ const styles = StyleSheet.create({
 
   innerView: {
     alignItems: "center",
+
     flex: 1,
     flexDirection: "row",
-
     paddingHorizontal: 8,
   },
   outerView: {
