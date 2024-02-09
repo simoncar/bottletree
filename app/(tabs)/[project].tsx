@@ -11,24 +11,27 @@ export default function ProjectPosts() {
   const { project } = useLocalSearchParams();
   let dbProject = project;
   if (project == "welcome") {
-    getUser(auth().currentUser.uid || "", (user) => {
-      if (user) {
-        console.log("index user: ", user);
-        //if user.project has a value then set the project variable to that value
-        if (user.project) {
-          dbProject = user.project;
+    const currentUser = auth().currentUser;
+    if (currentUser) {
+      getUser(currentUser.uid, (user) => {
+        if (user) {
+          console.log("index user: ", user);
+          //if user.project has a value then set the project variable to that value
+          if (user.project) {
+            dbProject = user.project;
 
-          router.navigate({
-            pathname: "/[project]",
-            params: {
-              project: dbProject,
-            },
-          });
+            router.navigate({
+              pathname: "/[project]",
+              params: {
+                project: dbProject,
+              },
+            });
+          }
+        } else {
+          console.log("no user :-(");
         }
-      } else {
-        console.log("no user :-(");
-      }
-    });
+      });
+    }
   }
 
   return (
