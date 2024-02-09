@@ -5,15 +5,27 @@ import { Posts } from "@/components/Posts";
 import { View } from "@/components/Themed";
 import { getUser } from "@/lib/APIuser";
 import { auth, firestore } from "@/lib/firebase";
+import { IUser } from "@/lib/types";
 import { useAuth } from "@/lib/authProvider";
 
 export default function ProjectPosts() {
   const { project } = useLocalSearchParams();
+  const { sharedDataUser } = useAuth();
+
   let dbProject = project;
+
+  const loggedInUser: IUser = sharedDataUser ?? {
+    uid: "",
+    displayName: "",
+    email: "",
+    photoURL: "",
+    project: "",
+  };
+
   if (project == "welcome") {
     const currentUser = auth().currentUser;
     if (currentUser) {
-      getUser(currentUser.uid, (user) => {
+      getUser(loggedInUser.uid, (user) => {
         if (user) {
           console.log("index user: ", user);
           //if user.project has a value then set the project variable to that value

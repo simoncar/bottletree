@@ -34,16 +34,13 @@ export default function TabLayout() {
     return <Text>Loading...</Text>;
   }
 
-  let loggedInUser: IUser = sharedDataUser;
-
-  if (null == sharedDataUser) {
-    loggedInUser = {
-      uid: "",
-      displayName: "",
-      email: "",
-      photoURL: "",
-    };
-  }
+  const loggedInUser: IUser = sharedDataUser ?? {
+    uid: "",
+    displayName: "",
+    email: "",
+    photoURL: "",
+    project: "",
+  };
 
   const saveDone = () => {
     console.log("saveDone - push to home");
