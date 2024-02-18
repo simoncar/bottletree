@@ -4,7 +4,7 @@ import { useLocalSearchParams, router } from "expo-router";
 import { Posts } from "@/components/Posts";
 import { View } from "@/components/Themed";
 import { getUser } from "@/lib/APIuser";
-import { auth, firestore } from "@/lib/firebase";
+import { auth } from "@/lib/firebase";
 import { IUser } from "@/lib/types";
 import { useAuth } from "@/lib/authProvider";
 
@@ -28,7 +28,6 @@ export default function ProjectPosts() {
       getUser(loggedInUser.uid, (user) => {
         if (user) {
           console.log("index user: ", user);
-          //if user.project has a value then set the project variable to that value
           if (user.project) {
             dbProject = user.project;
 
@@ -38,6 +37,8 @@ export default function ProjectPosts() {
                 project: dbProject,
               },
             });
+          } else {
+            console.log("no default user project :-(");
           }
         } else {
           console.log("no user :-(");

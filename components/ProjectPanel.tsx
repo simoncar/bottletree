@@ -56,7 +56,7 @@ const Project = (props) => {
             updateSharedDataProject({
               key: projectObj.project,
             });
-            router.push({
+            router.navigate({
               pathname: "/project/[project]",
               params: {
                 project: projectObj.project,
@@ -83,7 +83,7 @@ const Project = (props) => {
       <Pressable
         style={styles.pressableRight}
         onPress={() => {
-          router.push({
+          router.navigate({
             pathname: "/projectList",
           });
         }}>

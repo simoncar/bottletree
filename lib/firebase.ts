@@ -1,4 +1,3 @@
-import { fbConfig } from "../env";
 import * as Device from "expo-device";
 import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
@@ -16,10 +15,6 @@ export const firebaseErrors: Record<string, string> = {
     "Failed to send the request. Check your connection.",
 };
 
-// firestore().settings({
-//   persistence: false, // disable offline persistence
-// });
-
 const db = firestore();
 
 console.log("__DEV__: ", __DEV__);
@@ -33,4 +28,3 @@ if (!Device.isDevice) {
 }
 
 export { firebase, db, storage, auth, firestore };
-//export default firebase;
