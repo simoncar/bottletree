@@ -27,7 +27,7 @@ export default function editPost() {
   const { width } = Dimensions.get("window");
 
   const saveDone = () => {
-    router.push({
+    router.navigate({
       pathname: "/(tabs)",
       params: {
         project: sharedDataProject.key,

@@ -109,7 +109,7 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            router.push({
+            router.navigate({
               pathname: "/note",
               params: {
                 projectId: sharedDataProject.key,
@@ -118,7 +118,7 @@ export default function TabLayout() {
             });
             break;
           case 1:
-            router.push({
+            router.navigate({
               pathname: "/camera",
               params: {
                 pdateBegin: dateBegin,
@@ -132,7 +132,7 @@ export default function TabLayout() {
             pickImage();
             break;
           case 3:
-            router.push({
+            router.navigate({
               pathname: "/editCalendar",
               params: {
                 pdateBegin: dateBegin,
@@ -161,7 +161,7 @@ export default function TabLayout() {
         name="[project]"
         listeners={{
           tabPress: (e) => {
-            router.push({
+            router.navigate({
               pathname: "/projectList",
               params: {
                 page: "",

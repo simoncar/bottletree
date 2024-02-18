@@ -44,7 +44,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
 
   const openEdit = () => {
     console.log("edit:" + post);
-    router.push({
+    router.navigate({
       pathname: "/note",
       params: {
         projectId: post.projectId,

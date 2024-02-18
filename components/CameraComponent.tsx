@@ -62,7 +62,7 @@ export default function App() {
   const saveDone = () => {
     console.log("saveDone - push to home");
 
-    router.push({
+    router.navigate({
       pathname: "/(tabs)",
       params: {
         project: sharedDataProject.key,

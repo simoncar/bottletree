@@ -102,7 +102,7 @@ const ModalScreen = (props) => {
               archived: data.archived,
             });
 
-            router.push({
+            router.navigate({
               pathname: "/project/[project]",
               params: {
                 project: data.key,

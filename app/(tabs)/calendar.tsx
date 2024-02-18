@@ -163,7 +163,7 @@ export default function CalendarLarge() {
       pcolorName: event.colorName,
     });
 
-    router.push({
+    router.navigate({
       pathname: "/editCalendar",
       params: {
         calendarId: event.key,

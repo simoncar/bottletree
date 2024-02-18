@@ -66,7 +66,7 @@ export default function SignIn() {
         key={"createAccount"}
         style={styles.createBtn}
         onPress={() => {
-          router.push({
+          router.navigate({
             pathname: "/createAccount",
             params: {
               email: email,
@@ -154,7 +154,7 @@ export default function SignIn() {
           <TouchableOpacity
             key={"forgotPassword"}
             onPress={() => {
-              router.push({
+              router.navigate({
                 pathname: "/forgotPassword",
                 params: {
                   email: email,

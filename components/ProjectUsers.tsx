@@ -66,7 +66,7 @@ export const ProjectUsers = (props) => {
       <Pressable
         style={styles.outerView}
         onPress={() => {
-          router.push({
+          router.navigate({
             pathname: "/userList",
             params: {
               project: "post.projectId",

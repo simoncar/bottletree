@@ -61,7 +61,7 @@ export const Posts = ({ project }: Props) => {
         <View style={styles.loginBtn}>
           <TouchableOpacity
             onPress={() => {
-              router.push({
+              router.navigate({
                 pathname: "/addPost",
               });
             }}>

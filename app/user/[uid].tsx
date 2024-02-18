@@ -113,7 +113,7 @@ export default function editUser() {
   };
 
   const administration = async () => {
-    router.push({
+    router.navigate({
       pathname: "/projectListAdmin",
     });
   };
@@ -213,7 +213,7 @@ export default function editUser() {
       <TouchableOpacity
         key={"language"}
         onPress={() =>
-          router.push({
+          router.navigate({
             pathname: "/language",
           })
         }>
@@ -238,7 +238,7 @@ export default function editUser() {
       <TouchableOpacity
         key={"deleteAccount"}
         onPress={() =>
-          router.push({
+          router.navigate({
             pathname: "/deleteAccount",
           })
         }>

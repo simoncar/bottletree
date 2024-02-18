@@ -27,7 +27,7 @@ export default function SelectLanguage(props: TProps) {
     //setLanguage(newLanguage);
     //I18n.locale = newLanguage;
 
-    router.push({
+    router.navigate({
       pathname: "/app/user",
     });
   };
