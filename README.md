@@ -19,6 +19,7 @@ npx expo start --dev-client
 
 eas build --profile development-simulator --platform ios
 eas build --profile development --platform ios
+eas build --profile development --platform android
 
 ---------- Firebase Functions ---------------
 

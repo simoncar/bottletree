@@ -193,15 +193,7 @@ export default function RootLayout() {
                     title: "app/layout/user",
                   }}
                 />
-                <Stack.Screen
-                  name="camera.web"
-                  options={{
-                    title: "Take Photo",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
+
                 <Stack.Screen
                   name="note"
                   options={{
