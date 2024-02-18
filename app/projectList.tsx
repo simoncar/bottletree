@@ -163,7 +163,6 @@ const ModalScreen = (props) => {
               icon: data.icon,
               archived: data.archived,
             });
-            console.log("Edit Project: ", data.archived);
 
             router.replace({
               pathname: "/project/[project]",

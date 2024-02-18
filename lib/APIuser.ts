@@ -82,8 +82,9 @@ export const updateUserProjectCount = (project: string, count: number) => {
   const u = auth().currentUser?.uid;
   console.log("updateUserProjectCount: ", project, count);
 
-  if (u && count) {
+  if (u && count >= 0 && project != "welcome" && project != "(tabs)") {
     const docRef1 = firestore().collection("users").doc(u);
+    console.log("updateUserProjectCount SET: ", project, count, u);
 
     docRef1.set(
       {
