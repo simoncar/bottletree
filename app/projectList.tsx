@@ -108,6 +108,12 @@ const ModalScreen = (props) => {
 
     const postCount = findValueByKey(sharedDataUser.postCount, data.key);
     const postCountDelta = data.postCount - postCount;
+    console.log(
+      "postCountDelta: ",
+      postCount,
+      sharedDataUser.postCount,
+      postCountDelta,
+    );
 
     return (
       <View key={data.key} style={styles.outerView}>

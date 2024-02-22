@@ -17,7 +17,7 @@ type Props = {
 
 export const Posts = ({ project }: Props) => {
   const [posts, setPosts] = useState([]);
-  const { sharedDataUser } = useAuth();
+  const { updateSharedDataUser, sharedDataUser } = useAuth();
 
   let currentProject: IProject;
 
@@ -30,6 +30,19 @@ export const Posts = ({ project }: Props) => {
   useEffect(() => {
     const unsubscribe = getPosts(project, postsRead);
     updateUserProjectCount(project, posts.length);
+
+    if (sharedDataUser != null) {
+      console.log(
+        "updateUserProjectCount > sharedDataUser != null: ",
+        sharedDataUser,
+      );
+
+      updateSharedDataUserProjectCount(
+        sharedDataUser,
+        currentProject?.key,
+        currentProject?.postCount,
+      );
+    }
     return () => {
       unsubscribe;
     };
@@ -40,7 +53,11 @@ export const Posts = ({ project }: Props) => {
     project: string,
     postCount: number,
   ) {
+    console.log("    XXX updateSharedDataUserProjectCount: ", obj);
+
     if (obj.postCount != undefined) {
+      console.log("    YYY updateSharedDataUserProjectCount: ", obj.postCount);
+
       obj.postCount[project] = postCount;
     }
   }

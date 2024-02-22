@@ -47,7 +47,7 @@ export default function SignIn() {
             });
           }}
           style={styles.loginBtn}>
-          <Text style={styles.loginText}>SIGN In</Text>
+          <Text style={styles.loginText}>SIGN IN</Text>
         </TouchableOpacity>
       );
     } else {
