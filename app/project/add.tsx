@@ -58,6 +58,8 @@ export default function addPhoto() {
 
   const onSave = async () => {
     project.title = text;
+    console.log("addProject: ", text, project.title, loggedInUser.uid);
+
     addProject(project, loggedInUser, saveDone);
   };
 

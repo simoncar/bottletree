@@ -208,6 +208,8 @@ export async function getPosts(
     project = "void";
   }
 
+  console.log("loading posts from firebase: getPosts", project);
+
   const q = firestore()
     .collection("projects")
     .doc(project)
@@ -227,6 +229,7 @@ export async function getPosts(
         timestamp: doc.data().timestamp,
         caption: doc.data().caption,
       });
+      console.log("posts.push", posts);
     });
     callback(posts);
   });

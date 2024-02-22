@@ -182,6 +182,7 @@ export function addProject(
 ) {
   try {
     const projectId = generateProjectReference();
+    console.log("Adding project: ", projectId, project, user);
 
     //TODO: check the project refernce is not already in use (unlikely)
 
@@ -262,4 +263,12 @@ export function deleteProjectUser(
   return;
 }
 
-const generateProjectReference = (): string => {};
+const generateProjectReference = (): string => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let code = "";
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    code += chars.charAt(randomIndex);
+  }
+  return code;
+};
