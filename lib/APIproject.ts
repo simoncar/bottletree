@@ -56,7 +56,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
     });
   });
 
-  const q = db.collection("projects").orderBy("timestamp", "desc");
+  const q = db.collection("projects"); //.orderBy("timestamp", "desc");
 
   const projectsSnapshot = await q.get();
 
@@ -98,8 +98,6 @@ export async function getAllProjects(callback: projectsRead) {
   const projectsSnapshot = await q.get();
 
   projectsSnapshot.forEach((doc) => {
-    console.log("doc.data().title: ", doc.data().title);
-
     if (!doc.data().archived) {
       projects.push({
         project: doc.id,
@@ -206,10 +204,23 @@ export function addProject(
   return;
 }
 
+//function to retrieve all projects from firebase and then add the user to the accessList for each project
+export function addProjectUserAll(user: IUser, callback: saveDoneAll) {
+  console.log("Adding user to all projects: ", user);
+
+  getAllProjects((projects) => {
+    projects.forEach((project) => {
+      console.log("Adding user to project: ", project.key, project);
+      addProjectUser(project.key, user);
+    });
+    callback();
+  });
+}
+
 export function addProjectUser(
   projectId: string,
   user: IUser,
-  callback: { (id: string): void; (arg0: string): void },
+  callback?: { (id: string): void; (arg0: string): void },
 ) {
   console.log("Adding user to project: ", projectId, user);
 

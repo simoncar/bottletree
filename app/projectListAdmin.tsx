@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   ScrollView,
   useColorScheme,
+  Alert,
 } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import { getAllProjects } from "@/lib/APIproject";
+import { getAllProjects, addProjectUserAll } from "@/lib/APIproject";
 import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -64,6 +65,59 @@ const ModalScreen = (props) => {
           ]}>
           (Control who can see what projects)
         </Text>
+      </View>
+    );
+  }
+
+  const saveDoneAll = () => {
+    console.log("saveDoneAll - push to home");
+    Alert.alert("Added to All Projects", "You can now see all projects");
+  };
+
+  const askAddAll = () => {
+    Alert.alert(
+      "Add Me to All Projects",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Add",
+          onPress: () => {
+            addProjectUserAll(sharedDataUser, saveDoneAll);
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+  };
+
+  function renderAll() {
+    return (
+      <View style={styles.adminAll}>
+        <TouchableOpacity
+          key={"addAll"}
+          onPress={() => {
+            askAddAll();
+          }}>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            Add Me to All Projects
+          </Text>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            (Makes testing easier)
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -135,6 +189,7 @@ const ModalScreen = (props) => {
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
         <View>{renderAdmin()}</View>
+        <View>{renderAll()}</View>
         {loading === false && (
           <View>
             <ShortList
@@ -153,7 +208,13 @@ const styles = StyleSheet.create({
   admin: {
     alignItems: "center",
     backgroundColor: "red",
-    color: "red",
+    height: 70,
+    paddingTop: 10,
+    textAlign: "center",
+  },
+  adminAll: {
+    alignItems: "center",
+    backgroundColor: "blue",
     height: 70,
     paddingTop: 10,
     textAlign: "center",
