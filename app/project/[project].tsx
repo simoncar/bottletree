@@ -150,7 +150,6 @@ export default function editPost() {
 
   return (
   
-     
       <ScrollView>
         <Stack.Screen
           options={{

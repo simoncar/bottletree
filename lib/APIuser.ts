@@ -85,16 +85,17 @@ export const updateUserProjectCount = (project: string, count: number) => {
   if (u && count >= 0 && project != "welcome" && project != "(tabs)") {
     const docRef1 = firestore().collection("users").doc(u);
     console.log("updateUserProjectCount SET: ", project, count, u);
-
-    docRef1.set(
-      {
-        project: project,
-        postCount: {
-          [project]: count,
+    if (project != undefined) {
+      docRef1.set(
+        {
+          project: project,
+          postCount: {
+            [project]: count,
+          },
         },
-      },
-      { merge: true },
-    );
+        { merge: true },
+      );
+    }
   }
 };
 
