@@ -125,9 +125,12 @@ const ModalScreen = (props) => {
   function renderTitle(data: IProject) {
     if (!data.archived) {
       return (
-        <Text numberOfLines={2} ellipsizeMode="tail" style={styles.project}>
-          {data.title || ""}
-        </Text>
+        <View>
+          <Text numberOfLines={2} ellipsizeMode="tail" style={styles.project}>
+            {data.title || ""}
+          </Text>
+          <Text style={styles.projectId}>{data.project || ""}</Text>
+        </View>
       );
     } else {
       return (
@@ -235,11 +238,11 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     textAlign: "center",
   },
-
   container: {
     flex: 1,
     height: 200,
   },
+
   innerView: {
     alignItems: "center",
     flex: 1,
@@ -261,11 +264,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     width: 300,
   },
-
   projectArchived: {
     color: "grey",
     fontSize: 18,
     marginBottom: 5,
+  },
+
+  projectId: {
+    color: "grey",
+    fontSize: 14,
   },
   projectList: {},
   projectTitle: {
