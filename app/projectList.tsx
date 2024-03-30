@@ -93,7 +93,12 @@ const ModalScreen = (props) => {
 
   function renderTitle(data: IProject) {
     if (!data.archived) {
-      return <Text style={styles.project}>{data.title || ""}</Text>;
+      return (
+        <View>
+          <Text style={styles.project}>{data.title || ""}</Text>
+          <Text style={styles.projectId}>{data.project || ""}</Text>
+        </View>
+      );
     } else {
       return (
         <Text style={styles.projectArchived}>
@@ -108,12 +113,6 @@ const ModalScreen = (props) => {
 
     const postCount = findValueByKey(sharedDataUser.postCount, data.key);
     const postCountDelta = data.postCount - postCount;
-    console.log(
-      "postCountDelta: ",
-      postCount,
-      sharedDataUser.postCount,
-      postCountDelta,
-    );
 
     return (
       <View key={data.key} style={styles.outerView}>
@@ -257,11 +256,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-
   projectArchived: {
     color: "grey",
     fontSize: 18,
     marginBottom: 5,
+  },
+
+  projectId: {
+    color: "grey",
+    fontSize: 14,
   },
   projectList: {},
   projectTitle: {

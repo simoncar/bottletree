@@ -5,8 +5,6 @@ type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
-// create an export function that loads a single
-
 export async function getProject(
   project: string,
   callback: { (project: IProject): void; (arg0: IProject): void },
@@ -38,8 +36,6 @@ export async function getProject(
 
   return () => unsubscribe();
 }
-
-// function to get the most recent project based on timestamp
 
 export async function getProjects(uid: string, callback: projectsRead) {
   const projectList: string[] = ["X"];

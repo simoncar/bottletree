@@ -78,25 +78,36 @@ export const updateAccountName = (displayName: string) => {
     });
 };
 
-export const updateUserProjectCount = (project: string, count: number) => {
+export const updateUserProjectCount = (project: string) => {
   const u = auth().currentUser?.uid;
-  console.log("updateUserProjectCount: ", project, count);
 
-  if (u && count >= 0 && project != "welcome" && project != "(tabs)") {
-    const docRef1 = firestore().collection("users").doc(u);
-    console.log("updateUserProjectCount SET: ", project, count, u);
-    if (project != undefined) {
-      docRef1.set(
-        {
-          project: project,
-          postCount: {
-            [project]: count,
+  // load the porject from firebase and return the count
+  const docRef = firestore().collection("projects").doc(project);
+  let count = 0;
+  docRef
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        if (typeof doc.data().postCount === "number") {
+          count = doc.data().postCount;
+        }
+        console.log("updateUserProjectCount GET: ", project, count, u);
+      }
+    })
+    .then(() =>
+      firestore()
+        .collection("users")
+        .doc(u)
+        .set(
+          {
+            project: project,
+            postCount: {
+              [project]: count,
+            },
           },
-        },
-        { merge: true },
-      );
-    }
-  }
+          { merge: true },
+        ),
+    );
 };
 
 export const updateAccountPhotoURL = (photoURL: string) => {
