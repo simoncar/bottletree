@@ -179,7 +179,7 @@ const ModalScreen = (props) => {
               </View>
             )}
           </View>
-          <View>{renderTitle(data)}</View>
+          <View style={styles.projectTitle}>{renderTitle(data)}</View>
         </TouchableOpacity>
       </View>
     );
@@ -256,18 +256,21 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
-
   project: {
     fontSize: 18,
     marginBottom: 5,
     width: 300,
   },
+
   projectArchived: {
     color: "grey",
     fontSize: 18,
     marginBottom: 5,
   },
   projectList: {},
+  projectTitle: {
+    width: 250,
+  },
 });
 
 export default ModalScreen;
