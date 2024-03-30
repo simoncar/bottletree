@@ -31,13 +31,6 @@ export const Posts = ({ project }: Props) => {
     const unsubscribe = getPosts(project, postsRead);
     updateUserProjectCount(project);
 
-    if (sharedDataUser != null) {
-      updateSharedDataUserProjectCount(
-        sharedDataUser,
-        currentProject?.key,
-        currentProject?.postCount,
-      );
-    }
     return () => {
       unsubscribe;
     };
