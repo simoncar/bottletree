@@ -31,11 +31,12 @@ const ModalScreen = (props) => {
   const { updateSharedDataProject } = useContext(ProjectContext);
 
   const projectsRead = (projectsDB: IProject[]) => {
+    console.log("calling SETPROJECTS");
+
     setProjects(projectsDB);
   };
 
   useEffect(() => {
-    //updateSharedDataUser(uid);
     getProjects(uid, projectsRead);
   }, []);
 
@@ -118,6 +119,7 @@ const ModalScreen = (props) => {
           style={styles.innerView}
           onPress={() => {
             console.log("here");
+            updateSharedDataUser(sharedDataUser);
 
             getProjects(uid, projectsRead);
 
