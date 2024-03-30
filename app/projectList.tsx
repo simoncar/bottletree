@@ -121,8 +121,6 @@ const ModalScreen = (props) => {
             console.log("here");
             updateSharedDataUser(sharedDataUser);
 
-            getProjects(uid, projectsRead);
-
             updateSharedDataProject({
               key: data.key,
               title: data.title,
@@ -130,7 +128,8 @@ const ModalScreen = (props) => {
               archived: data.archived,
               postCount: data.postCount ?? 0,
             });
-            postCountDelta == 0;
+
+            sharedDataUser.postCount[data.key] = data.postCount ?? 0;
 
             router.navigate({
               pathname: "/[project]",
