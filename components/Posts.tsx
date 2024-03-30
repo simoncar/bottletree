@@ -30,13 +30,6 @@ export const Posts = ({ project }: Props) => {
   useEffect(() => {
     const unsubscribe = getPosts(project, postsRead);
     updateUserProjectCount(project);
-    console.log(
-      "GOLD updateUserProjectCount > sharedDataUser != null: ",
-      "project:",
-      project,
-      posts.length,
-      sharedDataUser,
-    );
 
     if (sharedDataUser != null) {
       updateSharedDataUserProjectCount(
@@ -55,11 +48,7 @@ export const Posts = ({ project }: Props) => {
     project: string,
     postCount: number,
   ) {
-    console.log("    XXX updateSharedDataUserProjectCount: ", obj);
-
     if (obj.postCount != undefined) {
-      console.log("    YYY updateSharedDataUserProjectCount: ", obj.postCount);
-
       obj.postCount[project] = postCount;
     }
   }
