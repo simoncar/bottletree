@@ -229,7 +229,6 @@ export async function getPosts(
         timestamp: doc.data().timestamp,
         caption: doc.data().caption,
       });
-      console.log("posts.push", posts);
     });
     callback(posts);
   });

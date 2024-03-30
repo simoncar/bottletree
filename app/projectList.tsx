@@ -22,7 +22,7 @@ const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
     page: string;
   }>();
-  const { sharedDataUser } = useAuth();
+  const { updateSharedDataUser, sharedDataUser } = useAuth();
   const uid = sharedDataUser?.uid;
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -35,11 +35,8 @@ const ModalScreen = (props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = getProjects(uid, projectsRead);
-    unsubscribe;
-    return () => {
-      // unsubscribe;
-    };
+    //updateSharedDataUser(uid);
+    getProjects(uid, projectsRead);
   }, []);
 
   useEffect(() => {
@@ -111,8 +108,8 @@ const ModalScreen = (props) => {
   function renderRow(data: IProject) {
     const icon = data.icon;
 
-    const postCount = findValueByKey(sharedDataUser.postCount, data.key);
-    const postCountDelta = data.postCount - postCount;
+    const postCountUser = findValueByKey(sharedDataUser.postCount, data.key);
+    const postCountDelta = data.postCount - postCountUser;
 
     return (
       <View key={data.key} style={styles.outerView}>
@@ -120,6 +117,10 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
+            console.log("here");
+
+            getProjects(uid, projectsRead);
+
             updateSharedDataProject({
               key: data.key,
               title: data.title,
@@ -156,6 +157,12 @@ const ModalScreen = (props) => {
           <View>
             <View style={styles.redCircle}>
               <Text style={styles.redNumber}>{postCountDelta}</Text>
+            </View>
+            <View style={styles.redCircle}>
+              <Text style={styles.redNumber}>{data.postCount}</Text>
+            </View>
+            <View style={styles.redCircle}>
+              <Text style={styles.redNumber}>{postCountUser}</Text>
             </View>
           </View>
         )}

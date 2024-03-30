@@ -19,6 +19,7 @@ export async function getUser(
           photoURL: doc.data()?.photoURL,
           language: doc.data()?.language,
           project: doc.data()?.project,
+          postCount: doc.data()?.postCount,
         };
 
         callback(user);

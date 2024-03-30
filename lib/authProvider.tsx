@@ -33,11 +33,14 @@ export function AuthProvider(props: React.PropsWithChildren) {
         getUser(auth().currentUser?.uid, (dbuser) => {
           if (dbuser) {
             const usr: IUser = {
+              key: auth().currentUser?.uid,
               uid: auth().currentUser?.uid,
               email: auth().currentUser?.email,
               displayName: auth().currentUser?.displayName,
               photoURL: auth().currentUser?.photoURL,
               project: dbuser.project,
+              postCount: dbuser.postCount,
+              language: dbuser.language,
             };
 
             setSharedDataUser(usr);
