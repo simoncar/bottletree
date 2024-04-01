@@ -19,7 +19,7 @@ npx expo start --dev-client
 
 eas build --profile development-simulator --platform ios
 eas build --profile development --platform ios
-eas build --profile development --platform android
+eas build --profile aab --platform android
 
 ---------- Firebase Functions ---------------
 
@@ -55,25 +55,24 @@ distribution to internal
 android.buildType to apk
 android.gradleCommand to :app:assembleRelease, :app:assembleDebug or any other gradle command that produces .apk
 
-
 {
-  "build": {
-    "preview": {
-      "android": {
-        "buildType": "apk"
-      }
-    },
-    "preview2": {
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
-      }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "preview4": {
-      "distribution": "internal"
-    },
-    "production": {}
-  }
+"build": {
+"preview": {
+"android": {
+"buildType": "apk"
+}
+},
+"preview2": {
+"android": {
+"gradleCommand": ":app:assembleRelease"
+}
+},
+"preview3": {
+"developmentClient": true
+},
+"preview4": {
+"distribution": "internal"
+},
+"production": {}
+}
 }

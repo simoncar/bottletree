@@ -15,7 +15,9 @@
         "simulator": true
       }
     },
-    "aab": {},
+    "aab": {
+      "channel": "development"
+    },
 
     "production": {
       "channel": "production",
