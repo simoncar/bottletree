@@ -47,3 +47,33 @@ npx expo install --fix
 
 sudo lsof -i :5000
 sudo kill -9 PID
+
+To generate an .apk, modify the eas.json by adding one of the following properties in a build profile:
+
+developmentClient to true (default)
+distribution to internal
+android.buildType to apk
+android.gradleCommand to :app:assembleRelease, :app:assembleDebug or any other gradle command that produces .apk
+
+
+{
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
+    "preview4": {
+      "distribution": "internal"
+    },
+    "production": {}
+  }
+}
