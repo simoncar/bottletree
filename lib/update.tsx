@@ -36,7 +36,7 @@ export const Update = () => {
 
       if (update.isAvailable) {
         await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
+         await Updates.reloadAsync();
       }
     } catch (error) {
       alert(`Error fetching latest update: ${error}`);

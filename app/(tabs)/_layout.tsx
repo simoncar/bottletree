@@ -21,7 +21,7 @@ function TabBarIcon(props: {
   return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
-const appName = "Notebook";
+const appName = "Builder";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

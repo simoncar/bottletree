@@ -210,56 +210,7 @@ export default function editUser() {
           </View>
         </View>
       </View>
-      <TouchableOpacity
-        key={"language"}
-        onPress={() =>
-          router.navigate({
-            pathname: "/language",
-          })
-        }>
-        <View style={styles.outerView}>
-          <View style={styles.leftContent}>
-            <FontAwesome
-              name="language"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-            <Text style={styles.settingName}>Language</Text>
-          </View>
-          <View style={styles.rightChevron}>
-            <FontAwesome5
-              name="chevron-right"
-              size={20}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        key={"deleteAccount"}
-        onPress={() =>
-          router.navigate({
-            pathname: "/deleteAccount",
-          })
-        }>
-        <View style={styles.outerView}>
-          <View style={styles.leftContent}>
-            <FontAwesome5
-              name="trash-alt"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-            <Text style={styles.settingName}>Delete Account</Text>
-          </View>
-          <View style={styles.rightChevron}>
-            <FontAwesome5
-              name="chevron-right"
-              size={20}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-        </View>
-      </TouchableOpacity>
+
       <View style={styles.outerView}>
         <TouchableOpacity
           key={"signOut"}
@@ -316,6 +267,32 @@ export default function editUser() {
           </View>
         </View>
       )}
+
+      <TouchableOpacity
+        key={"deleteAccount"}
+        onPress={() =>
+          router.navigate({
+            pathname: "/deleteAccount",
+          })
+        }>
+        <View style={styles.outerView}>
+          <View style={styles.leftContent}>
+            <FontAwesome5
+              name="trash-alt"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+            <Text style={styles.settingName}>Delete Account</Text>
+          </View>
+          <View style={styles.rightChevron}>
+            <FontAwesome5
+              name="chevron-right"
+              size={20}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
 
       <StatusBar style="auto" />
       <View style={styles.aboutContainer}>
