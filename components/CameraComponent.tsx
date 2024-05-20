@@ -1,4 +1,4 @@
-import { Camera, CameraType } from "expo-camera";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useState, useContext, useRef } from "react";
 import {
   Button,
@@ -20,8 +20,9 @@ import { View, Text, ParsedText } from "@/components/Themed";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
-  const [type, setType] = useState(CameraType.back);
-  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [facing, setFacing] = useState("back");
+  const [permission, requestPermission] = useCameraPermissions();
+
   const colorScheme = useColorScheme();
   const [camera, setCamera] = useState(null);
   const { sharedDataProject } = useContext(ProjectContext);
@@ -31,28 +32,23 @@ export default function App() {
   const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
 
   if (!permission) {
+    // Camera permissions are still loading.
     return <View />;
   }
-
   if (!permission.granted) {
-    // Camera permissions are not granted yet
+    // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
-        <Text style={styles.permission}>
+        <Text style={{ textAlign: "center" }}>
           We need your permission to show the camera
         </Text>
-        <Button
-          onPress={requestPermission}
-          title="Grant Permission to use the Camera"
-        />
+        <Button onPress={requestPermission} title="grant permission" />
       </View>
     );
   }
 
-  function flipCamera() {
-    setType((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back,
-    );
+  function toggleCameraFacing() {
+    setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
   const progressCallback = (progress) => {
@@ -141,12 +137,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Camera
-        ref={(ref) => setCamera(ref)}
-        style={styles.camera}
-        type={type}
-        useCamera2Api
-        autoFocus={true}>
+      <CameraView style={styles.camera} facing={facing}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
           <View style={styles.a}>
@@ -162,7 +153,9 @@ export default function App() {
             </TouchableOpacity>
           </View>
           <View style={styles.a}>
-            <TouchableOpacity style={styles.flipCamera} onPress={flipCamera}>
+            <TouchableOpacity
+              style={styles.flipCamera}
+              onPress={toggleCameraFacing}>
               <Ionicons
                 name="camera-reverse-outline"
                 size={45}
@@ -171,7 +164,7 @@ export default function App() {
             </TouchableOpacity>
           </View>
         </View>
-      </Camera>
+      </CameraView>
     </View>
   );
 }
@@ -182,6 +175,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     paddingBottom: 40,
+  },
+  button: {
+    alignItems: "center",
+    alignSelf: "flex-end",
+    flex: 1,
+  },
+  buttonContainer: {
+    backgroundColor: "transparent",
+    flex: 1,
+    flexDirection: "row",
+    margin: 64,
   },
   buttonRow: {
     bottom: 0,
@@ -226,5 +230,10 @@ const styles = StyleSheet.create({
   },
   permission: {
     textAlign: "center",
+  },
+  text: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });

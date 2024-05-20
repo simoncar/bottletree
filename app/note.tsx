@@ -27,7 +27,7 @@ export default function Note() {
     caption: "",
     projectId: local?.projectId || "",
     projectTitle: "",
-    author: sharedDataUser.displayName,
+    author: sharedDataUser?.displayName || "", // Use optional chaining and provide a default value
   });
 
   console.log("Note:", "pro : " + local.projectId, "Post:" + local.postId);
