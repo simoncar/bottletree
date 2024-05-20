@@ -48,6 +48,7 @@ export const Posts = ({ project }: Props) => {
 
   const renderItems = (item) => {
     const post: IPost = item.item;
+    console.log("renderItems Post: ", post);
 
     return (
       <View>
@@ -57,6 +58,8 @@ export const Posts = ({ project }: Props) => {
   };
 
   const renderEmpty = () => {
+    console.log("renderEmpty: ", currentProject?.key);
+
     if (undefined != currentProject?.key) {
       return (
         <View style={styles.loginBtn}>

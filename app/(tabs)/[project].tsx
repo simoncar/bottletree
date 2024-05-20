@@ -22,7 +22,7 @@ export default function ProjectPosts() {
     project: "",
   };
 
-  if (project == "welcome") {
+  if (project == "welcomeXXX") {
     const currentUser = auth().currentUser;
     if (currentUser) {
       getUser(loggedInUser.uid, (user) => {

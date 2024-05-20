@@ -1,6 +1,7 @@
 import { db, firestore } from "./firebase";
 import { IPost, IComment } from "./types";
 import * as Device from "expo-device";
+import { addProjectUser } from "./APIproject";
 
 //create a export function that gets a single post from firebase into a return object that can be used by the app
 export async function getPost(
@@ -209,6 +210,11 @@ export async function getPosts(
   }
 
   console.log("loading posts from firebase: getPosts", project);
+
+  //force user into the welcome project
+  // run the addProjectUserFunction with a project ID of 'welcome' and a user ID of the current user
+  // this will add the user to the welcome project
+  //addProjectUser("welcome", sharedDataUser.uid, saveDone);
 
   const q = firestore()
     .collection("projects")
