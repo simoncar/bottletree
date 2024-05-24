@@ -5,6 +5,7 @@ import {
   Pressable,
   useColorScheme,
   View,
+  TouchableOpacity,
 } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
@@ -64,6 +65,18 @@ const Post = (props) => {
     );
   }
 
+  function renderAddProject() {
+    return (
+      <TouchableOpacity
+        onPress={async () => {
+          console.log("create account pressed");
+        }}
+        style={styles.loginBtn}>
+        <Text style={styles.loginText}>+ Create Building Project</Text>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <View
       style={[
@@ -74,16 +87,20 @@ const Post = (props) => {
         },
       ]}>
       {renderImage()}
+
       {!(<Dots images={imageUrls} activeImage={activeImage} />)}
 
       <View style={styles.commentView}>
         <Text style={styles.comment}>{caption}</Text>
+
         <Comments
           project={post.projectId}
           post={post.key}
           commentShow={commentShow}
           setCommentShow={setCommentShow}
         />
+
+        {renderAddProject()}
       </View>
 
       <Footer
