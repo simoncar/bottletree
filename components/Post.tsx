@@ -67,13 +67,16 @@ const Post = (props) => {
 
   function renderAddProject() {
     return (
-      <TouchableOpacity
-        onPress={async () => {
-          console.log("create account pressed");
-        }}
-        style={styles.loginBtn}>
-        <Text style={styles.loginText}>+ Create Building Project</Text>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity
+          key={"createProject"}
+          style={styles.createBtn}
+          onPress={async () => {
+            console.log("create account pressed");
+          }}>
+          <Text style={styles.createText}>+ Create Project</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -122,7 +125,24 @@ const styles = StyleSheet.create({
   commentView: {
     backgroundColor: "transparent",
   },
-
+  container: {
+    alignItems: "center",
+    flex: 1,
+    paddingTop: 40,
+  },
+  createBtn: {
+    alignItems: "center",
+    backgroundColor: "#9D5BD0",
+    borderRadius: 10,
+    height: 50,
+    justifyContent: "center",
+    marginBottom: 40,
+    width: "80%",
+  },
+  createText: {
+    color: "white",
+    fontSize: 18,
+  },
   postView: {
     borderRadius: 10,
     borderWidth: 10,
