@@ -72,7 +72,9 @@ const Post = (props) => {
           key={"createProject"}
           style={styles.createBtn}
           onPress={async () => {
-            console.log("create account pressed");
+            router.replace({
+              pathname: "project/add",
+            });
           }}>
           <Text style={styles.createText}>+ Create Project</Text>
         </TouchableOpacity>
