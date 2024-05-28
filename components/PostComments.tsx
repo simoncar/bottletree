@@ -61,8 +61,11 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   };
 
   const displayName = (displayName: string) => {
+    if (project == "welcome") {
+      return "";
+    }
     const replacedString = displayName.replace(/ /g, " #");
-    return "#" + replacedString;
+    return "#" + replacedString + " ";
   };
 
   const renderInput = () => {
@@ -128,16 +131,19 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
           lightColor={bubbbleTextColor}
           darkColor={bubbbleTextColor}
           style={styles.commentText}
-          text={displayName(item.displayName) + " " + item.comment}
+          text={displayName(item.displayName) + item.comment}
         />
       </View>
     );
   };
 
+  console.log("project:", project);
+
   return (
     <View style={styles.commentsOverall}>
       <FlatList data={comments} renderItem={({ item }) => renderBubble(item)} />
-      {renderInput()}
+
+      {project != "welcome" && renderInput()}
     </View>
   );
 };
