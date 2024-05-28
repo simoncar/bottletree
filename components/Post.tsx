@@ -14,6 +14,7 @@ import Comments from "./PostComments";
 import Dots from "@/components/dots";
 import Footer from "@/components/Footer";
 import Colors from "@/constants/Colors";
+import Project from "./ProjectPanel";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
@@ -66,20 +67,22 @@ const Post = (props) => {
   }
 
   function renderAddProject() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          key={"createProject"}
-          style={styles.createBtn}
-          onPress={async () => {
-            router.replace({
-              pathname: "project/add",
-            });
-          }}>
-          <Text style={styles.createText}>+ Create Project</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if (post.projectId == "welcome") {
+      return (
+        <View style={styles.container}>
+          <TouchableOpacity
+            key={"createProject"}
+            style={styles.createBtn}
+            onPress={async () => {
+              router.replace({
+                pathname: "project/add",
+              });
+            }}>
+            <Text style={styles.createText}>+ Create Project</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
 
   return (

@@ -159,12 +159,6 @@ const ModalScreen = (props) => {
             <View style={styles.redCircle}>
               <Text style={styles.redNumber}>{postCountDelta}</Text>
             </View>
-            <View style={styles.redCircle}>
-              <Text style={styles.redNumber}>{data.postCount}</Text>
-            </View>
-            <View style={styles.redCircle}>
-              <Text style={styles.redNumber}>{postCountUser}</Text>
-            </View>
           </View>
         )}
         <TouchableOpacity
