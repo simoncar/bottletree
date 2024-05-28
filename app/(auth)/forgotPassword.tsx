@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   heading: {
-    color: "white",
     fontSize: 24,
     paddingBottom: 30,
   },
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   resetDetail: {
-    color: "white",
     fontSize: 18,
     paddingBottom: 30,
     paddingTop: 30,
