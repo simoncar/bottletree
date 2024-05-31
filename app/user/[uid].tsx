@@ -52,11 +52,7 @@ export default function editUser() {
     photoURL: "",
   });
 
-  const admins = [
-    "simoncar@gmail.com",
-    "simon@simon.co",
-    "eddymitchell133@gmail.com",
-  ];
+  const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
   useEffect(() => {
     getUser(local?.uid || "", (user) => {

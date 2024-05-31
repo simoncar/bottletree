@@ -7,6 +7,7 @@ export async function getUser(
   callback: { (user: IUser): void; (arg0: IUser): void },
 ) {
   const q = firestore().collection("users").doc(uid);
+  console.log("getUser: ", uid);
 
   q.get()
     .then((doc) => {
@@ -22,7 +23,6 @@ export async function getUser(
           postCount: doc.data()?.postCount,
         };
         console.log("WWWWWdoc.data: ", doc.data);
-
         console.log("WWWWWgetUser Document data:", user);
 
         callback(user);

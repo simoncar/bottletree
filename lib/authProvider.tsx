@@ -62,11 +62,8 @@ export function AuthProvider(props: React.PropsWithChildren) {
               });
             }
           } else {
-            setSession(null);
-            setSharedDataUser(null);
-
             router.replace({
-              pathname: "/signIn",
+              pathname: "welcome",
               params: {},
             });
           }
@@ -85,7 +82,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   const updateSharedDataUser = (newData) => {
     try {
-      console.log("updateSharedDataUser: ", newData);
+      console.log("updateSharedDataUser (auth provider): ", newData);
 
       const jsonValue = JSON.stringify({ ...sharedDataUser, ...newData });
       setSharedDataUser({ ...sharedDataUser, ...newData });

@@ -38,18 +38,7 @@ export default function SignIn() {
 
   const renderAction = (errorMessage: string) => {
     if (errorMessage == "Success") {
-      return (
-        <TouchableOpacity
-          onPress={async () => {
-            router.replace({
-              pathname: "/signIn",
-              params: {},
-            });
-          }}
-          style={styles.loginBtn}>
-          <Text style={styles.loginText}>SIGN IN</Text>
-        </TouchableOpacity>
-      );
+      return;
     } else {
       return (
         <TouchableOpacity

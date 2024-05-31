@@ -16,12 +16,13 @@ type Props = {
 };
 
 export const Posts = ({ project }: Props) => {
+  const { sharedDataUser } = useAuth();
+
   const [posts, setPosts] = useState([]);
-  const { updateSharedDataUser, sharedDataUser } = useAuth();
 
   let currentProject: IProject;
 
-  console.log("Posts: ", project);
+  console.log("Posts>>>>>: ", project, sharedDataUser);
 
   const postsRead = (postsDB) => {
     console.log("PostsRead: ", postsDB);
@@ -30,13 +31,16 @@ export const Posts = ({ project }: Props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = getPosts(project, postsRead);
-    updateUserProjectCount(project);
+    console.log("Posts: useEffect QQQQ :", project, sharedDataUser);
 
-    return () => {
-      unsubscribe;
-    };
-  }, [project]);
+    if (sharedDataUser) {
+      const unsubscribe = getPosts(project, postsRead);
+      updateUserProjectCount(project);
+      return () => {
+        unsubscribe;
+      };
+    }
+  }, [project, sharedDataUser]);
 
   function updateSharedDataUserProjectCount(
     obj: Record<string, number>,
