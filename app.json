@@ -19,7 +19,7 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "96",
+      "buildNumber": "97",
       "config": {
         "usesNonExemptEncryption": false
       },
