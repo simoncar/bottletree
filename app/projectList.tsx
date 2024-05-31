@@ -118,7 +118,7 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            console.log("here");
+            console.log("here: ", data);
             updateSharedDataUser(sharedDataUser);
 
             updateSharedDataProject({

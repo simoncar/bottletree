@@ -121,8 +121,6 @@ export default function TabLayout() {
             router.navigate({
               pathname: "/camera",
               params: {
-                pdateBegin: dateBegin,
-                pdateEnd: dateEnd,
                 pcolor: "#49B382",
                 pcolorName: "Grass",
               },

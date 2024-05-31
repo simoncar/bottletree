@@ -39,10 +39,14 @@ export default function App() {
     // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
-        <Text style={{ textAlign: "center" }}>
-          We need your permission to show the camera
+        <Text style={styles.text}>
+          We need your permission to show the camera so you can take a photo.
         </Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <Text style={styles.text}>
+          Camera access is optional. If you don't want allow access to the
+          camera you can press the Back button.
+        </Text>
+        <Button onPress={requestPermission} title="Next" />
       </View>
     );
   }
@@ -176,17 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 40,
   },
-  button: {
-    alignItems: "center",
-    alignSelf: "flex-end",
-    flex: 1,
-  },
-  buttonContainer: {
-    backgroundColor: "transparent",
-    flex: 1,
-    flexDirection: "row",
-    margin: 64,
-  },
+
   buttonRow: {
     bottom: 0,
     flexDirection: "row",
@@ -221,6 +215,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    padding: 30,
   },
   flipCamera: {
     alignItems: "center",
@@ -228,12 +223,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  permission: {
-    textAlign: "center",
-  },
   text: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 16,
+    paddingBottom: 20,
+    textAlign: "center",
   },
 });

@@ -187,6 +187,8 @@ export function parseImages(images: string[]) {
   const parsedImages: { ratio: number; url: string }[] = [];
 
   if (images === undefined || images.length === 0) {
+    console.log("parseImages: images is undefined or empty");
+
     return [];
   }
   images.forEach((image) => {
@@ -211,11 +213,6 @@ export async function getPosts(
 
   console.log("loading posts from firebase: getPosts", project);
 
-  //force user into the welcome project
-  // run the addProjectUserFunction with a project ID of 'welcome' and a user ID of the current user
-  // this will add the user to the welcome project
-  //addProjectUser("welcome", sharedDataUser.uid, saveDone);
-
   const q = firestore()
     .collection("projects")
     .doc(project)
@@ -225,7 +222,6 @@ export async function getPosts(
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
     querySnapshot?.forEach((doc) => {
-      parseImages(doc.data().images);
       posts.push({
         key: doc.id,
         projectId: project,

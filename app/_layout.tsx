@@ -193,7 +193,15 @@ export default function RootLayout() {
                     title: "app/layout/user",
                   }}
                 />
-
+                <Stack.Screen
+                  name="camera"
+                  options={{
+                    title: "Camera",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
                 <Stack.Screen
                   name="note"
                   options={{

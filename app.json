@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.92",
+    "version": "1.0.100",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#5D5CE7"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
@@ -23,9 +21,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "associatedDomains": [
-        "applinks:b.simon.co"
-      ]
+      "associatedDomains": ["applinks:b.simon.co"]
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -60,13 +56,13 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to share the images you select with the project team."
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to share the images you select with other people that have access to the project."
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera so you can take a photo and post it to the project so other people that have access to the project can view your photo.",
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
         }
@@ -98,8 +94,8 @@
       [
         "expo-media-library",
         {
-          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
-          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to share the images you select with other people that have access to the project.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos you have selected to your camera roll.",
           "isAccessMediaLocationEnabled": true
         }
       ],

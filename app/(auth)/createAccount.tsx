@@ -27,7 +27,7 @@ export default function SignIn() {
       updateAccountName(name); //firebease auth update function
       updateSharedDataUser(user);
     } else {
-      updateSharedDataUser(null);
+      //updateSharedDataUser(null);
     }
     setErrorMessage(strip(error));
   };

@@ -10,9 +10,12 @@ export interface IPost {
   projectTitle?: string;
   caption: string;
   author?: string;
-  images?: string[];
-  ratio?: number;
+  images?: {
+    ratio: number;
+    url: string;
+  }[];
   timestamp?: Timestamp;
+  ratio: number;
   comments?: IComment[];
 }
 

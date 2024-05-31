@@ -24,6 +24,8 @@ export const Posts = ({ project }: Props) => {
   console.log("Posts: ", project);
 
   const postsRead = (postsDB) => {
+    console.log("PostsRead: ", postsDB);
+
     setPosts(postsDB);
   };
 
@@ -84,6 +86,8 @@ export const Posts = ({ project }: Props) => {
   };
 
   if (null == sharedDataUser) {
+    console.log("Posts: No sharedDataUser");
+
     return;
   } else
     return (

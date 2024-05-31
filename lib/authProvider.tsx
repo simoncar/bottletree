@@ -4,6 +4,7 @@ import { useStorageState } from "./useStorageState";
 import { auth } from "@/lib/firebase";
 import { IUser } from "./types";
 import { getUser } from "@/lib/APIuser";
+import { removeFirebaseWord } from "@/lib/util";
 
 const AuthContext = createContext<
   | (IUser & { sharedDataUser?: IUser } & {
@@ -29,6 +30,8 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
+      console.log("AuthProvider onAuthStateChanged: ", user);
+
       if (user) {
         getUser(auth().currentUser?.uid, (dbuser) => {
           if (dbuser) {
@@ -42,9 +45,15 @@ export function AuthProvider(props: React.PropsWithChildren) {
               postCount: dbuser.postCount,
               language: dbuser.language,
             };
+            console.log("AuthProvider setSharedDataUser: ", usr);
 
             setSharedDataUser(usr);
             setSession(user.uid);
+
+            router.replace({
+              pathname: "/welcome",
+              params: {},
+            });
           } else {
             setSession(null);
             setSharedDataUser(null);
@@ -94,10 +103,13 @@ export function AuthProvider(props: React.PropsWithChildren) {
           photoURL: convertToString(""),
           project: "",
         };
+        console.log("createAccount success: ", user);
+
         callback(user, "Success");
       })
       .catch((error) => {
-        const errorMessage = error.message;
+        const errorMessage = removeFirebaseWord(error.message);
+        console.log("createAccount failure: ", error);
         callback({}, errorMessage);
       });
   };

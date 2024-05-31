@@ -29,6 +29,8 @@ const Project = (props) => {
   });
 
   useEffect(() => {
+    console.log("Project panel Use effect fired: ", project);
+
     getProject(project || "", (projectObj) => {
       if (projectObj) {
         setProject(projectObj);
