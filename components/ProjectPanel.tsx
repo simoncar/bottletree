@@ -34,6 +34,7 @@ const Project = (props) => {
     getProject(project || "", (projectObj) => {
       if (projectObj) {
         setProject(projectObj);
+        
       }
     });
     getUserProjectCount(userProjectCountRead);

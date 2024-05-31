@@ -30,7 +30,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
-      console.log("AuthProvider onAuthStateChanged: ", user);
+      console.log("WWWWW AuthProvider onAuthStateChanged: ", user);
 
       if (user) {
         getUser(auth().currentUser?.uid, (dbuser) => {
@@ -45,15 +45,22 @@ export function AuthProvider(props: React.PropsWithChildren) {
               postCount: dbuser.postCount,
               language: dbuser.language,
             };
-            console.log("AuthProvider setSharedDataUser: ", usr);
+            console.log("WWWWW AuthProvider setSharedDataUser: ", usr);
 
             setSharedDataUser(usr);
             setSession(user.uid);
 
-            router.replace({
-              pathname: "/welcome",
-              params: {},
-            });
+            if (usr.project) {
+              router.replace({
+                pathname: "/" + usr.project,
+                params: {},
+              });
+            } else {
+              router.replace({
+                pathname: "welcome",
+                params: {},
+              });
+            }
           } else {
             setSession(null);
             setSharedDataUser(null);

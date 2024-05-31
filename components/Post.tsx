@@ -94,6 +94,7 @@ const Post = (props) => {
           borderColor: Colors[colorScheme ?? "light"].postBackground,
         },
       ]}>
+      {renderAddProject()}
       {renderImage()}
 
       {!(<Dots images={imageUrls} activeImage={activeImage} />)}
@@ -107,8 +108,6 @@ const Post = (props) => {
           commentShow={commentShow}
           setCommentShow={setCommentShow}
         />
-
-        {renderAddProject()}
       </View>
 
       <Footer

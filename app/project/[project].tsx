@@ -44,6 +44,8 @@ export default function editPost() {
   });
 
   useEffect(() => {
+    console.log("editPost Use effect fired: ", local?.project);
+
     getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);
@@ -149,64 +151,60 @@ export default function editPost() {
   };
 
   return (
-  
-      <ScrollView>
-        <Stack.Screen
-          options={{
-            headerRight: () => (
-              <View style={{ paddingRight: 5 }}>
-                <NativeButton
-                  title="Done"
-                  onPress={() => updateProject(project, saveDone)}
-                />
-              </View>
-            ),
-            title: "",
-          }}
-        />
-        <View style={styles.avatarAContainer}>
-          <View style={styles.avatarBView}>{profilePic()}</View>
+    <ScrollView>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <View style={{ paddingRight: 5 }}>
+              <NativeButton
+                title="Done"
+                onPress={() => updateProject(project, saveDone)}
+              />
+            </View>
+          ),
+          title: "",
+        }}
+      />
+      <View style={styles.avatarAContainer}>
+        <View style={styles.avatarBView}>{profilePic()}</View>
+      </View>
+      <View style={styles.projectNameContainer}>
+        <View style={styles.projectBox}>
+          <TextInput
+            style={styles.project}
+            onChangeText={(text) => setProject({ ...project, title: text })}
+            placeholder={"Project Title"}
+            value={project.title}
+          />
         </View>
-        <View style={styles.projectNameContainer}>
-          <View style={styles.projectBox}>
-            <TextInput
-              style={styles.project}
-              onChangeText={(text) => setProject({ ...project, title: text })}
-              placeholder={"Project Title"}
-              value={project.title}
-            />
-          </View>
-          <View style={styles.archiveBox}>
-            <Text style={styles.archiveMessage}>
-              {project.archived == true ? "Project Archived" : ""}
-            </Text>
-          </View>
+        <View style={styles.archiveBox}>
+          <Text style={styles.archiveMessage}>
+            {project.archived == true ? "Project Archived" : ""}
+          </Text>
         </View>
+      </View>
 
-        <ProjectUsers project={local.project} updateUsers={updateUsers} />
+      <ProjectUsers project={local.project} updateUsers={updateUsers} />
 
-        <Pressable style={styles.outerView} onPress={toggleArchive}>
-          <View style={styles.avatar}>
-            <Ionicons
-              name="archive"
-              size={25}
-              color={Colors[colorScheme ?? "light"].textPlaceholder}
-            />
-          </View>
-          <View>
-            <Text style={styles.archiveName}>
-              {project.archived == true
-                ? "Unarchive Project"
-                : "Archive Project"}
-            </Text>
-          </View>
-        </Pressable>
-
-        <View style={styles.diagBox}>
-          <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
+      <Pressable style={styles.outerView} onPress={toggleArchive}>
+        <View style={styles.avatar}>
+          <Ionicons
+            name="archive"
+            size={25}
+            color={Colors[colorScheme ?? "light"].textPlaceholder}
+          />
         </View>
-      </ScrollView>
-   
+        <View>
+          <Text style={styles.archiveName}>
+            {project.archived == true ? "Unarchive Project" : "Archive Project"}
+          </Text>
+        </View>
+      </Pressable>
+
+      <View style={styles.diagBox}>
+        <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
+      </View>
+    </ScrollView>
   );
 }
 

@@ -18,9 +18,12 @@ export async function getUser(
           email: doc.data()?.email,
           photoURL: doc.data()?.photoURL,
           language: doc.data()?.language,
-          project: doc.data()?.project,
+          project: doc.data().project,
           postCount: doc.data()?.postCount,
         };
+        console.log("WWWWWdoc.data: ", doc.data);
+
+        console.log("WWWWWgetUser Document data:", user);
 
         callback(user);
       } else {

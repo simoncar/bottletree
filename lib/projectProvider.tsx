@@ -27,6 +27,8 @@ const ProjectProvider = ({ children }) => {
   }, []);
 
   async function updateSharedDataProject(newData) {
+    console.log("updateSharedDataProject: ", newData);
+
     const jsonValue = JSON.stringify({
       ...sharedDataProject,
       ...newData,

@@ -119,17 +119,21 @@ const ModalScreen = (props) => {
           style={styles.innerView}
           onPress={() => {
             console.log("here: ", data);
-            updateSharedDataUser(sharedDataUser);
 
             updateSharedDataProject({
               key: data.key,
+              project: data.key,
               title: data.title,
               icon: data.icon,
               archived: data.archived,
               postCount: data.postCount ?? 0,
             });
+            console.log("yyy sharedDataUser: ", sharedDataUser);
+            if (sharedDataUser.postCount !== undefined) {
+              sharedDataUser.postCount[data.key] = data.postCount;
+            }
 
-            sharedDataUser.postCount[data.key] = data.postCount ?? 0;
+            updateSharedDataUser(sharedDataUser);
 
             router.navigate({
               pathname: "/[project]",

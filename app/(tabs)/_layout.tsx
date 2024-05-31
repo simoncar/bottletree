@@ -87,6 +87,11 @@ export default function TabLayout() {
   };
 
   const openActionSheet = async () => {
+    console.log(
+      "openActionSheet, sharedDataProject.title: ",
+      sharedDataProject.key,
+    );
+
     const options = [
       "Add Note",
       "Take Photo",

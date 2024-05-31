@@ -6,6 +6,8 @@ const ProjectContext = React.createContext<IProject>({
   title: "",
   icon: "",
   archived: false,
+  postCount: 0,
+  project: ""
 });
 
 export default ProjectContext;
