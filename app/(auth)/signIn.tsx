@@ -29,6 +29,8 @@ export default function SignIn() {
     switch (errorCode) {
       case "auth/invalid-email":
         return "Invalid email address format.";
+      case "auth/invalid-credential":
+        return "Invalid email or password. Check your login details and try again or create an account.";
       case "auth/user-disabled":
         return "User account has been disabled.";
       case "auth/user-not-found":
