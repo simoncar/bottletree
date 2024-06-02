@@ -39,7 +39,6 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
 
   const saveDone = (comment: IComment) => {
     //setProjects(projectsDB);
-    console.log("Comment saved", comment);
     setSaved(true);
     setComment(defaultComment);
   };

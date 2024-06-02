@@ -9,7 +9,6 @@ export async function getPost(
   postId: string,
   callback: { (post: IPost): void; (arg0: IPost): void },
 ) {
-  console.log("getPost", project, postId);
 
   const q = db
     .collection("projects")
@@ -82,7 +81,6 @@ export async function addPostImage(post: IPost, callback: saveDone) {
 }
 
 export async function setPostNote(post: IPost, callback: saveDone) {
-  console.log("setPostNote", post);
 
   const note = db
     .collection("projects")
@@ -101,7 +99,6 @@ export async function setPostNote(post: IPost, callback: saveDone) {
     .then((docRef) => {
       console.log("Post Document written with ID: ", post.key);
       if (post.author != "Simon" && Device.isDevice) {
-        console.log("******* SENDING NOTIFICATION *******");
 
         const messageRef = db
           .collection("notifications")
@@ -111,7 +108,6 @@ export async function setPostNote(post: IPost, callback: saveDone) {
             timestamp: firestore.Timestamp.now(),
           })
           .then((docRef) => {
-            console.log("Notification Document written with ID: ", docRef.id);
             callback(docRef.id);
           })
           .catch((error) => {

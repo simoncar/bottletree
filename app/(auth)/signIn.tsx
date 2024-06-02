@@ -141,7 +141,6 @@ export default function SignIn() {
               auth()
                 .signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                  console.log("logged in:", userCredential);
                   updateAccountName(userCredential.user.displayName);
 
                   router.navigate("/");

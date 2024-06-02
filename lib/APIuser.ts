@@ -7,7 +7,6 @@ export async function getUser(
   callback: { (user: IUser): void; (arg0: IUser): void },
 ) {
   const q = firestore().collection("users").doc(uid);
-  console.log("getUser: ", uid);
 
   q.get()
     .then((doc) => {
@@ -22,8 +21,6 @@ export async function getUser(
           project: doc.data().project,
           postCount: doc.data()?.postCount,
         };
-        console.log("WWWWWdoc.data: ", doc.data);
-        console.log("WWWWWgetUser Document data:", user);
 
         callback(user);
       } else {
@@ -42,13 +39,10 @@ export async function deleteUser(
   uid: string,
   callback: { (user: IUser): void; (arg0: IUser): void },
 ) {
-  console.log("deleteUser: ", uid);
-
   const q = firestore().collection("users").doc(uid);
 
   q.delete()
     .then(() => {
-      console.log("User successfully deleted!");
       callback(null);
     })
     .catch((error) => {

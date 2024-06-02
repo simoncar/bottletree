@@ -44,7 +44,6 @@ export default function editPost() {
   });
 
   useEffect(() => {
-    console.log("editPost Use effect fired: ", local?.project);
 
     getProject(local?.project || "", (project) => {
       if (project) {
@@ -76,11 +75,9 @@ export default function editPost() {
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
-    console.log("completedCallback:", sourceDownloadURLarray);
     let ratio = 0.66666;
     const downloadURLarray = sourceDownloadURLarray.map((element) => {
       const myArray = element.split("*");
-      console.log("myArray: ", myArray);
       if (myArray[0] > ratio) {
         ratio = myArray[0];
       }

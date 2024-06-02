@@ -32,18 +32,14 @@ const Footer = ({ post, setCommentShow }: Props) => {
     }
   };
 
-  const saveDone = () => {
-    console.log("saveDone");
-  };
+  const saveDone = () => {};
 
   const askComment = () => {
-    console.log("comment");
     setFooter(!footer);
     setCommentShow(true);
   };
 
   const openEdit = () => {
-    console.log("edit:" + post);
     router.navigate({
       pathname: "/note",
       params: {
@@ -54,7 +50,6 @@ const Footer = ({ post, setCommentShow }: Props) => {
   };
 
   const askDelete = () => {
-    console.log("delete");
     setFooter(!footer);
 
     Alert.alert(

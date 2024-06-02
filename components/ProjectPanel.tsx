@@ -18,7 +18,7 @@ const Project = (props) => {
   const router = useRouter();
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
-  
+
   const [projectObj, setProject] = useState<IProject>({
     project: "",
     key: "",
@@ -29,12 +29,9 @@ const Project = (props) => {
   });
 
   useEffect(() => {
-    console.log("Project panel Use effect fired: ", project);
-
     getProject(project || "", (projectObj) => {
       if (projectObj) {
         setProject(projectObj);
-
       }
     });
     getUserProjectCount(userProjectCountRead);

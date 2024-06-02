@@ -61,18 +61,13 @@ export default function editUser() {
   useEffect(() => {
     getUser(local?.uid || "", (user) => {
       if (user) {
-        console.log("user: ", user);
-
         setUser(user);
         updateSharedDataUser(user);
-      } else {
-        console.log("no user :-(");
       }
     });
   }, []);
 
   const save = () => {
-    console.log("save: " + user.displayName, sharedDataUser?.displayName);
     updateSharedDataUser({ displayName: user.displayName });
     updateAccountName(user.displayName);
 
@@ -84,12 +79,9 @@ export default function editUser() {
   };
 
   const completedCallback = (sourceDownloadURLarray: any[]) => {
-    console.log("completedCallback:", sourceDownloadURLarray);
-
     let ratio = 0.66666;
     const downloadURLarray = sourceDownloadURLarray.map((element) => {
       const myArray = element.split("*");
-      console.log("myArray: ", myArray);
       if (myArray[0] > ratio) {
         ratio = myArray[0];
       }

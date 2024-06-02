@@ -11,7 +11,6 @@ export function parseLinks(text: string) {
 
 export function removeFirebaseWord(errorString) {
   const wordToRemove = "firebase:";
-  console.log("Error removeFirebaseWord: ", errorString);
 
   return errorString
     .split(" ")

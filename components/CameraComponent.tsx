@@ -55,13 +55,9 @@ export default function App() {
     setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
-  const progressCallback = (progress) => {
-    console.log("progressCallback CAMERA : " + progress);
-  };
+  const progressCallback = (progress) => {};
 
   const saveDone = () => {
-    console.log("saveDone - push to home");
-
     router.navigate({
       pathname: "/(tabs)",
       params: {
@@ -72,10 +68,8 @@ export default function App() {
   };
 
   const completedCallback = (sourceDownloadURL) => {
-    console.log("addImageCallback CAMERA >>>>>>>: ", sourceDownloadURL);
     let ratio = 0.66666;
     const myArray = sourceDownloadURL.split("*");
-    console.log("myArray: ", myArray);
     if (myArray[0] > ratio) {
       ratio = myArray[0];
     }

@@ -22,7 +22,6 @@ export default function SignIn() {
   const colorScheme = useColorScheme();
 
   const createAccountCallback = (user, error) => {
-    console.log("createAccountCallback:", error);
     if (error == "Success") {
       updateAccountName(name); //firebease auth update function
       updateSharedDataUser(user);
@@ -43,7 +42,6 @@ export default function SignIn() {
       return (
         <TouchableOpacity
           onPress={async () => {
-            console.log("touchable opacity signin");
 
             // signIn(email, password, loginError);
 

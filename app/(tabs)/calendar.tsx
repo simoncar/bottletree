@@ -71,8 +71,6 @@ export default function CalendarLarge() {
   }
 
   useEffect(() => {
-    console.log("useEffect setNavOptions:", calendarDate);
-
     setNavOptions(calendarDate);
     if (undefined != currentProject) {
       const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
@@ -83,8 +81,6 @@ export default function CalendarLarge() {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect setNavOptions:", calendarDate);
-
     setNavOptions(calendarDate);
   }, [calendarDate]);
 
@@ -132,7 +128,6 @@ export default function CalendarLarge() {
   };
 
   const onChangeDate = ([start, end]) => {
-    console.log("onChangeDate:", start, end);
     //setDate(start);
     //setNavOptions(start);
   };
@@ -151,18 +146,6 @@ export default function CalendarLarge() {
   };
 
   const onPressEvent = (event: ICalendarEventBase) => {
-    console.log("onPressEvent:", event);
-    console.log("onPressEventAAA:", {
-      pkey: event.key,
-      ptitle: event.title,
-      pdescription: event.description,
-      pdateBegin: event.start,
-      pdateEnd: event.end,
-      puid: event.uid,
-      pcolor: event.color,
-      pcolorName: event.colorName,
-    });
-
     router.navigate({
       pathname: "/editCalendar",
       params: {

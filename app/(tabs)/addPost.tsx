@@ -21,7 +21,6 @@ export default function addPhoto() {
   }, []);
 
   const saveDone = () => {
-    console.log("saveDone - push to home");
 
     router.navigate({
       pathname: "/(tabs)",
@@ -72,11 +71,9 @@ export default function addPhoto() {
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
-    console.log("addImageCallback >>>>>>>: ", sourceDownloadURLarray);
     let ratio = 0.66666;
     const downloadURLarray = sourceDownloadURLarray.map((element) => {
       const myArray = element.split("*");
-      console.log("myArray: ", myArray);
       if (myArray[0] > ratio) {
         ratio = myArray[0];
       }

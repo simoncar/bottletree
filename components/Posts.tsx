@@ -22,17 +22,11 @@ export const Posts = ({ project }: Props) => {
 
   let currentProject: IProject;
 
-  console.log("Posts>>>>>: ", project, sharedDataUser);
-
   const postsRead = (postsDB) => {
-    console.log("PostsRead: ", postsDB);
-
     setPosts(postsDB);
   };
 
   useEffect(() => {
-    console.log("Posts: useEffect QQQQ :", project, sharedDataUser);
-
     if (sharedDataUser) {
       const unsubscribe = getPosts(project, postsRead);
       updateUserProjectCount(project);
@@ -54,7 +48,6 @@ export const Posts = ({ project }: Props) => {
 
   const renderItems = (item) => {
     const post: IPost = item.item;
-    console.log("renderItems Post: ", post);
 
     return (
       <View>
@@ -64,8 +57,6 @@ export const Posts = ({ project }: Props) => {
   };
 
   const renderEmpty = () => {
-    console.log("renderEmpty: ", currentProject?.key);
-
     if (undefined != currentProject?.key) {
       return (
         <View style={styles.loginBtn}>
@@ -90,8 +81,6 @@ export const Posts = ({ project }: Props) => {
   };
 
   if (null == sharedDataUser) {
-    console.log("Posts: No sharedDataUser");
-
     return;
   } else
     return (

@@ -13,7 +13,6 @@ export async function getProject(
     console.log("No project provided");
     return;
   }
-  console.log("getProject:", project);
 
   const q = db.collection("projects").doc(project);
 

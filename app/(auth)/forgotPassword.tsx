@@ -11,7 +11,6 @@ export default function SignIn() {
   const { resetPassword } = useAuth();
 
   const resetError = (error) => {
-    console.log("reset ERROR:", error);
     setErrorMessage(strip(error));
   };
 
@@ -49,7 +48,6 @@ export default function SignIn() {
 
       <TouchableOpacity
         onPress={async () => {
-          console.log("touchable opacity signin");
 
           resetPassword(email, resetError);
         }}

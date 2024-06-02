@@ -57,7 +57,6 @@ export const ProjectUsers = (props) => {
   };
 
   const deleteDone = (id) => {
-    console.log("deleteDone: ", id);
     getProjectUsers(project, projectUsersRead);
   };
 
@@ -93,7 +92,6 @@ export const ProjectUsers = (props) => {
       <Pressable
         style={styles.rightDeleteBox}
         onPress={() => {
-          console.log("doDelete:", data, index);
           deleteProjectUser(project, data, deleteDone);
           row[index].close();
         }}>

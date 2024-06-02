@@ -34,7 +34,6 @@ export default function TabLayout() {
     return <Text>Loading...</Text>;
   }
 
-  console.log(" >> _Layout sharedDataProject: ", sharedDataProject);
 
   const loggedInUser: IUser = sharedDataUser ?? {
     uid: "",
@@ -89,11 +88,6 @@ export default function TabLayout() {
   };
 
   const openActionSheet = async () => {
-    console.log(
-      "openActionSheet, sharedDataProject.title: ",
-      sharedDataProject.key,
-    );
-
     const dateBegin = new Date();
     dateBegin.setMinutes(0);
     const dateEnd = new Date();
