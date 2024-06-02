@@ -2,16 +2,14 @@ import React, { useState, useContext } from "react";
 import { StyleSheet, Button, SafeAreaView } from "react-native";
 import { router, Stack } from "expo-router";
 import { TextInput } from "@/components/Themed";
-
-import ProjectContext from "@/lib/projectContext";
 import { useAuth } from "@/lib/authProvider";
 
 import { addProject, addProjectUser } from "@/lib/APIproject";
 import { IProject, IUser } from "@/lib/types";
+import { useProject } from "@/lib/projectProvider";
 
 export default function addPhoto() {
-  const { sharedDataProject, updateSharedDataProject } =
-    useContext(ProjectContext);
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const { sharedDataUser } = useAuth();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -46,7 +44,7 @@ export default function addPhoto() {
   };
 
   const saveDone = (id: string) => {
-    updateSharedDataProject({
+    updateStoreSharedDataProject({
       key: id,
       title: project.title,
       icon: project.icon,

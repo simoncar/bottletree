@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useStorageState } from "./useStorageState";
 import { auth } from "@/lib/firebase";
@@ -25,6 +25,7 @@ export function useAuth() {
 }
 
 export function AuthProvider(props: React.PropsWithChildren) {
+  const router = useRouter();
   const [[isLoading, session], setSession] = useStorageState("session");
   const [sharedDataUser, setSharedDataUser] = useState<IUser | null>(null);
 
@@ -71,6 +72,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
       } else {
         setSession(null);
         setSharedDataUser(null);
+
         router.replace({
           pathname: "/signIn",
           params: {},

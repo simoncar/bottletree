@@ -15,6 +15,7 @@ import { IUser } from "@/lib/types";
 import ProjectContext from "@/lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useAuth } from "@/lib/authProvider";
+import { useProject } from "@/lib/projectProvider";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -23,8 +24,7 @@ const ModalScreen = (props) => {
 
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const { sharedDataProject, updateSharedDataProject } =
-    useContext(ProjectContext);
+ const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const { sharedDataUser, isLoading } = useAuth();
 
   const usersRead = (usersDB: IUser[]) => {

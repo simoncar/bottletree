@@ -26,7 +26,7 @@ import { IProject } from "@/lib/types";
 
 export default function editPost() {
   const [updateUsers, setUpdateUsers] = useState(true);
-  const { sharedData, updateSharedDataProject } = useProject();
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const local = useLocalSearchParams<{
     project: string;
   }>();
@@ -49,13 +49,13 @@ export default function editPost() {
     getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);
-        updateSharedDataProject(project);
+        updateStoreSharedDataProject(project);
       }
     });
   }, []);
 
   const saveDone = (id: string) => {
-    updateSharedDataProject(project);
+    updateStoreSharedDataProject(project);
 
     router.navigate({
       pathname: "/[project]",

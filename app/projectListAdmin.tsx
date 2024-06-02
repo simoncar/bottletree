@@ -18,6 +18,7 @@ import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useAuth } from "@/lib/authProvider";
+import { useProject } from "@/lib/projectProvider";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -28,7 +29,7 @@ const ModalScreen = (props) => {
   const [loading, setLoading] = useState(true);
 
   const colorScheme = useColorScheme();
-  const { updateSharedDataProject } = useContext(ProjectContext);
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const projectsRead = (projectsDB: IProject[]) => {
     setProjects(projectsDB);
@@ -152,7 +153,7 @@ const ModalScreen = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            updateSharedDataProject({
+            updateStoreSharedDataProject({
               key: data.key,
               title: data.title,
               icon: data.icon,

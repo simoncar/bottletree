@@ -10,15 +10,15 @@ import { getUserProjectCount } from "@/lib/APIuser";
 import { IUser, IProject } from "@/lib/types";
 import { useAuth } from "@/lib/authProvider";
 import { getProject } from "@/lib/APIproject";
-import ProjectContext from "@/lib/projectContext";
+import { useProject } from "@/lib/projectProvider";
 
 const Project = (props) => {
   const { project } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
-  const { sharedDataProject, updateSharedDataProject } =
-    useContext(ProjectContext);
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  
   const [projectObj, setProject] = useState<IProject>({
     project: "",
     key: "",
@@ -34,7 +34,7 @@ const Project = (props) => {
     getProject(project || "", (projectObj) => {
       if (projectObj) {
         setProject(projectObj);
-        
+
       }
     });
     getUserProjectCount(userProjectCountRead);
@@ -56,7 +56,7 @@ const Project = (props) => {
         style={styles.pressableLeft}
         onPress={() => {
           if (projectObj) {
-            updateSharedDataProject({
+            updateStoreSharedDataProject({
               key: projectObj.project,
             });
             router.navigate({

@@ -17,6 +17,7 @@ import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useAuth } from "@/lib/authProvider";
+import { useProject } from "@/lib/projectProvider";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -28,7 +29,7 @@ const ModalScreen = (props) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const colorScheme = useColorScheme();
-  const { updateSharedDataProject } = useContext(ProjectContext);
+    const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const projectsRead = (projectsDB: IProject[]) => {
     console.log("calling SETPROJECTS");
@@ -120,7 +121,7 @@ const ModalScreen = (props) => {
           onPress={() => {
             console.log("here: ", data);
 
-            updateSharedDataProject({
+            updateStoreSharedDataProject({
               key: data.key,
               project: data.key,
               title: data.title,
@@ -168,7 +169,7 @@ const ModalScreen = (props) => {
         <TouchableOpacity
           key={"chevron." + data.key}
           onPress={() => {
-            updateSharedDataProject({
+            updateStoreSharedDataProject({
               key: data.key,
               title: data.title,
               icon: data.icon,

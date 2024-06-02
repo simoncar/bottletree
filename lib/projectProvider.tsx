@@ -26,13 +26,21 @@ const ProjectProvider = ({ children }) => {
     });
   }, []);
 
-  async function updateSharedDataProject(newData) {
-    console.log("updateSharedDataProject: ", newData);
+  async function updateStoreSharedDataProject(newData) {
+    console.log("updateStoreSharedDataProject PART 1: ", newData);
 
     const jsonValue = JSON.stringify({
       ...sharedDataProject,
       ...newData,
     });
+    if (newData === null) {
+      AsyncStorage.removeItem("@PROJECT").then(() => {
+        setSharedDataProject(null);
+        return null;
+      });
+    }
+
+    console.log("updateStoreSharedDataProject PART 2: ", jsonValue);
     setSharedDataProject({ ...sharedDataProject, ...newData });
     AsyncStorage.setItem("@PROJECT", jsonValue).then(() => {
       return jsonValue;
@@ -41,7 +49,7 @@ const ProjectProvider = ({ children }) => {
 
   return (
     <ProjectContext.Provider
-      value={{ sharedDataProject, updateSharedDataProject }}>
+      value={{ sharedDataProject, updateStoreSharedDataProject }}>
       {children}
     </ProjectContext.Provider>
   );

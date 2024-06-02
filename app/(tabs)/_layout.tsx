@@ -8,7 +8,7 @@ import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
 import { IUser } from "@/lib/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import ProjectContext from "@/lib/projectContext";
+import { useProject } from "@/lib/projectProvider";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { addPostImage } from "@/lib/APIpost";
 import { useAuth } from "@/lib/authProvider";
@@ -25,7 +25,7 @@ const appName = "Builder";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { sharedDataProject } = useContext(ProjectContext);
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const [progress, setProgress] = useState(0);
   const { sharedDataUser, isLoading } = useAuth();
   const { showActionSheetWithOptions } = useActionSheet();
@@ -33,6 +33,8 @@ export default function TabLayout() {
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
+
+  console.log(" >> _Layout sharedDataProject: ", sharedDataProject);
 
   const loggedInUser: IUser = sharedDataUser ?? {
     uid: "",
@@ -92,19 +94,24 @@ export default function TabLayout() {
       sharedDataProject.key,
     );
 
-    const options = [
-      "Add Note",
-      "Take Photo",
-      "Add from Camera Roll",
-      "Add Calendar Event",
-      "Cancel",
-    ];
-    const cancelButtonIndex = options.length - 1;
     const dateBegin = new Date();
     dateBegin.setMinutes(0);
     const dateEnd = new Date();
     dateEnd.setMinutes(0);
     dateEnd.setHours(dateEnd.getHours() + 1);
+
+    let options = [];
+
+    options = [
+      "Add Note",
+      "Take Photo",
+      "Add from Camera Roll",
+      "Add Calendar Event",
+      "Add Project",
+      "Cancel",
+    ];
+
+    const cancelButtonIndex = options.length - 1;
 
     showActionSheetWithOptions(
       {
@@ -143,6 +150,11 @@ export default function TabLayout() {
                 pcolor: "#49B382",
                 pcolorName: "Grass",
               },
+            });
+            break;
+          case 4:
+            router.navigate({
+              pathname: "project/add",
             });
             break;
         }

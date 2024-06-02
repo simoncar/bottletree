@@ -105,7 +105,7 @@ export const ProjectUsers = (props) => {
 
   function renderRow(data: any, index: number) {
     let me = "";
-    if (data.uid === sharedDataUser.uid) {
+    if (data.uid === sharedDataUser?.uid) {
       me = " (Me)";
     }
     return (

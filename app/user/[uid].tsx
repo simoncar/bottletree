@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Text, TextInput } from "@/components/Themed";
 import { useAuth } from "@/lib/authProvider";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
 
@@ -33,6 +34,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "@/lib/demoData";
 import { IUser } from "@/lib/types";
 import { StatusBar } from "expo-status-bar";
+import { useProject } from "@/lib/projectProvider";
 
 import { auth } from "@/lib/firebase";
 
@@ -42,6 +44,8 @@ export default function editUser() {
   }>();
 
   const { sharedDataUser, updateSharedDataUser } = useAuth();
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
 
@@ -213,8 +217,12 @@ export default function editUser() {
           onPress={() => {
             auth()
               .signOut()
-              .then(() => {
-                console.log("Sign-out successful.");
+              .then(async () => {
+                await AsyncStorage.clear();
+                console.log("Storage successfully cleared!");
+                console.log("Sign-out successful....");
+                // clear the shared data project
+                updateStoreSharedDataProject(null);
               })
               .catch((error) => {
                 console.log("[uid] eror: ", error.message);
