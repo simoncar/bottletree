@@ -12,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#5D5CE7"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
@@ -21,7 +23,9 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "associatedDomains": ["applinks:b.simon.co"]
+      "associatedDomains": [
+        "applinks:b.simon.co"
+      ]
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -29,7 +33,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#5D5CE7"
       },
-      "versionCode": 10,
+      "versionCode": 11,
       "package": "com.simoncar.bottletree"
     },
     "web": {
