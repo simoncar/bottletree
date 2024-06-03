@@ -1,4 +1,4 @@
-name: 2. Build and Submit
+name: 2. Build Apk and Submit
 on:
   workflow_dispatch:
   push:
