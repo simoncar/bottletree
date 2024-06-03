@@ -15,10 +15,9 @@
         "simulator": true
       }
     },
-    "aab": {
+    "apk": {
       "channel": "development"
     },
-
     "production": {
       "channel": "production",
       "autoIncrement": true
