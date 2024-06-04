@@ -1003,6 +1003,11 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@dev-plugins/async-storage@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@dev-plugins/async-storage/-/async-storage-0.0.3.tgz#82e07537f6f6de3001d9c659021bb0e0be84047d"
+  integrity sha512-aFpz2YN6puUs5LYZDy4MAgpYNhMUgSBkdVB0lTf/H7a1S3TWZ/YXuLDIc0HCwpAeR0fTwa9CobdZ6WMLviWwfA==
+
 "@dev-plugins/react-navigation@^0.0.5":
   version "0.0.5"
   resolved "https://registry.npmjs.org/@dev-plugins/react-navigation/-/react-navigation-0.0.5.tgz"

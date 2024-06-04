@@ -29,7 +29,6 @@
     ]
   },
   "dependencies": {
-    "@dev-plugins/react-navigation": "^0.0.5",
     "@expo/react-native-action-sheet": "^4.0.1",
     "@expo/vector-icons": "^14.0.0",
     "@likashefqet/react-native-image-zoom": "^2.1.1",
@@ -95,6 +94,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
+    "@dev-plugins/async-storage": "^0.0.3",
+    "@dev-plugins/react-navigation": "^0.0.5",
     "@react-native-community/eslint-config": "^3.2.0",
     "@tsconfig/react-native": "^3.0.2",
     "@types/jest": "^29.5.2",
