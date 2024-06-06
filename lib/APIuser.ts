@@ -1,4 +1,3 @@
-import { CurrentRenderContext } from "@react-navigation/native";
 import { auth, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
 
@@ -28,7 +27,7 @@ export async function getUser(
       }
     })
     .catch((error) => {
-      console.log("getUser Error getting document:", error);
+      console.log("getUser Error getting getUser document:", error);
       callback(null);
     });
 
@@ -78,7 +77,7 @@ export const updateAccountName = (displayName: string) => {
 
 export const updateUserProjectCount = (project: string) => {
   const u = auth().currentUser?.uid;
-  if (project === "welcome") {
+  if (project === "welcome" || project == undefined) {
     return;
   }
 
@@ -94,6 +93,9 @@ export const updateUserProjectCount = (project: string) => {
       }
     })
     .then(() => {
+      console.log("updateUserProjectCount  project // ", project);
+      console.log("updateUserProjectCount  count // ", count);
+
       firestore()
         .collection("users")
         .doc(u)

@@ -60,19 +60,24 @@ export default function editCalendar() {
   const [showColor, setShowColor] = useState<boolean>(false);
 
   useEffect(() => {
-    getCalendarEvent(local?.calendarId || "", (calendarEvent) => {
-      if (calendarEvent) {
-        setCalendarEvent(calendarEvent);
-        setDateBegin(calendarEvent.dateBegin?.toDate() || new Date());
-        setDateBeginTime(calendarEvent.dateBegin?.toDate() || new Date());
-        setDateEnd(calendarEvent.dateEnd?.toDate() || new Date());
-        setDateEndTime(calendarEvent.dateEnd?.toDate() || new Date());
-      }
-    });
+    console.log("local?.calendarId:", local?.calendarId);
+    if (local?.calendarId != undefined) {
+      getCalendarEvent(local?.calendarId || "", (calendarEvent) => {
+        if (calendarEvent) {
+          console.log("calendarEvent:", calendarEvent);
 
-    navigation.addListener("focus", () => {
-      console.log("useLocalSearchParams:", useLocalSearchParams);
-    });
+          setCalendarEvent(calendarEvent);
+          setDateBegin(calendarEvent.dateBegin?.toDate() || new Date());
+          setDateBeginTime(calendarEvent.dateBegin?.toDate() || new Date());
+          setDateEnd(calendarEvent.dateEnd?.toDate() || new Date());
+          setDateEndTime(calendarEvent.dateEnd?.toDate() || new Date());
+        }
+      });
+    }
+
+    // navigation.addListener("focus", () => {
+    //   console.log("useLocalSearchParams:", useLocalSearchParams);
+    // });
   }, []);
 
   const saveDone = (id: string) => {
@@ -132,6 +137,8 @@ export default function editCalendar() {
     event: DateTimePickerEvent,
     selectedDate: Date,
   ) => {
+    console.log("onChangedateBegin:", selectedDate);
+
     const currentDate = selectedDate || dateBegin;
 
     setDateBegin(currentDate);
@@ -184,6 +191,8 @@ export default function editCalendar() {
 
   const handleSelectColor = (colorName, code) => {
     // Handle button press event
+    console.log("handleSelectColor");
+
     setCalendarEvent({ ...calendarEvent, colorName: colorName, color: code });
     setShowColor(false);
   };
@@ -237,43 +246,81 @@ export default function editCalendar() {
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
           <View style={styles.date}>
-            <DateTimePicker
-              testID="dateTimePicker1"
-              value={dateBegin}
-              mode={"date"}
-              is24Hour={true}
-              onChange={onChangedateBegin}
-            />
+            {false && (
+              <DateTimePicker
+                testID="dateTimePicker1"
+                value={dateBegin}
+                mode={"date"}
+                is24Hour={true}
+                onChange={onChangedateBegin}
+              />
+            )}
+            <Text>
+              {dateBegin.toLocaleDateString("en-US", {
+                weekday: "short",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </Text>
           </View>
           <View style={styles.right}>
-            <DateTimePicker
-              testID="dateTimePicker2"
-              value={dateBeginTime}
-              mode={"time"}
-              is24Hour={true}
-              onChange={onChangeBeginTime}
-            />
+            {false && (
+              <DateTimePicker
+                testID="dateTimePicker2"
+                value={dateBeginTime}
+                mode={"time"}
+                is24Hour={true}
+                onChange={onChangeBeginTime}
+              />
+            )}
+            <Text>
+              {dateBeginTime.toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              })}
+            </Text>
           </View>
         </View>
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
           <View style={styles.date}>
-            <DateTimePicker
-              testID="dateTimePicker3"
-              value={dateEnd}
-              mode={"date"}
-              is24Hour={true}
-              onChange={onChangedateEnd}
-            />
+            {false && (
+              <DateTimePicker
+                testID="dateTimePicker3"
+                value={dateEnd}
+                mode={"date"}
+                is24Hour={true}
+                onChange={onChangedateEnd}
+              />
+            )}
+            <Text>
+              {dateEnd.toLocaleDateString("en-US", {
+                weekday: "short",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </Text>
           </View>
           <View style={styles.right}>
-            <DateTimePicker
-              testID="dateTimePicker4"
-              value={dateEndTime}
-              mode={"time"}
-              is24Hour={true}
-              onChange={onChangeEndTime}
-            />
+            {false && (
+              <DateTimePicker
+                testID="dateTimePicker4"
+                value={dateEndTime}
+                mode={"time"}
+                is24Hour={true}
+                onChange={onChangeEndTime}
+              />
+            )}
+            <Text>
+              {dateEndTime.toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              })}
+            </Text>
           </View>
         </View>
         <View style={[styles.descriptionView, styles.line]}>
