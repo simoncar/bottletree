@@ -1,4 +1,4 @@
-name: 3. Development Simulator Build
+name: 3. Development Simulator Build iOS
 on:
   workflow_dispatch:
   push:
@@ -6,7 +6,7 @@ on:
       - appstore
 jobs:
   build:
-    name: Development Simulator Build
+    name: Development Simulator Build iOS
     runs-on: ubuntu-latest
     permissions:
       contents: write
