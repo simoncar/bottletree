@@ -12,6 +12,7 @@ import {
   useColorScheme,
   Pressable,
   Alert,
+  Platform,
 } from "react-native";
 import { firestore } from "@/lib/firebase";
 
@@ -56,6 +57,9 @@ export default function editCalendar() {
   const [dateBeginTime, setDateBeginTime] = useState<Date>(new Date());
   const [dateEnd, setDateEnd] = useState<Date>(new Date());
   const [dateEndTime, setDateEndTime] = useState<Date>(new Date());
+
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
 
   const [showColor, setShowColor] = useState<boolean>(false);
 
@@ -138,7 +142,7 @@ export default function editCalendar() {
     selectedDate: Date,
   ) => {
     console.log("onChangedateBegin:", selectedDate);
-
+    setShow(Platform.OS === "ios" ? true : false);
     const currentDate = selectedDate || dateBegin;
 
     setDateBegin(currentDate);
@@ -218,6 +222,15 @@ export default function editCalendar() {
     }
   };
 
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatePicker = () => {
+    showMode("date");
+  };
+
   return (
     <SafeAreaView>
       <Stack.Screen
@@ -246,23 +259,26 @@ export default function editCalendar() {
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
           <View style={styles.date}>
-            {false && (
+            {show && (
               <DateTimePicker
                 testID="dateTimePicker1"
                 value={dateBegin}
-                mode={"date"}
+                mode={mode}
                 is24Hour={true}
                 onChange={onChangedateBegin}
+                display="default"
               />
             )}
-            <Text>
-              {dateBegin.toLocaleDateString("en-US", {
-                weekday: "short",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </Text>
+            <Pressable onPress={showDatePicker}>
+              <Text style={styles.textDate}>
+                {dateBegin.toLocaleDateString("en-US", {
+                  weekday: "short",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </Text>
+            </Pressable>
           </View>
           <View style={styles.right}>
             {false && (
@@ -274,7 +290,7 @@ export default function editCalendar() {
                 onChange={onChangeBeginTime}
               />
             )}
-            <Text>
+            <Text style={styles.textDate}>
               {dateBeginTime.toLocaleString("en-US", {
                 hour: "numeric",
                 minute: "numeric",
@@ -295,7 +311,7 @@ export default function editCalendar() {
                 onChange={onChangedateEnd}
               />
             )}
-            <Text>
+            <Text style={styles.textDate}>
               {dateEnd.toLocaleDateString("en-US", {
                 weekday: "short",
                 day: "numeric",
@@ -314,7 +330,7 @@ export default function editCalendar() {
                 onChange={onChangeEndTime}
               />
             )}
-            <Text>
+            <Text style={styles.textDate}>
               {dateEndTime.toLocaleString("en-US", {
                 hour: "numeric",
                 minute: "numeric",
@@ -443,6 +459,9 @@ const styles = StyleSheet.create({
   },
   projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
   right: { paddingRight: 8 },
+  textDate: {
+    fontSize: 20,
+  },
   textDescription: {
     fontSize: 16,
     width: 350,
