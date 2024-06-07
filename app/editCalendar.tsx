@@ -12,7 +12,6 @@ import {
   useColorScheme,
   Pressable,
   Alert,
-  Platform,
 } from "react-native";
 import { firestore } from "@/lib/firebase";
 
@@ -25,21 +24,13 @@ import {
 import { useProject } from "@/lib/projectProvider";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
+
 import Colors from "@/constants/Colors";
 import { ICalendarEvent } from "@/lib/types";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
 import { ColorRow } from "@/components/ColorRow";
-import {
-  ANDROID_MODE,
-  DAY_OF_WEEK,
-  IOS_MODE,
-  ANDROID_DISPLAY,
-  IOS_DISPLAY,
-} from "@react-native-community/datetimepicker/src/constants";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function editCalendar() {
   const { sharedDataProject } = useProject();
@@ -60,27 +51,16 @@ export default function editCalendar() {
     uid: "",
   });
 
-  const MODE_VALUES = Platform.select({
-    ios: Object.values(IOS_MODE),
-    android: Object.values(ANDROID_MODE),
-    windows: [],
-  });
-  const DISPLAY_VALUES = Platform.select({
-    ios: Object.values(IOS_DISPLAY),
-    android: Object.values(ANDROID_DISPLAY),
-    windows: [],
-  });
-
   const [dateBegin, setDateBegin] = useState<Date>(new Date());
   const [dateBeginTime, setDateBeginTime] = useState<Date>(new Date());
   const [dateEnd, setDateEnd] = useState<Date>(new Date());
   const [dateEndTime, setDateEndTime] = useState<Date>(new Date());
-  const [display, setDisplay] = useState(DISPLAY_VALUES[0]);
-
-  const [mode, setMode] = useState(MODE_VALUES[0]);
-  const [show, setShow] = useState(false);
-
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [showColor, setShowColor] = useState<boolean>(false);
+  const [datePart, setDatePart] = useState<string>("dateBegin");
+  const [dateOrTime, setDateOrTime] = useState<string>("date");
+  const [pickerValue, setPickerValue] = useState<Date>(new Date());
+  const [displayMode, setDisplayMode] = useState<string>("inline");
 
   useEffect(() => {
     console.log("local?.calendarId:", local?.calendarId);
@@ -97,10 +77,6 @@ export default function editCalendar() {
         }
       });
     }
-
-    // navigation.addListener("focus", () => {
-    //   console.log("useLocalSearchParams:", useLocalSearchParams);
-    // });
   }, []);
 
   const saveDone = (id: string) => {
@@ -156,12 +132,7 @@ export default function editCalendar() {
     );
   };
 
-  const onChangedateBegin = (
-    event: DateTimePickerEvent,
-    selectedDate: Date,
-  ) => {
-    console.log("onChangedateBegin:", selectedDate);
-    setShow(Platform.OS === "ios" ? true : false);
+  const onChangedateBegin = (selectedDate: Date) => {
     const currentDate = selectedDate || dateBegin;
 
     setDateBegin(currentDate);
@@ -177,19 +148,15 @@ export default function editCalendar() {
         dateEnd: firestore.Timestamp.fromDate(currentDate),
       });
     }
+    hideDatePicker();
   };
 
-  const onChangeBeginTime = (
-    event: DateTimePickerEvent,
-    selectedDate: Date,
-  ) => {
-    console.log("onChangeBeginTime:", selectedDate);
-
+  const onChangeBeginTime = (selectedDate: Date) => {
     const currentDate = selectedDate || dateBegin;
     setDateBeginTime(currentDate);
   };
 
-  const onChangedateEnd = (event: DateTimePickerEvent, selectedDate: Date) => {
+  const onChangedateEnd = (selectedDate: Date) => {
     const currentDate = selectedDate || dateEnd;
     setDateEnd(currentDate);
     setCalendarEvent({
@@ -205,9 +172,8 @@ export default function editCalendar() {
     }
   };
 
-  const onChangeEndTime = (event: DateTimePickerEvent, selectedDate: Date) => {
+  const onChangeEndTime = (selectedDate: Date) => {
     console.log("onChangeEndTime:", selectedDate);
-
     const currentDate = selectedDate || dateEnd;
     setDateEndTime(currentDate);
   };
@@ -246,9 +212,40 @@ export default function editCalendar() {
     setMode(currentMode);
   };
 
-  const showDatePicker = () => {
-    //showMode("date");
-    setShow(true);
+  const showDatePicker = (dateParttoDisplay, dateorTime, pickerValue) => {
+    if (dateorTime == "date") {
+      setDisplayMode("inline");
+    } else {
+      setDisplayMode("");
+    }
+
+    setDateOrTime(dateorTime);
+    setPickerValue(pickerValue);
+    setDatePart(dateParttoDisplay);
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.log("handleConfirm datePart:", datePart);
+    hideDatePicker();
+    switch (datePart) {
+      case "dateBegin":
+        onChangedateBegin(date);
+        break;
+      case "dateBeginTime":
+        onChangeBeginTime(date);
+        break;
+      case "dateEnd":
+        onChangedateEnd(date);
+        break;
+      case "dateEndTime":
+        onChangeEndTime(date);
+        break;
+    }
   };
 
   return (
@@ -262,6 +259,15 @@ export default function editCalendar() {
       />
       <ScrollView>
         <View style={[styles.itemView, styles.line]}>
+          <DateTimePickerModal
+            testID="dateTimePicker1"
+            date={pickerValue}
+            isVisible={isDatePickerVisible}
+            mode={dateOrTime}
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            display={displayMode}
+          />
           <View style={styles.avatar}></View>
           <View style={styles.title}>
             <TextInput
@@ -279,19 +285,9 @@ export default function editCalendar() {
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
           <View style={styles.date}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              {show && (
-                <DateTimePicker
-                  testID="dateTimePicker1"
-                  value={dateBegin}
-                  is24Hour
-                  onChange={onChangedateBegin}
-                  mode={mode}
-                  display={display}
-                />
-              )}
-            </View>
-            <Pressable onPress={showDatePicker}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}></View>
+            <Pressable
+              onPress={() => showDatePicker("dateBegin", "date", dateBegin)}>
               <Text style={styles.textDate}>
                 {dateBegin.toLocaleDateString("en-US", {
                   weekday: "short",
@@ -303,60 +299,48 @@ export default function editCalendar() {
             </Pressable>
           </View>
           <View style={styles.right}>
-            {false && (
-              <DateTimePicker
-                testID="dateTimePicker2"
-                value={dateBeginTime}
-                mode={"time"}
-                is24Hour={true}
-                onChange={onChangeBeginTime}
-              />
-            )}
-            <Text style={styles.textDate}>
-              {dateBeginTime.toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              })}
-            </Text>
+            <Pressable
+              onPress={() =>
+                showDatePicker("dateBeginTime", "time", dateBeginTime)
+              }>
+              <Text style={styles.textDate}>
+                {dateBeginTime.toLocaleString("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })}
+              </Text>
+            </Pressable>
           </View>
         </View>
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
           <View style={styles.date}>
-            {false && (
-              <DateTimePicker
-                testID="dateTimePicker3"
-                value={dateEnd}
-                is24Hour={true}
-                onChange={onChangedateEnd}
-              />
-            )}
-            <Text style={styles.textDate}>
-              {dateEnd.toLocaleDateString("en-US", {
-                weekday: "short",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </Text>
+            <Pressable
+              onPress={() => showDatePicker("dateEnd", "date", dateEnd)}>
+              <Text style={styles.textDate}>
+                {dateEnd.toLocaleDateString("en-US", {
+                  weekday: "short",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </Text>
+            </Pressable>
           </View>
           <View style={styles.right}>
-            {false && (
-              <DateTimePicker
-                testID="dateTimePicker4"
-                value={dateEndTime}
-                is24Hour={true}
-                onChange={onChangeEndTime}
-              />
-            )}
-            <Text style={styles.textDate}>
-              {dateEndTime.toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              })}
-            </Text>
+            <Pressable
+              onPress={() =>
+                showDatePicker("dateEndTime", "time", dateEndTime)
+              }>
+              <Text style={styles.textDate}>
+                {dateEndTime.toLocaleString("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })}
+              </Text>
+            </Pressable>
           </View>
         </View>
         <View style={[styles.descriptionView, styles.line]}>
