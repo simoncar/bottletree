@@ -48,7 +48,6 @@ export default function SignIn() {
 
       <TouchableOpacity
         onPress={async () => {
-
           resetPassword(email, resetError);
         }}
         style={styles.loginBtn}>

@@ -123,7 +123,7 @@ export function AuthProvider(props: React.PropsWithChildren) {
   const resetPassword = (screenEmail: string, callback: resetError) => {
     auth()
       .sendPasswordResetEmail(screenEmail)
-      .then(() => callback("sendPasswordResetEmail"))
+      .then(() => callback("Password reset email sent.  Check your inbox."))
       .catch((error) => {
         const errorMessage = error.message;
         callback(errorMessage);
