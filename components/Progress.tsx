@@ -27,7 +27,6 @@ const Progress = (props: ProgressProps) => {
 
 const styles = StyleSheet.create({
   progressContainer: {
-    flex: 1,
     height: 6,
     padding: 0,
     width: "100%",

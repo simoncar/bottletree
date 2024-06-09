@@ -16,7 +16,8 @@ import { IPost } from "@/lib/types";
 import { useAuth } from "@/lib/authProvider";
 import { addPostImage } from "@/lib/APIpost";
 import { router } from "expo-router";
-import { View, Text, ParsedText } from "@/components/Themed";
+import { View, Text } from "@/components/Themed";
+import Progress from "@/components/Progress";
 
 export default function App() {
   const [facing, setFacing] = useState("back");
@@ -30,6 +31,7 @@ export default function App() {
   const [backgroundColor, setBackgroundColor] = useState("#3498db");
   const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
   const cameraRef = useRef<any>(null);
+  const [progress, setProgress] = useState(0);
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -55,7 +57,9 @@ export default function App() {
     setFacing((current) => (current === "back" ? "front" : "back"));
   }
 
-  const progressCallback = (progress) => {};
+  const progressCallback = (progress: number) => {
+    setProgress(progress);
+  };
 
   const saveDone = () => {
     router.navigate({
@@ -89,7 +93,7 @@ export default function App() {
     console.log("Camera add post: ", post);
 
     addPostImage(post, saveDone);
-    //setProgress(0);
+    setProgress(0);
   };
 
   const handlePressIn = () => {
@@ -136,6 +140,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Progress progress={progress} />
       <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
@@ -210,7 +215,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 30,
   },
   flipCamera: {
     alignItems: "center",
