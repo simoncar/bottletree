@@ -1,5 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
-import { firebase, storage, uploadBytes } from "./firebase";
+import { firebase, uploadBytes } from "./firebase";
 import * as Crypto from "expo-crypto";
 import { Image } from "react-native-compressor";
 import { Platform } from "react-native";
@@ -71,7 +71,7 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
         resolve(xhr.response);
       };
       xhr.onerror = function (e) {
-        reject(new TypeError("Network request failed"));
+        reject(new TypeError("Network request failed: " + e));
       };
       xhr.responseType = "blob";
       xhr.open("GET", uri, true);
@@ -86,15 +86,8 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
       const storageRef = getStorageRef(folder);
 
       if (isWeb) {
-        console.log("uploadBytes:", result);
-
         getBlobFroUri(result).then((blob) => {
-          uploadBytes(storageRef, blob).then((snapshot) => {
-            // console.log("WWWUploaded a data_url string!");
-            // console.log("WWWFile available at", downloadURL.split("?")[0]);
-            // console.log("WWWdimensions", asset.height, asset.width);
-            // const ratio = asset.height / asset.width;
-
+          uploadBytes(storageRef, blob).then(() => {
             const p = storageRef.getDownloadURL().then((downloadURL) => {
               console.log("File available at", downloadURL);
               console.log("dimensions", asset.height, asset.width);

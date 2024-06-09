@@ -14,5 +14,6 @@ console.log("__DEV__: ", __DEV__);
 //   auth().useEmulator("http://localhost:9099");
 //   storage().useEmulator("127.0.0.1", 9199);
 // }
+const uploadBytes = null; // uploadBytes only available in web version (firebase.web.ts)
 
-export { firebase, db, storage, auth, firestore };
+export { firebase, db, storage, auth, firestore, uploadBytes };

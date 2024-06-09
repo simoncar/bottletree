@@ -1,12 +1,4 @@
-import { fbConfig } from "../env";
-// import * as Device from "expo-device";
-// import auth from "firebase/auth";
-// import firestore from "firebase/firestore";
 import storage, { uploadBytes } from "firebase/storage";
-// import firebase from "firebase/compat/app";
-
-// import { initializeApp } from "firebase/app";
-
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
