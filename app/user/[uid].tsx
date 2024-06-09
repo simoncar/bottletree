@@ -8,13 +8,13 @@ import {
   Pressable,
   View,
 } from "react-native";
+import Progress from "@/components/Progress";
 import { Text, TextInput } from "@/components/Themed";
 import { useAuth } from "@/lib/authProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, Stack } from "expo-router";
 import { Image } from "expo-image";
 
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -45,6 +45,7 @@ export default function editUser() {
 
   const { sharedDataUser, updateSharedDataUser } = useAuth();
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const [progress, setProgress] = useState(0);
 
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
@@ -74,8 +75,8 @@ export default function editUser() {
     router.back();
   };
 
-  const progressCallback = (progress: string) => {
-    console.log("progressCallback: " + progress);
+  const progressCallback = (progress: number) => {
+    setProgress(progress);
   };
 
   const completedCallback = (sourceDownloadURLarray: any[]) => {
@@ -92,6 +93,7 @@ export default function editUser() {
     setUser({ ...user, photoURL: downloadURLarray[0] });
     updateAccountPhotoURL(downloadURLarray[0]); //firebease auth update function
     updateSharedDataUser({ photoURL: downloadURLarray[0] });
+    setProgress(0);
   };
 
   const pickImage = async () => {
@@ -187,6 +189,8 @@ export default function editUser() {
           },
         }}
       />
+
+      <Progress progress={progress} />
 
       <View style={styles.avatarAContainer}>
         <View style={styles.avatarBView}>{profilePic()}</View>

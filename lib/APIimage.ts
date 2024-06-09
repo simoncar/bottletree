@@ -119,7 +119,11 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
                 console.log("Upload is paused");
                 break;
               case "running":
-                console.log("Upload is running");
+                console.log(
+                  "Upload is running:",
+                  snapshot.bytesTransferred,
+                  snapshot.totalBytes,
+                );
                 break;
             }
           },

@@ -63,7 +63,7 @@ export const Posts = ({ project }: Props) => {
           <TouchableOpacity
             onPress={() => {
               router.navigate({
-                pathname: "/addPost",
+                pathname: "/camera",
               });
             }}>
             <Text style={styles.buttonText}>ADD FIRST POST</Text>

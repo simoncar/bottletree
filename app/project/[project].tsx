@@ -3,7 +3,6 @@ import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useEffect, useState } from "react";
 
 import {
-  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   Button as NativeButton,
@@ -12,6 +11,7 @@ import {
 } from "react-native";
 
 import { Text, TextInput, View } from "@/components/Themed";
+import Progress from "@/components/Progress";
 import { updateProject, getProject } from "@/lib/APIproject";
 import { useProject } from "@/lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -27,6 +27,8 @@ import { IProject } from "@/lib/types";
 export default function editPost() {
   const [updateUsers, setUpdateUsers] = useState(true);
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const [progress, setProgress] = useState(0);
+
   const local = useLocalSearchParams<{
     project: string;
   }>();
@@ -44,7 +46,6 @@ export default function editPost() {
   });
 
   useEffect(() => {
-
     getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);
@@ -70,8 +71,8 @@ export default function editPost() {
     updateProject(updatedProject, saveDone);
   };
 
-  const progressCallback = (progress) => {
-    console.log("progressCallback: " + progress);
+  const progressCallback = (progress: number) => {
+    setProgress(progress);
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
@@ -86,6 +87,7 @@ export default function editPost() {
     });
 
     setProject({ ...project, icon: downloadURLarray[0] });
+    setProgress(0);
   };
 
   const pickImage = async () => {
@@ -162,6 +164,8 @@ export default function editPost() {
           title: "",
         }}
       />
+      <Progress progress={progress} />
+
       <View style={styles.avatarAContainer}>
         <View style={styles.avatarBView}>{profilePic()}</View>
       </View>
@@ -199,7 +203,7 @@ export default function editPost() {
       </Pressable>
 
       <View style={styles.diagBox}>
-        <Text style={styles.archiveMessage}>Project ID: {project.key}</Text>
+        <Text style={styles.projectId}>Project ID: {project.key}</Text>
       </View>
     </ScrollView>
   );
@@ -217,7 +221,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
-
   archiveName: {
     color: "red",
     fontSize: 20,
@@ -225,6 +228,7 @@ const styles = StyleSheet.create({
   },
 
   avatar: { alignItems: "center", justifyContent: "center", width: 48 },
+
   avatarAContainer: {
     alignItems: "center",
     justifyContent: "center",
@@ -248,7 +252,6 @@ const styles = StyleSheet.create({
     top: 115,
     width: 30,
   },
-
   diagBox: {
     alignItems: "center",
     justifyContent: "center",
@@ -283,6 +286,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 15,
   },
+  progressContainer: {
+    flex: 1,
+    padding: 0,
+    width: "100%",
+  },
   project: {
     fontSize: 25,
     fontWeight: "bold",
@@ -295,6 +303,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     justifyContent: "center",
     width: "85%",
+  },
+  projectId: {
+    color: "grey",
+    fontSize: 12,
+    textAlign: "center",
   },
   projectNameContainer: {
     alignItems: "center",
