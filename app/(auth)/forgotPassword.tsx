@@ -51,7 +51,7 @@ export default function SignIn() {
           resetPassword(email, resetError);
         }}
         style={styles.loginBtn}>
-        <Text style={styles.loginText}>SEND RESET LINK</Text>
+        <Text style={styles.loginText}>Send Reset Link</Text>
       </TouchableOpacity>
       <View>
         <Text style={styles.resetDetail}>

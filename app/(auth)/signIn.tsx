@@ -17,7 +17,6 @@ import { updateAccountName } from "@/lib/APIuser";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [notificationHeader, setNotificationHeader] = useState("");
   const [notification, setNotification] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
   const [showSignIn, setShowSignIn] = useState(false);
@@ -58,41 +57,16 @@ export default function SignIn() {
         <Animated.View
           style={{
             height: welcomeFontSize,
-          }}>
-          <Text style={styles.welcomeText}>Welcome to</Text>
-        </Animated.View>
+          }}></Animated.View>
+        <Text style={styles.welcomeText}>Welcome to</Text>
 
         <Text style={styles.welcomeApp}>Builder App</Text>
       </Animated.View>
-      <TouchableOpacity
-        key={"createAccount"}
-        style={styles.createBtn}
-        onPress={() => {
-          router.navigate({
-            pathname: "/createAccount",
-            params: {
-              email: email,
-            },
-          });
-        }}>
-        <Text style={styles.createText}>Create a new account</Text>
-      </TouchableOpacity>
-      {!showSignIn && (
-        <TouchableOpacity
-          key={"signIn"}
-          style={styles.createBtn}
-          onPress={() => {
-            welcomeMarginTop.value = withSpring(welcomeMarginTop.value - 50);
-            welcomeFontSize.value = welcomeFontSize.value - 50;
-            setShowSignIn(true);
-          }}>
-          <Text style={styles.createText}>Sign in</Text>
-        </TouchableOpacity>
-      )}
+
       {showSignIn && (
         <View style={styles.signInContainer}>
           <View>
-            <Text style={styles.welcomeText}>Sign in</Text>
+            <Text style={styles.welcomeText}></Text>
           </View>
           <View style={styles.inputView}>
             <TextInput
@@ -114,7 +88,6 @@ export default function SignIn() {
               secureTextEntry={secureEntry}
               onChangeText={(password) => {
                 setPassword(password);
-                setNotificationHeader("");
                 setNotification("");
               }}
             />
@@ -128,9 +101,6 @@ export default function SignIn() {
             </Pressable>
           </View>
           <View style={styles.notificationView}>
-            <Text style={styles.notificationTextHeader}>
-              {notificationHeader}
-            </Text>
             <Text numberOfLines={3} style={styles.notificationText}>
               {notification}
             </Text>
@@ -152,8 +122,8 @@ export default function SignIn() {
                   });
               });
             }}
-            style={styles.loginBtn}>
-            <Text style={styles.loginText}>LOGIN</Text>
+            style={styles.button}>
+            <Text style={styles.loginText}>Sign in</Text>
           </TouchableOpacity>
           <TouchableOpacity
             key={"forgotPassword"}
@@ -169,6 +139,33 @@ export default function SignIn() {
           </TouchableOpacity>
         </View>
       )}
+
+      {!showSignIn && (
+        <TouchableOpacity
+          key={"signIn"}
+          style={styles.button}
+          onPress={() => {
+            welcomeMarginTop.value = withSpring(welcomeMarginTop.value - 50);
+            welcomeFontSize.value = welcomeFontSize.value - 50;
+            setShowSignIn(true);
+          }}>
+          <Text style={styles.createText}>Sign in</Text>
+        </TouchableOpacity>
+      )}
+      <TouchableOpacity
+        key={"createAccount"}
+        style={styles.button}
+        onPress={() => {
+          router.navigate({
+            pathname: "/createAccount",
+            params: {
+              email: email,
+            },
+          });
+        }}>
+        <Text style={styles.createText}>Create a new account</Text>
+      </TouchableOpacity>
+
       {!showSignIn && (
         <View style={styles.sloganView}>
           <Text style={styles.sloganText}>The ultimate app</Text>
@@ -180,20 +177,21 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 40,
-  },
-  createBtn: {
+  button: {
     alignItems: "center",
     backgroundColor: "#9D5BD0",
     borderRadius: 10,
     height: 50,
     justifyContent: "center",
-    marginBottom: 40,
-    width: "80%",
+    marginBottom: 10,
+    width: 300,
   },
+  container: {
+    alignItems: "center",
+    flex: 1,
+    paddingTop: 40,
+  },
+
   createText: {
     color: "white",
     fontSize: 18,
@@ -202,6 +200,7 @@ const styles = StyleSheet.create({
   forgot_button: {
     fontSize: 18,
     height: 30,
+    paddingBottom: 50,
   },
   inputView: {
     borderBottomColor: "#CED0CE",
@@ -212,15 +211,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: "80%",
   },
-  loginBtn: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 40,
-    width: 300,
-  },
   loginText: {
     color: "white",
     fontSize: 18,
@@ -229,12 +219,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
   },
-  notificationTextHeader: {
-    fontSize: 18,
-    fontWeight: "bold",
-    paddingBottom: 10,
-    textAlign: "center",
-  },
+
   notificationView: {
     alignItems: "center",
     borderRadius: 5,
@@ -244,8 +229,6 @@ const styles = StyleSheet.create({
   },
   signInContainer: {
     alignItems: "center",
-    flex: 1,
-    paddingTop: 10,
   },
   sloganText: {
     fontSize: 25,

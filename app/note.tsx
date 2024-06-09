@@ -44,8 +44,6 @@ export default function Note() {
   }, []);
 
   const saveDone = () => {
-    console.log("saveDone - push to home");
-
     router.navigate({
       pathname: "/[project]",
       params: {

@@ -6,7 +6,7 @@ import { BigText } from "@/components/StyledText";
 
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
-import { IUser } from "@/lib/types";
+import { IUser, IPost } from "@/lib/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { useProject } from "@/lib/projectProvider";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
@@ -180,7 +180,7 @@ export default function TabLayout() {
         options={{
           title: "",
           href: {
-            pathname: sharedDataProject.key,
+            pathname: sharedDataProject?.key,
           },
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
@@ -200,9 +200,9 @@ export default function TabLayout() {
             <View>
               <Link href="user">
                 <UserAvatar
-                  uid={loggedInUser.uid}
-                  photoURL={loggedInUser.photoURL}
-                  displayName={loggedInUser.displayName}
+                  uid={loggedInUser?.uid}
+                  photoURL={loggedInUser?.photoURL}
+                  displayName={loggedInUser?.displayName}
                 />
               </Link>
             </View>

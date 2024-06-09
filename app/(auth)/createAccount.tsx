@@ -42,13 +42,12 @@ export default function SignIn() {
       return (
         <TouchableOpacity
           onPress={async () => {
-
             // signIn(email, password, loginError);
 
             createAccount(name, email, password, createAccountCallback);
           }}
-          style={styles.loginBtn}>
-          <Text style={styles.loginText}>CREATE ACCOUNT</Text>
+          style={styles.button}>
+          <Text style={styles.loginText}>Create Account</Text>
         </TouchableOpacity>
       );
     }
@@ -112,10 +111,19 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: "#9D5BD0",
+    borderRadius: 10,
+    height: 50,
+    justifyContent: "center",
+    marginBottom: 10,
+    width: 300,
+  },
   container: {
     alignItems: "center",
     flex: 1,
-    paddingTop: 100,
+    paddingTop: 40,
   },
   eye: { color: "grey", paddingTop: 10 },
   inputView: {
@@ -125,17 +133,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 45,
     marginBottom: 20,
-    width: "80%",
+    width: 400,
   },
-  loginBtn: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginTop: 40,
-    width: "80%",
-  },
+
   loginText: {
     color: "white",
     fontSize: 18,

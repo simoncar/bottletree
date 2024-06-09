@@ -136,8 +136,6 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     );
   };
 
-  console.log("project:", project);
-
   return (
     <View style={styles.commentsOverall}>
       <FlatList data={comments} renderItem={({ item }) => renderBubble(item)} />
