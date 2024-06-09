@@ -41,7 +41,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
 
   const openEdit = () => {
     router.navigate({
-      pathname: "/note",
+      pathname: "/editPost",
       params: {
         projectId: post.projectId,
         postId: post.key,
@@ -88,30 +88,6 @@ const Footer = ({ post, setCommentShow }: Props) => {
       {footer && (
         <View style={styles.boxContainer}>
           <View style={styles.box}>
-            <Pressable
-              onPress={() => {
-                ShareItem({
-                  title: "post.title",
-                  message: " post.body",
-                  url: "https://www.google.com",
-                  dialogTitle: "Share",
-                  subject: "Share Link",
-                });
-              }}>
-              <View style={styles.actionRow}>
-                <Text style={styles.actionLeftText}>Share</Text>
-
-                <Feather
-                  style={[
-                    styles.actionRightIcon,
-                    { color: Colors[colorScheme ?? "light"].text },
-                  ]}
-                  name="share"
-                  size={25}
-                />
-              </View>
-            </Pressable>
-            <View style={styles.line} />
             <Pressable
               onPress={() => {
                 setFooter(!footer);

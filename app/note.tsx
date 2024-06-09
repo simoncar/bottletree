@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import { IPost, IProject } from "@/lib/types";
-import ProjectContext from "@/lib/projectContext";
 import { useAuth } from "@/lib/authProvider";
 import { setPostNote, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
@@ -27,16 +26,14 @@ export default function Note() {
     caption: "",
     projectId: local?.projectId || "",
     projectTitle: "",
-    author: sharedDataUser?.displayName || "", // Use optional chaining and provide a default value
+    author: sharedDataUser?.displayName || "",
+    images: [],
+    ratio: 1,
   });
 
-  console.log("Note:", "pro : " + local.projectId, "Post:" + local.postId);
-
-  const { sharedDataProject } = useContext<IProject>(ProjectContext);
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    console.log("Note - useEffect");
     if (local?.postId) {
       getPost(local?.projectId || "", local?.postId || "", (post) => {
         if (post) {
@@ -58,7 +55,6 @@ export default function Note() {
   };
 
   const save = () => {
-    console.log("save:", sharedDataProject);
     if (post.key == "") {
       post.key = "post_" + Date.now();
     }
