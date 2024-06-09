@@ -43,6 +43,7 @@ const ProjectProvider = ({ children }) => {
     console.log("updateStoreSharedDataProject PART 2: ", jsonValue);
     setSharedDataProject({ ...sharedDataProject, ...newData });
     AsyncStorage.setItem("@PROJECT", jsonValue).then(() => {
+      console.log("AsyncStorage.SET ", jsonValue);
       return jsonValue;
     });
   }

@@ -11,7 +11,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
 import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { updateAccountName } from "@/lib/APIuser";
 
 export default function SignIn() {
@@ -138,16 +138,19 @@ export default function SignIn() {
 
           <TouchableOpacity
             onPress={() => {
-              auth()
-                .signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                  updateAccountName(userCredential.user.displayName);
+              AsyncStorage.clear().then(() => {
+                console.log("Storage successfully cleared!");
+                auth()
+                  .signInWithEmailAndPassword(email, password)
+                  .then((userCredential) => {
+                    updateAccountName(userCredential.user.displayName);
 
-                  router.navigate("/");
-                })
-                .catch((error) => {
-                  setNotification(errorMessage(error.code));
-                });
+                    router.navigate("/");
+                  })
+                  .catch((error) => {
+                    setNotification(errorMessage(error.code));
+                  });
+              });
             }}
             style={styles.loginBtn}>
             <Text style={styles.loginText}>LOGIN</Text>

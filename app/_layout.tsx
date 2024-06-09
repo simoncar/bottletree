@@ -16,6 +16,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 export { ErrorBoundary } from "expo-router";
 import Colors from "@/constants/Colors";
+import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 
 // export const unstable_settings = {
 //   // Ensure that reloading on `/modal` keeps a back button present.
@@ -25,6 +26,7 @@ import Colors from "@/constants/Colors";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  useAsyncStorageDevTools();
   const navigationRef = useNavigationContainerRef();
   const [fontsLoaded, error] = useFonts({
     //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),

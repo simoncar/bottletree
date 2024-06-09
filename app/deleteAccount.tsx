@@ -21,7 +21,7 @@ export default function DeleteAccount() {
 
   const onDelete = () => {
     Alert.alert(
-      "Delete",
+      "Delete Account",
       "Are you sure?",
       [
         {
@@ -30,7 +30,7 @@ export default function DeleteAccount() {
           style: "cancel",
         },
         {
-          text: "Delete",
+          text: "Yes",
           onPress: () => {
             deleteUser(sharedDataUser.uid, deleteUserCallback);
             deleteAccount(deleteAccountCallback);
@@ -46,38 +46,49 @@ export default function DeleteAccount() {
       <Stack.Screen options={{ title: "Delete Account" }} />
 
       <View>
-        <Text>Are you sure you want to delete your account?</Text>
-        <Text>If you change your mind, you will not be able to undo this.</Text>
+        <Text style={styles.welcomeText}>
+          Are you sure you want to delete your account?
+        </Text>
+        <Text style={styles.welcomeText}>
+          If you change your mind, you will not be able to undo this.
+        </Text>
       </View>
 
       <TouchableOpacity
         onPress={async () => {
           onDelete();
         }}
-        style={styles.loginBtn}>
-        <Text style={styles.loginText}>YES, Delete my account</Text>
+        style={styles.button}>
+        <Text style={styles.buttonText}>YES, Delete my account</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    alignItems: "center",
+    backgroundColor: "#9D5BD0",
+    borderRadius: 10,
+    height: 50,
+    justifyContent: "center",
+    marginBottom: 40,
+    marginTop: 50,
+    width: 300,
+  },
+
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+  },
   container: {
     alignItems: "center",
     flex: 1,
+    paddingHorizontal: 20,
     paddingTop: 100,
   },
-
-  loginBtn: {
-    alignItems: "center",
-    backgroundColor: "#2196F3",
-    borderRadius: 25,
-    height: 50,
-    justifyContent: "center",
-    marginTop: 40,
-    width: "80%",
-  },
-  loginText: {
-    color: "#000",
+  welcomeText: {
+    fontSize: 16,
+    marginBottom: 10,
   },
 });

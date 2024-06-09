@@ -17,7 +17,6 @@ import { useAuth } from "@/lib/authProvider";
 import { addPostImage } from "@/lib/APIpost";
 import { router } from "expo-router";
 import { View, Text, ParsedText } from "@/components/Themed";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   const [facing, setFacing] = useState("back");
@@ -30,6 +29,7 @@ export default function App() {
   const scaleValue = useRef(new Animated.Value(1)).current;
   const [backgroundColor, setBackgroundColor] = useState("#3498db");
   const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
+  const cameraRef = useRef<any>(null);
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -59,10 +59,9 @@ export default function App() {
 
   const saveDone = () => {
     router.navigate({
-      pathname: "/(tabs)",
+      pathname: "/[project]",
       params: {
         project: sharedDataProject.key,
-        title: sharedDataProject.title,
       },
     });
   };
@@ -87,6 +86,8 @@ export default function App() {
       ratio: ratio,
     };
 
+    console.log("Camera add post: ", post);
+
     addPostImage(post, saveDone);
     //setProgress(0);
   };
@@ -103,7 +104,7 @@ export default function App() {
     setBackgroundInnerColor("#b92929");
   };
 
-  const handlePressOut = async () => {
+  const takePicture = async () => {
     Animated.timing(scaleValue, {
       toValue: 1,
       duration: 150,
@@ -113,9 +114,9 @@ export default function App() {
 
     if (!permission) return;
 
-    if (camera) {
+    if (cameraRef.current) {
       const options = { quality: 0.7 };
-      const photo = await camera.takePictureAsync(options);
+      const photo = await cameraRef.current.takePictureAsync(options);
 
       addImageFromPhoto(photo, "project", progressCallback, completedCallback);
     }
@@ -135,13 +136,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={facing}>
+      <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
           <View style={styles.a}>
             <TouchableOpacity
               onPressIn={handlePressIn}
-              onPressOut={handlePressOut}
+              onPressOut={takePicture}
               activeOpacity={1}>
               <Animated.View style={[styles.circleOuter, animatedStyle]}>
                 <View style={styles.circleMiddle}>
