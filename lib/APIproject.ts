@@ -212,7 +212,6 @@ export function addProjectUserAll(user: IUser, callback: saveDoneAll) {
   });
 }
 
-
 export function addProjectUser(
   projectId: string,
   user: IUser,
@@ -236,7 +235,7 @@ export function addProjectUser(
       )
       .then((docRef) => {
         if (callback) {
-          callback(projectId);
+          callback(user.uid);
         } else {
           console.log("Callback not provided.");
         }

@@ -25,12 +25,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
 
 export default function editPost() {
-  const [updateUsers, setUpdateUsers] = useState(true);
+  const [updateUsers, setUpdateUsers] = useState("");
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const [progress, setProgress] = useState(0);
 
   const local = useLocalSearchParams<{
     project: string;
+    pUpdateUsers: string;
   }>();
 
   const colorScheme = useColorScheme();
@@ -44,6 +45,11 @@ export default function editPost() {
     archived: false,
     postCount: 0,
   });
+
+  useEffect(() => {
+    console.log("pUpdateUsers useEffect");
+    setUpdateUsers(local.pUpdateUsers);
+  }, [local.pUpdateUsers]);
 
   useEffect(() => {
     getProject(local?.project || "", (project) => {
