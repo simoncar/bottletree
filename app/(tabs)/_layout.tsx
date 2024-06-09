@@ -34,7 +34,6 @@ export default function TabLayout() {
     return <Text>Loading...</Text>;
   }
 
-
   const loggedInUser: IUser = sharedDataUser ?? {
     uid: "",
     displayName: "",
@@ -181,7 +180,7 @@ export default function TabLayout() {
         options={{
           title: "",
           href: {
-            pathname: "/[project]",
+            pathname: sharedDataProject.key,
           },
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
