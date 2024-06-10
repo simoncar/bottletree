@@ -45,6 +45,9 @@ export default function App() {
         <Text style={styles.text}>
           We need your permission to show the camera so you can take a photo.
         </Text>
+        <Text style={styles.text}>
+          Check settings to enable camera permissions.
+        </Text>
       </View>
     );
   }
