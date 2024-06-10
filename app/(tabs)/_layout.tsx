@@ -13,6 +13,7 @@ import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { addPostImage } from "@/lib/APIpost";
 import { useAuth } from "@/lib/authProvider";
 import { Text } from "@/components/Themed";
+import alert from "@/lib/alert";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -86,6 +87,15 @@ export default function TabLayout() {
     setProgress(0);
   };
 
+  const createProject = () => {
+    console.log("alert to create project");
+
+    alert("Alert", "Begin by creating a project.");
+    router.navigate({
+      pathname: "project/add",
+    });
+  };
+
   const openActionSheet = async () => {
     const dateBegin = new Date();
     dateBegin.setMinutes(0);
@@ -94,6 +104,8 @@ export default function TabLayout() {
     dateEnd.setHours(dateEnd.getHours() + 1);
 
     let options = [];
+
+    console.log("sharedDataProject: ", sharedDataProject);
 
     options = [
       "Add Note",
@@ -114,6 +126,12 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
+            if (!sharedDataProject.key) {
+              console.log("sharedDataProject not set");
+              createProject();
+              return;
+            }
+
             router.navigate({
               pathname: "/note",
               params: {
@@ -123,6 +141,11 @@ export default function TabLayout() {
             });
             break;
           case 1:
+            if (!sharedDataProject.key) {
+              console.log("sharedDataProject not set");
+              createProject();
+              return;
+            }
             router.navigate({
               pathname: "/camera",
               params: {
@@ -132,9 +155,19 @@ export default function TabLayout() {
             });
             break;
           case 2:
+            if (!sharedDataProject.key) {
+              console.log("sharedDataProject not set");
+              createProject();
+              return;
+            }
             pickImage();
             break;
           case 3:
+            if (!sharedDataProject.key) {
+              console.log("sharedDataProject not set");
+              createProject();
+              return;
+            }
             router.navigate({
               pathname: "/editCalendar",
               params: {

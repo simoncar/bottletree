@@ -32,7 +32,7 @@ export default function DeleteAccount() {
         {
           text: "Yes",
           onPress: () => {
-            deleteUser(sharedDataUser.uid, deleteUserCallback);
+            deleteUser(sharedDataUser?.uid, deleteUserCallback);
             deleteAccount(deleteAccountCallback);
           },
         },
@@ -45,13 +45,14 @@ export default function DeleteAccount() {
     <View style={styles.container}>
       <Stack.Screen options={{ title: "Delete Account" }} />
 
-      <View>
-        <Text style={styles.welcomeText}>
+      <View style={styles.instructions}>
+        <Text style={styles.text}>
           Are you sure you want to delete your account?
         </Text>
-        <Text style={styles.welcomeText}>
+        <Text style={styles.text}>
           If you change your mind, you will not be able to undo this.
         </Text>
+        <Text style={styles.error}>{errorMessage}</Text>
       </View>
 
       <TouchableOpacity
@@ -87,7 +88,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 100,
   },
-  welcomeText: {
+  error: {
+    color: "red",
+    fontSize: 16,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  instructions: {
+    alignItems: "center",
+  },
+  text: {
     fontSize: 16,
     marginBottom: 10,
   },

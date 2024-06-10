@@ -146,6 +146,8 @@ export function AuthProvider(props: React.PropsWithChildren) {
       .then(() => callback("deleting the user"))
       .catch((error) => {
         const errorMessage = error.message;
+        console.log("deleteAccount failure: ", error);
+
         callback(errorMessage);
       });
     setSharedDataUser(null);
