@@ -126,7 +126,7 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            if (!sharedDataProject.key) {
+            if (!sharedDataProject?.key) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -141,7 +141,7 @@ export default function TabLayout() {
             });
             break;
           case 1:
-            if (!sharedDataProject.key) {
+            if (!sharedDataProject?.key) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -155,7 +155,7 @@ export default function TabLayout() {
             });
             break;
           case 2:
-            if (!sharedDataProject.key) {
+            if (!sharedDataProject?.key) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -163,7 +163,7 @@ export default function TabLayout() {
             pickImage();
             break;
           case 3:
-            if (!sharedDataProject.key) {
+            if (!sharedDataProject?.key) {
               console.log("sharedDataProject not set");
               createProject();
               return;

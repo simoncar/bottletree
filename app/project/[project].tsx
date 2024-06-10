@@ -160,12 +160,9 @@ export default function editPost() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <View style={{ paddingRight: 5 }}>
-              <NativeButton
-                title="Done"
-                onPress={() => updateProject(project, saveDone)}
-              />
-            </View>
+            <Pressable onPress={() => updateProject(project, saveDone)}>
+              <Text style={{ fontSize: 16 }}>Save</Text>
+            </Pressable>
           ),
           title: "",
         }}
