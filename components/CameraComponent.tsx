@@ -34,7 +34,7 @@ export default function App() {
   const cameraRef = useRef<any>(null);
   const [progress, setProgress] = useState(0);
 
-  const openSettings = (progress: number) => {
+  const openSettings = () => {
     Linking.openSettings();
   };
 
