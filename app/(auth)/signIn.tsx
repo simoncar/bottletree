@@ -51,7 +51,7 @@ export default function SignIn() {
       <Animated.View
         style={{
           alignItems: "center",
-          marginBottom: 40,
+          marginBottom: 10,
           marginTop: welcomeMarginTop,
         }}>
         <Animated.View
@@ -65,9 +65,6 @@ export default function SignIn() {
 
       {showSignIn && (
         <View style={styles.signInContainer}>
-          <View>
-            <Text style={styles.welcomeText}></Text>
-          </View>
           <View style={styles.inputView}>
             <TextInput
               style={styles.textInput}
@@ -198,7 +195,7 @@ const styles = StyleSheet.create({
   },
   eye: { color: "grey", paddingTop: 10 },
   forgot_button: {
-    fontSize: 18,
+    fontSize: 14,
     height: 30,
     paddingBottom: 50,
   },
@@ -255,7 +252,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   welcomeText: {
-    fontSize: 25,
+    fontSize: 20,
     marginBottom: 10,
   },
 });
