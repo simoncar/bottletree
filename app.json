@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.110",
+    "version": "1.0.111",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -17,7 +17,7 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "110",
+      "buildNumber": "111",
       "config": {
         "usesNonExemptEncryption": false
       },
@@ -62,7 +62,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera so you can take a photo and post it to the project so other people that have access to the project can view your photo.",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera so you can take a photo and post it to the project so other people that have access to your project can view your photo.",
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
         }

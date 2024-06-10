@@ -39,16 +39,12 @@ export default function App() {
   }
   if (!permission.granted) {
     // Camera permissions are not granted yet.
+    requestPermission;
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
           We need your permission to show the camera so you can take a photo.
         </Text>
-        <Text style={styles.text}>
-          Camera access is optional. If you don't want allow access to the
-          camera you can press the Back button.
-        </Text>
-        <Button onPress={requestPermission} title="Next" />
       </View>
     );
   }
@@ -215,6 +211,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    padding: 40,
   },
   flipCamera: {
     alignItems: "center",
