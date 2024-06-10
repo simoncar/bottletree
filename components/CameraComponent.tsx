@@ -1,7 +1,7 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useState, useContext, useRef } from "react";
 import {
-  Button,
+  Pressable,
   StyleSheet,
   TouchableOpacity,
   useColorScheme,
@@ -18,6 +18,7 @@ import { addPostImage } from "@/lib/APIpost";
 import { router } from "expo-router";
 import { View, Text } from "@/components/Themed";
 import Progress from "@/components/Progress";
+import * as Linking from "expo-linking";
 
 export default function App() {
   const [facing, setFacing] = useState("back");
@@ -33,6 +34,10 @@ export default function App() {
   const cameraRef = useRef<any>(null);
   const [progress, setProgress] = useState(0);
 
+  const openSettings = (progress: number) => {
+    Linking.openSettings();
+  };
+
   if (!permission) {
     // Camera permissions are still loading.
     return <View />;
@@ -45,9 +50,14 @@ export default function App() {
         <Text style={styles.text}>
           We need your permission to show the camera so you can take a photo.
         </Text>
-        <Text style={styles.text}>
-          Check settings to enable camera permissions.
-        </Text>
+        <Pressable
+          onPress={() => {
+            openSettings();
+          }}>
+          <Text style={styles.text}>
+            Open settings to enable camera permissions.
+          </Text>
+        </Pressable>
       </View>
     );
   }
