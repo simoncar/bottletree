@@ -53,19 +53,25 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
             if (usr.project) {
               router.replace({
-                pathname: "/" + usr.project,
-                params: {},
+                pathname: "/[project]",
+                params: {
+                  project: usr.project,
+                },
               });
             } else {
               router.replace({
-                pathname: "welcome",
-                params: {},
+                pathname: "/[project]",
+                params: {
+                  project: "welcome",
+                },
               });
             }
           } else {
             router.replace({
-              pathname: "welcome",
-              params: {},
+              pathname: "/[project]",
+              params: {
+                project: "welcome",
+              },
             });
           }
         });

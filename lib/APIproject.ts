@@ -235,7 +235,7 @@ export function addProjectUser(
       )
       .then((docRef) => {
         if (callback) {
-          callback(user.uid);
+          callback(projectId);
         } else {
           console.log("Callback not provided.");
         }
