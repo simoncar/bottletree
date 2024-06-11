@@ -44,11 +44,11 @@ export default function App() {
   }
   if (!permission.granted) {
     // Camera permissions are not granted yet.
-    requestPermission;
+    requestPermission();
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          We need your permission to show the camera so you can take a photo.
+          We need your permission to show the camera so you can take photos.
         </Text>
         <Pressable
           onPress={() => {
