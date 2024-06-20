@@ -134,10 +134,48 @@ export const demoData = async () => {
         { merge: true },
       );
 
+    const projectRefwelcome = await db
+      .collection("projects")
+      .doc("welcome")
+      .set(
+        {
+          title: "Welcome Project",
+          icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
+          archived: false,
+          postCount: 7,
+          timestamp: firestore.Timestamp.now(),
+        },
+        { merge: true },
+      );
+
+    const postRefwelcome = db
+      .collection("projects")
+      .doc("welcome")
+      .collection("posts")
+      .doc("welcomePost")
+      .set(
+        {
+          author: "John Doe",
+          avatar: "https://",
+          timestamp: firestore.Timestamp.now(),
+          images: [
+            "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202307%2F199D1629-236B-4A78-B2C6-D1C0A1689E8B?alt=media&token=a16d1ecc-dd20-4b99-a077-5cbb446d2a05",
+            "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.05.53%20PM.png?alt=media&token=b776cb08-fc7e-4ac6-b01b-e2ff47920c76&_gl=1*cz9bbf*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQzMy4wLjAuMA..",
+            "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.05.58%20PM.png?alt=media&token=35645c96-05d4-4ffc-95e4-0b805ae91981&_gl=1*1aa7ivb*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQzOS4wLjAuMA..",
+          ],
+        },
+        { merge: true },
+      );
+
     await newProjectUser("project7rovira", users[0]);
     await newProjectUser("project7rovira", users[1]);
     await newProjectUser("project7rovira", users[2]);
     await newProjectUser("project7rovira", users[5]);
+
+    await newProjectUser("welcome", users[0]);
+    await newProjectUser("welcome", users[1]);
+    await newProjectUser("welcome", users[2]);
+    await newProjectUser("welcome", users[5]);
 
     await newProjectUser("project106joli", users[0]);
     await newProjectUser("project106joli", users[1]);

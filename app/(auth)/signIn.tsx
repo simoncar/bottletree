@@ -41,6 +41,23 @@ export default function SignIn() {
     }
   };
 
+  const mostRecentProject = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@MySuperStore:key");
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        return value;
+      } else {
+        console.log("No project found");
+        return "welcome";
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log("mostRecentProject:", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -112,7 +129,7 @@ export default function SignIn() {
                   .then((userCredential) => {
                     updateAccountName(userCredential.user.displayName);
 
-                    router.navigate("/");
+                    router.navigate("/" + mostRecentProject());
                   })
                   .catch((error) => {
                     setNotification(errorMessage(error.code));
