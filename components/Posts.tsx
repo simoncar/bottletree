@@ -28,6 +28,8 @@ export const Posts = ({ project }: Props) => {
 
   useEffect(() => {
     if (sharedDataUser) {
+      console.log("Posts useEffect calling getPosts : ", project);
+
       const unsubscribe = getPosts(project, postsRead);
       updateUserProjectCount(project);
       return () => {

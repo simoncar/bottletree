@@ -50,29 +50,6 @@ export function AuthProvider(props: React.PropsWithChildren) {
 
             setSharedDataUser(usr);
             setSession(user.uid);
-
-            if (usr.project) {
-              router.replace({
-                pathname: "/[project]",
-                params: {
-                  project: usr.project,
-                },
-              });
-            } else {
-              router.replace({
-                pathname: "/[project]",
-                params: {
-                  project: "welcome",
-                },
-              });
-            }
-          } else {
-            router.replace({
-              pathname: "/[project]",
-              params: {
-                project: "welcome",
-              },
-            });
           }
         });
       } else {

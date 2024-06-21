@@ -43,10 +43,10 @@ export default function SignIn() {
 
   const mostRecentProject = async () => {
     try {
-      const value = await AsyncStorage.getItem("@MySuperStore:key");
+      const value = await AsyncStorage.getItem("@PROJECT");
       if (value !== null) {
         // We have data!!
-        console.log(value);
+        console.log("mostRecentProject AA: ", value.key);
         return value;
       } else {
         console.log("No project found");
@@ -54,7 +54,8 @@ export default function SignIn() {
       }
     } catch (error) {
       // Error retrieving data
-      console.log("mostRecentProject:", error);
+      console.log("mostRecentProject BB:", error);
+      return "welcome";
     }
   };
 
@@ -126,10 +127,13 @@ export default function SignIn() {
                 console.log("Storage successfully cleared!");
                 auth()
                   .signInWithEmailAndPassword(email, password)
-                  .then((userCredential) => {
+                  .then(async (userCredential) => {
                     updateAccountName(userCredential.user.displayName);
+                    //const goto = await mostRecentProject();
+                    const goto = "welcome";
+                    console.log("goto: ", goto);
 
-                    router.navigate("/" + mostRecentProject());
+                    router.navigate("/" + goto);
                   })
                   .catch((error) => {
                     setNotification(errorMessage(error.code));
