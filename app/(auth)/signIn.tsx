@@ -41,24 +41,6 @@ export default function SignIn() {
     }
   };
 
-  const mostRecentProject = async () => {
-    try {
-      const value = await AsyncStorage.getItem("@PROJECT");
-      if (value !== null) {
-        // We have data!!
-        console.log("mostRecentProject AA: ", value.key);
-        return value;
-      } else {
-        console.log("No project found");
-        return "welcome";
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log("mostRecentProject BB:", error);
-      return "welcome";
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Stack.Screen
