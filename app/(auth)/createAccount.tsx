@@ -25,7 +25,7 @@ export default function SignIn() {
     if (error == "Success") {
       updateAccountName(name); //firebease auth update function
       updateSharedDataUser(user);
-      router.navigate("/");
+      router.navigate("/welcome");
     } else {
       //updateSharedDataUser(null);
     }
