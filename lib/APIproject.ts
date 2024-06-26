@@ -65,6 +65,7 @@ export async function getProjects(uid: string, callback: projectsRead) {
           icon: doc.data().icon,
           archived: false,
           postCount: doc.data().postCount,
+          timestamp: doc.data().timestamp,
         });
       } else {
         projectsArchived.push({
@@ -74,9 +75,26 @@ export async function getProjects(uid: string, callback: projectsRead) {
           icon: doc.data().icon,
           archived: true,
           postCount: doc.data().postCount,
+          timestamp: doc.data().timestamp,
         });
       }
     }
+  });
+
+  //if any project has a null timestamp, set it to '1/jan/1990'
+  projects.forEach((project) => {
+    if (!project.timestamp) {
+      project.timestamp = new firestore.Timestamp(631152000, 0);
+    }
+  });
+
+  //order the projectList by timestamp, with the most recent timestamps first
+  projects.sort((a, b) => {
+    return b.timestamp?.seconds - a.timestamp?.seconds;
+  });
+
+  projectsArchived.sort((a, b) => {
+    return b.timestamp?.seconds - a.timestamp?.seconds;
   });
 
   callback([...projects, ...projectsArchived]);

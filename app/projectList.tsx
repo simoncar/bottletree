@@ -34,6 +34,8 @@ const ModalScreen = (props) => {
   const projectsRead = (projectsDB: IProject[]) => {
     console.log("calling SETPROJECTS");
 
+    
+
     setProjects(projectsDB);
   };
 

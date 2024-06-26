@@ -26,6 +26,7 @@ export interface IProject {
   icon: string;
   archived?: boolean;
   postCount: number;
+  timestamp?: Timestamp;
 }
 
 export interface IUser {
