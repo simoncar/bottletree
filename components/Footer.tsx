@@ -4,8 +4,8 @@ import { StyleSheet, Pressable, useColorScheme } from "react-native";
 import { View, Text } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { IPost } from "@/lib/types";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { getRelativeTime } from "@/lib/util";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { deletePost } from "@/lib/APIpost";
@@ -21,15 +21,6 @@ type Props = {
 const Footer = ({ post, setCommentShow }: Props) => {
   const colorScheme = useColorScheme();
   const [footer, setFooter] = useState<boolean>(false);
-
-  const getRelativeTime = (timestamp: number) => {
-    if (timestamp) {
-      dayjs.extend(relativeTime);
-      return dayjs(timestamp).fromNow();
-    } else {
-      return "";
-    }
-  };
 
   const saveDone = () => {};
 

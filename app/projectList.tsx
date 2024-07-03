@@ -18,6 +18,7 @@ import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useAuth } from "@/lib/authProvider";
 import { useProject } from "@/lib/projectProvider";
+import { getRelativeTime } from "@/lib/util";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -29,12 +30,10 @@ const ModalScreen = (props) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const colorScheme = useColorScheme();
-    const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const projectsRead = (projectsDB: IProject[]) => {
     console.log("calling SETPROJECTS");
-
-    
 
     setProjects(projectsDB);
   };
@@ -98,6 +97,9 @@ const ModalScreen = (props) => {
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
           <Text style={styles.projectId}>{data.project || ""}</Text>
+          <Text style={styles.projectId}>
+            {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
+          </Text>
         </View>
       );
     } else {
