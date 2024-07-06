@@ -13,7 +13,11 @@ import {
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import { getAllProjects, addProjectUserAll } from "@/lib/APIproject";
+import {
+  getAllProjects,
+  addProjectUserAll,
+  archiveAllProjects,
+} from "@/lib/APIproject";
 import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -96,6 +100,27 @@ const ModalScreen = (props) => {
     );
   };
 
+  const askArchiveAll = () => {
+    Alert.alert(
+      "Archive All Projects",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Add",
+          onPress: () => {
+            archiveAllProjects(saveDoneAll);
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+  };
+
   function renderAll() {
     return (
       <View style={styles.adminAll}>
@@ -117,6 +142,36 @@ const ModalScreen = (props) => {
               { color: Colors[colorScheme ?? "light"].background },
             ]}>
             (Makes testing easier)
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  function renderArchiveAll() {
+    if (!__DEV__) {
+      return null;
+    }
+    return (
+      <View style={styles.adminAll}>
+        <TouchableOpacity
+          key={"archiveAll"}
+          onPress={() => {
+            askArchiveAll();
+          }}>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            Archive All Projects
+          </Text>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            (Data Cleanup)
           </Text>
         </TouchableOpacity>
       </View>
@@ -194,6 +249,7 @@ const ModalScreen = (props) => {
       <ScrollView style={styles.projectList}>
         <View>{renderAdmin()}</View>
         <View>{renderAll()}</View>
+        <View>{renderArchiveAll()}</View>
         {loading === false && (
           <View>
             <ShortList

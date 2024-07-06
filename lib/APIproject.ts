@@ -230,6 +230,20 @@ export function addProjectUserAll(user: IUser, callback: saveDoneAll) {
   });
 }
 
+export function archiveAllProjects(callback: saveDoneAll) {
+  const updatedDone = (projectKey) => {
+    console.log("Projecct Arhived: ", projectKey);
+  };
+
+  getAllProjects((projects) => {
+    projects.forEach((project) => {
+      console.log("Archive Project: ", project.key, project);
+      updateProject({ ...project, archived: true }, updatedDone);
+    });
+    callback();
+  });
+}
+
 export function addProjectUser(
   projectId: string,
   user: IUser,
