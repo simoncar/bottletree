@@ -1,5 +1,5 @@
 import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
-
+import * as Device from "expo-device";
 export type CollectionReference = FirebaseFirestoreTypes.CollectionReference;
 export type DocumentReference = FirebaseFirestoreTypes.DocumentReference;
 export type Timestamp = FirebaseFirestoreTypes.Timestamp;
@@ -27,6 +27,17 @@ export interface IProject {
   archived?: boolean;
   postCount: number;
   timestamp?: Timestamp;
+}
+
+export interface ILog {
+  loglevel: string;
+  message: string;
+  key?: string;
+  timestamp?: Timestamp;
+  user?: string;
+  email?: string;
+  device?: string;
+  version?: string;
 }
 
 export interface IUser {

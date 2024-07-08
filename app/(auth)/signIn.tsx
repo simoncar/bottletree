@@ -13,6 +13,7 @@ import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { updateAccountName } from "@/lib/APIuser";
+import { addLog } from "@/lib/APIlog";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -111,6 +112,12 @@ export default function SignIn() {
                   .signInWithEmailAndPassword(email, password)
                   .then(async (userCredential) => {
                     updateAccountName(userCredential.user.displayName);
+                    addLog({
+                      loglevel: "INFO",
+                      message: "User signed in",
+                      user: userCredential.user.uid,
+                      email: userCredential.user.email,
+                    });
                     //const goto = await mostRecentProject();
                     const goto = "welcome";
                     console.log("goto: ", goto);

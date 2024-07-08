@@ -46,7 +46,7 @@ export const About = () => {
         <Text style={styles.version}>
           Dev.native - {__DEV__ ? "true" : "false"}
         </Text>
-        <Text style={styles.version}>Toekn - {token}</Text>
+        <Text style={styles.version}>Token - {token}</Text>
       </View>
     );
   }
