@@ -6,7 +6,7 @@ import * as Application from "expo-application";
 export async function getLogs(callback: logsRead) {
   const logs: ILog[] = [];
 
-  const q = firestore().collection("logs").orderBy("timestamp", "asc");
+  const q = firestore().collection("logs").orderBy("timestamp", "desc");
 
   const logSnapshot = await q.get();
 
@@ -19,6 +19,7 @@ export async function getLogs(callback: logsRead) {
       user: doc.data().user,
       device: doc.data().device,
       version: doc.data().version,
+      email: doc.data().email,
     });
   });
 

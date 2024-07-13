@@ -15,7 +15,7 @@ import { ILog } from "@/lib/types";
 import ProjectContext from "@/lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useAuth } from "@/lib/authProvider";
-import { useProject } from "@/lib/projectProvider";
+import { getRelativeTime } from "@/lib/util";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -28,6 +28,7 @@ const ModalScreen = (props) => {
 
   const logsRead = (logsDB: ILog[]) => {
     setLogs(logsDB);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -41,25 +42,31 @@ const ModalScreen = (props) => {
   function renderRow(data: ILog) {
     const backgroundColor = "transparent";
     return (
-     
-        <View
-          key={data.key}
-          style={[styles.outerView, { backgroundColor: backgroundColor }]}>
-          <View style={styles.avatar}>
-            <View style={styles.avatarFace}>
-              <Ionicons
-                name="person-outline"
-                color="#999999"
-                style={styles.avatarIcon}
-              />
-            </View>
-          </View>
-          <View>
-            <Text style={styles.logLevel}>{data.loglevel || ""}</Text>
-            <Text style={styles.message}>{data.message || ""}</Text>
+      <View
+        key={data.key}
+        style={[styles.outerView, { backgroundColor: backgroundColor }]}>
+        <View style={styles.avatar}>
+          <View style={styles.avatarFace}>
+            <Ionicons
+              name="person-outline"
+              color="#999999"
+              style={styles.avatarIcon}
+            />
           </View>
         </View>
-      
+        <View>
+          <Text style={styles.logLevel}>
+            {data.loglevel || ""} {data.message || ""}
+          </Text>
+
+          <Text style={styles.logLevel}>
+            {" "}
+            {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
+          </Text>
+
+          <Text style={styles.message}>{data.email || ""}</Text>
+        </View>
+      </View>
     );
   }
 
