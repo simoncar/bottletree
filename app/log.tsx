@@ -55,16 +55,15 @@ const ModalScreen = (props) => {
           </View>
         </View>
         <View>
-          <Text style={styles.logLevel}>
+          <Text style={styles.message}>{data.email || ""}</Text>
+          <Text style={styles.messageSmall}>
             {data.loglevel || ""} {data.message || ""}
           </Text>
-
-          <Text style={styles.logLevel}>
-            {" "}
+          <Text style={styles.messageSmall}>
             {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
           </Text>
-
-          <Text style={styles.message}>{data.email || ""}</Text>
+          <Text style={styles.messageSmall}>{data.version || ""}</Text>
+          <Text style={styles.messageSmall}>{data.device || ""}</Text>
         </View>
       </View>
     );
@@ -113,13 +112,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
+  messageSmall: {
+    color: "grey",
+    fontSize: 14,
+  },
 
   outerView: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
-    height: 80,
     paddingVertical: 8,
     padding: 8,
   },

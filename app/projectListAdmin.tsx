@@ -270,7 +270,6 @@ const ModalScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
-        <View>{renderAdmin()}</View>
         <View>{renderAll()}</View>
         <View>{renderArchiveAll()}</View>
         <View>{renderLog()}</View>
