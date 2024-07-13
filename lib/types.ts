@@ -22,7 +22,7 @@ export interface IPost {
 export interface IProject {
   project: string;
   key: string;
-  title: string;
+title: string;
   icon: string;
   archived?: boolean;
   postCount: number;

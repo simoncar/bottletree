@@ -213,6 +213,15 @@ export default function RootLayout() {
                     },
                   }}
                 />
+                <Stack.Screen
+                  name="log"
+                  options={{
+                    title: "Logs",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
               </Stack>
             </ProjectProvider>
           </ActionSheetProvider>

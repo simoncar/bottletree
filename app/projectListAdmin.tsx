@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { router, useLocalSearchParams } from "expo-router";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Pressable,
@@ -148,12 +148,35 @@ const ModalScreen = (props) => {
     );
   }
 
+  function renderLog() {
+    if (!__DEV__) {
+      return null;
+    }
+    return (
+      <View style={styles.adminAllLog}>
+        <Link href="log">
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            View Log
+          </Text>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}></Text>
+        </Link>
+      </View>
+    );
+  }
   function renderArchiveAll() {
     if (!__DEV__) {
       return null;
     }
     return (
-      <View style={styles.adminAll}>
+      <View style={styles.adminAllArchive}>
         <TouchableOpacity
           key={"archiveAll"}
           onPress={() => {
@@ -250,6 +273,7 @@ const ModalScreen = (props) => {
         <View>{renderAdmin()}</View>
         <View>{renderAll()}</View>
         <View>{renderArchiveAll()}</View>
+        <View>{renderLog()}</View>
         {loading === false && (
           <View>
             <ShortList
@@ -275,6 +299,20 @@ const styles = StyleSheet.create({
   adminAll: {
     alignItems: "center",
     backgroundColor: "blue",
+    height: 70,
+    paddingTop: 10,
+    textAlign: "center",
+  },
+  adminAllArchive: {
+    alignItems: "center",
+    backgroundColor: "yellow",
+    height: 70,
+    paddingTop: 10,
+    textAlign: "center",
+  },
+  adminAllLog: {
+    alignItems: "center",
+    backgroundColor: "green",
     height: 70,
     paddingTop: 10,
     textAlign: "center",
