@@ -1,9 +1,8 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { Link, router, useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Pressable,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
@@ -18,7 +17,6 @@ import {
   addProjectUserAll,
   archiveAllProjects,
 } from "@/lib/APIproject";
-import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useAuth } from "@/lib/authProvider";
@@ -52,27 +50,6 @@ const ModalScreen = (props) => {
       setLoading(false);
     }
   }, [projects]);
-
-  function renderAdmin() {
-    return (
-      <View style={styles.admin}>
-        <Text
-          style={[
-            styles.project,
-            { color: Colors[colorScheme ?? "light"].background },
-          ]}>
-          Supervisor Mode
-        </Text>
-        <Text
-          style={[
-            styles.project,
-            { color: Colors[colorScheme ?? "light"].background },
-          ]}>
-          (Control who can see what projects)
-        </Text>
-      </View>
-    );
-  }
 
   const saveDoneAll = () => {
     console.log("saveDoneAll - push to home");
