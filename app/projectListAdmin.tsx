@@ -130,21 +130,29 @@ const ModalScreen = (props) => {
       return null;
     }
     return (
-      <View style={styles.adminAllLog}>
-        <Link href="log">
-          <Text
-            style={[
-              styles.project,
-              { color: Colors[colorScheme ?? "light"].background },
-            ]}>
-            View Log
-          </Text>
-          <Text
-            style={[
-              styles.project,
-              { color: Colors[colorScheme ?? "light"].background },
-            ]}></Text>
-        </Link>
+      <View style={styles.outerView}>
+        <View style={styles.innerView}>
+          <Link href="log">
+            <View style={styles.avatar}>
+              <View style={styles.avatarFace}>
+                <MaterialIcons
+                  name="history"
+                  color="#999999"
+                  style={styles.avatarIcon}
+                />
+              </View>
+            </View>
+            <View>
+              <Text
+                numberOfLines={2}
+                ellipsizeMode="tail"
+                style={styles.project}>
+                View Log
+              </Text>
+              <Text style={styles.projectId}>{""}</Text>
+            </View>
+          </Link>
+        </View>
       </View>
     );
   }
@@ -265,13 +273,6 @@ const ModalScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-  admin: {
-    alignItems: "center",
-    backgroundColor: "red",
-    height: 70,
-    paddingTop: 10,
-    textAlign: "center",
-  },
   adminAll: {
     alignItems: "center",
     backgroundColor: "blue",
