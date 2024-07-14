@@ -126,9 +126,6 @@ const ModalScreen = (props) => {
   }
 
   function renderLog() {
-    if (!__DEV__) {
-      return null;
-    }
     return (
       <View style={styles.outerView}>
         <View style={styles.innerView}>
