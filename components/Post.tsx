@@ -14,7 +14,6 @@ import Comments from "./PostComments";
 import Dots from "@/components/dots";
 import Footer from "@/components/Footer";
 import Colors from "@/constants/Colors";
-import Project from "./ProjectPanel";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
