@@ -24,19 +24,10 @@ export const ProjectUsers = (props) => {
   const colorScheme = useColorScheme();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
-  const { sharedDataUser, isLoading } = useAuth();
+  const { sharedDataUser } = useAuth();
 
   let prevOpenedRow;
   const row: Array<any> = [];
-
-  if (null == sharedDataUser) {
-    loggedInUser = {
-      uid: "",
-      displayName: "",
-      email: "",
-      photoURL: "",
-    };
-  }
 
   useEffect(() => {
     getProjectUsers(project, projectUsersRead);
@@ -189,7 +180,7 @@ export const ProjectUsers = (props) => {
       <View>
         {renderHeader({
           key: "header",
-          displayName: "Project Access List",
+          displayName: "Add",
           subTitle: "Add person to project",
         })}
       </View>
