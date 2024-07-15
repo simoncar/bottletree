@@ -11,6 +11,7 @@ import { Text, View, TextInput } from "@/components/Themed";
 import { updateAccountName } from "@/lib/APIuser";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
+import { addLog } from "@/lib/APIlog";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -25,6 +26,12 @@ export default function SignIn() {
     if (error == "Success") {
       updateAccountName(name); //firebease auth update function
       updateSharedDataUser(user);
+      addLog({
+        loglevel: "INFO",
+        message: "Create Account Success",
+        user: user.uid,
+        email: user.email,
+      });
       router.navigate("/welcome");
     } else {
       //updateSharedDataUser(null);

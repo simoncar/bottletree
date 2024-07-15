@@ -49,7 +49,7 @@ sudo lsof -i :5000
 sudo kill -9 PID
 
 To generate an .apk, modify the eas.json by adding one of the following properties in a build profile:
-
+apiLog
 developmentClient to true (default)
 distribution to internal
 android.buildType to apk

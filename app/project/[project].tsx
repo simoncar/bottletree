@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
-  Button as NativeButton,
+  Button,
   useColorScheme,
   Pressable,
 } from "react-native";
@@ -160,11 +160,11 @@ export default function editPost() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <Pressable onPress={() => updateProject(project, saveDone)}>
-              <Text style={{ fontSize: 16 }}>Save</Text>
-            </Pressable>
+            <Button
+              title="Save"
+              onPress={() => updateProject(project, saveDone)}
+            />
           ),
-          title: "",
         }}
       />
       <Progress progress={progress} />

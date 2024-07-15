@@ -5,7 +5,7 @@ import {
   StyleSheet,
   useColorScheme,
   TouchableOpacity,
-  Pressable,
+  Button,
   View,
 } from "react-native";
 import Progress from "@/components/Progress";
@@ -177,16 +177,7 @@ export default function editUser() {
     <ScrollView>
       <Stack.Screen
         options={{
-          headerRight: () => (
-            <Pressable onPress={() => save()}>
-              <Text style={{ fontSize: 16 }}>Save</Text>
-            </Pressable>
-          ),
-          title: "",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            color: "white",
-          },
+          headerRight: () => <Button title="Save" onPress={() => save()} />,
         }}
       />
 

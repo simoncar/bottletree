@@ -163,6 +163,10 @@ export default function SignIn() {
         key={"createAccount"}
         style={styles.button}
         onPress={() => {
+          addLog({
+            loglevel: "INFO",
+            message: "Create Account",
+          });
           router.navigate({
             pathname: "/createAccount",
             params: {
