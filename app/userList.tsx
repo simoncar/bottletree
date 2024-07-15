@@ -1,18 +1,12 @@
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  useColorScheme,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import { getUsers } from "@/lib/APIuser";
 import { addProjectUser } from "@/lib/APIproject";
 import { IUser } from "@/lib/types";
-import ProjectContext from "@/lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useAuth } from "@/lib/authProvider";
 import { useProject } from "@/lib/projectProvider";
@@ -24,7 +18,7 @@ const ModalScreen = (props) => {
 
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState(true);
- const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const { sharedDataUser, isLoading } = useAuth();
 
   const usersRead = (usersDB: IUser[]) => {

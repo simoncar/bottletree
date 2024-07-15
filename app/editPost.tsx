@@ -10,7 +10,7 @@ import {
 import { router, useLocalSearchParams, Stack } from "expo-router";
 import { TextInput, View } from "@/components/Themed";
 import { useAuth } from "@/lib/authProvider";
-import { IPost, IProject } from "@/lib/types";
+import { IPost } from "@/lib/types";
 import { updatePost, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
 
@@ -32,7 +32,6 @@ export default function editPost() {
   });
 
   const colorScheme = useColorScheme();
-  const { width } = Dimensions.get("window");
 
   useEffect(() => {
     if (local?.postId) {

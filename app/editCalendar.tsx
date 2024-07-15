@@ -35,7 +35,6 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 export default function editCalendar() {
   const { sharedDataProject } = useProject();
   const colorScheme = useColorScheme();
-  const navigation = useNavigation();
 
   const local = useLocalSearchParams<{
     calendarId: string;
@@ -205,11 +204,6 @@ export default function editCalendar() {
         </Pressable>
       );
     }
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
   };
 
   const showDatePicker = (dateParttoDisplay, dateorTime, pickerValue) => {

@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { SettingsListItem } from "@/components/SettingsListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { getUser } from "@/lib/APIuser";
-import { useLocalSearchParams } from "expo-router";
 import { useAuth } from "@/lib/authProvider";
 import { IUser } from "@/lib/types";
 

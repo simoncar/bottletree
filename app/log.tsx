@@ -1,30 +1,15 @@
-import { Image } from "expo-image";
-import { Link, useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  useColorScheme,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, ScrollView } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import { getLogs } from "@/lib/APIlog";
-import { addProjectUser } from "@/lib/APIproject";
 import { ILog } from "@/lib/types";
-import ProjectContext from "@/lib/projectContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useAuth } from "@/lib/authProvider";
 import { getRelativeTime } from "@/lib/util";
 
-const ModalScreen = (props) => {
-  const { page } = useLocalSearchParams<{
-    page: string;
-  }>();
-
+const LogScreen = (props) => {
   const [logs, setLogs] = useState<ILog[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const { sharedDataUser, isLoading } = useAuth();
 
   const logsRead = (logsDB: ILog[]) => {
     setLogs(logsDB);
@@ -99,12 +84,6 @@ const styles = StyleSheet.create({
     height: 200,
   },
 
-  logLevel: {
-    color: "#888",
-    fontSize: 18,
-    marginBottom: 5,
-  },
-
   logList: {
     paddingBottom: 50,
   },
@@ -127,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalScreen;
+export default LogScreen;

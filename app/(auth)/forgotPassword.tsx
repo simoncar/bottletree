@@ -7,10 +7,10 @@ import { Text, View, TextInput } from "@/components/Themed";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const { resetPassword } = useAuth();
 
-  const resetError = (error) => {
+  const resetError = (error) =>
+  {
     setErrorMessage(strip(error));
   };
 
