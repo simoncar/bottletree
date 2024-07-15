@@ -262,7 +262,7 @@ export async function getComments(project: string, postId: string) {
 
 export async function addComment(
   project: string,
-  post: string,
+  post: IPost,
   comment: IComment,
   callback: { (comment: IComment): void; (arg0: string): void },
 ) {
