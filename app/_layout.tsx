@@ -192,7 +192,10 @@ export default function RootLayout() {
                 <Stack.Screen
                   name="user/[uid]"
                   options={{
-                    title: "app/layout/user",
+                    title: "User",
+                    headerTitleStyle: {
+                      fontWeight: "bold",
+                    },
                   }}
                 />
                 <Stack.Screen

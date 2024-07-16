@@ -12,6 +12,7 @@ type Props = {
   project: string;
   post: IPost;
   commentShow: boolean;
+
   setCommentShow: (commentShow: boolean) => void;
 };
 
@@ -36,6 +37,13 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
       setSaved(false);
     });
   }, [saved]);
+
+  useEffect(() => {
+    if (commentShow == true) {
+      console.log("use effect commentShow");
+      setComment(null);
+    }
+  }, [commentShow]);
 
   const saveDone = (comment: IComment) => {
     //setProjects(projectsDB);
