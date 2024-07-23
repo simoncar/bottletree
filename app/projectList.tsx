@@ -39,7 +39,7 @@ const ModalScreen = (props) => {
   };
 
   useEffect(() => {
-    getProjects(uid, projectsRead);
+ getProjects;
   }, []);
 
   useEffect(() => {

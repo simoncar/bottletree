@@ -17,7 +17,6 @@ type Props = {
 
 export const Posts = ({ project }: Props) => {
   const { sharedDataUser } = useAuth();
-
   const [posts, setPosts] = useState([]);
 
   let currentProject: IProject;

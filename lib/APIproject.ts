@@ -41,6 +41,8 @@ export async function getProjects(uid: string, callback: projectsRead) {
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
 
+  console.log("Getting projects for user: ", uid);
+
   const query = db.collectionGroup("accessList").where("uid", "==", uid);
 
   await query.get().then((querySnapshot) => {
