@@ -21,8 +21,6 @@ const UserProvider = (props: React.PropsWithChildren) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("UserProvider >> session:", session);
-
         const userData = await getUser(session);
 
         setUser({ ...userData });

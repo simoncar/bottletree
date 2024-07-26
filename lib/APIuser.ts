@@ -4,11 +4,7 @@ import { useSession } from "@/lib/ctx";
 
 export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
-  console.log("getUser uid 1111:", uid);
-
   const doc = await q.get();
-
-  console.log("getUser doc:", doc);
 
   if (doc.exists) {
     const user: IUser = {
@@ -48,8 +44,6 @@ export async function deleteUser(
 }
 
 export async function updateAccountName(uid: string, displayName: string) {
-  console.log("updateAccountName displayName:", displayName);
-
   const docRef1 = firestore().collection("users").doc(uid);
 
   const user = auth().currentUser;

@@ -156,7 +156,6 @@ export async function getProjectUsers(
   });
 
   const userList: IUser[] = [];
-  console.log("idList: ", idList);
 
   if (idList.length > 0) {
     const q2 = db.collection("users");

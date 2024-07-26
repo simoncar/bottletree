@@ -46,7 +46,6 @@ export function useStorageState(key: string): UseStateHook<string> {
       try {
         if (typeof localStorage !== "undefined") {
           const storedValue = localStorage.getItem(key);
-          console.log("useStorageState web value:", storedValue);
           setState(storedValue ? JSON.parse(storedValue) : null);
         }
       } catch (e) {
@@ -54,7 +53,6 @@ export function useStorageState(key: string): UseStateHook<string> {
       }
     } else {
       SecureStore.getItemAsync(key).then((value) => {
-        console.log("useStorageState native value:", value);
         setState(value ? JSON.parse(value) : null);
       });
     }
