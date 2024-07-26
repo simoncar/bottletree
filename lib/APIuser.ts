@@ -49,10 +49,10 @@ export async function deleteUser(
   return () => q;
 }
 
-export async function updateAccountName(displayName: string) {
+export async function updateAccountName(uid: string, displayName: string) {
   console.log("updateAccountName displayName:", displayName);
 
-  const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
+  const docRef1 = firestore().collection("users").doc(uid);
 
   const user = auth().currentUser;
   try {
@@ -72,8 +72,7 @@ export async function updateAccountName(displayName: string) {
   }
 }
 
-export const updateUserProjectCount = (project: string) => {
-  const u = auth().currentUser?.uid;
+export const updateUserProjectCount = (uid: string, project: string) => {
   if (project === "welcome" || project == undefined) {
     return;
   }
@@ -95,7 +94,7 @@ export const updateUserProjectCount = (project: string) => {
 
       firestore()
         .collection("users")
-        .doc(u)
+        .doc(uid)
         .set(
           {
             project: project,
@@ -178,12 +177,15 @@ const generateFirebaseDocIDFromEmail = (email) => {
   return `${sanitizedEmail}_${suffix}`;
 };
 
-export async function getUserProjectCount(callback: userProjectCountRead) {
+export async function getUserProjectCount(
+  uid: string,
+  callback: userProjectCountRead,
+) {
   let user: IUser;
 
   firestore()
     .collection("users")
-    .doc(auth().currentUser.uid)
+    .doc(uid)
     .get()
     .then((doc) => {
       user = {

@@ -9,6 +9,7 @@ import { UserContext } from "@/lib/UserContext";
 
 export const About = () => {
   const { user } = useContext(UserContext);
+  const { session } = useSession();
   const deviceLanguage = getLocales()[0].languageCode;
 
   if (null == user) {
@@ -27,7 +28,8 @@ export const About = () => {
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion})
         </Text>
-        <Text style={styles.version}>SDU - {user.uid}</Text>
+        <Text style={styles.version}>UserContext - {user.uid}</Text>
+        <Text style={styles.version}>ctx Session - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>Language - {deviceLanguage}</Text>
         <Text style={styles.version}>Project - {user.project}</Text>

@@ -11,7 +11,7 @@ import { UserContext } from "@/lib/UserContext";
 export const About = () => {
   const { user } = useContext(UserContext);
   const [token, setToken] = useState("");
-  const { session, isAuthLoading } = useSession();
+  const { session } = useSession();
   const deviceLanguage = getLocales()[0].languageCode;
 
   useEffect(() => {

@@ -74,10 +74,12 @@ export default function Home() {
         <Text style={styles.welcomeApp}>Builder App</Text>
       </View>
 
+      <View style={styles.outerView}>
+        <Link href="/projectList">
+          <Text style={styles.settingName}>View Projects</Text>
+        </Link>
+      </View>
       {renderAddProject()}
-      <Link href="welcome">
-        <Text style={styles.text}>View Projects</Text>
-      </Link>
 
       {renderLogout()}
       <About />

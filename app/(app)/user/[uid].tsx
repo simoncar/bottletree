@@ -55,7 +55,7 @@ export default function editUser() {
   const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
   const save = () => {
-    updateAccountName(user.displayName);
+    updateAccountName(session,user.displayName);
     router.back();
   };
 

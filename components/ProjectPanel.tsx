@@ -16,6 +16,7 @@ const Project = (props) => {
   const { project } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
+  const { session, signOut } = useSession();
 
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
@@ -29,12 +30,16 @@ const Project = (props) => {
   });
 
   useEffect(() => {
-    getProject(project || "", (projectObj) => {
-      if (projectObj) {
-        setProject(projectObj);
-      }
-    });
-    getUserProjectCount(userProjectCountRead);
+    console.log("ProjectPanel useEffect session:", session);
+
+    if (session) {
+      getProject(project || "", (projectObj) => {
+        if (projectObj) {
+          setProject(projectObj);
+        }
+      });
+      getUserProjectCount(session, userProjectCountRead);
+    }
   }, [project]);
 
   const userProjectCountRead = (user: IUser) => {

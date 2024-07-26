@@ -17,6 +17,7 @@ type Props = {
 };
 
 export const Posts = ({ project }: Props) => {
+  const { session, isAuthLoading } = useSession();
   const [posts, setPosts] = useState([]);
   const { user } = useContext(UserContext);
 
@@ -35,7 +36,7 @@ export const Posts = ({ project }: Props) => {
       console.log("Posts useEffect calling getPosts : ", project);
 
       const unsubscribe = getPosts(project, postsRead);
-      updateUserProjectCount(project);
+      updateUserProjectCount(session, project);
       return () => {
         unsubscribe;
       };
