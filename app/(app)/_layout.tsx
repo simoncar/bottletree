@@ -70,14 +70,14 @@ export default function Layout() {
     return null;
   }
 
-  if (isAuthLoading) {
-    console.log("_layout Loading isAuthLoading...");
-    return <Text>Loading....... . . . </Text>;
-  }
-
   if (!session) {
     console.log("_layout Redirecting to signIn");
     return <Redirect href="/signIn" />;
+  }
+
+  if (isAuthLoading) {
+    console.log("_layout Loading isAuthLoading...");
+    return <Text>Loading....... . . . </Text>;
   }
 
   //function to return a view with padding when the app is rendered in a web browser and not a mobile device
