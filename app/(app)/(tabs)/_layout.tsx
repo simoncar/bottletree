@@ -34,7 +34,7 @@ export default function TabLayout() {
   const { showActionSheetWithOptions } = useActionSheet();
 
   if (isAuthLoading) {
-    return <Text>Loading...</Text>;
+    return <Text>Loading</Text>;
   }
 
   const saveDone = () => {
