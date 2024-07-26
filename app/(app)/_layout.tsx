@@ -72,7 +72,7 @@ export default function Layout() {
 
   if (isAuthLoading) {
     console.log("_layout Loading isAuthLoading...");
-    return <Text>Loading.......</Text>;
+    return <Text>Loading....... . . . </Text>;
   }
 
   if (!session) {
