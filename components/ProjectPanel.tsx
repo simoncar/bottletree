@@ -12,7 +12,7 @@ import { useSession } from "@/lib/ctx";
 import { getProject } from "@/lib/APIproject";
 import { useProject } from "@/lib/projectProvider";
 
-const Project = (props) => {
+const ProjectPanel = (props) => {
   const { project } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
@@ -31,6 +31,7 @@ const Project = (props) => {
 
   useEffect(() => {
     if (session) {
+      console.log("projectPanel useEffect: " + project);
       getProject(project || "", (projectObj) => {
         if (projectObj) {
           setProject(projectObj);
@@ -153,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Project;
+export default ProjectPanel;

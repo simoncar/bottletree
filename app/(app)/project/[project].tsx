@@ -52,6 +52,8 @@ export default function editPost() {
   }, [local.pUpdateUsers]);
 
   useEffect(() => {
+    console.log("project useEffect: " + local.project);
+
     getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);

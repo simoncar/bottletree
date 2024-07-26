@@ -10,7 +10,7 @@ export async function getProject(
   callback: { (project: IProject): void; (arg0: IProject): void },
 ) {
   if (!project) {
-    console.log("No project provided");
+    console.log("getProject: No project provided");
     return;
   }
 

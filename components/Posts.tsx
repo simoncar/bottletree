@@ -5,7 +5,7 @@ import { getPosts } from "@/lib/APIpost";
 import { updateUserProjectCount } from "@/lib/APIuser";
 import { IPost, IProject } from "@/lib/types";
 import Post from "./Post";
-import Project from "./ProjectPanel";
+import ProjectPanel from "./ProjectPanel";
 import { router } from "expo-router";
 import { useSession } from "@/lib/ctx";
 import { FlatList } from "react-native-gesture-handler";
@@ -91,7 +91,7 @@ export const Posts = ({ project }: Props) => {
     return (
       <View style={styles.list}>
         <View>
-          <Project project={project} />
+          <ProjectPanel project={project} />
         </View>
 
         <View style={{ flex: 1, flexDirection: "row" }}>
