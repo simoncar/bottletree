@@ -15,6 +15,7 @@ import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import alert from "@/lib/alert";
 import { UserContext } from "../../../lib/UserContext";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -220,7 +221,17 @@ export default function TabLayout() {
             height: 80,
           },
           headerTitle: () => (
-            <BigText style={styles.headerTitle}>{appName}</BigText>
+            <Link href="/">
+              <View style={styles.titleView}>
+                <Ionicons
+                  name="construct-outline"
+                  size={30}
+                  color={Colors[colorScheme ?? "light"].text}
+                  style={{ paddingTop: 5 }}
+                />
+                <BigText style={styles.headerTitle}>{appName}</BigText>
+              </View>
+            </Link>
           ),
           headerTitleAlign: "left",
           headerRight: () => (
@@ -278,8 +289,9 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   headerTitle: {
-    fontSize: 28,
+    fontSize: 33,
     fontWeight: "bold",
+    paddingLeft: 5,
   },
   tabButton: {
     alignItems: "center",
@@ -292,5 +304,9 @@ const styles = StyleSheet.create({
   tabIcon: {
     paddingBottom: 0,
     paddingLeft: 1,
+  },
+  titleView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
