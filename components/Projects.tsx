@@ -1,0 +1,207 @@
+import { Image } from "expo-image";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+
+  useColorScheme,
+} from "react-native";
+import { ShortList } from "@/components/sComponent";
+import { Text, View } from "@/components/Themed";
+import Colors from "@/constants/Colors";
+import { getProjects } from "@/lib/APIproject";
+import ProjectContext from "@/lib/projectContext";
+import { IProject } from "@/lib/types";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useSession } from "@/lib/ctx";
+import { useProject } from "@/lib/projectProvider";
+import { getRelativeTime } from "@/lib/util";
+import { UserContext } from "@/lib/UserContext";
+
+type Props = {
+  session: string;
+};
+
+export const Projects = ({ session }: Props) => {
+  const [projects, setProjects] = useState<IProject[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const { user, setUser } = useContext(UserContext);
+  const colorScheme = useColorScheme();
+
+  const projectsRead = (projectsDB: IProject[]) => {
+    setProjects(projectsDB);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getProjects(session, projectsRead);
+  }, []);
+
+  function findValueByKey(
+    obj: Record<string, number>,
+    keyToFind: string,
+  ): number {
+    if (obj == undefined) {
+      return 0;
+    }
+    const value = obj[keyToFind];
+    return value !== undefined ? value : 0; // Return 0 or any default value if the key doesn't exist in the object.
+  }
+
+  function renderTitle(data: IProject) {
+    if (!data.archived) {
+      return (
+        <View>
+          <Text style={styles.project}>{data.title || ""}</Text>
+          <Text style={styles.projectId}>{data.project || ""}</Text>
+          <Text style={styles.projectId}>
+            {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
+          </Text>
+        </View>
+      );
+    } else {
+      return (
+        <Text style={styles.projectArchived}>
+          {data.title || ""} (Archived)
+        </Text>
+      );
+    }
+  }
+
+  function renderRow(data: IProject) {
+    const icon = data.icon;
+
+    const postCountUser = findValueByKey(user.postCount, data.key);
+    const postCountDelta = data.postCount - postCountUser;
+
+    return (
+      <View key={data.key} style={styles.outerView}>
+        <TouchableOpacity
+          key={data.key}
+          style={styles.innerView}
+          onPress={() => {
+            setUser({ ...user, project: data.key });
+
+            router.navigate({
+              pathname: "/[project]",
+              params: {
+                project: data.key,
+              },
+            });
+          }}>
+          <View style={styles.avatar}>
+            {icon ? (
+              <Image style={styles.avatarFace} source={data.icon} />
+            ) : (
+              <View style={styles.avatarFace}>
+                <MaterialIcons
+                  name="house-siding"
+                  color="#999999"
+                  style={styles.avatarIcon}
+                />
+              </View>
+            )}
+          </View>
+          <View style={styles.projectTitle}>{renderTitle(data)}</View>
+        </TouchableOpacity>
+
+        {postCountDelta > 0 && (
+          <View>
+            <View style={styles.redCircle}>
+              <Text style={styles.redNumber}>{postCountDelta}</Text>
+            </View>
+          </View>
+        )}
+      </View>
+    );
+  }
+
+  return (
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: Colors[colorScheme ?? "light"].background },
+      ]}>
+      {loading === false && (
+        <View>
+          <ShortList
+            key={projects.key}
+            data={projects}
+            renderItem={renderRow}
+          />
+        </View>
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  avatar: {
+    marginRight: 12,
+    width: 50,
+  },
+  avatarFace: {
+    borderColor: "lightgrey",
+    borderRadius: 48 / 2,
+    borderWidth: StyleSheet.hairlineWidth,
+    height: 48,
+    width: 48,
+  },
+
+  avatarIcon: {
+    fontSize: 35,
+    paddingTop: 5,
+    textAlign: "center",
+  },
+  container: {
+    paddingTop: 20,
+  },
+
+  innerView: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+
+    paddingHorizontal: 8,
+  },
+  outerView: {
+    alignItems: "center",
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    paddingVertical: 8,
+    padding: 8,
+    width: 350,
+  },
+  project: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  projectArchived: {
+    color: "grey",
+    fontSize: 18,
+    marginBottom: 5,
+  },
+
+  projectId: {
+    color: "grey",
+    fontSize: 14,
+  },
+  projectTitle: {
+    width: 250,
+  },
+  redCircle: {
+    alignItems: "center",
+    backgroundColor: "red",
+    borderRadius: 25 / 2,
+    height: 25,
+    justifyContent: "center",
+    marginRight: 25,
+    width: 25,
+  },
+
+  redNumber: {
+    color: "white",
+  },
+});

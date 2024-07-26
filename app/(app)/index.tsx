@@ -1,5 +1,10 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  ScrollView,
+} from "react-native";
 import { useSession } from "@/lib/ctx";
 import { Stack, Link } from "expo-router";
 import { deleteUser } from "@/lib/APIuser";
@@ -9,9 +14,11 @@ import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
 import { router } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Projects } from "@/components/Projects";
 
 export default function Home() {
   const colorScheme = useColorScheme();
+  const { session } = useSession();
 
   function renderAddProject() {
     return (
@@ -32,7 +39,7 @@ export default function Home() {
 
   function renderLogout() {
     return (
-      <View style={styles.outerView}>
+      <View style={styles.container}>
         <TouchableOpacity
           key={"signOut"}
           onPress={() => {
@@ -67,22 +74,19 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: "Home" }} />
+      <ScrollView>
+        <Stack.Screen options={{ title: "Home" }} />
 
-      <View style={styles.instructions}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Text style={styles.welcomeApp}>Builder App</Text>
-      </View>
+        <View style={styles.instructions}>
+          <Text style={styles.welcomeText}>Welcome to</Text>
+          <Text style={styles.welcomeApp}>Builder App</Text>
+        </View>
 
-      <View style={styles.outerView}>
-        <Link href="/projectList">
-          <Text style={styles.settingName}>View Projects</Text>
-        </Link>
-      </View>
-      {renderAddProject()}
-
-      {renderLogout()}
-      <About />
+        <Projects session={session as string} />
+        {renderAddProject()}
+        {renderLogout()}
+        <About />
+      </ScrollView>
     </View>
   );
 }
