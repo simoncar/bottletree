@@ -9,7 +9,6 @@ export async function getPost(
   postId: string,
   callback: { (post: IPost): void; (arg0: IPost): void },
 ) {
-
   const q = db
     .collection("projects")
     .doc(project)
@@ -81,7 +80,6 @@ export async function addPostImage(post: IPost, callback: saveDone) {
 }
 
 export async function setPostNote(post: IPost, callback: saveDone) {
-
   const note = db
     .collection("projects")
     .doc(post.projectId)
@@ -99,7 +97,6 @@ export async function setPostNote(post: IPost, callback: saveDone) {
     .then((docRef) => {
       console.log("Post Document written with ID: ", post.key);
       if (post.author != "Simon" && Device.isDevice) {
-
         const messageRef = db
           .collection("notifications")
           .add({
@@ -201,19 +198,15 @@ export function parseImages(images: string[]) {
 
 export async function getPosts(
   project: string | null | undefined,
-  callback: postsRead,
+  callback: any,
 ) {
+  console.log("loading posts from firebase: getPosts", project);
+
   if (undefined === project || null === project || "" === project) {
     project = "void";
   }
 
-  console.log("loading posts from firebase: getPosts", project);
-
-  const q = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("posts")
-    .orderBy("timestamp", "desc");
+  const q = firestore().collection("projects").doc(project).collection("posts");
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
@@ -228,6 +221,8 @@ export async function getPosts(
         caption: doc.data().caption,
       });
     });
+    console.log("querySnapshot from firebase: getPosts", posts);
+
     callback(posts);
   });
 

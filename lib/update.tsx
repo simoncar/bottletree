@@ -3,19 +3,14 @@ import { StyleSheet, Pressable } from "react-native";
 import { getLocales } from "expo-localization";
 import { Text, View } from "@/components/Themed";
 import * as Application from "expo-application";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { getToken } from "@/lib/APINotification";
 import { auth } from "@/lib/firebase";
 import * as Updates from "expo-updates";
 
 export const Update = () => {
-  const { sharedDataUser } = useAuth();
-  const [token, setToken] = useState("");
-  const deviceLanguage = getLocales()[0].languageCode;
   const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
     Updates.useUpdates();
-
-  const showDownloadButton = isUpdateAvailable;
 
   // Show whether or not we are running embedded code or an update
   const runTypeMessage = currentlyRunning.isEmbeddedLaunch
@@ -36,7 +31,7 @@ export const Update = () => {
 
       if (update.isAvailable) {
         await Updates.fetchUpdateAsync();
-         await Updates.reloadAsync();
+        await Updates.reloadAsync();
       }
     } catch (error) {
       alert(`Error fetching latest update: ${error}`);

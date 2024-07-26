@@ -13,12 +13,13 @@ import Colors from "@/constants/Colors";
 import { addImageFromPhoto } from "@/lib/APIimage";
 import ProjectContext from "@/lib/projectContext";
 import { IPost } from "@/lib/types";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { addPostImage } from "@/lib/APIpost";
 import { router } from "expo-router";
 import { View, Text } from "@/components/Themed";
 import Progress from "@/components/Progress";
 import * as Linking from "expo-linking";
+import { UserContext } from "@/lib/UserContext";
 
 export default function App() {
   const [facing, setFacing] = useState("back");
@@ -27,7 +28,7 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [camera, setCamera] = useState(null);
   const { sharedDataProject } = useContext(ProjectContext);
-  const { sharedDataUser } = useAuth();
+  const { user } = useContext(UserContext);
   const scaleValue = useRef(new Animated.Value(1)).current;
   const [backgroundColor, setBackgroundColor] = useState("#3498db");
   const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
@@ -94,7 +95,7 @@ export default function App() {
       caption: "",
       projectId: sharedDataProject.key,
       projectTitle: sharedDataProject.title,
-      author: sharedDataUser.displayName,
+      author: user.displayName,
       images: [downloadURL],
       ratio: ratio,
     };

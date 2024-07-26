@@ -8,18 +8,18 @@ import { getUsers } from "@/lib/APIuser";
 import { addProjectUser } from "@/lib/APIproject";
 import { IUser } from "@/lib/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { useProject } from "@/lib/projectProvider";
+import { UserContext } from "@/lib/UserContext";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
     page: string;
   }>();
-
+ const { user } = useContext(UserContext);
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState(true);
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
-  const { sharedDataUser, isLoading } = useAuth();
 
   const usersRead = (usersDB: IUser[]) => {
     setUsers(usersDB);
@@ -52,7 +52,7 @@ const ModalScreen = (props) => {
 
   function renderRow(data: IUser) {
     let backgroundColor = "transparent";
-    if (data.uid === sharedDataUser.uid) {
+    if (data.uid === user.uid) {
       backgroundColor = "#3fc451";
     }
     return (

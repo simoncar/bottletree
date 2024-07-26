@@ -5,7 +5,7 @@ import {
   Pressable,
   useColorScheme,
 } from "react-native";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "@/components/Themed";
 import { updateAccountName } from "@/lib/APIuser";
@@ -19,13 +19,14 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const { updateSharedDataUser, createAccount } = useAuth();
+  const { session, signUp } = useSession();
   const colorScheme = useColorScheme();
 
-  const createAccountCallback = (user, error) => {
+  const signUpCallback = (user, error) => {
     if (error == "Success") {
+      console.log("signUpCallback Success:", user);
+
       updateAccountName(name); //firebease auth update function
-      updateSharedDataUser(user);
       addLog({
         loglevel: "INFO",
         message: "Create Account Success",
@@ -52,7 +53,7 @@ export default function SignIn() {
           onPress={async () => {
             // signIn(email, password, loginError);
 
-            createAccount(name, email, password, createAccountCallback);
+            signUp(name, email, password, signUpCallback);
           }}
           style={styles.button}>
           <Text style={styles.loginText}>Create Account</Text>

@@ -10,11 +10,10 @@ import {
 } from "react-native";
 import Progress from "@/components/Progress";
 import { Text, TextInput } from "@/components/Themed";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router, Stack } from "expo-router";
+import { router, Stack, Redirect } from "expo-router";
 import { Image } from "expo-image";
-
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -35,6 +34,7 @@ import { demoData } from "@/lib/demoData";
 import { IUser } from "@/lib/types";
 import { StatusBar } from "expo-status-bar";
 import { useProject } from "@/lib/projectProvider";
+import { UserContext } from "../../../lib/UserContext";
 
 import { auth } from "@/lib/firebase";
 
@@ -43,35 +43,19 @@ export default function editUser() {
     uid: string;
   }>();
 
-  const { sharedDataUser, updateSharedDataUser } = useAuth();
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const { session, signOut } = useSession();
+  const { user, setUser } = useContext(UserContext);
   const [progress, setProgress] = useState(0);
 
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
 
-  const [user, setUser] = useState<IUser>({
-    uid: "",
-    displayName: "",
-    email: "",
-    photoURL: "",
-  });
+  console.log("user screen:", user);
 
   const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
-  useEffect(() => {
-    getUser(local?.uid || "", (user) => {
-      if (user) {
-        setUser(user);
-        updateSharedDataUser(user);
-      }
-    });
-  }, []);
-
   const save = () => {
-    updateSharedDataUser({ displayName: user.displayName });
     updateAccountName(user.displayName);
-
     router.back();
   };
 
@@ -91,8 +75,7 @@ export default function editUser() {
     });
 
     setUser({ ...user, photoURL: downloadURLarray[0] });
-    updateAccountPhotoURL(downloadURLarray[0]); //firebease auth update function
-    updateSharedDataUser({ photoURL: downloadURLarray[0] });
+    updateAccountPhotoURL(downloadURLarray[0]);
     setProgress(0);
   };
 
@@ -137,7 +120,6 @@ export default function editUser() {
             break;
           case 1:
             updateAccountPhotoURL("");
-            updateSharedDataUser({ photoURL: "" });
             setUser({ ...user, photoURL: "" });
 
             break;
@@ -147,6 +129,10 @@ export default function editUser() {
   };
 
   const profilePic = () => {
+    //if user is null return nothing
+    if (!user) {
+      return;
+    }
     return (
       <View style={styles.profilePicContainer}>
         <TouchableOpacity
@@ -173,6 +159,14 @@ export default function editUser() {
     );
   };
 
+  if (!session) {
+    console.log("_layout Redirecting to signIn");
+    return <Redirect href="/signIn" />;
+  }
+  if (!user) {
+    return;
+  }
+
   return (
     <ScrollView>
       <Stack.Screen
@@ -180,9 +174,7 @@ export default function editUser() {
           headerRight: () => <Button title="Save" onPress={() => save()} />,
         }}
       />
-
       <Progress progress={progress} />
-
       <View style={styles.avatarAContainer}>
         <View style={styles.avatarBView}>{profilePic()}</View>
 
@@ -197,7 +189,6 @@ export default function editUser() {
           </View>
         </View>
       </View>
-
       <View style={styles.outerView}>
         <TouchableOpacity
           key={"signOut"}
@@ -206,10 +197,12 @@ export default function editUser() {
               .signOut()
               .then(async () => {
                 await AsyncStorage.clear();
-                console.log("Storage successfully cleared!");
+                console.log("User Storage successfully cleared!");
                 console.log("Sign-out successful....");
                 // clear the shared data project
-                updateStoreSharedDataProject(null);
+                setUser(null);
+                // Clear the stack and navigate to the signIn page
+                router.replace("/signIn");
               })
               .catch((error) => {
                 console.log("[uid] eror: ", error.message);
@@ -226,7 +219,7 @@ export default function editUser() {
           <View style={styles.rightChevron}></View>
         </TouchableOpacity>
       </View>
-      {isAdmin(sharedDataUser?.email) && (
+      {isAdmin(user?.email) && (
         <View>
           <View style={styles.outerView}>
             <TouchableOpacity key={"admin"} onPress={() => administration()}>
@@ -258,7 +251,6 @@ export default function editUser() {
           </View>
         </View>
       )}
-
       <TouchableOpacity
         key={"deleteAccount"}
         onPress={() =>
@@ -284,7 +276,6 @@ export default function editUser() {
           </View>
         </View>
       </TouchableOpacity>
-
       <StatusBar style="auto" />
       <View style={styles.aboutContainer}>
         <Update />

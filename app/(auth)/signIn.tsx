@@ -14,8 +14,11 @@ import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { updateAccountName } from "@/lib/APIuser";
 import { addLog } from "@/lib/APIlog";
+import { useSession } from "@/lib/ctx";
+import { About } from "@/lib/about";
 
 export default function SignIn() {
+  const { signIn, signUp } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setNotification] = useState("");
@@ -42,6 +45,18 @@ export default function SignIn() {
     }
   };
 
+  const handleSignIn = async () => {
+    try {
+      await signIn(email, password);
+      router.push("/(app)");
+    } catch (error) {
+      console.log(error);
+      setNotification(errorMessage(error.code));
+    } finally {
+      // do something
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -60,7 +75,6 @@ export default function SignIn() {
             height: welcomeFontSize,
           }}></Animated.View>
         <Text style={styles.welcomeText}>Welcome to</Text>
-
         <Text style={styles.welcomeApp}>Builder App</Text>
       </Animated.View>
 
@@ -104,32 +118,7 @@ export default function SignIn() {
             </Text>
           </View>
 
-          <TouchableOpacity
-            onPress={() => {
-              AsyncStorage.clear().then(() => {
-                console.log("Storage successfully cleared!");
-                auth()
-                  .signInWithEmailAndPassword(email, password)
-                  .then(async (userCredential) => {
-                    updateAccountName(userCredential.user.displayName);
-                    addLog({
-                      loglevel: "INFO",
-                      message: "User signed in",
-                      user: userCredential.user.uid,
-                      email: userCredential.user.email,
-                    });
-                    //const goto = await mostRecentProject();
-                    const goto = "welcome";
-                    console.log("goto: ", goto);
-
-                    router.navigate("/" + goto);
-                  })
-                  .catch((error) => {
-                    setNotification(errorMessage(error.code));
-                  });
-              });
-            }}
-            style={styles.button}>
+          <TouchableOpacity onPress={handleSignIn} style={styles.button}>
             <Text style={styles.loginText}>Sign in</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -160,7 +149,7 @@ export default function SignIn() {
         </TouchableOpacity>
       )}
       <TouchableOpacity
-        key={"createAccount"}
+        key={"signUp"}
         style={styles.button}
         onPress={() => {
           addLog({
@@ -168,7 +157,7 @@ export default function SignIn() {
             message: "Create Account",
           });
           router.navigate({
-            pathname: "/createAccount",
+            pathname: "/signUp",
             params: {
               email: email,
             },
@@ -183,6 +172,8 @@ export default function SignIn() {
           <Text style={styles.sloganText}>for modern house builders</Text>
         </View>
       )}
+
+      <About />
     </View>
   );
 }
@@ -227,6 +218,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   notificationText: {
+    color: "red",
     fontSize: 18,
     textAlign: "center",
   },

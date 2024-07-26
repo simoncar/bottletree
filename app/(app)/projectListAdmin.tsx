@@ -1,7 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
 import { Link, router, useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -19,14 +19,15 @@ import {
 } from "@/lib/APIproject";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { useProject } from "@/lib/projectProvider";
+import { UserContext } from "@/lib/UserContext";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
     page: string;
   }>();
-  const { sharedDataUser } = useAuth();
+  const { user } = useContext(UserContext);
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -69,7 +70,7 @@ const ModalScreen = (props) => {
         {
           text: "Add",
           onPress: () => {
-            addProjectUserAll(sharedDataUser, saveDoneAll);
+            addProjectUserAll(user, saveDoneAll);
           },
         },
       ],
@@ -279,7 +280,7 @@ const styles = StyleSheet.create({
   },
   adminAllArchive: {
     alignItems: "center",
-    backgroundColor: "yellow",
+    backgroundColor: "green",
     height: 70,
     paddingTop: 10,
     textAlign: "center",

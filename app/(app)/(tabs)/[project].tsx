@@ -3,15 +3,16 @@ import { StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Posts } from "@/components/Posts";
 import { View } from "@/components/Themed";
+import { About } from "@/lib/about";
 
 export default function ProjectPosts() {
   const { project } = useLocalSearchParams();
-
   const dbProject = project;
 
   return (
     <View style={styles.container}>
       <Posts project={dbProject as string} />
+      <About />
     </View>
   );
 }

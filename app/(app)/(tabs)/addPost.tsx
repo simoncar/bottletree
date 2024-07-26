@@ -7,13 +7,14 @@ import { addPostImage } from "@/lib/APIpost";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import ProjectContext from "@/lib/projectContext";
 import { IPost } from "@/lib/types";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import * as Progress from "react-native-progress";
+import { UserContext } from "@/lib/UserContext";
 
 export default function addPhoto() {
   const { sharedDataProject } = useContext(ProjectContext);
-  const { sharedDataUser } = useAuth();
   const [image, setImage] = useState(null);
+  const { user } = useContext(UserContext);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -87,7 +88,7 @@ export default function addPhoto() {
       caption: "",
       projectId: sharedDataProject.key,
       projectTitle: sharedDataProject.title,
-      author: sharedDataUser.displayName,
+      author: user.displayName,
       images: downloadURLarray,
       ratio: ratio,
     };

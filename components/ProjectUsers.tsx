@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, Pressable, useColorScheme, Button } from "react-native";
 import { View, Text, ParsedText } from "./Themed";
 import { getProjectUsers } from "@/lib/APIproject";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { ShortList } from "@/components/sComponent";
 import { Image } from "expo-image";
 import Colors from "@/constants/Colors";
@@ -16,6 +16,7 @@ import {
   SkeletonContainer,
   GradientProps,
 } from "react-native-dynamic-skeletons";
+import { UserContext } from "@/lib/UserContext";
 
 const Gradient = (props: GradientProps) => <LinearGradient {...props} />;
 
@@ -24,7 +25,7 @@ export const ProjectUsers = (props) => {
   const colorScheme = useColorScheme();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
-  const { sharedDataUser } = useAuth();
+  const { user } = useContext(UserContext);
 
   let prevOpenedRow;
   const row: Array<any> = [];
@@ -94,7 +95,7 @@ export const ProjectUsers = (props) => {
 
   function renderRow(data: any, index: number) {
     let me = "";
-    if (data.uid === sharedDataUser?.uid) {
+    if (data.uid === user?.uid) {
       me = " (Me)";
     }
     return (

@@ -1,32 +1,33 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   SafeAreaView,
-  ScrollView,
-  View,
-  TextInput,
-  Button as NativeButton,
   useColorScheme,
+  Button as NativeButton,
+  Dimensions,
+  ScrollView,
 } from "react-native";
-import { Stack, router, useLocalSearchParams } from "expo-router";
-import { IPost, IProject } from "@/lib/types";
-import { useAuth } from "@/lib/authProvider";
-import { setPostNote, getPost } from "@/lib/APIpost";
+import { router, useLocalSearchParams, Stack } from "expo-router";
+import { TextInput, View } from "@/components/Themed";
+import { useSession } from "@/lib/ctx";
+import { IPost } from "@/lib/types";
+import { updatePost, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
+import { UserContext } from "@/lib/UserContext";
 
-export default function Note() {
+export default function editPost() {
+  const { user } = useContext(UserContext);
   const local = useLocalSearchParams<{
     projectId: string;
     postId: string;
   }>();
-  const { sharedDataUser } = useAuth();
 
   const [post, setPost] = useState<IPost>({
     key: "",
     caption: "",
     projectId: local?.projectId || "",
     projectTitle: "",
-    author: sharedDataUser?.displayName || "",
+    author: user?.displayName || "",
     images: [],
     ratio: 1,
   });
@@ -53,11 +54,9 @@ export default function Note() {
   };
 
   const save = () => {
-    if (post.key == "") {
-      post.key = "post_" + Date.now();
-    }
+    console.log("save updated post :", post);
 
-    setPostNote(post, saveDone);
+    updatePost(post, saveDone);
   };
 
   return (

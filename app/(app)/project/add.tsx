@@ -2,26 +2,30 @@ import React, { useState, useContext } from "react";
 import { StyleSheet, Button, SafeAreaView } from "react-native";
 import { router, Stack } from "expo-router";
 import { TextInput } from "@/components/Themed";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 
 import { addProject, addProjectUser } from "@/lib/APIproject";
 import { IProject, IUser } from "@/lib/types";
 import { useProject } from "@/lib/projectProvider";
+import { UserContext } from "@/lib/UserContext";
 
 export default function addPhoto() {
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
-  const { sharedDataUser } = useAuth();
+    const { user } = useContext(UserContext);
+  const { session } = useSession();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [text, onChangeText] = useState("");
-  let loggedInUser: IUser = sharedDataUser;
+  
+  let loggedInUser: IUser = user;
 
-  if (null == sharedDataUser) {
+  if (null == session) {
     loggedInUser = {
       uid: "",
       displayName: "",
       email: "",
       photoURL: "",
+      project: "",
     };
   }
 
@@ -31,6 +35,7 @@ export default function addPhoto() {
     icon: "",
     archived: false,
     postCount: 0,
+    project: ""
   };
 
   const saveDoneUser = (projectId: string) => {

@@ -8,25 +8,30 @@ import { IPost, IProject } from "@/lib/types";
 import Post from "./Post";
 import Project from "./ProjectPanel";
 import { router } from "expo-router";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { FlatList } from "react-native-gesture-handler";
+import { UserContext } from "@/lib/UserContext";
 
 type Props = {
   project: string;
 };
 
 export const Posts = ({ project }: Props) => {
-  const { sharedDataUser } = useAuth();
   const [posts, setPosts] = useState([]);
+  const { user } = useContext(UserContext);
 
   let currentProject: IProject;
 
   const postsRead = (postsDB) => {
+    console.log("Posts postsRead : ", postsDB);
+
     setPosts(postsDB);
   };
 
   useEffect(() => {
-    if (sharedDataUser) {
+    console.log("Posts useEffect : ", project);
+
+    if (user) {
       console.log("Posts useEffect calling getPosts : ", project);
 
       const unsubscribe = getPosts(project, postsRead);
@@ -35,7 +40,7 @@ export const Posts = ({ project }: Props) => {
         unsubscribe;
       };
     }
-  }, [project, sharedDataUser]);
+  }, [project, user]);
 
   function updateSharedDataUserProjectCount(
     obj: Record<string, number>,
@@ -81,7 +86,7 @@ export const Posts = ({ project }: Props) => {
     return item.key;
   };
 
-  if (null == sharedDataUser) {
+  if (null == user) {
     return;
   } else
     return (

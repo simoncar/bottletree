@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, Button, TouchableOpacity } from "react-native";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { Stack } from "expo-router";
 import { Text, View, TextInput } from "@/components/Themed";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { resetPassword } = useAuth();
+  const { resetPassword } = useSession();
 
-  const resetError = (error) =>
-  {
+  const resetError = (error) => {
     setErrorMessage(strip(error));
   };
 

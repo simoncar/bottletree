@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { SettingsListItem } from "@/components/SettingsListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { IUser } from "@/lib/types";
+import { UserContext } from "@/lib/UserContext";
 
 interface TProps {
   navigation: any;
@@ -12,7 +13,7 @@ interface TProps {
 
 export default function SelectLanguage(props: TProps) {
   let language = "en";
-  const { sharedDataUser } = useAuth();
+  const { user } = useContext(UserContext);
   const getStyle = (pass: string) => {
     if (language === pass) {
       return styles.imageStyleCheckOn;
@@ -30,7 +31,7 @@ export default function SelectLanguage(props: TProps) {
     });
   };
 
-  const loggedInUser: IUser = sharedDataUser;
+  const loggedInUser: IUser = user;
 
   if (loggedInUser?.language !== undefined) {
     language = loggedInUser.language;

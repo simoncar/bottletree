@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, FlatList, useColorScheme, Pressable } from "react-native";
 import { View, Text, TextInput, ParsedText } from "./Themed";
 import { addComment, getComments } from "@/lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
 import { IComment, IPost } from "@/lib/types";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { firestore } from "@/lib/firebase";
+import { UserContext } from "@/lib/UserContext";
 
 type Props = {
   project: string;
@@ -20,10 +21,9 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   const defaultComment = "Add a comment...";
   const [comments, setComments] = useState([]);
   const [text, setComment] = useState(defaultComment);
-
+  const { user } = useContext(UserContext);
   const [saved, setSaved] = useState(false);
   const colorScheme = useColorScheme();
-  const { sharedDataUser } = useAuth();
 
   useEffect(() => {
     getComments(project, post).then((comments) => {
@@ -55,9 +55,9 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     setCommentShow(false);
     const comment: IComment = {
       comment: text,
-      displayName: sharedDataUser.displayName,
+      displayName: user.displayName,
       timestamp: firestore.Timestamp.now(),
-      uid: sharedDataUser.uid,
+      uid: user.uid,
     };
 
     addComment(project, post, comment, saveDone);
@@ -121,7 +121,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     let bubbleBackgroundColor =
       Colors[colorScheme ?? "light"].bubbleBackgroundColorOther;
     let bubbbleTextColor = Colors[colorScheme ?? "light"].bubbleTextColorOther;
-    if (item.displayName == sharedDataUser.displayName) {
+    if (item.displayName == user.displayName) {
       bubbleBackgroundColor =
         Colors[colorScheme ?? "light"].bubbleBackgroundColorMe;
       bubbbleTextColor = Colors[colorScheme ?? "light"].bubbleTextColorMe;

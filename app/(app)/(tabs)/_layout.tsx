@@ -11,9 +11,10 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { useProject } from "@/lib/projectProvider";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { addPostImage } from "@/lib/APIpost";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import alert from "@/lib/alert";
+import { UserContext } from "../../../lib/UserContext";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -27,21 +28,14 @@ const appName = "Builder";
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const { user, setUser } = useContext(UserContext);
   const [progress, setProgress] = useState(0);
-  const { sharedDataUser, isLoading } = useAuth();
+  const { session, isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
 
-  if (isLoading) {
+  if (isAuthLoading) {
     return <Text>Loading...</Text>;
   }
-
-  const loggedInUser: IUser = sharedDataUser ?? {
-    uid: "",
-    displayName: "",
-    email: "",
-    photoURL: "",
-    project: "",
-  };
 
   const saveDone = () => {
     console.log("saveDone - push to home");
@@ -78,7 +72,7 @@ export default function TabLayout() {
       caption: "",
       projectId: sharedDataProject.key,
       projectTitle: sharedDataProject.title,
-      author: sharedDataUser.displayName,
+      author: user.displayName,
       images: sourceDownloadURLarray,
       ratio: ratio,
     };
@@ -233,9 +227,9 @@ export default function TabLayout() {
             <View>
               <Link href="user">
                 <UserAvatar
-                  uid={loggedInUser?.uid}
-                  photoURL={loggedInUser?.photoURL}
-                  displayName={loggedInUser?.displayName}
+                  uid={user?.uid}
+                  photoURL={user?.photoURL}
+                  displayName={user?.displayName}
                 />
               </Link>
             </View>
@@ -291,6 +285,7 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
+    fontWeight: "bold",
   },
   tabButton: {
     alignItems: "center",

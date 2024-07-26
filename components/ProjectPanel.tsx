@@ -8,7 +8,7 @@ import Colors from "@/constants/Colors";
 import { Text } from "@/components/Themed";
 import { getUserProjectCount } from "@/lib/APIuser";
 import { IUser, IProject } from "@/lib/types";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { getProject } from "@/lib/APIproject";
 import { useProject } from "@/lib/projectProvider";
 
@@ -16,7 +16,7 @@ const Project = (props) => {
   const { project } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
-  const { sharedDataUser, updateSharedDataUser, signOut } = useAuth();
+
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const [projectObj, setProject] = useState<IProject>({

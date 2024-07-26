@@ -16,31 +16,47 @@ import { getProjects } from "@/lib/APIproject";
 import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { useProject } from "@/lib/projectProvider";
 import { getRelativeTime } from "@/lib/util";
+import { UserContext } from "@/lib/UserContext";
 
-const Home = () => {
-  const { sharedDataUser, isLoadingAuth } = useAuth();
+const ModalScreen = (props) => {
+  const { page } = useLocalSearchParams<{
+    page: string;
+  }>();
+  const { user, setUser } = useContext(UserContext);
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
   const colorScheme = useColorScheme();
-  const uid = sharedDataUser?.uid || "";
+  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const projectsRead = (projectsDB: IProject[]) => {
+    console.log("calling SETPROJECTS");
+
     setProjects(projectsDB);
   };
 
   useEffect(() => {
-    const unsubscribe = getProjects(uid, projectsRead);
-    unsubscribe;
-    return () => {
-      // unsubscribe;
-    };
+    getProjects(user.uid, projectsRead);
   }, []);
 
-  if (isLoadingAuth) {
-    return <Text>Loading...</Text>;
+  useEffect(() => {
+    if (projects !== null && loading === true) {
+      setLoading(false);
+    }
+  }, [projects]);
+
+  function findValueByKey(
+    obj: Record<string, number>,
+    keyToFind: string,
+  ): number {
+    if (obj == undefined) {
+      return 0;
+    }
+    const value = obj[keyToFind];
+    return value !== undefined ? value : 0; // Return 0 or any default value if the key doesn't exist in the object.
   }
 
   function renderAdd() {
@@ -98,6 +114,7 @@ const Home = () => {
   function renderRow(data: IProject) {
     const icon = data.icon;
 
+    const postCountUser = findValueByKey(user.postCount, data.key);
     const postCountDelta = data.postCount - postCountUser;
 
     return (
@@ -106,12 +123,19 @@ const Home = () => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            console.log("here: ", data);
-
-            console.log("yyy sharedDataUser: ", sharedDataUser);
-            if (sharedDataUser.postCount !== undefined) {
-              sharedDataUser.postCount[data.key] = data.postCount;
+            updateStoreSharedDataProject({
+              key: data.key,
+              project: data.key,
+              title: data.title,
+              icon: data.icon,
+              archived: data.archived,
+              postCount: data.postCount ?? 0,
+            });
+            if (user.postCount !== undefined) {
+              user.postCount[data.key] = data.postCount;
             }
+
+            setUser(user);
 
             router.navigate({
               pathname: "/[project]",
@@ -146,6 +170,13 @@ const Home = () => {
         <TouchableOpacity
           key={"chevron." + data.key}
           onPress={() => {
+            updateStoreSharedDataProject({
+              key: data.key,
+              title: data.title,
+              icon: data.icon,
+              archived: data.archived,
+            });
+
             router.replace({
               pathname: "/project/[project]",
               params: {
@@ -265,4 +296,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default ModalScreen;

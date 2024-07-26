@@ -1,37 +1,34 @@
 import { auth, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
+import { useSession } from "@/lib/ctx";
 
-export async function getUser(
-  uid: string,
-  callback: { (user: IUser): void; (arg0: IUser): void },
-) {
+export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
+  console.log("getUser uid 1111:", uid);
 
-  q.get()
-    .then((doc) => {
-      if (doc.exists) {
-        const user: IUser = {
-          key: doc.id,
-          uid: doc.id,
-          displayName: doc.data()?.displayName,
-          email: doc.data()?.email,
-          photoURL: doc.data()?.photoURL,
-          language: doc.data()?.language,
-          project: doc.data().project,
-          postCount: doc.data()?.postCount,
-        };
+  const doc = await q.get();
 
-        callback(user);
-      } else {
-        callback(null);
-      }
-    })
-    .catch((error) => {
-      console.log("getUser Error getting getUser document:", error);
-      callback(null);
-    });
+  console.log("getUser doc:", doc);
 
-  return () => q;
+  if (doc.exists) {
+    const user: IUser = {
+      key: doc.id,
+      uid: doc.id,
+      displayName: doc.data()?.displayName,
+      email: doc.data()?.email,
+      photoURL: doc.data()?.photoURL,
+      language: doc.data()?.language,
+      project: doc.data().project,
+      postCount: doc.data()?.postCount,
+    };
+
+    console.log("firestore user found:", user);
+
+    return user;
+  } else {
+    console.log("firestore user NOT found:", uid);
+    return null;
+  }
 }
 
 export async function deleteUser(
@@ -52,28 +49,28 @@ export async function deleteUser(
   return () => q;
 }
 
-export const updateAccountName = (displayName: string) => {
+export async function updateAccountName(displayName: string) {
+  console.log("updateAccountName displayName:", displayName);
+
   const docRef1 = firestore().collection("users").doc(auth().currentUser.uid);
 
   const user = auth().currentUser;
-  const docRef2 = user
-    .updateProfile({
+  try {
+    await user.updateProfile({
       displayName: displayName,
-    })
-    .then(() => {
-      docRef1.set(
-        {
-          displayName: displayName,
-          email: auth().currentUser.email,
-          photoURL: auth().currentUser.photoURL,
-        },
-        { merge: true },
-      );
-    })
-    .catch((error) => {
-      console.log("upupdateAccountName update ERROR ", error);
     });
-};
+    await docRef1.set(
+      {
+        displayName: displayName,
+        email: auth().currentUser.email,
+        photoURL: auth().currentUser.photoURL,
+      },
+      { merge: true },
+    );
+  } catch (error) {
+    console.log("upupdateAccountName update ERROR ", error);
+  }
+}
 
 export const updateUserProjectCount = (project: string) => {
   const u = auth().currentUser?.uid;

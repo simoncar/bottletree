@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { useAuth } from "@/lib/authProvider";
+import { useSession } from "@/lib/ctx";
 import { Stack, router } from "expo-router";
 import { deleteUser } from "@/lib/APIuser";
 import { Text, View } from "@/components/Themed";
+import { UserContext } from "../../lib/UserContext";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");
-  const { deleteAccount, sharedDataUser } = useAuth();
+  const { deleteAccount } = useSession();
+  const { user, setUser } = useContext(UserContext);
 
   const deleteAccountCallback = (error) => {
     console.log("Delete Account Error:", error);
@@ -32,7 +34,7 @@ export default function DeleteAccount() {
         {
           text: "Yes",
           onPress: () => {
-            deleteUser(sharedDataUser?.uid, deleteUserCallback);
+            deleteUser(user?.uid, deleteUserCallback);
             deleteAccount(deleteAccountCallback);
           },
         },

@@ -45,14 +45,17 @@ export function useStorageState(key: string): UseStateHook<string> {
     if (Platform.OS === "web") {
       try {
         if (typeof localStorage !== "undefined") {
-          setState(localStorage.getItem(key));
+          const storedValue = localStorage.getItem(key);
+          console.log("useStorageState web value:", storedValue);
+          setState(storedValue ? JSON.parse(storedValue) : null);
         }
       } catch (e) {
         console.error("Local storage is unavailable:", e);
       }
     } else {
       SecureStore.getItemAsync(key).then((value) => {
-        setState(value);
+        console.log("useStorageState native value:", value);
+        setState(value ? JSON.parse(value) : null);
       });
     }
   }, [key]);
@@ -61,7 +64,7 @@ export function useStorageState(key: string): UseStateHook<string> {
   const setValue = React.useCallback(
     (value: string | null) => {
       setState(value);
-      setStorageItemAsync(key, value);
+      setStorageItemAsync(key, JSON.stringify(value));
     },
     [key],
   );
