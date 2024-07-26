@@ -50,10 +50,7 @@ export const Projects = ({ session, archived }: Props) => {
       return (
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
-          <Text style={styles.projectId}>{data.project || ""}</Text>
-          <Text style={styles.projectId}>
-            {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
-          </Text>
+          <Text style={styles.projectId}>Posts : {data.postCount || ""}</Text>
         </View>
       );
     } else {
