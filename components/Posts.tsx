@@ -11,6 +11,7 @@ import { router } from "expo-router";
 import { useSession } from "@/lib/ctx";
 import { FlatList } from "react-native-gesture-handler";
 import { UserContext } from "@/lib/UserContext";
+import { About } from "@/lib/about";
 
 type Props = {
   project: string;
@@ -81,7 +82,11 @@ export const Posts = ({ project }: Props) => {
   };
 
   const renderFooter = () => {
-    return <View style={styles.footer}></View>;
+    return (
+      <View style={styles.footer}>
+        <About />
+      </View>
+    );
   };
   const getKey = (item) => {
     return item.key;
