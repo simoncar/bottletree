@@ -6,9 +6,9 @@ import {
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { useNavigationContainerRef, Stack, Redirect } from "expo-router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { useColorScheme, Platform, View } from "react-native";
+import { useColorScheme } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
 import { useSession } from "@/lib/ctx";
 import { UserProvider } from "../../lib/UserContext";
@@ -70,38 +70,13 @@ export default function Layout() {
     return null;
   }
 
-  if (!session) {
-    return <Redirect href="/signIn" />;
-  }
-
   if (isAuthLoading) {
     return <Text>Loading.. </Text>;
   }
 
-  //function to return a view with padding when the app is rendered in a web browser and not a mobile device
-  const WebPadding = ({ children }) => {
-    if (Platform.OS === "web") {
-      return (
-        <View
-          style={{
-            flex: 1,
-            padding: 10,
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-          }}>
-          {children}
-        </View>
-      );
-    } else {
-      return (
-        <View
-          style={{
-            flex: 1,
-          }}>
-          {children}
-        </View>
-      );
-    }
-  };
+  if (!session) {
+    return <Redirect href="/signIn" />;
+  }
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
@@ -115,9 +90,6 @@ export default function Layout() {
                     backgroundColor: Colors[colorScheme ?? "light"].background,
                   },
                   headerBackTitle: "Back",
-                  headerBackTitleStyle: {
-                    color: Colors[colorScheme ?? "light"].text,
-                  },
                 }}>
                 <Stack.Screen
                   name="(tabs)"

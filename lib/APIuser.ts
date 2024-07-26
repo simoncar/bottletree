@@ -22,8 +22,6 @@ export async function getUser(uid: string) {
       postCount: doc.data()?.postCount,
     };
 
-    console.log("firestore user found:", user);
-
     return user;
   } else {
     console.log("firestore user NOT found:", uid);

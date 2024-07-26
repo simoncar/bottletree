@@ -1,10 +1,9 @@
-import { useRouter } from "expo-router";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { useStorageState } from "./useStorageState";
 import { auth } from "@/lib/firebase";
 import { IUser } from "@/lib/types";
-import { getUser, updateAccountName } from "@/lib/APIuser";
-import { removeFirebaseWord } from "@/lib/util";
+import { updateAccountName } from "@/lib/APIuser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
   session?: string | null;
@@ -34,6 +33,7 @@ export const AuthContext = createContext<AuthContextType>({
 // This hook can be used to access the user info.
 export function useSession() {
   const context = useContext(AuthContext);
+
   if (!context) {
     throw new Error("useSession must be used within a Provider");
   }
@@ -92,37 +92,12 @@ export function SessionProvider(props: React.PropsWithChildren) {
     }
   };
 
-  const signOut = () => {
+  const signOut = async () => {
     setSession(null);
     auth().signOut();
+    AsyncStorage.clear();
+    console.log("Sign Out Success:", "setSession, setUser, auth, AsyncStorage");
   };
-
-  // useEffect(() => {
-  //   const unsubscribeAuth = auth().onAuthStateChanged(async (user) => {
-  //     if (user) {
-  //       getUser(auth().currentUser?.uid, (dbuser) => {
-  //         if (dbuser) {
-  //           const usr: IUser = {
-  //             key: auth().currentUser?.uid,
-  //             uid: auth().currentUser?.uid,
-  //             email: auth().currentUser?.email,
-  //             displayName: auth().currentUser?.displayName,
-  //             photoURL: auth().currentUser?.photoURL,
-  //             project: dbuser.project,
-  //             postCount: dbuser.postCount,
-  //             language: dbuser.language,
-  //           };
-  //           setSharedDataUser(usr);
-  //           setAuthLoading(false);
-  //         }
-  //       });
-  //     } else {
-  //       setSharedDataUser(null);
-  //       setAuthLoading(false);
-  //     }
-  //   });
-  //   return () => unsubscribeAuth();
-  // }, []);
 
   const resetPassword = (screenEmail: string, callback: resetError) => {
     auth()

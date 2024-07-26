@@ -1,7 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   useColorScheme,
   TouchableOpacity,
@@ -11,7 +10,6 @@ import {
 import Progress from "@/components/Progress";
 import { Text, TextInput } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, Stack, Redirect } from "expo-router";
 import { Image } from "expo-image";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -20,23 +18,15 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Colors from "@/constants/Colors";
-import {
-  updateAccountName,
-  updateAccountPhotoURL,
-  getUser,
-} from "@/lib/APIuser";
+import { updateAccountName, updateAccountPhotoURL } from "@/lib/APIuser";
 import { About } from "@/lib/about";
 import { Update } from "@/lib/update";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "@/lib/demoData";
-import { IUser } from "@/lib/types";
 import { StatusBar } from "expo-status-bar";
-import { useProject } from "@/lib/projectProvider";
-import { UserContext } from "../../../lib/UserContext";
-
-import { auth } from "@/lib/firebase";
+import { UserContext } from "@/lib/UserContext";
 
 export default function editUser() {
   const local = useLocalSearchParams<{
@@ -50,12 +40,10 @@ export default function editUser() {
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
 
-  console.log("user screen:", user);
-
   const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
   const save = () => {
-    updateAccountName(session,user.displayName);
+    updateAccountName(session, user.displayName);
     router.back();
   };
 
@@ -192,20 +180,9 @@ export default function editUser() {
         <TouchableOpacity
           key={"signOut"}
           onPress={() => {
-            auth()
-              .signOut()
-              .then(async () => {
-                await AsyncStorage.clear();
-                console.log("User Storage successfully cleared!");
-                console.log("Sign-out successful....");
-                // clear the shared data project
-                setUser(null);
-                // Clear the stack and navigate to the signIn page
-                router.replace("/signIn");
-              })
-              .catch((error) => {
-                console.log("[uid] eror: ", error.message);
-              });
+            signOut();
+            setUser(null);
+            router.replace("/signIn");
           }}>
           <View style={styles.leftContent}>
             <MaterialIcons

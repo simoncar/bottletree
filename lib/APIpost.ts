@@ -200,8 +200,6 @@ export async function getPosts(
   project: string | null | undefined,
   callback: any,
 ) {
-  console.log("loading posts from firebase: getPosts", project);
-
   if (undefined === project || null === project || "" === project) {
     project = "void";
   }
@@ -221,7 +219,6 @@ export async function getPosts(
         caption: doc.data().caption,
       });
     });
-    console.log("querySnapshot from firebase: getPosts", posts);
 
     callback(posts);
   });

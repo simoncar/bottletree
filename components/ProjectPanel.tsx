@@ -30,8 +30,6 @@ const Project = (props) => {
   });
 
   useEffect(() => {
-    console.log("ProjectPanel useEffect session:", session);
-
     if (session) {
       getProject(project || "", (projectObj) => {
         if (projectObj) {
