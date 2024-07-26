@@ -49,6 +49,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       setSession(response.user.uid);
       console.log("Sign In Success", session);
     } catch (error) {
+      setSession(null);
       console.log(error);
       throw error;
     }
@@ -82,7 +83,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
       console.log("signUp createUserWithEmailAndPassword 2222: ", user);
 
-      updateAccountName(name);
+      updateAccountName(response.user.uid, name);
 
       callback(user, "Success");
     } catch (error) {
