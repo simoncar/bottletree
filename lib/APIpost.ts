@@ -204,7 +204,13 @@ export async function getPosts(
     project = "void";
   }
 
-  const q = firestore().collection("projects").doc(project).collection("posts");
+  console.log("getPosts: project", project);
+
+  const q = firestore()
+    .collection("projects")
+    .doc(project)
+    .collection("posts")
+    .orderBy("timestamp", "desc");
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
@@ -218,6 +224,9 @@ export async function getPosts(
         timestamp: doc.data().timestamp,
         caption: doc.data().caption,
       });
+      if (doc.id == "post_1722006145380") {
+        console.log("getPosts: post_1722006145380", doc.data());
+      }
     });
 
     callback(posts);
