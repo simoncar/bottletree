@@ -1,12 +1,7 @@
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-
-  useColorScheme,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
@@ -21,9 +16,10 @@ import { UserContext } from "@/lib/UserContext";
 
 type Props = {
   session: string;
+  archived: boolean;
 };
 
-export const Projects = ({ session }: Props) => {
+export const Projects = ({ session, archived }: Props) => {
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const { user, setUser } = useContext(UserContext);
@@ -35,7 +31,7 @@ export const Projects = ({ session }: Props) => {
   };
 
   useEffect(() => {
-    getProjects(session, projectsRead);
+    getProjects(session, archived, projectsRead);
   }, []);
 
   function findValueByKey(

@@ -36,12 +36,14 @@ export async function getProject(
   return () => unsubscribe();
 }
 
-export async function getProjects(uid: string, callback: projectsRead) {
+export async function getProjects(
+  uid: string,
+  archived: boolean,
+  callback: projectsRead,
+) {
   const projectList: string[] = ["X"];
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
-
-  console.log("Getting projects for user: ", uid);
 
   const query = db.collectionGroup("accessList").where("uid", "==", uid);
 
@@ -70,15 +72,17 @@ export async function getProjects(uid: string, callback: projectsRead) {
           timestamp: doc.data().timestamp,
         });
       } else {
-        projectsArchived.push({
-          project: doc.id,
-          key: doc.id,
-          title: doc.data().title || "Untitled",
-          icon: doc.data().icon,
-          archived: true,
-          postCount: doc.data().postCount,
-          timestamp: doc.data().timestamp,
-        });
+        if (archived) {
+          projectsArchived.push({
+            project: doc.id,
+            key: doc.id,
+            title: doc.data().title || "Untitled",
+            icon: doc.data().icon,
+            archived: true,
+            postCount: doc.data().postCount,
+            timestamp: doc.data().timestamp,
+          });
+        }
       }
     }
   });

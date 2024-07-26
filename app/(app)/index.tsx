@@ -82,7 +82,7 @@ export default function Home() {
           <Text style={styles.welcomeApp}>Builder App</Text>
         </View>
 
-        <Projects session={session as string} />
+        <Projects session={session as string} archived={false} />
         {renderAddProject()}
         {renderLogout()}
         <About />
