@@ -23,8 +23,19 @@ export default function Root({ children }: PropsWithChildren) {
         */}
         <ScrollViewStyleReset />
         {/* Add any additional <head> elements that you want globally available on web... */}
+        <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
       </head>
       <body>{children}</body>
     </html>
   );
 }
+
+const responsiveBackground = `
+body {
+  background-color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+  }
+}`;

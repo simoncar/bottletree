@@ -13,11 +13,7 @@ export const About = () => {
   const deviceLanguage = getLocales()[0].languageCode;
 
   if (null == user) {
-    return (
-      <View>
-        <Text style={styles.version}>About</Text>
-      </View>
-    );
+    return <View></View>;
   } else {
     return (
       <View style={styles.aboutContainer}>
