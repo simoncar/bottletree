@@ -29,21 +29,19 @@ function renderPhotoURL(photoURL) {
 type Props = {
   uid: string;
   photoURL: string;
-  displayName: string;
 };
 
-export const UserAvatar = ({ uid, photoURL, displayName }: Props) => {
+export const UserAvatar = ({ uid, photoURL }: Props) => {
   return (
-    <Link
-      href={{
-        pathname: "/user/[uid]",
-        params: { uid: uid },
-      }}
-      asChild>
-      <Pressable>
+    <View>
+      <Link
+        href={{
+          pathname: "/user/[uid]",
+          params: { uid: uid },
+        }}>
         <View style={styles.avatar}>{renderPhotoURL(photoURL)}</View>
-      </Pressable>
-    </Link>
+      </Link>
+    </View>
   );
 };
 

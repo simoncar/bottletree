@@ -30,7 +30,6 @@ export const About = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
-        <Text style={styles.version}>{user.providerData}</Text>
         <Text style={styles.version}>{user.displayName}</Text>
         <Text style={styles.version}>{user.email}</Text>
         <Text style={styles.version}>

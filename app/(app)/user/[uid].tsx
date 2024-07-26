@@ -160,7 +160,6 @@ export default function editUser() {
   };
 
   if (!session) {
-    console.log("_layout Redirecting to signIn");
     return <Redirect href="/signIn" />;
   }
   if (!user) {

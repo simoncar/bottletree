@@ -1,7 +1,6 @@
 import {
   Stack,
   useLocalSearchParams,
-  useNavigation,
   router,
 } from "expo-router";
 import React, { useState, useEffect } from "react";
@@ -355,7 +354,6 @@ export default function editCalendar() {
             multiline
             numberOfLines={6}
             autoCapitalize="none"
-            textAlignVertical="top"
           />
         </View>
         <View style={[styles.itemView, styles.line]}>
@@ -375,7 +373,6 @@ export default function editCalendar() {
           </View>
         </View>
         <Pressable
-          style={styles.pressableRight}
           onPress={() => {
             console.log("color press:");
             setShowColor(!showColor);

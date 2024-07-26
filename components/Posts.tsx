@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { View, Text } from "@/components/Themed";
 import { getPosts } from "@/lib/APIpost";
 import { updateUserProjectCount } from "@/lib/APIuser";
-import ProjectContext from "@/lib/projectContext";
 import { IPost, IProject } from "@/lib/types";
 import Post from "./Post";
 import Project from "./ProjectPanel";
@@ -18,24 +17,18 @@ type Props = {
 };
 
 export const Posts = ({ project }: Props) => {
-  const { session, isAuthLoading } = useSession();
+  const { session } = useSession();
   const [posts, setPosts] = useState([]);
   const { user } = useContext(UserContext);
 
   let currentProject: IProject;
 
   const postsRead = (postsDB) => {
-    console.log("Posts postsRead : ", postsDB);
-
     setPosts(postsDB);
   };
 
   useEffect(() => {
-    console.log("Posts useEffect : ", project);
-
     if (user) {
-      console.log("Posts useEffect calling getPosts : ", project);
-
       const unsubscribe = getPosts(project, postsRead);
       updateUserProjectCount(session, project);
       return () => {
