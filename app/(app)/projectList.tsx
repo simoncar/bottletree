@@ -135,7 +135,7 @@ const ModalScreen = (props) => {
               user.postCount[data.key] = data.postCount;
             }
 
-            setUser(user);
+            setUser({ ...user, project: data.key });
 
             router.navigate({
               pathname: "/[project]",
