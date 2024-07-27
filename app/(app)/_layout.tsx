@@ -4,6 +4,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import { useNavigationContainerRef, Stack, Redirect } from "expo-router";
 import React, { useEffect } from "react";
@@ -15,7 +16,6 @@ import { UserProvider } from "../../lib/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
-export { ErrorBoundary } from "expo-router";
 import Colors from "@/constants/Colors";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { Text } from "@/components/Themed";
@@ -71,7 +71,14 @@ export default function Layout() {
   }
 
   if (isAuthLoading) {
-    return <Text>Loading.. </Text>;
+    return (
+      <ThemeProvider
+        value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
+        <View style={styles.container}>
+          <Text>Initial Loading... </Text>
+        </View>
+      </ThemeProvider>
+    );
   }
 
   if (!session) {
@@ -221,3 +228,10 @@ export default function Layout() {
     </ThemeProvider>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    flex: 1,
+    paddingTop: 60,
+  },
+});

@@ -18,7 +18,8 @@ import { Projects } from "@/components/Projects";
 
 export default function Home() {
   const colorScheme = useColorScheme();
-  const { session } = useSession();
+  const { session, signOut } = useSession();
+  const { setUser } = useContext(UserContext);
 
   function renderAddProject() {
     return (
@@ -43,20 +44,9 @@ export default function Home() {
         <TouchableOpacity
           key={"signOut"}
           onPress={() => {
-            auth()
-              .signOut()
-              .then(async () => {
-                await AsyncStorage.clear();
-                console.log("User Storage successfully cleared!");
-                console.log("Sign-out successful....");
-                // clear the shared data project
-                setUser(null);
-                // Clear the stack and navigate to the signIn page
-                router.replace("/signIn");
-              })
-              .catch((error) => {
-                console.log("[uid] eror: ", error.message);
-              });
+            signOut();
+            setUser(null);
+            router.replace("/signIn");
           }}>
           <View style={styles.leftContent}>
             <MaterialIcons
@@ -78,7 +68,6 @@ export default function Home() {
         <Stack.Screen options={{ title: "Home" }} />
 
         <View style={styles.instructions}>
-          <Text style={styles.welcomeText}>Welcome to</Text>
           <Text style={styles.welcomeApp}>Builder App</Text>
         </View>
 
