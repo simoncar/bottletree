@@ -125,7 +125,6 @@ export default function TabLayout() {
         switch (buttonIndex) {
           case 0:
             if (!project) {
-              console.log("sharedDataProject not set");
               createProject();
               return;
             }
@@ -134,27 +133,25 @@ export default function TabLayout() {
               pathname: "/note",
               params: {
                 project: project,
-                postId: "",
+                post: "",
               },
             });
             break;
           case 1:
             if (!project) {
-              console.log("sharedDataProject not set");
               createProject();
               return;
             }
             router.navigate({
               pathname: "/camera",
               params: {
-                pcolor: "#49B382",
-                pcolorName: "Grass",
+                project: project,
+                post: "",
               },
             });
             break;
           case 2:
             if (!project) {
-              console.log("sharedDataProject not set");
               createProject();
               return;
             }
@@ -162,7 +159,6 @@ export default function TabLayout() {
             break;
           case 3:
             if (!project) {
-              console.log("sharedDataProject not set");
               createProject();
               return;
             }

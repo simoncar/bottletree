@@ -28,72 +28,54 @@ exports[`note test 1`] = `
     }
   >
     <RCTSafeAreaView>
-      <RCTScrollView>
-        <View>
-          <View
-            style={
+      <TextInput
+        autoFocus={true}
+        multiline={true}
+        numberOfLines={10}
+        onChangeText={[Function]}
+        placeholder="Add Note"
+        style={
+          [
+            {
+              "fontSize": 20,
+              "height": 140,
+              "margin": 12,
+              "padding": 10,
+              "paddingLeft": 20,
+              "width": "98%",
+            },
+            {
+              "color": "#000",
+            },
+          ]
+        }
+        value=""
+      />
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "paddingTop": 50,
+          }
+        }
+      >
+        <Text
+          style={
+            [
               {
-                "flex": 1,
-                "justifyContent": "center",
-                "padding": 20,
-              }
-            }
-          >
-            <View
-              style={
-                {
-                  "flex": 1,
-                  "justifyContent": "flex-start",
-                }
-              }
-            >
-              <TextInput
-                autoFocus={true}
-                multiline={true}
-                numberOfLines={10}
-                onChangeText={[Function]}
-                placeholder="Add Note"
-                style={
-                  [
-                    {
-                      "fontSize": 25,
-                    },
-                    {
-                      "color": "#000",
-                    },
-                  ]
-                }
-                value=""
-              />
-            </View>
-          </View>
-          <View
-            style={
+                "color": "#000",
+              },
               {
-                "alignItems": "center",
-                "justifyContent": "center",
-                "paddingTop": 50,
-              }
-            }
-          >
-            <Text
-              style={
-                [
-                  {
-                    "color": "#000",
-                  },
-                  {
-                    "color": "grey",
-                    "fontSize": 14,
-                  },
-                ]
-              }
-            >
-              73JwAXeOEhLXUggpVKK9
-            </Text>
-          </View>
-        </View>
-      </RCTScrollView>
+                "color": "grey",
+                "fontSize": 14,
+              },
+            ]
+          }
+        >
+          73JwAXeOEhLXUggpVKK9
+        </Text>
+      </View>
     </RCTSafeAreaView>
   </RNCSafeAreaView>
 </RNCSafeAreaProvider>

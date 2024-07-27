@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
-  ScrollView,
   TextInput,
   Button as NativeButton,
   useColorScheme,
@@ -17,7 +16,7 @@ import { UserContext } from "@/lib/UserContext";
 export default function Note() {
   const local = useLocalSearchParams<{
     project: string;
-    postId: string;
+    post: string;
   }>();
   const { user } = useContext(UserContext);
 
@@ -34,8 +33,8 @@ export default function Note() {
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    if (local?.postId) {
-      getPost(local?.project || "", local?.postId || "", (post) => {
+    if (local?.post) {
+      getPost(local?.project || "", local?.post || "", (post) => {
         if (post) {
           setPost(post);
         }
@@ -69,27 +68,18 @@ export default function Note() {
           ),
         }}
       />
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.title}>
-            <TextInput
-              style={[
-                styles.titleText,
-                { color: Colors[colorScheme ?? "light"].text },
-              ]}
-              onChangeText={(title) => setPost({ ...post, caption: title })}
-              placeholder={"Add Note"}
-              value={post.caption}
-              autoFocus={true}
-              multiline={true}
-              numberOfLines={10}
-            />
-          </View>
-        </View>
-        <View style={styles.aboutContainer}>
-          <Text style={styles.version}>{user.project}</Text>
-        </View>
-      </ScrollView>
+      <TextInput
+        style={[styles.input, { color: Colors[colorScheme ?? "light"].text }]}
+        onChangeText={(title) => setPost({ ...post, caption: title })}
+        placeholder={"Add Note"}
+        value={post.caption}
+        autoFocus={true}
+        multiline={true}
+        numberOfLines={10}
+      />
+      <View style={styles.aboutContainer}>
+        <Text style={styles.version}>{user.project}</Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -100,14 +90,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 50,
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: { flex: 1, justifyContent: "flex-start" },
-  titleText: {
-    fontSize: 25,
+  input: {
+    fontSize: 20,
+    height: 140,
+    margin: 12,
+    padding: 10,
+    paddingLeft: 20,
+    width: "98%",
   },
   version: {
     color: "grey",

@@ -11,11 +11,9 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "@/constants/Colors";
 import { addImageFromPhoto } from "@/lib/APIimage";
-import ProjectContext from "@/lib/projectContext";
 import { IPost } from "@/lib/types";
-import { useSession } from "@/lib/ctx";
 import { addPostImage } from "@/lib/APIpost";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { View, Text } from "@/components/Themed";
 import Progress from "@/components/Progress";
 import * as Linking from "expo-linking";
@@ -27,13 +25,17 @@ export default function App() {
 
   const colorScheme = useColorScheme();
   const [camera, setCamera] = useState(null);
-  const { sharedDataProject } = useContext(ProjectContext);
   const { user } = useContext(UserContext);
   const scaleValue = useRef(new Animated.Value(1)).current;
   const [backgroundColor, setBackgroundColor] = useState("#3498db");
   const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
   const cameraRef = useRef<any>(null);
   const [progress, setProgress] = useState(0);
+
+  const local = useLocalSearchParams<{
+    project: string;
+    post: string;
+  }>();
 
   const openSettings = () => {
     Linking.openSettings();
@@ -75,7 +77,7 @@ export default function App() {
     router.navigate({
       pathname: "/[project]",
       params: {
-        project: sharedDataProject.key,
+        project: local.project,
       },
     });
   };
@@ -93,8 +95,8 @@ export default function App() {
     const post: IPost = {
       key: "",
       caption: "",
-      projectId: sharedDataProject.key,
-      projectTitle: sharedDataProject.title,
+      projectId: local.project,
+      projectTitle: local.project,
       author: user.displayName,
       images: [downloadURL],
       ratio: ratio,
@@ -151,6 +153,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Progress progress={progress} />
+
       <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
         <View style={styles.buttonRow}>
           <View style={styles.a}></View>
@@ -225,7 +228,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 40,
+    padding: 0,
   },
   flipCamera: {
     alignItems: "center",
