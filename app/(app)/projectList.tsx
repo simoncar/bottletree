@@ -21,7 +21,7 @@ import { useProject } from "@/lib/projectProvider";
 import { getRelativeTime } from "@/lib/util";
 import { UserContext } from "@/lib/UserContext";
 
-const ModalScreen = (props) => {
+const ProjectList = (props) => {
   const { page } = useLocalSearchParams<{
     page: string;
   }>();
@@ -33,8 +33,6 @@ const ModalScreen = (props) => {
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const projectsRead = (projectsDB: IProject[]) => {
-    console.log("calling SETPROJECTS");
-
     setProjects(projectsDB);
   };
 
@@ -296,4 +294,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalScreen;
+export default ProjectList;

@@ -1,4 +1,3 @@
-import { useLocalSearchParams } from "expo-router";
 import React, { useState, useContext } from "react";
 import {
   StyleSheet,
@@ -29,10 +28,6 @@ import { StatusBar } from "expo-status-bar";
 import { UserContext } from "@/lib/UserContext";
 
 export default function editUser() {
-  const local = useLocalSearchParams<{
-    uid: string;
-  }>();
-
   const { session, signOut } = useSession();
   const { user, setUser } = useContext(UserContext);
   const [progress, setProgress] = useState(0);

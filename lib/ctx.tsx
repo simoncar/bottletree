@@ -88,7 +88,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       callback(user, "Success");
     } catch (error) {
       console.log("signUp Error: ", error);
-      callback({}, error);
+      callback(null, error);
     }
   };
 
@@ -99,7 +99,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     console.log("Sign Out Success:", "setSession, setUser, auth, AsyncStorage");
   };
 
-  const resetPassword = (screenEmail: string, callback: resetError) => {
+  const resetPassword = (screenEmail: string, callback: any) => {
     auth()
       .sendPasswordResetEmail(screenEmail)
       .then(() => callback("Password reset email sent.  Check your inbox."))
@@ -111,7 +111,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     //removeItem();
   };
 
-  const deleteAccount = async (callback: resetError) => {
+  const deleteAccount = async (callback: any) => {
     const user = auth().currentUser;
 
     user

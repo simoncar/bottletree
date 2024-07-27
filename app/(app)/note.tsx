@@ -9,8 +9,7 @@ import {
   useColorScheme,
 } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { IPost, IProject } from "@/lib/types";
-import { useSession } from "@/lib/ctx";
+import { IPost } from "@/lib/types";
 import { setPostNote, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
 import { UserContext } from "@/lib/UserContext";
@@ -20,7 +19,7 @@ export default function Note() {
     projectId: string;
     postId: string;
   }>();
-    const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [post, setPost] = useState<IPost>({
     key: "",

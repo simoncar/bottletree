@@ -15,7 +15,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-reanimated)"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
@@ -26,6 +26,10 @@
       "!**/node_modules/**",
       "!**/babel.config.js",
       "!**/jest.setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./__mocks__/mockFirebase",
+      "./jest-setup.js"
     ]
   },
   "dependencies": {
@@ -98,6 +102,8 @@
     "@dev-plugins/async-storage": "^0.0.3",
     "@dev-plugins/react-navigation": "^0.0.5",
     "@react-native-community/eslint-config": "^3.2.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^12.5.2",
     "@tsconfig/react-native": "^3.0.2",
     "@types/jest": "^29.5.2",
     "@types/react": "~18.2.79",

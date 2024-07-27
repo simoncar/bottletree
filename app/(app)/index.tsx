@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -6,8 +6,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useSession } from "@/lib/ctx";
-import { Stack, Link } from "expo-router";
-import { deleteUser } from "@/lib/APIuser";
+import { Stack } from "expo-router";
 import { Text, View } from "@/components/Themed";
 import { UserContext } from "../../lib/UserContext";
 import Colors from "@/constants/Colors";
@@ -56,7 +55,6 @@ export default function Home() {
             />
             <Text style={styles.settingName}>Log Out</Text>
           </View>
-          <View style={styles.rightChevron}></View>
         </TouchableOpacity>
       </View>
     );
@@ -96,7 +94,6 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: 200,
   },
-
   createText: {
     color: "white",
     fontSize: 18,
@@ -111,30 +108,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingHorizontal: 8,
   },
-  outerView: {
-    alignItems: "center",
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: "row",
-    height: 80,
-    paddingVertical: 8,
-    padding: 8,
-  },
   settingName: {
     fontSize: 20,
     paddingLeft: 20,
-  },
-  text: {
-    fontSize: 16,
-    marginBottom: 10,
   },
   welcomeApp: {
     color: "#9D5BD0",
     fontSize: 45,
     fontWeight: "bold",
-  },
-  welcomeText: {
-    fontSize: 20,
-    marginBottom: 10,
   },
 });
