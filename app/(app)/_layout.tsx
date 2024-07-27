@@ -20,6 +20,10 @@ import Colors from "@/constants/Colors";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { Text } from "@/components/Themed";
 
+export const unstable_settings = {
+  initialRouteName: "index",
+};
+
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
