@@ -6,12 +6,11 @@ import {
   ScrollView,
 } from "react-native";
 import { useSession } from "@/lib/ctx";
-import { Stack } from "expo-router";
+import { router, Link, Stack } from "expo-router";
 import { Text, View } from "@/components/Themed";
 import { UserContext } from "../../lib/UserContext";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
-import { router } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Projects } from "@/components/Projects";
 
@@ -23,16 +22,14 @@ export default function Home() {
   function renderAddProject() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          key={"createProject"}
-          style={styles.createBtn}
-          onPress={async () => {
-            router.replace({
-              pathname: "project/add",
-            });
+        <Link
+          href={{
+            pathname: "/project/add",
           }}>
-          <Text style={styles.createText}>+ Create Project</Text>
-        </TouchableOpacity>
+          <View style={styles.createBtn}>
+            <Text style={styles.createText}>+ Create Project</Text>
+          </View>
+        </Link>
       </View>
     );
   }

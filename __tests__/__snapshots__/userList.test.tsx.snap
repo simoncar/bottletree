@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user list test 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RNCSafeAreaView
+    edges={
+      {
+        "bottom": "additive",
+        "left": "additive",
+        "right": "additive",
+        "top": "additive",
+      }
+    }
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flex": 1,
+          "height": 200,
+        }
+      }
+    >
+      <RCTScrollView
+        style={
+          {
+            "paddingBottom": 50,
+          }
+        }
+      >
+        <View />
+      </RCTScrollView>
+    </View>
+  </RNCSafeAreaView>
+</RNCSafeAreaProvider>
+`;

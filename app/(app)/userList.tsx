@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
@@ -12,11 +12,11 @@ import { useSession } from "@/lib/ctx";
 import { useProject } from "@/lib/projectProvider";
 import { UserContext } from "@/lib/UserContext";
 
-const ModalScreen = (props) => {
+const UserList = (props) => {
   const { page } = useLocalSearchParams<{
     page: string;
   }>();
- const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState(true);
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
@@ -148,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalScreen;
+export default UserList;
