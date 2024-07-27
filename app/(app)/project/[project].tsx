@@ -24,7 +24,7 @@ import { ProjectUsers } from "@/components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
 
-export default function editPost() {
+export default function Project() {
   const [updateUsers, setUpdateUsers] = useState("");
   const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const [progress, setProgress] = useState(0);
