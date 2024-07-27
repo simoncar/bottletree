@@ -22,6 +22,13 @@ jest.mock("@/lib/projectProvider", () => ({
   useProject: jest.fn(),
 }));
 
+jest.mock("expo-image", () => {
+  const actualExpoImage = jest.requireActual("expo-image");
+  const { Image } = jest.requireActual("react-native");
+
+  return { ...actualExpoImage, Image };
+});
+
 jest.mock("react-native", () => {
   const ReactNative = jest.requireActual("react-native");
   return Object.defineProperty(ReactNative, "Settings", {
