@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs, Redirect, router } from "expo-router";
+import { Link, Tabs, useLocalSearchParams, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { BigText } from "@/components/StyledText";
@@ -26,13 +26,18 @@ function TabBarIcon(props: {
 
 const appName = "Builder";
 
+type SearchParams = {
+  project: string;
+};
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+
   const { user, setUser } = useContext(UserContext);
   const [progress, setProgress] = useState(0);
   const { session, isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
+  const { project } = useLocalSearchParams<SearchParams>();
 
   if (isAuthLoading) {
     return <Text>Loading</Text>;
@@ -71,8 +76,8 @@ export default function TabLayout() {
     const post: IPost = {
       key: "",
       caption: "",
-      projectId: sharedDataProject.key,
-      projectTitle: sharedDataProject.title,
+      projectId: project,
+      projectTitle: project,
       author: user.displayName,
       images: sourceDownloadURLarray,
       ratio: ratio,
@@ -100,10 +105,8 @@ export default function TabLayout() {
 
     let options = [];
 
-    console.log("sharedDataProject: ", sharedDataProject);
-
     options = [
-      "Add Note-" + user.project,
+      "Add Note",
       "Take Photo",
       "Add from Camera Roll",
       "Add Calendar Event",
@@ -121,7 +124,7 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            if (!sharedDataProject?.key) {
+            if (!project) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -130,13 +133,13 @@ export default function TabLayout() {
             router.navigate({
               pathname: "/note",
               params: {
-                projectId: sharedDataProject.key,
+                project: project,
                 postId: "",
               },
             });
             break;
           case 1:
-            if (!sharedDataProject?.key) {
+            if (!project) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -150,7 +153,7 @@ export default function TabLayout() {
             });
             break;
           case 2:
-            if (!sharedDataProject?.key) {
+            if (!project) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -158,7 +161,7 @@ export default function TabLayout() {
             pickImage();
             break;
           case 3:
-            if (!sharedDataProject?.key) {
+            if (!project) {
               console.log("sharedDataProject not set");
               createProject();
               return;
@@ -208,7 +211,7 @@ export default function TabLayout() {
         options={{
           title: "",
           href: {
-            pathname: sharedDataProject?.key,
+            pathname: project,
           },
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,

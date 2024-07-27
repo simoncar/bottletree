@@ -16,7 +16,7 @@ import { UserContext } from "@/lib/UserContext";
 
 export default function Note() {
   const local = useLocalSearchParams<{
-    projectId: string;
+    project: string;
     postId: string;
   }>();
   const { user } = useContext(UserContext);
@@ -24,7 +24,7 @@ export default function Note() {
   const [post, setPost] = useState<IPost>({
     key: "",
     caption: "",
-    projectId: local?.projectId || "",
+    projectId: local?.project || "",
     projectTitle: "",
     author: user?.displayName || "",
     images: [],
@@ -35,7 +35,7 @@ export default function Note() {
 
   useEffect(() => {
     if (local?.postId) {
-      getPost(local?.projectId || "", local?.postId || "", (post) => {
+      getPost(local?.project || "", local?.postId || "", (post) => {
         if (post) {
           setPost(post);
         }
@@ -47,7 +47,7 @@ export default function Note() {
     router.navigate({
       pathname: "/[project]",
       params: {
-        project: local?.projectId,
+        project: local?.project,
       },
     });
   };

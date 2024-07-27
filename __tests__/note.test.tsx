@@ -23,7 +23,7 @@ it("note test", async () => {
   renderRouter(
     {
       index: MockComponent,
-      "note?projectId=73JwAXeOEhLXUggpVKK9": MockComponent,
+      "note?project=73JwAXeOEhLXUggpVKK9": MockComponent,
       "(group)/b": MockComponent,
     },
     {
