@@ -49,6 +49,7 @@ export function useStorageState(key: string): UseStateHook<string> {
           setState(storedValue ? JSON.parse(storedValue) : null);
         }
       } catch (e) {
+        setState(null);
         console.error("Local storage is unavailable:", e);
       }
     } else {
