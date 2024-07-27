@@ -103,7 +103,7 @@ export default function TabLayout() {
     console.log("sharedDataProject: ", sharedDataProject);
 
     options = [
-      "Add Note",
+      "Add Note-" + user.project,
       "Take Photo",
       "Add from Camera Roll",
       "Add Calendar Event",
