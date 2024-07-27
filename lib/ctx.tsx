@@ -69,8 +69,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
         password,
       );
 
-      console.log("signUp createUserWithEmailAndPassword response: ", response);
-
       setSession(response.user.uid);
 
       const user: IUser = {
@@ -80,8 +78,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
         photoURL: convertToString(""),
         project: "",
       };
-
-      console.log("signUp createUserWithEmailAndPassword 2222: ", user);
 
       updateAccountName(response.user.uid, name);
 
@@ -96,7 +92,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
     setSession(null);
     auth().signOut();
     AsyncStorage.clear();
-    console.log("Sign Out Success:", "setSession, setUser, auth, AsyncStorage");
   };
 
   const resetPassword = (screenEmail: string, callback: any) => {

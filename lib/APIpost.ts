@@ -180,8 +180,6 @@ export function parseImages(images: string[]) {
   const parsedImages: { ratio: number; url: string }[] = [];
 
   if (images === undefined || images.length === 0) {
-    console.log("parseImages: images is undefined or empty");
-
     return [];
   }
   images.forEach((image) => {
@@ -224,9 +222,6 @@ export async function getPosts(
         timestamp: doc.data().timestamp,
         caption: doc.data().caption,
       });
-      if (doc.id == "post_1722006145380") {
-        console.log("getPosts: post_1722006145380", doc.data());
-      }
     });
 
     callback(posts);
