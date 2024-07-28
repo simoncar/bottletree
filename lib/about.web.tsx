@@ -21,10 +21,10 @@ export const About = () => {
         <Text style={styles.version}>{user.email}</Text>
         <Text style={styles.version}>
           {Application.nativeApplicationVersion} (
-          {Application.nativeBuildVersion})
+          {Application.nativeBuildVersion}) | 2
         </Text>
-        <Text style={styles.version}>UserContext - {user.uid}</Text>
-        <Text style={styles.version}>ctx Session - {session}</Text>
+        <Text style={styles.version}>User Context - {user.uid}</Text>
+        <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>Language - {deviceLanguage}</Text>
         <Text style={styles.version}>Project - {user.project}</Text>
