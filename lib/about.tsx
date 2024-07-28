@@ -1,30 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { getLocales } from "expo-localization";
 import { Text, View } from "@/components/Themed";
 import * as Application from "expo-application";
 import { useSession } from "@/lib/ctx";
-import { getToken } from "@/lib/APINotification";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
 import { Link } from "expo-router";
 
 export const About = () => {
   const { user } = useContext(UserContext);
-  const [token, setToken] = useState("");
   const { session } = useSession();
   const deviceLanguage = getLocales()[0].languageCode;
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      const returnToken = await getToken();
-      setToken(returnToken);
-    };
-
-    fetchToken()
-      // make sure to catch any error
-      .catch(console.error);
-  }, []);
 
   if (null == user) {
     return <View />;

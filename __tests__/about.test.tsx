@@ -68,8 +68,16 @@ it("about test", async () => {
 
   const setUser = jest.fn();
 
-  const { toJSON } = render(
+  const { toJSON: toJSON1 } = render(
     <UserContext.Provider value={{ user, setUser }}>
+      <About />
+    </UserContext.Provider>,
+  );
+
+  expect(toJSON1()).toMatchSnapshot();
+
+  const { toJSON } = render(
+    <UserContext.Provider value={{ user: null, setUser }}>
       <About />
     </UserContext.Provider>,
   );

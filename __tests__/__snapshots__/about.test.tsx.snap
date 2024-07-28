@@ -144,3 +144,5 @@ exports[`about test 1`] = `
   </Text>
 </View>
 `;
+
+exports[`about test 2`] = `<View />`;
