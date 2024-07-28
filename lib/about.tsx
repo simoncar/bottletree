@@ -7,6 +7,7 @@ import { useSession } from "@/lib/ctx";
 import { getToken } from "@/lib/APINotification";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
+import { Link } from "expo-router";
 
 export const About = () => {
   const { user } = useContext(UserContext);
@@ -30,7 +31,13 @@ export const About = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
-        <Text style={styles.version}>{user.displayName}</Text>
+        <Link
+          href={{
+            pathname: "/user/[uid]",
+            params: { uid: session },
+          }}>
+          <Text style={styles.version}>{user.displayName}</Text>
+        </Link>
         <Text style={styles.version}>{user.email}</Text>
         <Text style={styles.version}>
           {Application.nativeApplicationVersion} (

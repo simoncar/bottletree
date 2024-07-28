@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Posts } from "@/components/Posts";
-import { View, Text } from "@/components/Themed";
+import { View } from "@/components/Themed";
 import { UserContext } from "@/lib/UserContext";
 
 type SearchParams = {

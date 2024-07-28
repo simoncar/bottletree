@@ -1,6 +1,5 @@
 import { auth, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
-import { useSession } from "@/lib/ctx";
 
 export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
@@ -46,6 +45,17 @@ export async function deleteUser(
 export async function updateAccountName(uid: string, displayName: string) {
   const docRef1 = firestore().collection("users").doc(uid);
 
+  console.log("updateAccountName  displayName // ", displayName);
+  console.log("updateAccountName  uid // ", uid);
+  console.log(
+    "updateAccountName  auth().currentUser.email // ",
+    auth().currentUser.email,
+  );
+  console.log(
+    "updateAccountName  currentUser.photoURL // ",
+    auth().currentUser.photoURL,
+  );
+
   const user = auth().currentUser;
   try {
     await user.updateProfile({
@@ -55,7 +65,9 @@ export async function updateAccountName(uid: string, displayName: string) {
       {
         displayName: displayName,
         email: auth().currentUser.email,
-        photoURL: auth().currentUser.photoURL,
+        photoURL: auth().currentUser.photoURL
+          ? auth().currentUser.photoURL
+          : "",
       },
       { merge: true },
     );

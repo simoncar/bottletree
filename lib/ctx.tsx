@@ -111,7 +111,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
     user
       .delete()
-      .then(() => callback("deleting the user"))
+      .then(() => callback(null))
       .catch((error) => {
         const errorMessage = error.message;
         console.log("deleteAccount failure: ", error);

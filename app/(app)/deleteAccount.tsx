@@ -11,14 +11,23 @@ export default function DeleteAccount() {
   const { deleteAccount } = useSession();
   const { user, setUser } = useContext(UserContext);
 
-  const deleteAccountCallback = (error) => {
-    console.log("Delete Account Error:", error);
-    setErrorMessage(error);
+  const deleteAccountCallback = (error: any) => {
+    if (error == null) {
+      setUser(null);
+      router.replace("/signIn");
+    } else {
+      console.log("Delete Account Error:", error);
+      setErrorMessage(error);
+    }
   };
 
-  const deleteUserCallback = (error) => {
-    console.log("Delete User Error:", error);
-    setErrorMessage(error);
+  const deleteUserCallback = (error: any) => {
+    if (error == null) {
+      console.log("Delete User Success");
+    } else {
+      console.log("Delete User Error:", error);
+      setErrorMessage(error);
+    }
   };
 
   const onDelete = () => {

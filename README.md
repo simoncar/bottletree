@@ -26,8 +26,6 @@ eas build --profile aab --platform android
 npm install firebase-functions@latest firebase-admin@latest --save
 npm install -g firebase-tools
 
-firebase emulators:start
-
 firebase deploy --only functions
 
 firebase deploy --only functions --project builder-403d5

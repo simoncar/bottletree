@@ -75,7 +75,7 @@ export default function SignIn() {
             height: welcomeFontSize,
           }}></Animated.View>
         <Text style={styles.welcomeText}>Welcome to</Text>
-        <Text style={styles.welcomeApp}>Builder App</Text>
+        <Text style={styles.welcomeApp}>Builder</Text>
       </Animated.View>
 
       {showSignIn && (

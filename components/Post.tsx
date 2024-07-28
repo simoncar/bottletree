@@ -5,7 +5,6 @@ import {
   Pressable,
   useColorScheme,
   View,
-  TouchableOpacity,
 } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";

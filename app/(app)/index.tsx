@@ -63,7 +63,7 @@ export default function Home() {
         <Stack.Screen options={{ title: "Home" }} />
 
         <View style={styles.instructions}>
-          <Text style={styles.welcomeApp}>Builder App</Text>
+          <Text style={styles.welcomeApp}>Builder</Text>
         </View>
 
         <Projects session={session as string} archived={false} />

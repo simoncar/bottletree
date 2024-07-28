@@ -19,21 +19,21 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [secureEntry, setSecureEntry] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const { session, signUp } = useSession();
+  const { signUp } = useSession();
   const colorScheme = useColorScheme();
 
   const signUpCallback = (user, error) => {
     if (error == "Success") {
       console.log("signUpCallback Success:", user);
 
-      updateAccountName(name); //firebease auth update function
+      updateAccountName(user.uid, user.displayName); //firebease auth update function
       addLog({
         loglevel: "INFO",
         message: "Create Account Success",
         user: user.uid,
         email: user.email,
       });
-      router.navigate("/welcome");
+      router.navigate("/");
     } else {
       //updateSharedDataUser(null);
     }
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 45,
     marginBottom: 20,
-    width: 400,
+    width: "80%",
   },
 
   loginText: {
