@@ -19,7 +19,6 @@ export default function ProjectPosts() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.project}>{project}</Text>
       <Posts project={project as string} />
     </View>
   );
@@ -30,8 +29,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     justifyContent: "center",
-  },
-  project: {
-    color: "grey",
   },
 });

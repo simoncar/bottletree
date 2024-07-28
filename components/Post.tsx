@@ -65,25 +65,6 @@ const Post = (props) => {
     );
   }
 
-  function renderAddProject() {
-    if (post.projectId == "welcome") {
-      return (
-        <View style={styles.container}>
-          <TouchableOpacity
-            key={"createProject"}
-            style={styles.createBtn}
-            onPress={async () => {
-              router.replace({
-                pathname: "project/add",
-              });
-            }}>
-            <Text style={styles.createText}>+ Create Project</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-  }
-
   return (
     <View
       style={[
@@ -93,7 +74,6 @@ const Post = (props) => {
           borderColor: Colors[colorScheme ?? "light"].postBackground,
         },
       ]}>
-      {renderAddProject()}
       {renderImage()}
 
       {!(<Dots images={imageUrls} activeImage={activeImage} />)}
@@ -128,24 +108,7 @@ const styles = StyleSheet.create({
   commentView: {
     backgroundColor: "transparent",
   },
-  container: {
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 40,
-  },
-  createBtn: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 40,
-    width: "80%",
-  },
-  createText: {
-    color: "white",
-    fontSize: 18,
-  },
+
   postView: {
     borderRadius: 10,
     borderWidth: 10,

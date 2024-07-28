@@ -193,7 +193,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 40,
   },
-
   buttonRow: {
     bottom: 0,
     flexDirection: "row",
@@ -205,22 +204,22 @@ const styles = StyleSheet.create({
   },
   circleInner: {
     backgroundColor: "white",
-    borderRadius: 86 / 2, // Use half of the width and height to create a circle
+    borderRadius: 86 / 2,
     height: 86,
-    width: 86, // Adjust the inner circle size as needed
+    width: 86,
   },
   circleMiddle: {
     alignItems: "center",
     backgroundColor: "black",
-    borderRadius: 90 / 2, // Use half of the width and height to create a circle
+    borderRadius: 90 / 2,
     height: 90,
     justifyContent: "center",
-    width: 90, // Adjust the inner circle size as needed
+    width: 90,
   },
   circleOuter: {
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 50, // Use half of the width and height to create a circle
+    borderRadius: 50,
     height: 100,
     justifyContent: "center",
     width: 100,
