@@ -28,6 +28,7 @@ export async function getProject(
       icon: doc.data().icon,
       archived: doc.data().archived,
       postCount: doc.data().postCount,
+      private: doc.data().private || false,
     };
 
     callback(returnProject);
@@ -70,6 +71,7 @@ export async function getProjects(
           archived: false,
           postCount: doc.data().postCount,
           timestamp: doc.data().timestamp,
+          private: doc.data().private || false,
         });
       } else {
         if (archived) {
@@ -81,6 +83,7 @@ export async function getProjects(
             archived: true,
             postCount: doc.data().postCount,
             timestamp: doc.data().timestamp,
+            private: doc.data().private || false,
           });
         }
       }
@@ -125,6 +128,7 @@ export async function getAllProjects(callback: projectsRead) {
         icon: doc.data().icon,
         archived: false,
         postCount: doc.data().postCount,
+        private: doc.data().private || false,
       });
     } else {
       projectsArchived.push({
@@ -134,6 +138,7 @@ export async function getAllProjects(callback: projectsRead) {
         icon: doc.data().icon,
         archived: true,
         postCount: doc.data().postCount,
+        private: doc.data().private || false,
       });
     }
   });
@@ -169,6 +174,7 @@ export async function getProjectUsers(
           displayName: doc.data().displayName,
           email: doc.data().email,
           photoURL: doc.data().photoURL,
+          project: projectId,
         });
       }
     });
@@ -185,6 +191,7 @@ export function updateProject(project: IProject, callback: saveDone) {
       title: project.title,
       icon: project?.icon ?? stockHouseIcon,
       archived: project?.archived ?? false,
+      private: project?.private || false,
     })
     .then(() => {
       callback(project.key);
@@ -210,6 +217,7 @@ export function addProject(
         timestamp: firestore.Timestamp.now(),
         archived: false,
         postCount: 0,
+        private: project?.private || false,
       })
       .then(() => {
         console.log("Project written with ID: ", projectId);
@@ -307,7 +315,7 @@ export function deleteProjectUser(
 }
 
 const generateProjectReference = (): string => {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "";
   for (let i = 0; i < 6; i++) {
     const randomIndex = Math.floor(Math.random() * chars.length);

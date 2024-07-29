@@ -8,6 +8,7 @@ import {
   Button,
   useColorScheme,
   Pressable,
+  Switch,
 } from "react-native";
 
 import { Text, TextInput, View } from "@/components/Themed";
@@ -44,16 +45,14 @@ export default function Project() {
     icon: "",
     archived: false,
     postCount: 0,
+    private: false,
   });
 
   useEffect(() => {
-    console.log("pUpdateUsers useEffect");
     setUpdateUsers(local.pUpdateUsers);
   }, [local.pUpdateUsers]);
 
   useEffect(() => {
-    console.log("project useEffect: " + local.project);
-
     getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);
@@ -170,7 +169,6 @@ export default function Project() {
         }}
       />
       <Progress progress={progress} />
-
       <View style={styles.avatarAContainer}>
         <View style={styles.avatarBView}>{profilePic()}</View>
       </View>
@@ -189,9 +187,29 @@ export default function Project() {
           </Text>
         </View>
       </View>
-
+      <View style={styles.outerView}>
+        <View style={styles.innerView}>
+          <View style={styles.avatar}>
+            <Ionicons
+              name="share-social"
+              size={25}
+              color={Colors[colorScheme ?? "light"].textPlaceholder}
+            />
+          </View>
+          <View>
+            <Text style={styles.private}>Private</Text>
+          </View>
+        </View>
+        <View style={styles.rightChevron}>
+          <Switch
+            value={project.private}
+            onValueChange={(value) =>
+              setProject({ ...project, private: value })
+            }
+          />
+        </View>
+      </View>
       <ProjectUsers project={local.project} updateUsers={updateUsers} />
-
       <Pressable style={styles.outerView} onPress={toggleArchive}>
         <View style={styles.avatar}>
           <Ionicons
@@ -206,7 +224,6 @@ export default function Project() {
           </Text>
         </View>
       </Pressable>
-
       <View style={styles.diagBox}>
         <Text style={styles.projectId}>Project ID: {project.key}</Text>
       </View>
@@ -231,19 +248,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 20,
   },
-
   avatar: { alignItems: "center", justifyContent: "center", width: 48 },
-
   avatarAContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 20,
   },
+
   avatarBView: {},
   camera: {
     color: "white",
     marginBottom: 2,
   },
+
   circle: {
     alignItems: "center",
     backgroundColor: "lightgrey",
@@ -264,15 +281,25 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     paddingTop: 100,
   },
-
+  innerView: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingHorizontal: 8,
+  },
   outerView: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
     flexDirection: "row",
     paddingVertical: 8,
     padding: 8,
-    paddingTop: 60,
   },
+  private: {
+    fontSize: 20,
+    paddingLeft: 20,
+  },
+
   profilePhoto: {
     borderColor: "grey",
     borderRadius: 150 / 2,
@@ -291,11 +318,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 15,
   },
-  progressContainer: {
-    flex: 1,
-    padding: 0,
-    width: "100%",
-  },
+
   project: {
     fontSize: 25,
     fontWeight: "bold",
@@ -319,5 +342,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 20,
     paddingTop: 20,
+  },
+  rightChevron: {
+    marginHorizontal: 8,
   },
 });

@@ -26,6 +26,7 @@ export interface IProject {
   archived?: boolean;
   postCount: number;
   timestamp?: Timestamp;
+  private: boolean;
 }
 
 export interface ILog {
