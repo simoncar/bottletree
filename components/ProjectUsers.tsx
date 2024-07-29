@@ -181,8 +181,8 @@ export const ProjectUsers = (props) => {
       <View>
         {renderHeader({
           key: "header",
-          displayName: "Add",
-          subTitle: "Add person to project",
+          displayName: "Add People to Project",
+          subTitle: "Required for Private Projects",
         })}
       </View>
 
