@@ -193,7 +193,7 @@ export default function Project() {
             <Ionicons
               name="share-social"
               size={25}
-              color={Colors[colorScheme ?? "light"].textPlaceholder}
+              color={Colors[colorScheme ?? "light"].text}
             />
           </View>
           <View>
@@ -215,7 +215,7 @@ export default function Project() {
           <Ionicons
             name="archive"
             size={25}
-            color={Colors[colorScheme ?? "light"].textPlaceholder}
+            color={Colors[colorScheme ?? "light"].text}
           />
         </View>
         <View>
@@ -286,7 +286,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-start",
-    paddingHorizontal: 8,
   },
   outerView: {
     alignItems: "center",
