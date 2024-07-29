@@ -50,12 +50,23 @@ export function useStorageState(key: string): UseStateHook<string> {
         }
       } catch (e) {
         setState(null);
-        console.error("Local storage is unavailable:", e);
+        console.error("Local  web storage is unavailable:", e);
       }
     } else {
-      SecureStore.getItemAsync(key).then((value) => {
-        setState(value ? JSON.parse(value) : null);
-      });
+      try {
+        SecureStore.getItemAsync(key).then((value) => {
+          console.log("SecureStore.getItemAsync(key) // ", value);
+          try {
+            setState(value ? JSON.parse(value) : null);
+          } catch (e) {
+            setState(null);
+            console.error("Local app storage is unavailable:", e);
+          }
+        });
+      } catch (e) {
+        setState(null);
+        console.error("Local app storage is unavailable:", e);
+      }
     }
   }, [key]);
 
