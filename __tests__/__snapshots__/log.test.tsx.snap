@@ -1,0 +1,720 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogList render log test 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <RNCSafeAreaView
+    edges={
+      {
+        "bottom": "additive",
+        "left": "additive",
+        "right": "additive",
+        "top": "additive",
+      }
+    }
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flex": 1,
+          "height": 200,
+        }
+      }
+    >
+      <RCTScrollView
+        style={
+          {
+            "paddingBottom": 50,
+          }
+        }
+      >
+        <View>
+          <View>
+            <View>
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#CED0CE",
+                      "borderBottomWidth": 0.5,
+                      "flexDirection": "row",
+                      "padding": 8,
+                      "paddingVertical": 8,
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "marginRight": 12,
+                      "width": 50,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "borderRadius": 24,
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "fontSize": 18,
+                          "marginBottom": 5,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                     
+                    Some Message
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    1
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    Android
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#CED0CE",
+                      "borderBottomWidth": 0.5,
+                      "flexDirection": "row",
+                      "padding": 8,
+                      "paddingVertical": 8,
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "marginRight": 12,
+                      "width": 50,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "borderRadius": 24,
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "fontSize": 18,
+                          "marginBottom": 5,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                     
+                    Some Message
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    1
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    Android
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#CED0CE",
+                      "borderBottomWidth": 0.5,
+                      "flexDirection": "row",
+                      "padding": 8,
+                      "paddingVertical": 8,
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "marginRight": 12,
+                      "width": 50,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "borderRadius": 24,
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "fontSize": 18,
+                          "marginBottom": 5,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                     
+                    Some Message
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    1
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    Android
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#CED0CE",
+                      "borderBottomWidth": 0.5,
+                      "flexDirection": "row",
+                      "padding": 8,
+                      "paddingVertical": 8,
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "marginRight": 12,
+                      "width": 50,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "borderRadius": 24,
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "fontSize": 18,
+                          "marginBottom": 5,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                     
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    1
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    Android
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#CED0CE",
+                      "borderBottomWidth": 0.5,
+                      "flexDirection": "row",
+                      "padding": 8,
+                      "paddingVertical": 8,
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "marginRight": 12,
+                      "width": 50,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "borderRadius": 24,
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "fontSize": 18,
+                          "marginBottom": 5,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                     
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    Android
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#CED0CE",
+                      "borderBottomWidth": 0.5,
+                      "flexDirection": "row",
+                      "padding": 8,
+                      "paddingVertical": 8,
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    {
+                      "marginRight": 12,
+                      "width": 50,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "borderRadius": 24,
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "fontSize": 18,
+                          "marginBottom": 5,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                     
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  >
+                    1
+                  </Text>
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#000",
+                        },
+                        {
+                          "color": "grey",
+                          "fontSize": 14,
+                        },
+                      ]
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </RNCSafeAreaView>
+</RNCSafeAreaProvider>
+`;

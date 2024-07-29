@@ -40,7 +40,6 @@ const ProjectProvider = ({ children }) => {
 
     setSharedDataProject({ ...sharedDataProject, ...newData });
     AsyncStorage.setItem("@PROJECT", jsonValue).then(() => {
-      console.log("AsyncStorage.SET ", jsonValue);
       return jsonValue;
     });
   }

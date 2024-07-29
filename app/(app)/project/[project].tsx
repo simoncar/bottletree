@@ -1,7 +1,6 @@
 import { Image } from "expo-image";
 import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useEffect, useState } from "react";
-
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,11 +9,9 @@ import {
   Pressable,
   Switch,
 } from "react-native";
-
 import { Text, TextInput, View } from "@/components/Themed";
 import Progress from "@/components/Progress";
 import { updateProject, getProject } from "@/lib/APIproject";
-import { useProject } from "@/lib/projectProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -27,7 +24,6 @@ import { IProject } from "@/lib/types";
 
 export default function Project() {
   const [updateUsers, setUpdateUsers] = useState("");
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
   const [progress, setProgress] = useState(0);
 
   const local = useLocalSearchParams<{
@@ -56,14 +52,11 @@ export default function Project() {
     getProject(local?.project || "", (project) => {
       if (project) {
         setProject(project);
-        updateStoreSharedDataProject(project);
       }
     });
   }, []);
 
   const saveDone = (id: string) => {
-    updateStoreSharedDataProject(project);
-
     router.navigate({
       pathname: "/[project]",
       params: {
@@ -89,8 +82,7 @@ export default function Project() {
       if (myArray[0] > ratio) {
         ratio = myArray[0];
       }
-
-      return myArray[1]; // For example, creating a new array with each element doubled.
+      return myArray[1];
     });
 
     setProject({ ...project, icon: downloadURLarray[0] });
