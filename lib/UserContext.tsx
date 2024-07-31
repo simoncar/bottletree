@@ -3,7 +3,6 @@ import { getUser } from "@/lib/APIuser";
 import { useSession } from "@/lib/ctx";
 import { IUser } from "@/lib/types";
 
-// Define the shape of the context
 interface UserContextType {
   user: IUser | null;
   setUser: (user: IUser) => void;

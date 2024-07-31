@@ -13,24 +13,17 @@ import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { getProjects } from "@/lib/APIproject";
-import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useSession } from "@/lib/ctx";
-import { useProject } from "@/lib/projectProvider";
 import { getRelativeTime } from "@/lib/util";
 import { UserContext } from "@/lib/UserContext";
 
-const ProjectList = (props) => {
-  const { page } = useLocalSearchParams<{
-    page: string;
-  }>();
+const ProjectList = () => {
   const { user, setUser } = useContext(UserContext);
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const colorScheme = useColorScheme();
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
 
   const projectsRead = (projectsDB: IProject[]) => {
     setProjects(projectsDB);
@@ -63,7 +56,7 @@ const ProjectList = (props) => {
         key={"addProject"}
         onPress={() => {
           router.replace({
-            pathname: "project/add",
+            pathname: "/project/add",
           });
         }}>
         <View style={styles.outerView}>
@@ -94,7 +87,7 @@ const ProjectList = (props) => {
       return (
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
-          <Text style={styles.projectId}>{data.project || ""}</Text>
+
           <Text style={styles.projectId}>
             {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
           </Text>
@@ -121,14 +114,6 @@ const ProjectList = (props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            updateStoreSharedDataProject({
-              key: data.key,
-              project: data.key,
-              title: data.title,
-              icon: data.icon,
-              archived: data.archived,
-              postCount: data.postCount ?? 0,
-            });
             if (user.postCount !== undefined) {
               user.postCount[data.key] = data.postCount;
             }
@@ -168,13 +153,6 @@ const ProjectList = (props) => {
         <TouchableOpacity
           key={"chevron." + data.key}
           onPress={() => {
-            updateStoreSharedDataProject({
-              key: data.key,
-              title: data.title,
-              icon: data.icon,
-              archived: data.archived,
-            });
-
             router.replace({
               pathname: "/project/[project]",
               params: {

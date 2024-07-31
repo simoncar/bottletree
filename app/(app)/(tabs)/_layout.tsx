@@ -3,12 +3,10 @@ import { Link, Tabs, useLocalSearchParams, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { BigText } from "@/components/StyledText";
-
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
-import { IUser, IPost } from "@/lib/types";
+import { IPost } from "@/lib/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { useProject } from "@/lib/projectProvider";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { addPostImage } from "@/lib/APIpost";
 import { useSession } from "@/lib/ctx";
@@ -32,8 +30,7 @@ type SearchParams = {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [progress, setProgress] = useState(0);
   const { session, isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
@@ -88,8 +85,6 @@ export default function TabLayout() {
   };
 
   const createProject = () => {
-    console.log("alert to create project");
-
     alert("Alert", "Begin by creating a project.");
     router.navigate({
       pathname: "project/add",
