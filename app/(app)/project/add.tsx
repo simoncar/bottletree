@@ -3,20 +3,15 @@ import { StyleSheet, Button, SafeAreaView } from "react-native";
 import { router, Stack } from "expo-router";
 import { TextInput } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
-
 import { addProject, addProjectUser } from "@/lib/APIproject";
 import { IProject, IUser } from "@/lib/types";
-import { useProject } from "@/lib/projectProvider";
 import { UserContext } from "@/lib/UserContext";
 
-export default function addPhoto() {
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
-    const { user } = useContext(UserContext);
+export default function addNewProject() {
+  const { user } = useContext(UserContext);
   const { session } = useSession();
-  const [image, setImage] = useState(null);
-  const [progress, setProgress] = useState(0);
   const [text, onChangeText] = useState("");
-  
+
   let loggedInUser: IUser = user;
 
   if (null == session) {
@@ -35,7 +30,8 @@ export default function addPhoto() {
     icon: "",
     archived: false,
     postCount: 0,
-    project: ""
+    project: "",
+    private: false,
   };
 
   const saveDoneUser = (projectId: string) => {
@@ -49,20 +45,12 @@ export default function addPhoto() {
   };
 
   const saveDone = (id: string) => {
-    updateStoreSharedDataProject({
-      key: id,
-      title: project.title,
-      icon: project.icon,
-      archived: project.archived,
-    });
-
     addProjectUser(id, loggedInUser, saveDoneUser);
   };
 
   const onSave = async () => {
     project.title = text;
     console.log("addProject: ", text, project.title, loggedInUser.uid);
-
     addProject(project, loggedInUser, saveDone);
   };
 
@@ -88,7 +76,8 @@ export default function addPhoto() {
 
 const styles = StyleSheet.create({
   input: {
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: "bold",
     height: 140,
     margin: 12,
     padding: 10,

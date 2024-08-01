@@ -237,7 +237,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="addPost"
+        name="nothing"
         options={{
           title: "Add",
           tabBarButton: () => (

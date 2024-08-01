@@ -46,10 +46,7 @@ describe("ProjectList", () => {
     });
     (useLocalSearchParams as jest.Mock).mockReturnValue({ page: "1" });
     (useColorScheme as jest.Mock).mockReturnValue("light");
-    (useProject as jest.Mock).mockReturnValue({
-      sharedDataProject: {},
-      updateStoreSharedDataProject: jest.fn(),
-    });
+    (useProject as jest.Mock).
   });
 
   it("renders the project list and handles loading state", async () => {
