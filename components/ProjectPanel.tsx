@@ -10,15 +10,16 @@ import { getUserProjectCount } from "@/lib/APIuser";
 import { IUser, IProject } from "@/lib/types";
 import { useSession } from "@/lib/ctx";
 import { getProject } from "@/lib/APIproject";
-import { useProject } from "@/lib/projectProvider";
 
-const ProjectPanel = (props) => {
+type ProjectProp = {
+  project: string;
+};
+
+const ProjectPanel = (props: ProjectProp) => {
   const { project } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
-  const { session, signOut } = useSession();
-
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const { session } = useSession();
 
   const [projectObj, setProject] = useState<IProject>({
     project: "",
@@ -27,6 +28,7 @@ const ProjectPanel = (props) => {
     icon: "",
     archived: false,
     postCount: 0,
+    private: false,
   });
 
   useEffect(() => {
@@ -46,62 +48,87 @@ const ProjectPanel = (props) => {
   };
 
   return (
-    <View
-      style={[
-        styles.outerView,
-        {
-          backgroundColor: Colors[colorScheme ?? "light"].projectPanel,
-        },
-      ]}>
-      <Pressable
-        style={styles.pressableLeft}
-        onPress={() => {
-          if (projectObj) {
-            updateStoreSharedDataProject({
-              key: projectObj.project,
-            });
+    <View>
+      <View
+        style={[
+          styles.outerView,
+          {
+            backgroundColor: Colors[colorScheme ?? "light"].projectPanel,
+          },
+        ]}>
+        <Pressable
+          style={styles.pressableLeft}
+          onPress={() => {
+            if (projectObj) {
+              router.navigate({
+                pathname: "/project/[project]",
+                params: {
+                  project: projectObj.project,
+                },
+              });
+            }
+          }}>
+          <View style={styles.avatar}>
+            {projectObj.icon ? (
+              <Image
+                style={styles.projectAvatar}
+                source={projectObj.icon}></Image>
+            ) : (
+              <View style={styles.projectAvatar}>
+                <MaterialIcons
+                  name="house-siding"
+                  color="#999999"
+                  style={styles.avatarIcon}
+                />
+              </View>
+            )}
+          </View>
+        </Pressable>
+        <Pressable
+          style={styles.pressableRight}
+          onPress={() => {
             router.navigate({
-              pathname: "/project/[project]",
-              params: {
-                project: projectObj.project,
-              },
+              pathname: "/projectList",
             });
-          }
+          }}>
+          <View style={styles.projectText}>
+            <Text style={styles.updateText}>
+              {projectObj.title || "Select Project"}
+            </Text>
+          </View>
+          <View style={styles.rightChevron}>
+            <FontAwesome5
+              name="angle-down"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
+        </Pressable>
+      </View>
+      <Pressable
+        style={styles.pressableShare}
+        onPress={() => {
+          router.navigate({
+            pathname: "/share",
+          });
         }}>
-        <View style={styles.avatar}>
-          {projectObj.icon ? (
-            <Image
-              style={styles.projectAvatar}
-              source={projectObj.icon}></Image>
-          ) : (
+        <View
+          style={[
+            styles.outerView,
+            {
+              backgroundColor: Colors[colorScheme ?? "light"].projectPanel,
+            },
+          ]}>
+          <View style={styles.avatar}>
             <View style={styles.projectAvatar}>
               <MaterialIcons
-                name="house-siding"
+                name="link"
                 color="#999999"
                 style={styles.avatarIcon}
               />
             </View>
-          )}
-        </View>
-      </Pressable>
-      <Pressable
-        style={styles.pressableRight}
-        onPress={() => {
-          router.navigate({
-            pathname: "/projectList",
-          });
-        }}>
-        <View style={styles.projectText}>
-          <Text style={styles.updateText}>
-            {projectObj.title || "Select Project"}
-          </Text>
-        </View>
-        <View style={styles.rightChevron}>
-          <FontAwesome5
-            name="angle-down"
-            size={25}
-            color={Colors[colorScheme ?? "light"].text}
-          />
+          </View>
+          <Text style={styles.share}>Share Project</Text>
         </View>
       </Pressable>
     </View>
@@ -137,18 +164,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
   },
-  projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
+  pressableShare: {},
 
+  projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
   projectText: {
     alignItems: "center",
     flexDirection: "row",
     flex: 1,
   },
+
   rightChevron: {
     marginHorizontal: 8,
   },
+  share: {
+    flexDirection: "row",
+    flex: 1,
+    fontSize: 18,
+  },
   updateText: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     marginRight: 12,
   },

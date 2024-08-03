@@ -112,12 +112,18 @@ export default function Layout() {
                     headerShown: true,
                   }}
                 />
-
                 <Stack.Screen
                   name="projectList"
                   options={{
                     presentation: "modal",
                     title: "Projects",
+                  }}
+                />
+                <Stack.Screen
+                  name="share"
+                  options={{
+                    presentation: "modal",
+                    title: "Share",
                   }}
                 />
                 <Stack.Screen
