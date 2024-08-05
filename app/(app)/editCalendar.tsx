@@ -103,7 +103,7 @@ export default function editCalendar() {
     );
   };
 
-  const deleteDone = (id: string) => {
+  const deleteDone = () => {
     router.navigate({
       pathname: "/calendar",
     });

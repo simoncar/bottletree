@@ -14,7 +14,13 @@ const Share = () => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       <View style={styles.shareLink}>
-        <Text style={styles.shareText}>http://otbapps.com/W84FCL</Text>
+        <Text style={styles.shareText}>https://otbapps.com/wb5dlt</Text>
+        <FontAwesome5
+          name="share"
+          size={30}
+          color={Colors[colorScheme ?? "light"].text}
+          style={{ paddingLeft: 10 }}
+        />
       </View>
       <View style={styles.qrcode}>
         <FontAwesome5

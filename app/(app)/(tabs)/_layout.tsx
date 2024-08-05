@@ -31,8 +31,8 @@ type SearchParams = {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { user } = useContext(UserContext);
-  const [progress, setProgress] = useState(0);
-  const { session, isAuthLoading } = useSession();
+  const [setProgress] = useState(0);
+  const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
   const { project } = useLocalSearchParams<SearchParams>();
 

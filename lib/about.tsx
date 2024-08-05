@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-import { getLocales } from "expo-localization";
 import { Text, View } from "@/components/Themed";
-import * as Application from "expo-application";
 import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
@@ -11,7 +9,6 @@ import { Link } from "expo-router";
 export const About = () => {
   const { user } = useContext(UserContext);
   const { session } = useSession();
-  const deviceLanguage = getLocales()[0].languageCode;
 
   if (null == user) {
     return <View />;

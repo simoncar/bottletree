@@ -7,7 +7,7 @@ import { ILog } from "@/lib/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { getRelativeTime } from "@/lib/util";
 
-const LogScreen = (props) => {
+const LogScreen = () => {
   const [logs, setLogs] = useState<ILog[] | null>(null);
   const [loading, setLoading] = useState(true);
 
