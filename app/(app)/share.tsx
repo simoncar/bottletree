@@ -1,10 +1,17 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import React from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
+import QRCode from "react-native-qrcode-svg";
+import { useLocalSearchParams } from "expo-router";
+
+type ShareParams = {
+  project: string;
+};
 
 const Share = () => {
+  const { project } = useLocalSearchParams<ShareParams>();
   const colorScheme = useColorScheme();
 
   return (
@@ -14,20 +21,16 @@ const Share = () => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       <View style={styles.shareLink}>
-        <Text style={styles.shareText}>https://otbapps.com/wb5dlt</Text>
-        <FontAwesome5
-          name="share"
+        <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
+        <AntDesign
+          name="sharealt"
           size={30}
           color={Colors[colorScheme ?? "light"].text}
-          style={{ paddingLeft: 10 }}
+          style={{ paddingLeft: 15 }}
         />
       </View>
       <View style={styles.qrcode}>
-        <FontAwesome5
-          name="qrcode"
-          size={255}
-          color={Colors[colorScheme ?? "light"].text}
-        />
+        <QRCode size={200} ecl="L" value="https://b.otbapps.com/wb5dlt" />
       </View>
     </View>
   );
@@ -43,12 +46,15 @@ const styles = StyleSheet.create({
   qrcode: {
     alignItems: "center",
     flexDirection: "row",
-    textAlign: "center",
+    height: 200,
+    paddingTop: 100,
+    width: 200,
   },
   shareLink: {
     alignItems: "center",
     flexDirection: "row",
     paddingBottom: 25,
+    paddingTop: 100,
     textAlign: "center",
   },
   shareText: {

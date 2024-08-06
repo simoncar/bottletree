@@ -44,6 +44,21 @@ exports[`about test 1`] = `
       ]
     }
   >
+    john.doe@example.com
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "#000",
+        },
+        {
+          "color": "grey",
+          "fontSize": 14,
+        },
+      ]
+    }
+  >
     User Context - 
     1234567890
   </Text>

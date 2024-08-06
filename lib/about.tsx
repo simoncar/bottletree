@@ -22,6 +22,7 @@ export const About = () => {
           }}>
           <Text style={styles.version}>{user.displayName}</Text>
         </Link>
+        <Text style={styles.version}>{user.email}</Text>
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
