@@ -6,7 +6,7 @@ exports[`about test 1`] = `
     {
       "alignItems": "center",
       "justifyContent": "center",
-      "paddingTop": 50,
+      "paddingTop": 490,
     }
   }
 >
@@ -30,39 +30,6 @@ exports[`about test 1`] = `
     >
       John Doe
     </Text>
-  </Text>
-  <Text
-    style={
-      [
-        {
-          "color": "#000",
-        },
-        {
-          "color": "grey",
-          "fontSize": 14,
-        },
-      ]
-    }
-  >
-    john.doe@example.com
-  </Text>
-  <Text
-    style={
-      [
-        {
-          "color": "#000",
-        },
-        {
-          "color": "grey",
-          "fontSize": 14,
-        },
-      ]
-    }
-  >
-    mock
-     (
-    mock
-    ) | 3
   </Text>
   <Text
     style={
@@ -109,22 +76,6 @@ exports[`about test 1`] = `
     }
   >
     Auth - 
-  </Text>
-  <Text
-    style={
-      [
-        {
-          "color": "#000",
-        },
-        {
-          "color": "grey",
-          "fontSize": 14,
-        },
-      ]
-    }
-  >
-    Language - 
-    en
   </Text>
   <Text
     style={

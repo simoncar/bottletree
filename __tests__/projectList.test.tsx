@@ -46,7 +46,7 @@ describe("ProjectList", () => {
     });
     (useLocalSearchParams as jest.Mock).mockReturnValue({ page: "1" });
     (useColorScheme as jest.Mock).mockReturnValue("light");
-    (useProject as jest.Mock).
+    (useProject as jest.Mock).mockReturnValue(mockProjects);
   });
 
   it("renders the project list and handles loading state", async () => {

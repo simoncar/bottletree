@@ -14,6 +14,7 @@ eas update --branch production --message "Updating the app"
 
 npx expo start --offline
 npx expo start --dev-client
+yarn test
 
 ------ development build -------
 
@@ -27,7 +28,6 @@ npm install firebase-functions@latest firebase-admin@latest --save
 npm install -g firebase-tools
 
 firebase deploy --only functions
-
 firebase deploy --only functions --project builder-403d5
 
 npx expo install --fix
