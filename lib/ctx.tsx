@@ -18,6 +18,7 @@ interface AuthContextType {
     callback: (user: IUser, message: string) => void,
   ) => void;
   signOut: () => void;
+  signInAnonymously: (callback: (user: IUser, message: string) => void) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -28,6 +29,7 @@ export const AuthContext = createContext<AuthContextType>({
   signIn: () => null,
   signUp: () => null,
   signOut: () => null,
+  signInAnonymously: () => null,
 });
 
 // This hook can be used to access the user info.
@@ -42,6 +44,23 @@ export function useSession() {
 
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isAuthLoading, session], setSession] = useStorageState("session");
+
+  const signInAnonymously = async (
+    callback: (session, message: string) => void,
+  ) => {
+    try {
+      const response = await auth().signInAnonymously();
+      await setSession(response.user.uid);
+      updateAccountName(response.user.uid, "");
+      console.log("Sign In signInAnonymously Success", session);
+      callback(response.user.uid, "Success");
+      return response.user.uid;
+    } catch (error) {
+      setSession(null);
+      console.log(error);
+      callback(null, error);
+    }
+  };
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -77,6 +96,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         displayName: convertToString(name),
         photoURL: convertToString(""),
         project: "",
+        anonymous: auth().currentUser.isAnonymous,
       };
 
       updateAccountName(response.user.uid, name);
@@ -135,6 +155,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         session,
         resetPassword,
         deleteAccount,
+        signInAnonymously,
         signIn,
         signUp,
         signOut,

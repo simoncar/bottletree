@@ -12,7 +12,7 @@ import { addPostImage } from "@/lib/APIpost";
 import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import alert from "@/lib/alert";
-import { UserContext } from "../../../lib/UserContext";
+import { UserContext } from "@/lib/UserContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 function TabBarIcon(props: {
@@ -31,7 +31,7 @@ type SearchParams = {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { user } = useContext(UserContext);
-  const [setProgress] = useState(0);
+  const [progress, setProgress] = useState(0);
   const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
   const { project } = useLocalSearchParams<SearchParams>();
@@ -230,7 +230,11 @@ export default function TabLayout() {
           headerTitleAlign: "left",
           headerRight: () => (
             <View>
-              <UserAvatar uid={user?.uid} photoURL={user?.photoURL} />
+              <UserAvatar
+                uid={user?.uid}
+                photoURL={user?.photoURL}
+                user={user}
+              />
             </View>
           ),
         }}

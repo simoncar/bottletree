@@ -50,6 +50,7 @@ export interface IUser {
   postCount?: Map<string, number>;
   language?: string;
   project: string;
+  anonymous: boolean;
 }
 
 export interface IComment {

@@ -15,6 +15,7 @@ export async function getUser(uid: string) {
       language: doc.data()?.language,
       project: doc.data().project,
       postCount: doc.data()?.postCount,
+      anonymous: auth().currentUser.isAnonymous,
     };
 
     return user;
@@ -68,6 +69,7 @@ export async function updateAccountName(uid: string, displayName: string) {
         photoURL: auth().currentUser.photoURL
           ? auth().currentUser.photoURL
           : "",
+        anonymous: auth().currentUser.isAnonymous,
       },
       { merge: true },
     );
@@ -77,7 +79,9 @@ export async function updateAccountName(uid: string, displayName: string) {
 }
 
 export const updateUserProjectCount = (uid: string, project: string) => {
-  if (project === "welcome" || project == undefined) {
+  console.log("updateUserProjectCount  uid // ", uid);
+
+  if (uid === null || project == undefined) {
     return;
   }
 
@@ -161,6 +165,7 @@ export async function getUsers(callback: usersRead) {
       photoURL: doc.data().photoURL,
       language: doc.data().language,
       project: doc.data().project,
+      anonymous: auth().currentUser.isAnonymous,
     });
   });
 
@@ -201,6 +206,7 @@ export async function getUserProjectCount(
         postCount: doc.data()?.postCount,
         language: doc.data()?.language,
         project: doc.data()?.project,
+        anonymous: auth().currentUser.isAnonymous,
       };
 
       callback(user);

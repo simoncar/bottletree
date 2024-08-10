@@ -44,6 +44,8 @@ const ProjectPanel = (props: ProjectProp) => {
   }, [project]);
 
   const userProjectCountRead = (user: IUser) => {
+    console.log("userProjectCountRead: ", user);
+
     //updateSharedDataUser({ postCount: user.postCount });
   };
 

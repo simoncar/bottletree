@@ -11,6 +11,7 @@ export async function getProject(
 ) {
   if (!project) {
     console.log("getProject: No project provided");
+    callback(null);
     return;
   }
 
@@ -19,6 +20,7 @@ export async function getProject(
   const unsubscribe = q.onSnapshot((doc) => {
     if (!doc.exists) {
       console.log("No such project:", project);
+      callback(null);
       return;
     }
     const returnProject: IProject = {
@@ -175,6 +177,7 @@ export async function getProjectUsers(
           email: doc.data().email,
           photoURL: doc.data().photoURL,
           project: projectId,
+          anonymous: doc.data().anonymous ? true : false,
         });
       }
     });

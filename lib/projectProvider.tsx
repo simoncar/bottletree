@@ -14,6 +14,7 @@ const ProjectProvider = ({ children }) => {
     email: "",
     photoURL: "",
     project: "",
+    anonymous: true,
   };
 
   const [sharedDataProject, setSharedDataProject] = useState(INITIAL_PROJECT);

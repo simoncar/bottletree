@@ -6,7 +6,12 @@ import {
 } from "@react-navigation/native";
 import { View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
-import { useNavigationContainerRef, Stack, Redirect } from "expo-router";
+import {
+  useNavigationContainerRef,
+  useLocalSearchParams,
+  Stack,
+  Redirect,
+} from "expo-router";
 import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
@@ -20,6 +25,10 @@ import Colors from "@/constants/Colors";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { Text } from "@/components/Themed";
 
+type SearchParams = {
+  project: string;
+};
+
 export const unstable_settings = {
   initialRouteName: "index",
 };
@@ -27,6 +36,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
+  const { project } = useLocalSearchParams<SearchParams>();
   useAsyncStorageDevTools();
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
@@ -82,7 +92,15 @@ export default function Layout() {
   }
 
   if (!session) {
-    return <Redirect href="/signIn" />;
+    return (
+      <Redirect
+        href={{
+          pathname: "/signUpAnonymously",
+          params: { project: project },
+        }}
+      />
+    );
+    //await signInAnonymously();
   }
 
   return (

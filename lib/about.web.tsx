@@ -20,9 +20,13 @@ export const About = () => {
         <Text style={styles.version}>{user.displayName}</Text>
         <Text style={styles.version}>{user.email}</Text>
         <Text style={styles.version}>
+          Anonymous: {auth().currentUser?.isAnonymous}
+        </Text>
+        <Text style={styles.version}>
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion}) | 2
         </Text>
+
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>

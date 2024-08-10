@@ -21,6 +21,7 @@ export default function addNewProject() {
       email: "",
       photoURL: "",
       project: "",
+      anonymous: true,
     };
   }
 
