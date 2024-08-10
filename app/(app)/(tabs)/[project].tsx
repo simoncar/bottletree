@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { Posts } from "@/components/Posts";
@@ -15,11 +15,10 @@ export default function ProjectPosts() {
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    getProject(project, (projectObj) => {
+    getProject(project, (projectObj: any) => {
       if (projectObj) {
         console.log("ProjectPosts: project found: " + project);
       } else {
-        console.log("ProjectPosts: project not found: " + project);
         router.replace("/signIn");
       }
     });

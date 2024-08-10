@@ -30,7 +30,7 @@ const Share = () => {
         />
       </View>
       <View style={styles.qrcode}>
-        <QRCode size={200} ecl="L" value="https://b.otbapps.com/wb5dlt" />
+        <QRCode size={200} ecl="L" value={`https://b.otbapps.com/${project}`} />
       </View>
     </View>
   );

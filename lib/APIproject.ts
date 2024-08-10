@@ -318,11 +318,12 @@ export function deleteProjectUser(
 }
 
 const generateProjectReference = (): string => {
-  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // remove ambiguous characters such as Il1O0 to avoid confusion in printed documents
+
   let code = "";
   for (let i = 0; i < 6; i++) {
     const randomIndex = Math.floor(Math.random() * chars.length);
     code += chars.charAt(randomIndex);
   }
-  return code;
+  return code.toLocaleLowerCase();
 };
