@@ -41,12 +41,6 @@ const Share = () => {
         </Text>
         <View style={styles.shareLink}>
           <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
-          <AntDesign
-            name="sharealt"
-            size={30}
-            color={Colors[colorScheme ?? "light"].text}
-            style={{ paddingLeft: 15 }}
-          />
         </View>
         <CopyLinkButton />
       </View>
