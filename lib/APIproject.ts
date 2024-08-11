@@ -108,6 +108,8 @@ export async function getProjects(
     return b.timestamp?.seconds - a.timestamp?.seconds;
   });
 
+  console.log("getProjects: ", projects, projectsArchived);
+
   callback([...projects, ...projectsArchived]);
 
   return;

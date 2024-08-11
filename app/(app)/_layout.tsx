@@ -11,7 +11,6 @@ import {
   useLocalSearchParams,
   Stack,
   Redirect,
-  router,
 } from "expo-router";
 import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
@@ -91,6 +90,8 @@ export default function Layout() {
       </ThemeProvider>
     );
   }
+
+  console.log("Layout: session AAAA: ", session);
 
   if (!session) {
     console.log("Layout: session not found: ", project);

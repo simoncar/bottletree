@@ -25,7 +25,7 @@ function TabBarIcon(props: {
 const appName = "Builder";
 
 type SearchParams = {
-  project: string;
+  projectId: string;
 };
 
 export default function TabLayout() {
@@ -34,7 +34,8 @@ export default function TabLayout() {
   const [progress, setProgress] = useState(0);
   const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
-  const { project } = useLocalSearchParams<SearchParams>();
+  const { projectId } = useLocalSearchParams<SearchParams>();
+  //const project = "project";
 
   if (isAuthLoading) {
     return <Text>Loading</Text>;
@@ -73,8 +74,8 @@ export default function TabLayout() {
     const post: IPost = {
       key: "",
       caption: "",
-      projectId: project,
-      projectTitle: project,
+      projectId: projectId,
+      projectTitle: projectId,
       author: user.displayName,
       images: sourceDownloadURLarray,
       ratio: ratio,
@@ -119,7 +120,7 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            if (!project) {
+            if (!projectId) {
               createProject();
               return;
             }
@@ -127,33 +128,33 @@ export default function TabLayout() {
             router.navigate({
               pathname: "/note",
               params: {
-                project: project,
+                project: projectId,
                 post: "",
               },
             });
             break;
           case 1:
-            if (!project) {
+            if (!projectId) {
               createProject();
               return;
             }
             router.navigate({
               pathname: "/camera",
               params: {
-                project: project,
+                project: projectId,
                 post: "",
               },
             });
             break;
           case 2:
-            if (!project) {
+            if (!projectId) {
               createProject();
               return;
             }
             pickImage();
             break;
           case 3:
-            if (!project) {
+            if (!projectId) {
               createProject();
               return;
             }
@@ -201,9 +202,7 @@ export default function TabLayout() {
         }}
         options={{
           title: "",
-          href: {
-            pathname: project,
-          },
+
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
