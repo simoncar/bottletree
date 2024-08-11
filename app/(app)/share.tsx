@@ -19,7 +19,10 @@ const Share = () => {
   const CopyLinkButton = () => {
     return (
       <TouchableOpacity
-        style={styles.buttonStyle}
+        style={[
+          styles.buttonStyle,
+          { borderColor: Colors[colorScheme ?? "light"].text },
+        ]}
         onPress={() => {
           Clipboard.setStringAsync("https://b.otbapps.com/" + project);
         }}>

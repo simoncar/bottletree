@@ -34,8 +34,6 @@ type Props = {
 };
 
 export const UserAvatar = ({ uid, photoURL, user }: Props) => {
-  console.log("UserAvatar: ", uid, photoURL, user);
-
   if (user?.email == undefined) {
     return (
       <View style={styles.container}>
