@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   },
   version: {
     color: "grey",
-    fontSize: 14,
+    fontSize: 10,
   },
 });

@@ -21,7 +21,6 @@ const UserProvider = (props: React.PropsWithChildren) => {
     const fetchData = async () => {
       try {
         const userData = await getUser(session);
-        console.log("userData", userData);
         if (userData != null) {
           setUser({ ...userData });
         }

@@ -202,8 +202,6 @@ export async function getPosts(
     project = "void";
   }
 
-  console.log("getPosts: project", project);
-
   const q = firestore()
     .collection("projects")
     .doc(project)

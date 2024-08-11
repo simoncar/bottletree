@@ -5,8 +5,6 @@ export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
   const doc = await q.get();
 
-  console.log("firestore user found:", auth().currentUser);
-
   if (doc.exists) {
     const user: IUser = {
       key: doc.id,
