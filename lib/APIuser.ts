@@ -5,6 +5,8 @@ export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
   const doc = await q.get();
 
+  console.log("firestore user found:", auth().currentUser);
+
   if (doc.exists) {
     const user: IUser = {
       key: doc.id,
@@ -15,7 +17,7 @@ export async function getUser(uid: string) {
       language: doc.data()?.language,
       project: doc.data().project,
       postCount: doc.data()?.postCount,
-      anonymous: auth().currentUser.isAnonymous,
+      anonymous: auth().currentUser?.isAnonymous,
     };
 
     return user;

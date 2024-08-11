@@ -65,7 +65,9 @@ export const Projects = ({ session, archived }: Props) => {
   function renderRow(data: IProject) {
     const icon = data.icon;
 
-    const postCountUser = findValueByKey(user.postCount, data.key);
+    console.log("Projects: renderRow: data: ", user);
+
+    const postCountUser = findValueByKey(user?.postCount, data.key);
     const postCountDelta = data.postCount - postCountUser;
 
     return (
