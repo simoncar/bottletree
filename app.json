@@ -12,16 +12,20 @@
       "resizeMode": "contain",
       "backgroundColor": "#5D5CE7"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "133",
+      "buildNumber": "134",
       "config": {
         "usesNonExemptEncryption": false
       },
-      "associatedDomains": ["applinks:b.simon.co"]
+      "associatedDomains": [
+        "applinks:b.simon.co"
+      ]
     },
     "android": {
       "googleServicesFile": "./google-services.json",
