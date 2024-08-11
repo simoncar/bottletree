@@ -111,7 +111,7 @@ const ProjectPanel = (props: ProjectProp) => {
         onPress={() => {
           router.navigate({
             pathname: "/share",
-            //params: { project: project },
+            params: { project: project },
           });
         }}>
         <View
