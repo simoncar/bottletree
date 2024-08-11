@@ -50,7 +50,7 @@ export function useStorageState(key: string): UseStateHook<string> {
         }
       } catch (e) {
         setState(null);
-        console.error("Local  web storage is unavailable:", e);
+        console.error("Local web storage is unavailable:", e);
       }
     } else {
       try {
@@ -65,7 +65,7 @@ export function useStorageState(key: string): UseStateHook<string> {
         });
       } catch (e) {
         setState(null);
-        console.error("Local app storage is unavailable:", e);
+        console.error("Local storage system is unavailable:", e);
       }
     }
   }, [key]);

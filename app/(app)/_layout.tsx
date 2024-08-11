@@ -91,8 +91,6 @@ export default function Layout() {
     );
   }
 
-  console.log("Layout: session AAAA: ", session);
-
   if (!session) {
     console.log("Layout: session not found: ", project);
     if (project) {
@@ -108,7 +106,7 @@ export default function Layout() {
       return (
         <Redirect
           href={{
-            pathname: "/(auth)/signIn",
+            pathname: "/signIn",
           }}
         />
       );
