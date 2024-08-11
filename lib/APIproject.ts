@@ -108,8 +108,6 @@ export async function getProjects(
     return b.timestamp?.seconds - a.timestamp?.seconds;
   });
 
-  console.log("getProjects: ", projects, projectsArchived);
-
   callback([...projects, ...projectsArchived]);
 
   return;
@@ -237,8 +235,6 @@ export function addProject(
 
 //function to retrieve all projects from firebase and then add the user to the accessList for each project
 export function addProjectUserAll(user: IUser, callback: saveDoneAll) {
-  console.log("Adding user to all projects: ", user);
-
   getAllProjects((projects) => {
     projects.forEach((project) => {
       console.log("Adding user to project: ", project.key, project);

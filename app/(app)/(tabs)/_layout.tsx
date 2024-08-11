@@ -25,7 +25,7 @@ function TabBarIcon(props: {
 const appName = "Builder";
 
 type SearchParams = {
-  projectId: string;
+  project: string;
 };
 
 export default function TabLayout() {
@@ -34,7 +34,7 @@ export default function TabLayout() {
   const [progress, setProgress] = useState(0);
   const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
-  const { projectId } = useLocalSearchParams<SearchParams>();
+  const { project } = useLocalSearchParams<SearchParams>();
   //const project = "project";
 
   if (isAuthLoading) {
@@ -74,8 +74,8 @@ export default function TabLayout() {
     const post: IPost = {
       key: "",
       caption: "",
-      projectId: projectId,
-      projectTitle: projectId,
+      projectId: project,
+      projectTitle: project,
       author: user.displayName,
       images: sourceDownloadURLarray,
       ratio: ratio,
@@ -120,7 +120,7 @@ export default function TabLayout() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            if (!projectId) {
+            if (!project) {
               createProject();
               return;
             }
@@ -128,33 +128,33 @@ export default function TabLayout() {
             router.navigate({
               pathname: "/note",
               params: {
-                project: projectId,
+                project: project,
                 post: "",
               },
             });
             break;
           case 1:
-            if (!projectId) {
+            if (!project) {
               createProject();
               return;
             }
             router.navigate({
               pathname: "/camera",
               params: {
-                project: projectId,
+                project: project,
                 post: "",
               },
             });
             break;
           case 2:
-            if (!projectId) {
+            if (!project) {
               createProject();
               return;
             }
             pickImage();
             break;
           case 3:
-            if (!projectId) {
+            if (!project) {
               createProject();
               return;
             }

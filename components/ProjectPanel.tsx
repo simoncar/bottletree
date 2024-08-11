@@ -33,7 +33,6 @@ const ProjectPanel = (props: ProjectProp) => {
 
   useEffect(() => {
     if (session) {
-      console.log("projectPanel useEffect: " + project);
       getProject(project || "", (projectObj) => {
         if (projectObj) {
           setProject(projectObj);

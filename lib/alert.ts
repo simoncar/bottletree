@@ -5,6 +5,10 @@ const alertPolyfill = (title, description, options, extra) => {
     [title, description].filter(Boolean).join("\n"),
   );
 
+  if (!options || !options.length) {
+    return;
+  }
+
   if (result) {
     const confirmOption = options.find(({ style }) => style !== "cancel");
     confirmOption && confirmOption.onPress();
