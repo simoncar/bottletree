@@ -24,7 +24,7 @@ export const About = () => {
         </Link>
         <Text style={styles.version}>Email: {user.email}</Text>
         <Text style={styles.version}>
-          Anonymouse: {auth().currentUser.isAnonymous}
+          Anonymous: {auth().currentUser?.isAnonymous}
         </Text>
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>

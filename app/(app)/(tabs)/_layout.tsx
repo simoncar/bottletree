@@ -87,7 +87,7 @@ export default function TabLayout() {
   const createProject = () => {
     alert("Alert", "Begin by creating a project.");
     router.navigate({
-      pathname: "project/add",
+      pathname: "/project/add",
     });
   };
 
@@ -169,7 +169,7 @@ export default function TabLayout() {
             break;
           case 4:
             router.navigate({
-              pathname: "project/add",
+              pathname: "/project/add",
             });
             break;
         }

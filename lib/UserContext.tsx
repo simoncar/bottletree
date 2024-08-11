@@ -22,8 +22,9 @@ const UserProvider = (props: React.PropsWithChildren) => {
       try {
         const userData = await getUser(session);
         console.log("userData", userData);
-
-        setUser({ ...userData });
+        if (userData != null) {
+          setUser({ ...userData });
+        }
       } catch (error) {
         console.error("error fetching user data in UserProvider", error);
       }

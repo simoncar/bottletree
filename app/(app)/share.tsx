@@ -5,6 +5,7 @@ import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
 import { useLocalSearchParams } from "expo-router";
+import * as Clipboard from "expo-clipboard";
 
 type ShareParams = {
   project: string;
@@ -13,13 +14,14 @@ type ShareParams = {
 const Share = () => {
   const { project } = useLocalSearchParams<ShareParams>();
   const colorScheme = useColorScheme();
+  const [copiedText, setCopiedText] = React.useState("");
 
   const CopyLinkButton = () => {
     return (
       <TouchableOpacity
         style={styles.buttonStyle}
         onPress={() => {
-          console.log("CopyLinkButton");
+          Clipboard.setStringAsync("https://b.otbapps.com/" + project);
         }}>
         <Text style={styles.shareButton}>Copy link</Text>
       </TouchableOpacity>

@@ -11,6 +11,7 @@ import {
   useLocalSearchParams,
   Stack,
   Redirect,
+  router,
 } from "expo-router";
 import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
@@ -92,17 +93,27 @@ export default function Layout() {
   }
 
   if (!session) {
-    return (
-      <Redirect
-        href={{
-          pathname: "/signUpAnonymously",
-          params: { project: project },
-        }}
-      />
-    );
+    console.log("Layout: session not found: ", project);
+    if (project) {
+      return (
+        <Redirect
+          href={{
+            pathname: "/anonymous/signIn",
+            params: { project: project },
+          }}
+        />
+      );
+    } else {
+      return (
+        <Redirect
+          href={{
+            pathname: "/(auth)/signIn",
+          }}
+        />
+      );
+    }
     //await signInAnonymously();
   }
-
   return (
     <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
