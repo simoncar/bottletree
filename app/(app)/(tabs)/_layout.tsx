@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Link, Tabs, useLocalSearchParams, router } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { BigText } from "@/components/StyledText";
 import { UserAvatar } from "@/components/UserAvatar";
@@ -18,6 +18,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
   color: string;
+  style?: any;
 }) {
   return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
 }
@@ -31,7 +32,6 @@ type SearchParams = {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { user } = useContext(UserContext);
-  const [progress, setProgress] = useState(0);
   const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
   const { project } = useLocalSearchParams<SearchParams>();
@@ -57,12 +57,12 @@ export default function TabLayout() {
   };
 
   const progressCallback = (progress: number) => {
-    setProgress(progress);
+    console.log("progressCallback", progress);
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
     let ratio = 0.66666;
-    const downloadURLarray = sourceDownloadURLarray.map((element) => {
+    sourceDownloadURLarray.map((element) => {
       const myArray = element.split("*");
       if (myArray[0] > ratio) {
         ratio = myArray[0];
@@ -82,7 +82,6 @@ export default function TabLayout() {
     };
 
     addPostImage(post, saveDone);
-    setProgress(0);
   };
 
   const createProject = () => {
@@ -160,12 +159,6 @@ export default function TabLayout() {
             }
             router.navigate({
               pathname: "/editCalendar",
-              params: {
-                pdateBegin: dateBegin,
-                pdateEnd: dateEnd,
-                pcolor: "#49B382",
-                pcolorName: "Grass",
-              },
             });
             break;
           case 4:
@@ -191,7 +184,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="[project]"
         listeners={{
-          tabPress: (e) => {
+          tabPress: () => {
             router.navigate({
               pathname: "/projectList",
               params: {

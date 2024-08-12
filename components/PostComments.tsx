@@ -4,7 +4,7 @@ import { View, Text, TextInput, ParsedText } from "./Themed";
 import { addComment, getComments } from "@/lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
-import { IComment} from "@/lib/types";
+import { IComment } from "@/lib/types";
 import { firestore } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
 
@@ -60,10 +60,6 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     };
 
     addComment(project, post, comment, saveDone);
-  };
-
-  const showCommentInputBlock = () => {
-    setCommentShow(true);
   };
 
   const displayName = (displayName: string) => {
