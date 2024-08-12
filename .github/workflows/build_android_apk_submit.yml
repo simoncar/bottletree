@@ -1,4 +1,4 @@
-name: 2. Build Apk Preview
+name: 2. Build Apk and Submit to Play Store
 on:
   workflow_dispatch:
   push:
