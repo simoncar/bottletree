@@ -50,89 +50,98 @@ const ProjectPanel = (props: ProjectProp) => {
 
   return (
     <View>
-      <View
-        style={[
-          styles.outerView,
-          {
-            backgroundColor: Colors[colorScheme ?? "light"].projectPanel,
-          },
-        ]}>
-        <Pressable
-          style={styles.pressableLeft}
-          onPress={() => {
-            if (projectObj) {
-              router.navigate({
-                pathname: "/project/[project]",
-                params: {
-                  project: projectObj.project,
-                },
-              });
-            }
-          }}>
-          <View style={styles.avatar}>
-            {projectObj.icon ? (
-              <Image
-                style={styles.projectAvatar}
-                source={projectObj.icon}></Image>
-            ) : (
-              <View style={styles.projectAvatar}>
-                <MaterialIcons
-                  name="house-siding"
-                  color="#999999"
-                  style={styles.avatarIcon}
-                />
-              </View>
-            )}
-          </View>
-        </Pressable>
-        <Pressable
-          style={styles.pressableRight}
-          onPress={() => {
-            router.navigate({
-              pathname: "/projectList",
-            });
-          }}>
-          <View style={styles.projectText}>
+      <View style={[styles.outerView, {}]}>
+        <View style={[styles.innerView, {}]}>
+          <Pressable
+            style={styles.pressableLeft}
+            onPress={() => {
+              if (projectObj) {
+                router.navigate({
+                  pathname: "/project/[project]",
+                  params: {
+                    project: projectObj.project,
+                  },
+                });
+              }
+            }}>
+            <View style={styles.avatar}>
+              {projectObj.icon ? (
+                <Image
+                  style={styles.projectAvatar}
+                  source={projectObj.icon}></Image>
+              ) : (
+                <View style={styles.projectAvatar}>
+                  <MaterialIcons
+                    name="house-siding"
+                    color="#999999"
+                    style={styles.avatarIcon}
+                  />
+                </View>
+              )}
+            </View>
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              if (projectObj) {
+                router.navigate({
+                  pathname: "/project/[project]",
+                  params: {
+                    project: projectObj.project,
+                  },
+                });
+              }
+            }}>
             <Text style={styles.updateText}>
               {projectObj.title || "Select Project"}
             </Text>
-          </View>
-          <View style={styles.rightChevron}>
-            <FontAwesome5
-              name="angle-down"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
+          </Pressable>
+        </View>
+        <View>
+          <Pressable
+            onPress={() => {
+              router.navigate({
+                pathname: "/projectList",
+              });
+            }}>
+            <View style={styles.rightChevron}>
+              <FontAwesome5
+                name="angle-down"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </View>
+          </Pressable>
+        </View>
+      </View>
+      <View style={[styles.outerView, { paddingTop: 10 }]}>
+        <Pressable
+          style={styles.pressableLeft}
+          onPress={() => {
+            router.navigate({
+              pathname: "/share",
+              params: { project: project },
+            });
+          }}>
+          <View style={styles.avatar}>
+            <MaterialIcons
+              name="link"
+              color="#999999"
+              style={styles.avatarIcon}
             />
           </View>
         </Pressable>
-      </View>
-      <Pressable
-        style={styles.pressableShare}
-        onPress={() => {
-          router.navigate({
-            pathname: "/share",
-            params: { project: project },
-          });
-        }}>
-        <View
-          style={[
-            styles.outerView,
-            {
-              backgroundColor: Colors[colorScheme ?? "light"].projectPanel,
-            },
-          ]}>
-          <View style={styles.avatar}>
-            <View style={styles.projectAvatar}>
-              <MaterialIcons
-                name="link"
-                color="#999999"
-                style={styles.avatarIcon}
-              />
-            </View>
+        <Pressable
+          onPress={() => {
+            router.navigate({
+              pathname: "/share",
+              params: { project: project },
+            });
+          }}>
+          <View>
+            <Text style={styles.shareText}>Share</Text>
           </View>
-          <Text style={styles.share}>Share Project</Text>
-        </View>
-      </Pressable>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -142,51 +151,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 12,
     textAlign: "center",
-    width: 50,
   },
-
   avatarIcon: {
     fontSize: 25,
     paddingTop: 5,
-    textAlign: "center",
+  },
+  innerView: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
   },
   outerView: {
     alignItems: "center",
-    borderRadius: 5,
+    borderBottomColor: "#CED0CE",
     flexDirection: "row",
-    marginTop: 10,
-    padding: 5,
+    paddingVertical: 8,
+    padding: 8,
   },
   pressableLeft: {
     alignItems: "center",
     width: 50,
   },
-  pressableRight: {
-    alignItems: "center",
-    flexDirection: "row",
-    flex: 1,
-  },
-  pressableShare: {},
-
   projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
-  projectText: {
-    alignItems: "center",
-    flexDirection: "row",
-    flex: 1,
-  },
-
   rightChevron: {
-    marginHorizontal: 8,
+    paddingRight: 10,
   },
-  share: {
-    flexDirection: "row",
-    flex: 1,
+  shareText: {
     fontSize: 18,
   },
   updateText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "bold",
-    marginRight: 12,
   },
 });
 

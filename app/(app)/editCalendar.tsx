@@ -27,6 +27,8 @@ import { ColorRow } from "@/components/ColorRow";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { getProject } from "@/lib/APIproject";
 
+type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
+type DateorTime = "date" | "time";
 type CalendarParams = {
   calendarId: string;
   project: string;
@@ -61,9 +63,9 @@ export default function editCalendar() {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [showColor, setShowColor] = useState<boolean>(false);
   const [datePart, setDatePart] = useState<string>("dateBegin");
-  const [dateOrTime, setDateOrTime] = useState<string>("date");
+  const [dateOrTime, setDateOrTime] = useState<DateorTime>("date");
   const [pickerValue, setPickerValue] = useState<Date>(new Date());
-  const [displayMode, setDisplayMode] = useState<string>("inline");
+  const [displayMode, setDisplayMode] = useState<DisplayMode>("inline");
 
   useEffect(() => {
     if (calendarId != undefined) {
@@ -213,7 +215,7 @@ export default function editCalendar() {
     if (dateorTime == "date") {
       setDisplayMode("inline");
     } else {
-      setDisplayMode("");
+      setDisplayMode(null);
     }
 
     setDateOrTime(dateorTime);
@@ -264,6 +266,7 @@ export default function editCalendar() {
             onCancel={hideDatePicker}
             display={displayMode}
           />
+
           <View style={styles.avatar}></View>
           <View style={styles.title}>
             <TextInput

@@ -233,7 +233,7 @@ export function addProject(
 }
 
 //function to retrieve all projects from firebase and then add the user to the accessList for each project
-export function addProjectUserAll(user: IUser, callback: saveDoneAll) {
+export function addProjectUserAll(user: IUser, callback: any) {
   getAllProjects((projects) => {
     projects.forEach((project) => {
       console.log("Adding user to project: ", project.key, project);
@@ -243,7 +243,7 @@ export function addProjectUserAll(user: IUser, callback: saveDoneAll) {
   });
 }
 
-export function archiveAllProjects(callback: saveDoneAll) {
+export function archiveAllProjects(callback: any) {
   const updatedDone = (projectKey) => {
     console.log("Projecct Arhived: ", projectKey);
   };
@@ -278,7 +278,7 @@ export function addProjectUser(
         },
         { merge: true },
       )
-      .then((docRef) => {
+      .then(() => {
         if (callback) {
           callback(projectId);
         } else {

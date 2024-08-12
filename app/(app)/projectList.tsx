@@ -224,7 +224,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
-
     paddingHorizontal: 8,
   },
   outerView: {

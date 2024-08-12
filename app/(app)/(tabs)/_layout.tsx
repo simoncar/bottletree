@@ -13,7 +13,6 @@ import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -212,13 +211,11 @@ export default function TabLayout() {
           headerTitle: () => (
             <Link href="/">
               <View style={styles.titleView}>
-                <Ionicons
-                  name="construct-outline"
-                  size={30}
+                <FontAwesome5
+                  name="chevron-left"
+                  size={23}
                   color={Colors[colorScheme ?? "light"].text}
-                  style={{ paddingTop: 5 }}
                 />
-                <BigText style={styles.headerTitle}>{appName}</BigText>
               </View>
             </Link>
           ),

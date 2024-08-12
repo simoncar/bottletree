@@ -32,7 +32,7 @@ export async function getPost(
   });
 }
 
-export async function addPostImage(post: IPost, callback: saveDone) {
+export async function addPostImage(post: IPost, callback: any) {
   db.collection("projects")
     .doc(post.projectId)
     .collection("posts")
@@ -52,8 +52,7 @@ export async function addPostImage(post: IPost, callback: saveDone) {
           post.author.substring(0, 5),
         );
 
-        const messageRef = db
-          .collection("notifications")
+        db.collection("notifications")
           .add({
             title: post.author + ": " + post.projectTitle,
             body: "New Image Added...",
@@ -77,7 +76,7 @@ export async function addPostImage(post: IPost, callback: saveDone) {
   return;
 }
 
-export async function setPostNote(post: IPost, callback: saveDone) {
+export async function setPostNote(post: IPost, callback: any) {
   const note = db
     .collection("projects")
     .doc(post.projectId)
@@ -92,11 +91,10 @@ export async function setPostNote(post: IPost, callback: saveDone) {
       caption: post.caption,
       timestamp: firestore.Timestamp.now(),
     })
-    .then((docRef) => {
+    .then(() => {
       console.log("Post Document written with ID: ", post.key);
       if (post.author != "Simon" && Device.isDevice) {
-        const messageRef = db
-          .collection("notifications")
+        db.collection("notifications")
           .add({
             title: post.author + ": " + post.projectTitle,
             body: "New Note Added",
@@ -149,10 +147,6 @@ export function deletePost(post: IPost, callback: any) {
     callback(post.key);
   });
 }
-
-////function to accept an array of strings, loop through the array and parse each sting into 2 parts seperated by a * character
-// the first part is the ratio number and the second part is the image url
-// the function then returns an array of objects with the ratio and image url
 
 function containsAsteriskBeforeHttp(str) {
   const httpIndex = str.indexOf("http");
