@@ -4,8 +4,7 @@ import { View, Text, TextInput, ParsedText } from "./Themed";
 import { addComment, getComments } from "@/lib/APIpost";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
-import { IComment, IPost } from "@/lib/types";
-import { useSession } from "@/lib/ctx";
+import { IComment} from "@/lib/types";
 import { firestore } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
 
