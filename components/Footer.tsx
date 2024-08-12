@@ -22,7 +22,9 @@ const Footer = ({ post, setCommentShow }: Props) => {
   const colorScheme = useColorScheme();
   const [footer, setFooter] = useState<boolean>(false);
 
-  const saveDone = () => {};
+  const saveDone = () => {
+    console.log("saveDone");
+  };
 
   const askComment = () => {
     setFooter(!footer);

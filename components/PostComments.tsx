@@ -11,7 +11,7 @@ import { UserContext } from "@/lib/UserContext";
 
 type Props = {
   project: string;
-  post: IPost;
+  post: string;
   commentShow: boolean;
 
   setCommentShow: (commentShow: boolean) => void;

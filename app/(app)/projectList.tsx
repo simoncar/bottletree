@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import {
   Pressable,

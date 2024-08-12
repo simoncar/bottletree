@@ -1,9 +1,7 @@
 import { db, firestore } from "./firebase";
 import { IPost, IComment } from "./types";
 import * as Device from "expo-device";
-import { addProjectUser } from "./APIproject";
 
-//create a export function that gets a single post from firebase into a return object that can be used by the app
 export async function getPost(
   project: string,
   postId: string,
@@ -121,7 +119,7 @@ export async function setPostNote(post: IPost, callback: saveDone) {
   return;
 }
 
-export function updatePost(post: IPost, callback: saveDone) {
+export function updatePost(post: IPost, callback: any) {
   const postRef = db
     .collection("projects")
     .doc(post.projectId)
@@ -140,7 +138,7 @@ export function updatePost(post: IPost, callback: saveDone) {
     });
 }
 
-export function deletePost(post: IPost, callback: saveDone) {
+export function deletePost(post: IPost, callback: any) {
   const postRef = firestore()
     .collection("projects")
     .doc(post.projectId)
@@ -256,7 +254,7 @@ export async function getComments(project: string, postId: string) {
 
 export async function addComment(
   project: string,
-  post: IPost,
+  post: string,
   comment: IComment,
   callback: { (comment: IComment): void; (arg0: string): void },
 ) {

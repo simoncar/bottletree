@@ -10,7 +10,7 @@ import { UserContext } from "@/lib/UserContext";
 export const About = () => {
   const { user } = useContext(UserContext);
   const { session } = useSession();
-  const [authUser, setAuthUser] = useState<string>(true);
+  const [authUser, setAuthUser] = useState<string>(null);
   const deviceLanguage = getLocales()[0].languageCode;
 
   useEffect(() => {

@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import { StyleSheet, Dimensions, View, Text } from "react-native";
-import { router, useLocalSearchParams, Stack } from "expo-router";
+import React from "react";
+import { StyleSheet, Dimensions, View } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
 import { Image } from "expo-image";
 
 export default function viewPost() {
-  const { key, image, caption, ratio } = useLocalSearchParams();
+  const { image } = useLocalSearchParams();
 
   return (
     <View style={styles.overall}>

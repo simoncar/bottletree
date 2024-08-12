@@ -79,8 +79,6 @@ export async function updateAccountName(uid: string, displayName: string) {
 }
 
 export const updateUserProjectCount = (uid: string, project: string) => {
-  console.log("updateUserProjectCount  uid // ", uid);
-
   if (uid === null || project == undefined) {
     return;
   }
@@ -97,9 +95,6 @@ export const updateUserProjectCount = (uid: string, project: string) => {
       }
     })
     .then(() => {
-      console.log("updateUserProjectCount  project // ", project);
-      console.log("updateUserProjectCount  count // ", count);
-
       firestore()
         .collection("users")
         .doc(uid)

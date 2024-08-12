@@ -185,7 +185,7 @@ export async function getProjectUsers(
   callback(userList);
 }
 
-export function updateProject(project: IProject, callback: saveDone) {
+export function updateProject(project: IProject, callback: any) {
   const ref = db.collection("projects").doc(project.key);
 
   ref
