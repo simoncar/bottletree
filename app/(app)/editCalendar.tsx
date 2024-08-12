@@ -1,8 +1,4 @@
-import {
-  Stack,
-  useLocalSearchParams,
-  router,
-} from "expo-router";
+import { Stack, useLocalSearchParams, router } from "expo-router";
 import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
@@ -20,25 +16,25 @@ import {
   saveCalendarEvent,
   deleteCalendarEvent,
 } from "@/lib/APIcalendar";
-import { useProject } from "@/lib/projectProvider";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Colors from "@/constants/Colors";
-import { ICalendarEvent } from "@/lib/types";
+import { ICalendarEvent, IProject } from "@/lib/types";
 import { Image } from "expo-image";
 import { ScrollView } from "react-native-gesture-handler";
 import { ColorRow } from "@/components/ColorRow";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { getProject } from "@/lib/APIproject";
+
+type CalendarParams = {
+  calendarId: string;
+  project: string;
+};
 
 export default function editCalendar() {
-  const { sharedDataProject } = useProject();
   const colorScheme = useColorScheme();
-
-  const local = useLocalSearchParams<{
-    calendarId: string;
-  }>();
-
+  const { calendarId, project } = useLocalSearchParams<CalendarParams>();
   const [calendarEvent, setCalendarEvent] = useState<ICalendarEvent>({
     key: "",
     color: "#30A7E2",
@@ -47,6 +43,15 @@ export default function editCalendar() {
     projectId: "",
     title: "",
     uid: "",
+  });
+  const [projectObj, setProject] = useState<IProject>({
+    project: "",
+    key: "",
+    title: "",
+    icon: "",
+    archived: false,
+    postCount: 0,
+    private: false,
   });
 
   const [dateBegin, setDateBegin] = useState<Date>(new Date());
@@ -61,12 +66,9 @@ export default function editCalendar() {
   const [displayMode, setDisplayMode] = useState<string>("inline");
 
   useEffect(() => {
-    console.log("local?.calendarId:", local?.calendarId);
-    if (local?.calendarId != undefined) {
-      getCalendarEvent(local?.calendarId || "", (calendarEvent) => {
+    if (calendarId != undefined) {
+      getCalendarEvent(calendarId || "", (calendarEvent) => {
         if (calendarEvent) {
-          console.log("calendarEvent:", calendarEvent);
-
           setCalendarEvent(calendarEvent);
           setDateBegin(calendarEvent.dateBegin?.toDate() || new Date());
           setDateBeginTime(calendarEvent.dateBegin?.toDate() || new Date());
@@ -75,6 +77,12 @@ export default function editCalendar() {
         }
       });
     }
+
+    getProject(project || "", (projectObj) => {
+      if (projectObj) {
+        setProject(projectObj);
+      }
+    });
   }, []);
 
   const saveDone = (id: string) => {
@@ -171,15 +179,11 @@ export default function editCalendar() {
   };
 
   const onChangeEndTime = (selectedDate: Date) => {
-    console.log("onChangeEndTime:", selectedDate);
     const currentDate = selectedDate || dateEnd;
     setDateEndTime(currentDate);
   };
 
   const handleSelectColor = (colorName, code) => {
-    // Handle button press event
-    console.log("handleSelectColor");
-
     setCalendarEvent({ ...calendarEvent, colorName: colorName, color: code });
     setShowColor(false);
   };
@@ -223,7 +227,6 @@ export default function editCalendar() {
   };
 
   const handleConfirm = (date) => {
-    console.log("handleConfirm datePart:", datePart);
     hideDatePicker();
     switch (datePart) {
       case "dateBegin":
@@ -358,17 +361,14 @@ export default function editCalendar() {
         </View>
         <View style={[styles.itemView, styles.line]}>
           <View style={styles.avatar}>
-            <Image
-              style={styles.projectAvatar}
-              source={sharedDataProject.icon}
-            />
+            <Image style={styles.projectAvatar} source={projectObj.icon} />
           </View>
           <View style={styles.title}>
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
               style={styles.actionTitle}>
-              {sharedDataProject.title}
+              {projectObj.title}
             </Text>
           </View>
         </View>

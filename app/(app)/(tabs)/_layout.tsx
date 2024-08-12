@@ -159,6 +159,9 @@ export default function TabLayout() {
             }
             router.navigate({
               pathname: "/editCalendar",
+              params: {
+                project: project,
+              },
             });
             break;
           case 4:

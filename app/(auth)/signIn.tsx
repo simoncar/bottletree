@@ -9,16 +9,12 @@ import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "@/components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
-import { auth } from "@/lib/firebase";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { updateAccountName } from "@/lib/APIuser";
-import { addLog } from "@/lib/APIlog";
 import { useSession } from "@/lib/ctx";
 import { About } from "@/lib/about";
 
 export default function SignIn() {
-  const { signIn, signUp } = useSession();
+  const { signIn } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setNotification] = useState("");
