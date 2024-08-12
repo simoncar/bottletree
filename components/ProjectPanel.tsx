@@ -91,7 +91,7 @@ const ProjectPanel = (props: ProjectProp) => {
                 });
               }
             }}>
-            <Text style={styles.updateText}>
+            <Text style={styles.titleText}>
               {projectObj.title || "Select Project"}
             </Text>
           </Pressable>
@@ -179,9 +179,10 @@ const styles = StyleSheet.create({
   shareText: {
     fontSize: 18,
   },
-  updateText: {
+  titleText: {
     fontSize: 30,
     fontWeight: "bold",
+    width: 275,
   },
 });
 
