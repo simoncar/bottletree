@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -7,9 +7,7 @@ import {
   Dimensions,
 } from "react-native";
 import { getItemsBigCalendar } from "@/lib/APIcalendar";
-import { IProject } from "@/lib/types";
 import { View, Text } from "@/components/Themed";
-import ProjectContext from "@/lib/projectContext";
 import Colors from "@/constants/Colors";
 import { router } from "expo-router";
 import dayjs from "dayjs";
@@ -27,12 +25,9 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
   const [calendarDate, setDate] = useState(dayjs());
-  const { sharedDataProject } = useContext(ProjectContext);
   const colorScheme = useColorScheme();
   const { height } = Dimensions.get("window");
   const navigation = useNavigation();
-
-  let currentProject: IProject = sharedDataProject;
 
   const darkTheme = {
     palette: {
@@ -63,36 +58,17 @@ export default function CalendarLarge() {
     setItems(calendarItemsDB);
   };
 
-  if (null == sharedDataProject) {
-    currentProject = {
-      key: "",
-      icon: "",
-    };
-  }
-
   useEffect(() => {
     setNavOptions(calendarDate);
-    if (undefined != currentProject) {
-      const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
-      return () => {
-        unsubscribe;
-      };
-    }
+    const unsubscribe = getItemsBigCalendar("", itemsRead);
+    return () => {
+      unsubscribe;
+    };
   }, []);
 
   useEffect(() => {
     setNavOptions(calendarDate);
   }, [calendarDate]);
-
-  // useEffect(() => {
-  //   if (sharedDataProject && undefined != currentProject?.key) {
-  //     setItems([]);
-  //     const unsubscribe = getItemsBigCalendar(currentProject.key, itemsRead);
-  //     return () => {
-  //       unsubscribe;
-  //     };
-  //   }
-  // }, [currentProject]);
 
   const setNavOptions = (start) => {
     navigation.setOptions({

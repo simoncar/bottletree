@@ -7,7 +7,6 @@ import { useColorScheme } from "react-native";
 import { UserContext } from "@/lib/UserContext";
 import { useProject } from "@/lib/projectProvider";
 
-// Mock the dependencies
 jest.mock("@/lib/APIproject", () => ({
   getProjects: jest.fn(),
 }));
