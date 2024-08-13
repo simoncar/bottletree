@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -32,7 +33,7 @@ export default function CalendarLarge() {
   const darkTheme = {
     palette: {
       primary: {
-        main: "#007bff", //'today' color
+        main: "#007bff",
         contrastText: Colors[colorScheme ?? "light"].bigCalendarContrastText,
       },
       moreLabel: Colors[colorScheme ?? "light"].text,
@@ -59,7 +60,7 @@ export default function CalendarLarge() {
   };
 
   useEffect(() => {
-    setNavOptions(calendarDate);
+    setNavOptions();
     const unsubscribe = getItemsBigCalendar("", itemsRead);
     return () => {
       unsubscribe;
@@ -67,10 +68,10 @@ export default function CalendarLarge() {
   }, []);
 
   useEffect(() => {
-    setNavOptions(calendarDate);
+    setNavOptions();
   }, [calendarDate]);
 
-  const setNavOptions = (start) => {
+  const setNavOptions = () => {
     navigation.setOptions({
       headerTitle: () => (
         <View style={styles.headerTitleA}>
@@ -104,6 +105,8 @@ export default function CalendarLarge() {
   };
 
   const onChangeDate = ([start, end]) => {
+    console.log("onChangeDate", start, end);
+
     //setDate(start);
     //setNavOptions(start);
   };
@@ -112,37 +115,36 @@ export default function CalendarLarge() {
     event: T,
     touchableOpacityProps: CalendarTouchableOpacityProps,
   ) => {
+    const typedEvent = event as T & { color: string }; // Add type assertion
     return (
       <TouchableOpacity {...touchableOpacityProps}>
-        <View style={[styles.calendarEvent, { backgroundColor: event.color }]}>
-          <Text style={styles.calendarEventText}>{event.title}</Text>
+        <View
+          style={[styles.calendarEvent, { backgroundColor: typedEvent.color }]}>
+          <Text style={styles.calendarEventText}>{typedEvent.title}</Text>
         </View>
       </TouchableOpacity>
     );
   };
 
-  const onPressEvent = (event: ICalendarEventBase) => {
+  const onPressEvent = <T extends ICalendarEventBase>(event: T) => {
+    const typedEvent = event as T & { key: string }; // Add type assertion
     router.navigate({
       pathname: "/editCalendar",
       params: {
-        calendarId: event.key,
+        calendarId: typedEvent.key,
       },
     });
   };
 
   const _onPrevDate = () => {
-    console.log("_onPrevDate:", calendarDate, modeToNum("month", calendarDate));
-
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
   };
 
   const _onNextDate = () => {
-    console.log("_onNextDate:", calendarDate, modeToNum("month", calendarDate));
-
     setDate(dayjs(calendarDate).add(modeToNum("month", calendarDate), "day"));
   };
 
-  function modeToNum(mode: Mode, current?: dayjs.Dayjs | Date): number {
+  function modeToNum(mode: string, current?: dayjs.Dayjs | Date): number {
     if (!current) {
       throw new Error("You must specify current date if mode is month");
     }
@@ -159,8 +161,10 @@ export default function CalendarLarge() {
         height={height - 200}
         mode="month"
         renderEvent={renderEvent}
+        // @ts-ignore
         theme={darkTheme}
         eventCellStyle={styles.calendarCellStyle}
+        // @ts-ignore
         date={calendarDate}
         onChangeDate={onChangeDate}
         onPressEvent={onPressEvent}
