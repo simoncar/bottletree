@@ -23,11 +23,12 @@ exports[`about test 1`] = `
           },
           {
             "color": "grey",
-            "fontSize": 14,
+            "fontSize": 10,
           },
         ]
       }
     >
+      Name: 
       John Doe
     </Text>
   </Text>
@@ -39,11 +40,12 @@ exports[`about test 1`] = `
         },
         {
           "color": "grey",
-          "fontSize": 14,
+          "fontSize": 10,
         },
       ]
     }
   >
+    Email: 
     john.doe@example.com
   </Text>
   <Text
@@ -54,7 +56,22 @@ exports[`about test 1`] = `
         },
         {
           "color": "grey",
-          "fontSize": 14,
+          "fontSize": 10,
+        },
+      ]
+    }
+  >
+    Anonymous: 
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "#000",
+        },
+        {
+          "color": "grey",
+          "fontSize": 10,
         },
       ]
     }
@@ -70,7 +87,7 @@ exports[`about test 1`] = `
         },
         {
           "color": "grey",
-          "fontSize": 14,
+          "fontSize": 10,
         },
       ]
     }
@@ -85,7 +102,7 @@ exports[`about test 1`] = `
         },
         {
           "color": "grey",
-          "fontSize": 14,
+          "fontSize": 10,
         },
       ]
     }
@@ -100,7 +117,7 @@ exports[`about test 1`] = `
         },
         {
           "color": "grey",
-          "fontSize": 14,
+          "fontSize": 10,
         },
       ]
     }
