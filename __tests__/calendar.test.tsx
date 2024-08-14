@@ -1,9 +1,8 @@
 import React from "react";
 import { render, waitFor } from "@testing-library/react-native";
 import Calendar from "@/app/(app)/(tabs)/calendar";
-import { getProjects } from "@/lib/APIproject";
-import { useLocalSearchParams, useNavigation } from "expo-router";
-import { renderRouter, screen } from "expo-router/testing-library";
+import { useNavigation } from "expo-router";
+import { screen } from "expo-router/testing-library";
 import { useColorScheme } from "react-native";
 import { UserContext } from "@/lib/UserContext";
 import { useProject } from "@/lib/projectProvider";

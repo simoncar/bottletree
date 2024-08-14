@@ -1,17 +1,13 @@
 import { Image } from "expo-image";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { getProjects } from "@/lib/APIproject";
-import ProjectContext from "@/lib/projectContext";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useSession } from "@/lib/ctx";
-import { useProject } from "@/lib/projectProvider";
-import { getRelativeTime } from "@/lib/util";
 import { UserContext } from "@/lib/UserContext";
 
 type Props = {
