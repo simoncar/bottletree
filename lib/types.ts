@@ -9,6 +9,7 @@ export interface IPost {
   projectTitle?: string;
   caption: string;
   author?: string;
+  uid?: string;
   images?: {
     ratio: number;
     url: string;

@@ -105,8 +105,6 @@ export default function CalendarLarge() {
   };
 
   const onChangeDate = ([start, end]) => {
-    console.log("onChangeDate", start, end);
-
     //setDate(start);
     //setNavOptions(start);
   };

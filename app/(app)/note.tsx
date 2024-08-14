@@ -26,6 +26,7 @@ export default function Note() {
     projectId: local?.project || "",
     projectTitle: "",
     author: user?.displayName || "",
+    uid: user?.uid || "",
     images: [],
     ratio: 1,
   });
