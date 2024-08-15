@@ -8,8 +8,8 @@
       "distribution": "internal",
       "channel": "development",
       "autoIncrement": true,
-      "ios": {
-        "simulator": false
+      "env": {
+        "PRODUCT_NAME": "Builder"
       }
     },
     "development-simulator": {
