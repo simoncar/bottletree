@@ -50,6 +50,10 @@ const ViewPost = () => {
         fileExtension = ".webp";
       }
 
+      Toast.show("Content Type: " + contentType, {
+        duration: Toast.durations.LONG,
+      });
+
       console.log("File extension", fileExtension);
 
       const newUri = uri.replace("image.tmp", `image${fileExtension}`);
@@ -62,9 +66,9 @@ const ViewPost = () => {
       });
     } catch (error) {
       console.error("Error downloading or saving image", error);
-      Toast.show("Failed to save image: " + error, {
-        duration: Toast.durations.SHORT,
-      });
+      // Toast.show("Failed to save image: " + contentType, {
+      //   duration: Toast.durations.SHORT,
+      // });
     }
   };
 
