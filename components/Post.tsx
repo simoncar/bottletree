@@ -36,15 +36,12 @@ const Post = (props) => {
           return (
             <View style={{ paddingVertical: 5 }} key={index}>
               <Pressable
+                key={"aa" + index}
                 onPress={() => {
                   router.navigate({
                     pathname: "/viewPost",
                     params: {
-                      project: post.projectId,
-                      key: post.key,
                       image: encodeURIComponent(im.url),
-                      caption: caption || "",
-                      ratio: ratio,
                     },
                   });
                 }}>

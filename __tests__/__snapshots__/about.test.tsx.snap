@@ -76,6 +76,24 @@ exports[`about test 1`] = `
       ]
     }
   >
+    mock
+     (
+    mock
+    ) | 2
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "#000",
+        },
+        {
+          "color": "grey",
+          "fontSize": 10,
+        },
+      ]
+    }
+  >
     User Context - 
     1234567890
   </Text>

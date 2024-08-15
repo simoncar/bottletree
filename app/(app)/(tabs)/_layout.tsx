@@ -33,7 +33,6 @@ export default function TabLayout() {
   const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
   const { project } = useLocalSearchParams<SearchParams>();
-  //const project = "project";
 
   if (isAuthLoading) {
     return <Text>Loading</Text>;
@@ -207,7 +206,7 @@ export default function TabLayout() {
             backgroundColor: Colors[colorScheme ?? "light"].background,
             height: 80,
           },
-          headerTitle: () => <Back href="/" />,
+          headerTitle: () => <Back />,
           headerTitleAlign: "left",
           headerRight: () => (
             <View>
