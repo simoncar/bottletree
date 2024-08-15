@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
   titleView: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingRight: 20,
   },
 });

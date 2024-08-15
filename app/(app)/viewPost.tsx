@@ -62,7 +62,7 @@ const ViewPost = () => {
       });
     } catch (error) {
       console.error("Error downloading or saving image", error);
-      Toast.show("Failed to save image", {
+      Toast.show("Failed to save image: " + error, {
         duration: Toast.durations.SHORT,
       });
     }
