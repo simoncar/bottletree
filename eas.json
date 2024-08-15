@@ -5,12 +5,7 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal",
-      "channel": "development",
-      "autoIncrement": true,
-      "env": {
-        "PRODUCT_NAME": "Builder"
-      }
+      "distribution": "internal"
     },
     "development-simulator": {
       "extends": "development",
