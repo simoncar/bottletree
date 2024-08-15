@@ -185,7 +185,7 @@ export default function Layout() {
                 <Stack.Screen
                   name="viewPost"
                   options={{
-                    title: "View & Zoom",
+                    title: "",
                     headerTitleStyle: {
                       fontWeight: "bold",
                     },
