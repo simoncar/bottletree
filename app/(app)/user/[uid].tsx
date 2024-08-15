@@ -26,6 +26,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "@/lib/demoData";
 import { StatusBar } from "expo-status-bar";
 import { UserContext } from "@/lib/UserContext";
+import { Back } from "@/components/Back";
 
 export default function editUser() {
   const { session, signOut } = useSession();
@@ -153,6 +154,7 @@ export default function editUser() {
     <ScrollView>
       <Stack.Screen
         options={{
+          headerLeft: () => <Back />,
           headerRight: () => <Button title="Save" onPress={() => save()} />,
         }}
       />

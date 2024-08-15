@@ -12,6 +12,7 @@ import { IPost } from "@/lib/types";
 import { setPostNote, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
 import { UserContext } from "@/lib/UserContext";
+import { Back } from "@/components/Back";
 
 export default function Note() {
   const local = useLocalSearchParams<{
@@ -64,6 +65,7 @@ export default function Note() {
     <SafeAreaView>
       <Stack.Screen
         options={{
+          headerLeft: () => <Back />,
           headerRight: () => (
             <NativeButton title="Done" onPress={() => save()} />
           ),

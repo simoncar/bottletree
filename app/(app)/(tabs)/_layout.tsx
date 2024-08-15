@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Link, Tabs, useLocalSearchParams, router } from "expo-router";
+import { Tabs, useLocalSearchParams, router } from "expo-router";
 import React, { useContext } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { BigText } from "@/components/StyledText";
@@ -11,6 +11,7 @@ import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { addPostImage } from "@/lib/APIpost";
 import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
+import { Back } from "@/components/Back";
 import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
 
@@ -206,17 +207,7 @@ export default function TabLayout() {
             backgroundColor: Colors[colorScheme ?? "light"].background,
             height: 80,
           },
-          headerTitle: () => (
-            <Link href="/">
-              <View style={styles.titleView}>
-                <FontAwesome5
-                  name="chevron-left"
-                  size={23}
-                  color={Colors[colorScheme ?? "light"].text}
-                />
-              </View>
-            </Link>
-          ),
+          headerTitle: () => <Back href="/" />,
           headerTitleAlign: "left",
           headerRight: () => (
             <View>
@@ -292,9 +283,5 @@ const styles = StyleSheet.create({
   tabIcon: {
     paddingBottom: 0,
     paddingLeft: 1,
-  },
-  titleView: {
-    flexDirection: "row",
-    justifyContent: "space-between",
   },
 });

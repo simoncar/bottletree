@@ -1,0 +1,32 @@
+import React from "react";
+import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import { router } from "expo-router";
+import Colors from "@/constants/Colors";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { View } from "@/components/Themed";
+
+const goBack = () => {
+  router.back();
+};
+
+export const Back = () => {
+  const colorScheme = useColorScheme();
+  return (
+    <Pressable onPress={goBack}>
+      <View style={styles.titleView}>
+        <FontAwesome5
+          name="chevron-left"
+          size={23}
+          color={Colors[colorScheme ?? "light"].text}
+        />
+      </View>
+    </Pressable>
+  );
+};
+
+const styles = StyleSheet.create({
+  titleView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});

@@ -26,6 +26,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ColorRow } from "@/components/ColorRow";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { getProject } from "@/lib/APIproject";
+import { Back } from "@/components/Back";
 
 type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
 type DateorTime = "date" | "time";
@@ -250,6 +251,7 @@ export default function editCalendar() {
     <SafeAreaView>
       <Stack.Screen
         options={{
+          headerLeft: () => <Back />,
           headerRight: () => (
             <NativeButton title="Done" onPress={() => save()} />
           ),

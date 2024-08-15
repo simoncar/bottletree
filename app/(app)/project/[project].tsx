@@ -21,6 +21,7 @@ import Colors from "@/constants/Colors";
 import { ProjectUsers } from "@/components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
+import { Back } from "@/components/Back";
 
 export default function Project() {
   const [updateUsers, setUpdateUsers] = useState("");
@@ -152,6 +153,7 @@ export default function Project() {
     <ScrollView>
       <Stack.Screen
         options={{
+          headerLeft: () => <Back />,
           headerRight: () => (
             <Button
               title="Save"

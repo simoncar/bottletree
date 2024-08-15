@@ -7,17 +7,19 @@ import {
   useColorScheme,
   Animated,
   Easing,
+  SafeAreaView,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "@/constants/Colors";
 import { addImageFromPhoto } from "@/lib/APIimage";
 import { IPost } from "@/lib/types";
 import { addPostImage } from "@/lib/APIpost";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import { View, Text } from "@/components/Themed";
 import Progress from "@/components/Progress";
 import * as Linking from "expo-linking";
 import { UserContext } from "@/lib/UserContext";
+import { Back } from "@/components/Back";
 
 export default function App() {
   const [facing, setFacing] = useState("back");
@@ -151,38 +153,46 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Progress progress={progress} />
+    <SafeAreaView>
+      <Stack.Screen
+        options={{
+          headerLeft: () => <Back />,
+        }}
+      />
+      <View style={styles.container}>
+        <Progress progress={progress} />
 
-      <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
-        <View style={styles.buttonRow}>
-          <View style={styles.a}></View>
-          <View style={styles.a}>
-            <TouchableOpacity
-              onPressIn={handlePressIn}
-              onPressOut={takePicture}
-              activeOpacity={1}>
-              <Animated.View style={[styles.circleOuter, animatedStyle]}>
-                <View style={styles.circleMiddle}>
-                  <View style={[styles.circleInner, animatedInnerStyle]}></View>
-                </View>
-              </Animated.View>
-            </TouchableOpacity>
+        <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
+          <View style={styles.buttonRow}>
+            <View style={styles.a}></View>
+            <View style={styles.a}>
+              <TouchableOpacity
+                onPressIn={handlePressIn}
+                onPressOut={takePicture}
+                activeOpacity={1}>
+                <Animated.View style={[styles.circleOuter, animatedStyle]}>
+                  <View style={styles.circleMiddle}>
+                    <View
+                      style={[styles.circleInner, animatedInnerStyle]}></View>
+                  </View>
+                </Animated.View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.a}>
+              <TouchableOpacity
+                style={styles.flipCamera}
+                onPress={toggleCameraFacing}>
+                <Ionicons
+                  name="camera-reverse-outline"
+                  size={45}
+                  color={Colors[colorScheme ?? "light"].textPlaceholder}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.a}>
-            <TouchableOpacity
-              style={styles.flipCamera}
-              onPress={toggleCameraFacing}>
-              <Ionicons
-                name="camera-reverse-outline"
-                size={45}
-                color={Colors[colorScheme ?? "light"].textPlaceholder}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </CameraView>
-    </View>
+        </CameraView>
+      </View>
+    </SafeAreaView>
   );
 }
 

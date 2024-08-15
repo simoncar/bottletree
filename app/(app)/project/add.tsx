@@ -6,6 +6,7 @@ import { useSession } from "@/lib/ctx";
 import { addProject, addProjectUser } from "@/lib/APIproject";
 import { IProject, IUser } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
+import { Back } from "@/components/Back";
 
 export default function addNewProject() {
   const { user } = useContext(UserContext);
@@ -58,6 +59,7 @@ export default function addNewProject() {
     <SafeAreaView>
       <Stack.Screen
         options={{
+          headerLeft: () => <Back />,
           headerRight: () => <Button title="Next" onPress={() => onSave()} />,
         }}
       />
