@@ -3,7 +3,6 @@ import { StyleSheet, View, SafeAreaView } from "react-native";
 import { SettingsListItem } from "@/components/SettingsListItem";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { useSession } from "@/lib/ctx";
 import { IUser } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
 

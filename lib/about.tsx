@@ -5,6 +5,7 @@ import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
 import { Link } from "expo-router";
+import * as Application from "expo-application";
 
 export const About = () => {
   const { user } = useContext(UserContext);
@@ -25,6 +26,10 @@ export const About = () => {
         <Text style={styles.version}>Email: {user.email}</Text>
         <Text style={styles.version}>
           Anonymous: {auth().currentUser?.isAnonymous}
+        </Text>
+        <Text style={styles.version}>
+          {Application.nativeApplicationVersion} (
+          {Application.nativeBuildVersion}) | 2
         </Text>
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
