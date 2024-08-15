@@ -7,7 +7,10 @@
       "developmentClient": true,
       "distribution": "internal",
       "channel": "development",
-      "autoIncrement": true
+      "autoIncrement": true,
+      "ios": {
+        "simulator": false
+      }
     },
     "development-simulator": {
       "extends": "development",
