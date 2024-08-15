@@ -16,6 +16,9 @@ const PinchableImage = ({ source }: { source: string }) => {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
 
+  const imageWidth = 300;
+  const imageHeight = 300;
+
   const pinchGesture = Gesture.Pinch()
     .onUpdate((event) => {
       scale.value = event.scale;
@@ -32,13 +35,16 @@ const PinchableImage = ({ source }: { source: string }) => {
       translateY.value = event.translationY;
     })
     .onEnd((event) => {
+      const clampX = (scale.value - 1) * (imageWidth / 2);
+      const clampY = (scale.value - 1) * (imageHeight / 2);
+
       translateX.value = withDecay({
         velocity: event.velocityX,
-        clamp: [-(scale.value - 1) * 150, (scale.value - 1) * 150],
+        clamp: [-clampX, clampX],
       });
       translateY.value = withDecay({
         velocity: event.velocityY,
-        clamp: [-(scale.value - 1) * 150, (scale.value - 1) * 150],
+        clamp: [-clampY, clampY],
       });
     });
 
