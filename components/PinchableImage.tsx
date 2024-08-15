@@ -35,17 +35,17 @@ const PinchableImage = ({ source }: { source: string }) => {
       translateY.value = event.translationY;
     })
     .onEnd((event) => {
-      const clampX = (scale.value - 1) * (imageWidth / 2);
-      const clampY = (scale.value - 1) * (imageHeight / 2);
+      const maxOffsetX = (scale.value - 1) * (imageWidth / 2);
+      const maxOffsetY = (scale.value - 1) * (imageHeight / 2);
 
-      translateX.value = withDecay({
-        velocity: event.velocityX,
-        clamp: [-clampX, clampX],
-      });
-      translateY.value = withDecay({
-        velocity: event.velocityY,
-        clamp: [-clampY, clampY],
-      });
+      translateX.value = withSpring(
+        Math.min(maxOffsetX, Math.max(translateX.value, -maxOffsetX)),
+        { damping: 10, stiffness: 150 },
+      );
+      translateY.value = withSpring(
+        Math.min(maxOffsetY, Math.max(translateY.value, -maxOffsetY)),
+        { damping: 10, stiffness: 150 },
+      );
     });
 
   const combinedGesture = Gesture.Simultaneous(pinchGesture, panGesture);
