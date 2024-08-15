@@ -5,6 +5,7 @@ import { Stack, router } from "expo-router";
 import { deleteUser } from "@/lib/APIuser";
 import { Text, View } from "@/components/Themed";
 import { UserContext } from "../../lib/UserContext";
+import { Back } from "@/components/Back";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -54,7 +55,12 @@ export default function DeleteAccount() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: "Delete Account" }} />
+      <Stack.Screen
+        options={{
+          title: "Delete Account",
+          headerLeft: () => <Back />,
+        }}
+      />
 
       <View style={styles.instructions}>
         <Text style={styles.text}>
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   instructions: {
-    alignItems: "center",
+    padding: 20,
   },
   text: {
     fontSize: 16,
