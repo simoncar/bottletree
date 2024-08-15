@@ -99,12 +99,6 @@ const ViewPost = () => {
 };
 
 const styles = StyleSheet.create({
-  imageZoom: {
-    height: Dimensions.get("window").height - 200,
-    overflow: "hidden",
-    resizeMode: "contain",
-    width: Dimensions.get("window").width,
-  },
   overall: {
     backgroundColor: "#010101",
     flex: 1,
