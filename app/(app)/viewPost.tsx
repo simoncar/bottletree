@@ -48,13 +48,9 @@ const ViewPost = () => {
         fileExtension = ".gif";
       } else if (contentType === "image/webp") {
         fileExtension = ".webp";
+      } else {
+        fileExtension = ".jpg";
       }
-
-      Toast.show("Content Type: " + contentType, {
-        duration: Toast.durations.LONG,
-      });
-
-      console.log("File extension", fileExtension);
 
       const newUri = uri.replace("image.tmp", `image${fileExtension}`);
       await FileSystem.moveAsync({ from: uri, to: newUri });
@@ -66,9 +62,9 @@ const ViewPost = () => {
       });
     } catch (error) {
       console.error("Error downloading or saving image", error);
-      // Toast.show("Failed to save image: " + contentType, {
-      //   duration: Toast.durations.SHORT,
-      // });
+      Toast.show("Failed to save image: " + error, {
+        duration: Toast.durations.SHORT,
+      });
     }
   };
 
