@@ -61,6 +61,12 @@
         }
       ],
       [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts to select people you want to share a project with."
+        }
+      ],
+      [
         "expo-camera",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera so you can take a photo and post it to the project so other people that have access to your project can view your photo.",

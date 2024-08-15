@@ -5683,6 +5683,11 @@ expo-constants@~16.0.2:
     "@expo/config" "~9.0.0"
     "@expo/env" "~0.3.0"
 
+expo-contacts@~13.0.5:
+  version "13.0.5"
+  resolved "https://registry.yarnpkg.com/expo-contacts/-/expo-contacts-13.0.5.tgz#c8d8818c5a82cc15fbd38be2f5ac6a321a734cfb"
+  integrity sha512-jFdmrh0c7iMfaxEmt7bbDTBoz5Onyq3uLhvLxWzhb3dFXsEtQ/6SsdATtXbNQ9cP8gsD3itz3Ev2oxYXGFAMQw==
+
 expo-crypto@~13.0.2:
   version "13.0.2"
   resolved "https://registry.npmjs.org/expo-crypto/-/expo-crypto-13.0.2.tgz"
