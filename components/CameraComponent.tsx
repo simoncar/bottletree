@@ -156,46 +156,43 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView>
+    <View style={styles.container}>
       <Stack.Screen
         options={{
           headerLeft: () => <Back />,
         }}
       />
-      <View style={styles.container}>
-        <Progress progress={progress} />
+      <Progress progress={progress} />
 
-        <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
-          <View style={styles.buttonRow}>
-            <View style={styles.a}></View>
-            <View style={styles.a}>
-              <TouchableOpacity
-                onPressIn={handlePressIn}
-                onPressOut={takePicture}
-                activeOpacity={1}>
-                <Animated.View style={[styles.circleOuter, animatedStyle]}>
-                  <View style={styles.circleMiddle}>
-                    <View
-                      style={[styles.circleInner, animatedInnerStyle]}></View>
-                  </View>
-                </Animated.View>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.a}>
-              <TouchableOpacity
-                style={styles.flipCamera}
-                onPress={toggleCameraFacing}>
-                <Ionicons
-                  name="camera-reverse-outline"
-                  size={45}
-                  color={Colors[colorScheme ?? "light"].textPlaceholder}
-                />
-              </TouchableOpacity>
-            </View>
+      <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
+        <View style={styles.buttonRow}>
+          <View style={styles.a}></View>
+          <View style={styles.a}>
+            <TouchableOpacity
+              onPressIn={handlePressIn}
+              onPressOut={takePicture}
+              activeOpacity={1}>
+              <Animated.View style={[styles.circleOuter, animatedStyle]}>
+                <View style={styles.circleMiddle}>
+                  <View style={[styles.circleInner, animatedInnerStyle]}></View>
+                </View>
+              </Animated.View>
+            </TouchableOpacity>
           </View>
-        </CameraView>
-      </View>
-    </SafeAreaView>
+          <View style={styles.a}>
+            <TouchableOpacity
+              style={styles.flipCamera}
+              onPress={toggleCameraFacing}>
+              <Ionicons
+                name="camera-reverse-outline"
+                size={45}
+                color={Colors[colorScheme ?? "light"].textPlaceholder}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </CameraView>
+    </View>
   );
 }
 
