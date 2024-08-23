@@ -29,9 +29,9 @@ type SearchParams = {
   project: string;
 };
 
-export const unstable_settings = {
-  initialRouteName: "index",
-};
+// export const unstable_settings = {
+//   initialRouteName: "index",
+// };
 
 SplashScreen.preventAutoHideAsync();
 
