@@ -1,4 +1,4 @@
-import { CameraView, useCameraPermissions } from "expo-camera";
+import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import React, { useState, useContext, useRef } from "react";
 import {
   Pressable,
@@ -22,11 +22,10 @@ import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 
 export default function App() {
-  const [facing, setFacing] = useState("back");
+  const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
 
   const colorScheme = useColorScheme();
-  const [camera, setCamera] = useState(null);
   const { user } = useContext(UserContext);
   const scaleValue = useRef(new Animated.Value(1)).current;
   const [backgroundColor, setBackgroundColor] = useState("#3498db");
@@ -45,10 +44,13 @@ export default function App() {
 
   if (!permission) {
     // Camera permissions are still loading.
+    console.log("Camera permissions are still loading.");
     return <View />;
   }
   if (!permission.granted) {
     // Camera permissions are not granted yet.
+    console.log("Camera permissions are not granted yet > requestPermission");
+
     requestPermission();
     return (
       <View style={styles.container}>

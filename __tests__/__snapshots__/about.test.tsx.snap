@@ -79,7 +79,7 @@ exports[`about test 1`] = `
     mock
      (
     mock
-    ) | 2
+    ) | 3
   </Text>
   <Text
     style={
