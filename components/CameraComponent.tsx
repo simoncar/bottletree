@@ -47,6 +47,7 @@ export default function App() {
     console.log("Camera permissions are still loading.");
     return <View />;
   }
+
   if (!permission.granted) {
     // Camera permissions are not granted yet.
     console.log("Camera permissions are not granted yet > requestPermission");
