@@ -43,6 +43,27 @@ export async function deleteUser(
   return () => q;
 }
 
+
+export async function createUser(user: IUser) {
+  const usersCollection = firestore().collection("users");
+  const querySnapshot = await usersCollection.where("email", "==", user.email).get();
+
+  if (!querySnapshot.empty) {
+    console.log("User already exists with email:", user.email);
+    return null;
+  } else {
+    try {
+      const userDoc = usersCollection.doc(user.uid);
+      await userDoc.set(user);
+      console.log("User created successfully:", user.uid);
+      return user;
+    } catch (error) {
+      console.error("Error creating user:", error);
+      return null;
+    }
+  }
+}
+
 export async function updateAccountName(uid: string, displayName: string) {
   const docRef1 = firestore().collection("users").doc(uid);
 

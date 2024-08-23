@@ -1,5 +1,6 @@
 import { db, firestore } from "./firebase";
 import { IProject, IUser } from "./types";
+import { createUser } from "./APIuser";
 
 type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
@@ -257,12 +258,14 @@ export function archiveAllProjects(callback: any) {
   });
 }
 
-export function addProjectUser(
+export async function addProjectUser(
   projectId: string,
   user: IUser,
   callback?: { (id: string): void; (arg0: string): void },
 ) {
   console.log("Adding user to project: ", projectId, user);
+
+  await createUser(user);
 
   try {
     db.collection("projects")

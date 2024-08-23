@@ -35,6 +35,27 @@ exports[`user list test 1`] = `
         }
       }
     >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Search users..."
+        placeholderTextColor="#ccc"
+        style={
+          [
+            {
+              "color": "#000",
+            },
+            {
+              "borderColor": "gray",
+              "borderRadius": 5,
+              "borderWidth": 1,
+              "height": 40,
+              "margin": 10,
+              "paddingHorizontal": 8,
+            },
+          ]
+        }
+        value=""
+      />
       <RCTScrollView
         style={
           {

@@ -3,34 +3,55 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { ShortList } from "@/components/sComponent";
-import { Text, View } from "@/components/Themed";
-import { getUsers } from "@/lib/APIuser";
+import { Text, View, TextInput } from "@/components/Themed";
 import { addProjectUser } from "@/lib/APIproject";
 import { IUser } from "@/lib/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useSession } from "@/lib/ctx";
-import { useProject } from "@/lib/projectProvider";
 import { UserContext } from "@/lib/UserContext";
+import * as Contacts from "expo-contacts";
+import { sortContactsByName } from "@/lib/sort";
 
-const UserList = (props) => {
-  const { page } = useLocalSearchParams<{
-    page: string;
+const UserList = () => {
+  const { project } = useLocalSearchParams<{
+    project: string;
   }>();
+
   const { user } = useContext(UserContext);
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const { sharedDataProject, updateStoreSharedDataProject } = useProject();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const usersRead = (usersDB: IUser[]) => {
     setUsers(usersDB);
   };
 
   useEffect(() => {
-    const unsubscribe = getUsers(usersRead);
-    unsubscribe;
-    return () => {
-      // unsubscribe;
-    };
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === "granted") {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails],
+        });
+
+        sortContactsByName(data);
+
+        if (data.length > 0) {
+          const contacts = data.map((contact) => {
+            return {
+              key: contact.id,
+              uid: contact.id,
+              displayName: contact?.name || "",
+              email: contact.emails?.[0]?.email || "",
+              photoURL: null,
+              project: project,
+              anonymous: false,
+            };
+          });
+
+          usersRead(contacts);
+        }
+      }
+    })();
   }, []);
 
   useEffect(() => {
@@ -45,7 +66,7 @@ const UserList = (props) => {
       pathname: "/project/[project]",
       params: {
         pUpdateUsers: id,
-        project: sharedDataProject.key,
+        project: project,
       },
     });
   };
@@ -62,7 +83,7 @@ const UserList = (props) => {
         <TouchableOpacity
           style={styles.innerView}
           onPress={() => {
-            addProjectUser(sharedDataProject.key, data, saveDone);
+            addProjectUser(project, data, saveDone);
           }}>
           <View style={styles.avatar}>
             {data.photoURL ? (
@@ -86,12 +107,24 @@ const UserList = (props) => {
     );
   }
 
+  const filteredUsers = users?.filter(
+    (user) =>
+      user.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
     <View style={styles.container}>
+      <TextInput
+        style={styles.searchBar}
+        placeholder="Search ..."
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+      />
       <ScrollView style={styles.userList}>
         {loading === false && (
           <View>
-            <ShortList data={users} renderItem={renderRow} />
+            <ShortList data={filteredUsers} renderItem={renderRow} />
           </View>
         )}
       </ScrollView>
@@ -115,10 +148,8 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 200,
   },
-
   innerView: {
     alignItems: "center",
-
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: 8,
@@ -132,7 +163,14 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
-
+  searchBar: {
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    height: 40,
+    margin: 10,
+    paddingHorizontal: 8,
+  },
   userList: {
     paddingBottom: 50,
   },
@@ -141,7 +179,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-
   username: {
     fontSize: 18,
     marginBottom: 5,

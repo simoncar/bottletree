@@ -20,8 +20,11 @@ import { UserContext } from "@/lib/UserContext";
 
 const Gradient = (props: GradientProps) => <LinearGradient {...props} />;
 
-export const ProjectUsers = (props) => {
-  const { project, updateUsers } = props;
+export const ProjectUsers = (props: any) => {
+  const { project } = useLocalSearchParams<{
+    project: string;
+  }>();
+
   const colorScheme = useColorScheme();
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
@@ -40,10 +43,6 @@ export const ProjectUsers = (props) => {
     }
   }, [projectUsers]);
 
-  useEffect(() => {
-    getProjectUsers(project, projectUsersRead);
-  }, [updateUsers]);
-
   const projectUsersRead = (projectUsersDB) => {
     setProjectUsers(projectUsersDB);
   };
@@ -60,7 +59,7 @@ export const ProjectUsers = (props) => {
           router.navigate({
             pathname: "/userList",
             params: {
-              project: "post.projectId",
+              project: project,
             },
           });
         }}>
