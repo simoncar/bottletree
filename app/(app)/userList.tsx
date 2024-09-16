@@ -65,7 +65,7 @@ const UserList = () => {
     router.navigate({
       pathname: "/project/[project]",
       params: {
-        pUpdateUsers: id,
+        update: id,
         project: project,
       },
     });

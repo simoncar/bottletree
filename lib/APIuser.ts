@@ -43,14 +43,20 @@ export async function deleteUser(
   return () => q;
 }
 
-
 export async function createUser(user: IUser) {
   const usersCollection = firestore().collection("users");
-  const querySnapshot = await usersCollection.where("email", "==", user.email).get();
+  const querySnapshot = await usersCollection
+    .where("email", "==", user.email)
+    .get();
 
   if (!querySnapshot.empty) {
     console.log("User already exists with email:", user.email);
-    return null;
+    user.key = querySnapshot.docs[0].id;
+    user.uid = querySnapshot.docs[0].id;
+    user.displayName = querySnapshot.docs[0].data().displayName;
+    user.photoURL = querySnapshot.docs[0].data().photoURL;
+    user.anonymous = false;
+    return user;
   } else {
     try {
       const userDoc = usersCollection.doc(user.uid);

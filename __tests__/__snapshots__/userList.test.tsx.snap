@@ -37,7 +37,7 @@ exports[`user list test 1`] = `
     >
       <TextInput
         onChangeText={[Function]}
-        placeholder="Search users..."
+        placeholder="Search ..."
         placeholderTextColor="#ccc"
         style={
           [

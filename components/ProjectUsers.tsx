@@ -21,8 +21,9 @@ import { UserContext } from "@/lib/UserContext";
 const Gradient = (props: GradientProps) => <LinearGradient {...props} />;
 
 export const ProjectUsers = (props: any) => {
-  const { project } = useLocalSearchParams<{
+  const { project, update } = useLocalSearchParams<{
     project: string;
+    update: string;
   }>();
 
   const colorScheme = useColorScheme();
@@ -36,6 +37,10 @@ export const ProjectUsers = (props: any) => {
   useEffect(() => {
     getProjectUsers(project, projectUsersRead);
   }, []);
+
+  useEffect(() => {
+    getProjectUsers(project, projectUsersRead);
+  }, [update]);
 
   useEffect(() => {
     if (projectUsers !== "" && loading === true) {

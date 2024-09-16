@@ -263,9 +263,11 @@ export async function addProjectUser(
   user: IUser,
   callback?: { (id: string): void; (arg0: string): void },
 ) {
-  console.log("Adding user to project: ", projectId, user);
+  console.log("Adding user to project (Before): ", projectId, user);
 
-  await createUser(user);
+  user = await createUser(user);
+
+  console.log("Adding user to project (After): ", projectId, user);
 
   try {
     db.collection("projects")
@@ -283,7 +285,7 @@ export async function addProjectUser(
       )
       .then(() => {
         if (callback) {
-          callback(projectId);
+          callback(user.uid);
         } else {
           console.log("Callback not provided.");
         }
