@@ -149,6 +149,29 @@ export default function Project() {
     );
   };
 
+  const PrivateSelector = (
+    <View style={styles.outerView}>
+      <View style={styles.innerView}>
+        <View style={styles.avatar}>
+          <Ionicons
+            name="share-social"
+            size={25}
+            color={Colors[colorScheme ?? "light"].text}
+          />
+        </View>
+        <View>
+          <Text style={styles.private}>Private</Text>
+        </View>
+      </View>
+      <View style={styles.rightChevron}>
+        <Switch
+          value={project.private}
+          onValueChange={(value) => setProject({ ...project, private: value })}
+        />
+      </View>
+    </View>
+  );
+
   return (
     <ScrollView>
       <Stack.Screen
@@ -179,28 +202,6 @@ export default function Project() {
           <Text style={styles.archiveMessage}>
             {project.archived == true ? "Project Archived" : ""}
           </Text>
-        </View>
-      </View>
-      <View style={styles.outerView}>
-        <View style={styles.innerView}>
-          <View style={styles.avatar}>
-            <Ionicons
-              name="share-social"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-          <View>
-            <Text style={styles.private}>Private</Text>
-          </View>
-        </View>
-        <View style={styles.rightChevron}>
-          <Switch
-            value={project.private}
-            onValueChange={(value) =>
-              setProject({ ...project, private: value })
-            }
-          />
         </View>
       </View>
       <ProjectUsers project={local.project} updateUsers={updateUsers} />

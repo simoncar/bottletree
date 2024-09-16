@@ -10,6 +10,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { UserContext } from "@/lib/UserContext";
 import * as Contacts from "expo-contacts";
 import { sortContactsByName } from "@/lib/sort";
+import Loading from "@/app/(app)/loading";
 
 const UserList = () => {
   const { project } = useLocalSearchParams<{
@@ -30,13 +31,15 @@ const UserList = () => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === "granted") {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails],
+          fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
         });
 
         sortContactsByName(data);
 
         if (data.length > 0) {
           const contacts = data.map((contact) => {
+            console.log("contact: ", contact.phoneNumbers);
+
             return {
               key: contact.id,
               uid: contact.id,
@@ -122,6 +125,11 @@ const UserList = () => {
         onChangeText={setSearchQuery}
       />
       <ScrollView style={styles.userList}>
+        {loading === true && (
+          <View>
+            <Loading />
+          </View>
+        )}
         {loading === false && (
           <View>
             <ShortList data={filteredUsers} renderItem={renderRow} />
