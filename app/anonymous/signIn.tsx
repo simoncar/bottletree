@@ -5,6 +5,7 @@ import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
 import { addProjectUser } from "@/lib/APIproject";
 import { IUser } from "@/lib/types";
+import { addLog } from "@/lib/APIlog";
 
 type Params = {
   project: string;
@@ -36,7 +37,12 @@ export default function SignInAnonymously() {
   const signInAnonymouslyCallback = (session, error) => {
     if (error == "Success") {
       console.log("signInAnonymously: ", session, project);
-
+      addLog({
+        loglevel: "INFO",
+        message: "Create Account Anonymously",
+        user: session,
+        email: null,
+      });
       anonymousUser.uid = session;
       addProjectUser(project, anonymousUser, saveDone);
     } else {

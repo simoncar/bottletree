@@ -72,18 +72,6 @@ export async function createUser(user: IUser) {
 
 export async function updateAccountName(uid: string, displayName: string) {
   const docRef1 = firestore().collection("users").doc(uid);
-
-  console.log("updateAccountName  displayName // ", displayName);
-  console.log("updateAccountName  uid // ", uid);
-  console.log(
-    "updateAccountName  auth().currentUser.email // ",
-    auth().currentUser.email,
-  );
-  console.log(
-    "updateAccountName  currentUser.photoURL // ",
-    auth().currentUser.photoURL,
-  );
-
   const user = auth().currentUser;
   try {
     await user.updateProfile({
