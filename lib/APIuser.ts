@@ -164,12 +164,13 @@ export const updateAccountPhotoURL = (photoURL: string) => {
           { merge: true },
         );
       })
-      .then(() => {})
       .catch((error) => {
         console.log("updateAccountPhotoURL update ERROR ", error);
       });
   }
 };
+
+type usersRead = (users: IUser[]) => void;
 
 export async function getUsers(callback: usersRead) {
   const users: IUser[] = [];
@@ -194,19 +195,7 @@ export async function getUsers(callback: usersRead) {
   callback(users);
 }
 
-const generateFirebaseDocIDFromEmail = (email) => {
-  if (!email || typeof email !== "string") {
-    throw new Error("Invalid email provided");
-  }
-
-  // Replace invalid characters for Firebase keys
-  const sanitizedEmail = email.replace(/[.$#\[\]\/]/g, "_");
-
-  // Add a random suffix to ensure uniqueness
-  const suffix = Math.random().toString(36).substring(2, 8);
-
-  return `${sanitizedEmail}_${suffix}`;
-};
+type userProjectCountRead = (user: IUser) => void;
 
 export async function getUserProjectCount(
   uid: string,
