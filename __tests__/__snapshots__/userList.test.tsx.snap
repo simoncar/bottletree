@@ -63,7 +63,21 @@ exports[`user list test 1`] = `
           }
         }
       >
-        <View />
+        <View>
+          <View>
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <ActivityIndicator />
+            </View>
+          </View>
+        </View>
       </RCTScrollView>
     </View>
   </RNCSafeAreaView>
