@@ -12,6 +12,7 @@ import { updateAccountName } from "@/lib/APIuser";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
 import { addLog } from "@/lib/APIlog";
+import { About } from "@/lib/about";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -51,8 +52,6 @@ export default function SignIn() {
       return (
         <TouchableOpacity
           onPress={async () => {
-            // signIn(email, password, loginError);
-
             signUp(name, email, password, signUpCallback);
           }}
           style={styles.button}>
@@ -115,11 +114,20 @@ export default function SignIn() {
       </View>
 
       {renderAction(errorMessage)}
+      <View style={styles.aboutContainer}>
+        <About />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  aboutContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 50,
+    paddingTop: 50,
+  },
   button: {
     alignItems: "center",
     backgroundColor: "#9D5BD0",
