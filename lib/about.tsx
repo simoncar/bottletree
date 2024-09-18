@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
@@ -10,8 +10,14 @@ import * as Application from "expo-application";
 export const About = () => {
   const { user } = useContext(UserContext);
   const { session } = useSession();
+  const [authUser, setAuthUser] = useState<string>(null);
 
-  if (null == user) {
+  useEffect(() => {
+    setAuthUser(auth().currentUser?.uid);
+    console.log("About useEffect", auth().currentUser?.uid);
+  }, []);
+
+  if (null == authUser) {
     return <View />;
   } else {
     return (
@@ -21,9 +27,9 @@ export const About = () => {
             pathname: "/user/[uid]",
             params: { uid: session },
           }}>
-          <Text style={styles.version}>Name: {user.displayName}</Text>
+          <Text style={styles.version}>Name: {user?.displayName}</Text>
         </Link>
-        <Text style={styles.version}>Email: {user.email}</Text>
+        <Text style={styles.version}>Email: {user?.email}</Text>
         <Text style={styles.version}>
           Anonymous: {auth().currentUser?.isAnonymous}
         </Text>
@@ -31,10 +37,10 @@ export const About = () => {
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion}) | 3
         </Text>
-        <Text style={styles.version}>User Context - {user.uid}</Text>
+        <Text style={styles.version}>User Context - {user?.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
-        <Text style={styles.version}>Project - {user.project}</Text>
+        <Text style={styles.version}>Project - {user?.project}</Text>
       </View>
     );
   }
