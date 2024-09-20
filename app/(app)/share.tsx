@@ -49,7 +49,7 @@ const ShareLink = () => {
           try {
             const result = await Share.share(
               {
-                message: title,
+                message: title + "\n\n" + "https://b.otbapps.com/" + project,
                 url: "https://b.otbapps.com/" + project,
                 title: "Share project",
               },
