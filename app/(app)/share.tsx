@@ -1,4 +1,6 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+
 import React from "react";
 import {
   StyleSheet,
@@ -11,7 +13,6 @@ import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
 import { useLocalSearchParams } from "expo-router";
 import * as Clipboard from "expo-clipboard";
-import { IProject } from "@/lib/types";
 
 type ShareParams = {
   project: string;
@@ -33,7 +34,8 @@ const ShareLink = () => {
         onPress={() => {
           Clipboard.setStringAsync("https://b.otbapps.com/" + project);
         }}>
-        <Text style={styles.shareButton}>Copy link</Text>
+        <FontAwesome6 name="copy" color="#999999" style={styles.avatarIcon} />
+        <Text style={styles.shareButton}>Copy</Text>
       </TouchableOpacity>
     );
   };
@@ -71,7 +73,8 @@ const ShareLink = () => {
             console.log("Share Error: ", error.message);
           }
         }}>
-        <Text style={styles.shareButton}>Share link</Text>
+        <FontAwesome6 name="share" color="#999999" style={styles.avatarIcon} />
+        <Text style={styles.shareButton}>Share</Text>
       </TouchableOpacity>
     );
   };
@@ -101,11 +104,17 @@ const ShareLink = () => {
 };
 
 const styles = StyleSheet.create({
+  avatarIcon: {
+    fontSize: 20,
+    paddingLeft: 5,
+    paddingRight: 10,
+  },
   buttonStyle: {
     alignItems: "center",
     borderRadius: 50,
     borderWidth: 1,
     color: "#4267B2",
+    flexDirection: "row",
     fontSize: 16,
     marginBottom: 20,
     marginTop: 10,
@@ -127,7 +136,6 @@ const styles = StyleSheet.create({
     width: 204,
   },
   shareButton: {
-    color: "#4267B2",
     fontSize: 20,
     fontWeight: "bold",
   },
