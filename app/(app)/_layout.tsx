@@ -163,7 +163,7 @@ export default function Layout() {
                   name="userList"
                   options={{
                     presentation: "modal",
-                    title: "Users",
+                    title: "Contacts",
                   }}
                 />
                 <Stack.Screen

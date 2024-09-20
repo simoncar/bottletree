@@ -11,6 +11,7 @@ import { UserContext } from "@/lib/UserContext";
 import * as Contacts from "expo-contacts";
 import { sortContactsByName } from "@/lib/sort";
 import Loading from "@/app/(app)/loading";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 const UserList = () => {
   const { project } = useLocalSearchParams<{
@@ -118,12 +119,23 @@ const UserList = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.searchBar}
-        placeholder="Search ..."
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-      />
+      <View style={styles.headerBox}>
+        <View style={styles.innerView}>
+          <View style={styles.avatar}>
+            <FontAwesome
+              name="search"
+              color="#999999"
+              style={styles.searchIcon}
+            />
+          </View>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search contacts"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        </View>
+      </View>
       <ScrollView style={styles.userList}>
         {loading === true && (
           <View>
@@ -156,28 +168,29 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 200,
   },
+  headerBox: {
+    alignItems: "center",
+    borderColor: "#999999",
+    borderRadius: 100,
+    borderWidth: 1,
+    flexDirection: "row",
+    height: 40,
+    marginBottom: 10,
+    marginHorizontal: 10,
+  },
   innerView: {
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: 8,
   },
-  outerView: {
-    alignItems: "center",
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: "row",
-    height: 80,
-    paddingVertical: 8,
-    padding: 8,
+
+  searchIcon: {
+    fontSize: 20,
+    paddingHorizontal: 10,
   },
-  searchBar: {
-    borderColor: "gray",
-    borderRadius: 5,
-    borderWidth: 1,
-    height: 40,
-    margin: 10,
-    paddingHorizontal: 8,
+  searchInput: {
+    fontSize: 18,
   },
   userList: {
     paddingBottom: 50,
