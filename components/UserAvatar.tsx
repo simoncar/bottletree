@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image } from "expo-image";
 import { StyleSheet, useColorScheme } from "react-native";
 import { Link } from "expo-router";
+import { useSession } from "@/lib/ctx";
 import Colors from "@/constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Text, View } from "@/components/Themed";
+import { UserContext } from "@/lib/UserContext";
 
 function renderPhotoURL(photoURL) {
   const colorScheme = useColorScheme();
@@ -33,7 +35,12 @@ type Props = {
   user: any;
 };
 
-export const UserAvatar = ({ uid, photoURL, user }: Props) => {
+export const UserAvatar = ({ uid, photoURL }: Props) => {
+  const { user } = useContext(UserContext);
+  const { session } = useSession();
+
+  console.log("UserAvatar", uid, photoURL, user);
+
   if (user?.email == undefined) {
     return (
       <View style={styles.container}>
