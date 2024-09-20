@@ -171,14 +171,16 @@ export async function getProjectUsers(
 
     usersSnapshot.forEach((doc) => {
       if (idList.includes(doc.id)) {
-        userList.push({
-          uid: doc.id,
-          displayName: doc.data().displayName,
-          email: doc.data().email,
-          photoURL: doc.data().photoURL,
-          project: projectId,
-          anonymous: doc.data().anonymous ? true : false,
-        });
+        if (!doc.data().anonymous) {
+          userList.push({
+            uid: doc.id,
+            displayName: doc.data().displayName,
+            email: doc.data().email,
+            photoURL: doc.data().photoURL,
+            project: projectId,
+            anonymous: doc.data().anonymous ? true : false,
+          });
+        }
       }
     });
   }

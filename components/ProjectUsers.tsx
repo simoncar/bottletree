@@ -102,6 +102,7 @@ export const ProjectUsers = (props: any) => {
     if (data.uid === user?.uid) {
       me = " (Me)";
     }
+
     return (
       <Swipeable
         key={index}
