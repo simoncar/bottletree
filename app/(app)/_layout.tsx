@@ -12,7 +12,7 @@ import {
   Stack,
   Redirect,
 } from "expo-router";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
@@ -24,8 +24,6 @@ import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 import Colors from "@/constants/Colors";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { Text } from "@/components/Themed";
-import { UserAvatar } from "@/components/UserAvatar";
-import { UserContext } from "@/lib/UserContext";
 
 type SearchParams = {
   project: string;
@@ -43,7 +41,6 @@ export default function Layout() {
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
   const { session, isAuthLoading } = useSession();
-  const { user } = useContext(UserContext);
 
   const [fontsLoaded, error] = useFonts({
     //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -140,15 +137,6 @@ export default function Layout() {
                   options={{
                     title: "Home",
                     headerShown: true,
-                    headerRight: () => (
-                      <View>
-                        <UserAvatar
-                          uid={user?.uid}
-                          photoURL={user?.photoURL}
-                          user={user}
-                        />
-                      </View>
-                    ),
                   }}
                 />
                 <Stack.Screen
@@ -277,6 +265,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    paddingTop: 100,
+    paddingTop: 60,
   },
 });
