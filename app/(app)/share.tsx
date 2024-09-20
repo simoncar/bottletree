@@ -1,18 +1,25 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import React from "react";
-import { StyleSheet, useColorScheme, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  useColorScheme,
+  TouchableOpacity,
+  Share,
+} from "react-native";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
 import { useLocalSearchParams } from "expo-router";
 import * as Clipboard from "expo-clipboard";
+import { IProject } from "@/lib/types";
 
 type ShareParams = {
   project: string;
+  title: string;
 };
 
-const Share = () => {
-  const { project } = useLocalSearchParams<ShareParams>();
+const ShareLink = () => {
+  const { project, title } = useLocalSearchParams<ShareParams>();
   const colorScheme = useColorScheme();
   const [copiedText, setCopiedText] = React.useState("");
 
@@ -31,6 +38,44 @@ const Share = () => {
     );
   };
 
+  const ShareLinkButton = () => {
+    return (
+      <TouchableOpacity
+        style={[
+          styles.buttonStyle,
+          { borderColor: Colors[colorScheme ?? "light"].text },
+        ]}
+        onPress={async () => {
+          try {
+            const result = await Share.share(
+              {
+                message: title,
+                url: "https://b.otbapps.com/" + project,
+                title: "Share project",
+              },
+              {
+                dialogTitle: "Share project",
+                subject: title,
+              },
+            );
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+          } catch (error: any) {
+            console.log("Share Error: ", error.message);
+          }
+        }}>
+        <Text style={styles.shareButton}>Share link</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View
       style={[
@@ -38,7 +83,6 @@ const Share = () => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       <View style={styles.shareInstructions}>
-        <Text style={styles.shareHeading}>Link sharing</Text>
         <Text style={styles.shareText}>
           Let anybody with the link see this project
         </Text>
@@ -46,6 +90,7 @@ const Share = () => {
           <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
         </View>
         <CopyLinkButton />
+        <ShareLinkButton />
       </View>
 
       <View style={styles.qrcode}>
@@ -62,6 +107,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     color: "#4267B2",
     fontSize: 16,
+    marginBottom: 20,
+    marginTop: 10,
     padding: 8,
     textAlign: "center",
     width: 150,
@@ -74,21 +121,19 @@ const styles = StyleSheet.create({
   },
   qrcode: {
     alignItems: "center",
+    borderColor: "white",
+    borderWidth: 2,
     flexDirection: "row",
-    height: 200,
-    paddingTop: 100,
-    width: 200,
+    width: 204,
   },
   shareButton: {
     color: "#4267B2",
     fontSize: 20,
     fontWeight: "bold",
   },
-  shareHeading: {
-    fontSize: 24,
-    paddingBottom: 10,
-  },
+
   shareInstructions: {
+    alignItems: "center",
     paddingBottom: 25,
     paddingTop: 25,
   },
@@ -102,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Share;
+export default ShareLink;
