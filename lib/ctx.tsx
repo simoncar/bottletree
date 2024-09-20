@@ -15,6 +15,7 @@ interface AuthContextType {
     screenName: string,
     screenEmail: string,
     screenPassword: string,
+
     callback: (user: IUser, message: string) => void,
   ) => void;
   signOut: () => void;

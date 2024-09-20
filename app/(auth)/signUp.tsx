@@ -8,11 +8,12 @@ import {
 import { useSession } from "@/lib/ctx";
 import { Stack, router } from "expo-router";
 import { Text, View, TextInput } from "@/components/Themed";
-import { updateAccountName } from "@/lib/APIuser";
+import { updateAccountName, mergeUser } from "@/lib/APIuser";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
 import { addLog } from "@/lib/APIlog";
 import { About } from "@/lib/about";
+import { auth } from "@/lib/firebase";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -22,12 +23,16 @@ export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState("");
   const { signUp } = useSession();
   const colorScheme = useColorScheme();
+  const oldUid = auth().currentUser?.uid;
 
   const signUpCallback = (user, error) => {
     if (error == "Success") {
       console.log("signUpCallback Success:", user);
 
       updateAccountName(user.uid, user.displayName); //firebease auth update function
+
+      mergeUser(oldUid, user);
+
       addLog({
         loglevel: "INFO",
         message: "Create Account Success",
@@ -43,6 +48,18 @@ export default function SignIn() {
 
   const strip = (str: string) => {
     return str.substring(str.lastIndexOf("]") + 1).trim();
+  };
+
+  const renderOldUser = () => {
+    if (oldUid) {
+      return (
+        <View style={styles.notificationView}>
+          <Text numberOfLines={3} style={styles.notificationText}>
+            You are already signed in as {oldUid}
+          </Text>
+        </View>
+      );
+    }
   };
 
   const renderAction = (errorMessage: string) => {
@@ -114,6 +131,7 @@ export default function SignIn() {
       </View>
 
       {renderAction(errorMessage)}
+      {renderOldUser()}
       <View style={styles.aboutContainer}>
         <About />
       </View>

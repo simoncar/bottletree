@@ -13,10 +13,8 @@ type SearchParams = {
 export default function ProjectPosts() {
   const { project } = useLocalSearchParams<SearchParams>();
   const { user, setUser } = useContext(UserContext);
-  console.log("AAAA: project: " + project);
 
   useEffect(() => {
-    console.log("BBBB: project: " + project);
     getProject(project, (projectObj: any) => {
       if (projectObj) {
         console.log("ProjectPosts: project found: " + project);

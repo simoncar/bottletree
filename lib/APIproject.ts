@@ -159,7 +159,7 @@ export async function getProjectUsers(
   const idSnapshot = await q1.get();
   const idList: string[] = [];
   idSnapshot.forEach((doc) => {
-    idList.push(doc.id);
+    idList.push(doc.data().uid);
   });
 
   const userList: IUser[] = [];

@@ -1,4 +1,4 @@
-import { auth, firestore } from "@/lib/firebase";
+import { auth, db, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
 
 export async function getUser(uid: string) {
@@ -45,9 +45,15 @@ export async function deleteUser(
 
 export async function createUser(user: IUser) {
   const usersCollection = firestore().collection("users");
-  const querySnapshot = await usersCollection
-    .where("email", "==", user.email)
-    .get();
+
+  let querySnapshot;
+  if (user.email == undefined) {
+    querySnapshot = await usersCollection
+      .where("email", "==", user.email)
+      .get();
+  } else {
+    querySnapshot = await usersCollection.where("uid", "==", user.uid).get();
+  }
 
   if (!querySnapshot.empty) {
     console.log("User already exists with email:", user.email);
@@ -211,3 +217,23 @@ export async function getUserProjectCount(
       callback(user);
     });
 }
+
+//create an export function that accepts an old user and an a new user then it looks for all the records in the project accessList collection for the old user and updates them to the new user
+export const mergeUser = (oldUid: string, newUser: IUser) => {
+  const q = db.collectionGroup("accessList").where("uid", "==", oldUid);
+  console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
+
+  q.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      db.collection("projects")
+        .doc(doc.data().projectId)
+        .collection("accessList")
+        .add({
+          displayName: newUser?.displayName || "",
+          projectId: doc.data().projectId,
+          timestamp: firestore.Timestamp.now(),
+          uid: newUser.uid,
+        });
+    });
+  });
+};

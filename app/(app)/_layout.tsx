@@ -111,7 +111,6 @@ export default function Layout() {
         />
       );
     }
-    //await signInAnonymously();
   }
   return (
     <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
