@@ -21,7 +21,7 @@ export default function Home() {
 
   function renderAddProject() {
     return (
-      <View style={styles.container}>
+      <View style={styles.containerAdd}>
         <Link
           href={{
             pathname: "/project/add",
@@ -79,9 +79,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    marginBottom: 50,
     paddingHorizontal: 20,
-    paddingTop: 50,
+  },
+  containerAdd: {
+    alignItems: "center",
+    flex: 1,
+    paddingTop: 40,
   },
   createBtn: {
     alignItems: "center",
@@ -114,5 +117,6 @@ const styles = StyleSheet.create({
     color: "#9D5BD0",
     fontSize: 45,
     fontWeight: "bold",
+    marginTop: 20,
   },
 });
