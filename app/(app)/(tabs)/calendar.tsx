@@ -76,7 +76,7 @@ export default function CalendarLarge() {
       headerTitle: () => (
         <View style={styles.headerTitleA}>
           <View style={styles.headerTitleB}>
-            <Pressable onPress={_onPrevDate}>
+            <Pressable hitSlop={20} onPress={_onPrevDate}>
               <FontAwesome5
                 name="chevron-left"
                 size={23}
@@ -86,7 +86,7 @@ export default function CalendarLarge() {
           </View>
 
           <View style={styles.pressable}>
-            <Pressable onPress={_onNextDate}>
+            <Pressable hitSlop={20} onPress={_onNextDate}>
               <FontAwesome5
                 name="chevron-right"
                 size={23}
