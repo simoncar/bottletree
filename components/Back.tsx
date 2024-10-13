@@ -12,7 +12,9 @@ const goBack = () => {
 export const Back = () => {
   const colorScheme = useColorScheme();
   return (
-    <Pressable onPress={goBack}>
+    <Pressable
+      hitSlop={{ top: 10, bottom: 10, left: 10, right: 30 }}
+      onPress={goBack}>
       <View style={styles.titleView}>
         <FontAwesome5
           name="chevron-left"
