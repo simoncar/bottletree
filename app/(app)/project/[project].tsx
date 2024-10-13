@@ -22,6 +22,7 @@ import { ProjectUsers } from "@/components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
 import { Back } from "@/components/Back";
+import SharePanel from "@/components/SharePanel";
 
 export default function Project() {
   const [updateUsers, setUpdateUsers] = useState("");
@@ -204,6 +205,7 @@ export default function Project() {
           </Text>
         </View>
       </View>
+      <SharePanel project={project} />
       <ProjectUsers project={local.project} updateUsers={updateUsers} />
       <Pressable style={styles.outerView} onPress={toggleArchive}>
         <View style={styles.avatar}>

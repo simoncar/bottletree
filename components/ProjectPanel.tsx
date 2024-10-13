@@ -1,10 +1,15 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
+import {
+  Pressable,
+  Share,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from "react-native";
 
 import Colors from "@/constants/Colors";
 import { Text } from "@/components/Themed";
@@ -12,6 +17,7 @@ import { getUserProjectCount } from "@/lib/APIuser";
 import { IUser, IProject } from "@/lib/types";
 import { useSession } from "@/lib/ctx";
 import { getProject } from "@/lib/APIproject";
+import SharePanel from "@/components/SharePanel";
 
 type ProjectProp = {
   project: string;
@@ -115,38 +121,7 @@ const ProjectPanel = (props: ProjectProp) => {
           </Pressable>
         </View>
       </View>
-      <View style={[styles.outerView, { paddingTop: 10 }]}>
-        <Pressable
-          style={styles.pressableLeft}
-          onPress={() => {
-            router.navigate({
-              pathname: "/share",
-              params: { project: project },
-            });
-          }}>
-          <View style={styles.avatar}>
-            <MaterialIcons
-              name="link"
-              color="#999999"
-              style={styles.avatarIcon}
-            />
-          </View>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            router.navigate({
-              pathname: "/share",
-              params: {
-                project: project,
-                title: projectObj.title,
-              },
-            });
-          }}>
-          <View>
-            <Text style={styles.shareText}>Share</Text>
-          </View>
-        </Pressable>
-      </View>
+      <SharePanel project={projectObj} />
     </View>
   );
 };
