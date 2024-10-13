@@ -35,27 +35,58 @@ exports[`user list test 1`] = `
         }
       }
     >
-      <TextInput
-        onChangeText={[Function]}
-        placeholder="Search ..."
-        placeholderTextColor="#ccc"
+      <View
         style={
-          [
-            {
-              "color": "#000",
-            },
-            {
-              "borderColor": "gray",
-              "borderRadius": 5,
-              "borderWidth": 1,
-              "height": 40,
-              "margin": 10,
-              "paddingHorizontal": 8,
-            },
-          ]
+          {
+            "alignItems": "center",
+            "borderColor": "#999999",
+            "borderRadius": 100,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "height": 40,
+            "marginBottom": 10,
+            "marginHorizontal": 10,
+          }
         }
-        value=""
-      />
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "paddingHorizontal": 8,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "marginRight": 12,
+                "width": 50,
+              }
+            }
+          >
+            <Text />
+          </View>
+          <TextInput
+            onChangeText={[Function]}
+            placeholder="Search contacts"
+            placeholderTextColor="#ccc"
+            style={
+              [
+                {
+                  "color": "#000",
+                },
+                {
+                  "fontSize": 18,
+                },
+              ]
+            }
+            value=""
+          />
+        </View>
+      </View>
       <RCTScrollView
         style={
           {
