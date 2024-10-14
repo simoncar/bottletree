@@ -13,6 +13,7 @@ import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Projects } from "@/components/Projects";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -60,17 +61,23 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Stack.Screen options={{ title: "Home" }} />
+        <SafeAreaView>
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+          />
 
-        <View style={styles.instructions}>
-          <Text style={styles.welcomeApp}>Builder</Text>
-        </View>
+          <View style={styles.instructions}>
+            <Text style={styles.welcomeApp}>Builder</Text>
+          </View>
 
-        <Projects session={session as string} archived={false} />
-        {renderAddProject()}
-        <View style={styles.bigGap} />
-        {renderLogout()}
-        <About />
+          <Projects session={session as string} archived={false} />
+          {renderAddProject()}
+          <View style={styles.bigGap} />
+          {renderLogout()}
+          <About />
+        </SafeAreaView>
       </ScrollView>
     </View>
   );
