@@ -1,15 +1,8 @@
 import React from "react";
+import { StyleSheet, Pressable } from "react-native";
+import { View } from "@/components/Themed";
 
-import {
-  Dimensions,
-  StyleSheet,
-  Pressable,
-  useColorScheme,
-} from "react-native";
-import { View, Text, ParsedText } from "@/components/Themed";
-import Colors from "@/constants/Colors";
-
-export const ColorRow = ({ onPress, selectedColor }) => {
+export const ColorRow = ({ onPress }) => {
   function renderColor(name: string, code: string) {
     return (
       <Pressable

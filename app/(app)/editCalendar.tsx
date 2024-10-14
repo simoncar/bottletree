@@ -399,7 +399,6 @@ export default function editCalendar() {
             <View style={styles.itemViewRow}>
               <ColorRow
                 onPress={handleSelectColor}
-                selectedColor={calendarEvent.colorName}
               />
             </View>
           )}

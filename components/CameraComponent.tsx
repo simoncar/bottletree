@@ -7,7 +7,6 @@ import {
   useColorScheme,
   Animated,
   Easing,
-  SafeAreaView,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "@/constants/Colors";
