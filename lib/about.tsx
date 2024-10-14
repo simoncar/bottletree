@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   aboutContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 490,
+    paddingBottom: 50,
+    paddingTop: 50,
   },
   version: {
     color: "grey",

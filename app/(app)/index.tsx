@@ -44,7 +44,7 @@ export default function Home() {
             setUser(null);
             router.replace("/signIn");
           }}>
-          <View style={styles.leftContent}>
+          <View style={styles.logout}>
             <MaterialIcons
               name="logout"
               size={25}
@@ -68,6 +68,7 @@ export default function Home() {
 
         <Projects session={session as string} archived={false} />
         {renderAddProject()}
+        <View style={styles.bigGap} />
         {renderLogout()}
         <About />
       </ScrollView>
@@ -76,6 +77,9 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
+  bigGap: {
+    paddingTop: 400,
+  },
   container: {
     alignItems: "center",
     flex: 1,
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
   instructions: {
     alignItems: "center",
   },
-  leftContent: {
+  logout: {
     alignItems: "center",
     flex: 1,
     flexDirection: "row",

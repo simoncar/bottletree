@@ -28,7 +28,7 @@ npm install firebase-functions@latest firebase-admin@latest --save
 npm install -g firebase-tools
 
 firebase deploy --only functions
-firebase deploy --only functions --project builder-403d5
+firebase deploy --only functions --project builder-403d5p
 
 npx expo install --fix
 
