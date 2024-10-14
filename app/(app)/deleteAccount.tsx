@@ -4,7 +4,7 @@ import { useSession } from "@/lib/ctx";
 import { Stack, router } from "expo-router";
 import { deleteUser } from "@/lib/APIuser";
 import { Text, View } from "@/components/Themed";
-import { UserContext } from "../../lib/UserContext";
+import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 
 export default function DeleteAccount() {

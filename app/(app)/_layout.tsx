@@ -17,7 +17,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
 import { useSession } from "@/lib/ctx";
-import { UserProvider } from "../../lib/UserContext";
+import { UserProvider } from "@/lib/UserContext";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";

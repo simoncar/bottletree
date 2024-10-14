@@ -8,7 +8,7 @@ import {
 import { useSession } from "@/lib/ctx";
 import { router, Link, Stack } from "expo-router";
 import { Text, View } from "@/components/Themed";
-import { UserContext } from "../../lib/UserContext";
+import { UserContext } from "@/lib/UserContext";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
