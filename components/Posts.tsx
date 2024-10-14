@@ -49,6 +49,15 @@ export const Posts = ({ project }: Props) => {
       </View>
     );
   };
+
+  const renderHeader = () => {
+    return (
+      <View>
+        <ProjectPanel project={project} />
+      </View>
+    );
+  };
+
   const getKey = (item) => {
     return item.key;
   };
@@ -58,14 +67,11 @@ export const Posts = ({ project }: Props) => {
   } else
     return (
       <View style={styles.list}>
-        <View>
-          <ProjectPanel project={project} />
-        </View>
-
         <View style={{ flex: 1, flexDirection: "row" }}>
           <FlatList
             data={posts}
             renderItem={renderItems}
+            ListHeaderComponent={renderHeader}
             keyExtractor={(item, index) => getKey(item)}
             ListFooterComponent={renderFooter}
             keyboardShouldPersistTaps={"handled"}
