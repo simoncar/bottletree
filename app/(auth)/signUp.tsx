@@ -54,8 +54,8 @@ export default function SignIn() {
     if (oldUid) {
       return (
         <View style={styles.notificationView}>
-          <Text numberOfLines={3} style={styles.notificationText}>
-            You are already signed in as {oldUid}
+          <Text numberOfLines={3} style={styles.notificationUID}>
+            {oldUid}
           </Text>
         </View>
       );
@@ -177,6 +177,11 @@ const styles = StyleSheet.create({
   },
   notificationText: {
     fontSize: 18,
+  },
+  notificationUID: {
+    color: "grey",
+    fontSize: 12,
+    paddingTop: 30,
   },
   notificationView: {
     borderRadius: 5,

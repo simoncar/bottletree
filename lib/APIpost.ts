@@ -261,13 +261,11 @@ export async function addComment(
     .collection("comments")
     .add(comment)
     .then((docRef) => {
-      console.log("Comments written with ID: ", docRef.id);
       const newData = { key: docRef.id };
 
       const projectDoc = firestore().collection("projects").doc(project);
       projectDoc.get().then((doc) => {
         if (doc.exists) {
-          console.log("Document data:", doc.data());
           const projectData = doc.data();
 
           firestore()
