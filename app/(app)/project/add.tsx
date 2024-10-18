@@ -7,6 +7,7 @@ import { addProject, addProjectUser } from "@/lib/APIproject";
 import { IProject, IUser } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
+import { About } from "@/lib/about";
 
 export default function addNewProject() {
   const { user } = useContext(UserContext);
@@ -52,6 +53,8 @@ export default function addNewProject() {
 
   const onSave = async () => {
     project.title = text;
+    console.log("addNewProject - onSave", project, loggedInUser);
+
     addProject(project, loggedInUser, saveDone);
   };
 
@@ -63,7 +66,6 @@ export default function addNewProject() {
           headerRight: () => <Button title="Next" onPress={() => onSave()} />,
         }}
       />
-
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangeText(text)}
@@ -72,6 +74,7 @@ export default function addNewProject() {
         autoFocus={true}
         multiline
       />
+      <About />
     </SafeAreaView>
   );
 }

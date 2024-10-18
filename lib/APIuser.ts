@@ -47,7 +47,11 @@ export async function createUser(user: IUser) {
   const usersCollection = firestore().collection("users");
 
   let querySnapshot;
-  if (user.email == undefined) {
+
+  console.log("createUser:", user);
+  console.log("createUserUID:", user.uid);
+
+  if (user.email != undefined) {
     querySnapshot = await usersCollection
       .where("email", "==", user.email)
       .get();
