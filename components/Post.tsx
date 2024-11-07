@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
-import { Text, ParsedText } from "@/components/Themed";
+import { Text } from "@/components/Themed";
 import Comments from "./PostComments";
 import Dots from "@/components/dots";
 import Footer from "@/components/Footer";

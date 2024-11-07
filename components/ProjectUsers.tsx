@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, Pressable, useColorScheme, Button } from "react-native";
-import { View, Text, ParsedText } from "./Themed";
+import { StyleSheet, Pressable, useColorScheme } from "react-native";
+import { View, Text } from "./Themed";
 import { getProjectUsers } from "@/lib/APIproject";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useSession } from "@/lib/ctx";
 import { ShortList } from "@/components/sComponent";
 import { Image } from "expo-image";
 import Colors from "@/constants/Colors";
