@@ -29,8 +29,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#5D5CE7"
       },
-      "versionCode": 153,
-      "package": "co.simon.bottletree"
+      "versionCode": 152,
+      "package": "com.simoncar.bottletree"
     },
     "web": {
       "bundler": "metro",
