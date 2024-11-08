@@ -34,7 +34,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#5D5CE7"
       },
-      "versionCode": 152,
+      "versionCode": 153,
       "package": "com.simoncar.bottletree"
     },
     "web": {
