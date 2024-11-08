@@ -1,4 +1,4 @@
-name: 2. Build Apk for Android Device
+name: 2. Build aab for Google Play Store
 on:
   workflow_dispatch:
   push:
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build on EAS
-        run: eas build --profile preview --platform android --non-interactive
+        run: eas build --platform android --non-interactive
       - uses: stefanzweifel/git-auto-commit-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
