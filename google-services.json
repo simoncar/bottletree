@@ -8,12 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:813298396785:android:b84efd0d486938efd175d0",
+        "mobilesdk_app_id": "1:813298396785:android:daf99b22f2d00fc6d175d0",
         "android_client_info": {
-          "package_name": "com.simoncar.bottletree"
+          "package_name": "co.simon.bottletree"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "813298396785-2sam7cnq68e9taavk5ei5ujabnjmopqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCIQ2lQjA-psn-74yqcYxZ0lBppdD3xm20"
@@ -21,7 +26,20 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813298396785-2sam7cnq68e9taavk5ei5ujabnjmopqq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "813298396785-nu8419rbmg1ovmvp0iea1of91oinpcpq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.simoncar.bottletree",
+                "app_store_id": "6449942716"
+              }
+            }
+          ]
         }
       }
     }
