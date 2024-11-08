@@ -30,7 +30,7 @@
         "backgroundColor": "#5D5CE7"
       },
       "versionCode": 152,
-      "package": "com.simoncar.bottletree"
+      "package": "co.simon.bottletree"
     },
     "web": {
       "bundler": "metro",
