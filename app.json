@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.152",
+    "version": "1.0.153",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#5D5CE7"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
@@ -23,10 +21,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "associatedDomains": [
-        "applinks:b.otbapps.com",
-        "applinks:b.simon.co"
-      ]
+      "associatedDomains": ["applinks:b.otbapps.com", "applinks:b.simon.co"]
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -34,8 +29,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#5D5CE7"
       },
-      "versionCode": 152,
-      "package": "com.simoncar.bottletree"
+      "versionCode": 153,
+      "package": "co.simon.bottletree"
     },
     "web": {
       "bundler": "metro",
