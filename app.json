@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.153",
+    "version": "1.0.160",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -17,7 +17,7 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "153",
+      "buildNumber": "160",
       "config": {
         "usesNonExemptEncryption": false
       },
@@ -29,7 +29,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#5D5CE7"
       },
-      "versionCode": 152,
+      "versionCode": 160,
       "package": "co.simon.bottletree"
     },
     "web": {
