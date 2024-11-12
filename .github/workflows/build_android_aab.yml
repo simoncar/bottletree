@@ -25,6 +25,8 @@ jobs:
         run: yarn install
       - name: Build on EAS
         run: eas build --platform android --non-interactive --auto-submit
+      - name: Submit via EAS
+        run: eas submit --platform android --latest
       - uses: stefanzweifel/git-auto-commit-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
