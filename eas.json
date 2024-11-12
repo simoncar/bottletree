@@ -32,7 +32,6 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccountKeyPath": "./builder-403d5-4f08a6a16867.json",
         "track": "internal"
       },
       "ios": {
