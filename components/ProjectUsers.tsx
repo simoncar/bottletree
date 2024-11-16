@@ -11,13 +11,9 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { deleteProjectUser } from "@/lib/APIproject";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  SkeletonContainer,
-  GradientProps,
-} from "react-native-dynamic-skeletons";
+
 import { UserContext } from "@/lib/UserContext";
 
-const Gradient = (props: GradientProps) => <LinearGradient {...props} />;
 
 export const ProjectUsers = (props: any) => {
   const { project, update } = useLocalSearchParams<{
@@ -110,7 +106,7 @@ export const ProjectUsers = (props: any) => {
         }
         onSwipeableOpen={() => closeRow(index)}
         ref={(ref) => (row[index] = ref)}
-        rightOpenValue={-100}>
+    >
         <View>
           <View key={data.uid} style={styles.outerView}>
             <View style={styles.avatar}>
@@ -144,29 +140,9 @@ export const ProjectUsers = (props: any) => {
       <View>
         <View>
           <View key="skeleton" style={styles.outerView}>
-            <SkeletonContainer
-              isLoading={true}
-              Gradient={Gradient}
-              colors={["#e1e1e1", "#f2f2f2", "#e1e1e1"]}
-              style={{
-                backgroundColor:
-                  Colors[colorScheme ?? "light"].skeletonBackground,
-              }}
-              duration={2000}>
-              <View style={styles.skeletonAvatarFace}></View>
-            </SkeletonContainer>
+         
             <View style={styles.skeletonSpace}></View>
-            <SkeletonContainer
-              isLoading={true}
-              Gradient={Gradient}
-              colors={["#e1e1e1", "#f2f2f2", "#e1e1e1"]}
-              style={{
-                backgroundColor:
-                  Colors[colorScheme ?? "light"].skeletonBackground,
-              }}
-              duration={2000}>
-              <View style={styles.skeletonName}></View>
-            </SkeletonContainer>
+           
           </View>
         </View>
       </View>
