@@ -7,7 +7,6 @@ import {
   Pressable,
 } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
 import { Image } from "expo-image";
 import { Back } from "@/components/Back";
 import { Feather } from "@expo/vector-icons";
