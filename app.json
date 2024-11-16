@@ -2,7 +2,7 @@
   "expo": {
     "name": "One Build",
     "slug": "bottletree",
-    "version": "1.0.162",
+    "version": "1.0.177",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bottletree",
@@ -17,7 +17,6 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "com.simoncar.bottletree",
-      "buildNumber": "162",
       "config": {
         "usesNonExemptEncryption": false
       },
@@ -105,7 +104,6 @@
           "isAccessMediaLocationEnabled": true
         }
       ],
-      "react-native-compressor",
       "expo-localization",
       "expo-secure-store",
       "expo-asset"
