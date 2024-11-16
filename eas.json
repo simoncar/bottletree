@@ -11,7 +11,8 @@
     "development-simulator": {
       "extends": "development",
       "ios": {
-        "simulator": true
+        "simulator": true,
+        "resourceClass": "large"
       }
     },
     "apk": {
