@@ -15,7 +15,7 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-reanimated|react-native-compressor)"
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-reanimated)"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
@@ -86,7 +86,6 @@
     "react-native": "0.76.2",
     "react-native-big-calendar": "^4.14.0",
     "react-native-calendars": "^1.1304.1",
-    "react-native-compressor": "^1.8.23",
     "react-native-dynamic-skeletons": "^0.7.0",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",

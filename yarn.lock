@@ -9718,11 +9718,6 @@ react-native-calendars@^1.1304.1:
   optionalDependencies:
     moment "^2.29.4"
 
-react-native-compressor@^1.8.23:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/react-native-compressor/-/react-native-compressor-1.9.0.tgz#3b5aabac97f996036990f41294383a34510aaf22"
-  integrity sha512-kJgRBTrvI8/yOJs8GhXfc1bZui/Wl3FNKOkc3K5+EIgihzU/vS+UTLkojGcYwoYXxj4xP7GFwp0SJLsNOOJZNw==
-
 react-native-dynamic-skeletons@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-native-dynamic-skeletons/-/react-native-dynamic-skeletons-0.7.0.tgz#f5c45c9281bcdafa49020f3e5b4b33b32529bc9a"
