@@ -71,7 +71,6 @@
     "expo-splash-screen": "~0.29.11",
     "expo-status-bar": "~2.0.0",
     "expo-system-ui": "~4.0.3",
-    "expo-updates": "~0.26.7",
     "expo-web-browser": "~14.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
