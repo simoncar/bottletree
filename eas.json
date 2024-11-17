@@ -12,7 +12,7 @@
       "extends": "development",
       "ios": {
         "simulator": true,
-        "resourceClass": "large"
+        "resourceClass": "default"
       }
     },
     "apk": {
