@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "jsx": "react",
+    "jsx": "react-native",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
   "extends": "expo/tsconfig.base",
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
