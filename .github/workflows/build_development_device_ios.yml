@@ -1,4 +1,4 @@
-name: 2. Build Apk for Android Device
+name: 4. build_development_device_ios
 on:
   workflow_dispatch:
   push:
@@ -6,7 +6,7 @@ on:
       - appstore
 jobs:
   build:
-    name: Install and build
+    name: build_development_device_ios
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build on EAS
-        run: eas build --profile preview --platform android --non-interactive
+        run: eas build --profile development --platform ios --non-interactive
       - uses: stefanzweifel/git-auto-commit-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

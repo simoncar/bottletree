@@ -1,4 +1,4 @@
-name: 2. Build aab for Google Play Store
+name: 3. build_development_simulator_ios
 on:
   workflow_dispatch:
   push:
@@ -6,7 +6,7 @@ on:
       - appstore
 jobs:
   build:
-    name: Install and build
+    name: build_simulator_ios
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build on EAS
-        run: eas build --platform android --non-interactive --auto-submit
+        run: eas build --profile simulator --platform ios --non-interactive
       - uses: stefanzweifel/git-auto-commit-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

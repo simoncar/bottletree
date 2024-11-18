@@ -1,4 +1,4 @@
-name: 2. Build iOS and Submit to App Store
+name: 2. build_store_android_aab_submit
 on:
   workflow_dispatch:
   push:
@@ -6,7 +6,7 @@ on:
       - appstore
 jobs:
   build:
-    name: Install and build
+    name: build_store_android_aab_submit
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build on EAS
-        run: eas build --platform ios --non-interactive --auto-submit
+        run: eas build --platform android --non-interactive --auto-submit
       - uses: stefanzweifel/git-auto-commit-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

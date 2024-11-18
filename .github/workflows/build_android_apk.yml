@@ -1,4 +1,4 @@
-name: 3. Development Simulator Build iOS
+name: 2. build_android_apk
 on:
   workflow_dispatch:
   push:
@@ -6,7 +6,7 @@ on:
       - appstore
 jobs:
   build:
-    name: Development Simulator Build iOS
+    name: build_android_apk
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build on EAS
-        run: eas build --profile development-simulator --platform ios --non-interactive
+        run: eas build --profile preview --platform android --non-interactive
       - uses: stefanzweifel/git-auto-commit-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

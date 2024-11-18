@@ -1,4 +1,4 @@
-name: 4. Development Device Android Build
+name: 4. build_development_android_apk
 on:
   workflow_dispatch:
   push:
@@ -6,7 +6,7 @@ on:
       - appstore
 jobs:
   build:
-    name: Development Device Android Build
+    name: build_development_android_apk
     runs-on: ubuntu-latest
     permissions:
       contents: write
