@@ -30,7 +30,7 @@ export const About = () => {
         </Text>
         <Text style={styles.version}>
           {Application.nativeApplicationVersion} (
-          {Application.nativeBuildVersion}) | 2
+          {Application.nativeBuildVersion}) | 4.web
         </Text>
 
         <Text style={styles.version}>User Context - {user?.uid}</Text>
