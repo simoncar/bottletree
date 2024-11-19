@@ -82,28 +82,27 @@ export const Projects = ({ session, archived }: Props) => {
             });
           }}>
           <View style={styles.avatar}>
-            {icon ? (
-              <Image style={styles.avatarFace} source={data.icon} />
-            ) : (
-              <View style={styles.avatarFace}>
-                <MaterialIcons
-                  name="house-siding"
-                  color="#999999"
-                  style={styles.avatarIcon}
-                />
-              </View>
-            )}
+            <View style={styles.imageContainer}>
+              {icon ? (
+                <Image style={styles.avatarFace} source={data.icon} />
+              ) : (
+                <View style={styles.avatarFace}>
+                  <MaterialIcons
+                    name="house-siding"
+                    color="#999999"
+                    style={styles.avatarIcon}
+                  />
+                </View>
+              )}
+              {postCountDelta > 0 && (
+                <View style={styles.redCircle}>
+                  <Text style={styles.redNumber}>{postCountDelta}</Text>
+                </View>
+              )}
+            </View>
           </View>
           <View style={styles.projectTitle}>{renderTitle(data)}</View>
         </TouchableOpacity>
-
-        {postCountDelta > 0 && (
-          <View>
-            <View style={styles.redCircle}>
-              <Text style={styles.redNumber}>{postCountDelta}</Text>
-            </View>
-          </View>
-        )}
       </View>
     );
   }
@@ -139,7 +138,6 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
   },
-
   avatarIcon: {
     fontSize: 35,
     paddingTop: 5,
@@ -148,7 +146,9 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
   },
-
+  imageContainer: {
+    position: "relative",
+  },
   innerView: {
     alignItems: "center",
     flex: 1,
@@ -171,7 +171,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-
   projectId: {
     color: "grey",
     fontSize: 14,
@@ -185,11 +184,14 @@ const styles = StyleSheet.create({
     borderRadius: 25 / 2,
     height: 25,
     justifyContent: "center",
-    marginRight: 25,
+    position: "absolute",
+    right: 0,
+    top: 0,
     width: 25,
   },
-
   redNumber: {
     color: "white",
   },
 });
+
+export default Projects;
