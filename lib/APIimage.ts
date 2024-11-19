@@ -1,7 +1,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { firebase, uploadBytes } from "./firebase";
 import * as Crypto from "expo-crypto";
-import { Image } from "react-native-compressor";
+//import { Image } from "react-native-compressor";
 import { Platform } from "react-native";
 
 export const addImageFromCameraRoll = async (
@@ -54,15 +54,16 @@ export const addImageFromPhoto = async (
 
 async function processItemAsync(folder: string, asset: any, progressCallback) {
   const isWeb = Platform.OS === "web";
-  let result = asset.uri;
-  if (!isWeb) {
-    result = await Image.compress(asset.uri, {
-      progressDivider: 10,
-      downloadProgress: (progress) => {
-        console.log("downloadProgress: ", progress);
-      },
-    });
-  }
+  const result = asset.uri;
+  // if (!isWeb) {
+  //   // result = await Image.compress(asset.uri, {
+  //   //   progressDivider: 10,
+  //   //   downloadProgress: (progress) => {
+  //   //     console.log("downloadProgress: ", progress);
+  //   //   },
+  //   // });
+
+  // }
 
   const getBlobFroUri = async (uri) => {
     const blob = await new Promise((resolve, reject) => {
