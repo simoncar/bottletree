@@ -274,10 +274,9 @@ const styles = StyleSheet.create({
   tabButton: {
     alignItems: "center",
     backgroundColor: "#5D5CE7",
-    borderRadius: 55 / 2,
+    borderRadius: 30 / 2,
     height: 55,
     justifyContent: "center",
-    width: 55,
   },
   tabIcon: {
     paddingBottom: 0,
