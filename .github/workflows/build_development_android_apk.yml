@@ -1,4 +1,4 @@
-name: 4. build_development_android_apk
+name: build_development_android_apk
 on:
   workflow_dispatch:
   push:

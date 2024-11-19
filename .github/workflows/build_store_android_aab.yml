@@ -1,4 +1,4 @@
-name: 2. build_store_android_aab_submit
+name: build_store_android_aab_submit
 on:
   workflow_dispatch:
   push:

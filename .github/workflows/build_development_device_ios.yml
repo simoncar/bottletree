@@ -1,4 +1,4 @@
-name: 4. build_development_device_ios
+name: build_development_device_ios
 on:
   workflow_dispatch:
   push:

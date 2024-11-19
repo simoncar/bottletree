@@ -5,7 +5,7 @@ name: Deploy to WWW Hosting
 "on":
   push:
     branches:
-      - main
+      - appstore
 jobs:
   deploy_firebase_hosting:
     runs-on: ubuntu-latest
