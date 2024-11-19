@@ -37,14 +37,14 @@ jobs:
       - name: EAS Apply codepush
         run: eas update --branch production --message "Github Action Updating the app"
 
-      
       - name: Deploy to WWW Hosting
         run: yarn predeploy
-        uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-            repoToken: "${{ secrets.GITHUB_TOKEN }}"
-            firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BUILDER_403D5 }}"
-            channelId: live
-            projectId: builder-403d5
-          env:
-            FIREBASE_CLI_PREVIEWS: hostingchannels
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BUILDER_403D5 }}"
+          channelId: live
+          projectId: builder-403d5
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
