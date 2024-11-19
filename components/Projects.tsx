@@ -46,7 +46,9 @@ export const Projects = ({ session, archived }: Props) => {
       return (
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
-          <Text style={styles.projectId}>Posts : {data.postCount || ""}</Text>
+          <Text style={styles.projectId}>
+            {data.postCount > 0 ? `Posts: ${data.postCount}` : ""}
+          </Text>
         </View>
       );
     } else {
@@ -127,15 +129,15 @@ export const Projects = ({ session, archived }: Props) => {
 
 const styles = StyleSheet.create({
   avatar: {
-    marginRight: 12,
-    width: 50,
+    marginRight: 5,
+    width: 110,
   },
   avatarFace: {
     borderColor: "lightgrey",
-    borderRadius: 48 / 2,
+    borderRadius: 30 / 2,
     borderWidth: StyleSheet.hairlineWidth,
-    height: 48,
-    width: 48,
+    height: 100,
+    width: 100,
   },
 
   avatarIcon: {
@@ -151,8 +153,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
-
-    paddingHorizontal: 8,
   },
   outerView: {
     alignItems: "center",
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
     paddingVertical: 8,
-    padding: 8,
     width: 350,
   },
   project: {

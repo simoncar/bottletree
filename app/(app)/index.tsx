@@ -69,7 +69,7 @@ export default function Home() {
           />
 
           <View style={styles.instructions}>
-            <Text style={styles.welcomeApp}>Builder</Text>
+            <Text style={styles.welcomeApp}>Welcome to Builder</Text>
           </View>
 
           <Projects session={session as string} archived={false} />
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   containerAdd: {
     alignItems: "center",
@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   instructions: {
-    alignItems: "center",
+    alignItems: "flex-start",
+    paddingTop: 20,
   },
   logout: {
     alignItems: "center",
@@ -125,9 +126,10 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   welcomeApp: {
-    color: "#9D5BD0",
-    fontSize: 45,
+    color: "white",
+    fontSize: 38,
     fontWeight: "bold",
-    marginTop: 20,
+    marginBottom: 20,
+    marginTop: 40,
   },
 });

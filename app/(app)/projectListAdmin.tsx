@@ -170,7 +170,7 @@ const ModalScreen = (props) => {
               styles.project,
               { color: Colors[colorScheme ?? "light"].background },
             ]}>
-            Archive All Projects
+            Archive All Projects with 0 Posts
           </Text>
           <Text
             style={[

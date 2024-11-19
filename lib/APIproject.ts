@@ -253,8 +253,9 @@ export function archiveAllProjects(callback: any) {
 
   getAllProjects((projects) => {
     projects.forEach((project) => {
-      console.log("Archive Project: ", project.key, project);
-      updateProject({ ...project, archived: true }, updatedDone);
+      if (!project.postCount) {
+        updateProject({ ...project, archived: true }, updatedDone);
+      }
     });
     callback();
   });
