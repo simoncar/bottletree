@@ -60,7 +60,9 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
         <SafeAreaView>
           <Stack.Screen
             options={{

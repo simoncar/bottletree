@@ -1,7 +1,12 @@
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  ScrollView,
+} from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
@@ -114,13 +119,16 @@ export const Projects = ({ session, archived }: Props) => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       {loading === false && (
-        <View>
+        <ScrollView
+          style={styles.userList}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
           <ShortList
             key={projects.key}
             data={projects}
             renderItem={renderRow}
           />
-        </View>
+        </ScrollView>
       )}
     </View>
   );
@@ -191,6 +199,9 @@ const styles = StyleSheet.create({
   },
   redNumber: {
     color: "white",
+  },
+  userList: {
+    paddingBottom: 50,
   },
 });
 
