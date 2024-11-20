@@ -4,6 +4,28 @@ import * as Crypto from "expo-crypto";
 import { Platform } from "react-native";
 import * as ImageManipulator from "expo-image-manipulator";
 
+// Types and interfaces
+interface ImageAsset {
+  uri: string;
+  height: number;
+  width: number;
+}
+
+interface ImageProcessOptions {
+  compress: number;
+  format: ImageManipulator.SaveFormat;
+  base64: boolean;
+}
+
+interface ProgressCallback {
+  (progress: number): void;
+}
+
+// Constants
+const DEFAULT_COMPRESSION_RATIO = 0.2;
+const IMAGE_FORMAT = ImageManipulator.SaveFormat.JPEG;
+const IS_WEB_PLATFORM = Platform.OS === "web";
+
 export const addImageFromCameraRoll = async (
   multiple: boolean,
   folder: string,
@@ -52,54 +74,54 @@ export const addImageFromPhoto = async (
   }
 };
 
-async function processItemAsync(folder: string, asset: any, progressCallback) {
-  const isWeb = Platform.OS === "web";
-  let result = asset.uri;
-  let resultCompressed;
+async function processItemAsync(
+  folder: string, 
+  asset: ImageAsset, 
+  progressCallback: ProgressCallback
+): Promise<string> {
+  let imageUri = asset.uri;
+  let compressedImage;
 
   try {
-    if (isWeb) {
-      //TODO: for some reason this is not working on web, results in a larger file size and PNG?
-      resultCompressed = asset;
+    if (IS_WEB_PLATFORM) {
+      // TODO: for some reason this is not working on web, results in a larger file size and PNG?
+      compressedImage = asset;
     } else {
-      resultCompressed = await ImageManipulator.manipulateAsync(
+      const compressionOptions: ImageProcessOptions = {
+        compress: DEFAULT_COMPRESSION_RATIO,
+        format: IMAGE_FORMAT,
+        base64: true,
+      };
+
+      compressedImage = await ImageManipulator.manipulateAsync(
         asset.uri,
         [], // No operations, just compression
-        {
-          compress: 0.2, // Adjust the quality (0.0 to 1.0)
-          format: ImageManipulator.SaveFormat.JPEG, // or PNG
-          base64: true,
-        },
+        compressionOptions
       );
-      result = resultCompressed.uri;
+      imageUri = compressedImage.uri;
     }
   } catch (error) {
     console.error("Error compressing image:", error);
+    throw error;
   }
 
-  const getBlobFroUri = async (uri) => {
-    const blob = await new Promise((resolve, reject) => {
+  const getBlobFromUri = async (uri: string): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function () {
-        resolve(xhr.response);
-      };
-      xhr.onerror = function (e) {
-        reject(new TypeError("Network request failed: " + e));
-      };
+      xhr.onload = () => resolve(xhr.response);
+      xhr.onerror = (e) => reject(new TypeError(`Network request failed: ${e}`));
       xhr.responseType = "blob";
       xhr.open("GET", uri, true);
       xhr.send(null);
     });
-
-    return blob;
   };
 
   return new Promise((resolve, reject) => {
     try {
       const storageRef = getStorageRef(folder);
 
-      if (isWeb) {
-        getBlobFroUri(result).then((blob) => {
+      if (IS_WEB_PLATFORM) {
+        getBlobFromUri(imageUri).then((blob) => {
           uploadBytes(storageRef, blob).then(() => {
             storageRef.getDownloadURL().then((downloadURL) => {
               console.log("File available at", downloadURL);
@@ -110,7 +132,7 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
           });
         });
       } else {
-        const uploadTask = storageRef.putFile(result);
+        const uploadTask = storageRef.putFile(imageUri);
 
         uploadTask.on(
           "state_changed",
