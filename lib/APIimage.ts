@@ -49,7 +49,7 @@ export const addImageFromPhoto = async (
     );
     completedCallback(processedResults);
   } catch (error) {
-    console.error("Error occurred during processing:", error);
+    console.error("Error occurred during processing addImageFromPhoto:", error);
   }
 };
 
@@ -57,17 +57,10 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
   const isWeb = Platform.OS === "web";
   let result = asset.uri;
   let resultCompressed;
-  // const format = ImageManipulator.SaveFormat.JPEG;
-
-  // const saveOptions: ImageManipulator.SaveOptions = {
-  //   compress: 0.8,
-  //   format: format,
-  //   base64: true,
-  // };
 
   try {
     if (isWeb) {
-      console.log("AAA isWeb: asset.uri ", asset.uri);
+      //TODO: for some reason this is not working on web, results in a larger file size and PNG?
       resultCompressed = asset;
     } else {
       resultCompressed = await ImageManipulator.manipulateAsync(
@@ -79,7 +72,7 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
           base64: true,
         },
       );
-      result = resultCompressed.uri; // Update the URI with the compressed image
+      result = resultCompressed.uri;
     }
   } catch (error) {
     console.error("Error compressing image:", error);
@@ -107,8 +100,6 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
       const storageRef = getStorageRef(folder);
 
       if (isWeb) {
-        console.log("BBB isWeb: getBlobFroUri ", result);
-
         getBlobFroUri(result).then((blob) => {
           uploadBytes(storageRef, blob).then(() => {
             const p = storageRef.getDownloadURL().then((downloadURL) => {
