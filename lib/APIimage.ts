@@ -1,7 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 import { firebase, uploadBytes } from "./firebase";
 import * as Crypto from "expo-crypto";
-//import { Image } from "react-native-compressor";
 import { Platform } from "react-native";
 import * as ImageManipulator from "expo-image-manipulator";
 
@@ -102,7 +101,7 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
       if (isWeb) {
         getBlobFroUri(result).then((blob) => {
           uploadBytes(storageRef, blob).then(() => {
-            const p = storageRef.getDownloadURL().then((downloadURL) => {
+            storageRef.getDownloadURL().then((downloadURL) => {
               console.log("File available at", downloadURL);
               console.log("dimensions", asset.height, asset.width);
               const ratio = asset.height / asset.width;
@@ -138,7 +137,7 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
             console.log("error file upload:", error);
           },
           () => {
-            const p = storageRef.getDownloadURL().then((downloadURL) => {
+            storageRef.getDownloadURL().then((downloadURL) => {
               console.log("File available at", downloadURL);
               console.log("dimensions", asset.height, asset.width);
               const ratio = asset.height / asset.width;
