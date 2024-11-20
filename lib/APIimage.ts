@@ -3,6 +3,7 @@ import { firebase, uploadBytes } from "./firebase";
 import * as Crypto from "expo-crypto";
 //import { Image } from "react-native-compressor";
 import { Platform } from "react-native";
+import * as ImageManipulator from "expo-image-manipulator";
 
 export const addImageFromCameraRoll = async (
   multiple: boolean,
@@ -54,16 +55,35 @@ export const addImageFromPhoto = async (
 
 async function processItemAsync(folder: string, asset: any, progressCallback) {
   const isWeb = Platform.OS === "web";
-  const result = asset.uri;
-  // if (!isWeb) {
-  //   // result = await Image.compress(asset.uri, {
-  //   //   progressDivider: 10,
-  //   //   downloadProgress: (progress) => {
-  //   //     console.log("downloadProgress: ", progress);
-  //   //   },
-  //   // });
+  let result = asset.uri;
+  let resultCompressed;
+  // const format = ImageManipulator.SaveFormat.JPEG;
 
-  // }
+  // const saveOptions: ImageManipulator.SaveOptions = {
+  //   compress: 0.8,
+  //   format: format,
+  //   base64: true,
+  // };
+
+  try {
+    if (isWeb) {
+      console.log("AAA isWeb: asset.uri ", asset.uri);
+      resultCompressed = asset;
+    } else {
+      resultCompressed = await ImageManipulator.manipulateAsync(
+        asset.uri,
+        [], // No operations, just compression
+        {
+          compress: 0.2, // Adjust the quality (0.0 to 1.0)
+          format: ImageManipulator.SaveFormat.JPEG, // or PNG
+          base64: true,
+        },
+      );
+      result = resultCompressed.uri; // Update the URI with the compressed image
+    }
+  } catch (error) {
+    console.error("Error compressing image:", error);
+  }
 
   const getBlobFroUri = async (uri) => {
     const blob = await new Promise((resolve, reject) => {
@@ -87,6 +107,8 @@ async function processItemAsync(folder: string, asset: any, progressCallback) {
       const storageRef = getStorageRef(folder);
 
       if (isWeb) {
+        console.log("BBB isWeb: getBlobFroUri ", result);
+
         getBlobFroUri(result).then((blob) => {
           uploadBytes(storageRef, blob).then(() => {
             const p = storageRef.getDownloadURL().then((downloadURL) => {
