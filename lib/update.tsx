@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
     borderColor: "#CED0CE",
     borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
-    elevation: 3,
     flexDirection: "row",
     paddingHorizontal: 16,
     padding: 8,
