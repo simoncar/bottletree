@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   welcomeApp: {
-    color: "white",
     fontSize: 38,
     fontWeight: "bold",
     marginBottom: 20,
