@@ -22,6 +22,12 @@ export const Update = () => {
     : "Check for updates";
 
   useEffect(() => {
+    if (isUpdateAvailable) {
+      setShowUpdate(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (isUpdatePending) {
       // Update has successfully downloaded
       //runUpdate();
