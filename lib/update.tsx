@@ -14,6 +14,7 @@ export const Update = () => {
   const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
     Updates.useUpdates();
   const colorScheme = useColorScheme();
+  const [showUpdate, setShowUpdate] = useState(false);
 
   // Show whether or not we are running embedded code or an update
   const runTypeMessage = currentlyRunning.isEmbeddedLaunch
@@ -28,6 +29,15 @@ export const Update = () => {
     }
   }, [isUpdatePending]);
 
+  useEffect(() => {
+    if (__DEV__) return;
+    if (isUpdateAvailable) {
+      setShowUpdate(true);
+    } else {
+      console.log("No new update available");
+    }
+  }, [isUpdateAvailable]);
+
   async function fetchandRunUpdatesAsync() {
     try {
       const update = await Updates.checkForUpdateAsync();
@@ -41,7 +51,7 @@ export const Update = () => {
     }
   }
 
-  if (!isUpdateAvailable) {
+  if (showUpdate === false) {
     return null;
   }
 
@@ -87,13 +97,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 16,
     padding: 8,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
     width: "100%",
   },
   updateContainer: {
