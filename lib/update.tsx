@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Pressable, useColorScheme } from "react-native";
+import {
+  StyleSheet,
+  Pressable,
+  useColorScheme,
+  AppState,
+  AppStateStatus,
+} from "react-native";
 import { getLocales } from "expo-localization";
 import { Text, View } from "@/components/Themed";
 import * as Application from "expo-application";
@@ -22,15 +28,30 @@ export const Update = () => {
     : "Check for updates";
 
   useEffect(() => {
-    if (isUpdateAvailable) {
-      setShowUpdate(true);
-    }
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      if (nextAppState === "active") {
+        Updates.checkForUpdateAsync();
+      }
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange,
+    );
+
+    return () => {
+      subscription.remove();
+    };
   }, []);
 
   useEffect(() => {
+    if (isUpdateAvailable) {
+      setShowUpdate(true);
+    }
+  }, [isUpdateAvailable]);
+
+  useEffect(() => {
     if (isUpdatePending) {
-      // Update has successfully downloaded
-      //runUpdate();
       console.log("Update has successfully downloaded");
     }
   }, [isUpdatePending]);
