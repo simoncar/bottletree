@@ -41,9 +41,9 @@ export const Update = () => {
     }
   }
 
-  // if (!isUpdateAvailable) {
-  //   return null;
-  // }
+  if (!isUpdateAvailable) {
+    return null;
+  }
 
   return (
     <View style={styles.updateContainer}>
@@ -66,7 +66,7 @@ export const Update = () => {
 
 const styles = StyleSheet.create({
   iconContainer: {
-    marginLeft: 50,
+    marginLeft: 70,
     marginRight: 12,
   },
   installText: {
@@ -80,14 +80,26 @@ const styles = StyleSheet.create({
   },
   updateButton: {
     alignItems: "center",
+    borderColor: "#CED0CE",
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+    elevation: 3,
     flexDirection: "row",
     paddingHorizontal: 16,
+    padding: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     width: "100%",
   },
   updateContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 12,
+    paddingTop: 12,
   },
   updateText: {
     fontSize: 16,
