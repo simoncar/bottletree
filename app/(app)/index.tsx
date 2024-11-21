@@ -16,6 +16,7 @@ import { Projects } from "@/components/Projects";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { UserAvatar } from "@/components/UserAvatar";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { Update } from "@/lib/update";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -81,8 +82,17 @@ export default function Home() {
     <ScrollView
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}>
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <SafeAreaView>
         {renderTopPanel()}
+        <View style={styles.updateContainer}>
+          <Update />
+        </View>
         <View style={styles.container}>
           <View style={styles.instructions}>
             <Text style={styles.welcomeApp}>Welcome to Builder</Text>
@@ -127,10 +137,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
   },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
+
   instructions: {
     alignItems: "flex-start",
     paddingTop: 20,
@@ -160,6 +167,9 @@ const styles = StyleSheet.create({
   },
   topPanelRight: {
     marginLeft: 16,
+  },
+  updateContainer: {
+    paddingHorizontal: 16,
   },
   welcomeApp: {
     fontSize: 38,
