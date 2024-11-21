@@ -39,7 +39,7 @@ module.exports = {
 		"react-native/no-color-literals": 0,
 		"react-native/no-raw-text": 2,
 		"react-native/no-single-element-style-arrays": 2,
-		"react-native/sort-styles": ["error", "asc", { "ignoreClassNames": false, "ignoreStyleProperties": false }]
-
+		"react-native/sort-styles": ["error", "asc", { "ignoreClassNames": false, "ignoreStyleProperties": false }],
+		"ignorePatterns": ["node_modules/"],
 	}
 };
