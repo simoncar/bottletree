@@ -93,7 +93,7 @@ export const Update = () => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.updateText}>Update Available++</Text>
+          <Text style={styles.updateText}>Update Available+++</Text>
           <Text style={styles.installText}>Click to install</Text>
         </View>
       </Pressable>
