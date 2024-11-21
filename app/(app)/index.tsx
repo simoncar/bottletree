@@ -14,11 +14,13 @@ import { About } from "@/lib/about";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Projects } from "@/components/Projects";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { UserAvatar } from "@/components/UserAvatar";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 export default function Home() {
   const colorScheme = useColorScheme();
   const { session, signOut } = useSession();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   function renderAddProject() {
     return (
@@ -31,6 +33,23 @@ export default function Home() {
             <Text style={styles.createText}>+ Create Project</Text>
           </View>
         </Link>
+      </View>
+    );
+  }
+
+  function renderTopPanel() {
+    return (
+      <View style={styles.topPanel}>
+        <View style={styles.topPanelLeft}>
+          <FontAwesome6
+            name="hammer"
+            size={24}
+            color={Colors[colorScheme ?? "light"].text}
+          />
+        </View>
+        <View style={styles.topPanelRight}>
+          <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
+        </View>
       </View>
     );
   }
@@ -59,17 +78,12 @@ export default function Home() {
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}>
-        <SafeAreaView>
-          <Stack.Screen
-            options={{
-              headerShown: false,
-            }}
-          />
-
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}>
+      <SafeAreaView>
+        {renderTopPanel()}
+        <View style={styles.container}>
           <View style={styles.instructions}>
             <Text style={styles.welcomeApp}>Welcome to Builder</Text>
           </View>
@@ -79,9 +93,9 @@ export default function Home() {
           <View style={styles.bigGap} />
           {renderLogout()}
           <About />
-        </SafeAreaView>
-      </ScrollView>
-    </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -94,6 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
   },
+
   containerAdd: {
     alignItems: "center",
     flex: 1,
@@ -112,6 +127,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
   },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
   instructions: {
     alignItems: "flex-start",
     paddingTop: 20,
@@ -126,6 +145,21 @@ const styles = StyleSheet.create({
   settingName: {
     fontSize: 20,
     paddingLeft: 20,
+  },
+  topPanel: {
+    alignItems: "center",
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  topPanelLeft: {
+    flex: 1,
+  },
+  topPanelRight: {
+    marginLeft: 16,
   },
   welcomeApp: {
     fontSize: 38,
