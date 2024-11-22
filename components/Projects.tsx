@@ -119,16 +119,7 @@ export const Projects = ({ session, archived }: Props) => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       {loading === false && (
-        <ScrollView
-          style={styles.userList}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}>
-          <ShortList
-            key={projects.key}
-            data={projects}
-            renderItem={renderRow}
-          />
-        </ScrollView>
+        <ShortList key={projects.key} data={projects} renderItem={renderRow} />
       )}
     </View>
   );
