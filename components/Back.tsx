@@ -4,7 +4,6 @@ import { router } from "expo-router";
 import Colors from "@/constants/Colors";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { View } from "@/components/Themed";
-import { press } from "@testing-library/react-native/build/user-event/press";
 
 const goBack = () => {
   router.back();
