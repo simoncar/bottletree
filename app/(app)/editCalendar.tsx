@@ -251,7 +251,6 @@ export default function editCalendar() {
     <SafeAreaView>
       <Stack.Screen
         options={{
-          headerLeft: () => <Back />,
           headerRight: () => (
             <NativeButton title="Done" onPress={() => save()} />
           ),
@@ -397,9 +396,7 @@ export default function editCalendar() {
           </View>
           {showColor && (
             <View style={styles.itemViewRow}>
-              <ColorRow
-                onPress={handleSelectColor}
-              />
+              <ColorRow onPress={handleSelectColor} />
             </View>
           )}
           <View style={styles.line}></View>

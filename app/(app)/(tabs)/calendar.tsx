@@ -15,7 +15,11 @@ import dayjs from "dayjs";
 import { useNavigation } from "expo-router";
 import { BigText } from "@/components/StyledText";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-
+import {
+  Calendar,
+  ICalendarEventBase,
+  CalendarTouchableOpacityProps,
+} from "react-native-big-calendar";
 
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -71,6 +75,11 @@ export default function CalendarLarge() {
     navigation.setOptions({
       headerTitle: () => (
         <View style={styles.headerTitleA}>
+          <View style={styles.headerTitleDate}>
+            <BigText style={styles.headerTitle}>
+              {dayjs(calendarDate).format("MMMM YYYY")}
+            </BigText>
+          </View>
           <View style={styles.headerTitleB}>
             <Pressable hitSlop={20} onPress={_onPrevDate}>
               <FontAwesome5
@@ -90,11 +99,6 @@ export default function CalendarLarge() {
               />
             </Pressable>
           </View>
-          <View style={styles.headerTitleDate}>
-            <BigText style={styles.headerTitle}>
-              {dayjs(calendarDate).format("MMMM YYYY")}
-            </BigText>
-          </View>
         </View>
       ),
     });
@@ -105,6 +109,30 @@ export default function CalendarLarge() {
     //setNavOptions(start);
   };
 
+  const renderEvent = <T extends ICalendarEventBase>(
+    event: T,
+    touchableOpacityProps: CalendarTouchableOpacityProps,
+  ) => {
+    const typedEvent = event as T & { color: string }; // Add type assertion
+    return (
+      <TouchableOpacity {...touchableOpacityProps}>
+        <View
+          style={[styles.calendarEvent, { backgroundColor: typedEvent.color }]}>
+          <Text style={styles.calendarEventText}>{typedEvent.title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const onPressEvent = <T extends ICalendarEventBase>(event: T) => {
+    const typedEvent = event as T & { key: string }; // Add type assertion
+    router.navigate({
+      pathname: "/editCalendar",
+      params: {
+        calendarId: typedEvent.key,
+      },
+    });
+  };
 
   const _onPrevDate = () => {
     setDate(dayjs(calendarDate).add(dayjs(calendarDate).date() * -1, "day"));
@@ -126,7 +154,22 @@ export default function CalendarLarge() {
 
   return (
     <ScrollView>
-      
+      <Calendar
+        events={items}
+        height={height - 200}
+        mode="month"
+        renderEvent={renderEvent}
+        // @ts-ignore
+        theme={darkTheme}
+        eventCellStyle={styles.calendarCellStyle}
+        // @ts-ignore
+        date={calendarDate}
+        onChangeDate={onChangeDate}
+        onPressEvent={onPressEvent}
+        eventMinHeightForMonthView={25}
+        maxVisibleEventCount={10}
+        swipeEnabled={false}
+      />
     </ScrollView>
   );
 }

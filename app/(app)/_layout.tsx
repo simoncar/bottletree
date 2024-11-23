@@ -24,6 +24,7 @@ import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 import Colors from "@/constants/Colors";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { Text } from "@/components/Themed";
+import { Back } from "@/components/Back";
 
 type SearchParams = {
   project: string;
@@ -123,7 +124,8 @@ export default function Layout() {
                   headerStyle: {
                     backgroundColor: Colors[colorScheme ?? "light"].background,
                   },
-                  headerBackTitle: "Back",
+                  headerBackTitle: "",
+                  headerLeft: () => <Back />,
                 }}>
                 <Stack.Screen
                   name="(tabs)"

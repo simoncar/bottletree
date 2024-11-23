@@ -7,6 +7,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { Back } from "@/components/Back";
 
 export default function Layout() {
   const colorScheme = useColorScheme();
@@ -34,7 +35,8 @@ export default function Layout() {
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
-          headerBackTitle: "Back",
+          headerBackTitle: "",
+          headerLeft: () => <Back />,
         }}
       />
     </ThemeProvider>

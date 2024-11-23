@@ -58,7 +58,6 @@ export default function DeleteAccount() {
       <Stack.Screen
         options={{
           title: "Delete Account",
-          headerLeft: () => <Back />,
         }}
       />
 

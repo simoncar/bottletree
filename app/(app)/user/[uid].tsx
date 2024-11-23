@@ -153,7 +153,6 @@ export default function editUser() {
     <ScrollView>
       <Stack.Screen
         options={{
-          headerLeft: () => <Back />,
           headerRight: () => <Button title="Save" onPress={() => save()} />,
         }}
       />

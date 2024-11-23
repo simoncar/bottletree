@@ -65,7 +65,6 @@ export default function Note() {
     <SafeAreaView>
       <Stack.Screen
         options={{
-          headerLeft: () => <Back />,
           headerRight: () => (
             <NativeButton title="Done" onPress={() => save()} />
           ),

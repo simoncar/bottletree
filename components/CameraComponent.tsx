@@ -156,11 +156,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          headerLeft: () => <Back />,
-        }}
-      />
       <Progress progress={progress} />
 
       <CameraView style={styles.camera} facing={facing} ref={cameraRef}>

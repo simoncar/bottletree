@@ -62,7 +62,6 @@ export default function addNewProject() {
     <SafeAreaView>
       <Stack.Screen
         options={{
-          headerLeft: () => <Back />,
           headerRight: () => <Button title="Next" onPress={() => onSave()} />,
         }}
       />

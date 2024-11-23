@@ -72,7 +72,6 @@ const ViewPost = () => {
     <View style={styles.overall}>
       <Stack.Screen
         options={{
-          headerLeft: () => <Back />,
           headerRight: () => (
             <Pressable
               onPress={() => {

@@ -177,7 +177,6 @@ export default function Project() {
     <ScrollView>
       <Stack.Screen
         options={{
-          headerLeft: () => <Back />,
           headerRight: () => (
             <Button
               title="Save"

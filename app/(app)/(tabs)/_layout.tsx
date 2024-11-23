@@ -178,8 +178,18 @@ export default function TabLayout() {
         tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tintInactive,
         tabBarStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,
-          height: 80,
         },
+
+        headerStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+        },
+        tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+
+        headerLeft: () => (
+          <View style={styles.back}>
+            <Back />
+          </View>
+        ),
       }}>
       <Tabs.Screen
         name="[project]"
@@ -195,27 +205,8 @@ export default function TabLayout() {
         }}
         options={{
           title: "",
-
-          headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-          },
-
-          headerTintColor: "white",
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          tabBarStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-            height: 80,
-          },
-          headerTitle: () => <Back />,
-          headerTitleAlign: "left",
           headerRight: () => (
-            <View>
-              <UserAvatar
-                uid={user?.uid}
-                photoURL={user?.photoURL}
-                user={user}
-              />
-            </View>
+            <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
           ),
         }}
       />
@@ -248,17 +239,9 @@ export default function TabLayout() {
             // eslint-disable-next-line react-native/no-raw-text
             <BigText style={styles.headerTitle}>Calendar</BigText>
           ),
-          headerTitleAlign: "left",
-          headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-          },
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="calendar" color={color} />
           ),
-          tabBarStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-            height: 80,
-          },
         }}
       />
     </Tabs>
@@ -281,5 +264,8 @@ const styles = StyleSheet.create({
   tabIcon: {
     paddingBottom: 0,
     paddingLeft: 1,
+  },
+  back: {
+    paddingLeft: 10,
   },
 });
