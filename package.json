@@ -78,7 +78,7 @@
     "react-native": "0.76.2",
     "react-native-big-calendar": "^4.16.0",
     "react-native-gesture-handler": "~2.20.2",
-    "react-native-modal-datetime-picker": "^17.1.0",
+    "react-native-modal-datetime-picker": "^18.0.0",
     "react-native-parsed-text": "^0.0.22",
     "react-native-progress": "^5.0.0",
     "react-native-qrcode-svg": "^6.3.1",

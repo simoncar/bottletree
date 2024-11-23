@@ -75,30 +75,9 @@ export default function CalendarLarge() {
     navigation.setOptions({
       headerTitle: () => (
         <View style={styles.headerTitleA}>
-          <View style={styles.headerTitleDate}>
-            <BigText style={styles.headerTitle}>
-              {dayjs(calendarDate).format("MMMM YYYY")}
-            </BigText>
-          </View>
-          <View style={styles.headerTitleB}>
-            <Pressable hitSlop={20} onPress={_onPrevDate}>
-              <FontAwesome5
-                name="chevron-left"
-                size={23}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-            </Pressable>
-          </View>
-
-          <View style={styles.pressable}>
-            <Pressable hitSlop={20} onPress={_onNextDate}>
-              <FontAwesome5
-                name="chevron-right"
-                size={23}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-            </Pressable>
-          </View>
+          <BigText style={styles.headerTitle}>
+            {dayjs(calendarDate).format("MMMM YYYY")}
+          </BigText>
         </View>
       ),
     });
@@ -188,24 +167,13 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 24,
-    paddingTop: 3,
   },
   headerTitleA: {
-    flex: 1,
     flexDirection: "row",
   },
-  headerTitleB: {
-    height: 50,
-    paddingTop: 3,
-    width: 50,
-  },
-  headerTitleDate: {
-    height: 50,
-    width: "100%",
-  },
+  headerTitleB: {},
+  headerTitleDate: {},
   pressable: {
-    height: 50,
-    paddingTop: 3,
     width: 40,
   },
 });
