@@ -79,17 +79,17 @@ export default function Home() {
   }
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      showsHorizontalScrollIndicator={false}>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-      />
+    <SafeAreaView>
+      {renderTopPanel()}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+        />
 
-      <SafeAreaView>
-        {renderTopPanel()}
         <View style={styles.updateContainer}>
           <Update />
         </View>
@@ -104,8 +104,8 @@ export default function Home() {
           {renderLogout()}
           <About />
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
