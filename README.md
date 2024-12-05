@@ -18,6 +18,8 @@ yarn test
 
 ------ development build -------
 
+npx expo install expo@latest --fix
+
 eas build --profile development-simulator --platform ios
 eas build --profile development --platform ios
 eas build --profile aab --platform android

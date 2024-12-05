@@ -20,6 +20,7 @@ import {
   ICalendarEventBase,
   CalendarTouchableOpacityProps,
 } from "react-native-big-calendar";
+import MonthYearPicker from "@/components/MonthYearPicker";
 
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -29,6 +30,14 @@ export default function CalendarLarge() {
   const colorScheme = useColorScheme();
   const { height } = Dimensions.get("window");
   const navigation = useNavigation();
+
+  const [selectedMonth, setSelectedMonth] = useState(0); // January
+  const [selectedYear, setSelectedYear] = useState(2024);
+
+  const handleValueChange = (month: number, year: number) => {
+    setSelectedMonth(month);
+    setSelectedYear(year);
+  };
 
   const darkTheme = {
     palette: {
@@ -78,6 +87,18 @@ export default function CalendarLarge() {
           <BigText style={styles.headerTitle}>
             {dayjs(calendarDate).format("MMMM YYYY")}
           </BigText>
+          <View style={styles.headerTitle}>
+            <Text style={styles.text}>
+              Selected: {selectedMonth + 1}/{selectedYear}
+            </Text>
+            <MonthYearPicker
+              selectedMonth={selectedMonth}
+              selectedYear={selectedYear}
+              onValueChange={handleValueChange}
+              minYear={2000}
+              maxYear={2030}
+            />
+          </View>
         </View>
       ),
     });
@@ -175,5 +196,14 @@ const styles = StyleSheet.create({
   headerTitleDate: {},
   pressable: {
     width: 40,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 20,
   },
 });

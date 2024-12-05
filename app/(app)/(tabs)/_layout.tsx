@@ -14,6 +14,7 @@ import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
@@ -184,7 +185,6 @@ export default function TabLayout() {
           backgroundColor: Colors[colorScheme ?? "light"].background,
         },
         tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-
         headerLeft: () => (
           <View style={styles.back}>
             <Back />
@@ -204,9 +204,36 @@ export default function TabLayout() {
           },
         }}
         options={{
-          title: "",
+          title: "Projects",
           headerRight: () => (
             <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="calendar"
+        options={{
+          title: "Calendar",
+          headerTitle: () => (
+            // eslint-disable-next-line react-native/no-raw-text
+            <BigText style={styles.headerTitle}>Calendar</BigText>
+          ),
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="calendar" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="files"
+        options={{
+          title: "Files",
+          headerTitle: () => (
+            // eslint-disable-next-line react-native/no-raw-text
+            <BigText style={styles.headerTitle}>Files</BigText>
+          ),
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="file-pdf" color={color} />
           ),
         }}
       />
@@ -215,32 +242,13 @@ export default function TabLayout() {
         name="nothing"
         options={{
           title: "Add",
-          tabBarButton: () => (
+          tabBarIcon: () => (
             <Pressable
               onPress={() => {
                 openActionSheet();
-              }}
-              style={styles.tabButton}>
-              <TabBarIcon
-                style={styles.tabIcon}
-                name="plus-square"
-                color={"white"}
-              />
+              }}>
+              <TabBarIcon name="plus-square" color={"white"} />
             </Pressable>
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="calendar"
-        options={{
-          title: "",
-          headerTitle: () => (
-            // eslint-disable-next-line react-native/no-raw-text
-            <BigText style={styles.headerTitle}>Calendar</BigText>
-          ),
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="calendar" color={color} />
           ),
         }}
       />
@@ -257,9 +265,9 @@ const styles = StyleSheet.create({
   tabButton: {
     alignItems: "center",
     backgroundColor: "#5D5CE7",
-    borderRadius: 30 / 2,
-    height: 55,
+    borderRadius: 100,
     justifyContent: "center",
+    width: 30,
   },
   tabIcon: {
     paddingBottom: 0,

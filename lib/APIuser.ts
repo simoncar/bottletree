@@ -20,8 +20,23 @@ export async function getUser(uid: string) {
 
     return user;
   } else {
-    console.log("firestore user NOT found:", uid);
-    return null;
+    console.log(
+      "firestore user NOT found:",
+      "creating user",
+      uid,
+      auth().currentUser,
+    );
+    const newUser = await createUser({
+      uid: uid,
+      displayName: auth().currentUser.displayName,
+      email: auth().currentUser.email,
+      photoURL: "",
+      language: "en",
+      project: "",
+      anonymous: auth().currentUser.isAnonymous,
+    });
+
+    return newUser;
   }
 }
 

@@ -93,7 +93,6 @@ export default function Layout() {
   }
 
   if (!session) {
-    console.log("Layout: session not found: ", project);
     if (project) {
       return (
         <Redirect
