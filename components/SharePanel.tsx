@@ -49,7 +49,13 @@ const IconButton = (props) => {
               size={28}
             />
           </View>
-          <Text style={styles.shareText}>{label}</Text>
+          <Text
+            style={[
+              styles.shareText,
+              { color: Colors[colorScheme ?? "light"].text },
+            ]}>
+            {label}
+          </Text>
         </View>
       </Pressable>
     </View>
@@ -121,7 +127,6 @@ const styles = StyleSheet.create({
   },
   shareText: {
     fontSize: 16,
-    color: "#666",
   },
 });
 
