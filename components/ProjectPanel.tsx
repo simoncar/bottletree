@@ -119,7 +119,7 @@ const ProjectPanel = (props: ProjectProp) => {
           </Pressable>
         </View>
       </View>
-      <SharePanel project={projectObj} />
+      <SharePanel project={projectObj} icon="link" pathname="share" />
     </View>
   );
 };

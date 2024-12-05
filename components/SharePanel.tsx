@@ -10,80 +10,118 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
 import { Text } from "@/components/Themed";
 import { IProject } from "@/lib/types";
+import Colors from "@/constants/Colors";
 
 type ProjectProp = {
   project: IProject;
+  pathname: string;
+  icon: string;
+  label: string;
 };
 
-const SharePanel = (props: ProjectProp) => {
-  const { project } = props;
+const IconButton = (props) => {
+  const colorScheme = useColorScheme();
+  const { project, pathname, icon, label } = props;
   const router = useRouter();
 
   return (
-    <View style={[styles.outerView, { paddingTop: 10 }]}>
+    <View style={styles.buttonContainer}>
       <Pressable
-        style={styles.pressableLeft}
+        style={[
+          styles.button,
+          { backgroundColor: Colors[colorScheme ?? "light"].postBackground },
+        ]}
         onPress={() => {
           router.navigate({
-            pathname: "/share",
-            params: { project: project.key },
-          });
-        }}>
-        <View style={styles.avatar}>
-          <View style={styles.avatarFace}>
-            <MaterialIcons
-              name="link"
-              color="#999999"
-              style={styles.avatarIcon}
-            />
-          </View>
-        </View>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          router.navigate({
-            pathname: "/share",
+            pathname: `/${pathname}`,
             params: {
               project: project.key,
               title: project.title,
             },
           });
         }}>
-        <View>
-          <Text style={styles.shareText}>Share</Text>
+        <View style={styles.buttonContent}>
+          <View style={styles.iconContainer}>
+            <MaterialIcons
+              name={icon}
+              color="#999999"
+              style={styles.icon}
+              size={28}
+            />
+          </View>
+          <Text style={styles.shareText}>{label}</Text>
         </View>
       </Pressable>
     </View>
   );
 };
 
+export const SharePanel = (props) => {
+  const { project } = props;
+  const router = useRouter();
+
+  return (
+    <View style={styles.container}>
+      <IconButton
+        project={project}
+        pathname="share"
+        icon="link"
+        label="share"
+      />
+      <IconButton
+        project={project}
+        pathname="calendar"
+        icon="calendar-today"
+        label="calendar"
+      />
+      <IconButton
+        project={project}
+        pathname="files"
+        icon="file-present"
+        label="files"
+      />
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
-  avatar: {
-    alignItems: "center",
-    textAlign: "center",
-    width: 48,
+  buttonContainer: {
+    padding: 16,
   },
-  avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
-  avatarIcon: {
-    fontSize: 25,
-    paddingTop: 10,
-    textAlign: "center",
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 
-  outerView: {
-    alignItems: "center",
-    borderBottomColor: "#CED0CE",
-    flexDirection: "row",
-    paddingVertical: 8,
-    padding: 8,
+  button: {
+    borderRadius: 12,
+    width: 85,
+    height: 85,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: "#CED0CE",
   },
-  pressableLeft: {
+  buttonContent: {
+    flex: 1,
     alignItems: "center",
-    width: 50,
+    justifyContent: "center",
+  },
+  iconContainer: {
+    marginBottom: 8,
+  },
+  icon: {
+    textAlign: "center",
   },
   shareText: {
-    fontSize: 20,
-    paddingLeft: 20,
+    fontSize: 16,
+    color: "#666",
   },
 });
 
