@@ -98,6 +98,9 @@ export async function createUser(user: IUser) {
 export async function updateAccountName(uid: string, displayName: string) {
   const docRef1 = firestore().collection("users").doc(uid);
   const user = auth().currentUser;
+
+  console.log("updateAccountName:", user, uid, displayName);
+
   try {
     await user.updateProfile({
       displayName: displayName,

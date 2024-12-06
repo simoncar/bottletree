@@ -100,6 +100,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
         anonymous: auth().currentUser.isAnonymous,
       };
 
+      console.log("signUp user: ", user);
+
       updateAccountName(response.user.uid, name);
 
       callback(user, "Success");
