@@ -82,15 +82,15 @@ export default function CalendarLarge() {
   }, [calendarDate]);
 
   const setNavOptions = () => {
-    navigation.setOptions({
-      headerTitle: () => (
-        <View style={styles.headerTitleA}>
-          <BigText style={styles.headerTitle}>
-            {dayjs(calendarDate).format("MMMM YYYY")}
-          </BigText>
-        </View>
-      ),
-    });
+    // navigation.setOptions({
+    //   headerTitle: () => (
+    //     <View style={styles.headerTitleA}>
+    //       <BigText style={styles.headerTitle}>
+    //         {dayjs(calendarDate).format("MMMM YYYY")}
+    //       </BigText>
+    //     </View>
+    //   ),
+    // });
   };
 
   const onChangeDate = ([start, end]) => {
@@ -99,9 +99,13 @@ export default function CalendarLarge() {
   };
 
   const onChangeMonth = (monthIndex: number, year: number) => {
-    //setDate(start);
-    //setNavOptions(start);
-    console.log("monthIndex: " + monthIndex + " year: " + year);
+    const newDate = dayjs().year(year).month(monthIndex).date(1);
+    const today = dayjs();
+    if (newDate.isSame(today, "month") && newDate.isSame(today, "year")) {
+      setDate(today);
+    } else {
+      setDate(newDate);
+    }
   };
 
   const renderEvent = <T extends ICalendarEventBase>(

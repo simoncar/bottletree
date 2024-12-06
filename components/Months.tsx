@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   ScrollView,
   Text,
   TouchableOpacity,
   StyleSheet,
+  LayoutChangeEvent,
 } from "react-native";
 
 const MONTHS = [
@@ -45,13 +46,6 @@ export const MonthYearScroller: React.FC<Props> = ({
     allYears.push(y);
   }
 
-  // Flattened list of items like: [Dec 2025, Jan, Feb, ... Dec, 2026, Jan, Feb...]
-  // But for simplicity, let's just display months for a single selected year and a year picker horizontally.
-  // If you actually want a combined scroll, just put all in a single horizontal ScrollView.
-  // Here we'll do a horizontal scroll containing [Dec (for prev year), {months for current year}, Jan (for next year)]
-
-  // For a combined scroll, we can do something like this:
-  // Create an array of { label: string, year: number, monthIndex: number } for multiple years
   const items = [];
   for (const year of allYears) {
     for (let i = 0; i < MONTHS.length; i++) {
@@ -59,14 +53,45 @@ export const MonthYearScroller: React.FC<Props> = ({
     }
   }
 
+  // Find the current index of the selected month/year
+  const currentIndex = items.findIndex(
+    (item) =>
+      item.year === selectedYear && item.monthIndex === selectedMonthIndex,
+  );
+
+  // We'll store item width after layout to accurately scroll
+  const [itemWidth, setItemWidth] = useState<number | null>(null);
+
   const handleSelect = (item: { year: number; monthIndex: number }) => {
     setSelectedMonthIndex(item.monthIndex);
     setSelectedYear(item.year);
     onSelect?.(item.monthIndex, item.year);
   };
 
+  useEffect(() => {
+    // Once we know the item width, scroll to currentIndex
+    if (itemWidth && currentIndex >= 0) {
+      scrollRef.current?.scrollTo({
+        x: currentIndex * (itemWidth + 20), // itemWidth + (2 * marginHorizontal=10)
+        animated: false,
+      });
+    }
+  }, [itemWidth, currentIndex]);
+
+  const onItemLayout = (e: LayoutChangeEvent) => {
+    if (!itemWidth) {
+      const width = e.nativeEvent.layout.width;
+      setItemWidth(width);
+    }
+  };
+
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: 5,
+      }}>
       <ScrollView
         ref={scrollRef}
         horizontal
@@ -80,6 +105,7 @@ export const MonthYearScroller: React.FC<Props> = ({
             <TouchableOpacity
               key={idx}
               onPress={() => handleSelect(item)}
+              onLayout={idx === 0 ? onItemLayout : undefined}
               style={[styles.itemContainer, isSelected && styles.selectedItem]}>
               <Text
                 style={[styles.itemText, isSelected && styles.selectedText]}>
