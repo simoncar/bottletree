@@ -87,18 +87,6 @@ export default function CalendarLarge() {
           <BigText style={styles.headerTitle}>
             {dayjs(calendarDate).format("MMMM YYYY")}
           </BigText>
-          <View style={styles.headerTitle}>
-            <Text style={styles.text}>
-              Selected: {selectedMonth + 1}/{selectedYear}
-            </Text>
-            <MonthYearPicker
-              selectedMonth={selectedMonth}
-              selectedYear={selectedYear}
-              onValueChange={handleValueChange}
-              minYear={2000}
-              maxYear={2030}
-            />
-          </View>
         </View>
       ),
     });
