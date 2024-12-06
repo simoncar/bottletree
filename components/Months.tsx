@@ -103,7 +103,7 @@ export const MonthYearScroller: React.FC<Props> = ({
             item.year === selectedYear;
           return (
             <TouchableOpacity
-              key={idx}
+              key={`month-${idx}`}
               onPress={() => handleSelect(item)}
               onLayout={idx === 0 ? onItemLayout : undefined}
               style={[styles.itemContainer, isSelected && styles.selectedItem]}>
