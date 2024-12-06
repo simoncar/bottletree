@@ -23,6 +23,7 @@ import {
 import MonthYearPicker from "@/components/MonthYearPicker";
 
 import { ScrollView } from "react-native-gesture-handler";
+import { MonthYearScroller } from "@/components/Months";
 
 export default function CalendarLarge() {
   const [items, setItems] = useState([]);
@@ -97,6 +98,12 @@ export default function CalendarLarge() {
     //setNavOptions(start);
   };
 
+  const onChangeMonth = (monthIndex: number, year: number) => {
+    //setDate(start);
+    //setNavOptions(start);
+    console.log("monthIndex: " + monthIndex + " year: " + year);
+  };
+
   const renderEvent = <T extends ICalendarEventBase>(
     event: T,
     touchableOpacityProps: CalendarTouchableOpacityProps,
@@ -142,6 +149,7 @@ export default function CalendarLarge() {
 
   return (
     <ScrollView>
+      <MonthYearScroller range={5} onSelect={onChangeMonth} />
       <Calendar
         events={items}
         height={height - 200}
