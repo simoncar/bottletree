@@ -60,11 +60,6 @@ export default function addNewProject() {
 
   return (
     <SafeAreaView>
-      <Stack.Screen
-        options={{
-          headerRight: () => <Button title="Next" onPress={() => onSave()} />,
-        }}
-      />
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangeText(text)}
@@ -73,6 +68,7 @@ export default function addNewProject() {
         autoFocus={true}
         multiline
       />
+      <Button title="Next" onPress={() => onSave()} />
       <About />
     </SafeAreaView>
   );
