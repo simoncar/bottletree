@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { View } from "@/components/Themed";
 import { getPosts } from "@/lib/APIpost";
 import { updateUserProjectCount } from "@/lib/APIuser";
-import { IPost } from "@/lib/types";
+import { IPost, IProject } from "@/lib/types";
 import Post from "./Post";
 import ProjectPanel from "./ProjectPanel";
 import { useSession } from "@/lib/ctx";
@@ -14,6 +14,7 @@ import { About } from "@/lib/about";
 type Props = {
   project: string;
   title: string;
+  projectObj: IProject;
 };
 
 export const Posts = ({ project, title }: Props) => {
@@ -54,7 +55,7 @@ export const Posts = ({ project, title }: Props) => {
   const renderHeader = () => {
     return (
       <View>
-			<ProjectPanel project={project} title={title} />
+        <ProjectPanel project={project} title={title} />
       </View>
     );
   };

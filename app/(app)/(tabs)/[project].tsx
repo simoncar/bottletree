@@ -2,21 +2,22 @@ import React, { useEffect, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { Posts } from "@/components/Posts";
-import { View } from "@/components/Themed";
+import { View, Text } from "@/components/Themed";
 import { UserContext } from "@/lib/UserContext";
 import { getProject } from "@/lib/APIproject";
+import { IProject } from "@/lib/types";
 
 type SearchParams = {
-	project: string;
-	title:string;
+  project: string;
+  title: string;
 };
 
 export default function ProjectPosts() {
   const { project, title } = useLocalSearchParams<SearchParams>();
   const { user, setUser } = useContext(UserContext);
-
+  const projectObj: IProject = null;
   useEffect(() => {
-    getProject(project, (projectObj: any) => {
+    getProject(project, (projectObj) => {
       if (projectObj) {
         console.log("ProjectPosts: project found: " + project);
       } else {
@@ -28,11 +29,23 @@ export default function ProjectPosts() {
     setUser({ ...user, project: project });
   }, []);
 
-  return (
-    <View style={styles.container}>
-		  <Posts project={project as string} title={title as string} />
-    </View>
-  );
+  if (!project) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading</Text>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Posts
+          project={project as string}
+          title={title as string}
+          projectObj={projectObj}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
