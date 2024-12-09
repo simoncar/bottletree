@@ -22,7 +22,6 @@ type Props = {
 
 //TODO: Reload the projects when the sceen gets focus or on pulldown
 
-
 export const Projects = ({ session, archived }: Props) => {
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -86,6 +85,7 @@ export const Projects = ({ session, archived }: Props) => {
               pathname: "/[project]",
               params: {
                 project: data.key,
+                title: data.title,
               },
             });
           }}>
