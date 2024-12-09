@@ -22,10 +22,11 @@ import SharePanel from "@/components/SharePanel";
 type ProjectProp = {
   project: string;
   title: string;
+  projectObj: IProject;
 };
 
 const ProjectPanel = (props: ProjectProp) => {
-  const { project, title } = props;
+  const { project, title, projectObj: projectObjProps } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { session } = useSession();
@@ -42,11 +43,15 @@ const ProjectPanel = (props: ProjectProp) => {
 
   useEffect(() => {
     if (session) {
-      getProject(project || "", (projectObj) => {
-        if (projectObj) {
-          setProject(projectObj);
-        }
-      });
+      if (projectObjProps) {
+        setProject(projectObjProps);
+      } else {
+        getProject(project || "", (projectObj) => {
+          if (projectObj) {
+            setProject(projectObj);
+          }
+        });
+      }
       getUserProjectCount(session, userProjectCountRead);
     }
   }, [project]);

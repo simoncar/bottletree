@@ -17,7 +17,7 @@ type Props = {
   projectObj: IProject;
 };
 
-export const Posts = ({ project, title }: Props) => {
+export const Posts = ({ project, title, projectObj }: Props) => {
   const { session } = useSession();
   const { user } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
@@ -55,7 +55,7 @@ export const Posts = ({ project, title }: Props) => {
   const renderHeader = () => {
     return (
       <View>
-        <ProjectPanel project={project} title={title} />
+        <ProjectPanel project={project} title={title} projectObj={projectObj} />
       </View>
     );
   };
