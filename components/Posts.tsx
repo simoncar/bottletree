@@ -53,6 +53,8 @@ export const Posts = ({ project, title, projectObj }: Props) => {
   };
 
   const renderHeader = () => {
+    console.log("Posts - renderHeader", project, title, projectObj);
+
     return (
       <View>
         <ProjectPanel project={project} title={title} projectObj={projectObj} />

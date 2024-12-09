@@ -45,7 +45,13 @@ const ProjectPanel = (props: ProjectProp) => {
     if (session) {
       if (projectObjProps) {
         setProject(projectObjProps);
+        console.log(
+          "AAA ProjectPanel - useEffect - projectObjProps",
+          projectObjProps,
+        );
       } else {
+        console.log("BBB ProjectPanel - useEffect - projectObjProps is null");
+
         getProject(project || "", (projectObj) => {
           if (projectObj) {
             setProject(projectObj);

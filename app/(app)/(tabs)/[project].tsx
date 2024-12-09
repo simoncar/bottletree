@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { Posts } from "@/components/Posts";
@@ -15,10 +15,20 @@ type SearchParams = {
 export default function ProjectPosts() {
   const { project, title } = useLocalSearchParams<SearchParams>();
   const { user, setUser } = useContext(UserContext);
-  const projectObj: IProject = null;
+  const [projectObj, setProject] = useState<IProject>({
+    project: "",
+    key: "",
+    title: title,
+    icon: "",
+    archived: false,
+    postCount: 0,
+    private: false,
+  });
+
   useEffect(() => {
-    getProject(project, (projectObj) => {
-      if (projectObj) {
+    getProject(project, (pObj) => {
+      if (pObj) {
+        setProject(pObj);
         console.log("ProjectPosts: project found: " + project);
       } else {
         console.log("[project replace signIn] ");
@@ -29,7 +39,7 @@ export default function ProjectPosts() {
     setUser({ ...user, project: project });
   }, []);
 
-  if (!project) {
+  if (!projectObj) {
     return (
       <View style={styles.container}>
         <Text>Loading</Text>
