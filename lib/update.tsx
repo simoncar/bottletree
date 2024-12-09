@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   Pressable,
   useColorScheme,
   AppState,
   AppStateStatus,
+  Animated,
+  View,
 } from "react-native";
 import { getLocales } from "expo-localization";
-import { Text, View } from "@/components/Themed";
+import { Text } from "@/components/Themed";
 import * as Application from "expo-application";
 import { useSession } from "@/lib/ctx";
 import { getToken } from "@/lib/APINotification";
@@ -21,6 +23,25 @@ export const Update = () => {
     Updates.useUpdates();
   const colorScheme = useColorScheme();
   const [showUpdate, setShowUpdate] = useState(false);
+
+  // Create animation value
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  // Animation for press in
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  // Animation for press out
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  };
 
   // Show whether or not we are running embedded code or an update
   const runTypeMessage = currentlyRunning.isEmbeddedLaunch
@@ -84,19 +105,25 @@ export const Update = () => {
 
   return (
     <View style={styles.updateContainer}>
-      <Pressable onPress={fetchandRunUpdatesAsync} style={styles.updateButton}>
-        <View style={styles.iconContainer}>
-          <MaterialIcons
-            name="celebration"
-            size={24}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.updateText}>Update available</Text>
-          <Text style={styles.installText}>Click to install</Text>
-        </View>
-      </Pressable>
+      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+        <Pressable
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+          onPress={fetchandRunUpdatesAsync}
+          style={styles.updateButton}>
+          <View style={styles.iconContainer}>
+            <MaterialIcons
+              name="celebration"
+              size={24}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.updateText}>Update available</Text>
+            <Text style={styles.installText}>Click to install</Text>
+          </View>
+        </Pressable>
+      </Animated.View>
     </View>
   );
 };
