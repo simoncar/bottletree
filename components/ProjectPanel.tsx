@@ -21,10 +21,11 @@ import SharePanel from "@/components/SharePanel";
 
 type ProjectProp = {
   project: string;
+  title: string;
 };
 
 const ProjectPanel = (props: ProjectProp) => {
-  const { project } = props;
+  const { project, title } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { session } = useSession();
@@ -32,7 +33,7 @@ const ProjectPanel = (props: ProjectProp) => {
   const [projectObj, setProject] = useState<IProject>({
     project: "",
     key: "",
-    title: "",
+    title: title,
     icon: "",
     archived: false,
     postCount: 0,

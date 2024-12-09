@@ -15,6 +15,8 @@ export async function getProject(
     return;
   }
 
+  console.log("getProject DB CALL", project);
+
   const q = db.collection("projects").doc(project);
 
   const unsubscribe = q.onSnapshot((doc) => {

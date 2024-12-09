@@ -123,7 +123,8 @@ const ProjectList = () => {
             router.navigate({
               pathname: "/[project]",
               params: {
-                project: data.key,
+				  project: data.key,
+				  title: data.title,
               },
             });
           }}>

@@ -7,11 +7,12 @@ import { UserContext } from "@/lib/UserContext";
 import { getProject } from "@/lib/APIproject";
 
 type SearchParams = {
-  project: string;
+	project: string;
+	title:string;
 };
 
 export default function ProjectPosts() {
-  const { project } = useLocalSearchParams<SearchParams>();
+  const { project, title } = useLocalSearchParams<SearchParams>();
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function ProjectPosts() {
 
   return (
     <View style={styles.container}>
-      <Posts project={project as string} />
+		  <Posts project={project as string} title={title as string} />
     </View>
   );
 }

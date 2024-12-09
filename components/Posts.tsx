@@ -13,9 +13,10 @@ import { About } from "@/lib/about";
 
 type Props = {
   project: string;
+  title: string;
 };
 
-export const Posts = ({ project }: Props) => {
+export const Posts = ({ project, title }: Props) => {
   const { session } = useSession();
   const { user } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
@@ -53,7 +54,7 @@ export const Posts = ({ project }: Props) => {
   const renderHeader = () => {
     return (
       <View>
-        <ProjectPanel project={project} />
+			<ProjectPanel project={project} title={title} />
       </View>
     );
   };
