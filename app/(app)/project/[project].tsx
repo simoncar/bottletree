@@ -23,6 +23,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
 import { Back } from "@/components/Back";
 import SharePanel from "@/components/SharePanel";
+import Animated from "react-native-reanimated";
 
 export default function Project() {
   const [updateUsers, setUpdateUsers] = useState("");
@@ -175,20 +176,6 @@ export default function Project() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          headerRight: () => (
-            <Button
-              title="Save"
-              onPress={() => {
-                console.log("project save pressed", project);
-
-                updateProject(project, saveDone);
-              }}
-            />
-          ),
-        }}
-      />
       <View style={styles.contentContainer}>
         <Progress progress={progress} />
         <View style={styles.avatarAContainer}>
@@ -209,6 +196,15 @@ export default function Project() {
             </Text>
           </View>
         </View>
+
+        <Pressable
+          style={styles.saveButton}
+          onPress={() => {
+            console.log("project save pressed", project);
+            updateProject(project, saveDone);
+          }}>
+          <Text style={styles.saveButtonText}>Save</Text>
+        </Pressable>
         <SharePanel project={project} />
         <ProjectUsers project={local.project} updateUsers={updateUsers} />
         <Pressable style={styles.outerView} onPress={toggleArchive}>
@@ -242,6 +238,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "85%",
   },
+  button: {},
   archiveMessage: {
     color: "grey",
     fontSize: 16,
@@ -355,5 +352,27 @@ const styles = StyleSheet.create({
   },
   rightChevron: {
     marginHorizontal: 8,
+  },
+  saveButton: {
+    backgroundColor: "#007AFF", // iOS blue
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+    marginRight: 8,
+    zIndex: 100,
+    elevation: 100, // For Android
+  },
+  saveButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  animatedView: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });
