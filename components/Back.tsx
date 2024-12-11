@@ -35,5 +35,7 @@ const styles = StyleSheet.create({
   },
   pressable: {
     zIndex: 10,
+    color: "green",
+    backgroundColor: "red",
   },
 });

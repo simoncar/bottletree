@@ -114,149 +114,119 @@ export default function Layout() {
   }
   return (
     <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={styles.container}>
         <UserProvider>
-          <ActionSheetProvider>
-            <ProjectProvider>
-              <Stack
-                screenOptions={{
-                  headerStyle: {
-                    backgroundColor: Colors[colorScheme ?? "light"].background,
-                  },
-                  headerBackTitle: "",
-                  headerLeft: () => <Back />,
-                }}>
-                <Stack.Screen
-                  name="(tabs)"
-                  options={{
-                    title: "tt Tabs",
-                    headerShown: false,
-                  }}
-                />
-                <Stack.Screen
-                  name="index"
-                  options={{
-                    title: "Home",
-                    headerShown: true,
-                  }}
-                />
-                <Stack.Screen
-                  name="projectList"
-                  options={{
-                    presentation: "modal",
-                    title: "Projects",
-                  }}
-                />
-                <Stack.Screen
-                  name="share"
-                  options={{
-                    presentation: "modal",
-                    title: "Share",
-                  }}
-                />
-                <Stack.Screen
-                  name="projectListAdmin"
-                  options={{
-                    title: "Administration",
-                  }}
-                />
-                <Stack.Screen
-                  name="userList"
-                  options={{
-                    presentation: "modal",
-                    title: "Contacts",
-                  }}
-                />
-                <Stack.Screen
-                  name="language"
-                  options={{
-                    title: "Language",
-                  }}
-                />
-                <Stack.Screen
-                  name="editPost"
-                  options={{
-                    title: "Edit",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="viewPost"
-                  options={{
-                    title: "",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="project/[project]"
-                  options={{
-                    title: "Project",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="project/add"
-                  options={{
-                    title: "Add Project",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="editCalendar"
-                  options={{
-                    title: "Add Event",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="user/[uid]"
-                  options={{
-                    title: "User",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="camera"
-                  options={{
-                    title: "Camera",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="note"
-                  options={{
-                    title: "Add Note",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-                <Stack.Screen
-                  name="log"
-                  options={{
-                    title: "Logs",
-                    headerTitleStyle: {
-                      fontWeight: "bold",
-                    },
-                  }}
-                />
-              </Stack>
-            </ProjectProvider>
-          </ActionSheetProvider>
+          <ProjectProvider>
+            <Stack
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: Colors[colorScheme ?? "light"].background,
+                },
+                headerBackTitle: "",
+              }}>
+              <Stack.Screen
+                name="(tabs)"
+                options={{
+                  title: "tt Tabs",
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="index"
+                options={{
+                  title: "Home",
+                  headerShown: true,
+                }}
+              />
+              <Stack.Screen
+                name="projectList"
+                options={{
+                  presentation: "modal",
+                  title: "Projects",
+                }}
+              />
+              <Stack.Screen
+                name="share"
+                options={{
+                  presentation: "modal",
+                  title: "Share",
+                }}
+              />
+              <Stack.Screen
+                name="projectListAdmin"
+                options={{
+                  title: "Administration",
+                }}
+              />
+              <Stack.Screen
+                name="userList"
+                options={{
+                  presentation: "modal",
+                  title: "Contacts",
+                }}
+              />
+              <Stack.Screen
+                name="language"
+                options={{
+                  title: "Language",
+                }}
+              />
+              <Stack.Screen
+                name="editPost"
+                options={{
+                  title: "Edit",
+                }}
+              />
+              <Stack.Screen
+                name="viewPost"
+                options={{
+                  title: "",
+                }}
+              />
+              <Stack.Screen
+                name="project/[project]"
+                options={{
+                  title: "Project",
+                }}
+              />
+              <Stack.Screen
+                name="project/add"
+                options={{
+                  title: "Add Project",
+                }}
+              />
+              <Stack.Screen
+                name="editCalendar"
+                options={{
+                  title: "Add Event",
+                }}
+              />
+              <Stack.Screen
+                name="user/[uid]"
+                options={{
+                  title: "User",
+                }}
+              />
+              <Stack.Screen
+                name="camera"
+                options={{
+                  title: "Camera",
+                }}
+              />
+              <Stack.Screen
+                name="note"
+                options={{
+                  title: "Add Note",
+                }}
+              />
+              <Stack.Screen
+                name="log"
+                options={{
+                  title: "Logs",
+                }}
+              />
+            </Stack>
+          </ProjectProvider>
         </UserProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
@@ -264,8 +234,13 @@ export default function Layout() {
 }
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
-    paddingTop: 60,
+    position: "relative", // Ensure proper stacking context
+  },
+  // If you have Animated components, contain them:
+  animatedContainer: {
+    position: "absolute",
+    zIndex: 1,
+    pointerEvents: "box-none", // Allow touches to pass through to elements below
   },
 });

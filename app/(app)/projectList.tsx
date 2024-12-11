@@ -120,11 +120,11 @@ const ProjectList = () => {
 
             setUser({ ...user, project: data.key });
 
-            router.navigate({
+            router.push({
               pathname: "/[project]",
               params: {
-				  project: data.key,
-				  title: data.title,
+                project: data.key,
+                title: data.title,
               },
             });
           }}>

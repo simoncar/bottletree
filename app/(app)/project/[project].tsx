@@ -174,56 +174,64 @@ export default function Project() {
   );
 
   return (
-    <ScrollView>
+    <View style={styles.container}>
       <Stack.Screen
         options={{
           headerRight: () => (
             <Button
               title="Save"
-              onPress={() => updateProject(project, saveDone)}
+              onPress={() => {
+                console.log("project save pressed", project);
+
+                updateProject(project, saveDone);
+              }}
             />
           ),
         }}
       />
-      <Progress progress={progress} />
-      <View style={styles.avatarAContainer}>
-        <View style={styles.avatarBView}>{profilePic()}</View>
+      <View style={styles.contentContainer}>
+        <Progress progress={progress} />
+        <View style={styles.avatarAContainer}>
+          <View style={styles.avatarBView}>{profilePic()}</View>
+        </View>
+        <View style={styles.projectNameContainer}>
+          <View style={styles.projectBox}>
+            <TextInput
+              style={styles.project}
+              onChangeText={(text) => setProject({ ...project, title: text })}
+              placeholder={"Project Title"}
+              value={project.title}
+            />
+          </View>
+          <View style={styles.archiveBox}>
+            <Text style={styles.archiveMessage}>
+              {project.archived == true ? "Project Archived" : ""}
+            </Text>
+          </View>
+        </View>
+        <SharePanel project={project} />
+        <ProjectUsers project={local.project} updateUsers={updateUsers} />
+        <Pressable style={styles.outerView} onPress={toggleArchive}>
+          <View style={styles.avatar}>
+            <Ionicons
+              name="archive"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </View>
+          <View>
+            <Text style={styles.archiveName}>
+              {project.archived == true
+                ? "Unarchive Project"
+                : "Archive Project"}
+            </Text>
+          </View>
+        </Pressable>
+        <View style={styles.diagBox}>
+          <Text style={styles.projectId}>Project ID: {project.key}</Text>
+        </View>
       </View>
-      <View style={styles.projectNameContainer}>
-        <View style={styles.projectBox}>
-          <TextInput
-            style={styles.project}
-            onChangeText={(text) => setProject({ ...project, title: text })}
-            placeholder={"Project Title"}
-            value={project.title}
-          />
-        </View>
-        <View style={styles.archiveBox}>
-          <Text style={styles.archiveMessage}>
-            {project.archived == true ? "Project Archived" : ""}
-          </Text>
-        </View>
-      </View>
-      <SharePanel project={project} />
-      <ProjectUsers project={local.project} updateUsers={updateUsers} />
-      <Pressable style={styles.outerView} onPress={toggleArchive}>
-        <View style={styles.avatar}>
-          <Ionicons
-            name="archive"
-            size={25}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </View>
-        <View>
-          <Text style={styles.archiveName}>
-            {project.archived == true ? "Unarchive Project" : "Archive Project"}
-          </Text>
-        </View>
-      </Pressable>
-      <View style={styles.diagBox}>
-        <Text style={styles.projectId}>Project ID: {project.key}</Text>
-      </View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -269,6 +277,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 115,
     width: 30,
+  },
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    flex: 1,
+    zIndex: 1, // Ensure content stays below header
   },
   diagBox: {
     alignItems: "center",
