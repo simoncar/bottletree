@@ -145,6 +145,62 @@ export const demoData = async () => {
         { merge: true },
       );
 
+    await db
+      .collection("projects")
+      .doc("project7rovira")
+      .collection("files")
+      .doc("file11111")
+      .set(
+        {
+          key: "file1111",
+          filename: "House Plans version 1",
+          url: "https://file.location/filename.txt",
+          created: firestore.Timestamp.now(),
+          modified: firestore.Timestamp.now(),
+          filetype: "pdf",
+          bytes: 5242880,
+          projectId: "project7rovira",
+        },
+        { merge: true },
+      );
+
+    await db
+      .collection("projects")
+      .doc("project7rovira")
+      .collection("files")
+      .doc("file2222")
+      .set(
+        {
+          key: "file1111",
+          filename: "Bathroom Plans",
+          url: "https://file.location/filename.txt",
+          created: firestore.Timestamp.now(),
+          modified: firestore.Timestamp.now(),
+          filetype: "pdf",
+          bytes: 6242880,
+          projectId: "project7rovira",
+        },
+        { merge: true },
+      );
+    await db
+      .collection("projects")
+      .doc("project7rovira")
+      .collection("files")
+      .doc("file3333")
+      .set(
+        {
+          key: "file1111",
+          filename: "Certificate of Occupancy",
+          url: "https://file.location/filename.txt",
+          created: firestore.Timestamp.now(),
+          modified: firestore.Timestamp.now(),
+          filetype: "pdf",
+          bytes: 6242880,
+          projectId: "project7rovira",
+        },
+        { merge: true },
+      );
+
     await db.collection("projects").doc("welcome").set(
       {
         title: "Welcome Project",

@@ -14,7 +14,7 @@ import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];

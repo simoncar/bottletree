@@ -95,3 +95,15 @@ export interface ICalendarEvent {
   extensionTimeBegin?: string;
   extensionTimeEnd?: string;
 }
+
+//type to store files
+export interface IFile {
+  key: string;
+  filename: string;
+  url: string;
+  filetype: string;
+  bytes: number;
+  projectId: string;
+  created: Timestamp;
+  modified: Timestamp;
+}
