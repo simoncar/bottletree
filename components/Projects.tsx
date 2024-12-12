@@ -82,9 +82,9 @@ export const Projects = ({ session, archived }: Props) => {
             setUser({ ...user, project: data.key });
 
             router.navigate({
-              pathname: "/[project]",
+              pathname: "/[posts]",
               params: {
-                project: data.key,
+                posts: data.key,
                 title: data.title,
               },
             });

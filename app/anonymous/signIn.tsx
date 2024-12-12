@@ -27,9 +27,9 @@ export default function SignInAnonymously() {
   const saveDone = (id) => {
     console.log("saveDone SignInAnonymously: ", id);
     router.replace({
-      pathname: "/[project]",
+      pathname: "/[posts]",
       params: {
-        project: project,
+        posts: project,
       },
     });
   };

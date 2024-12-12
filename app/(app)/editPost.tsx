@@ -44,9 +44,9 @@ export default function editPost() {
 
   const saveDone = () => {
     router.navigate({
-      pathname: "/[project]",
+      pathname: "/[posts]",
       params: {
-        project: local?.projectId,
+        posts: local?.projectId,
       },
     });
   };

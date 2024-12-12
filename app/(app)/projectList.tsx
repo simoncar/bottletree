@@ -121,9 +121,9 @@ const ProjectList = () => {
             setUser({ ...user, project: data.key });
 
             router.push({
-              pathname: "/[project]",
+              pathname: "/[posts]",
               params: {
-                project: data.key,
+                posts: data.key,
                 title: data.title,
               },
             });

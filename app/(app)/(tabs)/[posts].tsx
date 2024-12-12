@@ -8,12 +8,12 @@ import { getProject } from "@/lib/APIproject";
 import { IProject } from "@/lib/types";
 
 type SearchParams = {
-  project: string;
+  posts: string; //project ID
   title: string;
 };
 
 export default function ProjectPosts() {
-  const { project, title } = useLocalSearchParams<SearchParams>();
+  const { posts: project, title } = useLocalSearchParams<SearchParams>();
   const { user, setUser } = useContext(UserContext);
   const [projectObj, setProject] = useState<IProject>({
     project: "",

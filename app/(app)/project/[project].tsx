@@ -61,9 +61,9 @@ export default function Project() {
 
   const saveDone = (id: string) => {
     router.navigate({
-      pathname: "/[project]",
+      pathname: "/[posts]",
       params: {
-        project: id,
+        posts: id,
       },
     });
   };

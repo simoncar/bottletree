@@ -191,7 +191,7 @@ export default function TabLayout() {
         ),
       }}>
       <Tabs.Screen
-        name="[project]"
+        name="[posts]"
         listeners={{
           tabPress: () => {
             router.navigate({
