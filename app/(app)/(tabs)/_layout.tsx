@@ -15,7 +15,6 @@ import { Back } from "@/components/Back";
 import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
 
-
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
   color: string;
@@ -215,10 +214,7 @@ export default function TabLayout() {
         name="calendar"
         options={{
           title: "Calendar",
-          headerTitle: () => (
-            // eslint-disable-next-line react-native/no-raw-text
-            <BigText style={styles.headerTitle}>Calendar</BigText>
-          ),
+
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="calendar" color={color} />
           ),
@@ -228,10 +224,7 @@ export default function TabLayout() {
         name="files"
         options={{
           title: "Files",
-          headerTitle: () => (
-            // eslint-disable-next-line react-native/no-raw-text
-            <BigText style={styles.headerTitle}>Files</BigText>
-          ),
+
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="file-pdf" color={color} />
           ),

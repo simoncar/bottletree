@@ -127,7 +127,7 @@ export default function Layout() {
               <Stack.Screen
                 name="(tabs)"
                 options={{
-                  title: "tt Tabs",
+                  title: "",
                   headerShown: false,
                 }}
               />
