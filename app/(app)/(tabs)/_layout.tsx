@@ -154,6 +154,7 @@ export default function TabLayout() {
                   style={{
                     paddingLeft: 30,
                     marginTop: 5,
+                    paddingBottom: 5,
                   }}
                   name="plus-circle"
                   color={Colors[colorScheme ?? "light"].text}
