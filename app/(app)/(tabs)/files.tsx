@@ -3,11 +3,10 @@ import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
-  Image,
 } from "react-native";
+import { Text } from "@/components/Themed";
 import { getFiles } from "@/lib/APIfiles";
 import { IFile } from "@/lib/types";
 import Colors from "@/constants/Colors";
@@ -15,6 +14,7 @@ import { useColorScheme } from "react-native";
 import { Timestamp } from "firebase/firestore";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useLocalSearchParams, router } from "expo-router";
+import * as DocumentPicker from "expo-document-picker";
 
 type SearchParams = {
   project: string; //project ID
@@ -40,22 +40,57 @@ export default function Files() {
     // Handle file selection
   };
 
+  const handleAddFilePress = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: "*/*",
+      copyToCacheDirectory: true,
+      multiple: true,
+    });
+
+    if (result.type === "success") {
+      console.log("Selected files:", result);
+      // Handle the selected files (e.g., upload to server, update state, etc.)
+    }
+  };
+
+  const predefinedFiles = [
+    "Blueprints and Floor Plans",
+    "Project Scope Document",
+    "Building Permits and Approvals",
+    "Bill of Quantities (BoQ)",
+    "Master Project Timeline",
+  ];
+
   const renderItem = ({ item }: { item: IFile }) => (
     <FileItem file={item} onPress={handleFilePress} />
   );
 
   return (
     <View style={styles.container}>
-      {loading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          data={files}
-          keyExtractor={(item) => item.key}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-        />
-      )}
+      <TouchableOpacity style={styles.addButton} onPress={handleAddFilePress}>
+        <Text style={styles.addButtonText}>Add File</Text>
+      </TouchableOpacity>
+      <FlatList
+        data={predefinedFiles}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <Text style={styles.predefinedFile}>{item}</Text>
+        )}
+        ListHeaderComponent={() => (
+          <>
+            {loading ? (
+              <ActivityIndicator />
+            ) : (
+              <FlatList
+                data={files}
+                keyExtractor={(item) => item.key}
+                renderItem={renderItem}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+              />
+            )}
+          </>
+        )}
+      />
     </View>
   );
 }
@@ -97,6 +132,23 @@ function formatDate(timestamp: Timestamp) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16,
+  },
+  addButton: {
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  addButtonText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  predefinedFile: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    fontSize: 16,
   },
   fileItem: {
     flexDirection: "row",
@@ -106,12 +158,9 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 40,
     height: 40,
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 12,
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    resizeMode: "contain",
   },
   fileInfo: {
     flex: 1,
