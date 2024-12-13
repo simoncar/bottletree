@@ -22,13 +22,7 @@ function TabBarIcon(props: {
   color: string;
   style?: any;
 }) {
-  return (
-    <FontAwesome5
-      size={28}
-      style={{ marginBottom: 0, paddingBottom: 35 }}
-      {...props}
-    />
-  );
+  return <FontAwesome5 size={28} style={{ marginBottom: 0 }} {...props} />;
 }
 
 type SearchParams = {
@@ -97,7 +91,7 @@ export default function TabLayout() {
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" />,
           headerLeft: () => (
             <View style={styles.back}>
               <Back />
