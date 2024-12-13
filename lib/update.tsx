@@ -7,6 +7,7 @@ import {
   AppStateStatus,
   Animated,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { getLocales } from "expo-localization";
 import { Text } from "@/components/Themed";
@@ -23,6 +24,7 @@ export const Update = () => {
     Updates.useUpdates();
   const colorScheme = useColorScheme();
   const [showUpdate, setShowUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Create animation value
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -87,6 +89,7 @@ export const Update = () => {
   }, [isUpdateAvailable]);
 
   async function fetchandRunUpdatesAsync() {
+    setLoading(true);
     try {
       const update = await Updates.checkForUpdateAsync();
 
@@ -96,6 +99,8 @@ export const Update = () => {
       }
     } catch (error) {
       alert(`Error fetching latest update: ${error}`);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -122,6 +127,7 @@ export const Update = () => {
             <Text style={styles.updateText}>Update available</Text>
             <Text style={styles.installText}>Click to install</Text>
           </View>
+          {loading && <ActivityIndicator style={styles.spinner} />}
         </Pressable>
       </Animated.View>
     </View>
@@ -130,7 +136,6 @@ export const Update = () => {
 
 const styles = StyleSheet.create({
   iconContainer: {
-    marginLeft: 70,
     marginRight: 12,
   },
   installText: {
@@ -161,5 +166,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
     marginBottom: 4,
+  },
+  spinner: {
+    marginLeft: 10,
   },
 });
