@@ -11,7 +11,7 @@ import Colors from "@/constants/Colors";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import alert from "@/lib/alert";
 import { IPost, IUser } from "@/lib/types";
-import { Tabs, useLocalSearchParams, router } from "expo-router";
+import { router } from "expo-router";
 import { addPostImage } from "@/lib/APIpost";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";

@@ -2,19 +2,15 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Tabs, useLocalSearchParams, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
-import { BigText } from "@/components/StyledText";
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
 import { IPost } from "@/lib/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { addPostImage } from "@/lib/APIpost";
 import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
-import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AddModal from "@/app/(app)/addModal";
 
 function TabBarIcon(props: {
@@ -91,7 +87,7 @@ export default function TabLayout() {
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerLeft: () => (
             <View style={styles.back}>
               <Back />
