@@ -2,7 +2,6 @@ import React from "react";
 import {
   Modal,
   View,
-  Text,
   StyleSheet,
   Pressable,
   useColorScheme,
@@ -16,6 +15,7 @@ import { addPostImage } from "@/lib/APIpost";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { Text } from "@/components/Themed";
 
 type OptionsModalProps = {
   visible: boolean;
@@ -76,13 +76,6 @@ const AddModal = ({
     addPostImage(post, saveDone);
   };
 
-  const createProject = () => {
-    alert("Alert", "Begin by creating a project.");
-    router.navigate({
-      pathname: "/project/add",
-    });
-  };
-
   //  "Add Note",
   //   "Take Photo",
   //   "Add from Camera Roll",
@@ -97,7 +90,13 @@ const AddModal = ({
       visible={visible}
       onRequestClose={onClose}>
       <View style={styles.overlay}>
-        <View style={styles.modalContainer}>
+        <View
+          style={[
+            styles.modalContainer,
+            {
+              backgroundColor: Colors[colorScheme ?? "light"].postBackground,
+            },
+          ]}>
           <Pressable
             style={styles.option}
             onPress={() => {
@@ -195,7 +194,12 @@ const AddModal = ({
               color={Colors[colorScheme ?? "light"].text}
             />
           </Pressable>
-          <Pressable style={styles.closeButton} onPress={onClose}>
+          <Pressable
+            style={styles.option}
+            onPress={() => {
+              onClose();
+            }}>
+            <Text style={styles.optionTextDisabled}></Text>
             <AntDesign
               name="close"
               size={24}
@@ -203,7 +207,6 @@ const AddModal = ({
             />
           </Pressable>
         </View>
-        <Text style={styles.closeButtonText}>Project:{project}</Text>
       </View>
     </Modal>
   );
@@ -217,7 +220,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   modalContainer: {
-    backgroundColor: "white",
     borderRadius: 10,
     padding: 20,
     width: "80%",

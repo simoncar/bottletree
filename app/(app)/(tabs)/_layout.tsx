@@ -143,12 +143,17 @@ export default function TabLayout() {
           name="nothing"
           options={{
             title: "Add",
-            tabBarIcon: ({ color }) => (
+
+            tabBarButton: (props) => (
               <Pressable
                 onPress={() => {
                   setModalVisible(true);
                 }}>
-                <TabBarIcon name="plus-square" color={color} />
+                <FontAwesome5
+                  size={40}
+                  style={{ paddingLeft: 30, marginTop: 5 }}
+                  name="plus-circle"
+                />
               </Pressable>
             ),
           }}
