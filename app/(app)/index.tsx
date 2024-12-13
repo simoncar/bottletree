@@ -95,7 +95,7 @@ export default function Home() {
         </View>
         <View style={styles.container}>
           <View style={styles.instructions}>
-            <Text style={styles.welcomeApp}>Welcome to Builder</Text>
+            <Text style={styles.welcomeApp}>Projects</Text>
           </View>
 
           <Projects session={session as string} archived={false} />
