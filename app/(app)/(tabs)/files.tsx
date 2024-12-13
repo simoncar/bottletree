@@ -70,11 +70,15 @@ export default function Files() {
       <TouchableOpacity style={styles.addButton} onPress={handleAddFilePress}>
         <Text style={styles.addButtonText}>Add File</Text>
       </TouchableOpacity>
+      <Text style={styles.predefinedFileHeader}>Examples of files to add:</Text>
       <FlatList
         data={predefinedFiles}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Text style={styles.predefinedFile}>{item}</Text>
+          <Text style={styles.predefinedFile}>
+            {"\u2022"}
+            {item}
+          </Text>
         )}
         ListHeaderComponent={() => (
           <>
@@ -145,10 +149,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   predefinedFile: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
     fontSize: 16,
+  },
+  predefinedFileHeader: {
+    fontSize: 16,
+    fontWeight: "bold",
+    paddingBottom: 8,
   },
   fileItem: {
     flexDirection: "row",
