@@ -9,12 +9,7 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { getLocales } from "expo-localization";
 import { Text } from "@/components/Themed";
-import * as Application from "expo-application";
-import { useSession } from "@/lib/ctx";
-import { getToken } from "@/lib/APINotification";
-import { auth } from "@/lib/firebase";
 import * as Updates from "expo-updates";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
