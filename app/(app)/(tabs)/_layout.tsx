@@ -1,6 +1,6 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Tabs, useLocalSearchParams, router } from "expo-router";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { BigText } from "@/components/StyledText";
 import { UserAvatar } from "@/components/UserAvatar";
@@ -14,17 +14,25 @@ import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import alert from "@/lib/alert";
 import { UserContext } from "@/lib/UserContext";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AddModal from "@/app/(app)/addModal";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome5>["name"];
   color: string;
   style?: any;
 }) {
-  return <FontAwesome5 size={28} style={{ marginBottom: -3 }} {...props} />;
+  return (
+    <FontAwesome5
+      size={28}
+      style={{ marginBottom: 0, paddingBottom: 35 }}
+      {...props}
+    />
+  );
 }
 
 type SearchParams = {
-  project: string;
+  posts: string;
 };
 
 export default function TabLayout() {
@@ -32,7 +40,8 @@ export default function TabLayout() {
   const { user } = useContext(UserContext);
   const { isAuthLoading } = useSession();
   const { showActionSheetWithOptions } = useActionSheet();
-  const { project } = useLocalSearchParams<SearchParams>();
+  const { posts: project } = useLocalSearchParams<SearchParams>();
+  const [modalVisible, setModalVisible] = useState(false);
 
   if (isAuthLoading) {
     return <Text>Loading</Text>;
@@ -40,17 +49,6 @@ export default function TabLayout() {
 
   const saveDone = () => {
     console.log("saveDone - push to home");
-  };
-
-  const pickImage = async () => {
-    const multiple = true;
-
-    addImageFromCameraRoll(
-      multiple,
-      "posts",
-      progressCallback,
-      completedCallback,
-    );
   };
 
   const progressCallback = (progress: number) => {
@@ -81,171 +79,99 @@ export default function TabLayout() {
     addPostImage(post, saveDone);
   };
 
-  const createProject = () => {
-    alert("Alert", "Begin by creating a project.");
-    router.navigate({
-      pathname: "/project/add",
-    });
-  };
-
-  const openActionSheet = async () => {
-    const dateBegin = new Date();
-    dateBegin.setMinutes(0);
-    const dateEnd = new Date();
-    dateEnd.setMinutes(0);
-    dateEnd.setHours(dateEnd.getHours() + 1);
-
-    let options = [];
-
-    options = [
-      "Add Note",
-      "Take Photo",
-      "Add from Camera Roll",
-      "Add Calendar Event",
-      "Add Project",
-      "Cancel",
-    ];
-
-    const cancelButtonIndex = options.length - 1;
-
-    showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex,
-      },
-      (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            if (!project) {
-              createProject();
-              return;
-            }
-
-            router.navigate({
-              pathname: "/note",
-              params: {
-                project: project,
-                post: "",
-              },
-            });
-            break;
-          case 1:
-            if (!project) {
-              createProject();
-              return;
-            }
-            router.navigate({
-              pathname: "/camera",
-              params: {
-                project: project,
-                post: "",
-              },
-            });
-            break;
-          case 2:
-            if (!project) {
-              createProject();
-              return;
-            }
-            pickImage();
-            break;
-          case 3:
-            if (!project) {
-              createProject();
-              return;
-            }
-            router.navigate({
-              pathname: "/editCalendar",
-              params: {
-                project: project,
-              },
-            });
-            break;
-          case 4:
-            router.navigate({
-              pathname: "/project/add",
-            });
-            break;
-        }
-      },
-    );
+  const handleOptionSelect = (option: string) => {
+    console.log("Selected option:", option);
+    setModalVisible(false);
   };
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tintInactive,
-        tabBarStyle: {
-          backgroundColor: Colors[colorScheme ?? "light"].background,
-        },
-
-        headerStyle: {
-          backgroundColor: Colors[colorScheme ?? "light"].background,
-        },
-        tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-        headerLeft: () => (
-          <View style={styles.back}>
-            <Back />
-          </View>
-        ),
-      }}>
-      <Tabs.Screen
-        name="[posts]"
-        listeners={{
-          tabPress: () => {
-            router.navigate({
-              pathname: "/projectList",
-              params: {
-                page: "",
-              },
-            });
+    <View style={{ flex: 1 }}>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+          tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tintInactive,
+          tabBarStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
           },
-        }}
-        options={{
-          title: "Projects",
-          headerRight: () => (
-            <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
-          ),
-        }}
-      />
 
-      <Tabs.Screen
-        name="calendar"
-        options={{
-          title: "Calendar",
-
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="calendar" color={color} />
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+          },
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerLeft: () => (
+            <View style={styles.back}>
+              <Back />
+            </View>
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="files"
-        options={{
-          title: "Files",
+        }}>
+        <Tabs.Screen
+          name="[posts]"
+          listeners={{
+            tabPress: () => {
+              router.navigate({
+                pathname: "/projectList",
+                params: {
+                  page: "",
+                },
+              });
+            },
+          }}
+          options={{
+            title: "Projects",
+            headerRight: () => (
+              <UserAvatar
+                uid={user?.uid}
+                photoURL={user?.photoURL}
+                user={user}
+              />
+            ),
+          }}
+        />
 
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="file-pdf" color={color} />
-          ),
-        }}
-      />
+        <Tabs.Screen
+          name="calendar"
+          options={{
+            title: "Calendar",
 
-      <Tabs.Screen
-        name="nothing"
-        options={{
-          title: "Add",
-          tabBarIcon: () => (
-            <Pressable
-              onPress={() => {
-                openActionSheet();
-              }}>
-              <TabBarIcon name="plus-square" color={"white"} />
-            </Pressable>
-          ),
-        }}
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon name="calendar" color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="files"
+          options={{
+            title: "Files",
+
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon name="file-pdf" color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="nothing"
+          options={{
+            title: "Add",
+            tabBarIcon: ({ color }) => (
+              <Pressable
+                onPress={() => {
+                  setModalVisible(true);
+                }}>
+                <TabBarIcon name="plus-square" color={color} />
+              </Pressable>
+            ),
+          }}
+        />
+      </Tabs>
+      <AddModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onOptionSelect={handleOptionSelect}
+        project={project}
+        user={user}
       />
-    </Tabs>
+    </View>
   );
 }
 
@@ -268,5 +194,9 @@ const styles = StyleSheet.create({
   },
   back: {
     paddingLeft: 10,
+  },
+  tabBarIcon: {
+    paddingBottom: 10,
+    paddingLeft: 1,
   },
 });

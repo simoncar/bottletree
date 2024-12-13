@@ -14,14 +14,21 @@ import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
 import { Timestamp } from "firebase/firestore";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { useLocalSearchParams, router } from "expo-router";
+
+type SearchParams = {
+  project: string; //project ID
+  title: string;
+};
 
 export default function Files() {
+  const { project, title } = useLocalSearchParams<SearchParams>();
   const [files, setFiles] = useState<IFile[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    getFiles("project7rovira", (retrievedFiles) => {
+    getFiles(project, (retrievedFiles) => {
       setFiles(retrievedFiles);
       console.log("getFiles:", retrievedFiles);
 
