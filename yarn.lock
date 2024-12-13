@@ -5696,6 +5696,11 @@ expo-device@~7.0.1:
   dependencies:
     ua-parser-js "^0.7.33"
 
+expo-document-picker@~13.0.1:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-13.0.1.tgz#f8c70d11cd59d7e57d5065667893c277b1a8869e"
+  integrity sha512-M3O3SDqubsRbVyY+Xu6V45K0/G1S1IqEdmVAnPkOiUU2eIEFfF5oP4KON4CsvEhO9IIunnpRr/oq9NQxb3SrEA==
+
 expo-eas-client@~0.13.0:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/expo-eas-client/-/expo-eas-client-0.13.1.tgz#ebca627f3f58a54906394eb3f5d22f41a1822618"
