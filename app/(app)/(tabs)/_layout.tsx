@@ -151,8 +151,12 @@ export default function TabLayout() {
                 }}>
                 <FontAwesome5
                   size={40}
-                  style={{ paddingLeft: 30, marginTop: 5 }}
+                  style={{
+                    paddingLeft: 30,
+                    marginTop: 5,
+                  }}
                   name="plus-circle"
+                  color={Colors[colorScheme ?? "light"].text}
                 />
               </Pressable>
             ),
