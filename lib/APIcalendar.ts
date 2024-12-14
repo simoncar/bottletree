@@ -11,7 +11,7 @@ const translateColor = (color: string) => {
   }
 };
 export async function getItemsBigCalendar(
-  projectId: string,
+  project: string,
   callback: itemsRead,
 ) {
   const q = firestore().collection("calendar");

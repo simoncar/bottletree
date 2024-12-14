@@ -10,11 +10,10 @@ import {
 import { getItemsBigCalendar } from "@/lib/APIcalendar";
 import { View, Text } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import { router } from "expo-router";
 import dayjs from "dayjs";
 import { useNavigation } from "expo-router";
-import { BigText } from "@/components/StyledText";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { useLocalSearchParams, router } from "expo-router";
+
 import {
   Calendar,
   ICalendarEventBase,
@@ -24,7 +23,13 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { MonthYearScroller } from "@/components/Months";
 
+type SearchParams = {
+  project: string; //project ID
+  title: string;
+};
+
 export default function CalendarLarge() {
+  const { project, title } = useLocalSearchParams<SearchParams>();
   const [items, setItems] = useState([]);
   const [calendarDate, setDate] = useState(dayjs());
   const colorScheme = useColorScheme();

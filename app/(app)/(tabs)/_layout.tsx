@@ -29,45 +29,12 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const { user } = useContext(UserContext);
   const { isAuthLoading } = useSession();
-  const { showActionSheetWithOptions } = useActionSheet();
   const { posts: project } = useLocalSearchParams<SearchParams>();
   const [modalVisible, setModalVisible] = useState(false);
 
   if (isAuthLoading) {
     return <Text>Loading</Text>;
   }
-
-  const saveDone = () => {
-    console.log("saveDone - push to home");
-  };
-
-  const progressCallback = (progress: number) => {
-    console.log("progressCallback", progress);
-  };
-
-  const completedCallback = (sourceDownloadURLarray) => {
-    let ratio = 0.66666;
-    sourceDownloadURLarray.map((element) => {
-      const myArray = element.split("*");
-      if (myArray[0] > ratio) {
-        ratio = myArray[0];
-      }
-
-      return myArray;
-    });
-
-    const post: IPost = {
-      key: "",
-      caption: "",
-      projectId: project,
-      projectTitle: project,
-      author: user.displayName,
-      images: sourceDownloadURLarray,
-      ratio: ratio,
-    };
-
-    addPostImage(post, saveDone);
-  };
 
   const handleOptionSelect = (option: string) => {
     console.log("Selected option:", option);
@@ -127,12 +94,13 @@ export default function TabLayout() {
               <TabBarIcon name="calendar" color={color} />
             ),
           }}
+          initialParams={{ project: project }}
         />
         <Tabs.Screen
           name="files"
+          initialParams={{ project: project }}
           options={{
             title: "Files",
-
             tabBarIcon: ({ color }) => (
               <TabBarIcon name="file-pdf" color={color} />
             ),
