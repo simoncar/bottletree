@@ -101,7 +101,7 @@ export interface IFile {
   key: string;
   filename: string;
   url: string;
-  filetype: string;
+  mimeType: string;
   bytes: number;
   projectId: string;
   created: Timestamp;

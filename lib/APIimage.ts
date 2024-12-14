@@ -1,5 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
-import { firebase, uploadBytes } from "./firebase";
+import { firebase, uploadBytes } from "@/lib/firebase";
 import * as Crypto from "expo-crypto";
 import { Platform } from "react-native";
 import * as ImageManipulator from "expo-image-manipulator";
@@ -75,9 +75,9 @@ export const addImageFromPhoto = async (
 };
 
 async function processItemAsync(
-  folder: string, 
-  asset: ImageAsset, 
-  progressCallback: ProgressCallback
+  folder: string,
+  asset: ImageAsset,
+  progressCallback: ProgressCallback,
 ): Promise<string> {
   let imageUri = asset.uri;
   let compressedImage;
@@ -96,7 +96,7 @@ async function processItemAsync(
       compressedImage = await ImageManipulator.manipulateAsync(
         asset.uri,
         [], // No operations, just compression
-        compressionOptions
+        compressionOptions,
       );
       imageUri = compressedImage.uri;
     }
@@ -109,7 +109,8 @@ async function processItemAsync(
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = () => resolve(xhr.response);
-      xhr.onerror = (e) => reject(new TypeError(`Network request failed: ${e}`));
+      xhr.onerror = (e) =>
+        reject(new TypeError(`Network request failed: ${e}`));
       xhr.responseType = "blob";
       xhr.open("GET", uri, true);
       xhr.send(null);

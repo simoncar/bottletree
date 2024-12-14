@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  Linking,
 } from "react-native";
 import { Text } from "@/components/Themed";
 import { getFiles } from "@/lib/APIfiles";
@@ -15,6 +16,8 @@ import { Timestamp } from "firebase/firestore";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useLocalSearchParams, router } from "expo-router";
 import * as DocumentPicker from "expo-document-picker";
+import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 type SearchParams = {
   project: string; //project ID
@@ -31,13 +34,16 @@ export default function Files() {
     getFiles(project, (retrievedFiles) => {
       setFiles(retrievedFiles);
       console.log("getFiles:", retrievedFiles);
-
       setLoading(false);
     });
   }, []);
 
   const handleFilePress = (file: IFile) => {
     // Handle file selection
+    console.log("File selected:", file);
+    Linking.openURL(file.url).catch((err) =>
+      console.error("Failed to open file URL:", err),
+    );
   };
 
   const handleAddFilePress = async () => {
@@ -47,9 +53,9 @@ export default function Files() {
       multiple: true,
     });
 
-    if (result.type === "success") {
+    if (result.type != "cancel") {
       console.log("Selected files:", result);
-      // Handle the selected files (e.g., upload to server, update state, etc.)
+      uploadFilesAndCreateEntries(result, project);
     }
   };
 
@@ -67,9 +73,26 @@ export default function Files() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.addButton} onPress={handleAddFilePress}>
+      <TouchableOpacity style={styles.addFile} onPress={handleAddFilePress}>
         <Text style={styles.addButtonText}>Add File</Text>
+        <AntDesign
+          name="addfile"
+          size={24}
+          color={Colors[colorScheme ?? "light"].textDisabledColor}
+        />
       </TouchableOpacity>
+
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={files}
+          keyExtractor={(item) => item.key}
+          renderItem={renderItem}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
+      )}
+
       <Text style={styles.predefinedFileHeader}>Examples of files to add:</Text>
       <FlatList
         data={predefinedFiles}
@@ -79,20 +102,6 @@ export default function Files() {
             {"\u2022"}
             {item}
           </Text>
-        )}
-        ListHeaderComponent={() => (
-          <>
-            {loading ? (
-              <ActivityIndicator />
-            ) : (
-              <FlatList
-                data={files}
-                keyExtractor={(item) => item.key}
-                renderItem={renderItem}
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
-              />
-            )}
-          </>
         )}
       />
     </View>
@@ -147,6 +156,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     fontSize: 16,
     fontWeight: "bold",
+    paddingRight: 10,
   },
   predefinedFile: {
     fontSize: 16,
@@ -184,5 +194,11 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: "#CCC",
     marginLeft: 64,
+  },
+  addFile: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
   },
 });
