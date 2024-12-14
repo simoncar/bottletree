@@ -47,15 +47,21 @@ export default function Files() {
   };
 
   const handleAddFilePress = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
-      type: "*/*",
-      copyToCacheDirectory: true,
-      multiple: true,
-    });
+    try {
+      let result = await DocumentPicker.getDocumentAsync({
+        type: "*/*",
+        copyToCacheDirectory: true,
+        multiple: true,
+      });
 
-    if (result.type != "cancel") {
-      console.log("Selected files:", result);
-      uploadFilesAndCreateEntries(result, project);
+      if (result.type != "cancel") {
+        console.log("Selected files:", result);
+        uploadFilesAndCreateEntries(result, project);
+      } else {
+        console.log("Document picker was canceled");
+      }
+    } catch (error) {
+      console.error("Error picking document:", error);
     }
   };
 

@@ -16,6 +16,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Text } from "@/components/Themed";
+import * as DocumentPicker from "expo-document-picker";
+import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
 
 type OptionsModalProps = {
   visible: boolean;
@@ -74,6 +76,31 @@ const AddModal = ({
     };
 
     addPostImage(post, saveDone);
+  };
+
+  const handleAddFilePress = async () => {
+    console.log("handleAddFilePress1");
+    try {
+      let result = await DocumentPicker.getDocumentAsync({
+        type: "*/*",
+        copyToCacheDirectory: true,
+        multiple: true,
+      });
+
+      console.log("handleAddFilePress2");
+
+      if (result.type != "cancel") {
+        console.log("Selected files:", result);
+        uploadFilesAndCreateEntries(result, project);
+        onClose();
+      } else {
+        console.log("Document picker was canceled");
+      }
+    } catch (error) {
+      console.error("Error picking document:", error);
+    }
+
+    console.log("handleAddFilePress3");
   };
 
   //  "Add Note",
@@ -138,7 +165,7 @@ const AddModal = ({
           <Pressable
             style={styles.option}
             onPress={() => {
-              onClose();
+              //onClose();
               pickImage();
             }}>
             <Text style={styles.optionText}>Add from Camera Roll</Text>
@@ -169,14 +196,14 @@ const AddModal = ({
           <Pressable
             style={styles.option}
             onPress={() => {
-              onClose();
-              console.log("Add File");
+              //onClose();
+              handleAddFilePress();
             }}>
-            <Text style={styles.optionTextDisabled}>Add File</Text>
+            <Text style={styles.optionText}>Add File</Text>
             <AntDesign
               name="addfile"
               size={24}
-              color={Colors[colorScheme ?? "light"].textDisabledColor}
+              color={Colors[colorScheme ?? "light"].text}
             />
           </Pressable>
           <Pressable
