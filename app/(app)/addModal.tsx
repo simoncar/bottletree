@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import Colors from "@/constants/Colors";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
-import alert from "@/lib/alert";
 import { IPost, IUser } from "@/lib/types";
 import { router } from "expo-router";
 import { addPostImage } from "@/lib/APIpost";
@@ -48,6 +47,7 @@ const AddModal = ({
 
   const progressCallback = (progress: number) => {
     console.log("progressCallback", progress);
+    onClose();
   };
 
   const saveDone = () => {
