@@ -24,23 +24,24 @@ export async function getFiles(project: string, callback: filesRead) {
     .collection("files")
     .orderBy("modified", "desc");
 
-  const logSnapshot = await q.get();
-
-  logSnapshot.forEach((doc) => {
-    console.log("loop files:", doc);
-    files.push({
-      key: doc.id,
-      filename: doc.data().filename,
-      url: doc.data().url,
-      mimeType: doc.data().mimeType,
-      bytes: doc.data().bytes,
-      created: doc.data().created,
-      modified: doc.data().modified,
-      projectId: doc.data().projectId,
+  const unsubscribe = q.onSnapshot((querySnapshot) => {
+    const files: IFile[] = [];
+    querySnapshot?.forEach((doc) => {
+      files.push({
+        key: doc.id,
+        filename: doc.data().filename,
+        url: doc.data().url,
+        mimeType: doc.data().mimeType,
+        bytes: doc.data().bytes,
+        created: doc.data().created,
+        modified: doc.data().modified,
+        projectId: doc.data().projectId,
+      });
     });
-  });
 
-  callback(files);
+    callback(files);
+  });
+  return () => unsubscribe();
 }
 
 export async function uploadFilesAndCreateEntries(
