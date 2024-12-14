@@ -28,7 +28,6 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { getProject } from "@/lib/APIproject";
 import { Back } from "@/components/Back";
 
-
 type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
 type DateorTime = "date" | "time";
 type CalendarParams = {
@@ -71,7 +70,7 @@ export default function editCalendar() {
 
   useEffect(() => {
     if (calendarId != undefined) {
-      getCalendarEvent(calendarId || "", (calendarEvent) => {
+      getCalendarEvent(project, calendarId || "", (calendarEvent) => {
         if (calendarEvent) {
           setCalendarEvent(calendarEvent);
           setDateBegin(calendarEvent.dateBegin?.toDate() || new Date());
@@ -106,6 +105,7 @@ export default function editCalendar() {
     d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
 
     saveCalendarEvent(
+      project,
       {
         ...calendarEvent,
         dateBegin: firestore.Timestamp.fromDate(d1),
@@ -134,7 +134,7 @@ export default function editCalendar() {
         {
           text: "Delete",
           onPress: () => {
-            deleteCalendarEvent(calendarEvent, deleteDone);
+            deleteCalendarEvent(project, calendarEvent, deleteDone);
           },
         },
       ],

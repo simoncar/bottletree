@@ -25,11 +25,10 @@ import { MonthYearScroller } from "@/components/Months";
 
 type SearchParams = {
   project: string; //project ID
-  title: string;
 };
 
 export default function CalendarLarge() {
-  const { project, title } = useLocalSearchParams<SearchParams>();
+  const { project } = useLocalSearchParams<SearchParams>();
   const [items, setItems] = useState([]);
   const [calendarDate, setDate] = useState(dayjs());
   const colorScheme = useColorScheme();
@@ -66,7 +65,7 @@ export default function CalendarLarge() {
   };
 
   useEffect(() => {
-    const unsubscribe = getItemsBigCalendar("", itemsRead);
+    const unsubscribe = getItemsBigCalendar(project, itemsRead);
     return () => {
       unsubscribe;
     };
