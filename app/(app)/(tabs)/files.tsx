@@ -18,6 +18,7 @@ import { useLocalSearchParams, router } from "expo-router";
 import * as DocumentPicker from "expo-document-picker";
 import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 type SearchParams = {
   project: string; //project ID
@@ -72,7 +73,6 @@ export default function Files() {
     "Bill of Quantities (BoQ)",
     "Master Project Timeline",
   ];
-
   const renderItem = ({ item }: { item: IFile }) => (
     <FileItem file={item} onPress={handleFilePress} />
   );
@@ -119,29 +119,75 @@ type FileItemProps = {
   onPress: (file: IFile) => void;
 };
 
+const getIconName = (mimeType: string) => {
+  switch (mimeType) {
+    case "application/pdf":
+      return "file-pdf-o";
+    case "image/jpeg":
+      return "file-image";
+    case "image/png":
+      return "file-image";
+    case "application/msword":
+      return "file-word-o";
+    case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+      return "file-word-o";
+    case "application/vnd.ms-excel":
+      return "file-excel-o";
+    case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+      return "file-excel-o";
+    case "application/vnd.ms-powerpoint":
+      return "file-powerpoint-o";
+    case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+      return "file-powerpoint-o";
+    default:
+      return "file-o";
+  }
+};
+
+const FileIcon = ({ file }: { file: IFile }) => {
+  const iconName = getIconName(file.mimeType);
+  const colorScheme = useColorScheme();
+  return (
+    <View style={styles.iconContainer}>
+      <FontAwesome
+        name={iconName}
+        size={24}
+        color={Colors[colorScheme ?? "light"].text}
+      />
+    </View>
+  );
+};
+
 const FileItem = ({ file, onPress }: FileItemProps) => {
   console.log("fileItem:", file);
   const formattedDate = formatDate(file.modified);
-  const colorScheme = useColorScheme();
 
   return (
     <TouchableOpacity style={styles.fileItem} onPress={() => onPress(file)}>
-      <View style={styles.iconContainer}>
-        <FontAwesome5
-          name="seedling"
-          size={25}
-          color={Colors[colorScheme ?? "light"].text}
-        />
-      </View>
+      <FileIcon file={file} />
       <View style={styles.fileInfo}>
         <Text style={styles.fileName}>{file.filename}</Text>
         <Text style={styles.fileDetails}>
-          {file.bytes} • {formattedDate}
+          {bytesToHumanReadable(file.bytes)} • {formattedDate}
         </Text>
       </View>
     </TouchableOpacity>
   );
 };
+function bytesToHumanReadable(sizeInBytes) {
+  const units = ["B", "KB", "MB", "GB", "TB", "PB"];
+  let size = sizeInBytes;
+
+  for (const unit of units) {
+    if (size < 1024) {
+      return unit === "KB"
+        ? `${Math.floor(size)} ${unit}`
+        : `${size.toFixed(2)} ${unit}`;
+    }
+    size /= 1024;
+  }
+  return `${size.toFixed(2)} PB`;
+}
 
 function formatDate(timestamp: Timestamp) {
   const date = timestamp.toDate();
