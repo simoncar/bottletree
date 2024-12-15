@@ -1,5 +1,5 @@
 module.exports = ({ config }) => {
-	const isDev = process.env.APP_ENV === "development";
+	const isDev = process.env.APP_ENV === "development" || process.env.APP_ENV === "staging" || process.env.APP_ENV === "apk";
 
 	return {
 		expo: {
