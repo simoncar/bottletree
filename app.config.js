@@ -32,7 +32,11 @@ module.exports = ({ config }) => {
 					foregroundImage: "./assets/images/adaptive-icon.png",
 					backgroundColor: isDev ? "#5D5CE7" : "#F9D96D",
 				},
-				package: process.env.ANDROID_PACKAGE || "co.simon.bottletree"
+				package: process.env.ANDROID_PACKAGE || "co.simon.bottletree",
+				"permissions": [
+					"READ_EXTERNAL_STORAGE",
+					"WRITE_EXTERNAL_STORAGE"
+				]
 			},
 			web: {
 				bundler: "metro",
