@@ -8,7 +8,8 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "ANDROID_PACKAGE": "co.simon.bottletree.dev"
+        "ANDROID_PACKAGE": "co.simon.bottletree.dev",
+        "GOOGLE_SERVICES_FILE": "google-services.dev.json"
       }
     },
     "simulator": {
@@ -18,7 +19,8 @@
         "resourceClass": "default"
       },
       "env": {
-        "ANDROID_PACKAGE": "co.simon.bottletree.dev"
+        "ANDROID_PACKAGE": "co.simon.bottletree.dev",
+        "GOOGLE_SERVICES_FILE": "google-services.dev.json"
       }
     },
     "apk": {
@@ -28,7 +30,8 @@
       "channel": "production",
       "autoIncrement": true,
       "env": {
-        "ANDROID_PACKAGE": "co.simon.bottletree"
+        "ANDROID_PACKAGE": "co.simon.bottletree",
+        "GOOGLE_SERVICES_FILE": "google-services.prod.json"
       }
     },
     "preview": {
@@ -38,7 +41,8 @@
         "resourceClass": "default"
       },
       "env": {
-        "ANDROID_PACKAGE": "co.simon.bottletree"
+        "ANDROID_PACKAGE": "co.simon.bottletree",
+        "GOOGLE_SERVICES_FILE": "google-services.prod.json"
       }
     }
   },
