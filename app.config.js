@@ -27,7 +27,7 @@ module.exports = ({ config }) => {
 				associatedDomains: ["applinks:b.otbapps.com", "applinks:b.simon.co"]
 			},
 			android: {
-				googleServicesFile: "./google-services.json",
+				googleServicesFile: "./" + process.env.GOOGLE_SERVICES_FILE,
 				adaptiveIcon: {
 					foregroundImage: "./assets/images/adaptive-icon.png",
 					backgroundColor: isDev ? "#5D5CE7" : "#F9D96D",
