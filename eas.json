@@ -6,13 +6,19 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "ANDROID_PACKAGE": "co.simon.bottletree.dev"
+      }
     },
     "simulator": {
       "extends": "development",
       "ios": {
         "simulator": true,
         "resourceClass": "default"
+      },
+      "env": {
+        "ANDROID_PACKAGE": "co.simon.bottletree.dev"
       }
     },
     "apk": {
@@ -20,13 +26,19 @@
     },
     "production": {
       "channel": "production",
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "ANDROID_PACKAGE": "co.simon.bottletree"
+      }
     },
     "preview": {
       "channel": "production",
       "android": {
         "buildType": "apk",
         "resourceClass": "default"
+      },
+      "env": {
+        "ANDROID_PACKAGE": "co.simon.bottletree"
       }
     }
   },
