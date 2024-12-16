@@ -25,7 +25,7 @@ import { Back } from "@/components/Back";
 import SharePanel from "@/components/SharePanel";
 import Animated from "react-native-reanimated";
 
-export default function Project() {
+export default function editProject() {
   const [updateUsers, setUpdateUsers] = useState("");
   const [progress, setProgress] = useState(0);
 
