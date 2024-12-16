@@ -100,6 +100,9 @@ export async function updateAccountName(uid: string, displayName: string) {
   const user = auth().currentUser;
 
   console.log("updateAccountName:", user, uid, displayName);
+  if (displayName == undefined || displayName == "") {
+    displayName = user.displayName;
+  }
 
   try {
     await user.updateProfile({
