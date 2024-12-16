@@ -51,9 +51,6 @@ export default function TabLayout() {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
 
-          headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
-          },
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerLeft: () => (
             <View style={styles.back}>

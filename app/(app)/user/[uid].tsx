@@ -39,6 +39,8 @@ export default function editUser() {
   const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
   const save = () => {
+    console.log("save");
+
     updateAccountName(session, user.displayName);
     router.back();
   };
@@ -88,6 +90,8 @@ export default function editUser() {
   };
 
   const openActionSheet = async () => {
+    console.log("openActionSheet");
+
     const options = ["Pick from Camera Roll", "Delete", "Cancel"];
     const destructiveButtonIndex = options.length - 2;
     const cancelButtonIndex = options.length - 1;
@@ -150,10 +154,18 @@ export default function editUser() {
   }
 
   return (
-    <ScrollView>
+    <View>
       <Stack.Screen
         options={{
-          headerRight: () => <Button title="Save" onPress={() => save()} />,
+          headerRight: () => (
+            <TouchableOpacity
+              onPressIn={() => {
+                console.log("save");
+                save();
+              }}>
+              <Text>Save</Text>
+            </TouchableOpacity>
+          ),
         }}
       />
       <Progress progress={progress} />
@@ -252,7 +264,7 @@ export default function editUser() {
         <Update />
         <About />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

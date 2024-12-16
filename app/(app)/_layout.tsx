@@ -112,17 +112,12 @@ export default function Layout() {
     }
   }
   return (
-    <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-      <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView>
+      <ThemeProvider
+        value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
         <UserProvider>
           <ProjectProvider>
-            <Stack
-              screenOptions={{
-                headerStyle: {
-                  backgroundColor: Colors[colorScheme ?? "light"].background,
-                },
-                headerBackTitle: "",
-              }}>
+            <Stack screenOptions={{}}>
               <Stack.Screen
                 name="(tabs)"
                 options={{
@@ -227,19 +222,19 @@ export default function Layout() {
             </Stack>
           </ProjectProvider>
         </UserProvider>
-      </GestureHandlerRootView>
-    </ThemeProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: "relative", // Ensure proper stacking context
-  },
-  // If you have Animated components, contain them:
-  animatedContainer: {
-    position: "absolute",
-    zIndex: 1,
-    pointerEvents: "box-none", // Allow touches to pass through to elements below
-  },
+  //   container: {
+  //     flex: 1,
+  //     position: "relative", // Ensure proper stacking context
+  //   },
+  //   // If you have Animated components, contain them:
+  //   animatedContainer: {
+  //     position: "absolute",
+  //     zIndex: 1,
+  //     pointerEvents: "box-none", // Allow touches to pass through to elements below
+  //   },
 });
