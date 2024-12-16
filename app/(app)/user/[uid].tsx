@@ -154,7 +154,7 @@ export default function editUser() {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Stack.Screen
         options={{
           headerRight: () => (
@@ -264,7 +264,7 @@ export default function editUser() {
         <Update />
         <About />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
