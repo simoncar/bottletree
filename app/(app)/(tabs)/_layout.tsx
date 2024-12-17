@@ -73,11 +73,13 @@ export default function TabLayout() {
           options={{
             title: "Projects",
             headerRight: () => (
-              <UserAvatar
-                uid={user?.uid}
-                photoURL={user?.photoURL}
-                user={user}
-              />
+              <View style={styles.topPanelRight}>
+                <UserAvatar
+                  uid={user?.uid}
+                  photoURL={user?.photoURL}
+                  user={user}
+                />
+              </View>
             ),
           }}
         />
@@ -156,6 +158,10 @@ const styles = StyleSheet.create({
   tabIcon: {
     paddingBottom: 0,
     paddingLeft: 1,
+  },
+  topPanelRight: {
+    padding: 6,
+    paddingBottom: 20,
   },
   back: {
     paddingLeft: 10,

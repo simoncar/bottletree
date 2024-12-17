@@ -94,20 +94,28 @@ export default function Files() {
           keyExtractor={(item) => item.key}
           renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ListEmptyComponent={() => (
+            <View>
+              <Text style={{ textAlign: "center", padding: 16 }}>
+                No files found
+              </Text>
+              <Text style={styles.predefinedFileHeader}>
+                Examples of files to add:
+              </Text>
+              <FlatList
+                data={predefinedFiles}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <Text style={styles.predefinedFile}>
+                    {"\u2022"}
+                    {item}
+                  </Text>
+                )}
+              />
+            </View>
+          )}
         />
       )}
-
-      <Text style={styles.predefinedFileHeader}>Examples of files to add:</Text>
-      <FlatList
-        data={predefinedFiles}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <Text style={styles.predefinedFile}>
-            {"\u2022"}
-            {item}
-          </Text>
-        )}
-      />
     </View>
   );
 }
@@ -215,6 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     paddingBottom: 8,
+    paddingTop: 40,
   },
   fileItem: {
     flexDirection: "row",
