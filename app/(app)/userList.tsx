@@ -12,6 +12,7 @@ import * as Contacts from "expo-contacts";
 import { sortContactsByName } from "@/lib/sort";
 import Loading from "@/app/(app)/loading";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Toast from "react-native-root-toast";
 
 const UserList = () => {
   const { project } = useLocalSearchParams<{
@@ -45,7 +46,7 @@ const UserList = () => {
               key: contact.id,
               uid: contact.id,
               displayName: contact?.name || "",
-              email: contact.emails?.[0]?.email || "",
+              email: contact.emails?.[0]?.email.toLowerCase() || "",
               photoURL: null,
               project: project,
               anonymous: false,
@@ -75,6 +76,20 @@ const UserList = () => {
     });
   };
 
+  const handleUserSelection = (selectedUser: IUser) => {
+    if (selectedUser.email) {
+      addProjectUser(project, selectedUser, saveDone);
+    } else {
+      console.log("Selected user does not have an email address.");
+      //   Toast.show("Contact must have an eamil address.", {
+      //     duration: Toast.durations.SHORT,
+      //   });
+      alert(
+        "Contact cannot be added unless they have an eamil address.  Instead try sharing the project with them using the share button.",
+      );
+    }
+  };
+
   function renderRow(data: IUser) {
     let backgroundColor = "transparent";
     if (data.uid === user.uid) {
@@ -87,7 +102,7 @@ const UserList = () => {
         <TouchableOpacity
           style={styles.innerView}
           onPress={() => {
-            addProjectUser(project, data, saveDone);
+            handleUserSelection(data);
           }}>
           <View style={styles.avatar}>
             {data.photoURL ? (

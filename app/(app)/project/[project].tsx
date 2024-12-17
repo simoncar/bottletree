@@ -175,59 +175,61 @@ export default function editProject() {
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Progress progress={progress} />
-        <View style={styles.avatarAContainer}>
-          <View style={styles.avatarBView}>{profilePic()}</View>
-        </View>
-        <View style={styles.projectNameContainer}>
-          <View style={styles.projectBox}>
-            <TextInput
-              style={styles.project}
-              onChangeText={(text) => setProject({ ...project, title: text })}
-              placeholder={"Project Title"}
-              value={project.title}
-            />
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
+          <Progress progress={progress} />
+          <View style={styles.avatarAContainer}>
+            <View style={styles.avatarBView}>{profilePic()}</View>
           </View>
-          <View style={styles.archiveBox}>
-            <Text style={styles.archiveMessage}>
-              {project.archived == true ? "Project Archived" : ""}
-            </Text>
+          <View style={styles.projectNameContainer}>
+            <View style={styles.projectBox}>
+              <TextInput
+                style={styles.project}
+                onChangeText={(text) => setProject({ ...project, title: text })}
+                placeholder={"Project Title"}
+                value={project.title}
+              />
+            </View>
+            <View style={styles.archiveBox}>
+              <Text style={styles.archiveMessage}>
+                {project.archived == true ? "Project Archived" : ""}
+              </Text>
+            </View>
           </View>
-        </View>
 
-        <Pressable
-          style={styles.saveButton}
-          onPress={() => {
-            console.log("project save pressed", project);
-            updateProject(project, saveDone);
-          }}>
-          <Text style={styles.saveButtonText}>Save</Text>
-        </Pressable>
-        <SharePanel project={project} />
-        <ProjectUsers project={local.project} updateUsers={updateUsers} />
-        <Pressable style={styles.outerView} onPress={toggleArchive}>
-          <View style={styles.avatar}>
-            <Ionicons
-              name="archive"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
+          <Pressable
+            style={styles.saveButton}
+            onPress={() => {
+              console.log("project save pressed", project);
+              updateProject(project, saveDone);
+            }}>
+            <Text style={styles.saveButtonText}>Save</Text>
+          </Pressable>
+          <SharePanel project={project} />
+          <ProjectUsers project={local.project} updateUsers={updateUsers} />
+          <Pressable style={styles.outerView} onPress={toggleArchive}>
+            <View style={styles.avatar}>
+              <Ionicons
+                name="archive"
+                size={25}
+                color={Colors[colorScheme ?? "light"].text}
+              />
+            </View>
+            <View>
+              <Text style={styles.archiveName}>
+                {project.archived == true
+                  ? "Unarchive Project"
+                  : "Archive Project"}
+              </Text>
+            </View>
+          </Pressable>
+          <View style={styles.diagBox}>
+            <Text style={styles.projectId}>Project ID: {project.key}</Text>
           </View>
-          <View>
-            <Text style={styles.archiveName}>
-              {project.archived == true
-                ? "Unarchive Project"
-                : "Archive Project"}
-            </Text>
-          </View>
-        </Pressable>
-        <View style={styles.diagBox}>
-          <Text style={styles.projectId}>Project ID: {project.key}</Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

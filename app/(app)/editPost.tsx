@@ -74,6 +74,7 @@ export default function editPost() {
                 styles.titleText,
                 { color: Colors[colorScheme ?? "light"].text },
               ]}
+			  
               onChangeText={(title) => setPost({ ...post, caption: title })}
               placeholder={"Add Note"}
               value={post.caption}

@@ -1,5 +1,6 @@
 import { auth, db, firestore } from "@/lib/firebase";
 import { IUser } from "./types";
+import * as Crypto from "expo-crypto";
 
 export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
@@ -68,7 +69,7 @@ export async function createUser(user: IUser) {
 
   if (user.email != undefined) {
     querySnapshot = await usersCollection
-      .where("email", "==", user.email)
+      .where("email", "==", user.email.toLowerCase())
       .get();
   } else {
     querySnapshot = await usersCollection.where("uid", "==", user.uid).get();
@@ -84,6 +85,7 @@ export async function createUser(user: IUser) {
     return user;
   } else {
     try {
+      const UUID = Crypto.randomUUID();
       const userDoc = usersCollection.doc(user.uid);
       await userDoc.set(user);
       console.log("User created successfully:", user.uid);
