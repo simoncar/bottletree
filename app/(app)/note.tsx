@@ -5,6 +5,7 @@ import {
   TextInput,
   Button as NativeButton,
   useColorScheme,
+  TouchableOpacity,
 } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { Stack, router, useLocalSearchParams } from "expo-router";
@@ -66,7 +67,13 @@ export default function Note() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <NativeButton title="Done" onPress={() => save()} />
+            <TouchableOpacity
+              onPressIn={() => {
+                console.log("save");
+                save();
+              }}>
+              <Text>Save</Text>
+            </TouchableOpacity>
           ),
         }}
       />

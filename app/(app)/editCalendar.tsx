@@ -7,6 +7,7 @@ import {
   useColorScheme,
   Pressable,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { firestore } from "@/lib/firebase";
 
@@ -253,7 +254,13 @@ export default function editCalendar() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <NativeButton title="Done" onPress={() => save()} />
+            <TouchableOpacity
+              onPressIn={() => {
+                console.log("save");
+                save();
+              }}>
+              <Text>Save</Text>
+            </TouchableOpacity>
           ),
         }}
       />
