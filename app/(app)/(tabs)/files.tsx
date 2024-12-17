@@ -122,7 +122,7 @@ const getIconName = (mimeType: string) => {
     case "application/pdf":
       return "file-pdf-o";
     case "image/jpeg":
-      return "file-image";
+      return "file-image-o";
     case "image/png":
       return "file-image";
     case "application/msword":
