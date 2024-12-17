@@ -23,7 +23,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
 import { Back } from "@/components/Back";
 import SharePanel from "@/components/SharePanel";
-import Animated from "react-native-reanimated";
 
 export default function editProject() {
   const [updateUsers, setUpdateUsers] = useState("");
@@ -60,12 +59,7 @@ export default function editProject() {
   }, []);
 
   const saveDone = (id: string) => {
-    router.navigate({
-      pathname: "/[posts]",
-      params: {
-        posts: id,
-      },
-    });
+    router.back();
   };
 
   const toggleArchive = () => {
@@ -176,6 +170,19 @@ export default function editProject() {
 
   return (
     <ScrollView>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <TouchableOpacity
+              onPressIn={() => {
+                console.log("save");
+                updateProject(project, saveDone);
+              }}>
+              <Text>Save</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <View style={styles.container}>
         <View style={styles.contentContainer}>
           <Progress progress={progress} />
@@ -198,14 +205,6 @@ export default function editProject() {
             </View>
           </View>
 
-          <Pressable
-            style={styles.saveButton}
-            onPress={() => {
-              console.log("project save pressed", project);
-              updateProject(project, saveDone);
-            }}>
-            <Text style={styles.saveButtonText}>Save</Text>
-          </Pressable>
           <SharePanel project={project} />
           <ProjectUsers project={local.project} updateUsers={updateUsers} />
           <Pressable style={styles.outerView} onPress={toggleArchive}>
