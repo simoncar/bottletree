@@ -13,6 +13,7 @@ import Colors from "@/constants/Colors";
 import dayjs from "dayjs";
 import { useNavigation } from "expo-router";
 import { useLocalSearchParams, router } from "expo-router";
+import { CustomCalendarEvent } from "@/lib/types";
 
 import {
   Calendar,
@@ -102,13 +103,14 @@ export default function CalendarLarge() {
     }
   };
 
-  const renderEvent = <T extends ICalendarEventBase>(
+  const renderEvent = <T extends CustomCalendarEvent>(
     event: T,
-    touchableOpacityProps: CalendarTouchableOpacityProps,
+    touchableOpacityProps: any,
   ) => {
     const typedEvent = event as T & { color: string }; // Add type assertion
+    const { key, ...restProps } = touchableOpacityProps;
     return (
-      <TouchableOpacity {...touchableOpacityProps}>
+      <TouchableOpacity {...restProps}>
         <View
           style={[styles.calendarEvent, { backgroundColor: typedEvent.color }]}>
           <Text style={styles.calendarEventText}>{typedEvent.title}</Text>
@@ -117,12 +119,12 @@ export default function CalendarLarge() {
     );
   };
 
-  const onPressEvent = <T extends ICalendarEventBase>(event: T) => {
-    const typedEvent = event as T & { key: string }; // Add type assertion
+  const onPressEvent = <T extends CustomCalendarEvent>(event: T) => {
+    const typedEvent = event as T & { id: string }; // Add type assertion
     router.navigate({
       pathname: "/editCalendar",
       params: {
-        calendarId: typedEvent.key,
+        calendarId: typedEvent.id,
       },
     });
   };

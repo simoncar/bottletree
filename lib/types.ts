@@ -1,4 +1,6 @@
 import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
+import { ICalendarEventBase } from "react-native-big-calendar";
+
 export type CollectionReference = FirebaseFirestoreTypes.CollectionReference;
 export type DocumentReference = FirebaseFirestoreTypes.DocumentReference;
 export type Timestamp = FirebaseFirestoreTypes.Timestamp;
@@ -106,4 +108,12 @@ export interface IFile {
   projectId: string;
   created: Timestamp;
   modified: Timestamp;
+}
+
+export interface CustomCalendarEvent extends ICalendarEventBase {
+  id: string;
+  summary: string;
+  color: string;
+  isFullDayEvent: boolean;
+  timeCreated: Date;
 }
