@@ -1,5 +1,6 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Tabs, useLocalSearchParams, router } from "expo-router";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useContext, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { UserAvatar } from "@/components/UserAvatar";
@@ -13,12 +14,30 @@ import { Back } from "@/components/Back";
 import { UserContext } from "@/lib/UserContext";
 import AddModal from "@/app/(app)/addModal";
 
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome5>["name"];
+function TabBarIcon({
+  name,
+  color,
+  style,
+  IconComponent,
+}: {
+  name: string;
   color: string;
   style?: any;
+  IconComponent?: React.ComponentType<{
+    name: string;
+    color: string;
+    size: number;
+  }>;
 }) {
-  return <FontAwesome5 size={28} style={{ marginBottom: 0 }} {...props} />;
+  return (
+    <IconComponent
+      size={28}
+      style={{ marginBottom: 0 }}
+      name={name}
+      color={color}
+      {...style}
+    />
+  );
 }
 
 type SearchParams = {
@@ -51,7 +70,13 @@ export default function TabLayout() {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
 
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon
+              name="home"
+              color={color}
+              IconComponent={FontAwesome5}
+            />
+          ),
           headerLeft: () => (
             <View style={styles.back}>
               <Back />
@@ -90,7 +115,11 @@ export default function TabLayout() {
             title: "Calendar",
 
             tabBarIcon: ({ color }) => (
-              <TabBarIcon name="calendar" color={color} />
+              <TabBarIcon
+                name="calendar"
+                color={color}
+                IconComponent={FontAwesome5}
+              />
             ),
           }}
           initialParams={{ project: project }}
@@ -101,7 +130,11 @@ export default function TabLayout() {
           options={{
             title: "Files",
             tabBarIcon: ({ color }) => (
-              <TabBarIcon name="file-pdf" color={color} />
+              <TabBarIcon
+                name="file-present"
+                color={color}
+                IconComponent={MaterialIcons}
+              />
             ),
           }}
         />
