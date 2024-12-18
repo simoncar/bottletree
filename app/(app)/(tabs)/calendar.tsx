@@ -121,10 +121,13 @@ export default function CalendarLarge() {
 
   const onPressEvent = <T extends CustomCalendarEvent>(event: T) => {
     const typedEvent = event as T & { id: string }; // Add type assertion
+    console.log("onPressEvent", typedEvent);
+
     router.navigate({
       pathname: "/editCalendar",
       params: {
-        calendarId: typedEvent.id,
+        calendarId: typedEvent.key,
+        project: project,
       },
     });
   };
