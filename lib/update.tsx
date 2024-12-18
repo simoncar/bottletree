@@ -164,5 +164,6 @@ const styles = StyleSheet.create({
   },
   spinner: {
     marginLeft: 10,
+    transform: [{ scale: 1.5 }],
   },
 });
