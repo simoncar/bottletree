@@ -70,10 +70,13 @@ module.exports = ({ config }) => {
 					}
 				],
 				[
-					"expo-contacts",
-					{
-						contactsPermission: "Allow $(PRODUCT_NAME) to access your contacts to select people you want to share a project with."
-					}
+					"expo-router"
+				]
+				[
+				"expo-contacts",
+				{
+					contactsPermission: "Allow $(PRODUCT_NAME) to access your contacts to select people you want to share a project with."
+				}
 				],
 				[
 					"expo-camera",
