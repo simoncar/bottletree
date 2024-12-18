@@ -69,14 +69,12 @@ module.exports = ({ config }) => {
 						photosPermission: "Allow $(PRODUCT_NAME) to access your photos to share the images you select with other people that have access to the project."
 					}
 				],
+				"expo-router",
 				[
-					"expo-router"
-				]
-				[
-				"expo-contacts",
-				{
-					contactsPermission: "Allow $(PRODUCT_NAME) to access your contacts to select people you want to share a project with."
-				}
+					"expo-contacts",
+					{
+						contactsPermission: "Allow $(PRODUCT_NAME) to access your contacts to select people you want to share a project with."
+					}
 				],
 				[
 					"expo-camera",
