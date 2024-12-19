@@ -114,22 +114,7 @@ const ProjectPanel = (props: ProjectProp) => {
             </Text>
           </Pressable>
         </View>
-        <View>
-          <Pressable
-            onPress={() => {
-              router.navigate({
-                pathname: "/projectList",
-              });
-            }}>
-            <View style={styles.rightChevron}>
-              <FontAwesome5
-                name="angle-down"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-              />
-            </View>
-          </Pressable>
-        </View>
+        <View></View>
       </View>
       <SharePanel project={projectObj} icon="link" pathname="share" />
     </View>
