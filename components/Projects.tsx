@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
-import { router } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import { router, useFocusEffect } from "expo-router";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -34,8 +34,24 @@ export const Projects = ({ session, archived }: Props) => {
   };
 
   useEffect(() => {
+    console.log("ProjectList useEffect");
+
     getProjects(session, archived, projectsRead);
   }, []);
+
+  useFocusEffect(
+    // Callback should be wrapped in `React.useCallback` to avoid running the effect too often.
+    useCallback(() => {
+      // Invoked whenever the route is focused.
+      console.log("ProjectList useFocusffect");
+      getProjects(session, archived, projectsRead);
+
+      // Return function is invoked whenever the route gets out of focus.
+      return () => {
+        console.log("This route is now unfocused.");
+      };
+    }, []),
+  );
 
   function findValueByKey(
     obj: Record<string, number>,
