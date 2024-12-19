@@ -1,10 +1,5 @@
 import React, { useContext } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, useColorScheme, ScrollView } from "react-native";
 import { useSession } from "@/lib/ctx";
 import { router, Link, Stack } from "expo-router";
 import { Text, View } from "@/components/Themed";

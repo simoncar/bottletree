@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text as RNText,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text as RNText, TouchableOpacity, View } from "react-native";
 
 export function Text(props) {
   const { style, ...rest } = props;
