@@ -131,7 +131,7 @@ export default function CalendarLarge() {
               onPressIn={() => {
                 goToday();
               }}>
-              <Text>Today</Text>
+              <Text style={{ paddingRight: 5 }}>Today</Text>
             </TouchableOpacity>
           ),
         }}
@@ -167,7 +167,6 @@ export default function CalendarLarge() {
 const styles = StyleSheet.create({
   calendarCellStyle: {
     borderWidth: 0,
-    color: "white",
     padding: 0,
   },
   calendarEvent: {

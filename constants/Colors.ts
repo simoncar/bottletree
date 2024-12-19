@@ -13,7 +13,7 @@ export default {
     projectPanel: "#e9f0fd",
     dots: "#ccc",
     dotsActive: "#3265cb",
-    bigCalendarBoxes: "#e9f0fd",
+    bigCalendarBoxes: "#dcdcdd",
     bigCalendarDayNumberInactive: "#2d4150",
     bigCalendarActive: "#3265cb",
     bigCalendarContrastText: "#fff",

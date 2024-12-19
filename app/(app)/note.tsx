@@ -46,12 +46,7 @@ export default function Note() {
   }, []);
 
   const saveDone = () => {
-    router.navigate({
-      pathname: "/[posts]",
-      params: {
-        posts: local?.project,
-      },
-    });
+    router.back();
   };
 
   const save = () => {
