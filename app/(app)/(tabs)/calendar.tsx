@@ -11,7 +11,7 @@ import { getItemsBigCalendar } from "@/lib/APIcalendar";
 import { View, Text } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import dayjs from "dayjs";
-import { useNavigation } from "expo-router";
+import { useNavigation, Stack } from "expo-router";
 import { useLocalSearchParams, router } from "expo-router";
 import { CustomCalendarEvent } from "@/lib/types";
 
@@ -89,6 +89,10 @@ export default function CalendarLarge() {
     }
   };
 
+  const goToday = () => {
+    setDate(dayjs());
+  };
+
   const renderEvent = <T extends CustomCalendarEvent>(
     event: T,
     touchableOpacityProps: any,
@@ -120,7 +124,26 @@ export default function CalendarLarge() {
 
   return (
     <ScrollView>
-      <MonthYearScroller range={5} onSelect={onChangeMonth} />
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <TouchableOpacity
+              onPressIn={() => {
+                goToday();
+              }}>
+              <Text>Today</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <MonthYearScroller
+        range={5}
+        onSelect={onChangeMonth}
+        currentMonthYear={{
+          month: calendarDate.month(),
+          year: calendarDate.year(),
+        }}
+      />
       <Calendar
         events={items}
         height={height - 200}

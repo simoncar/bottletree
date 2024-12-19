@@ -27,12 +27,14 @@ type Props = {
   initialYear?: number;
   range?: number; // how many years before and after the initialYear to show
   onSelect?: (monthIndex: number, year: number) => void;
+  currentMonthYear?: { month: number; year: number }; // new prop
 };
 
 export const MonthYearScroller: React.FC<Props> = ({
   initialYear = new Date().getFullYear(),
   range = 5,
   onSelect,
+  currentMonthYear, // new prop
 }) => {
   const [selectedMonthIndex, setSelectedMonthIndex] = useState(
     new Date().getMonth(),
@@ -77,7 +79,14 @@ export const MonthYearScroller: React.FC<Props> = ({
         animated: false,
       });
     }
-  }, [itemWidth]);
+  }, [itemWidth, currentMonthYear]);
+
+  useEffect(() => {
+    if (currentMonthYear) {
+      setSelectedMonthIndex(currentMonthYear.month);
+      setSelectedYear(currentMonthYear.year);
+    }
+  }, [currentMonthYear]);
 
   const onItemLayout = (e: LayoutChangeEvent) => {
     if (!itemWidth) {
