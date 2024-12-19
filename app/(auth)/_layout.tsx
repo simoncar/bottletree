@@ -8,6 +8,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { Back } from "@/components/Back";
+import { StatusBar } from "expo-status-bar";
 
 export default function Layout() {
   const colorScheme = useColorScheme();
@@ -30,12 +31,14 @@ export default function Layout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
+      <StatusBar style="auto" />
       <Stack
         screenOptions={{
           headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
           headerBackTitle: "",
+          navigationBarColor: Colors[colorScheme ?? "light"].background,
           headerLeft: () => <Back />,
         }}
       />

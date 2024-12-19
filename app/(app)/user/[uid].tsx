@@ -24,7 +24,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "@/lib/demoData";
-import { StatusBar } from "expo-status-bar";
+
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 
@@ -259,7 +259,7 @@ export default function editUser() {
           </View>
         </View>
       </TouchableOpacity>
-      <StatusBar style="auto" />
+
       <View style={styles.aboutContainer}>
         <Update />
         <About />

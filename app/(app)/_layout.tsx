@@ -24,6 +24,7 @@ import Colors from "@/constants/Colors";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
+import { StatusBar } from "expo-status-bar";
 
 type SearchParams = {
   project: string;
@@ -117,7 +118,13 @@ export default function Layout() {
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
         <UserProvider>
           <ProjectProvider>
-            <Stack screenOptions={{}}>
+            <StatusBar style="auto" />
+            <Stack
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: Colors[colorScheme ?? "light"].background,
+                },
+              }}>
               <Stack.Screen
                 name="(tabs)"
                 options={{

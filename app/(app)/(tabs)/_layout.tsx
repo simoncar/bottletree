@@ -13,6 +13,7 @@ import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import { UserContext } from "@/lib/UserContext";
 import AddModal from "@/app/(app)/addModal";
+import { StatusBar } from "expo-status-bar";
 
 function TabBarIcon({
   name,
@@ -62,11 +63,15 @@ export default function TabLayout() {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar style="auto" />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
           tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tintInactive,
           tabBarStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
+          },
+          headerStyle: {
             backgroundColor: Colors[colorScheme ?? "light"].background,
           },
 
