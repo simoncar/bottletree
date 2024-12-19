@@ -72,21 +72,7 @@ export default function CalendarLarge() {
     };
   }, []);
 
-  useEffect(() => {
-    setNavOptions();
-  }, [calendarDate]);
-
-  const setNavOptions = () => {
-    // navigation.setOptions({
-    //   headerTitle: () => (
-    //     <View style={styles.headerTitleA}>
-    //       <BigText style={styles.headerTitle}>
-    //         {dayjs(calendarDate).format("MMMM YYYY")}
-    //       </BigText>
-    //     </View>
-    //   ),
-    // });
-  };
+  useEffect(() => {}, [calendarDate]);
 
   const onChangeDate = ([start, end]) => {
     //setDate(start);
@@ -131,16 +117,6 @@ export default function CalendarLarge() {
       },
     });
   };
-
-  function modeToNum(mode: string, current?: dayjs.Dayjs | Date): number {
-    if (!current) {
-      throw new Error("You must specify current date if mode is month");
-    }
-    if (current instanceof Date) {
-      current = dayjs(current);
-    }
-    return current.daysInMonth() - current.date() + 1;
-  }
 
   return (
     <ScrollView>

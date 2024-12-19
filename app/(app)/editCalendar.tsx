@@ -90,12 +90,7 @@ export default function editCalendar() {
   }, []);
 
   const saveDone = (id: string) => {
-    router.navigate({
-      pathname: "/calendar",
-      params: {
-        id: id,
-      },
-    });
+    router.back();
   };
 
   const save = () => {

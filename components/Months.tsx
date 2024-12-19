@@ -38,7 +38,6 @@ export const MonthYearScroller: React.FC<Props> = ({
     new Date().getMonth(),
   );
   const [selectedYear, setSelectedYear] = useState(initialYear);
-
   const scrollRef = useRef<ScrollView>(null);
 
   const allYears = [];
@@ -70,13 +69,15 @@ export const MonthYearScroller: React.FC<Props> = ({
 
   useEffect(() => {
     // Once we know the item width, scroll to currentIndex
+    console.log("useEffect: ", currentIndex);
+
     if (itemWidth && currentIndex >= 0) {
       scrollRef.current?.scrollTo({
         x: currentIndex * (itemWidth + 20), // itemWidth + (2 * marginHorizontal=10)
         animated: false,
       });
     }
-  }, [itemWidth, currentIndex]);
+  }, [itemWidth]);
 
   const onItemLayout = (e: LayoutChangeEvent) => {
     if (!itemWidth) {
