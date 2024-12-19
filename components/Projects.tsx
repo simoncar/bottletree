@@ -20,8 +20,6 @@ type Props = {
   archived: boolean;
 };
 
-//TODO: Reload the projects when the sceen gets focus or on pulldown
-
 export const Projects = ({ session, archived }: Props) => {
   const [projects, setProjects] = useState<IProject[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
