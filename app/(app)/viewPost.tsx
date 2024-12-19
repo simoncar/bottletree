@@ -74,7 +74,7 @@ const ViewPost = () => {
         options={{
           headerRight: () => (
             <Pressable
-              onPress={() => {
+              onPressIn={() => {
                 downloadImage();
               }}>
               <Feather

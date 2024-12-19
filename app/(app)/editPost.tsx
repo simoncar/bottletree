@@ -5,6 +5,7 @@ import {
   useColorScheme,
   Button as NativeButton,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { router, useLocalSearchParams, Stack } from "expo-router";
 import { TextInput, View } from "@/components/Themed";
@@ -12,6 +13,7 @@ import { IPost } from "@/lib/types";
 import { updatePost, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
 import { UserContext } from "@/lib/UserContext";
+import { Text } from "@/components/Themed";
 
 export default function editPost() {
   const { user } = useContext(UserContext);
@@ -43,12 +45,7 @@ export default function editPost() {
   }, []);
 
   const saveDone = () => {
-    router.navigate({
-      pathname: "/[posts]",
-      params: {
-        posts: local?.projectId,
-      },
-    });
+    router.back();
   };
 
   const save = () => {
@@ -62,7 +59,13 @@ export default function editPost() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <NativeButton title="Done" onPress={() => save()} />
+            <TouchableOpacity
+              onPressIn={() => {
+                console.log("save");
+                save();
+              }}>
+              <Text>Save</Text>
+            </TouchableOpacity>
           ),
         }}
       />
@@ -74,7 +77,6 @@ export default function editPost() {
                 styles.titleText,
                 { color: Colors[colorScheme ?? "light"].text },
               ]}
-			  
               onChangeText={(title) => setPost({ ...post, caption: title })}
               placeholder={"Add Note"}
               value={post.caption}
