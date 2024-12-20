@@ -1,5 +1,10 @@
 import React, { useContext } from "react";
-import { StyleSheet, TouchableOpacity, useColorScheme, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  ScrollView,
+} from "react-native";
 import { useSession } from "@/lib/ctx";
 import { router, Link, Stack } from "expo-router";
 import { Text, View } from "@/components/Themed";
@@ -93,7 +98,7 @@ export default function Home() {
             <Text style={styles.welcomeApp}>Projects</Text>
           </View>
 
-          <Projects session={session as string} archived={false} />
+          <Projects session={session as string} archived={true} />
           {renderAddProject()}
           <View style={styles.bigGap} />
           {renderLogout()}

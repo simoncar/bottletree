@@ -22,12 +22,30 @@ type Props = {
 
 export const Projects = ({ session, archived }: Props) => {
   const [projects, setProjects] = useState<IProject[] | null>(null);
+  const [projectsArchive, setProjectsArchive] = useState<IProject[] | null>(
+    null,
+  );
   const [loading, setLoading] = useState<boolean>(true);
+  const [showArchived, setShowArchived] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
 
   const projectsRead = (projectsDB: IProject[]) => {
-    setProjects(projectsDB);
+    //loop through the projectsDB and split the array into two arrays based on the archived flag
+    const projects = projectsDB.reduce(
+      (acc, project) => {
+        if (project.archived) {
+          acc[1].push(project);
+        } else {
+          acc[0].push(project);
+        }
+        return acc;
+      },
+      [[], []],
+    );
+
+    setProjects(projects[0]);
+    setProjectsArchive(projects[1]);
     setLoading(false);
   };
 
@@ -136,7 +154,30 @@ export const Projects = ({ session, archived }: Props) => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       {loading === false && (
-        <ShortList data={projects} renderItem={renderRow} />
+        <View>
+          <ShortList data={projects} renderItem={renderRow} />
+          {projectsArchive && projectsArchive.length > 0 && (
+            <View>
+              <TouchableOpacity
+                onPress={() => setShowArchived(!showArchived)}
+                style={styles.collapsibleHeader}>
+                <Text style={styles.collapsibleHeaderText}>
+                  Archived Projects
+                </Text>
+                <MaterialIcons
+                  name={
+                    showArchived ? "keyboard-arrow-up" : "keyboard-arrow-down"
+                  }
+                  size={24}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+              </TouchableOpacity>
+              {showArchived && (
+                <ShortList data={projectsArchive} renderItem={renderRow} />
+              )}
+            </View>
+          )}
+        </View>
       )}
     </View>
   );
@@ -147,6 +188,20 @@ const styles = StyleSheet.create({
     marginRight: 5,
     width: 110,
   },
+  collapsibleHeader: {
+    alignItems: "center",
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    width: 350,
+  },
+  collapsibleHeaderText: {
+    fontSize: 18,
+  },
+
   avatarFace: {
     borderColor: "lightgrey",
     borderRadius: 30 / 2,
