@@ -10,9 +10,10 @@ import {
   useNavigationContainerRef,
   useLocalSearchParams,
   Stack,
-  Redirect,
+	Redirect,
+  router
 } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
@@ -26,6 +27,8 @@ import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import { StatusBar } from "expo-status-bar";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { addProjectUser } from "@/lib/APIproject";
+import { UserContext } from "@/lib/UserContext";
 
 type SearchParams = {
   project: string;
@@ -42,7 +45,8 @@ export default function Layout() {
   useAsyncStorageDevTools();
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
-  const { session, isAuthLoading } = useSession();
+	const { session, isAuthLoading } = useSession();
+	  const { user } = useContext(UserContext);
 
   const [fontsLoaded, error] = useFonts({
     //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -77,6 +81,16 @@ export default function Layout() {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+	
+  const saveDone = (id) => {
+    console.log("saveDone SignInAnonymously: ", id);
+    router.replace({
+      pathname: "/[posts]",
+      params: {
+        posts: project,
+      },
+    });
+  };
 
   if (!fontsLoaded) {
     return null;
@@ -112,6 +126,16 @@ export default function Layout() {
         />
       );
     }
+  } else {
+    // since the user is signedIn and there is a project, we can redirect to the project
+	  if (project)
+	  {
+		  //lookup the user based on the session
+	
+
+      addProjectUser(project, user, saveDone);
+
+     
   }
   return (
     <GestureHandlerRootView>
