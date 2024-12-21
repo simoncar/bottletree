@@ -44,14 +44,6 @@ export const Posts = ({ project, title, projectObj }: Props) => {
     );
   };
 
-  const renderFooter = () => {
-    return (
-      <View style={styles.footer}>
-        <About />
-      </View>
-    );
-  };
-
   const renderHeader = () => {
     console.log("Posts - renderHeader", project, title, projectObj);
 
@@ -77,7 +69,6 @@ export const Posts = ({ project, title, projectObj }: Props) => {
             renderItem={renderItems}
             ListHeaderComponent={renderHeader}
             keyExtractor={(item, index) => getKey(item)}
-            ListFooterComponent={renderFooter}
             keyboardShouldPersistTaps={"handled"}
           />
         </View>

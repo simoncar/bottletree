@@ -147,7 +147,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 50,
   },
-  projectAvatar: { borderRadius: 35 / 2, height: 35, width: 35 },
+  projectAvatar: {
+    borderRadius: 40 / 2,
+    height: 40,
+    width: 40,
+    borderWidth: 1,
+    borderColor: "#999999",
+  },
   rightChevron: {
     paddingRight: 10,
   },
