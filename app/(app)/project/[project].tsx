@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Text, TextInput, View } from "@/components/Themed";
 import Progress from "@/components/Progress";
-import { updateProject, getProject } from "@/lib/APIproject";
+import { updateProject, getProject, deleteProject } from "@/lib/APIproject";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -66,6 +66,11 @@ export default function editProject() {
     const updatedProject = { ...project, archived: !project.archived };
     setProject(updatedProject);
     updateProject(updatedProject, saveDone);
+  };
+
+  const deleteProject = () => {
+    console.log("delete Project");
+    alert("Delete Project does not work yet.");
   };
 
   const progressCallback = (progress: number) => {
@@ -224,7 +229,7 @@ export default function editProject() {
             </View>
           </Pressable>
           {project.archived == true ? (
-            <Pressable style={styles.actionRow} onPress={toggleArchive}>
+            <Pressable style={styles.actionRow} onPress={deleteProject}>
               <View style={styles.avatar}>
                 <Ionicons
                   name="archive"
