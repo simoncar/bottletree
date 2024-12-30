@@ -207,7 +207,7 @@ export default function editProject() {
 
           <SharePanel project={project} />
           <ProjectUsers project={local.project} updateUsers={updateUsers} />
-          <Pressable style={styles.outerView} onPress={toggleArchive}>
+          <Pressable style={styles.actionRow} onPress={toggleArchive}>
             <View style={styles.avatar}>
               <Ionicons
                 name="archive"
@@ -223,6 +223,21 @@ export default function editProject() {
               </Text>
             </View>
           </Pressable>
+          {project.archived == true ? (
+            <Pressable style={styles.actionRow} onPress={toggleArchive}>
+              <View style={styles.avatar}>
+                <Ionicons
+                  name="archive"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+              </View>
+              <View>
+                <Text style={styles.archiveName}>Delete Project</Text>
+              </View>
+            </Pressable>
+          ) : null}
+
           <View style={styles.diagBox}>
             <Text style={styles.projectId}>Project ID: {project.key}</Text>
           </View>
@@ -302,6 +317,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 8,
     padding: 8,
+  },
+  actionRow: {
+    alignItems: "center",
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    paddingVertical: 8,
+    padding: 8,
+    height: 80,
   },
   private: {
     fontSize: 20,

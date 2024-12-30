@@ -268,6 +268,26 @@ export function archiveAllProjects(callback: any) {
   });
 }
 
+//create a function, like archiveAllProjects, to delete all projects that have no posts and a timestamp older than 30 days
+//this will be useful for cleaning up old projects that have been abandoned
+//this function should also delete all posts and comments associated with the project
+//this function should also delete all users from the accessList for the project
+
+export function deleteProject(project: IProject, callback: any) {
+  try {
+	const ref = db.collection("projects").doc(project.key);
+
+	ref.delete().then(() => {
+	  callback(project.key);
+	});
+  } catch (e) {
+	console.error("Error deleting project: ", e);
+  }
+
+  return;
+}
+
+
 export async function addProjectUser(
   projectId: string,
   user: IUser,

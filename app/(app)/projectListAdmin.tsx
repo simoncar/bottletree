@@ -54,7 +54,7 @@ const ModalScreen = (props) => {
 
   const saveDoneAll = () => {
     console.log("saveDoneAll - push to home");
-    Alert.alert("Added to All Projects", "You can now see all projects");
+    Alert.alert("Operation Complete");
   };
 
   const askAddAll = () => {
