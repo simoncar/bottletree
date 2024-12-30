@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   avatarIcon: {
-    fontSize: 25,
+fontSize: 25,
     paddingTop: 5,
   },
   innerView: {
