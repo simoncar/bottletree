@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
 import { Link } from "expo-router";
 import * as Application from "expo-application";
+import * as Sentry from "@sentry/react-native";
 
 export const About = () => {
   const { user } = useContext(UserContext);
@@ -35,6 +36,13 @@ export const About = () => {
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>Project - {user.project}</Text>
+        <Button
+          title="Try!"
+          onPress={() => {
+            Sentry.captureException(new Error("First error"));
+          }}
+        />
+        ;
       </View>
     );
   }
