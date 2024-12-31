@@ -2680,30 +2680,29 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.3.0.tgz#9e558170c106bbafaa1ef502bd8e6d4651012bf9"
   integrity sha512-+zDZ20NUnSWghj7Ku5aFphMzuM9JulqCW+aPXT6IfIXFbb8tzYTTOSeRFOtuekJ99ibW2fUCSsjuKNlwDIbHFg==
 
-"@react-native-firebase/app@^21.5.0":
-  version "21.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-21.5.0.tgz#a639f0db3557d91bbf99298d504b4eaf46625b31"
-  integrity sha512-hCzoPH1GshHV37swPyiuCbi3zfQL9hKpJpakr7q5KH7g14SkLDxb9jFXvmj5Gw5axTYMpButynKbar8HYIIn6w==
+"@react-native-firebase/app@^21.6.1":
+  version "21.6.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-21.6.1.tgz#2f3a5f9bc9436ba3a0a76b9d32eb685e0a379340"
+  integrity sha512-o1i3aQMtJeofue+73j/8KO2l+/bRHaSHqOl7FtIeZfajQZaulaROugD2Rr2Mlc1o7LfEUyoDOoij9nGdrydEyw==
   dependencies:
     firebase "10.13.2"
-    superstruct "^0.6.2"
 
-"@react-native-firebase/auth@^21.5.0":
-  version "21.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.5.0.tgz#b0b2238042ff87b378ddba85c6d4c784174dd348"
-  integrity sha512-fY6vP0qlDZ+WdInrfx0V8EusLvEzDBpoYcQp0iKk4n30z5RRDVgat5bjmOhRWPCz6j9qh1/JsmqJkZLJ14auIQ==
+"@react-native-firebase/auth@^21.6.1":
+  version "21.6.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.6.1.tgz#c4d76818749c163ae39e69155ed12d353a7e5a8b"
+  integrity sha512-B/sVBB7QKpE/MLcBKnVM3LHo5XRj7A9uFc3zOkBmQl3JQ37bHqqdlRJxgnbIIvRY5Wz2sPy2hjRwjC0+b04kZg==
   dependencies:
     plist "^3.1.0"
 
-"@react-native-firebase/firestore@^21.5.0":
-  version "21.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-21.5.0.tgz#f3b3064476163e6cb7c804d8dd6024d0bc619564"
-  integrity sha512-DEey/lLqwHOcbbby8ljV4hgScj2RM6MqxxDAA78jLsD86NZ8VxMxIN+YAug8ayc9akUt1FdJ+FgIbkW1qgJ+KQ==
+"@react-native-firebase/firestore@^21.6.1":
+  version "21.6.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-21.6.1.tgz#228122fc2cd380f403f8984570b0ae6fa47c030a"
+  integrity sha512-i3RQM11zTRCYc7/KdD0MiCm7UyyTecDXG/89lEv5hvVJMS6ltIfK+0rDheSpBzYlK4kNoK765jnvVAQxIFEqbA==
 
-"@react-native-firebase/storage@^21.5.0":
-  version "21.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-21.5.0.tgz#e04891ef66e72fc71fc81f8b49a5888b35680b2a"
-  integrity sha512-VNySoZCBvsQ3XxRfMEdRONRzgctACPlquMWeAX4OZ6+P72WKOVFUWnKHpSrV4Lse3l6slZZ8pbpm1xUopVXAiw==
+"@react-native-firebase/storage@^21.6.1":
+  version "21.6.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-21.6.1.tgz#8d3ffc7d786302d611fbe15a6e7617c74f55b7f0"
+  integrity sha512-97PsRf1i+0TdQgbLV0WD/HDB+3cae7JWimqc8eTGVc+QK2OuooYgs34flnbDkXu71brzDWdGJRWijsZhtORggg==
 
 "@react-native/assets-registry@0.76.5":
   version "0.76.5"
@@ -2872,19 +2871,6 @@
     "@react-navigation/elements" "^2.2.5"
     color "^4.2.3"
 
-"@react-navigation/core@^7.0.3":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-7.0.3.tgz#bac011a459ae62bb91e3bc8adeb862f05ac19a88"
-  integrity sha512-BYfsHuPT/Z50CWw1chTPBzlIG+y/sTQEYXPAN+WvHkS2UbCFvJ3zN/wYfb08RFcyX8+5cYdiZAfC4Ui8hJjJ/A==
-  dependencies:
-    "@react-navigation/routers" "^7.0.0"
-    escape-string-regexp "^4.0.0"
-    nanoid "3.3.7"
-    query-string "^7.1.3"
-    react-is "^18.2.0"
-    use-latest-callback "^0.2.1"
-    use-sync-external-store "^1.2.2"
-
 "@react-navigation/core@^7.3.1":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-7.3.1.tgz#c6d4857fa2dd321d12ca87e200478c38c420f157"
@@ -2922,17 +2908,6 @@
     "@react-navigation/elements" "^2.2.5"
     warn-once "^0.1.1"
 
-"@react-navigation/native@^7.0.0":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-7.0.3.tgz#24707bf0d14a040c44b4c4dcaa85c59f7588506b"
-  integrity sha512-GzHvM8HgCjLW+314+gFv2ElN6di4q4KUI7TxQ62lpZc2moi9p8Z78/mTHJ7DZeYjit0Z5ISF9Le+kFhH68avMw==
-  dependencies:
-    "@react-navigation/core" "^7.0.3"
-    escape-string-regexp "^4.0.0"
-    fast-deep-equal "^3.1.3"
-    nanoid "3.3.7"
-    use-latest-callback "^0.2.1"
-
 "@react-navigation/native@^7.0.14":
   version "7.0.14"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-7.0.14.tgz#b3ee2879038dcf0523d26516af88d3adc549ce5e"
@@ -2943,13 +2918,6 @@
     fast-deep-equal "^3.1.3"
     nanoid "3.3.8"
     use-latest-callback "^0.2.1"
-
-"@react-navigation/routers@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-7.0.0.tgz#fb55a4d70a14e16b630c386fd09ba43664cc7409"
-  integrity sha512-b2ehNmgAfDziTd0EERm0C9JI9JH1kdRS4SNBWbKQOVPv23WG+5ExovwWet26sGtMabLJ5lxSE8Z2/fByfggjNQ==
-  dependencies:
-    nanoid "3.3.7"
 
 "@react-navigation/routers@^7.1.2":
   version "7.1.2"
@@ -4466,16 +4434,6 @@ cliui@^8.0.1:
     string-width "^4.2.0"
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
-
-clone-deep@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-2.0.2.tgz#00db3a1e173656730d1188c3d6aced6d7ea97713"
-  integrity sha512-SZegPTKjCgpQH63E+eN6mVEEPdQBOUzjyJm5Pora4lrwWRFS8I0QAxV/KD6vV/i0WuijHZWQC1fMsPEdxfdVCQ==
-  dependencies:
-    for-own "^1.0.0"
-    is-plain-object "^2.0.4"
-    kind-of "^6.0.0"
-    shallow-clone "^1.0.0"
 
 clone-deep@^4.0.1:
   version "4.0.1"
@@ -6328,23 +6286,6 @@ for-each@^0.3.3:
   dependencies:
     is-callable "^1.1.3"
 
-for-in@^0.1.3:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
-  integrity sha512-F0to7vbBSHP8E3l6dCjxNOLuSFAACIxFy3UehTUlG7svlXi37HHsDkyVcHo0Pq8QwrE+pXvWSVX3ZT1T9wAZ9g==
-
-for-in@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
-  integrity sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==
-
-for-own@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/for-own/-/for-own-1.0.0.tgz#c63332f415cedc4b04dbfe70cf836494c53cb44b"
-  integrity sha512-0OABksIGrxKK8K4kynWkQ7y1zounQxP+CWnyclVwj81KW3vlLlGUx57DKGcP/LH216GzqnstnPocF16Nxs0Ycg==
-  dependencies:
-    for-in "^1.0.1"
-
 foreground-child@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/foreground-child/-/foreground-child-3.1.1.tgz#1d173e776d75d2772fed08efe4a0de1ea1b12d0d"
@@ -7044,11 +6985,6 @@ is-docker@^2.0.0, is-docker@^2.1.1:
   version "2.2.1"
   resolved "https://registry.npmjs.org/is-docker/-/is-docker-2.2.1.tgz"
   integrity sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==
-
-is-extendable@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"
-  integrity sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==
 
 is-extglob@^2.1.1:
   version "2.1.1"
@@ -8019,12 +7955,7 @@ keyv@^4.5.3:
   dependencies:
     json-buffer "3.0.1"
 
-kind-of@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-5.1.0.tgz#729c91e2d857b7a419a1f9aa65685c4c33f5845d"
-  integrity sha512-NGEErnH6F2vUuXDh+OlbcKW7/wOcfdRHaZ7VWtqCztfHri/++YKmP51OdWeGPuqCOba6kk2OTe5d02VmTB80Pw==
-
-kind-of@^6.0.0, kind-of@^6.0.1, kind-of@^6.0.2:
+kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
@@ -8604,14 +8535,6 @@ minizlib@^2.1.1:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
-mixin-object@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
-  integrity sha512-ALGF1Jt9ouehcaXaHhn6t1yGWRqGaHkPFndtFVHfZXOvkIZ/yoGaSi0AHVTafb3ZBGg4dr/bDwnaEKqCXzchMA==
-  dependencies:
-    for-in "^0.1.3"
-    is-extendable "^0.1.1"
-
 mkdirp@^0.5.1, mkdirp@~0.5.1:
   version "0.5.6"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.6.tgz"
@@ -8662,15 +8585,15 @@ mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nanoid@3.3.7, nanoid@^3.1.23, nanoid@^3.3.7:
-  version "3.3.7"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
-  integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
-
 nanoid@3.3.8:
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.8.tgz#b1be3030bee36aaff18bacb375e5cce521684baf"
   integrity sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==
+
+nanoid@^3.1.23, nanoid@^3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
+  integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
 
 natural-compare-lite@^1.4.0:
   version "1.4.0"
@@ -10200,15 +10123,6 @@ setprototypeof@1.2.0:
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
-shallow-clone@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-1.0.0.tgz#4480cd06e882ef68b2ad88a3ea54832e2c48b571"
-  integrity sha512-oeXreoKR/SyNJtRJMAKPDSvd28OqEwG4eR/xc856cRGBII7gX9lvAqDxusPm0846z/w/hWYjI1NpKwJ00NHzRA==
-  dependencies:
-    is-extendable "^0.1.1"
-    kind-of "^5.0.0"
-    mixin-object "^2.0.1"
-
 shallow-clone@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/shallow-clone/-/shallow-clone-3.0.1.tgz"
@@ -10661,14 +10575,6 @@ sudo-prompt@^8.2.0:
   version "8.2.5"
   resolved "https://registry.npmjs.org/sudo-prompt/-/sudo-prompt-8.2.5.tgz"
   integrity sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
-
-superstruct@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-0.6.2.tgz#c5eb034806a17ff98d036674169ef85e4c7f6a1c"
-  integrity sha512-lvA97MFAJng3rfjcafT/zGTSWm6Tbpk++DP6It4Qg7oNaeM+2tdJMuVgGje21/bIpBEs6iQql1PJH6dKTjl4Ig==
-  dependencies:
-    clone-deep "^2.0.1"
-    kind-of "^6.0.1"
 
 supports-color@^5.3.0:
   version "5.5.0"

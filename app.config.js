@@ -5,7 +5,7 @@ module.exports = ({ config }) => {
 		expo: {
 			name: isDev ? "One Build DEV" : "One Build",
 			slug: "bottletree",
-			version: "1.0.191",
+			version: "1.0.195",
 			orientation: "portrait",
 			icon: "./assets/images/icon.png",
 			scheme: "bottletree",
@@ -63,6 +63,14 @@ module.exports = ({ config }) => {
 			plugins: [
 				"@react-native-firebase/app",
 				"@react-native-firebase/auth",
+				[
+					"expo-build-properties",
+					{
+						"ios": {
+							"useFrameworks": "static"
+						}
+					}
+				],
 				"expo-font",
 				[
 					"expo-image-picker",
