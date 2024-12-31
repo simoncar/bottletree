@@ -63,6 +63,7 @@ module.exports = ({ config }) => {
 			plugins: [
 				"@react-native-firebase/app",
 				"@react-native-firebase/auth",
+				"expo-font",
 				[
 					"expo-image-picker",
 					{
