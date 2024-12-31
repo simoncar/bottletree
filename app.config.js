@@ -81,6 +81,15 @@ module.exports = ({ config }) => {
 					{
 						cameraPermission: "Allow $(PRODUCT_NAME) to access your camera to take photos and videos."
 					}
+				],
+				[
+					"@sentry/react-native/expo",
+					{
+						"organization": process.env.SENTRY_ORG,
+						"project": process.env.SENTRY_PROJECT,
+						"authToken": process.env.SENTRY_AUTH_TOKEN,
+						"url": "https://sentry.io/"
+					}
 				]
 			]
 		}
