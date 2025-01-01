@@ -94,8 +94,8 @@ module.exports = ({ config }) => {
 				[
 					"@sentry/react-native/expo",
 					{
-						"organization": process.env.SENTRY_ORG,
-						"project": process.env.SENTRY_PROJECT,
+						"organization": "simon-co",
+						"project": "bottletree",
 						"url": "https://sentry.io/"
 					}
 				]
