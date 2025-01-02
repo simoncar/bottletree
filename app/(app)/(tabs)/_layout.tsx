@@ -92,8 +92,8 @@ export default function TabLayout() {
           name="[posts]"
           listeners={{
             tabPress: () => {
-              router.navigate({
-                pathname: "/projectList",
+              router.replace({
+                pathname: "/(app)",
                 params: {
                   page: "",
                 },
