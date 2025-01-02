@@ -47,6 +47,7 @@ export default function SignIn() {
   };
 
   const strip = (str: string) => {
+    if (!str) return "";
     return str.substring(str.lastIndexOf("]") + 1).trim();
   };
 
