@@ -240,7 +240,7 @@ export default function Layout() {
                 <Stack.Screen
                   name="house"
                   options={{
-                    title: "House",
+                    title: "About",
                   }}
                 />
                 <Stack.Screen
