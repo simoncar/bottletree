@@ -35,7 +35,7 @@ jobs:
         run: yarn install
 
       - name: EAS Apply codepush
-        run: eas update --branch production --message "Github Action Updating the app" && npx sentry-expo-upload-sourcemaps dist
+        run: eas update --branch production --message "Automated Codepush Update"
       - name: Deploy to WWW Hosting
         run: yarn predeploy
 
