@@ -39,7 +39,7 @@ const ProjectList = () => {
     console.log("ProjectList useFocusEffect");
 
     getProjects(user.uid, true, projectsRead);
-  }, []);
+  });
 
   useEffect(() => {
     if (projects !== null && loading === true) {
