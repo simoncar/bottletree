@@ -122,6 +122,30 @@ export default function CalendarLarge() {
     });
   };
 
+  const onPressCell = (date: Date) => {
+    console.log("onPressCell", date);
+    //alert("onPressCell");
+    router.navigate({
+      pathname: "/editCalendar",
+      params: {
+        project: project,
+        clickDate: date.toISOString(),
+      },
+    });
+  };
+
+  const onPressDateHeader = (date: Date) => {
+    console.log("onPressDateHeader", date);
+    //alert("onPressDateHeader");
+    router.navigate({
+      pathname: "/editCalendar",
+      params: {
+        project: project,
+        clickDate: date.toISOString(),
+      },
+    });
+  };
+
   return (
     <ScrollView>
       <Stack.Screen
@@ -156,6 +180,8 @@ export default function CalendarLarge() {
         date={calendarDate}
         onChangeDate={onChangeDate}
         onPressEvent={onPressEvent}
+        onPressCell={onPressCell}
+        onPressDateHeader={onPressDateHeader}
         eventMinHeightForMonthView={25}
         maxVisibleEventCount={10}
         swipeEnabled={false}

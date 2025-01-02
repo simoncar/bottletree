@@ -31,14 +31,16 @@ import { Back } from "@/components/Back";
 
 type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
 type DateorTime = "date" | "time";
+
 type CalendarParams = {
   calendarId: string;
   project: string;
+  clickDate?: string;
 };
-
 export default function editCalendar() {
   const colorScheme = useColorScheme();
-  const { calendarId, project } = useLocalSearchParams<CalendarParams>();
+  const { calendarId, project, clickDate } =
+    useLocalSearchParams<CalendarParams>();
   const [calendarEvent, setCalendarEvent] = useState<ICalendarEvent>({
     key: "",
     color: "#30A7E2",
@@ -80,6 +82,12 @@ export default function editCalendar() {
           setDateEndTime(calendarEvent.dateEnd?.toDate() || new Date());
         }
       });
+    } else {
+      console.log("calendarId is undefined");
+      setDateBegin(new Date(clickDate || ""));
+      setDateBeginTime(new Date(clickDate || ""));
+      setDateEnd(new Date(clickDate || ""));
+      setDateEndTime(new Date(clickDate || ""));
     }
 
     getProject(project || "", (projectObj) => {
