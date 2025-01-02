@@ -1,5 +1,11 @@
 import React from "react";
-import { Image, Linking, StyleSheet, useColorScheme } from "react-native";
+import {
+  Image,
+  Linking,
+  StyleSheet,
+  useColorScheme,
+  Platform,
+} from "react-native";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
@@ -13,14 +19,18 @@ export default function House() {
         Where Every Step of Building Comes to Life
       </Text>
 
-      <View style={styles.qrcode}>
-        <QRCode
-          size={200}
-          ecl="L"
-          value={`https://apps.apple.com/app/id6449942716`}
-        />
-      </View>
-      <Text style={styles.textSub}>Share the app with your friends</Text>
+      {Platform.OS === "ios" && (
+        <>
+          <View style={styles.qrcode}>
+            <QRCode
+              size={200}
+              ecl="L"
+              value={`https://apps.apple.com/app/id6449942716`}
+            />
+          </View>
+          <Text style={styles.textSub}>Share the app with your friends</Text>
+        </>
+      )}
     </View>
   );
 }

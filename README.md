@@ -41,3 +41,5 @@ TODO:
 Org Slug: simon-co
 project name: bottletree
 DSN: https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry.io/4506092928827392
+
+npx sentry-expo-upload-sourcemaps dist
