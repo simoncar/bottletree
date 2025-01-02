@@ -17,6 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { UserAvatar } from "@/components/UserAvatar";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Update } from "@/lib/update";
+import { Pressable } from "react-native-gesture-handler";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -42,11 +43,21 @@ export default function Home() {
     return (
       <View style={styles.topPanel}>
         <View style={styles.topPanelLeft}>
-          <FontAwesome6
-            name="hammer"
-            size={24}
-            color={Colors[colorScheme ?? "light"].text}
-          />
+          <Pressable
+            onPress={() =>
+              router.navigate({
+                pathname: "/house",
+                params: {
+                  post: "",
+                },
+              })
+            }>
+            <FontAwesome6
+              name="hammer"
+              size={24}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </Pressable>
         </View>
         <View style={styles.topPanelRight}>
           <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />

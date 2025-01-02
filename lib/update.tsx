@@ -48,7 +48,9 @@ export const Update = () => {
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (nextAppState === "active") {
-        Updates.checkForUpdateAsync();
+        if (!__DEV__) {
+          Updates.checkForUpdateAsync();
+        }
       }
     };
 

@@ -238,6 +238,12 @@ export default function Layout() {
                   }}
                 />
                 <Stack.Screen
+                  name="house"
+                  options={{
+                    title: "House",
+                  }}
+                />
+                <Stack.Screen
                   name="note"
                   options={{
                     title: "Add Note",
