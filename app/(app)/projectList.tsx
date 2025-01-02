@@ -1,7 +1,7 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Image } from "expo-image";
-import { router } from "expo-router";
-import React, { useContext, useEffect, useFocusEffect, useState } from "react";
+import { router, useFocusEffect } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Pressable,
   StyleSheet,
