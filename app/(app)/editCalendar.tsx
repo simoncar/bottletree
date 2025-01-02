@@ -85,9 +85,13 @@ export default function editCalendar() {
     } else {
       console.log("calendarId is undefined");
       setDateBegin(new Date(clickDate || ""));
-      setDateBeginTime(new Date(clickDate || ""));
+      const clickDateObj = new Date(clickDate || "");
+      clickDateObj.setHours(9, 0, 0, 0);
+      setDateBeginTime(clickDateObj);
       setDateEnd(new Date(clickDate || ""));
-      setDateEndTime(new Date(clickDate || ""));
+      const clickDateEndTime = new Date(clickDate || "");
+      clickDateEndTime.setHours(17, 0, 0, 0);
+      setDateEndTime(clickDateEndTime);
     }
 
     getProject(project || "", (projectObj) => {
