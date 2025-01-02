@@ -36,13 +36,6 @@ export const About = () => {
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>Project - {user.project}</Text>
-        <Button
-          title="Try!"
-          onPress={() => {
-            Sentry.captureException(new Error("First error"));
-          }}
-        />
-        ;
       </View>
     );
   }
