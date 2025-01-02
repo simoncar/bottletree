@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Linking, StyleSheet, useColorScheme } from "react-native";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
+import QRCode from "react-native-qrcode-svg";
 
 export default function House() {
   const colorScheme = useColorScheme();
@@ -12,17 +13,14 @@ export default function House() {
         Where Every Step of Building Comes to Life
       </Text>
 
-      <Image
-        source={require("@/assets/images/shape.png")}
-        style={styles.image}
-      />
-      <Text
-        style={styles.link}
-        onPress={() => {
-          Linking.openURL("https://otbapps.com");
-        }}>
-        Visit our website
-      </Text>
+      <View style={styles.qrcode}>
+        <QRCode
+          size={200}
+          ecl="L"
+          value={`https://apps.apple.com/app/id6449942716`}
+        />
+      </View>
+      <Text style={styles.textSub}>Share the app with your friends</Text>
     </View>
   );
 }
@@ -32,6 +30,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  qrcode: {
+    alignItems: "center",
+    borderColor: "white",
+    borderWidth: 2,
+    flexDirection: "row",
+    width: 204,
   },
   text: {
     fontSize: 34,
@@ -47,8 +52,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textSub: {
-    fontSize: 24,
+    fontSize: 20,
     marginBottom: 20,
+    padding: 20,
     textAlign: "center",
   },
   image: {
