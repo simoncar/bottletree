@@ -44,9 +44,7 @@ DSN: https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry
 
 npx sentry-expo-upload-sourcemaps dist
 
-
 notificatgions of projects your not added to
 press on notification, take you to the project
 search button
-building foundations
 calendars
