@@ -60,19 +60,8 @@ export default function SignIn() {
           headerShown: false,
         }}
       />
-      <Animated.View
-        style={{
-          alignItems: "center",
-          marginBottom: 10,
-          marginTop: welcomeMarginTop,
-        }}>
-        <Animated.View
-          style={{
-            height: welcomeFontSize,
-          }}></Animated.View>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Text style={styles.welcomeApp}>Builder</Text>
-      </Animated.View>
+
+      <Text style={styles.welcomeApp}>Builder</Text>
 
       {showSignIn && (
         <View style={styles.signInContainer}>
@@ -206,7 +195,6 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   loginText: {
-    color: "white",
     fontSize: 18,
   },
   notificationText: {
@@ -248,6 +236,8 @@ const styles = StyleSheet.create({
     color: "#9D5BD0",
     fontSize: 45,
     fontWeight: "bold",
+    marginTop: 80,
+    marginBottom: 40,
   },
   welcomeText: {
     fontSize: 20,

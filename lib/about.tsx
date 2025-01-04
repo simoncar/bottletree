@@ -17,25 +17,21 @@ export const About = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
+        <Text style={styles.version}>
+          {Application.nativeApplicationVersion} (
+          {Application.nativeBuildVersion}) | 12.app.sentry
+        </Text>
         <Link
           href={{
             pathname: "/user/[uid]",
             params: { uid: session },
           }}>
-          <Text style={styles.version}>Name: {user.displayName}</Text>
+          <Text style={styles.version}>Email: {user.email}</Text>
         </Link>
-        <Text style={styles.version}>Email: {user.email}</Text>
-        <Text style={styles.version}>
-          Anonymous: {auth().currentUser?.isAnonymous}
-        </Text>
-        <Text style={styles.version}>
-          {Application.nativeApplicationVersion} (
-          {Application.nativeBuildVersion}) | 11.app.sentry
-        </Text>
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
-        <Text style={styles.version}>Project - {user.project}</Text>
+        <Text style={styles.version}>{auth().currentUser?.isAnonymous}</Text>
       </View>
     );
   }
