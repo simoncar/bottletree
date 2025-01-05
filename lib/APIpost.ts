@@ -97,7 +97,7 @@ export async function setPostNote(post: IPost, callback: any) {
           title: post.author + ": " + post.projectTitle,
           body: "New Note Added",
           timestamp: firestore.Timestamp.now(),
-          prokectID: post.projectId,
+          projectID: post.projectId,
         })
         .then((docRef) => {
           callback(docRef.id);
