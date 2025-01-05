@@ -301,14 +301,13 @@ export async function addComment(
         if (doc.exists) {
           const projectData = doc.data();
 
-          firestore()
-            .collection("notifications")
-            .add({
-              title: comment.displayName + ": " + projectData?.title,
-              body: comment.comment,
-              timestamp: firestore.Timestamp.now(),
-              uid: comment.uid,
-            });
+          firestore().collection("notifications").add({
+            title: comment.displayName,
+            body: comment.comment,
+            timestamp: firestore.Timestamp.now(),
+            uid: comment.uid,
+            projectId: project,
+          });
 
           callback({ ...comment, ...newData });
         } else {
