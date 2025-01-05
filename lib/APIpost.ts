@@ -1,4 +1,3 @@
-import { projectID } from "firebase-functions/params";
 import { db, firestore } from "./firebase";
 import { IPost, IComment } from "./types";
 import * as Device from "expo-device";
@@ -57,7 +56,7 @@ export async function addPostImage(post: IPost, callback: any) {
           title: post.author + ": " + post.projectTitle,
           body: "New Image Added",
           timestamp: firestore.Timestamp.now(),
-          projectID: post.projectId,
+          projectId: post.projectId,
         })
         .then((docRef) => {
           console.log("Notification Document written with ID: ", docRef.id);
@@ -97,7 +96,7 @@ export async function setPostNote(post: IPost, callback: any) {
           title: post.author + ": " + post.projectTitle,
           body: "New Note Added",
           timestamp: firestore.Timestamp.now(),
-          projectID: post.projectId,
+          projectId: post.projectId,
         })
         .then((docRef) => {
           callback(docRef.id);
@@ -136,7 +135,7 @@ export async function setPostFile(post: IPost, callback: any) {
           title: post.author + ": " + post.projectTitle,
           body: "New File Added",
           timestamp: firestore.Timestamp.now(),
-          projectID: post.projectId,
+          projectId: post.projectId,
         })
         .then((docRef) => {
           callback(docRef.id);
