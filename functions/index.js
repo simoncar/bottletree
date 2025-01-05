@@ -67,6 +67,9 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 				body: JSON.stringify(notifications),
 			});
 
+			await event.data.ref.set({ notifications: notifications }, { merge: true })
+
+
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);

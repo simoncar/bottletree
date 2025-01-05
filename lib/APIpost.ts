@@ -53,7 +53,7 @@ export async function addPostImage(post: IPost, callback: any) {
 
       db.collection("notifications")
         .add({
-          title: post.author + ": " + post.projectTitle,
+          title: post.author,
           body: "New Image Added",
           timestamp: firestore.Timestamp.now(),
           projectId: post.projectId,
@@ -93,7 +93,7 @@ export async function setPostNote(post: IPost, callback: any) {
       console.log("Post Document written with ID: ", post.key);
       db.collection("notifications")
         .add({
-          title: post.author + ": " + post.projectTitle,
+          title: post.author,
           body: "New Note Added",
           timestamp: firestore.Timestamp.now(),
           projectId: post.projectId,
@@ -132,7 +132,7 @@ export async function setPostFile(post: IPost, callback: any) {
       console.log("Post Document written with ID: ", post.key);
       db.collection("notifications")
         .add({
-          title: post.author + ": " + post.projectTitle,
+          title: post.author,
           body: "New File Added",
           timestamp: firestore.Timestamp.now(),
           projectId: post.projectId,
