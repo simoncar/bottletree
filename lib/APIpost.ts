@@ -55,7 +55,7 @@ export async function addPostImage(post: IPost, callback: any) {
         db.collection("notifications")
           .add({
             title: post.author + ": " + post.projectTitle,
-            body: "New Image Added...",
+            body: "New Image Added",
             timestamp: firestore.Timestamp.now(),
           })
           .then((docRef) => {
@@ -117,7 +117,6 @@ export async function setPostNote(post: IPost, callback: any) {
 
   return;
 }
-
 
 export async function setPostFile(post: IPost, callback: any) {
   const note = db
