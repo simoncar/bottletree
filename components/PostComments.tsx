@@ -15,9 +15,6 @@ type Props = {
   setCommentShow: (commentShow: boolean) => void;
 };
 
-//TODO: 
-
-
 const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   const defaultComment = "Add a comment...";
   const [comments, setComments] = useState([]);
