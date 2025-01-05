@@ -25,7 +25,7 @@ if (!__DEV__) {
 function RootLayout() {
   const ref = useNavigationContainerRef();
   useEffect(() => {
-    if (ref?.current) {
+    if (ref?.current && !__DEV__) {
       navigationIntegration.registerNavigationContainer(ref);
     }
   }, [ref]);

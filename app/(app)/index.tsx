@@ -11,6 +11,7 @@ import { Text, View } from "@/components/Themed";
 import { UserContext } from "@/lib/UserContext";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
+import { Notifications } from "@/lib/notifications";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Projects } from "@/components/Projects";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -108,11 +109,11 @@ export default function Home() {
           <View style={styles.instructions}>
             <Text style={styles.welcomeApp}>Projects</Text>
           </View>
-
           <Projects session={session as string} archived={true} />
           {renderAddProject()}
           <View style={styles.bigGap} />
           {renderLogout()}
+          <Notifications />
           <About />
         </View>
       </ScrollView>
