@@ -21,14 +21,23 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 	const title = event.data.data().title;
 	const body = event.data.data().body;
 	const uid = event.data.data().uid;
+	const projectId = event.data.data().projectId;
+
+	if (!projectId) {
+		console.log('Project ID not specified. Exiting function.');
+		return;
+	}
+
 	var notifications = [];
 
-	//retrieve all the tokens from firebase
-	const tokens = await getFirestore().collection("tokens").get();
+	//for the specified project, retrieve all the users in the accessList collection under the project
+	const accessList = await getFirestore().collection("projects").doc(projectId).collection("accessList").get();
 
-	//for each token, create a notification object and push it to the notifications array
-	tokens.forEach((tokenDoc) => {
-		if (tokenDoc.data().uid !== uid) {   //dont send notification to the user who created the notification
+	//for each user in the accessList, retrieve the token from the tokens collection where the token uid matches the accessList uid
+	accessList.forEach(async (accessDoc) => {
+		const token = await getFirestore().collection("tokens").where("uid", "==", accessDoc.data().uid).get();
+		token.forEach((tokenDoc) => {
+			//create a notification object and push it to the notifications array
 			notifications.push({
 				to: tokenDoc.data().pushToken,
 				title: title,
@@ -36,42 +45,41 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 				body: body,
 				data: { uid: uid },
 			});
-		}
-	}
-	);
-
-	if (notifications.length > 0) {
-		const response = await fetch("https://exp.host/--/api/v2/push/send", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				'Accept-encoding': 'gzip, deflate',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(notifications),
 		});
+	});
+
+	// if (notifications.length > 0) {
+	// 	const response = await fetch("https://exp.host/--/api/v2/push/send", {
+	// 		method: "POST",
+	// 		headers: {
+	// 			Accept: "application/json",
+	// 			'Accept-encoding': 'gzip, deflate',
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify(notifications),
+	// 	});
 
 
-		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
-		}
+	// 	if (!response.ok) {
+	// 		throw new Error(`HTTP error! Status: ${response.status}`);
+	// 	}
 
-		const data = await response.json();
+	// 	const data = await response.json();
 
-		if (data.data[0].status === "error") {
-			const message = data.data[0]
-			return event.data.ref.set({ complete: true, response: message }, { merge: true });
+	// 	if (data.data[0].status === "error") {
+	// 		const message = data.data[0]
+	// 		return event.data.ref.set({ complete: true, response: message }, { merge: true });
 
-		}
-		if (data.data[0].status === "ok") {
-			const message = data;
-			return event.data.ref.set({ complete: true, response: message }, { merge: true });
+	// 	}
+	// 	if (data.data[0].status === "ok") {
+	// 		const message = data;
+	// 		return event.data.ref.set({ complete: true, response: message }, { merge: true });
 
-		}
+	// 	}
 
-	} else {
-		return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
-	}
+	// } else {
+	// 	return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
+	// }
 
 });
 
@@ -79,6 +87,11 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 exports.onDocumentCreated_post = onDocumentCreated("/projects/{projectId}/posts/{postId}", async (event) => {
 	const timestamp = event.data.data().timestamp;
 	const projectId = event.data.projectId;
+
+	if (!projectId) {
+		console.log('Project ID not specified. Exiting function.');
+		return;
+	}
 
 	console.log('timestamp: ', timestamp);
 	console.log('projectId: ', event.params.projectId);
