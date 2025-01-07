@@ -45,13 +45,7 @@ const ProjectPanel = (props: ProjectProp) => {
     if (session) {
       if (projectObjProps) {
         setProject(projectObjProps);
-        console.log(
-          "AAA ProjectPanel - useEffect - projectObjProps",
-          projectObjProps,
-        );
       } else {
-        console.log("BBB ProjectPanel - useEffect - projectObjProps is null");
-
         getProject(project || "", (projectObj) => {
           if (projectObj) {
             setProject(projectObj);
@@ -128,7 +122,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   avatarIcon: {
-fontSize: 25,
+    fontSize: 25,
     paddingTop: 5,
   },
   innerView: {

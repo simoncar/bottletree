@@ -11,7 +11,11 @@ import {
 } from "react-native";
 import { Text, TextInput, View } from "@/components/Themed";
 import Progress from "@/components/Progress";
-import { updateProject, getProject, deleteProject } from "@/lib/APIproject";
+import {
+  updateProject,
+  getProject,
+  updateProjectTimestamp,
+} from "@/lib/APIproject";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";

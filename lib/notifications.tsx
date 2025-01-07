@@ -27,8 +27,10 @@ export const Notifications = () => {
     return (
       <View style={styles.aboutContainer}>
         <Text style={styles.version}>Notifications</Text>
-        <Text>Your Expo push token: {expoPushToken}</Text>
-        <Text>Your Expo project ID: {projectId}</Text>
+        <Text style={styles.version}>
+          Your Expo push token: {expoPushToken}
+        </Text>
+        <Text style={styles.version}>Your Expo project ID: {projectId}</Text>
         <Button
           title="Register for Push Notifications"
           onPress={async () => {

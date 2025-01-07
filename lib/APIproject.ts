@@ -15,8 +15,6 @@ export async function getProject(
     return;
   }
 
-  console.log("getProject DB CALL", project);
-
   const q = db.collection("projects").doc(project);
 
   const unsubscribe = q.onSnapshot((doc) => {
@@ -33,6 +31,7 @@ export async function getProject(
       archived: doc.data().archived,
       postCount: doc.data().postCount,
       private: doc.data().private || false,
+      timestamp: doc.data().timestamp,
     };
 
     callback(returnProject);
@@ -204,6 +203,19 @@ export function updateProject(project: IProject, callback: any) {
       icon: project?.icon ?? stockHouseIcon,
       archived: project?.archived ?? false,
       private: project?.private || false,
+      timestamp: firestore.Timestamp.now(),
+    })
+    .then(() => {
+      callback(project.key);
+    });
+}
+
+export function updateProjectTimestamp(project: IProject, callback: any) {
+  const ref = db.collection("projects").doc(project.key);
+
+  ref
+    .update({
+      timestamp: firestore.Timestamp.now(),
     })
     .then(() => {
       callback(project.key);
@@ -275,18 +287,17 @@ export function archiveAllProjects(callback: any) {
 
 export function deleteProject(project: IProject, callback: any) {
   try {
-	const ref = db.collection("projects").doc(project.key);
+    const ref = db.collection("projects").doc(project.key);
 
-	ref.delete().then(() => {
-	  callback(project.key);
-	});
+    ref.delete().then(() => {
+      callback(project.key);
+    });
   } catch (e) {
-	console.error("Error deleting project: ", e);
+    console.error("Error deleting project: ", e);
   }
 
   return;
 }
-
 
 export async function addProjectUser(
   projectId: string,

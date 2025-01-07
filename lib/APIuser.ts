@@ -25,6 +25,7 @@ export async function getUser(uid: string) {
       project: doc.data().project,
       postCount: doc.data()?.postCount,
       anonymous: auth().currentUser?.isAnonymous,
+      notifications: doc.data()?.notifications ?? false,
     };
 
     return user;
@@ -103,6 +104,12 @@ export async function createUser(user: IUser) {
       return null;
     }
   }
+}
+
+export async function updateUser(user: IUser) {
+  const usersCollection = firestore().collection("users");
+  const userDoc = usersCollection.doc(user.uid);
+  await userDoc.set(user, { merge: true });
 }
 
 export async function updateAccountName(uid: string, displayName: string) {

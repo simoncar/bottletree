@@ -29,9 +29,7 @@ export default function ProjectPosts() {
     getProject(project, (pObj) => {
       if (pObj) {
         setProject(pObj);
-        console.log("ProjectPosts: project found: " + project);
       } else {
-        console.log("[project replace signIn] ");
         router.replace("/signIn");
       }
     });

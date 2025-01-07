@@ -17,7 +17,11 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Colors from "@/constants/Colors";
-import { updateAccountName, updateAccountPhotoURL } from "@/lib/APIuser";
+import {
+  updateAccountName,
+  updateAccountPhotoURL,
+  updateUser,
+} from "@/lib/APIuser";
 import { About } from "@/lib/about";
 import { Update } from "@/lib/update";
 import { useActionSheet } from "@expo/react-native-action-sheet";
@@ -87,6 +91,11 @@ export default function editUser() {
     } else {
       return false;
     }
+  };
+
+  const toggleNotifications = () => {
+    setUser({ ...user, notifications: !user.notifications });
+    updateUser({ ...user, notifications: !user.notifications });
   };
 
   const openActionSheet = async () => {
@@ -183,6 +192,31 @@ export default function editUser() {
           </View>
         </View>
       </View>
+      {isAdmin(user?.email) && (
+        <View>
+          <View style={styles.outerView}>
+            <TouchableOpacity
+              key={"admin"}
+              onPress={() => toggleNotifications()}>
+              <View style={styles.leftContent}>
+                <MaterialIcons
+                  name={
+                    user.notifications
+                      ? "notifications-active"
+                      : "notifications-off"
+                  }
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+                <Text style={styles.settingName}>
+                  Notifications {user.notifications ? "On" : "Off"}
+                </Text>
+              </View>
+              <View style={styles.rightChevron}></View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
       <View style={styles.outerView}>
         <TouchableOpacity
           key={"signOut"}
@@ -234,6 +268,7 @@ export default function editUser() {
           </View>
         </View>
       )}
+
       <TouchableOpacity
         key={"deleteAccount"}
         onPress={() =>

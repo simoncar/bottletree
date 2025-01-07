@@ -54,6 +54,7 @@ export interface IUser {
   language?: string;
   project: string;
   anonymous: boolean;
+  notifications?: boolean;
 }
 
 export interface IComment {
