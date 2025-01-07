@@ -6,6 +6,14 @@ export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
   const doc = await q.get();
 
+  if (!auth().currentUser) {
+    console.log(
+      "getUser: no current auth user, perhaps it was deleted: ",
+      auth().currentUser,
+    );
+    return null;
+  }
+
   if (doc.exists) {
     const user: IUser = {
       key: doc.id,
@@ -29,8 +37,8 @@ export async function getUser(uid: string) {
     );
     const newUser = await createUser({
       uid: uid,
-      displayName: auth().currentUser.displayName,
-      email: auth().currentUser.email,
+      displayName: auth().currentUser.displayName || "anonymous",
+      email: auth().currentUser.email || "anonymous",
       photoURL: "",
       language: "en",
       project: "",

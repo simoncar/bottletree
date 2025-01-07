@@ -25,7 +25,11 @@ const UserProvider = (props: React.PropsWithChildren) => {
           setUser({ ...userData });
         }
       } catch (error) {
-        console.error("error fetching user data in UserProvider", error);
+        console.error(
+          "error fetching user data in UserProvider",
+          error,
+          session,
+        );
       }
     };
 
