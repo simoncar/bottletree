@@ -69,8 +69,6 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 			await event.data.ref.set({ notifications: notifications }, { merge: true })
 
-
-
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
@@ -92,8 +90,6 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 			return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
 		}
 	});
-
-
 
 });
 
