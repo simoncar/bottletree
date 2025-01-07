@@ -13,8 +13,8 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const saveDone = (id: string) => {
-  console.log("saveDone", id);
+const saveDoneSetToken = (id: string) => {
+  console.log("saveDone Notification", id);
 };
 
 export function setToken(
@@ -104,7 +104,7 @@ export async function registerForPushNotificationsAsync() {
           key: safeToken,
           pushToken: pushTokenString,
         };
-        setToken(pushToken, saveDone);
+        setToken(pushToken, saveDoneSetToken);
       }
       console.log(pushTokenString);
       return pushTokenString;
@@ -155,7 +155,7 @@ export async function registerForPushNotificationsAsync_old() {
         key: safeToken,
         pushToken: token,
       };
-      setToken(pushToken, saveDone);
+      setToken(pushToken, saveDoneSetToken);
     }
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {
