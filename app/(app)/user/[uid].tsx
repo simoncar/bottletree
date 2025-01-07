@@ -95,9 +95,11 @@ export default function editUser() {
   };
 
   const toggleNotifications = () => {
-    const turnNotificationOn = !user.notifications;
-    setUser({ ...user, notifications: !user.notifications });
-    updateUser({ ...user, notifications: !user.notifications });
+    const turnNotificationOn =
+      user.notifications !== undefined ? !user.notifications : true;
+
+    setUser({ ...user, notifications: turnNotificationOn });
+    updateUser({ ...user, notifications: turnNotificationOn });
     if (turnNotificationOn) {
       registerForPushNotificationsAsync()
         .then((token) => console.log("setting token:", token))
