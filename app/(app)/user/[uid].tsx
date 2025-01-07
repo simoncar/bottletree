@@ -17,6 +17,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Colors from "@/constants/Colors";
+import { registerForPushNotificationsAsync } from "@/lib/APINotification";
 import {
   updateAccountName,
   updateAccountPhotoURL,
@@ -94,8 +95,14 @@ export default function editUser() {
   };
 
   const toggleNotifications = () => {
+    const turnNotificationOn = !user.notifications;
     setUser({ ...user, notifications: !user.notifications });
     updateUser({ ...user, notifications: !user.notifications });
+    if (turnNotificationOn) {
+      registerForPushNotificationsAsync()
+        .then((token) => console.log("setting token:", token))
+        .catch((error: any) => console.log("setting token error:", error));
+    }
   };
 
   const openActionSheet = async () => {
