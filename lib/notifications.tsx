@@ -31,14 +31,6 @@ export const Notifications = () => {
           Your Expo push token: {expoPushToken}
         </Text>
         <Text style={styles.version}>Your Expo project ID: {projectId}</Text>
-        <Button
-          title="Register for Push Notifications"
-          onPress={async () => {
-            registerForPushNotificationsAsync()
-              .then((token) => setExpoPushToken(token ?? ""))
-              .catch((error: any) => setExpoPushToken(`${error}`));
-          }}
-        />
       </View>
     );
   }
