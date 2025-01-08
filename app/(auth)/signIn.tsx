@@ -12,6 +12,7 @@ import Colors from "@/constants/Colors";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import { useSession } from "@/lib/ctx";
 import { About } from "@/lib/about";
+import { Update } from "@/lib/update";
 
 export default function SignIn() {
   const { signIn } = useSession();
@@ -62,6 +63,9 @@ export default function SignIn() {
       />
 
       <Text style={styles.welcomeApp}>Builder</Text>
+      <View style={styles.updateContainer}>
+        <Update />
+      </View>
 
       {showSignIn && (
         <View style={styles.signInContainer}>
@@ -168,6 +172,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 10,
     width: 300,
+  },
+  updateContainer: {
+    paddingHorizontal: 16,
   },
   container: {
     alignItems: "center",
