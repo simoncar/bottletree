@@ -55,6 +55,7 @@ export interface IUser {
   project: string;
   anonymous: boolean;
   notifications?: boolean;
+  created?: Timestamp;
 }
 
 export interface IComment {

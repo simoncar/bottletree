@@ -26,7 +26,7 @@ export default function SignIn() {
   const oldUid = auth().currentUser?.uid;
 
   const signUpCallback = (user, error) => {
-    if (error == "Success") {
+    if (error == "SignUp Success") {
       console.log("signUpCallback Success:", user);
 
       updateAccountName(user.uid, user.displayName); //firebease auth update function

@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { useStorageState } from "./useStorageState";
-import { auth } from "@/lib/firebase";
+import { auth, firestore } from "@/lib/firebase";
 import { IUser } from "@/lib/types";
-import { updateAccountName } from "@/lib/APIuser";
+import { updateAccountName, updateUser } from "@/lib/APIuser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
@@ -100,13 +100,14 @@ export function SessionProvider(props: React.PropsWithChildren) {
         photoURL: convertToString(""),
         project: "",
         anonymous: auth().currentUser.isAnonymous,
+        created: firestore.Timestamp.now(),
       };
 
       console.log("signUp user: ", user);
+      updateUser(user);
+      //updateAccountName(response.user.uid, name);
 
-      updateAccountName(response.user.uid, name);
-
-      callback(user, "Success");
+      callback(user, "SignUp Success");
     } catch (error) {
       console.log("signUp Error: ", error);
       callback(null, error);
@@ -116,7 +117,12 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const signOut = async () => {
     setSession(null);
     auth().signOut();
-    AsyncStorage.clear();
+    try {
+      await AsyncStorage.clear();
+      console.log("AsyncStorage cleared");
+    } catch (e) {
+      console.error("Failed to clear AsyncStorage:", e);
+    }
   };
 
   const resetPassword = (screenEmail: string, callback: any) => {

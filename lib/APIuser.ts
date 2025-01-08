@@ -262,8 +262,12 @@ export async function getUserProjectCount(
 
 //create an export function that accepts an old user and an a new user then it looks for all the records in the project accessList collection for the old user and updates them to the new user
 export const mergeUser = (oldUid: string, newUser: IUser) => {
-  const q = db.collectionGroup("accessList").where("uid", "==", oldUid);
   console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
+  if (!oldUid || !newUser || !newUser.uid) {
+    console.log("Invalid oldUid or newUser");
+    return;
+  }
+  const q = db.collectionGroup("accessList").where("uid", "==", oldUid);
 
   q.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
