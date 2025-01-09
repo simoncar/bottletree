@@ -224,7 +224,7 @@ export async function getUsers(callback: usersRead) {
       photoURL: doc.data().photoURL,
       language: doc.data().language,
       project: doc.data().project,
-      anonymous: auth().currentUser.isAnonymous,
+      anonymous: doc.data().isAnonymous ?? false,
     });
   });
 
