@@ -47,8 +47,10 @@ export default function SignIn() {
       await signIn(email, password);
       router.push("/(app)");
     } catch (error) {
-      console.log(error);
-      setNotification(errorMessage(error.code));
+      console.log("handleSignIn: ", error);
+      if (error && error.code) {
+        setNotification(errorMessage(error.code));
+      }
     } finally {
       // do something
     }
