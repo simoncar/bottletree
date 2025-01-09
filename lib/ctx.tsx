@@ -115,13 +115,15 @@ export function SessionProvider(props: React.PropsWithChildren) {
   };
 
   const signOut = async () => {
-    setSession(null);
-    auth().signOut();
     try {
+      setSession(null);
+      if (auth().currentUser) {
+        await auth().signOut();
+      }
       await AsyncStorage.clear();
       console.log("AsyncStorage cleared");
     } catch (e) {
-      console.error("Failed to clear AsyncStorage:", e);
+      console.error("Failed to clear Session, auth or AsyncStorage:", e);
     }
   };
 
