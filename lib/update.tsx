@@ -131,7 +131,7 @@ export const Update = () => {
 
 const styles = StyleSheet.create({
   iconContainer: {
-    marginRight: 12,
+    marginRight: 20,
   },
   installText: {
     color: "grey",
