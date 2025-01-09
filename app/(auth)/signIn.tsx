@@ -112,7 +112,7 @@ export default function SignIn() {
           <TouchableOpacity onPress={handleSignIn} style={styles.button}>
             <Text style={styles.loginText}>Sign in</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          <Pressable
             key={"forgotPassword"}
             onPress={() => {
               router.navigate({
@@ -122,15 +122,15 @@ export default function SignIn() {
                 },
               });
             }}>
-            <Text style={styles.forgot_button}>Forgot password?</Text>
-          </TouchableOpacity>
+            <Text style={styles.forgotPassword}>Forgot password?</Text>
+          </Pressable>
         </View>
       )}
 
       {!showSignIn && (
         <TouchableOpacity
           key={"signIn"}
-          style={styles.button}
+          style={[styles.button, { marginBottom: 30 }]}
           onPress={() => {
             welcomeMarginTop.value = withSpring(welcomeMarginTop.value - 50);
             welcomeFontSize.value = welcomeFontSize.value - 50;
@@ -185,14 +185,12 @@ const styles = StyleSheet.create({
   },
 
   createText: {
-    color: "white",
     fontSize: 18,
   },
   eye: { color: "grey", paddingTop: 10 },
-  forgot_button: {
+  forgotPassword: {
     fontSize: 14,
-    height: 30,
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   inputView: {
     borderBottomColor: "#CED0CE",
