@@ -83,48 +83,52 @@ export default function SignIn() {
     <View style={styles.container}>
       <Stack.Screen options={{ title: "Create Account" }} />
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.textInput}
-          inputMode="text"
-          placeholder="Name"
-          autoCorrect={false}
-          autoFocus
-          autoComplete="name"
-          onChangeText={(name) => setName(name)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.textInput}
-          keyboardType="email-address"
-          inputMode="email"
-          autoCapitalize="none"
-          placeholder="Email"
-          autoComplete="email"
-          spellCheck={false}
-          onChangeText={(email) => setEmail(email)}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Password"
-          secureTextEntry={secureEntry}
-          onChangeText={(password) => {
-            setPassword(password);
-            setErrorMessage("");
-          }}
-        />
-        <Pressable onPress={() => setSecureEntry(!secureEntry)}>
-          <AntDesign
-            name="eye"
-            size={25}
-            style={styles.eye}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </Pressable>
-      </View>
+	<View style={styles.inputView}>
+	  <TextInput
+		style={styles.textInput}
+		inputMode="text"
+		placeholder="Name"
+		autoCorrect={false}
+		autoFocus
+		autoComplete="name"
+		textContentType="name"
+		onChangeText={(name) => setName(name)}
+	  />
+	</View>
+	<View style={styles.inputView}>
+	  <TextInput
+		style={styles.textInput}
+		keyboardType="email-address"
+		inputMode="email"
+		autoCapitalize="none"
+		placeholder="Email"
+		autoComplete="email"
+		spellCheck={false}
+		textContentType="emailAddress"
+		onChangeText={(email) => setEmail(email)}
+	  />
+	</View>
+	<View style={styles.inputView}>
+	  <TextInput
+		style={styles.textInput}
+		placeholder="Password"
+		secureTextEntry={secureEntry}
+		autoComplete="password"
+		textContentType="password"
+		onChangeText={(password) => {
+		setPassword(password);
+		setErrorMessage("");
+		}}
+	  />
+	  <Pressable onPress={() => setSecureEntry(!secureEntry)}>
+		<AntDesign
+		name="eye"
+		size={25}
+		style={styles.eye}
+		color={Colors[colorScheme ?? "light"].text}
+		/>
+	  </Pressable>
+	</View>
       <View style={styles.notificationView}>
         <Text numberOfLines={3} style={styles.notificationText}>
           {errorMessage}
