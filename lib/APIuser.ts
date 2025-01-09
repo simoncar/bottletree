@@ -107,6 +107,11 @@ export async function createUser(user: IUser) {
 }
 
 export async function updateUser(user: IUser) {
+  Object.keys(user).forEach((key) => {
+    if (user[key] === undefined) {
+      delete user[key];
+    }
+  });
   const usersCollection = firestore().collection("users");
   const userDoc = usersCollection.doc(user.uid);
   await userDoc.set(user, { merge: true });
