@@ -101,32 +101,30 @@ export const Update = () => {
     }
   }
 
-  if (showUpdate === false) {
+  if (showUpdate === false && !__DEV__) {
     return null;
   }
 
   return (
     <View style={styles.updateContainer}>
-      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-        <Pressable
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-          onPress={fetchandRunUpdatesAsync}
-          style={styles.updateButton}>
-          <View style={styles.iconContainer}>
-            <MaterialIcons
-              name="celebration"
-              size={24}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.updateText}>Update available</Text>
-            <Text style={styles.installText}>Click to install</Text>
-          </View>
-          {loading && <ActivityIndicator style={styles.spinner} />}
-        </Pressable>
-      </Animated.View>
+      <Pressable
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        onPress={fetchandRunUpdatesAsync}
+        style={styles.updateButton}>
+        <View style={styles.iconContainer}>
+          <MaterialIcons
+            name="celebration"
+            size={24}
+            color={Colors[colorScheme ?? "light"].text}
+          />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.updateText}>Update available</Text>
+          <Text style={styles.installText}>Click to install</Text>
+        </View>
+        {loading && <ActivityIndicator style={styles.spinner} />}
+      </Pressable>
     </View>
   );
 };
@@ -158,6 +156,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 12,
+    width: "80%",
+    paddingBottom: 20,
   },
   updateText: {
     fontSize: 16,
