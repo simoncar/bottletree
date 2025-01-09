@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
 
   createText: {
     fontSize: 18,
+    color: "white",
   },
   eye: { color: "grey", paddingTop: 10 },
   forgotPassword: {
@@ -203,6 +204,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     fontSize: 18,
+    color: "white",
   },
   notificationText: {
     color: "red",
