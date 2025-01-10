@@ -36,6 +36,20 @@ module.exports = ({ config }) => {
 				"permissions": [
 					"READ_EXTERNAL_STORAGE",
 					"WRITE_EXTERNAL_STORAGE"
+				],
+				"intentFilters": [
+					{
+						"action": "VIEW",
+						"autoVerify": true,
+						"data": [
+							{
+								"scheme": "https",
+								"host": "b.otbapps.com",
+								"pathPrefix": "/records"
+							}
+						],
+						"category": ["BROWSABLE", "DEFAULT"]
+					}
 				]
 			},
 			web: {
