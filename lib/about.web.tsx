@@ -28,10 +28,7 @@ export const About = () => {
         <Text style={styles.version}>
           Anonymous: {auth().currentUser?.isAnonymous}
         </Text>
-        <Text style={styles.version}>
-          {Application.nativeApplicationVersion} (
-          {Application.nativeBuildVersion}) | 4.web
-        </Text>
+        <Text style={styles.version}>12.web.sentry</Text>
 
         <Text style={styles.version}>User Context - {user?.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
