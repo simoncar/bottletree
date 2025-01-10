@@ -110,7 +110,10 @@ const ProjectPanel = (props: ProjectProp) => {
         </View>
         <View></View>
       </View>
-      <SharePanel project={projectObj} icon="link" pathname="share" />
+      <SharePanel
+        project={projectObj}
+        buttons={["calendar", "files", "settings"]}
+      />
     </View>
   );
 };

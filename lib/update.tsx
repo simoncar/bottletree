@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 12,
-    width: "80%",
     paddingBottom: 20,
   },
   updateText: {

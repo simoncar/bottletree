@@ -61,31 +61,43 @@ const IconButton = (props) => {
     </View>
   );
 };
-
 export const SharePanel = (props) => {
-  const { project } = props;
-  const router = useRouter();
+  const { project, buttons } = props;
 
   return (
     <View style={styles.container}>
-      <IconButton
-        project={project}
-        pathname="share"
-        icon="link"
-        label="share"
-      />
-      <IconButton
-        project={project}
-        pathname="calendar"
-        icon="calendar-today"
-        label="calendar"
-      />
-      <IconButton
-        project={project}
-        pathname="files"
-        icon="file-present"
-        label="files"
-      />
+      {buttons.includes("calendar") && (
+        <IconButton
+          project={project}
+          pathname="calendar"
+          icon="calendar-today"
+          label="calendar"
+        />
+      )}
+      {buttons.includes("files") && (
+        <IconButton
+          project={project}
+          pathname="files"
+          icon="file-present"
+          label="files"
+        />
+      )}
+      {buttons.includes("share") && (
+        <IconButton
+          project={project}
+          pathname="share"
+          icon="share"
+          label="share"
+        />
+      )}
+      {buttons.includes("settings") && (
+        <IconButton
+          project={project}
+          pathname="project/[project]"
+          icon="settings"
+          label="settings"
+        />
+      )}
     </View>
   );
 };
