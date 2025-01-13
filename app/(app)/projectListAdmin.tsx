@@ -22,6 +22,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useSession } from "@/lib/ctx";
 import { useProject } from "@/lib/projectProvider";
 import { UserContext } from "@/lib/UserContext";
+import { updateAllUsersEmailToLowerCase } from "@/lib/APIuser";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -171,6 +172,36 @@ const ModalScreen = (props) => {
               { color: Colors[colorScheme ?? "light"].background },
             ]}>
             Archive All Projects with 0 Posts
+          </Text>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            (Data Cleanup)
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  function renderLowercase() {
+    if (!__DEV__) {
+      return null;
+    }
+    return (
+      <View style={styles.adminAllArchive}>
+        <TouchableOpacity
+          key={"archiveAll"}
+          onPress={() => {
+            updateAllUsersEmailToLowerCase();
+          }}>
+          <Text
+            style={[
+              styles.project,
+              { color: Colors[colorScheme ?? "light"].background },
+            ]}>
+            Lowercase
           </Text>
           <Text
             style={[

@@ -130,6 +130,7 @@ export default function Layout() {
     // since the user is signedIn and there is a project, we can redirect to the project
     if (project) {
       //lookup the user based on the session
+      console.log("_layout addProjectUser project: ", project, user);
 
       addProjectUser(project, user, saveDone);
     }

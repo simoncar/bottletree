@@ -17,6 +17,7 @@ export const About = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
+        <Text style={styles.version}>One Build</Text>
         <Text style={styles.version}>
           {Application.nativeApplicationVersion} (
           {Application.nativeBuildVersion}) | 12.app.sentry

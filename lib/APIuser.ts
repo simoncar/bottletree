@@ -19,7 +19,7 @@ export async function getUser(uid: string) {
       key: doc.id,
       uid: doc.id,
       displayName: doc.data()?.displayName,
-      email: doc.data()?.email,
+      email: doc.data()?.email.toLowerCase(),
       photoURL: doc.data()?.photoURL,
       language: doc.data()?.language,
       project: doc.data().project,
@@ -39,7 +39,7 @@ export async function getUser(uid: string) {
     const newUser = await createUser({
       uid: uid,
       displayName: auth().currentUser.displayName || "anonymous",
-      email: auth().currentUser.email || "anonymous",
+      email: auth().currentUser.email.toLowerCase() || "anonymous",
       photoURL: "",
       language: "en",
       project: "",
@@ -133,7 +133,7 @@ export async function updateAccountName(uid: string, displayName: string) {
     await docRef1.set(
       {
         displayName: displayName,
-        email: auth().currentUser.email,
+        email: auth().currentUser.email.toLocaleLowerCase(),
         photoURL: auth().currentUser.photoURL
           ? auth().currentUser.photoURL
           : "",
@@ -199,7 +199,7 @@ export const updateAccountPhotoURL = (photoURL: string) => {
         docRef1.set(
           {
             photoURL: photoURL,
-            email: auth().currentUser.email,
+            email: auth().currentUser.email.toLocaleLowerCase(),
             displayName: auth().currentUser.displayName,
           },
           { merge: true },
@@ -225,7 +225,7 @@ export async function getUsers(callback: usersRead) {
       key: doc.id,
       uid: doc.id,
       displayName: doc.data().displayName,
-      email: doc.data().email,
+      email: doc.data().email.toLowerCase(),
       photoURL: doc.data().photoURL,
       language: doc.data().language,
       project: doc.data().project,
@@ -253,7 +253,7 @@ export async function getUserProjectCount(
         key: doc.id,
         uid: doc.id,
         displayName: doc.data()?.displayName,
-        email: doc.data()?.email,
+        email: doc.data()?.email.toLowerCase(),
         photoURL: doc.data()?.photoURL,
         postCount: doc.data()?.postCount,
         language: doc.data()?.language,
@@ -288,3 +288,27 @@ export const mergeUser = (oldUid: string, newUser: IUser) => {
     });
   });
 };
+
+
+export async function updateAllUsersEmailToLowerCase() {
+	const usersCollection = firestore().collection("users");
+	const snapshot = await usersCollection.get();
+
+	const batch = firestore().batch();
+	
+	snapshot.forEach((doc) => {
+		const userData = doc.data();
+		if (userData.email) {
+			batch.update(doc.ref, {
+				email: userData.email.toLowerCase()
+			});
+		}
+	});
+
+	try {
+		await batch.commit();
+		console.log('Successfully updated all user emails to lowercase');
+	} catch (error) {
+		console.error('Error updating user emails:', error);
+	}
+}

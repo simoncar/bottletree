@@ -107,7 +107,7 @@ export default function Home() {
         </View>
         <View style={styles.container}>
           <View style={styles.instructions}>
-            <Text style={styles.welcomeApp}>Projects</Text>
+            <Text style={styles.welcomeApp}>One Build</Text>
           </View>
           <Projects session={session as string} archived={true} />
           {renderAddProject()}

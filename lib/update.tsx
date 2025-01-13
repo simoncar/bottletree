@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 12,
     paddingBottom: 20,
+    width: "100%",
   },
   updateText: {
     fontSize: 16,

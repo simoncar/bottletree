@@ -14,7 +14,7 @@ export default function House() {
   const colorScheme = useColorScheme();
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>OTB Apps Builder</Text>
+      <Text style={styles.text}>One Build</Text>
       <Text style={styles.textSub}>
         Where Every Step of Building Comes to Life
       </Text>
@@ -31,6 +31,11 @@ export default function House() {
           <Text style={styles.textSub}>Share the app with your friends</Text>
         </>
       )}
+      <Text
+        style={styles.link}
+        onPress={() => Linking.openURL("https://otbapps.com")}>
+        Visit otbapps.com
+      </Text>
     </View>
   );
 }

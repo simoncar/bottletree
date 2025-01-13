@@ -29,12 +29,11 @@ export default function ProjectPosts() {
     getProject(project, (pObj) => {
       if (pObj) {
         setProject(pObj);
+        setUser({ ...user, project: project });
       } else {
         router.replace("/signIn");
       }
     });
-
-    setUser({ ...user, project: project });
   }, []);
 
   if (!projectObj) {
