@@ -7,8 +7,7 @@
   "settings": {
     "eslint.validate": [],
     "github-actions.workflows.pinned.workflows": [
-      "dynamic/github-code-scanning/codeql",
-      ".github/workflows/update_codepush_www.yml"
+      "dynamic/github-code-scanning/codeql"
     ]
   }
 }
