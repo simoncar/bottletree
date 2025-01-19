@@ -13,6 +13,7 @@ export default function addNewProject() {
   const { user } = useContext(UserContext);
   const { session } = useSession();
   const [text, onChangeText] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   let loggedInUser: IUser = user;
 
@@ -52,9 +53,9 @@ export default function addNewProject() {
   };
 
   const onSave = async () => {
+    setIsSaving(true);
     project.title = text;
     console.log("addNewProject - onSave", project, loggedInUser);
-
     addProject(project, loggedInUser, saveDone);
   };
 
@@ -68,7 +69,19 @@ export default function addNewProject() {
         autoFocus={true}
         multiline
       />
-      <Button title="Next" onPress={() => onSave()} />
+      <Button
+        title={isSaving ? "Saving..." : "Next"}
+        onPress={async () => {
+          if (isSaving) return;
+          setIsSaving(true);
+          try {
+            await onSave();
+          } finally {
+            //setIsSaving(false);
+          }
+        }}
+        disabled={isSaving}
+      />
       <About />
     </SafeAreaView>
   );

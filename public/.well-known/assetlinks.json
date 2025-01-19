@@ -1,11 +1,15 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "co.simon.bottletree",
       "sha256_cert_fingerprints": [
-        "36:B8:9D:AC:4A:18:A8:94:AB:BF:AA:B2:FC:F9:F9:8D:F1:F9:05:0A:B4:20:6A:87:8E:62:C2:07:41:A0:47:BD"
+        "36:B8:9D:AC:4A:18:A8:94:AB:BF:AA:B2:FC:F9:F9:8D:F1:F9:05:0A:B4:20:6A:87:8E:62:C2:07:41:A0:47:BD",
+        "D0:92:77:A1:EA:B3:6D:3C:C4:85:5E:B4:8E:71:09:24:72:C4:63:2E:6A:F0:E6:51:67:29:C5:FC:8F:F2:DE:68"
       ]
     }
   }
