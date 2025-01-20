@@ -45,7 +45,7 @@ module.exports = ({ config }) => {
 							{
 								"scheme": "https",
 								"host": "b.otbapps.com",
-								"pathPrefix": "/records"
+								"pathPrefix": "/"
 							}
 						],
 						"category": ["BROWSABLE", "DEFAULT"]
