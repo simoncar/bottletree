@@ -9,6 +9,7 @@ import {
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
+import { About } from "@/lib/about";
 
 export default function House() {
   const colorScheme = useColorScheme();
@@ -16,7 +17,7 @@ export default function House() {
     <View style={styles.container}>
       <Text style={styles.text}>One Build</Text>
       <Text style={styles.textSub}>
-        Where Every Step of Building Comes to Life
+        Where Every Step of Building Comes to Life.
       </Text>
 
       {Platform.OS === "ios" && (
@@ -36,6 +37,7 @@ export default function House() {
         onPress={() => Linking.openURL("https://otbapps.com")}>
         Visit otbapps.com
       </Text>
+      <About />
     </View>
   );
 }
