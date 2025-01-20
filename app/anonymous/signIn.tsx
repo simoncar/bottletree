@@ -24,6 +24,8 @@ export default function SignInAnonymously() {
     anonymous: true,
   };
 
+  console.log("/anonymous/signIn.tsx");
+
   const saveDone = (id) => {
     console.log("saveDone SignInAnonymously: ", id);
     router.replace({
@@ -35,6 +37,8 @@ export default function SignInAnonymously() {
   };
 
   const signInAnonymouslyCallback = (session, error) => {
+    console.log("signInAnonymouslyCallback: ", session, ":", error);
+
     if (error == "Success") {
       console.log("signInAnonymously: ", session, project);
       addLog({
@@ -44,6 +48,7 @@ export default function SignInAnonymously() {
         email: null,
       });
       anonymousUser.uid = session;
+      console.log("signInAnonymouslyCallback: ", anonymousUser);
       addProjectUser(project, anonymousUser, saveDone);
     } else {
       //updateSharedDataUser(null);
@@ -52,6 +57,8 @@ export default function SignInAnonymously() {
 
   const handleSignInAnonymously = async () => {
     try {
+      console.log("handleSignInAnonymously");
+
       signInAnonymously(signInAnonymouslyCallback);
     } catch (error) {
       console.log(error);

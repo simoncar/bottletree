@@ -53,7 +53,10 @@ export function SessionProvider(props: React.PropsWithChildren) {
       const response = await auth().signInAnonymously();
       await setSession(response.user.uid);
       updateAccountName(response.user.uid, "");
-      console.log("Sign In signInAnonymously Success", session);
+      console.log(
+        "Sign In  auth().signInAnonymously Success",
+        response.user.uid,
+      );
       callback(response.user.uid, "Success");
       return response.user.uid;
     } catch (error) {

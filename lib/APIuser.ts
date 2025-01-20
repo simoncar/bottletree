@@ -44,6 +44,7 @@ export async function getUser(uid: string) {
       language: "en",
       project: "",
       anonymous: auth().currentUser.isAnonymous,
+      created: firestore.Timestamp.now(),
     });
 
     return newUser;
@@ -69,14 +70,17 @@ export async function deleteUser(
 }
 
 export async function createUser(user: IUser) {
+  if (!user) {
+    return null;
+  }
+
   const usersCollection = firestore().collection("users");
 
   let querySnapshot;
 
-  console.log("createUser:", user);
-  console.log("createUserUID:", user.uid);
+  console.log("createUser >>>>:", user);
 
-  if (user.email != undefined) {
+  if (user.email != undefined && user.email !== "") {
     querySnapshot = await usersCollection
       .where("email", "==", user.email.toLowerCase())
       .get();
@@ -91,11 +95,13 @@ export async function createUser(user: IUser) {
     user.displayName = querySnapshot.docs[0].data().displayName;
     user.photoURL = querySnapshot.docs[0].data().photoURL;
     user.anonymous = false;
+    user.created = querySnapshot.docs[0].data().created;
     return user;
   } else {
     try {
       const UUID = Crypto.randomUUID();
       const userDoc = usersCollection.doc(user.uid);
+      user.created = firestore.Timestamp.now();
       await userDoc.set(user);
       console.log("User created successfully:", user.uid);
       return user;
@@ -116,7 +122,6 @@ export async function updateUser(user: IUser) {
   const userDoc = usersCollection.doc(user.uid);
   await userDoc.set(user, { merge: true });
 }
-
 export async function updateAccountName(uid: string, displayName: string) {
   const docRef1 = firestore().collection("users").doc(uid);
   const user = auth().currentUser;
@@ -130,19 +135,24 @@ export async function updateAccountName(uid: string, displayName: string) {
     await user.updateProfile({
       displayName: displayName,
     });
-    await docRef1.set(
-      {
-        displayName: displayName,
-        email: auth().currentUser.email.toLocaleLowerCase(),
-        photoURL: auth().currentUser.photoURL
-          ? auth().currentUser.photoURL
-          : "",
-        anonymous: auth().currentUser.isAnonymous,
-      },
-      { merge: true },
-    );
+
+    const doc = await docRef1.get();
+    const updateData: any = {
+      displayName: displayName,
+      email: auth().currentUser.email
+        ? auth().currentUser.email.toLocaleLowerCase()
+        : "",
+      photoURL: auth().currentUser.photoURL ? auth().currentUser.photoURL : "",
+      anonymous: auth().currentUser.isAnonymous,
+    };
+
+    if (!doc.exists) {
+      updateData.created = firestore.Timestamp.now();
+    }
+
+    await docRef1.set(updateData, { merge: true });
   } catch (error) {
-    console.log("upupdateAccountName update ERROR ", error);
+    console.log("updateAccountName update ERROR ", error);
   }
 }
 
@@ -253,7 +263,7 @@ export async function getUserProjectCount(
         key: doc.id,
         uid: doc.id,
         displayName: doc.data()?.displayName,
-        email: doc.data()?.email.toLowerCase(),
+        email: doc.data()?.email?.toLowerCase(),
         photoURL: doc.data()?.photoURL,
         postCount: doc.data()?.postCount,
         language: doc.data()?.language,
@@ -289,26 +299,25 @@ export const mergeUser = (oldUid: string, newUser: IUser) => {
   });
 };
 
-
 export async function updateAllUsersEmailToLowerCase() {
-	const usersCollection = firestore().collection("users");
-	const snapshot = await usersCollection.get();
+  const usersCollection = firestore().collection("users");
+  const snapshot = await usersCollection.get();
 
-	const batch = firestore().batch();
-	
-	snapshot.forEach((doc) => {
-		const userData = doc.data();
-		if (userData.email) {
-			batch.update(doc.ref, {
-				email: userData.email.toLowerCase()
-			});
-		}
-	});
+  const batch = firestore().batch();
 
-	try {
-		await batch.commit();
-		console.log('Successfully updated all user emails to lowercase');
-	} catch (error) {
-		console.error('Error updating user emails:', error);
-	}
+  snapshot.forEach((doc) => {
+    const userData = doc.data();
+    if (userData.email) {
+      batch.update(doc.ref, {
+        email: userData.email.toLowerCase(),
+      });
+    }
+  });
+
+  try {
+    await batch.commit();
+    console.log("Successfully updated all user emails to lowercase");
+  } catch (error) {
+    console.error("Error updating user emails:", error);
+  }
 }

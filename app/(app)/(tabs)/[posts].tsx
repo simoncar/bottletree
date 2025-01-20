@@ -25,6 +25,8 @@ export default function ProjectPosts() {
     private: false,
   });
 
+  console.log("/(app)/(tabs)/[posts].tsx");
+
   useEffect(() => {
     getProject(project, (pObj) => {
       if (pObj) {

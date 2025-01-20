@@ -52,6 +52,8 @@ export default function TabLayout() {
   const { posts: project } = useLocalSearchParams<SearchParams>();
   const [modalVisible, setModalVisible] = useState(false);
 
+  console.log("/(app)/(tabs)/_layout.tsx");
+
   if (isAuthLoading) {
     return <Text>Loading</Text>;
   }

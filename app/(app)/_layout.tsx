@@ -31,7 +31,7 @@ import { addProjectUser } from "@/lib/APIproject";
 import { UserContext } from "@/lib/UserContext";
 
 type SearchParams = {
-  project: string;
+  posts: string;
 };
 
 // export const unstable_settings = {
@@ -41,7 +41,8 @@ type SearchParams = {
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
-  const { project } = useLocalSearchParams<SearchParams>();
+  const { posts } = useLocalSearchParams<SearchParams>();
+  const localParams = useLocalSearchParams();
   useAsyncStorageDevTools();
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
@@ -55,6 +56,8 @@ export default function Layout() {
   });
 
   const colorScheme = useColorScheme();
+
+  console.log("/(app)/_layout.tsx");
 
   const myLightTheme = {
     ...DefaultTheme,
@@ -87,7 +90,7 @@ export default function Layout() {
     router.replace({
       pathname: "/[posts]",
       params: {
-        posts: project,
+        posts: posts,
       },
     });
   };
@@ -108,16 +111,23 @@ export default function Layout() {
   }
 
   if (!session) {
-    if (project) {
+    console.log("Layout: no session");
+    console.log("Layout: localParams: ", localParams);
+
+    if (posts) {
+      console.log("Layout: project: ", posts);
+
       return (
         <Redirect
           href={{
             pathname: "/anonymous/signIn",
-            params: { project: project },
+            params: { project: posts },
           }}
         />
       );
     } else {
+      console.log("Layout: no project");
+
       return (
         <Redirect
           href={{
@@ -128,11 +138,11 @@ export default function Layout() {
     }
   } else {
     // since the user is signedIn and there is a project, we can redirect to the project
-    if (project) {
+    if (posts) {
       //lookup the user based on the session
-      console.log("_layout addProjectUser project: ", project, user);
+      console.log("_layout addProjectUser project: ", posts, user);
 
-      addProjectUser(project, user, saveDone);
+      addProjectUser(posts, user, saveDone);
     }
   }
   return (
