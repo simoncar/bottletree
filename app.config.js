@@ -75,6 +75,9 @@ module.exports = ({ config }) => {
 				typedRoutes: true
 			},
 			plugins: [
+				"expo-asset",
+				"expo-localization",
+				"expo-secure-store",
 				"@react-native-firebase/app",
 				"@react-native-firebase/auth",
 				[
