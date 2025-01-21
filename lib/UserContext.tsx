@@ -26,6 +26,8 @@ const UserProvider = (props: React.PropsWithChildren) => {
         if (!session) return;
 
         const id = user?.uid || session;
+        console.log("userContext XXXX id  : ", id);
+
         const userData = await getUser(id);
 
         if (userData) {

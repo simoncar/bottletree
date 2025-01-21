@@ -81,51 +81,30 @@ export default function Layout() {
   }, [error]);
 
   useEffect(() => {
-    console.log(
-      "rehydrading the userContext from session: {}{}{}{}{}{} : ",
-      "session: ",
-      session,
-      "isAuthLoading:",
-      isAuthLoading,
-      "user:",
-      user,
-      "auth currentuser: ",
-      auth().currentUser,
-    );
-
-    if (!isAuthLoading && session) {
-      // Get user data from Firebase if not already loaded
-      const loadUserData = async () => {
-        console.log("loadUserData: ", session);
-
-        if (session) return;
-        try {
-          console.log("loadUserData getUser: ", session);
-
-          const userData = await getUser(session);
-          if (userData) {
-            setUser(userData);
-            setAppLoading(false);
-            console.log("loadUserData setAppLoading FALSE: ", userData);
-          }
-        } catch (error) {
-          console.error("Error loading user data:", error);
-          setAppLoading(false);
+    const loadUserData = async () => {
+      if (!session) return;
+      try {
+        const userData = await getUser(session);
+        if (userData) {
+          setUser(userData);
         }
-      };
-
-      loadUserData();
-    }
-    if (!isAuthLoading && !session) {
-      console.log("NEW FRESH USER: NO SESSION >> loadUserData: ", session);
-
+      } catch (error) {
+        console.error("Error loading user data:", error);
+      }
       setAppLoading(false);
+    };
+
+    if (!isAuthLoading) {
+      if (session) {
+        loadUserData();
+      } else {
+        setAppLoading(false);
+      }
     }
-  }, [session, user, isAuthLoading]);
+  }, [session, isAuthLoading]);
 
   useEffect(() => {
     if (fontsLoaded) {
-      SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
@@ -135,7 +114,7 @@ export default function Layout() {
     return (
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-        <View style={styles.container}>
+        <View>
           <Text>Initial Loading... </Text>
         </View>
       </ThemeProvider>
@@ -143,7 +122,6 @@ export default function Layout() {
   }
 
   const saveDone = (id) => {
-    console.log("saveDone SignInAnonymously: ", id);
     router.replace({
       pathname: "/[posts]",
       params: {
@@ -158,6 +136,7 @@ export default function Layout() {
 
   if (appLoading == false) {
     console.log("loading COMPLETE: ", appLoading);
+    SplashScreen.hideAsync();
 
     if (!session) {
       console.log("Layout: no session");
@@ -314,15 +293,3 @@ export default function Layout() {
     </GestureHandlerRootView>
   );
 }
-const styles = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //     position: "relative", // Ensure proper stacking context
-  //   },
-  //   // If you have Animated components, contain them:
-  //   animatedContainer: {
-  //     position: "absolute",
-  //     zIndex: 1,
-  //     pointerEvents: "box-none", // Allow touches to pass through to elements below
-  //   },
-});
