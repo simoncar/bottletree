@@ -1,7 +1,7 @@
 import { Tabs, useLocalSearchParams, router } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
@@ -52,7 +52,9 @@ export default function TabLayout() {
   const { posts: project } = useLocalSearchParams<SearchParams>();
   const [modalVisible, setModalVisible] = useState(false);
 
-  console.log("/(app)/(tabs)/_layout.tsx");
+  useEffect(() => {
+    console.log("/(app)/(tabs)/_layout.tsx");
+  }, []);
 
   if (isAuthLoading) {
     return <Text>Loading</Text>;

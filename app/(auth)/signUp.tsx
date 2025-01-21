@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -14,6 +14,7 @@ import Colors from "@/constants/Colors";
 import { addLog } from "@/lib/APIlog";
 import { About } from "@/lib/about";
 import { auth } from "@/lib/firebase";
+import { UserContext } from "@/lib/UserContext";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -22,10 +23,11 @@ export default function SignIn() {
   const [secureEntry, setSecureEntry] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const { signUp } = useSession();
+  const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
   const oldUid = auth().currentUser?.uid;
 
-  const signUpCallback = (user, error) => {
+  const signUpCallback = async (user, error) => {
     if (error == "SignUp Success") {
       console.log("signUpCallback Success:", user);
 

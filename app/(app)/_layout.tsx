@@ -13,7 +13,7 @@ import {
   Redirect,
   router,
 } from "expo-router";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
@@ -29,14 +29,12 @@ import { StatusBar } from "expo-status-bar";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { addProjectUser } from "@/lib/APIproject";
 import { UserContext } from "@/lib/UserContext";
+import { getUser } from "@/lib/APIuser";
+import { auth, db, firestore } from "@/lib/firebase";
 
 type SearchParams = {
   posts: string;
 };
-
-// export const unstable_settings = {
-//   initialRouteName: "index",
-// };
 
 SplashScreen.preventAutoHideAsync();
 
@@ -46,8 +44,9 @@ export default function Layout() {
   useAsyncStorageDevTools();
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
+  const { user, setUser } = useContext(UserContext);
   const { session, isAuthLoading } = useSession();
-  const { user } = useContext(UserContext);
+  const [appLoading, setAppLoading] = useState(true);
 
   const [fontsLoaded, error] = useFonts({
     //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -57,7 +56,9 @@ export default function Layout() {
 
   const colorScheme = useColorScheme();
 
-  console.log("/(app)/_layout.tsx");
+  useEffect(() => {
+    console.log("/(app)/_layout.tsx");
+  }, []);
 
   const myLightTheme = {
     ...DefaultTheme,
@@ -80,10 +81,62 @@ export default function Layout() {
   }, [error]);
 
   useEffect(() => {
+    console.log(
+      "rehydrading the userContext from session: {}{}{}{}{}{} : ",
+      session,
+      isAuthLoading,
+      user,
+      !auth().currentUser,
+    );
+
+    if (!isAuthLoading && session) {
+      // Get user data from Firebase if not already loaded
+      const loadUserData = async () => {
+        console.log("loadUserData: ", session);
+
+        if (session) return;
+        try {
+          console.log("loadUserData getUser: ", session);
+
+          const userData = await getUser(session);
+          if (userData) {
+            setUser(userData);
+            setAppLoading(false);
+            console.log("loadUserData setAppLoading FALSE: ", userData);
+          }
+        } catch (error) {
+          console.error("Error loading user data:", error);
+          setAppLoading(false);
+        }
+      };
+
+      loadUserData();
+    }
+    if (!isAuthLoading && !session) {
+      console.log("NEW FRESH USER: NO SESSION >> loadUserData: ", session);
+
+      setAppLoading(false);
+    }
+  }, [session, user, isAuthLoading]);
+
+  useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+
+  if (isAuthLoading) {
+    console.log("Layout: isAuthLoading Initial Loading...");
+
+    return (
+      <ThemeProvider
+        value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
+        <View style={styles.container}>
+          <Text>Initial Loading... </Text>
+        </View>
+      </ThemeProvider>
+    );
+  }
 
   const saveDone = (id) => {
     console.log("saveDone SignInAnonymously: ", id);
@@ -99,50 +152,33 @@ export default function Layout() {
     return null;
   }
 
-  if (isAuthLoading) {
-    return (
-      <ThemeProvider
-        value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-        <View style={styles.container}>
-          <Text>Initial Loading... </Text>
-        </View>
-      </ThemeProvider>
-    );
-  }
+  if (appLoading == false) {
+    console.log("loading COMPLETE: ", appLoading);
 
-  if (!session) {
-    console.log("Layout: no session");
-    console.log("Layout: localParams: ", localParams);
-
-    if (posts) {
-      console.log("Layout: project: ", posts);
-
-      return (
-        <Redirect
-          href={{
-            pathname: "/anonymous/signIn",
-            params: { project: posts },
-          }}
-        />
-      );
+    if (!session) {
+      console.log("Layout: no session");
+      console.log("Layout: localParams: ", localParams);
+      if (posts) {
+        console.log("Layout: project: ", posts);
+        return (
+          <Redirect
+            href={{
+              pathname: "/anonymous/signIn",
+              params: { project: posts },
+            }}
+          />
+        );
+      } else {
+        console.log("Layout: no project");
+        return (
+          <Redirect
+            href={{
+              pathname: "/signIn",
+            }}
+          />
+        );
+      }
     } else {
-      console.log("Layout: no project");
-
-      return (
-        <Redirect
-          href={{
-            pathname: "/signIn",
-          }}
-        />
-      );
-    }
-  } else {
-    // since the user is signedIn and there is a project, we can redirect to the project
-    if (posts) {
-      //lookup the user based on the session
-      console.log("_layout addProjectUser project: ", posts, user);
-
-      addProjectUser(posts, user, saveDone);
     }
   }
   return (

@@ -31,7 +31,7 @@ export const About = () => {
         <Text style={styles.version}>12.web.sentry</Text>
 
         <Text style={styles.version}>User Context - {user?.uid}</Text>
-        <Text style={styles.version}>CTX - {session}</Text>
+        <Text style={styles.version}>session - {session}</Text>
         <Text style={styles.version}>Auth2 - {authUser}</Text>
         <Text style={styles.version}>Language - {deviceLanguage}</Text>
         <Text style={styles.version}>Project - {user?.project}</Text>

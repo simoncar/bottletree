@@ -32,6 +32,13 @@ export const Projects = ({ session, archived }: Props) => {
 
   const projectsRead = (projectsDB: IProject[]) => {
     //loop through the projectsDB and split the array into two arrays based on the archived flag
+    if (!projectsDB) {
+      setProjects([]);
+      setProjectsArchive([]);
+      setLoading(false);
+      return;
+    }
+
     const projects = projectsDB.reduce(
       (acc, project) => {
         if (project.archived) {

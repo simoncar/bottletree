@@ -8,7 +8,7 @@ export async function getUser(uid: string) {
 
   if (!auth().currentUser) {
     console.log(
-      "getUser: no current auth user, perhaps it was deleted: ",
+      "getUser: no current auth() user, perhaps it was deleted: ",
       auth().currentUser,
     );
     return null;
@@ -19,7 +19,7 @@ export async function getUser(uid: string) {
       key: doc.id,
       uid: doc.id,
       displayName: doc.data()?.displayName,
-      email: doc.data()?.email.toLowerCase(),
+      email: doc.data()?.email?.toLowerCase(),
       photoURL: doc.data()?.photoURL,
       language: doc.data()?.language,
       project: doc.data().project,
@@ -39,7 +39,7 @@ export async function getUser(uid: string) {
     const newUser = await createUser({
       uid: uid,
       displayName: auth().currentUser.displayName || "anonymous",
-      email: auth().currentUser.email.toLowerCase() || "anonymous",
+      email: auth().currentUser.email?.toLowerCase() || "anonymous",
       photoURL: "",
       language: "en",
       project: "",
@@ -127,7 +127,7 @@ export async function updateAccountName(uid: string, displayName: string) {
   const user = auth().currentUser;
 
   console.log("updateAccountName:", user, uid, displayName);
-  if (displayName == undefined || displayName == "") {
+  if (displayName == undefined || displayName == null) {
     displayName = user.displayName;
   }
 

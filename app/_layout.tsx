@@ -22,6 +22,8 @@ if (!__DEV__) {
   });
 }
 
+console.log("/app/_layout.tsx , setup sentry and navigationIntegration");
+
 function RootLayout() {
   const ref = useNavigationContainerRef();
   useEffect(() => {

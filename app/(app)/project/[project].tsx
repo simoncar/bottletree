@@ -27,6 +27,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
 import { Back } from "@/components/Back";
 import SharePanel from "@/components/SharePanel";
+import { About } from "@/lib/about";
 
 export default function editProject() {
   const [updateUsers, setUpdateUsers] = useState("");
@@ -252,6 +253,7 @@ export default function editProject() {
 
           <View style={styles.diagBox}>
             <Text style={styles.projectId}>Project ID: {project.key}</Text>
+            <About />
           </View>
         </View>
       </View>
