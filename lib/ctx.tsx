@@ -108,6 +108,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
       console.log("signUp user: ", user);
       updateUser(user);
+      setUser(user);
       //updateAccountName(response.user.uid, name);
 
       callback(user, "SignUp Success");

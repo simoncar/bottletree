@@ -4,6 +4,7 @@ import { SessionProvider } from "@/lib/ctx";
 import { RootSiblingParent } from "react-native-root-siblings";
 import * as Sentry from "@sentry/react-native";
 import { isRunningInExpoGo } from "expo";
+import { auth, db, firestore } from "@/lib/firebase";
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
