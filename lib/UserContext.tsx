@@ -52,40 +52,40 @@ const UserProvider = (props: React.PropsWithChildren) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log("UserProvider (userContext) XXXX 111 : session", user, session);
+  //   useEffect(() => {
+  //     console.log("UserProvider (userContext) XXXX 111 : session", user, session);
 
-    const fetchData = async () => {
-      console.log("UserProvider (userContext) XXXX 222 : session", session);
-      try {
-        if (user?.uid) {
-          const userData = await getUser(user?.uid);
-          console.log("createContext: UserProviderUIDUID SET >>>", userData);
-          setUser({ ...userData });
-        } else {
-          if (session) {
-            const userData = await getUser(session);
-            if (userData != null) {
-              console.log("createContext: UserProvider4444 SET >>>", userData);
+  //     const fetchData = async () => {
+  //       console.log("UserProvider (userContext) XXXX 222 : session", session);
+  //       try {
+  //         if (user?.uid) {
+  //           const userData = await getUser(user?.uid);
+  //           console.log("createContext: UserProviderUIDUID SET >>>", userData);
+  //           setUser({ ...userData });
+  //         } else {
+  //           if (session) {
+  //             const userData = await getUser(session);
+  //             if (userData != null) {
+  //               console.log("createContext: UserProvider4444 SET >>>", userData);
 
-              setUser({ ...userData });
-            } else {
-              console.log("createContext: UserProvider5555 SET >>>", userData);
-            }
-          }
-        }
-        console.log("UserProvider (userContext) XXXX 333: session", session);
-      } catch (error) {
-        console.error(
-          "XXXX error fetching user data in UserProvider",
-          error,
-          session,
-        );
-      }
-    };
+  //               setUser({ ...userData });
+  //             } else {
+  //               console.log("createContext: UserProvider5555 SET >>>", userData);
+  //             }
+  //           }
+  //         }
+  //         console.log("UserProvider (userContext) XXXX 333: session", session);
+  //       } catch (error) {
+  //         console.error(
+  //           "XXXX error fetching user data in UserProvider",
+  //           error,
+  //           session,
+  //         );
+  //       }
+  //     };
 
-    fetchData();
-  }, [session]);
+  //     fetchData();
+  //   }, [session]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
