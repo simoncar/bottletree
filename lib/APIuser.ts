@@ -186,7 +186,7 @@ export const updateUserProjectCount = (uid: string, project: string) => {
           { merge: true },
         )
         .then(() => {
-          console.log("User's project count updated successfully!");
+          //console.log("User's project count updated successfully!");
         })
         .catch((error) => {
           console.log("Error updating user's project count:", error);

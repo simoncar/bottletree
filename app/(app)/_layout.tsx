@@ -83,10 +83,14 @@ export default function Layout() {
   useEffect(() => {
     console.log(
       "rehydrading the userContext from session: {}{}{}{}{}{} : ",
+      "session: ",
       session,
+      "isAuthLoading:",
       isAuthLoading,
+      "user:",
       user,
-      !auth().currentUser,
+      "auth currentuser: ",
+      auth().currentUser,
     );
 
     if (!isAuthLoading && session) {

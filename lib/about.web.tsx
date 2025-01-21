@@ -15,7 +15,6 @@ export const About = () => {
 
   useEffect(() => {
     setAuthUser(auth().currentUser?.uid);
-    console.log("About useEffect", auth().currentUser?.uid);
   }, []);
 
   if (null == authUser) {

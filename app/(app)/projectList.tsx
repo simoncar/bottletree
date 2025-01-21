@@ -30,7 +30,6 @@ const ProjectList = () => {
   };
 
   useEffect(() => {
-    console.log("ProjectList useEffect");
 
     getProjects(user.uid, true, projectsRead);
   }, []);

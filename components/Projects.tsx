@@ -57,8 +57,6 @@ export const Projects = ({ session, archived }: Props) => {
   };
 
   useEffect(() => {
-    console.log("ProjectList useEffect");
-
     getProjects(session, archived, projectsRead);
   }, []);
 
@@ -66,7 +64,6 @@ export const Projects = ({ session, archived }: Props) => {
     // Callback should be wrapped in `React.useCallback` to avoid running the effect too often.
     useCallback(() => {
       // Invoked whenever the route is focused.
-      console.log("ProjectList useFocusffect");
       getProjects(session, archived, projectsRead);
 
       // Return function is invoked whenever the route gets out of focus.
