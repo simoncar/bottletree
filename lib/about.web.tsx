@@ -23,12 +23,13 @@ export const About = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
-        <Text style={styles.version}>{user?.displayName}</Text>
         <Text style={styles.version}>{user?.email}</Text>
+        <Text style={styles.version}>{user?.displayName}</Text>
+
         <Text style={styles.version}>
           Anonymous: {auth().currentUser?.isAnonymous}
         </Text>
-        <Text style={styles.version}>12.web.sentry</Text>
+        <Text style={styles.version}>13.web.sentry</Text>
 
         <Text style={styles.version}>User Context - {user?.uid}</Text>
         <Text style={styles.version}>session - {session}</Text>

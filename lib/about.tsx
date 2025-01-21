@@ -27,8 +27,9 @@ export const About = () => {
             pathname: "/user/[uid]",
             params: { uid: session },
           }}>
-          <Text style={styles.version}>Email: {user.email}</Text>
+          <Text style={styles.version}>Email: {user?.email}</Text>
         </Link>
+        <Text style={styles.version}>Name: {user?.displayName}</Text>
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>Session - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
