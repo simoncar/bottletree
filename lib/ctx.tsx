@@ -70,7 +70,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
       setSession(response.user.uid);
-      updateAccountName(response.user.uid, "");
+      //updateAccountName(response.user.uid, "");
 
       console.log("Sign In Success", session, response.user.uid);
     } catch (error) {
