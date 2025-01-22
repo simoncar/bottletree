@@ -48,7 +48,6 @@ export const Posts = ({ project, title, projectObj }: Props) => {
     return (
       <View>
         <ProjectPanel project={project} title={title} projectObj={projectObj} />
-        <About />
       </View>
     );
   };
@@ -71,6 +70,7 @@ export const Posts = ({ project, title, projectObj }: Props) => {
             keyboardShouldPersistTaps={"handled"}
           />
         </View>
+        <About />
       </View>
     );
 };

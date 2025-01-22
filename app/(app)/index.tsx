@@ -109,7 +109,6 @@ export default function Home() {
           <View style={styles.instructions}>
             <Text style={styles.welcomeApp}>One Build</Text>
           </View>
-          <About />
           <Projects session={session as string} archived={true} />
           {renderAddProject()}
           <View style={styles.bigGap} />
