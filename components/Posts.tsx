@@ -66,6 +66,7 @@ export const Posts = ({ project, title, projectObj }: Props) => {
             data={posts}
             renderItem={renderItems}
             ListHeaderComponent={renderHeader}
+            ListFooterComponent={About}
             keyExtractor={(item, index) => getKey(item)}
             keyboardShouldPersistTaps={"handled"}
           />
