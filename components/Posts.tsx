@@ -70,7 +70,6 @@ export const Posts = ({ project, title, projectObj }: Props) => {
             keyboardShouldPersistTaps={"handled"}
           />
         </View>
-        <About />
       </View>
     );
 };
