@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Slot, useNavigationContainerRef } from "expo-router";
 import { SessionProvider } from "@/lib/ctx";
 import { RootSiblingParent } from "react-native-root-siblings";
 import * as Sentry from "@sentry/react-native";
 import { isRunningInExpoGo } from "expo";
 import { auth, db, firestore } from "@/lib/firebase";
+import { useSession } from "@/lib/ctx";
+import { UserProvider } from "@/lib/UserContext";
+import { UserContext } from "@/lib/UserContext";
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
@@ -27,6 +30,9 @@ console.log("/app/_layout.tsx , setup sentry and navigationIntegration");
 
 function RootLayout() {
   const ref = useNavigationContainerRef();
+  const { session, isAuthLoading } = useSession();
+  const { user, setUser } = useContext(UserContext);
+
   useEffect(() => {
     if (ref?.current && !__DEV__) {
       navigationIntegration.registerNavigationContainer(ref);
@@ -36,7 +42,9 @@ function RootLayout() {
   return (
     <RootSiblingParent>
       <SessionProvider>
-        <Slot />
+        <UserProvider>
+          <Slot />
+        </UserProvider>
       </SessionProvider>
     </RootSiblingParent>
   );

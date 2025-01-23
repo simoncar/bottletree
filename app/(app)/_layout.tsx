@@ -18,7 +18,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
 import ProjectProvider from "@/lib/projectProvider";
 import { useSession } from "@/lib/ctx";
-import { UserProvider } from "@/lib/UserContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 import Colors from "@/constants/Colors";
@@ -168,7 +167,6 @@ export default function Layout() {
     <GestureHandlerRootView>
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-        <UserProvider>
           <ActionSheetProvider>
             <ProjectProvider>
               <StatusBar style="auto" />
@@ -288,7 +286,6 @@ export default function Layout() {
               </Stack>
             </ProjectProvider>
           </ActionSheetProvider>
-        </UserProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

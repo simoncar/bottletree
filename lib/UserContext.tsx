@@ -16,6 +16,7 @@ const UserContext = createContext<UserContextType>({
 const UserProvider = (props: React.PropsWithChildren) => {
   const { session } = useSession();
   const [user, setUser] = useState<IUser | null>(null);
+  const [isUserSet, setIsUserSet] = useState(false);
 
   useEffect(() => {
     console.log("userContext XXXX user  : ", user);
@@ -23,7 +24,7 @@ const UserProvider = (props: React.PropsWithChildren) => {
 
     const fetchData = async () => {
       try {
-        if (!session) return;
+        if (!session || isUserSet) return;
 
         const id = user?.uid || session;
         console.log("userContext XXXX id  : ", id);
@@ -32,6 +33,7 @@ const UserProvider = (props: React.PropsWithChildren) => {
 
         if (userData) {
           setUser(userData);
+          setIsUserSet(true);
         }
       } catch (error) {
         console.error("Error fetching user data inside createContext:", error);
@@ -39,7 +41,7 @@ const UserProvider = (props: React.PropsWithChildren) => {
     };
 
     fetchData();
-  }, []);
+  }, [[session, isUserSet]]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
