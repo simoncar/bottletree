@@ -242,6 +242,7 @@ export function addProject(
         archived: false,
         postCount: 0,
         private: project?.private || false,
+        created: firestore.Timestamp.now(),
       })
       .then(() => {
         console.log("Project written with ID: ", projectId);

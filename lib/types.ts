@@ -30,6 +30,7 @@ export interface IProject {
   postCount: number;
   timestamp?: Timestamp;
   private: boolean;
+  created?: Timestamp;
 }
 
 export interface ILog {
