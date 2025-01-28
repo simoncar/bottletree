@@ -80,6 +80,7 @@ export async function getProjects(
           postCount: doc.data().postCount,
           timestamp: doc.data().timestamp,
           private: doc.data().private || false,
+          created: doc.data().created || doc.data().timestamp,
         });
       } else {
         if (archived) {
@@ -92,6 +93,7 @@ export async function getProjects(
             postCount: doc.data().postCount,
             timestamp: doc.data().timestamp,
             private: doc.data().private || false,
+            created: doc.data().created || doc.data().timestamp,
           });
         }
       }
@@ -102,6 +104,9 @@ export async function getProjects(
   projects.forEach((project) => {
     if (!project.timestamp) {
       project.timestamp = new firestore.Timestamp(631152000, 0);
+    }
+    if (!project.created) {
+      project.created = project.timestamp;
     }
   });
 
