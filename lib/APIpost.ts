@@ -237,15 +237,16 @@ export async function getPosts(
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
     querySnapshot?.forEach((doc) => {
-      posts.push({
-        key: doc.id,
-        projectId: project,
-        author: doc.data().author,
-        images: parseImages(doc.data().images) ?? [],
-        ratio: doc.data().ratio ?? 1,
-        timestamp: doc.data().timestamp,
-        caption: doc.data().caption,
-      });
+	posts.push({
+	  key: doc.id,
+	  projectId: project,
+	  author: doc.data().author,
+	  images: parseImages(doc.data().images) ?? [],
+	  ratio: doc.data().ratio ?? 1,
+	  timestamp: doc.data().timestamp,
+	  caption: doc.data().caption,
+	  linkURL: doc.data().linkURL ?? "",
+	});
     });
 
     callback(posts);

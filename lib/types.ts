@@ -19,6 +19,7 @@ export interface IPost {
   timestamp?: Timestamp;
   ratio: number;
   comments?: IComment[];
+  linkURL?: string;
 }
 
 export interface IProject {

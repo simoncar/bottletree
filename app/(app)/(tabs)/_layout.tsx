@@ -86,11 +86,11 @@ export default function TabLayout() {
               IconComponent={FontAwesome5}
             />
           ),
-          headerLeft: () => (
-            <View style={styles.back}>
-              <Back />
-            </View>
-          ),
+          //   headerLeft: () => (
+          //     <View style={styles.back}>
+          //       <Back />
+          //     </View>
+          //   ),
         }}>
         <Tabs.Screen
           name="[posts]"

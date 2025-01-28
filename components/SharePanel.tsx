@@ -32,8 +32,9 @@ const IconButton = (props) => {
           { backgroundColor: Colors[colorScheme ?? "light"].postBackground },
         ]}
         onPress={() => {
+          console.log("IconButton: ", pathname, project);
           router.navigate({
-            pathname: `/${pathname}`,
+            pathname: pathname,
             params: {
               project: project.key,
               title: project.title,
@@ -69,7 +70,7 @@ export const SharePanel = (props) => {
       {buttons.includes("calendar") && (
         <IconButton
           project={project}
-          pathname="calendar"
+          pathname="/calendar"
           icon="calendar-today"
           label="calendar"
         />
@@ -77,7 +78,7 @@ export const SharePanel = (props) => {
       {buttons.includes("files") && (
         <IconButton
           project={project}
-          pathname="files"
+          pathname="/files"
           icon="file-present"
           label="files"
         />
@@ -85,7 +86,7 @@ export const SharePanel = (props) => {
       {buttons.includes("share") && (
         <IconButton
           project={project}
-          pathname="share"
+          pathname="/share"
           icon="share"
           label="share"
         />
@@ -93,7 +94,7 @@ export const SharePanel = (props) => {
       {buttons.includes("settings") && (
         <IconButton
           project={project}
-          pathname="project/[project]"
+          pathname="/project/[project]"
           icon="settings"
           label="settings"
         />
