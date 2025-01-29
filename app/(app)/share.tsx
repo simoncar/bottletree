@@ -85,9 +85,6 @@ const ShareLink = () => {
         styles.container,
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
-      <View style={styles.qrcode}>
-        <QRCode size={200} ecl="L" value={`https://b.simon.co/p`} />
-      </View>
       <View style={styles.shareInstructions}>
         <Text style={styles.shareText}>
           Let anybody with the link see this project
@@ -100,9 +97,8 @@ const ShareLink = () => {
       </View>
 
       <View style={styles.qrcode}>
-        <Text> A </Text>
+        <QRCode size={200} ecl="L" value={`https://b.otbapps.com/${project}`} />
       </View>
-      <View style={styles.qrcode}></View>
     </View>
   );
 };
