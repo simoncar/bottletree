@@ -13,7 +13,6 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from "react-native-reanimated";
-import { Image } from "expo-image";
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(ExpoImage);
 
@@ -81,18 +80,18 @@ const PinchableImage = ({ source }: { source: string }) => {
   }));
 
   return (
-    <GestureHandlerRootView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <PinchGestureHandler onGestureEvent={onPinchEvent} onEnded={onPinchEnd}>
-        <Animated.View>
-          <ExpoImage
+    <View style={styles.container}>
+      <GestureHandlerRootView
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <PinchGestureHandler onGestureEvent={onPinchEvent} onEnded={onPinchEnd}>
+          <AnimatedExpoImage
             source={source}
             style={[styles.image, animatedStyle]}
             contentFit="contain"
           />
-        </Animated.View>
-      </PinchGestureHandler>
-    </GestureHandlerRootView>
+        </PinchGestureHandler>
+      </GestureHandlerRootView>
+    </View>
   );
 
   //   return (
