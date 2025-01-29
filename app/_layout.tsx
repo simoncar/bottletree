@@ -8,6 +8,7 @@ import { auth, db, firestore } from "@/lib/firebase";
 import { useSession } from "@/lib/ctx";
 import { UserProvider } from "@/lib/UserContext";
 import { UserContext } from "@/lib/UserContext";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
@@ -40,13 +41,15 @@ function RootLayout() {
   }, [ref]);
 
   return (
-    <RootSiblingParent>
-      <SessionProvider>
-        <UserProvider>
-          <Slot />
-        </UserProvider>
-      </SessionProvider>
-    </RootSiblingParent>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <RootSiblingParent>
+        <SessionProvider>
+          <UserProvider>
+            <Slot />
+          </UserProvider>
+        </SessionProvider>
+      </RootSiblingParent>
+    </GestureHandlerRootView>
   );
 }
 

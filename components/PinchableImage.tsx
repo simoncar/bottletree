@@ -1,18 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
-import { GestureDetector, Gesture } from "react-native-gesture-handler";
-
-import { Image as ExpoImage } from "expo-image";
 import {
+  GestureDetector,
   GestureHandlerRootView,
-  PinchGestureHandler,
-  PinchGestureHandlerGestureEvent,
+  Gesture,
 } from "react-native-gesture-handler";
+import { Image as ExpoImage } from "expo-image";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
-  AnimatableValue,
 } from "react-native-reanimated";
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(ExpoImage);

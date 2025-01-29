@@ -164,7 +164,7 @@ export default function Layout() {
     }
   }
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
         <ActionSheetProvider>
