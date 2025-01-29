@@ -12,6 +12,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
+  AnimatableValue,
 } from "react-native-reanimated";
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(ExpoImage);
@@ -44,7 +45,6 @@ const PinchableImage = ({ source }: { source: string }) => {
     });
 
   const composed = Gesture.Simultaneous(pinchGesture, panGesture);
-
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       { translateX: positionX.value },
