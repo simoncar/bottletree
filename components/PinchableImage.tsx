@@ -85,7 +85,7 @@ const PinchableImage = ({ source }: { source: string }) => {
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <PinchGestureHandler onGestureEvent={onPinchEvent} onEnded={onPinchEnd}>
           <AnimatedExpoImage
-            source={source}
+            source={{ uri: source }}
             style={[styles.image, animatedStyle]}
             contentFit="contain"
           />
