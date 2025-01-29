@@ -17,52 +17,53 @@ import Animated, {
 const AnimatedExpoImage = Animated.createAnimatedComponent(ExpoImage);
 
 const PinchableImage = ({ source }: { source: string }) => {
-const scale = useSharedValue(1);
-const savedScale = useSharedValue(1);
-const positionX = useSharedValue(0);
-const positionY = useSharedValue(0);
-const savedPositionX = useSharedValue(0);
-const savedPositionY = useSharedValue(0);
+  const scale = useSharedValue(1);
+  const savedScale = useSharedValue(1);
+  const positionX = useSharedValue(0);
+  const positionY = useSharedValue(0);
+  const savedPositionX = useSharedValue(0);
+  const savedPositionY = useSharedValue(0);
 
-const pinchGesture = Gesture.Pinch()
-	.onStart(() => {
-		savedScale.value = scale.value;
-	})
-	.onUpdate((e) => {
-		scale.value = savedScale.value * e.scale;
-	});
+  const pinchGesture = Gesture.Pinch()
+    .onStart(() => {
+      savedScale.value = scale.value;
+    })
+    .onUpdate((e) => {
+      scale.value = savedScale.value * e.scale;
+    });
 
-const panGesture = Gesture.Pan()
-	.onStart(() => {
-		savedPositionX.value = positionX.value;
-		savedPositionY.value = positionY.value;
-	})
-	.onUpdate((e) => {
-		positionX.value = savedPositionX.value + e.translationX;
-		positionY.value = savedPositionY.value + e.translationY;
-	});
+  const panGesture = Gesture.Pan()
+    .maxPointers(2)
+    .onStart(() => {
+      savedPositionX.value = positionX.value;
+      savedPositionY.value = positionY.value;
+    })
+    .onUpdate((e) => {
+      positionX.value = savedPositionX.value + e.translationX;
+      positionY.value = savedPositionY.value + e.translationY;
+    });
 
-const composed = Gesture.Simultaneous(pinchGesture, panGesture);
+  const composed = Gesture.Simultaneous(pinchGesture, panGesture);
 
-const animatedStyle = useAnimatedStyle(() => ({
-	transform: [
-		{ translateX: positionX.value },
-		{ translateY: positionY.value },
-		{ scale: scale.value },
-	],
-}));
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: positionX.value },
+      { translateY: positionY.value },
+      { scale: scale.value },
+    ],
+  }));
 
-return (
-	<GestureHandlerRootView style={styles.container}>
-		<GestureDetector gesture={composed}>
-			<AnimatedExpoImage
-				source={source}
-				style={[styles.image, animatedStyle]}
-				contentFit="contain"
-			/>
-		</GestureDetector>
-	</GestureHandlerRootView>
-);
+  return (
+    <GestureHandlerRootView style={styles.container}>
+      <GestureDetector gesture={composed}>
+        <AnimatedExpoImage
+          source={source}
+          style={[styles.image, animatedStyle]}
+          contentFit="contain"
+        />
+      </GestureDetector>
+    </GestureHandlerRootView>
+  );
 };
 
 const styles = StyleSheet.create({
