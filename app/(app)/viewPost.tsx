@@ -87,11 +87,7 @@ const ViewPost = () => {
           ),
         }}
       />
-      {image && (
-        <View style={{ flex: 1 }}>
-          <PinchableImage source={image} />
-        </View>
-      )}
+      {image && <PinchableImage source={image} />}
     </View>
   );
 };
