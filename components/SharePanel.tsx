@@ -105,7 +105,7 @@ export const SharePanel = (props) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 16,
+    padding: 5,
   },
   container: {
     flexDirection: "row",
@@ -114,18 +114,10 @@ const styles = StyleSheet.create({
 
   button: {
     borderRadius: 12,
-    width: 85,
-    height: 85,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    width: 80,
+    height: 80,
+
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "#CED0CE",
   },
   buttonContent: {
     flex: 1,

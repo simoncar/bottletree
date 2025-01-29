@@ -112,7 +112,7 @@ const ProjectPanel = (props: ProjectProp) => {
       </View>
       <SharePanel
         project={projectObj}
-        buttons={["calendar", "files", "settings"]}
+        buttons={["calendar", "files", "share", "settings"]}
       />
     </View>
   );

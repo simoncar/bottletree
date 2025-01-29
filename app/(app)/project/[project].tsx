@@ -215,10 +215,6 @@ export default function editProject() {
             </View>
           </View>
 
-          <SharePanel
-            project={project}
-            buttons={["calendar", "files", "share"]}
-          />
           <ProjectUsers project={local.project} updateUsers={updateUsers} />
           <Pressable style={styles.actionRow} onPress={toggleArchive}>
             <View style={styles.avatar}>
