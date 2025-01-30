@@ -10,6 +10,7 @@ import { Image } from "expo-image";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, {
+  useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -36,16 +37,14 @@ export default function ViewPost() {
     scale.value = event.nativeEvent.scale;
   };
 
-  const panGestureHandler = (event) => {
+  const panGestureHandler_old = (event) => {
     const screenWidth = Dimensions.get("window").width;
     const screenHeight = Dimensions.get("window").height;
     const maxTranslateX = screenWidth / 2;
     const maxTranslateY = screenHeight / 2;
 
-    const newTranslateX =
-      translateX.value + event.nativeEvent.translationX * 0.1;
-    const newTranslateY =
-      translateY.value + event.nativeEvent.translationY * 0.1;
+    const newTranslateX = translateX.value + event.nativeEvent.translationX;
+    const newTranslateY = translateY.value + event.nativeEvent.translationY;
 
     translateX.value = Math.min(
       Math.max(newTranslateX, -maxTranslateX),
@@ -56,6 +55,22 @@ export default function ViewPost() {
       maxTranslateY,
     );
   };
+
+  const panGestureHandler = useAnimatedGestureHandler({
+    onStart: (_, ctx: any) => {
+      ctx.startX = translateX.value;
+      ctx.startY = translateY.value;
+    },
+    onActive: (event, ctx: any) => {
+      translateX.value = ctx.startX + event.translationX;
+      translateY.value = ctx.startY + event.translationY;
+    },
+    onEnd: (_) => {
+      // Optional: Add smooth return animation
+      translateX.value = withSpring(translateX.value);
+      translateY.value = withSpring(translateY.value);
+    },
+  });
 
   const animatedStyle = useAnimatedStyle(() => {
     // Clamp scale to minimum of 1 (100%)
