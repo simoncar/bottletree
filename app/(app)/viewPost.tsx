@@ -25,10 +25,6 @@ import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import Toast from "react-native-root-toast";
 
-type ViewParam = {
-  image: string;
-};
-
 export default function ViewPost() {
   const { image } = useLocalSearchParams<ViewParam>();
   const colorScheme = useColorScheme();
@@ -41,8 +37,24 @@ export default function ViewPost() {
   };
 
   const panGestureHandler = (event) => {
-    translateX.value += event.nativeEvent.translationX;
-    translateY.value += event.nativeEvent.translationY;
+    const screenWidth = Dimensions.get("window").width;
+    const screenHeight = Dimensions.get("window").height;
+    const maxTranslateX = screenWidth / 2;
+    const maxTranslateY = screenHeight / 2;
+
+    const newTranslateX =
+      translateX.value + event.nativeEvent.translationX * 0.1;
+    const newTranslateY =
+      translateY.value + event.nativeEvent.translationY * 0.1;
+
+    translateX.value = Math.min(
+      Math.max(newTranslateX, -maxTranslateX),
+      maxTranslateX,
+    );
+    translateY.value = Math.min(
+      Math.max(newTranslateY, -maxTranslateY),
+      maxTranslateY,
+    );
   };
 
   const animatedStyle = useAnimatedStyle(() => {
