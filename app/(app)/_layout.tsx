@@ -269,7 +269,7 @@ export default function Layout() {
                 name="house"
                 options={{
                   title: "About",
-                }} 
+                }}
               />
               <Stack.Screen
                 name="note"

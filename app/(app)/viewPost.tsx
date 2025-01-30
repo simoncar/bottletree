@@ -1,28 +1,62 @@
 import React from "react";
 import {
-  StyleSheet,
-  Dimensions,
   View,
-  useColorScheme,
+  StyleSheet,
   Pressable,
+  useColorScheme,
+  Dimensions,
 } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
-import { Back } from "@/components/Back";
-import { Feather } from "@expo/vector-icons";
+
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
+import {
+  PinchGestureHandler,
+  PanGestureHandler,
+} from "react-native-gesture-handler";
+import { Stack, useLocalSearchParams } from "expo-router";
+import Feather from "@expo/vector-icons/Feather";
 import Colors from "@/constants/Colors";
 import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import Toast from "react-native-root-toast";
-import PinchableImage from "@/components/PinchableImage";
 
 type ViewParam = {
   image: string;
 };
 
-const ViewPost = () => {
+export default function ViewPost() {
   const { image } = useLocalSearchParams<ViewParam>();
   const colorScheme = useColorScheme();
+  const scale = useSharedValue(1);
+  const translateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+
+  const pinchGestureHandler = (event) => {
+    scale.value = event.nativeEvent.scale;
+  };
+
+  const panGestureHandler = (event) => {
+    translateX.value += event.nativeEvent.translationX;
+    translateY.value += event.nativeEvent.translationY;
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    // Clamp scale to minimum of 1 (100%)
+    scale.value = Math.max(1, scale.value);
+
+    return {
+      transform: [
+        { scale: withSpring(scale.value) },
+        { translateX: withSpring(translateX.value) },
+        { translateY: withSpring(translateY.value) },
+      ],
+    };
+  });
 
   const downloadImage = async () => {
     try {
@@ -67,7 +101,6 @@ const ViewPost = () => {
       });
     }
   };
-
   return (
     <View style={styles.overall}>
       <Stack.Screen
@@ -87,17 +120,34 @@ const ViewPost = () => {
           ),
         }}
       />
-      {image && <PinchableImage source={image} />}
+      <PinchGestureHandler onGestureEvent={pinchGestureHandler}>
+        <Animated.View>
+          <PanGestureHandler onGestureEvent={panGestureHandler}>
+            <Animated.View style={animatedStyle as any}>
+              <Image
+                style={styles.image}
+                source={image}
+                contentFit="contain"
+                transition={1000}
+              />
+            </Animated.View>
+          </PanGestureHandler>
+        </Animated.View>
+      </PinchGestureHandler>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
   overall: {
-    backgroundColor: "#010101",
     flex: 1,
     height: Dimensions.get("window").height - 200,
   },
 });
-
-export default ViewPost;

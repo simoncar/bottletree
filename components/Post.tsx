@@ -38,6 +38,7 @@ const Post = (props) => {
               <Pressable
                 key={"aa" + index}
                 onPress={() => {
+                  console.log("Post navigate: : ", im.url);
                   router.navigate({
                     pathname: "/viewPost",
                     params: {
@@ -71,8 +72,6 @@ const Post = (props) => {
         },
       ]}>
       {renderImage()}
-
-      {!(<Dots images={imageUrls} activeImage={activeImage} />)}
 
       <View style={styles.commentView}>
         <Text style={styles.comment}>{caption}</Text>
