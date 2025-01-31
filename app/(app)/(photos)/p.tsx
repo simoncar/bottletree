@@ -67,15 +67,6 @@ const LogScreen = () => {
             }
           }}
           style={[styles.outerView, { backgroundColor: backgroundColor }]}>
-          <View style={styles.avatar}>
-            <View style={styles.avatarFace}>
-              <Feather
-                name="camera"
-                color="#999999"
-                style={styles.avatarIcon}
-              />
-            </View>
-          </View>
           <View style={styles.textContainer}>
             <Text style={styles.message}>{data.caption || ""}</Text>
 
@@ -160,6 +151,7 @@ const styles = StyleSheet.create({
   messageSmall: {
     color: "grey",
     fontSize: 14,
+    paddingTop: 5,
   },
 
   outerView: {
