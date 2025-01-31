@@ -130,6 +130,9 @@ const styles = StyleSheet.create({
   image: {
     height: 100,
     width: 100,
+    paddingRight: 5,
+    marginRight: 5,
+    borderRadius: 5,
   },
 
   imageContainer: {
