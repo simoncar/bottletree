@@ -1,38 +1,23 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
   SafeAreaView,
-  useColorScheme,
-  Button as NativeButton,
   ScrollView,
+  View,
+  TextInput,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
-import { router, useLocalSearchParams, Stack } from "expo-router";
-import { TextInput, View } from "@/components/Themed";
-import { IPost } from "@/lib/types";
-import { updatePost, getPost } from "@/lib/APIpost";
-import Colors from "@/constants/Colors";
-import { UserContext } from "@/lib/UserContext";
 import { Text } from "@/components/Themed";
+import { useColorScheme } from "react-native";
+import { Stack, router, useLocalSearchParams } from "expo-router";
+import Colors from "@/constants/Colors";
+import { getPost, updatePost } from "@/lib/APIpost";
+import { IPost } from "@/lib/types";
 
-export default function editPost() {
-  const { user } = useContext(UserContext);
-  const local = useLocalSearchParams<{
-    projectId: string;
-    postId: string;
-  }>();
-
-  const [post, setPost] = useState<IPost>({
-    key: "",
-    caption: "",
-    projectId: local?.projectId || "",
-    projectTitle: "",
-    author: user?.displayName || "",
-    images: [],
-    ratio: 1,
-  });
-
+export default function EditPost() {
   const colorScheme = useColorScheme();
+  const local = useLocalSearchParams();
+  const [post, setPost] = useState<IPost>({ caption: "" });
 
   useEffect(() => {
     if (local?.postId) {
@@ -72,15 +57,42 @@ export default function editPost() {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.title}>
+            <Text
+              style={[
+                styles.label,
+                { color: Colors[colorScheme ?? "light"].textDisabledColor },
+              ]}>
+              Title
+            </Text>
             <TextInput
               style={[
                 styles.titleText,
                 { color: Colors[colorScheme ?? "light"].text },
               ]}
               onChangeText={(title) => setPost({ ...post, caption: title })}
-              placeholder={"Add Note"}
+              placeholder={"Note"}
               value={post.caption}
               autoFocus={true}
+              multiline={true}
+              numberOfLines={10}
+            />
+          </View>
+          <View style={styles.title}>
+            <Text
+              style={[
+                styles.label,
+                { color: Colors[colorScheme ?? "light"].textDisabledColor },
+              ]}>
+              Link URL
+            </Text>
+            <TextInput
+              style={[
+                styles.titleText,
+                { color: Colors[colorScheme ?? "light"].text },
+              ]}
+              onChangeText={(linkURL) => setPost({ ...post, linkURL: linkURL })}
+              placeholder={"URL"}
+              value={post.linkURL}
               multiline={true}
               numberOfLines={10}
             />
@@ -97,8 +109,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
-  title: { flex: 1, justifyContent: "flex-start" },
+  title: {
+    marginBottom: 20,
+  },
+  label: {
+    color: "lightgrey",
+    marginBottom: 5,
+    paddingLeft: 5,
+  },
   titleText: {
-    fontSize: 25,
+    borderWidth: 1,
+    borderColor: "lightgrey",
+    borderRadius: 10,
+    padding: 10,
+    fontSize: 16,
+    backgroundColor: "white",
   },
 });

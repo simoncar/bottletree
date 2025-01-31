@@ -24,6 +24,7 @@ export async function getPost(
         images: doc.data()?.images,
         ratio: doc.data()?.ratio,
         timestamp: doc.data()?.timestamp,
+        linkURL: doc.data()?.linkURL,
       };
       callback(post);
     } else {
@@ -158,16 +159,13 @@ export function updatePost(post: IPost, callback: any) {
     .collection("posts")
     .doc(post.key);
 
-  postRef
-    .set(
-      {
-        caption: post.caption,
-      },
-      { merge: true },
-    )
-    .then(() => {
-      callback(post.key);
-    });
+  const postData = Object.fromEntries(
+    Object.entries(post).filter(([_, v]) => v !== undefined),
+  );
+
+  postRef.set(postData, { merge: true }).then(() => {
+    callback(post.key);
+  });
 }
 
 export function deletePost(post: IPost, callback: any) {
@@ -237,16 +235,16 @@ export async function getPosts(
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     const posts: IPost[] = [];
     querySnapshot?.forEach((doc) => {
-	posts.push({
-	  key: doc.id,
-	  projectId: project,
-	  author: doc.data().author,
-	  images: parseImages(doc.data().images) ?? [],
-	  ratio: doc.data().ratio ?? 1,
-	  timestamp: doc.data().timestamp,
-	  caption: doc.data().caption,
-	  linkURL: doc.data().linkURL ?? "",
-	});
+      posts.push({
+        key: doc.id,
+        projectId: project,
+        author: doc.data().author,
+        images: parseImages(doc.data().images) ?? [],
+        ratio: doc.data().ratio ?? 1,
+        timestamp: doc.data().timestamp,
+        caption: doc.data().caption,
+        linkURL: doc.data().linkURL ?? "",
+      });
     });
 
     callback(posts);

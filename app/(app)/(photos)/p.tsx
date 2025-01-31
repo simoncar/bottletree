@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, ScrollView, Pressable, Linking } from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
@@ -9,10 +9,23 @@ import { getRelativeTime } from "@/lib/util";
 import { getPosts } from "@/lib/APIpost";
 import Feather from "@expo/vector-icons/Feather";
 import { Image } from "expo-image";
+import { UserContext } from "@/lib/UserContext";
+import { Link, router, useLocalSearchParams } from "expo-router";
 
 const LogScreen = () => {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const { user, setUser } = useContext(UserContext);
+
+  const admins = ["simon@simon.co"];
+
+  const isAdmin = (email: string) => {
+    if (admins.includes(email)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const postsRead = (postsDB) => {
     setPosts(postsDB);
@@ -20,7 +33,7 @@ const LogScreen = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = getPosts("p", postsRead);
+    const unsubscribe = getPosts("photos", postsRead);
     return () => {
       unsubscribe;
     };
@@ -41,27 +54,35 @@ const LogScreen = () => {
 
   function renderRow(data: IPost) {
     const backgroundColor = "transparent";
+    console.log("data: ", data);
+
     return (
-      <Pressable
-        key={data.key}
-        onPress={() => {
-          if (data.linkURL) {
-            Linking.openURL(data.linkURL);
-          }
-        }}
-        style={[styles.outerView, { backgroundColor: backgroundColor }]}>
-        <View style={styles.avatar}>
-          <View style={styles.avatarFace}>
-            <Feather name="camera" color="#999999" style={styles.avatarIcon} />
+      <View>
+        <Pressable
+          key={data.key}
+          onPress={() => {
+            if (data.linkURL) {
+              Linking.openURL(data.linkURL);
+            }
+          }}
+          style={[styles.outerView, { backgroundColor: backgroundColor }]}>
+          <View style={styles.avatar}>
+            <View style={styles.avatarFace}>
+              <Feather
+                name="camera"
+                color="#999999"
+                style={styles.avatarIcon}
+              />
+            </View>
           </View>
-        </View>
-        <View>
-          <Text style={styles.message}>{data.caption || ""}</Text>
-          <Text style={styles.messageSmall}>
-            {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
-          </Text>
-        </View>
-      </Pressable>
+          <View>
+            <Text style={styles.message}>{data.caption || ""}</Text>
+            <Text style={styles.messageSmall}>
+              {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
+            </Text>
+          </View>
+        </Pressable>
+      </View>
     );
   }
 
@@ -74,6 +95,14 @@ const LogScreen = () => {
         {loading === false && (
           <View>
             <ShortList data={posts} renderItem={renderRow} />
+          </View>
+        )}
+
+        {isAdmin(user?.email) && (
+          <View style={{ alignItems: "center", paddingTop: 100 }}>
+            <Link href="/">
+              <Text>Home</Text>
+            </Link>
           </View>
         )}
       </ScrollView>

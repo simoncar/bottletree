@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Button, StyleSheet } from "react-native";
+import { Button, Pressable, StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
@@ -7,6 +7,7 @@ import { UserContext } from "@/lib/UserContext";
 import { Link } from "expo-router";
 import * as Application from "expo-application";
 import * as Sentry from "@sentry/react-native";
+import { useRouter } from "expo-router";
 
 export const About = () => {
   const { user } = useContext(UserContext);
@@ -17,9 +18,24 @@ export const About = () => {
     setAuthUser(auth().currentUser?.uid);
   }, []);
 
+  const router = useRouter();
+  let pressCount = 0;
+
+  const handlePress = () => {
+    pressCount += 1;
+    console.log(pressCount);
+
+    if (pressCount === 3) {
+      router.push("/p");
+    }
+  };
+
   return (
     <View style={styles.aboutContainer}>
-      <Text style={styles.version}>One Build</Text>
+      <Pressable onPress={handlePress}>
+        <Text style={styles.version}>One Build</Text>
+      </Pressable>
+
       <Text style={styles.version}>
         {Application.nativeApplicationVersion} ({Application.nativeBuildVersion}
         ) | 12.app.sentry

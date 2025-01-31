@@ -23,6 +23,8 @@ const Post = (props) => {
   const imageUrls = post.images && post.images.map((image) => image);
   const caption = post.caption !== undefined ? post.caption : "";
 
+
+
   function renderImage() {
     if (imageUrls.length == 0) {
       return;
