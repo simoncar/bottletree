@@ -11,6 +11,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { Image } from "expo-image";
 import { UserContext } from "@/lib/UserContext";
 import { Link, router, useLocalSearchParams } from "expo-router";
+import { ImageManipulator } from "expo-image-manipulator";
 
 const LogScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -75,8 +76,20 @@ const LogScreen = () => {
               />
             </View>
           </View>
-          <View>
+          <View style={styles.textContainer}>
             <Text style={styles.message}>{data.caption || ""}</Text>
+
+            {data.images && data.images.length > 0 && (
+              <View style={styles.imageContainer}>
+                {data.images.slice(0, 3).map((image, index) => (
+                  <Image
+                    key={index}
+                    source={{ uri: image.url }}
+                    style={styles.image}
+                  />
+                ))}
+              </View>
+            )}
             <Text style={styles.messageSmall}>
               {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
             </Text>
@@ -85,7 +98,6 @@ const LogScreen = () => {
       </View>
     );
   }
-
   return (
     <View style={styles.container}>
       <ScrollView style={styles.logList}>
@@ -114,6 +126,14 @@ const styles = StyleSheet.create({
   avatar: {
     marginRight: 12,
     width: 50,
+  },
+  image: {
+    height: 100,
+    width: 100,
+  },
+
+  imageContainer: {
+    flexDirection: "row",
   },
   avatarFace: { borderRadius: 48 / 2, height: 48, width: 48 },
 
@@ -147,9 +167,13 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     padding: 8,
   },
+  textContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
   profilePicContainer: {
     alignItems: "center",
-    paddingBottom: 15,
+    paddingBottom: 50,
     paddingHorizontal: 15,
     paddingTop: 15,
   },

@@ -83,7 +83,7 @@ export default function EditPost() {
                 styles.label,
                 { color: Colors[colorScheme ?? "light"].textDisabledColor },
               ]}>
-              Link URL
+              External Link
             </Text>
             <TextInput
               style={[
