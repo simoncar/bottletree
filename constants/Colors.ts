@@ -1,6 +1,7 @@
 export default {
   light: {
     text: "#000",
+    textField: "#000",
     orangeButtonIcon: "#fff",
     textPlaceholder: "#ccc",
     background: "#faf3f3",
@@ -26,6 +27,7 @@ export default {
   },
   dark: {
     text: "#fff",
+    textField: "#000",
     orangeButtonIcon: "#000",
     textPlaceholder: "#ccc",
     background: "#2F203C",

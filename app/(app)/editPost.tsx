@@ -67,7 +67,7 @@ export default function EditPost() {
             <TextInput
               style={[
                 styles.titleText,
-                { color: Colors[colorScheme ?? "light"].text },
+                { color: Colors[colorScheme ?? "light"].textField },
               ]}
               onChangeText={(title) => setPost({ ...post, caption: title })}
               placeholder={"Note"}
@@ -88,7 +88,7 @@ export default function EditPost() {
             <TextInput
               style={[
                 styles.titleText,
-                { color: Colors[colorScheme ?? "light"].text },
+                { color: Colors[colorScheme ?? "light"].textField },
               ]}
               onChangeText={(linkURL) => setPost({ ...post, linkURL: linkURL })}
               placeholder={"URL"}
