@@ -172,13 +172,6 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      <AddModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onOptionSelect={handleOptionSelect}
-        project={project}
-        user={user}
-      />
     </View>
   );
 }
