@@ -12,7 +12,7 @@ import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import { UserContext } from "@/lib/UserContext";
-
+import AddModal from "@/app/(app)/addModal";
 import { StatusBar } from "expo-status-bar";
 
 function TabBarIcon({
@@ -172,6 +172,13 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
+      <AddModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onOptionSelect={handleOptionSelect}
+        project={project}
+        user={user}
+      />
     </View>
   );
 }
