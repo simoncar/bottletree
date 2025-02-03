@@ -10,6 +10,7 @@ import {
   useNavigationContainerRef,
   useLocalSearchParams,
   usePathname,
+  useSegments,
   Stack,
   Redirect,
   router,
@@ -48,6 +49,7 @@ export default function Layout() {
   const { session, isAuthLoading } = useSession();
   const [appLoading, setAppLoading] = useState(true);
   const currentPath = usePathname();
+  const segments = useSegments();
 
   const [fontsLoaded, error] = useFonts({
     //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -137,7 +139,8 @@ export default function Layout() {
 
   if (appLoading == false) {
     console.log("loading COMPLETE: ", appLoading);
-    console.log("Layout:", currentPath);
+    console.log("Layout: path ", currentPath);
+    console.log("Layout: segments ", segments);
     SplashScreen.hideAsync();
 
     if (!session) {

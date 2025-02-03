@@ -10,7 +10,7 @@ import { getPosts } from "@/lib/APIpost";
 import Feather from "@expo/vector-icons/Feather";
 import { Image } from "expo-image";
 import { UserContext } from "@/lib/UserContext";
-import { Link, router, useLocalSearchParams } from "expo-router";
+import { Link, router, usePathname } from "expo-router";
 import { ImageManipulator } from "expo-image-manipulator";
 
 const LogScreen = () => {
