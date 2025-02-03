@@ -9,6 +9,7 @@ import { useFonts } from "expo-font";
 import {
   useNavigationContainerRef,
   useLocalSearchParams,
+  usePathname,
   Stack,
   Redirect,
   router,
@@ -46,6 +47,7 @@ export default function Layout() {
   const { user, setUser } = useContext(UserContext);
   const { session, isAuthLoading } = useSession();
   const [appLoading, setAppLoading] = useState(true);
+  const currentPath = usePathname();
 
   const [fontsLoaded, error] = useFonts({
     //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -135,6 +137,7 @@ export default function Layout() {
 
   if (appLoading == false) {
     console.log("loading COMPLETE: ", appLoading);
+    console.log("Layout:", currentPath);
     SplashScreen.hideAsync();
 
     if (!session) {
