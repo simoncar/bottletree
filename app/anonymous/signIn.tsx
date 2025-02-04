@@ -73,7 +73,7 @@ export default function SignInAnonymously() {
 
   return (
     <View style={styles.container}>
-      <Text>Initial Loading... </Text>
+      <Text>SignIn Loading... </Text>
     </View>
   );
 }

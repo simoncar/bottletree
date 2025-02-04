@@ -140,16 +140,10 @@ export default function Layout() {
   }
 
   if (appLoading == false) {
-    console.log("loading COMPLETE: ", appLoading);
-    console.log("Layout: path ", currentPath);
-    console.log("Layout: segments ", segments);
     SplashScreen.hideAsync();
 
     if (!session) {
-      console.log("Layout: no session");
-      console.log("Layout: localParams: ", localParams);
       if (posts) {
-        console.log("Layout: project: ", posts);
         return (
           <Redirect
             href={{
@@ -159,7 +153,6 @@ export default function Layout() {
           />
         );
       } else {
-        console.log("Layout: no project");
         return (
           <Redirect
             href={{
