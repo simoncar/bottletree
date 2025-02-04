@@ -14,6 +14,7 @@ import { getProjects } from "@/lib/APIproject";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { UserContext } from "@/lib/UserContext";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 type Props = {
   session: string;
@@ -147,6 +148,7 @@ export const Projects = ({ session, archived }: Props) => {
           </View>
           <View style={styles.projectTitle}>{renderTitle(data)}</View>
         </TouchableOpacity>
+        <FontAwesome name="star-o" size={24} color="white" />
       </View>
     );
   }
