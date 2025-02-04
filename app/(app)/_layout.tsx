@@ -59,6 +59,12 @@ export default function Layout() {
 
   const colorScheme = useColorScheme();
 
+  useEffect(() => {
+    console.log("/(app)/_layout.tsx");
+    console.log("Layout: A path ", currentPath);
+    console.log("Layout: A segments ", segments);
+  }, []);
+
   const myLightTheme = {
     ...DefaultTheme,
     colors: {
@@ -108,6 +114,8 @@ export default function Layout() {
   }, [fontsLoaded]);
 
   if (isAuthLoading) {
+    console.log("Layout: isAuthLoading Initial Loading...");
+
     return (
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
@@ -137,6 +145,8 @@ export default function Layout() {
 
     if (!session) {
       if (posts) {
+        console.log("Layout: Redirect to signInAnonymously");
+
         return (
           <Redirect
             href={{
@@ -145,7 +155,11 @@ export default function Layout() {
             }}
           />
         );
+      } else if (currentPath == "/p") {
+        //do nothing, let the /p render
       } else {
+        console.log("Layout: Redirect to signIn");
+
         return (
           <Redirect
             href={{
@@ -154,7 +168,6 @@ export default function Layout() {
           />
         );
       }
-    } else {
     }
   }
   return (

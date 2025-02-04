@@ -20,6 +20,8 @@ const LogScreen = () => {
 
   const admins = ["simon@simon.co"];
 
+  console.log("/app/(app)/p/index.tsx");
+
   const isAdmin = (email: string) => {
     if (admins.includes(email)) {
       return true;
