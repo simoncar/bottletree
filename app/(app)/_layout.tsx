@@ -59,12 +59,6 @@ export default function Layout() {
 
   const colorScheme = useColorScheme();
 
-  useEffect(() => {
-    console.log("/(app)/_layout.tsx");
-    console.log("Layout: A path ", currentPath);
-    console.log("Layout: A segments ", segments);
-  }, []);
-
   const myLightTheme = {
     ...DefaultTheme,
     colors: {
@@ -114,8 +108,6 @@ export default function Layout() {
   }, [fontsLoaded]);
 
   if (isAuthLoading) {
-    console.log("Layout: isAuthLoading Initial Loading...");
-
     return (
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>

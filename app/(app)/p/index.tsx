@@ -55,7 +55,6 @@ const LogScreen = () => {
 
   function renderRow(data: IPost) {
     const backgroundColor = "transparent";
-    console.log("data: ", data);
 
     return (
       <View key={data.key}>
