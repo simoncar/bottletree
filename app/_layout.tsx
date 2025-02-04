@@ -17,7 +17,7 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
 if (
   !__DEV__ &&
   !isRunningInExpoGo() &&
-  !navigator.userAgent.includes("Mozilla")
+  !(typeof navigator !== "undefined" && navigator.userAgent.includes("Mozilla"))
 ) {
   Sentry.init({
     dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry.io/4506092928827392",
