@@ -58,9 +58,8 @@ const LogScreen = () => {
     console.log("data: ", data);
 
     return (
-      <View>
+      <View key={data.key}>
         <Pressable
-          key={data.key}
           onPress={() => {
             if (data.linkURL) {
               Linking.openURL(data.linkURL);

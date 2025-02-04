@@ -14,7 +14,11 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
 });
 
-if (!__DEV__) {
+if (
+  !__DEV__ &&
+  !isRunningInExpoGo() &&
+  !navigator.userAgent.includes("Mozilla")
+) {
   Sentry.init({
     dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry.io/4506092928827392",
     debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production

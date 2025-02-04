@@ -119,7 +119,8 @@ export default function Layout() {
     return (
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-        <View>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <Text>Initial Loading... </Text>
         </View>
       </ThemeProvider>
@@ -285,7 +286,7 @@ export default function Layout() {
                 }}
               />
               <Stack.Screen
-                name="(photos)/p"
+                name="p/index"
                 options={{
                   headerShown: false,
                 }}
