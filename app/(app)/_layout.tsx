@@ -61,8 +61,8 @@ export default function Layout() {
 
   useEffect(() => {
     console.log("/(app)/_layout.tsx");
-    console.log("Layout: A path ", currentPath);
-    console.log("Layout: A segments ", segments);
+    console.log("Layout: A path :", currentPath);
+    console.log("Layout: A segments :", segments);
   }, []);
 
   const myLightTheme = {
@@ -155,9 +155,7 @@ export default function Layout() {
             }}
           />
         );
-      } else if (currentPath == "/p") {
-        //do nothing, let the /p render
-      } else {
+      } else if (currentPath != "/p") {
         console.log("Layout: Redirect to signIn");
 
         return (
