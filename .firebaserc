@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "builder-403d5"
-  }
+  },
+  "targets": {
+    "builder-403d5": {
+      "hosting": {
+        "builder": [
+          "builder-403d5"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
