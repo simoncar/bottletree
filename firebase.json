@@ -38,6 +38,7 @@
     }
   ],
   "hosting": {
+    "target": "builder-403d5",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*"],
     "rewrites": [

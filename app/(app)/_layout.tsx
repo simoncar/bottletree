@@ -155,7 +155,7 @@ export default function Layout() {
             }}
           />
         );
-      } else if (currentPath != "/p") {
+      } else {
         console.log("Layout: Redirect to signIn");
 
         return (

@@ -24,10 +24,6 @@ export const About = () => {
   const handlePress = () => {
     pressCount += 1;
     console.log(pressCount);
-
-    if (pressCount === 3) {
-      router.push("/p");
-    }
   };
 
   return (
