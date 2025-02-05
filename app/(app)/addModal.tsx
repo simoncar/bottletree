@@ -39,7 +39,8 @@ const AddModal = ({
 
     addImageFromCameraRoll(
       multiple,
-      "posts",
+      "project",
+      project,
       progressCallback,
       completedCallback,
     );

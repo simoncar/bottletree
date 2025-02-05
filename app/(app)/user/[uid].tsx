@@ -75,6 +75,7 @@ export default function editUser() {
     addImageFromCameraRoll(
       multiple,
       "profile",
+      user.uid,
       progressCallback,
       completedCallback,
     );

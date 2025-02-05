@@ -101,6 +101,7 @@ export default function editProject() {
     addImageFromCameraRoll(
       multiple,
       "project",
+      project.key,
       progressCallback,
       completedCallback,
     );

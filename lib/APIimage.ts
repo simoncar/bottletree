@@ -29,6 +29,7 @@ const IS_WEB_PLATFORM = Platform.OS === "web";
 export const addImageFromCameraRoll = async (
   multiple: boolean,
   folder: string,
+  project: string,
   progressCallback: {
     (progress: any): void;
   },
@@ -46,7 +47,7 @@ export const addImageFromCameraRoll = async (
   if (!result.canceled) {
     try {
       const promises = result.assets.map((item) =>
-        processItemAsync(folder, item, progressCallback),
+        processItemAsync(folder, project, item, progressCallback),
       );
       const processedResults = await Promise.all(promises);
       completedCallback(processedResults);
@@ -76,6 +77,7 @@ export const addImageFromPhoto = async (
 
 async function processItemAsync(
   folder: string,
+  project: string,
   asset: ImageAsset,
   progressCallback: ProgressCallback,
 ): Promise<string> {
@@ -119,7 +121,7 @@ async function processItemAsync(
 
   return new Promise((resolve, reject) => {
     try {
-      const storageRef = getStorageRef(folder);
+      const storageRef = getStorageRef(folder, project);
 
       if (IS_WEB_PLATFORM) {
         getBlobFromUri(imageUri).then((blob) => {
@@ -176,17 +178,11 @@ async function processItemAsync(
   });
 }
 
-function getStorageRef(folder: string) {
+function getStorageRef(folder: string, project: string) {
   const UUID = Crypto.randomUUID();
   const d = new Date();
 
-  const fileName =
-    folder +
-    "/" +
-    d.getUTCFullYear() +
-    ("0" + (d.getMonth() + 1)).slice(-2) +
-    "/" +
-    UUID;
+  const fileName = folder + "/" + project + "/images/" + UUID;
 
   //const storageRef = ref(storage, fileName);
   const storageRef = firebase.storage().ref(fileName);
