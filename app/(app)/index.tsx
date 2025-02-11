@@ -11,15 +11,12 @@ import { Text, View } from "@/components/Themed";
 import { UserContext } from "@/lib/UserContext";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
-import { Notifications } from "@/lib/notifications";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Projects } from "@/components/Projects";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { UserAvatar } from "@/components/UserAvatar";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Update } from "@/lib/update";
-import { Pressable } from "react-native-gesture-handler";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -45,21 +42,11 @@ export default function Home() {
     return (
       <View style={styles.topPanel}>
         <View style={styles.topPanelLeft}>
-          <Pressable
-            onPress={() =>
-              router.navigate({
-                pathname: "/house",
-                params: {
-                  post: "",
-                },
-              })
-            }>
-            <FontAwesome6
-              name="hammer"
-              size={24}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </Pressable>
+          <FontAwesome6
+            name="hammer"
+            size={24}
+            color={Colors[colorScheme ?? "light"].text}
+          />
         </View>
         <View style={styles.topPanelRight}>
           <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
@@ -108,13 +95,13 @@ export default function Home() {
         </View>
         <View style={styles.container}>
           <View style={styles.instructions}>
-            <Text style={styles.welcomeApp}>One Build</Text>
+            <Text style={styles.welcomeApp}>Projects</Text>
           </View>
+
           <Projects session={session as string} archived={true} />
           {renderAddProject()}
           <View style={styles.bigGap} />
           {renderLogout()}
-          <Notifications />
           <About />
         </View>
       </ScrollView>

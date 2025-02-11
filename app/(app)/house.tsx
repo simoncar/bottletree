@@ -37,6 +37,7 @@ export default function House() {
         onPress={() => Linking.openURL("https://otbapps.com")}>
         Visit otbapps.com
       </Text>
+
       <About />
     </View>
   );

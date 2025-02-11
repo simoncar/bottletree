@@ -39,8 +39,7 @@ export async function getProject(
 
   return () => unsubscribe();
 }
-
-export async function getProjects(
+export function getProjects(
   uid: string,
   archived: boolean,
   callback: projectsRead,
@@ -56,72 +55,71 @@ export async function getProjects(
 
   const query = db.collectionGroup("accessList").where("uid", "==", uid);
 
-  await query.get().then((querySnapshot) => {
+  query.onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       projectList.indexOf(doc.data().projectId) === -1
         ? projectList.push(doc.data().projectId)
         : console.log("This item already exists");
     });
-  });
 
-  const q = db.collection("projects"); //.orderBy("timestamp", "desc");
+    const q = db.collection("projects");
 
-  const projectsSnapshot = await q.get();
+    q.onSnapshot((projectsSnapshot) => {
+      projects.length = 0; // Clear the array
+      projectsArchived.length = 0; // Clear the array
 
-  projectsSnapshot.forEach((doc) => {
-    if (projectList.includes(doc.id)) {
-      if (!doc.data().archived) {
-        projects.push({
-          project: doc.id,
-          key: doc.id,
-          title: doc.data().title || "Untitled",
-          icon: doc.data().icon,
-          archived: false,
-          postCount: doc.data().postCount,
-          timestamp: doc.data().timestamp,
-          private: doc.data().private || false,
-          created: doc.data().created || doc.data().timestamp,
-        });
-      } else {
-        if (archived) {
-          projectsArchived.push({
-            project: doc.id,
-            key: doc.id,
-            title: doc.data().title || "Untitled",
-            icon: doc.data().icon,
-            archived: true,
-            postCount: doc.data().postCount,
-            timestamp: doc.data().timestamp,
-            private: doc.data().private || false,
-            created: doc.data().created || doc.data().timestamp,
-          });
+      projectsSnapshot.forEach((doc) => {
+        if (projectList.includes(doc.id)) {
+          if (!doc.data().archived) {
+            projects.push({
+              project: doc.id,
+              key: doc.id,
+              title: doc.data().title || "Untitled",
+              icon: doc.data().icon,
+              archived: false,
+              postCount: doc.data().postCount,
+              timestamp: doc.data().timestamp,
+              private: doc.data().private || false,
+              created: doc.data().created || doc.data().timestamp,
+            });
+          } else {
+            if (archived) {
+              projectsArchived.push({
+                project: doc.id,
+                key: doc.id,
+                title: doc.data().title || "Untitled",
+                icon: doc.data().icon,
+                archived: true,
+                postCount: doc.data().postCount,
+                timestamp: doc.data().timestamp,
+                private: doc.data().private || false,
+                created: doc.data().created || doc.data().timestamp,
+              });
+            }
+          }
         }
-      }
-    }
+      });
+
+      projects.forEach((project) => {
+        if (!project.timestamp) {
+          project.timestamp = new firestore.Timestamp(631152000, 0);
+        }
+        if (!project.created) {
+          project.created = project.timestamp;
+        }
+      });
+
+      projects.sort((a, b) => {
+        return b.timestamp?.seconds - a.timestamp?.seconds;
+      });
+
+      projectsArchived.sort((a, b) => {
+        return b.timestamp?.seconds - a.timestamp?.seconds;
+      });
+
+      callback([...projects, ...projectsArchived]);
+    });
   });
-
-  //if any project has a null timestamp, set it to '1/jan/1990'
-  projects.forEach((project) => {
-    if (!project.timestamp) {
-      project.timestamp = new firestore.Timestamp(631152000, 0);
-    }
-    if (!project.created) {
-      project.created = project.timestamp;
-    }
-  });
-
-  //order the projectList by timestamp, with the most recent timestamps first
-  projects.sort((a, b) => {
-    return b.timestamp?.seconds - a.timestamp?.seconds;
-  });
-
-  projectsArchived.sort((a, b) => {
-    return b.timestamp?.seconds - a.timestamp?.seconds;
-  });
-
-  callback([...projects, ...projectsArchived]);
-
-  return;
 }
 
 export async function getAllProjects(callback: projectsRead) {

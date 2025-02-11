@@ -23,8 +23,6 @@ const Post = (props) => {
   const imageUrls = post.images && post.images.map((image) => image);
   const caption = post.caption !== undefined ? post.caption : "";
 
-
-
   function renderImage() {
     if (imageUrls.length == 0) {
       return;
@@ -40,7 +38,6 @@ const Post = (props) => {
               <Pressable
                 key={"aa" + index}
                 onPress={() => {
-                  console.log("Post navigate: : ", im.url);
                   router.navigate({
                     pathname: "/viewPost",
                     params: {
@@ -74,6 +71,8 @@ const Post = (props) => {
         },
       ]}>
       {renderImage()}
+
+      {!(<Dots images={imageUrls} activeImage={activeImage} />)}
 
       <View style={styles.commentView}>
         <Text style={styles.comment}>{caption}</Text>

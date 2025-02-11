@@ -6,15 +6,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { View } from "@/components/Themed";
 
 const goBack = () => {
-  console.log("goBack:", router);
-  console.log("canDismiss:", router.canDismiss());
-  console.log("canGoBack:", router.canGoBack());
-
-  if (router.canGoBack()) {
-    router.back();
-  } else {
-    router.replace("/(tabs)");
-  }
+  router.back();
 };
 
 export const Back = () => {
