@@ -81,6 +81,7 @@ export function getProjects(
               timestamp: doc.data().timestamp,
               private: doc.data().private || false,
               created: doc.data().created || doc.data().timestamp,
+              star: doc.data().star || false,
             });
           } else {
             if (archived) {
@@ -94,6 +95,7 @@ export function getProjects(
                 timestamp: doc.data().timestamp,
                 private: doc.data().private || false,
                 created: doc.data().created || doc.data().timestamp,
+                star: doc.data().star || false,
               });
             }
           }
@@ -195,6 +197,25 @@ export async function getProjectUsers(
   }
 
   callback(userList);
+}
+export async function setStar(
+  projectId: string,
+  star: boolean,
+  callback?: { (id: string): void; (arg0: string): void },
+) {
+  try {
+    const ref = db.collection("projects").doc(projectId);
+
+    await ref.update({ star: star });
+
+    if (callback) {
+      callback(projectId);
+    } else {
+      console.log("Callback not provided.");
+    }
+  } catch (e) {
+    console.error("Error setting star property: ", e);
+  }
 }
 
 export function updateProject(project: IProject, callback: any) {

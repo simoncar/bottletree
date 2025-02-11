@@ -10,7 +10,7 @@ import {
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import { getProjects } from "@/lib/APIproject";
+import { getProjects, setStar } from "@/lib/APIproject";
 import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { UserContext } from "@/lib/UserContext";
@@ -148,7 +148,16 @@ export const Projects = ({ session, archived }: Props) => {
           </View>
           <View style={styles.projectTitle}>{renderTitle(data)}</View>
         </TouchableOpacity>
-        <FontAwesome name="star-o" size={24} color="white" />
+        <TouchableOpacity
+          onPress={() => {
+            setStar(data.key, !data.star);
+          }}>
+          <FontAwesome
+            name={data.star ? "star" : "star-o"}
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
       </View>
     );
   }

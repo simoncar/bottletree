@@ -32,6 +32,7 @@ export interface IProject {
   timestamp?: Timestamp;
   private: boolean;
   created?: Timestamp;
+  star?: boolean;
 }
 
 export interface ILog {
