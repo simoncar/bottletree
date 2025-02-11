@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   useColorScheme,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { useSession } from "@/lib/ctx";
 import { router, Link, Stack } from "expo-router";
@@ -42,11 +43,21 @@ export default function Home() {
     return (
       <View style={styles.topPanel}>
         <View style={styles.topPanelLeft}>
-          <FontAwesome6
-            name="hammer"
-            size={24}
-            color={Colors[colorScheme ?? "light"].text}
-          />
+          <Pressable
+            onPress={() =>
+              router.navigate({
+                pathname: "/house",
+                params: {
+                  post: "",
+                },
+              })
+            }>
+            <FontAwesome6
+              name="hammer"
+              size={24}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </Pressable>
         </View>
         <View style={styles.topPanelRight}>
           <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
