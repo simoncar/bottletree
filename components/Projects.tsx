@@ -155,7 +155,7 @@ export const Projects = ({ session, archived }: Props) => {
           <FontAwesome
             name={data.star ? "star" : "star-o"}
             size={24}
-            color="white"
+            color={Colors[colorScheme ?? "light"].text}
           />
         </TouchableOpacity>
       </View>
