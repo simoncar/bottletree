@@ -112,7 +112,10 @@ export function getProjects(
       });
 
       projects.sort((a, b) => {
-        return b.timestamp?.seconds - a.timestamp?.seconds;
+        if (a.star === b.star) {
+          return b.timestamp?.seconds - a.timestamp?.seconds;
+        }
+        return a.star ? -1 : 1;
       });
 
       projectsArchived.sort((a, b) => {
@@ -206,7 +209,10 @@ export async function setStar(
   try {
     const ref = db.collection("projects").doc(projectId);
 
-    await ref.update({ star: star });
+    await ref.update({
+      star: star,
+      timestamp: firestore.Timestamp.now(),
+    });
 
     if (callback) {
       callback(projectId);
