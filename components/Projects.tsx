@@ -150,6 +150,7 @@ export const Projects = ({ session, archived }: Props) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
+            //data.star = !data.star;
             setStar(data.key, !data.star);
           }}>
           <FontAwesome
