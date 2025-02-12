@@ -59,7 +59,7 @@ export function getProjects(
     querySnapshot.forEach((doc) => {
       projectList.indexOf(doc.data().projectId) === -1
         ? projectList.push(doc.data().projectId)
-        : console.log("This item already exists");
+        : console.log("This item already exists", Date());
     });
 
     const q = db.collection("projects");
