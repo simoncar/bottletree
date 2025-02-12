@@ -64,6 +64,11 @@ export default function editProject() {
   }, []);
 
   const saveDone = (id: string) => {
+    if (project.archived) {
+      router.push("/");
+    } else {
+      router.back();
+    }
     router.back();
   };
 
@@ -189,7 +194,7 @@ export default function editProject() {
                 console.log("save");
                 updateProject(project, saveDone);
               }}>
-              <Text>Save</Text>
+              <Text>Done</Text>
             </TouchableOpacity>
           ),
         }}

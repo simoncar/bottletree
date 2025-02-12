@@ -67,7 +67,7 @@ export default function Note() {
                 console.log("save");
                 save();
               }}>
-              <Text>Save</Text>
+              <Text>Done</Text>
             </TouchableOpacity>
           ),
         }}

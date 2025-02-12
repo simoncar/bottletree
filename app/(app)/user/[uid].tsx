@@ -182,7 +182,7 @@ export default function editUser() {
                 console.log("save");
                 save();
               }}>
-              <Text>Save</Text>
+              <Text>Done</Text>
             </TouchableOpacity>
           ),
         }}
