@@ -10,7 +10,6 @@ import { router } from "expo-router";
 import { Image } from "expo-image";
 import { Text } from "@/components/Themed";
 import Comments from "./PostComments";
-import Dots from "@/components/dots";
 import Footer from "@/components/Footer";
 import Colors from "@/constants/Colors";
 
@@ -71,8 +70,6 @@ const Post = (props) => {
         },
       ]}>
       {renderImage()}
-
-      {!(<Dots images={imageUrls} activeImage={activeImage} />)}
 
       <View style={styles.commentView}>
         <Text style={styles.comment}>{caption}</Text>

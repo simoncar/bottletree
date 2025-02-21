@@ -288,12 +288,6 @@ export default function Layout() {
                   title: "Logs",
                 }}
               />
-              <Stack.Screen
-                name="p/index"
-                options={{
-                  headerShown: false,
-                }}
-              />
             </Stack>
           </ProjectProvider>
         </ActionSheetProvider>

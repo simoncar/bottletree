@@ -104,13 +104,6 @@ const AddModal = ({
     console.log("handleAddFilePress3");
   };
 
-  //  "Add Note",
-  //   "Take Photo",
-  //   "Add from Camera Roll",
-  //   "Add Calendar Event",
-  //   "Add Project",
-  //   "Cancel",
-
   return (
     <Modal
       transparent={true}
