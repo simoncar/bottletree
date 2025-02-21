@@ -83,16 +83,11 @@ export default function Tasks() {
     };
     editTask(project, task.key, updatedTask)
       .then(() => {
-        console.log("AAAA:", tasks);
-
-        // setTasks((prevTasks) =>
-        //   prevTasks.map((t) =>
-        //     t.key === task.key ? { ...t, completed: !t.completed } : t,
-        //   ),
-        // );
-
-        console.log("AAAABBBB:", tasks);
-        console.log("AAAACCCC:", updatedTask);
+        setTasks((prevTasks) =>
+          prevTasks.map((t) =>
+            t.key === task.key ? { ...t, completed: !t.completed } : t,
+          ),
+        );
         console.log("Task updated successfully");
       })
       .catch((error) => {
