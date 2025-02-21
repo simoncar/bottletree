@@ -42,6 +42,28 @@ export default function Tasks() {
     });
   }, []);
 
+  const groupTasksByCompletion = (tasks: ITask[]) => {
+    const groupedTasks = tasks.reduce(
+      (acc, task) => {
+        if (task.completed) {
+          acc.completed.push(task);
+        } else {
+          acc.incomplete.push(task);
+        }
+        return acc;
+      },
+      { incomplete: [], completed: [] } as {
+        incomplete: ITask[];
+        completed: ITask[];
+      },
+    );
+    console.log("groupTasksByCompletion >>:", groupedTasks);
+
+    return groupedTasks;
+  };
+
+  const groupedTasks = groupTasksByCompletion(tasks);
+
   const handleTaskPress = (task: ITask) => {
     // Handle file selection
     console.log("File selected:", task);
@@ -107,9 +129,6 @@ export default function Tasks() {
   };
 
   const TaskItem = ({ task, onPress }: TaskItemProps) => {
-    console.log("taskItem:", task);
-    // const formattedDate = formatDate(task.modified);
-
     return (
       <View style={styles.taskItem}>
         <TouchableOpacity
@@ -127,6 +146,12 @@ export default function Tasks() {
       </View>
     );
   };
+
+  const renderSectionHeader = (title: string) => (
+    <View style={styles.sectionHeader}>
+      <Text style={styles.sectionHeaderText}>{title}</Text>
+    </View>
+  );
 
   const renderItem = ({ item }: { item: ITask }) => (
     <TaskItem task={item} onPress={handleTaskPress} />
@@ -147,7 +172,7 @@ export default function Tasks() {
         <ActivityIndicator />
       ) : (
         <FlatList
-          data={tasks}
+          data={[...groupedTasks.incomplete, ...groupedTasks.completed]}
           keyExtractor={(item) => item.key.toString()}
           renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -157,6 +182,18 @@ export default function Tasks() {
                 No tasks found
               </Text>
             </View>
+          )}
+          ListHeaderComponent={() => (
+            <>
+              {groupedTasks.incomplete.length > 0 &&
+                renderSectionHeader(
+                  `Tasks (${groupedTasks.incomplete.length})`,
+                )}
+              {groupedTasks.completed.length > 0 &&
+                renderSectionHeader(
+                  `Completed (${groupedTasks.completed.length})`,
+                )}
+            </>
           )}
         />
       )}
@@ -264,5 +301,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     fontSize: 18,
     borderRadius: 12,
+  },
+  sectionHeader: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  sectionHeaderText: {
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
