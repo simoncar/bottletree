@@ -147,6 +147,20 @@ export default function TabLayout() {
             ),
           }}
         />
+        <Tabs.Screen
+          name="tasks"
+          initialParams={{ project: project }}
+          options={{
+            title: "Tasks",
+            tabBarIcon: ({ color }) => (
+              <TabBarIcon
+                name="add-task"
+                color={color}
+                IconComponent={MaterialIcons}
+              />
+            ),
+          }}
+        />
 
         <Tabs.Screen
           name="nothing"

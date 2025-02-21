@@ -115,6 +115,16 @@ export interface IFile {
   modified: Timestamp;
 }
 
+//type to store tasks
+export interface ITask {
+  key?: string;
+  task: string;
+  projectId: string;
+  completed: boolean;
+  created?: Timestamp;
+  modified?: Timestamp;
+}
+
 export interface CustomCalendarEvent extends ICalendarEventBase {
   id: string;
   summary: string;

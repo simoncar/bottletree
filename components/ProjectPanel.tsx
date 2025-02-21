@@ -108,11 +108,18 @@ const ProjectPanel = (props: ProjectProp) => {
             </Text>
           </Pressable>
         </View>
-        <View></View>
+        <View>
+          <MaterialIcons
+            name={"settings"}
+            color="#999999"
+            style={styles.icon}
+            size={28}
+          />
+        </View>
       </View>
       <SharePanel
         project={projectObj}
-        buttons={["calendar", "files", "share", "settings"]}
+        buttons={["calendar", "files", "tasks", "share"]}
       />
     </View>
   );

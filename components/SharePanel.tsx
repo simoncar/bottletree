@@ -83,6 +83,14 @@ export const SharePanel = (props) => {
           label="files"
         />
       )}
+      {buttons.includes("tasks") && (
+        <IconButton
+          project={project}
+          pathname="/tasks"
+          icon="add-task"
+          label="tasks"
+        />
+      )}
       {buttons.includes("share") && (
         <IconButton
           project={project}
