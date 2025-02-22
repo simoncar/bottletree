@@ -6,7 +6,7 @@ module.exports = ({ config }) => {
 			name: isDev ? "One Build DEV" : "One Build",
 			slug: "bottletree",
 			version: "1.0.205",
-			orientation: "portrait",
+			orientation: "default",
 			icon: "./assets/images/icon.png",
 			scheme: "bottletree",
 			userInterfaceStyle: "automatic",
