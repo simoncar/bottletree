@@ -57,7 +57,6 @@ export default function Tasks() {
         completed: ITask[];
       },
     );
-    console.log("groupTasksByCompletion >>:", groupedTasks);
 
     return groupedTasks;
   };
@@ -83,11 +82,11 @@ export default function Tasks() {
     };
     editTask(project, task.key, updatedTask)
       .then(() => {
-        setTasks((prevTasks) =>
-          prevTasks.map((t) =>
-            t.key === task.key ? { ...t, completed: !t.completed } : t,
-          ),
-        );
+        // setTasks((prevTasks) =>
+        //   prevTasks.map((t) =>
+        //     t.key === task.key ? { ...t, completed: !t.completed } : t,
+        //   ),
+        // );
         console.log("Task updated successfully");
       })
       .catch((error) => {
