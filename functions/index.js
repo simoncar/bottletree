@@ -23,8 +23,8 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 	const uid = event.data.data().uid;
 	const projectId = event.data.data().projectId;
 
-	if (!projectId) {
-		console.log('Project ID not specified. Exiting function.');
+	if (!projectId || projectId === "demo") {
+		console.log('Project ID not specified or Demo Project. Exiting function.');
 		return;
 	}
 
@@ -99,8 +99,8 @@ exports.onDocumentCreated_post = onDocumentCreated("/projects/{projectId}/posts/
 	const timestamp = event.data.data().timestamp;
 	const projectId = event.data.projectId;
 
-	if (!projectId) {
-		console.log('Project ID not specified. Exiting function.');
+	if (!projectId || projectId === "demo") {
+		console.log('Project ID not specified or Demo Project. Exiting function.');
 		return;
 	}
 
