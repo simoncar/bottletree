@@ -109,12 +109,24 @@ const ProjectPanel = (props: ProjectProp) => {
           </Pressable>
         </View>
         <View>
-          <MaterialIcons
-            name={"settings"}
-            color="#999999"
-            style={styles.icon}
-            size={28}
-          />
+          <Pressable
+            onPress={() => {
+              if (projectObj) {
+                router.navigate({
+                  pathname: "/project/[project]",
+                  params: {
+                    project: projectObj.project,
+                  },
+                });
+              }
+            }}>
+            <MaterialIcons
+              name={"settings"}
+              color="#999999"
+              style={styles.icon}
+              size={28}
+            />
+          </Pressable>
         </View>
       </View>
       <SharePanel
