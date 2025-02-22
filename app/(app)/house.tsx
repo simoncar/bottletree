@@ -15,7 +15,7 @@ export default function House() {
   const colorScheme = useColorScheme();
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>One Build</Text>
+      <Text>One Build</Text>
       <Text style={styles.textSub}>
         Where Every Step of Building Comes to Life.
       </Text>
@@ -44,11 +44,7 @@ export default function House() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  container: {},
   qrcode: {
     alignItems: "center",
     borderColor: "white",

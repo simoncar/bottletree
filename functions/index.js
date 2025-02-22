@@ -50,7 +50,10 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 				title: title,
 				sound: "default",
 				body: body,
-				data: { uid: tokenDoc.data().uid },
+				data: {
+					uid: tokenDoc.data().uid,
+					project: projectId
+				},
 			});
 		});
 
