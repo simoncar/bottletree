@@ -166,31 +166,32 @@ export default function Tasks() {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList
-          data={[...groupedTasks.incomplete, ...groupedTasks.completed]}
-          keyExtractor={(item) => item.key.toString()}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-          ListEmptyComponent={() => (
-            <View>
-              <Text style={{ textAlign: "center", padding: 16 }}>
-                No tasks found
-              </Text>
-            </View>
-          )}
-          ListHeaderComponent={() => (
+        <>
+          {groupedTasks.incomplete.length > 0 && (
             <>
-              {groupedTasks.incomplete.length > 0 &&
-                renderSectionHeader(
-                  `Tasks (${groupedTasks.incomplete.length})`,
-                )}
-              {groupedTasks.completed.length > 0 &&
-                renderSectionHeader(
-                  `Completed (${groupedTasks.completed.length})`,
-                )}
+              {renderSectionHeader(`Tasks (${groupedTasks.incomplete.length})`)}
+              <FlatList
+                data={groupedTasks.incomplete}
+                keyExtractor={(item) => item.key.toString()}
+                renderItem={renderItem}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+              />
             </>
           )}
-        />
+          {groupedTasks.completed.length > 0 && (
+            <>
+              {renderSectionHeader(
+                `Completed (${groupedTasks.completed.length})`,
+              )}
+              <FlatList
+                data={groupedTasks.completed}
+                keyExtractor={(item) => item.key.toString()}
+                renderItem={renderItem}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+              />
+            </>
+          )}
+        </>
       )}
 
       <Modal

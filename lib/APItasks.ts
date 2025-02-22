@@ -4,11 +4,7 @@ import { ITask } from "./types";
 export async function getTasks(project: string, callback: tasksRead) {
   const tasks: ITask[] = [];
 
-  const q = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("tasks")
-    .orderBy("modified", "desc");
+  const q = firestore().collection("projects").doc(project).collection("tasks");
 
   const unsubscribe = q.onSnapshot((querySnapshot) => {
     querySnapshot?.forEach((doc) => {
