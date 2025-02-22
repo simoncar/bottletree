@@ -38,7 +38,6 @@ export default function Tasks() {
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
       setTasks(() => [...retrievedTasks]);
-      console.log("getTasks >>:", retrievedTasks);
       setLoading(false);
     });
   }, []);
@@ -66,7 +65,7 @@ export default function Tasks() {
 
   const handleTaskPress = (task: ITask) => {
     // Handle file selection
-    console.log("File selected:", task);
+    console.log("Task selected:", task);
   };
 
   const handleAddTaskPress = () => {
@@ -209,10 +208,11 @@ export default function Tasks() {
           <View style={styles.modalContent}>
             <TextInput
               ref={inputRef}
-              style={styles.input}
+              style={[styles.input]}
               placeholder="New Task"
               value={newTaskName}
               onChangeText={setNewTaskName}
+              multiline
             />
             <Button title="Save" onPress={handleSaveTask} />
           </View>
@@ -294,12 +294,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 16,
   },
   input: {
-    height: 40,
+    height: 80,
     borderColor: "gray",
     borderWidth: 0,
     marginBottom: 12,
     paddingHorizontal: 8,
-    fontSize: 18,
+    fontSize: 20,
     borderRadius: 12,
   },
   sectionHeader: {
