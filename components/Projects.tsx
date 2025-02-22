@@ -54,6 +54,8 @@ export const Projects = ({ session, archived }: Props) => {
 
     setProjects(projects[0]);
     setProjectsArchive(projects[1]);
+    console.log("projects", projects[0]);
+
     setLoading(false);
   };
 
@@ -148,19 +150,20 @@ export const Projects = ({ session, archived }: Props) => {
           </View>
           <View style={styles.projectTitle}>{renderTitle(data)}</View>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            //data.star = !data.star;
-            setStar(data.key, !data.star);
-          }}>
-          <FontAwesome
-            name={data.star ? "star" : "star-o"}
-            size={24}
-            color={
-              data.star ? Colors[colorScheme ?? "light"].text : "lightgrey"
-            }
-          />
-        </TouchableOpacity>
+        {data.key !== "demo" && (
+          <TouchableOpacity
+            onPress={() => {
+              setStar(data.key, !data.star);
+            }}>
+            <FontAwesome
+              name={data.star ? "star" : "star-o"}
+              size={24}
+              color={
+                data.star ? Colors[colorScheme ?? "light"].text : "lightgrey"
+              }
+            />
+          </TouchableOpacity>
+        )}
       </View>
     );
   }

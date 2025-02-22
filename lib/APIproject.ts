@@ -47,6 +47,7 @@ export function getProjects(
   const projectList: string[] = ["X"];
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
+  const projectsDemo: IProject[] = [];
 
   if (!uid) {
     callback(null);
@@ -69,7 +70,7 @@ export function getProjects(
       projectsArchived.length = 0; // Clear the array
 
       projectsSnapshot.forEach((doc) => {
-        if (projectList.includes(doc.id)) {
+        if (projectList.includes(doc.id) && doc.id !== "demo") {
           if (!doc.data().archived) {
             projects.push({
               project: doc.id,
@@ -121,8 +122,20 @@ export function getProjects(
       projectsArchived.sort((a, b) => {
         return b.timestamp?.seconds - a.timestamp?.seconds;
       });
+      projectsDemo.push({
+        project: "demo",
+        key: "demo",
+        title: "Demo Project",
+        icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/project%2Fdemo%2Fimages%2Fd0dd21df-e9fd-4d8f-a41a-b58deba7259c?alt=media&token=b9b74300-99aa-42b0-a069-676c5f6d62a1",
+        archived: false,
+        postCount: 0,
+        timestamp: firestore.Timestamp.now(),
+        private: false,
+        created: firestore.Timestamp.now(),
+        star: false,
+      });
 
-      callback([...projects, ...projectsArchived]);
+      callback([...projects, ...projectsArchived, ...projectsDemo]);
     });
   });
 }
