@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import { useNavigation, Stack } from "expo-router";
 import { useLocalSearchParams, router } from "expo-router";
 import { CustomCalendarEvent } from "@/lib/types";
+import { demoDataForDemoProject } from "@/lib/demoProject";
 
 import {
   Calendar,
@@ -66,6 +67,9 @@ export default function CalendarLarge() {
   };
 
   useEffect(() => {
+    //if the project = 'demo' then update demo data
+    demoDataForDemoProject();
+
     const unsubscribe = getItemsBigCalendar(project, itemsRead);
     return () => {
       unsubscribe;
