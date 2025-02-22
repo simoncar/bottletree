@@ -183,6 +183,10 @@ export const demoDataForDemoProject = async () => {
         docId: "demo11111",
         data: createCalendarEntry("Cleanup", "", 31, 31, "#49B382", "Grass"),
       },
+      {
+        docId: "demozzzz",
+        data: createCalendarEntry("Final Paymet", "", 45, 45, "#DB4545", "Red"),
+      },
     ];
 
     for (const { docId, data } of calendarData) {
