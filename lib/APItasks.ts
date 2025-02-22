@@ -1,6 +1,8 @@
 import { firestore } from "@/lib/firebase";
 import { ITask } from "./types";
 
+type tasksRead = (tasks: ITask[]) => void;
+
 export async function getTasks(project: string, callback: tasksRead) {
   const tasks: ITask[] = [];
 

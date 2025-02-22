@@ -120,12 +120,7 @@ const ProjectPanel = (props: ProjectProp) => {
                 });
               }
             }}>
-            <MaterialIcons
-              name={"settings"}
-              color="#999999"
-              style={styles.icon}
-              size={28}
-            />
+            <MaterialIcons name={"settings"} color="#999999" size={28} />
           </Pressable>
         </View>
       </View>
