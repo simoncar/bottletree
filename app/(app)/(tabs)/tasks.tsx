@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  Linking,
   Modal,
   TextInput,
   Button,
@@ -15,10 +14,7 @@ import { addTask, editTask, getTasks } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
-import { Timestamp } from "firebase/firestore";
-import { useLocalSearchParams, router } from "expo-router";
-import * as DocumentPicker from "expo-document-picker";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { useLocalSearchParams } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { MaterialIcons } from "@expo/vector-icons";
 
