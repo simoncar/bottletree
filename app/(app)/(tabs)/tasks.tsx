@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -33,6 +33,7 @@ export default function Tasks() {
   const colorScheme = useColorScheme();
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [newTaskName, setNewTaskName] = useState<string>("");
+  const inputRef = useRef<TextInput>(null);
 
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
@@ -70,6 +71,9 @@ export default function Tasks() {
 
   const handleAddTaskPress = () => {
     setModalVisible(true);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
   };
 
   const toggleComplete = (task: ITask) => {
@@ -168,7 +172,7 @@ export default function Tasks() {
         <>
           {groupedTasks.incomplete.length > 0 && (
             <>
-              {renderSectionHeader(`Tasks (${groupedTasks.incomplete.length})`)}
+              {renderSectionHeader(`Tasks`)}
               <FlatList
                 data={groupedTasks.incomplete}
                 keyExtractor={(item) => item.key.toString()}
@@ -204,6 +208,7 @@ export default function Tasks() {
           onPressOut={() => setModalVisible(false)}>
           <View style={styles.modalContent}>
             <TextInput
+              ref={inputRef}
               style={styles.input}
               placeholder="New Task"
               value={newTaskName}
