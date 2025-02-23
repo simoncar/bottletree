@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useColorScheme,
   Platform,
+  Pressable,
 } from "react-native";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
@@ -15,28 +16,22 @@ export default function House() {
   const colorScheme = useColorScheme();
   return (
     <View style={styles.container}>
-      <Text>One Build</Text>
+      <Text style={styles.text}>One Build</Text>
       <Text style={styles.textSub}>
         Where Every Step of Building Comes to Life.
       </Text>
 
-      {Platform.OS === "ios" && (
-        <>
-          <View style={styles.qrcode}>
-            <QRCode
-              size={200}
-              ecl="L"
-              value={`https://apps.apple.com/app/id6449942716`}
-            />
-          </View>
-          <Text style={styles.textSub}>Share the app with your friends</Text>
-        </>
-      )}
-      <Text
-        style={styles.link}
-        onPress={() => Linking.openURL("https://otbapps.com")}>
-        Visit otbapps.com
-      </Text>
+      <View style={styles.qrcode}>
+        <QRCode size={200} ecl="L" value={`https://otbapps.com`} />
+      </View>
+      <Text style={styles.textSub}>Share the app with your friends</Text>
+      <View>
+        <Pressable
+          style={styles.button}
+          onPress={() => Linking.openURL("https://otbapps.com")}>
+          <Text style={styles.buttonText}>Find out more</Text>
+        </Pressable>
+      </View>
 
       <About />
     </View>
@@ -44,13 +39,17 @@ export default function House() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    alignItems: "center",
+    padding: 20,
+  },
   qrcode: {
     alignItems: "center",
     borderColor: "white",
     borderWidth: 2,
-    flexDirection: "row",
     width: 204,
+    justifyContent: "center",
   },
   text: {
     fontSize: 34,
@@ -75,5 +74,20 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 8, // Optional: Adds rounded corners
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#9D5BD0",
+    borderRadius: 10,
+    height: 50,
+    justifyContent: "center",
+    marginBottom: 10,
+    width: 300,
+    color: "white",
+    textAlign: "center",
+  },
+  buttonText: {
+    fontSize: 18,
+    color: "white",
   },
 });
