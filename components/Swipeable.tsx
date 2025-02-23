@@ -14,12 +14,14 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.3;
 
 type SwipeableProps = {
+  id: string;
   onDelete?: () => void;
   children: React.ReactNode;
 };
 
-const Swipeable: React.FC<SwipeableProps> = ({ onDelete, children }) => {
+const Swipeable: React.FC<SwipeableProps> = ({ id, onDelete, children }) => {
   const translateX = useSharedValue(0);
+  const rowHeight = useSharedValue(100);
 
   const panGesture = Gesture.Pan()
     .onUpdate((event) => {
@@ -40,14 +42,24 @@ const Swipeable: React.FC<SwipeableProps> = ({ onDelete, children }) => {
     transform: [{ translateX: translateX.value }],
   }));
 
+  const rowStyle = useAnimatedStyle(() => ({
+    height: rowHeight.value,
+    opacity: rowHeight.value,
+  }));
+
   const handleDelete = () => {
-    translateX.value = withTiming(-SCREEN_WIDTH, {}, () => {
-      runOnJS(onDelete)?.();
+    translateX.value = withTiming(-SCREEN_WIDTH, {}, async () => {
+      if (onDelete) {
+        rowHeight.value = withTiming(0);
+        console.log("onDelete rowHeight.value", rowHeight.value, id);
+
+        await runOnJS(onDelete)();
+      }
     });
   };
 
   return (
-    <View style={styles.container}>
+    <Animated.View key={id} style={[styles.container, rowStyle]}>
       {/* Right Action (Delete) */}
       <View style={styles.rightAction}>
         <Pressable onPress={handleDelete} style={styles.deleteButton}>
@@ -62,7 +74,7 @@ const Swipeable: React.FC<SwipeableProps> = ({ onDelete, children }) => {
           {children}
         </Animated.View>
       </GestureDetector>
-    </View>
+    </Animated.View>
   );
 };
 
