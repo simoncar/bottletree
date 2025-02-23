@@ -32,6 +32,7 @@ import { addProjectUser } from "@/lib/APIproject";
 import { UserContext } from "@/lib/UserContext";
 import { getUser } from "@/lib/APIuser";
 import { auth, db, firestore } from "@/lib/firebase";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 type SearchParams = {
   posts: string;
@@ -174,121 +175,123 @@ export default function Layout() {
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
         <ActionSheetProvider>
           <ProjectProvider>
-            <StatusBar style="auto" />
-            <Stack
-              screenOptions={{
-                headerStyle: {
-                  backgroundColor: Colors[colorScheme ?? "light"].background,
-                },
-              }}>
-              <Stack.Screen
-                name="(tabs)"
-                options={{
-                  title: "",
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="index"
-                options={{
-                  title: "Home",
-                  headerShown: true,
-                }}
-              />
-              <Stack.Screen
-                name="projectList"
-                options={{
-                  presentation: "modal",
-                  title: "Projects",
-                }}
-              />
-              <Stack.Screen
-                name="share"
-                options={{
-                  presentation: "modal",
-                  title: "Share",
-                }}
-              />
-              <Stack.Screen
-                name="projectListAdmin"
-                options={{
-                  title: "Administration",
-                }}
-              />
-              <Stack.Screen
-                name="userList"
-                options={{
-                  presentation: "modal",
-                  title: "Contacts",
-                }}
-              />
-              <Stack.Screen
-                name="language"
-                options={{
-                  title: "Language",
-                }}
-              />
-              <Stack.Screen
-                name="editPost"
-                options={{
-                  title: "Edit",
-                }}
-              />
-              <Stack.Screen
-                name="viewPost"
-                options={{
-                  title: "",
-                }}
-              />
-              <Stack.Screen
-                name="project/[project]"
-                options={{
-                  title: "Project Details",
-                }}
-              />
-              <Stack.Screen
-                name="project/add"
-                options={{
-                  title: "Add Project",
-                }}
-              />
-              <Stack.Screen
-                name="editCalendar"
-                options={{
-                  title: "Add Event",
-                }}
-              />
-              <Stack.Screen
-                name="user/[uid]"
-                options={{
-                  title: "User",
-                }}
-              />
-              <Stack.Screen
-                name="camera"
-                options={{
-                  title: "Camera",
-                }}
-              />
-              <Stack.Screen
-                name="house"
-                options={{
-                  title: "About",
-                }}
-              />
-              <Stack.Screen
-                name="note"
-                options={{
-                  title: "Add Note",
-                }}
-              />
-              <Stack.Screen
-                name="log"
-                options={{
-                  title: "Logs",
-                }}
-              />
-            </Stack>
+            <RootSiblingParent>
+              <StatusBar style="auto" />
+              <Stack
+                screenOptions={{
+                  headerStyle: {
+                    backgroundColor: Colors[colorScheme ?? "light"].background,
+                  },
+                }}>
+                <Stack.Screen
+                  name="(tabs)"
+                  options={{
+                    title: "",
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="index"
+                  options={{
+                    title: "Home",
+                    headerShown: true,
+                  }}
+                />
+                <Stack.Screen
+                  name="projectList"
+                  options={{
+                    presentation: "modal",
+                    title: "Projects",
+                  }}
+                />
+                <Stack.Screen
+                  name="share"
+                  options={{
+                    presentation: "modal",
+                    title: "Share",
+                  }}
+                />
+                <Stack.Screen
+                  name="projectListAdmin"
+                  options={{
+                    title: "Administration",
+                  }}
+                />
+                <Stack.Screen
+                  name="userList"
+                  options={{
+                    presentation: "modal",
+                    title: "Contacts",
+                  }}
+                />
+                <Stack.Screen
+                  name="language"
+                  options={{
+                    title: "Language",
+                  }}
+                />
+                <Stack.Screen
+                  name="editPost"
+                  options={{
+                    title: "Edit",
+                  }}
+                />
+                <Stack.Screen
+                  name="viewPost"
+                  options={{
+                    title: "",
+                  }}
+                />
+                <Stack.Screen
+                  name="project/[project]"
+                  options={{
+                    title: "Project Details",
+                  }}
+                />
+                <Stack.Screen
+                  name="project/add"
+                  options={{
+                    title: "Add Project",
+                  }}
+                />
+                <Stack.Screen
+                  name="editCalendar"
+                  options={{
+                    title: "Add Event",
+                  }}
+                />
+                <Stack.Screen
+                  name="user/[uid]"
+                  options={{
+                    title: "User",
+                  }}
+                />
+                <Stack.Screen
+                  name="camera"
+                  options={{
+                    title: "Camera",
+                  }}
+                />
+                <Stack.Screen
+                  name="house"
+                  options={{
+                    title: "About",
+                  }}
+                />
+                <Stack.Screen
+                  name="note"
+                  options={{
+                    title: "Add Note",
+                  }}
+                />
+                <Stack.Screen
+                  name="log"
+                  options={{
+                    title: "Logs",
+                  }}
+                />
+              </Stack>
+            </RootSiblingParent>
           </ProjectProvider>
         </ActionSheetProvider>
       </ThemeProvider>

@@ -18,6 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { UserAvatar } from "@/components/UserAvatar";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Update } from "@/lib/update";
+import Toast from "react-native-root-toast";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -105,9 +106,19 @@ export default function Home() {
           <Update />
         </View>
         <View style={styles.container}>
-          <View style={styles.instructions}>
-            <Text style={styles.welcomeApp}>Projects</Text>
-          </View>
+          <Pressable
+            onPress={() => {
+              Toast.show("Projects", {
+                duration: Toast.durations.LONG,
+                containerStyle: { zIndex: 9999 },
+                position: Toast.positions.CENTER,
+              });
+              console.log("Projects");
+            }}>
+            <View style={styles.instructions}>
+              <Text style={styles.welcomeApp}>Projects</Text>
+            </View>
+          </Pressable>
 
           <Projects session={session as string} archived={true} />
           {renderAddProject()}

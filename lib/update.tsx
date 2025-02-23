@@ -13,6 +13,7 @@ import { Text } from "@/components/Themed";
 import * as Updates from "expo-updates";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
+import Toast from "react-native-root-toast";
 
 export const Update = () => {
   const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
