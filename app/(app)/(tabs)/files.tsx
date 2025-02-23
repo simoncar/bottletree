@@ -18,6 +18,7 @@ import * as DocumentPicker from "expo-document-picker";
 import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Toast from "react-native-toast-message";
 
 type SearchParams = {
   project: string; //project ID
@@ -55,6 +56,12 @@ export default function Files() {
 
       if (result.type != "cancel") {
         console.log("Selected files:", result);
+        Toast.show({
+          type: "success",
+          text1: "File Adding",
+          text2: "Your file is being added to the project",
+          position: "bottom",
+        });
         uploadFilesAndCreateEntries(result, project);
       } else {
         console.log("Document picker was canceled");
