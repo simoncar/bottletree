@@ -17,6 +17,7 @@ import { useColorScheme } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 type SearchParams = {
   project: string; //project ID
@@ -30,6 +31,12 @@ export default function Tasks() {
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [newTaskName, setNewTaskName] = useState<string>("");
   const inputRef = useRef<TextInput>(null);
+  const [collapsedSections, setCollapsedSections] = useState<{
+    [key: string]: boolean;
+  }>({
+    incomplete: false,
+    completed: true,
+  });
 
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
@@ -116,6 +123,13 @@ export default function Tasks() {
     setNewTaskName("");
   };
 
+  const toggleSection = (section: string) => {
+    setCollapsedSections((prevState) => ({
+      ...prevState,
+      [section]: !prevState[section],
+    }));
+  };
+
   type TaskItemProps = {
     task: ITask;
     onPress: (task: ITask) => void;
@@ -140,10 +154,17 @@ export default function Tasks() {
     );
   };
 
-  const renderSectionHeader = (title: string) => (
-    <View style={styles.sectionHeader}>
+  const renderSectionHeader = (title: string, section: string) => (
+    <TouchableOpacity
+      style={styles.sectionHeader}
+      onPress={() => toggleSection(section)}>
       <Text style={styles.sectionHeaderText}>{title}</Text>
-    </View>
+      <AntDesign
+        name={collapsedSections[section] ? "down" : "up"}
+        size={24}
+        color={Colors[colorScheme ?? "light"].text}
+      />
+    </TouchableOpacity>
   );
 
   const renderItem = ({ item }: { item: ITask }) => (
@@ -167,26 +188,35 @@ export default function Tasks() {
         <>
           {groupedTasks.incomplete.length > 0 && (
             <>
-              {renderSectionHeader(`Tasks`)}
-              <FlatList
-                data={groupedTasks.incomplete}
-                keyExtractor={(item) => item.key.toString()}
-                renderItem={renderItem}
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
-              />
+              {renderSectionHeader(`Tasks`, "incomplete")}
+              {!collapsedSections.incomplete && (
+                <FlatList
+                  data={groupedTasks.incomplete}
+                  keyExtractor={(item) => item.key.toString()}
+                  renderItem={renderItem}
+                  ItemSeparatorComponent={() => (
+                    <View style={styles.separator} />
+                  )}
+                />
+              )}
             </>
           )}
           {groupedTasks.completed.length > 0 && (
             <>
               {renderSectionHeader(
                 `Completed (${groupedTasks.completed.length})`,
+                "completed",
               )}
-              <FlatList
-                data={groupedTasks.completed}
-                keyExtractor={(item) => item.key.toString()}
-                renderItem={renderItem}
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
-              />
+              {!collapsedSections.completed && (
+                <FlatList
+                  data={groupedTasks.completed}
+                  keyExtractor={(item) => item.key.toString()}
+                  renderItem={renderItem}
+                  ItemSeparatorComponent={() => (
+                    <View style={styles.separator} />
+                  )}
+                />
+              )}
             </>
           )}
         </>
@@ -299,6 +329,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
