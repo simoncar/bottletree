@@ -110,8 +110,7 @@ export default function Home() {
             onPress={() => {
               Toast.show("Projects", {
                 duration: Toast.durations.LONG,
-                containerStyle: { zIndex: 9999 },
-                position: Toast.positions.CENTER,
+                position: Toast.positions.TOP,
               });
               console.log("Projects");
             }}>

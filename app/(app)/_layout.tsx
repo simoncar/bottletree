@@ -170,12 +170,11 @@ export default function Layout() {
     }
   }
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider
-        value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
-        <ActionSheetProvider>
-          <ProjectProvider>
-            <RootSiblingParent>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider
+          value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
+          <ActionSheetProvider>
+            <ProjectProvider>
               <StatusBar style="auto" />
               <Stack
                 screenOptions={{
@@ -291,10 +290,9 @@ export default function Layout() {
                   }}
                 />
               </Stack>
-            </RootSiblingParent>
-          </ProjectProvider>
-        </ActionSheetProvider>
-      </ThemeProvider>
-    </GestureHandlerRootView>
+            </ProjectProvider>
+          </ActionSheetProvider>
+        </ThemeProvider>
+      </GestureHandlerRootView>
   );
 }

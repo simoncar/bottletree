@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 
-export default function App() {
+export default function CameraComponent() {
   return <View />;
 }

@@ -43,13 +43,13 @@ function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <RootSiblingParent>
-        <SessionProvider>
-          <UserProvider>
+      <SessionProvider>
+        <UserProvider>
+          <RootSiblingParent>
             <Slot />
-          </UserProvider>
-        </SessionProvider>
-      </RootSiblingParent>
+          </RootSiblingParent>
+        </UserProvider>
+      </SessionProvider>
     </GestureHandlerRootView>
   );
 }

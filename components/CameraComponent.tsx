@@ -20,7 +20,7 @@ import * as Linking from "expo-linking";
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 
-export default function App() {
+export default function CameraComponent() {
   const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
 
