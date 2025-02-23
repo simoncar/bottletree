@@ -7,13 +7,11 @@ import { ShortList } from "@/components/sComponent";
 import { Image } from "expo-image";
 import Colors from "@/constants/Colors";
 import { router, useLocalSearchParams } from "expo-router";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 import { deleteProjectUser } from "@/lib/APIproject";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import Swipeable from "@/components/Swipeable";
 import { UserContext } from "@/lib/UserContext";
-
 
 export const ProjectUsers = (props: any) => {
   const { project, update } = useLocalSearchParams<{
@@ -101,12 +99,9 @@ export const ProjectUsers = (props: any) => {
     return (
       <Swipeable
         key={index}
-        renderRightActions={(progress, dragX) =>
-          renderRightActions(progress, dragX, data, index)
-        }
-        onSwipeableOpen={() => closeRow(index)}
-        ref={(ref) => (row[index] = ref)}
-    >
+        onDelete={() => {
+          deleteProjectUser(project, data, deleteDone);
+        }}>
         <View>
           <View key={data.uid} style={styles.outerView}>
             <View style={styles.avatar}>
@@ -140,9 +135,7 @@ export const ProjectUsers = (props: any) => {
       <View>
         <View>
           <View key="skeleton" style={styles.outerView}>
-         
             <View style={styles.skeletonSpace}></View>
-           
           </View>
         </View>
       </View>

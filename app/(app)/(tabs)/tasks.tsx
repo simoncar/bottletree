@@ -70,11 +70,6 @@ export default function Tasks() {
   const handleTaskPress = (task: ITask) => {
     // Handle file selection
     console.log("Task selected:", task);
-    Toast.show({
-      type: "success",
-      text1: "Hello",
-      text2: "This is some something 👋",
-    });
   };
 
   const handleAddTaskPress = () => {
