@@ -10,6 +10,7 @@ import { UserProvider } from "@/lib/UserContext";
 import { UserContext } from "@/lib/UserContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Platform } from "react-native";
+import Toast from "react-native-toast-message";
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
@@ -47,6 +48,7 @@ function RootLayout() {
         <UserProvider>
           <RootSiblingParent>
             <Slot />
+            <Toast />
           </RootSiblingParent>
         </UserProvider>
       </SessionProvider>

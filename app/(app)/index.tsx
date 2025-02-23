@@ -18,7 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { UserAvatar } from "@/components/UserAvatar";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Update } from "@/lib/update";
-import Toast from "react-native-root-toast";
+import Toast from "react-native-toast-message";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -108,10 +108,11 @@ export default function Home() {
         <View style={styles.container}>
           <Pressable
             onPress={() => {
-              Toast.show("Projects", {
-                duration: Toast.durations.LONG,
-                position: Toast.positions.TOP,
-              });
+              //   Toast.show("Projects", {
+              //     duration: Toast.durations.LONG,
+              //     position: Toast.positions.TOP,
+              //   });
+             
               console.log("Projects");
             }}>
             <View style={styles.instructions}>

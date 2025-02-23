@@ -18,7 +18,7 @@ import { useLocalSearchParams } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import Toast from "react-native-root-toast";
+import Toast from "react-native-toast-message";
 
 type SearchParams = {
   project: string; //project ID
@@ -70,8 +70,10 @@ export default function Tasks() {
   const handleTaskPress = (task: ITask) => {
     // Handle file selection
     console.log("Task selected:", task);
-    Toast.show("Task completed", {
-      duration: Toast.durations.LONG,
+    Toast.show({
+      type: "success",
+      text1: "Hello",
+      text2: "This is some something 👋",
     });
   };
 
@@ -92,9 +94,14 @@ export default function Tasks() {
     };
     editTask(project, task.key, updatedTask)
       .then(() => {
-        Toast.show("Task completed", {
-          duration: Toast.durations.SHORT,
-        });
+        if (!task.completed) {
+          Toast.show({
+            type: "success",
+            text1: "Task Complete",
+            text2: "Task has been set to Complete",
+            position: "bottom",
+          });
+        }
         console.log("Task updated successfully");
       })
       .catch((error) => {
