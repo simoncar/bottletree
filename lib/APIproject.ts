@@ -122,7 +122,7 @@ export function getProjects(
       projectsArchived.sort((a, b) => {
         return b.timestamp?.seconds - a.timestamp?.seconds;
       });
-      projectsDemo.push({
+      projectsDemo[0] = {
         project: "demo",
         key: "demo",
         title: "Demo Project",
@@ -133,9 +133,13 @@ export function getProjects(
         private: false,
         created: firestore.Timestamp.now(),
         star: false,
-      });
+      };
 
-      callback([...projects, ...projectsArchived, ...projectsDemo]);
+      const allProjects = [...projects, ...projectsArchived];
+      if (!allProjects.some((project) => project.key === "demo")) {
+        allProjects.push(...projectsDemo);
+      }
+      callback(allProjects);
     });
   });
 }

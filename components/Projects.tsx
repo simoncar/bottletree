@@ -54,8 +54,6 @@ export const Projects = ({ session, archived }: Props) => {
 
     setProjects(projects[0]);
     setProjectsArchive(projects[1]);
-    console.log("projects", projects[0]);
-
     setLoading(false);
   };
 

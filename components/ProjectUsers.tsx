@@ -99,6 +99,7 @@ export const ProjectUsers = (props: any) => {
     return (
       <Swipeable
         id={data.uid}
+        key={data.uid}
         onDelete={() => {
           console.log("Swipeable delete");
           deleteProjectUser(project, data, deleteDone);
