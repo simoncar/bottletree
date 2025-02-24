@@ -87,8 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 20,
     width: SCREEN_WIDTH,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
   },
   rightAction: {
     position: "absolute",

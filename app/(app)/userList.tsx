@@ -67,13 +67,16 @@ const UserList = () => {
 
   const saveDone = (id) => {
     console.log("saveDone: ", id);
-    router.back({
-      pathname: "/project/[project]",
-      params: {
-        update: id,
-        project: project,
-      },
-    });
+    router.back();
+    setTimeout(() => {
+      router.navigate({
+        pathname: "/project/[project]",
+        params: {
+          update: id,
+          project: project,
+        },
+      });
+    }, 500);
   };
 
   const handleUserSelection = (selectedUser: IUser) => {
