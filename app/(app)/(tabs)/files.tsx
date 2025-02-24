@@ -21,6 +21,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Toast from "react-native-toast-message";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import Reanimated, {
+  SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 type SearchParams = {
   project: string; //project ID
@@ -32,10 +36,12 @@ export default function Files() {
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
 
+  const row: Array<any> = [];
+  let prevOpenedRow;
+
   useEffect(() => {
     getFiles(project, (retrievedFiles) => {
       setFiles(retrievedFiles);
-      console.log("getFiles:", retrievedFiles);
       setLoading(false);
     });
   }, []);
@@ -128,7 +134,6 @@ export default function Files() {
   const deleteDone = (id) => {
     getFiles(project, (retrievedFiles) => {
       setFiles(retrievedFiles);
-      console.log("getFiles:", retrievedFiles);
       setLoading(false);
     });
   };
@@ -147,16 +152,48 @@ export default function Files() {
     );
   };
 
+  const closeRow = (index) => {
+    if (prevOpenedRow && prevOpenedRow !== row[index]) {
+      prevOpenedRow.close();
+    }
+    prevOpenedRow = row[index];
+  };
+
   const FileItem = ({ file, onPress }: FileItemProps) => {
     const formattedDate = formatDate(file.modified);
 
+    function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
+      const styleAnimation = useAnimatedStyle(() => {
+        return {
+          transform: [{ translateX: drag.value + 80 }],
+        };
+      });
+
+      return (
+        <Reanimated.View style={styleAnimation}>
+          <Pressable
+            style={styles.rightDeleteBox}
+            onPress={() => {
+              // deleteProjectUser(project, data, deleteDone);
+              console.log("delete file");
+              deleteFile(project, file.key, deleteDone);
+              row[file.key].close();
+            }}>
+            <AntDesign name="delete" size={25} color={"white"} />
+            <Text style={{ color: "white" }}>Delete</Text>
+          </Pressable>
+        </Reanimated.View>
+      );
+    }
+
     return (
       <Swipeable
-        id={file.key}
         key={file.key}
-        renderRightActions={(progress, dragX) =>
-          renderRightActions(progress, dragX, file, file.key)
-        }>
+        renderRightActions={RightAction}
+        rightThreshold={40}
+        friction={2}
+        onSwipeableOpen={() => closeRow(file.key)}
+        ref={(ref) => (row[file.key] = ref)}>
         <TouchableOpacity style={styles.fileItem} onPress={() => onPress(file)}>
           <FileIcon file={file} />
           <View style={styles.fileInfo}>
@@ -263,6 +300,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 8,
     paddingTop: 40,
+  },
+  rightDeleteBox: {
+    alignContent: "center",
+    alignItems: "center",
+    backgroundColor: "red",
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: 0,
+    height: 80,
+    width: 80,
   },
   fileItem: {
     flexDirection: "row",
