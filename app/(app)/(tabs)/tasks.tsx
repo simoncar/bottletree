@@ -235,30 +235,31 @@ export default function Tasks() {
         transparent={true}
         visible={isModalVisible}
         onRequestClose={() => setModalVisible(false)}>
-        <TouchableOpacity
-          style={styles.modalContainer}
-          activeOpacity={1}
-          onPressOut={() => setModalVisible(false)}>
-          <View style={styles.modalContent}>
-            <TextInput
-              ref={inputRef}
-              style={[styles.input]}
-              placeholder="New Task"
-              value={newTaskName}
-              onChangeText={setNewTaskName}
-              multiline
-            />
-            <Button title="Save" onPress={handleSaveTask} />
-          </View>
-        </TouchableOpacity>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{ flex: 1 }}>
+              <TouchableOpacity
+                style={styles.modalContainer}
+                activeOpacity={1}
+                onPressOut={() => setModalVisible(false)}>
+                <View style={styles.modalContent}>
+                  <TextInput
+                    ref={inputRef}
+                    style={[styles.input]}
+                    placeholder="New Task"
+                    value={newTaskName}
+                    onChangeText={setNewTaskName}
+                    multiline
+                  />
+                  <Button title="Save" onPress={handleSaveTask} />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
       </Modal>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={{ flex: 1 }}>{/* Your existing content */}</View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
     </View>
   );
 }
