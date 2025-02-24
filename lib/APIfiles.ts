@@ -15,6 +15,28 @@ type FilesJson = {
   canceled: boolean;
 };
 
+export function deleteFile(
+  projectId: string,
+  key: string,
+  callback: { (id: string): void; (arg0: string): void },
+) {
+  try {
+    const docRef = firestore()
+      .collection("projects")
+      .doc(projectId)
+      .collection("files")
+      .doc(key);
+
+    docRef.delete().then(() => {
+      callback(key);
+    });
+  } catch (e) {
+    console.error("Error deleting user from project: ", e);
+  }
+
+  return;
+}
+
 export async function getFiles(project: string, callback: filesRead) {
   const files: IFile[] = [];
 

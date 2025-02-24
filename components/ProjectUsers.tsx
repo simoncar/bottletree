@@ -10,8 +10,12 @@ import { router, useLocalSearchParams } from "expo-router";
 import { deleteProjectUser } from "@/lib/APIproject";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Swipeable from "@/components/Swipeable";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { UserContext } from "@/lib/UserContext";
+import Reanimated, {
+  SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 export const ProjectUsers = (props: any) => {
   const { project, update } = useLocalSearchParams<{
@@ -76,56 +80,62 @@ export const ProjectUsers = (props: any) => {
     );
   }
 
-  const renderRightActions = (progress, dragX, data, index) => {
-    return (
-      <Pressable
-        style={styles.rightDeleteBox}
-        onPress={() => {
-          deleteProjectUser(project, data, deleteDone);
-          row[index].close();
-        }}>
-        <AntDesign name="delete" size={25} color={"white"} />
-        <Text style={{ color: "white" }}>Delete</Text>
-      </Pressable>
-    );
-  };
-
   function renderRow(data: any, index: number) {
     let me = "";
     if (data.uid === user?.uid) {
       me = " (Me)";
     }
 
+    function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
+      const styleAnimation = useAnimatedStyle(() => {
+        return {
+          transform: [{ translateX: drag.value + 80 }],
+        };
+      });
+
+      return (
+        <Reanimated.View style={styleAnimation}>
+          <Pressable
+            style={styles.rightDeleteBox}
+            onPress={() => {
+              deleteProjectUser(project, data, deleteDone);
+              row[index].close();
+            }}>
+            <AntDesign name="delete" size={25} color={"white"} />
+            <Text style={{ color: "white" }}>Delete</Text>
+          </Pressable>
+        </Reanimated.View>
+      );
+    }
+
     return (
       <Swipeable
-        id={data.uid}
-        key={data.uid}
-        onDelete={() => {
-          console.log("Swipeable delete");
-          deleteProjectUser(project, data, deleteDone);
-        }}>
-        <View>
-          <View key={data.uid} style={styles.outerView}>
-            <View style={styles.avatar}>
-              {data.photoURL ? (
-                <Image style={styles.avatarFace} source={data.photoURL} />
-              ) : (
-                <View style={styles.avatarFace}>
-                  <Ionicons
-                    name="person-outline"
-                    color="#999999"
-                    style={styles.avatarIcon}
-                  />
-                </View>
-              )}
-            </View>
+        key={index}
+        renderRightActions={RightAction}
+        rightThreshold={40}
+        friction={2}
+        onSwipeableOpen={() => closeRow(index)}
+        ref={(ref) => (row[index] = ref)}>
+        <View key={data.uid} style={styles.outerView}>
+          <View style={styles.avatar}>
+            {data.photoURL ? (
+              <Image style={styles.avatarFace} source={data.photoURL} />
+            ) : (
+              <View style={styles.avatarFace}>
+                <Ionicons
+                  name="person-outline"
+                  color="#999999"
+                  style={styles.avatarIcon}
+                />
+              </View>
+            )}
+          </View>
 
-            <View>
-              <Text style={styles.name}>
-                {data.displayName || ""} {me}
-              </Text>
-              <Text style={styles.email}>{data.email || ""}</Text>
-            </View>
+          <View>
+            <Text style={styles.name}>
+              {data.displayName || ""} {me}
+            </Text>
+            <Text style={styles.email}>{data.email || ""}</Text>
           </View>
         </View>
       </Swipeable>
@@ -217,7 +227,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     margin: 0,
-    width: 70,
+    height: 80,
+    width: 80,
   },
   skeletonAvatarFace: {
     borderRadius: 48 / 2,
@@ -227,7 +238,6 @@ const styles = StyleSheet.create({
   skeletonName: {
     borderRadius: 5,
     height: 48,
-    width: 300,
   },
 
   skeletonSpace: { padding: 10 },
