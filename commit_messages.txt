@@ -1,0 +1,1319 @@
+[2025-02-24] Refactor ProjectUsers component to ensure unique key for swipeable delete and clean up Projects component by removing console logs
+[2025-02-24] Refactor task modal to improve keyboard handling and dismiss functionality
+[2025-02-24] Add keyboard handling to Tasks component and update navigation in UserList
+[2025-02-23] Enhance swipeable component with dynamic height adjustment and unique ID for delete action
+[2025-02-23] Implement swipeable delete functionality for project users
+[2025-02-23] Add toast notification for file upload process in Files component
+[2025-02-23] Replace react-native-root-toast with react-native-toast-message for improved toast notifications
+[2025-02-23] Refactor layout structure and rename CameraComponent for clarity
+[2025-02-23] Add toast notifications for task completion and project interactions
+[2025-02-23] Implement collapsible sections for task lists and enhance section header interaction
+[2025-02-23] Enhance House component layout and add interactive button for external link
+[2025-02-22] Refactor House component styles and update notification data structure
+[2025-02-22] Bump app version to 1.0.206 in app.config.js
+[2025-02-22] Change app orientation setting to default in app.config.js
+[2025-02-22] Upgrade Node.js and Firebase dependencies to latest versions
+[2025-02-22] Update project ID validation to include demo projects in notifications and posts functions
+[2025-02-22] Bump app version to 1.0.205
+[2025-02-22] Add demo project handling in getProjects and update Projects component to conditionally render star button
+[2025-02-22] Add additional demo calendar entry for final payment
+[2025-02-22] Add demo data seeding for calendar events in demo project
+[2025-02-22] Remove unused imports in Tasks component for cleaner code
+[2025-02-22] Remove debug logging in Tasks component and enhance input styling for new task modal
+[2025-02-22] Refactor ProjectPanel component by simplifying settings icon rendering and add type definition for tasksRead in APItasks
+[2025-02-22] Wrap settings icon in Pressable for navigation to project details
+[2025-02-22] Add input focus handling for new task modal and clean up task header display
+[2025-02-22] Remove debug logging and commented-out task update logic in Tasks component
+[2025-02-22] Refactor task list rendering to separate incomplete and completed tasks for improved clarity
+[2025-02-21] Fix task completion toggle logic and improve task update handling
+[2025-02-21] Implement task grouping by completion status and enhance task list display
+[2025-02-21] Add tasks management feature with task creation and completion functionality
+[2025-02-21] Refactor layout and remove unused components; add image selection functionality in EditPost
+[2025-02-21] Update timestamps in pubsub-debug.log for accurate logging
+[2025-02-20] Update dependencies in package.json to latest versions for improved stability and performance
+[2025-02-12] Adjust layout spacing in About component for improved visual hierarchy
+[2025-02-12] Replace "Save" text with "Done" in multiple components for consistency
+[2025-02-12] Add timestamp to console log for duplicate project entries
+[2025-02-11] Update star icon color and enhance project sorting logic; include timestamp on star update
+[2025-02-11] Wrap hammer icon in Pressable to enable navigation to the house page
+[2025-02-11] Toggle star status in Projects component on button press
+[2025-02-11] Update star icon color in Projects component to adapt to color scheme
+[2025-02-11] Add star functionality to projects; implement setStar method and update project type
+[2025-02-11] Refactor About component to improve user information display and remove unnecessary state management; simplify Back navigation logic and clean up console logs in various components.
+[2025-02-05] Update Firebase configuration to include hosting targets and adjust hosting target name
+[2025-02-05] Remove LogScreen component and simplify layout redirection logic
+[2025-02-05] Update image upload functionality to include project-specific paths in storage references
+[2025-02-04] Refactor console log statements for clarity and simplify conditional rendering in layout component
+[2025-02-04] Remove console logs and improve Sentry initialization conditions in layout files
+[2025-02-04] Simplify Sentry initialization condition by removing unnecessary checks for navigator and user agent in non-development environments
+[2025-02-04] Fix Sentry integration condition to check for navigator existence before user agent validation
+[2025-02-04] Remove console logs and commented-out code from layout and Firebase files
+[2025-02-04] Enhance layout styling and improve LogScreen key handling; update Sentry integration conditions
+[2025-02-04] Add FontAwesome icon import to Projects and Home components
+[2025-02-04] Refactor LogScreen component: move to new file and restore functionality
+[2025-02-03] Add AddModal component to TabLayout for improved user interaction
+[2025-02-03] Remove unused AddModal import from TabLayout
+[2025-02-03] Remove unused AddModal component from TabLayout
+[2025-02-03] Add detailed logging for current path and segments in Layout component
+[2025-02-03] Refactor routing logging in Layout component to include path segments
+[2025-02-03] Add usePathname hook to Layout component for improved routing logging
+[2025-01-31] Remove unused avatar component from LogScreen and add padding to message text style
+[2025-01-31] Enhance image styling in photos component by adding padding, margin, and border radius
+[2025-01-31] Add image display and styling to LogScreen; rename Link URL label in EditPost
+[2025-01-31] Update text input color for EditPost component to use textField color
+[2025-01-31] Add link URL support and admin navigation in post management
+[2025-01-30] Implement animated pan gesture handling in ViewPost component
+[2025-01-30] Enhance pan gesture handling in ViewPost component to limit translation bounds
+[2025-01-30] Refactor ViewPost component to implement pinch and pan gestures using GestureHandler and Reanimated
+[2025-01-29] Update package dependencies for expo-camera, expo-constants, expo-contacts, expo-dev-client, expo-linking, and expo-notifications
+[2025-01-29] Integrate GestureHandlerRootView for improved gesture handling in layout
+[2025-01-29] Simplify rendering of PinchableImage component in ViewPost
+[2025-01-29] Refactor PinchableImage component to include AnimatableValue for enhanced animation capabilities
+[2025-01-29] Enhance PinchableImage component to support simultaneous pinch and pan gestures
+[2025-01-29] Enhance PinchableImage component with simultaneous pinch and pan gesture handling
+[2025-01-29] Update PinchableImage component to use URI source for image rendering
+[2025-01-29] Refactor PinchableImage component structure for improved layout and gesture handling
+[2025-01-29] Refactor PinchableImage component to use PinchGestureHandler for improved pinch functionality and simplify gesture handling
+[2025-01-29] Update QR code generation in ShareLink component to use dynamic project URL
+[2025-01-29] Restore headerLeft component in TabLayout for back navigation
+[2025-01-29] Refactor SharePanel and ProjectPanel components; update button styles and options
+[2025-01-28] Add linkURL property to IPost interface and update getPosts function; implement LogScreen component for displaying posts
+[2025-01-28] Add created property to project data retrieval in getProjects function
+[2025-01-23] Add created timestamp to IProject interface and project creation function
+[2025-01-23] Refactor UserProvider to prevent unnecessary user data fetching and streamline context usage
+[2025-01-23] Add About component as ListFooter in Posts to enhance user information display
+[2025-01-23] Remove About component instance from Posts to streamline rendering
+[2025-01-22] Remove commented-out updateAccountName call in SessionProvider during sign-in process
+[2025-01-22] Remove redundant About component instances from Home and Posts components to streamline rendering
+[2025-01-22] Refactor About component to remove unnecessary Link and directly display user email; streamline user information presentation
+[2025-01-21] Enhance About component to utilize Firebase auth for user ID retrieval and improve user context handling; update SessionProvider to set user state on sign-up
+[2025-01-21] Refactor user data loading logic in Layout component, improve null checks, and clean up console logs; update About component to streamline user information display
+[2025-01-21] Refactor logging in layout and components, remove unnecessary console statements, and enhance user data fetching in UserProvider
+[2025-01-21] Update devDependencies to latest versions in package.json and yarn.lock
+[2025-01-21] Remove commented-out logging and fetchData function from UserProvider
+[2025-01-21] Update About component to display user name and improve null safety for user email
+[2025-01-21] Add About component to various layouts and improve user context handling
+[2025-01-20] Refactor project parameter handling and enhance logging in layout and sign-in components
+[2025-01-20] Add About component and update tagline punctuation in House component
+[2025-01-20] Update dependencies and add new Expo plugins for enhanced functionality
+[2025-01-20] Bump app version to 1.0.202
+[2025-01-20] Update app configuration path prefix and comment out Firebase emulator connection logs
+[2025-01-19] Enhance project addition flow with saving state and update asset links for login credentials
+[2025-01-14] Remove redundant workflow from GitHub Actions configuration
+[2025-01-13] Refactor user email handling to ensure all emails are stored in lowercase and update UI text to reflect new branding as "One Build"
+[2025-01-10] Add GitHub Actions workflow for uploading Sentry source maps
+[2025-01-10] Refactor SharePanel to accept dynamic button configuration for improved flexibility
+[2025-01-10] Bump app version to 1.0.201
+[2025-01-10] Update About component to display new version format
+[2025-01-10] Add intent filters for deep linking and create assetlinks.json for app verification
+[2025-01-09] Update iconContainer margin for improved layout consistency
+[2025-01-09] Refactor Update component to improve layout and add padding for better spacing
+[2025-01-09] Improve error handling and update success message in SignIn component
+[2025-01-09] Remove unnecessary blank line in styles definition in SignIn component
+[2025-01-09] Update styles in SignIn component to set text color to white for better visibility
+[2025-01-09] Refactor SignIn component to replace TouchableOpacity with Pressable for the forgot password button and update styles for improved layout
+[2025-01-09] Enhance SignUp form by adding textContentType and autoComplete attributes for better input handling
+[2025-01-09] Bump version and update expo dependencies to latest versions
+[2025-01-09] Remove undefined properties from user object before updating in Firestore
+[2025-01-09] Improve signOut function to await auth signOut and enhance error logging
+[2025-01-09] Fix anonymous user detection in getUsers function to handle undefined values
+[2025-01-09] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2025-01-09] Improve error handling in signIn function to log detailed error messages and set notifications conditionally
+[2025-01-08] Automated Commit on Version Bump in Action workflow
+[2025-01-08] Bump app version to 1.0.199
+[2025-01-08] Add Update component to SignIn screen for enhanced user feedback
+[2025-01-08] Remove unused button for push notification registration in Notifications component
+[2025-01-08] Update signUp callback to use "SignUp Success" and improve user merging validation
+[2025-01-07] Fix notification toggle logic to handle undefined state and improve clarity
+[2025-01-07] Rename saveDone function to saveDoneSetToken for clarity and update references in push notification registration
+[2025-01-07] Remove unnecessary blank lines in onDocumentCreated_notifications function
+[2025-01-07] Refactor user notification toggle for improved readability
+[2025-01-07] Implement push notification registration in toggleNotifications function
+[2025-01-07] Add user notification toggle and update project timestamp functionality
+[2025-01-07] Add null checks for current user in getUser function and improve error logging in UserProvider
+[2025-01-05] Update notification titles to include only author name and merge notifications in Firestore
+[2025-01-05] Refactor notification logic to include detailed logging and project ID in notifications
+[2025-01-05] Add Notifications component and implement push notification registration logic
+[2025-01-05] Fix inconsistent casing for projectId in notification payloads
+[2025-01-05] Fix typo in APIpost: correct 'prokectID' to 'projectID'
+[2025-01-05] Add Firebase functions and update notification logic to include project ID
+[2025-01-05] Add project ID validation and update notification retrieval logic
+[2025-01-05] Fix notification body text and remove unnecessary whitespace in APIpost
+[2025-01-05] Refactor Sentry initialization to avoid running in development mode; clean up PostComments component by removing TODO comments
+[2025-01-04] Fix typos and improve README clarity; add platform imports in APINotification
+[2025-01-04] Update authentication layout and sign-in screen; simplify welcome message and enhance version display in About component
+[2025-01-02] Update README with project notifications and search functionality details
+[2025-01-02] Set specific start and end times for date selection in editCalendar
+[2025-01-02] Add navigation handlers for calendar cell and date header presses; pass clickDate to editCalendar
+[2025-01-02] Rename "House" screen title to "About" in layout component
+[2025-01-02] Add conditional rendering for QR code on iOS in House component; update README with Sentry sourcemaps command
+[2025-01-02] Add QR code component to House screen for app sharing; update styles
+[2025-01-02] Add House screen and update navigation to include it; improve update check logic
+[2025-01-02] Update GitHub Actions workflow to use a more descriptive message for Codepush updates
+[2025-01-02] Add null check to strip function in SignIn component
+[2025-01-02] Update navigation method in TabLayout to use router.replace for improved routing
+[2025-01-02] Remove unused button for error capture in About component
+[2025-01-02] Fix useEffect dependency array in ProjectList component
+[2025-01-02] Refactor import statements in projectList.tsx for improved readability
+[2025-01-01] Update Sentry configuration with specific organization and project details
+[2025-01-01] Bump app version to 1.0.196
+[2024-12-31] Update app version to 1.0.195 and upgrade Firebase dependencies to version 21.6.1
+[2024-12-31] Update expo and related dependencies in package.json and add expo-font to app.config.js
+[2024-12-31] Add Sentry error tracking button to About component
+[2024-12-31] Remove Sentry authToken from app.config and fix typo in Sentry initialization in _layout.tsx
+[2024-12-31] Update About component to reflect new application version and build information
+[2024-12-31] Integrate Sentry for error tracking and performance monitoring, update README with project details, and modify metro.config for Sentry support
+[2024-12-30] Implement deleteProject function and update action handler in editProject component
+[2024-12-30] Add project deletion functionality and improve UI for archiving projects
+[2024-12-30] Add setPostFile function to handle file uploads and notifications in APIpost
+[2024-12-21] Update .gitignore, refactor layout styles, and remove unused footer in Posts component
+[2024-12-20] Add support for viewing archived projects in Projects component
+[2024-12-20] Refactor layout component for improved readability and consistency
+[2024-12-20] Add user context and project redirection logic in layout component
+[2024-12-19] Remove TODO comment for reloading projects on screen focus in Projects component
+[2024-12-19] Add useFocusEffect to ProjectList and Projects components for improved project fetching on route focus
+[2024-12-19] Remove unused Pressable component from ProjectPanel for cleaner code
+[2024-12-19] Add ActionSheetProvider to layout for improved action handling
+[2024-12-19] Update About component to reflect new app version in version display
+[2024-12-19] Add StatusBar component and update header styles for improved UI consistency
+[2024-12-19] Bump app version to 1.0.191
+[2024-12-19] Refactor imports in index.tsx and sComponent.tsx for cleaner code structure
+[2024-12-19] Refactor editPost and viewPost components; replace NativeButton with TouchableOpacity for save action and adjust navigation to use router.back() for improved user experience.
+[2024-12-19] Update CalendarLarge component; adjust "Today" button style and modify save functionality in Note component to navigate back. Change bigCalendarBoxes color in Colors.ts for improved UI consistency.
+[2024-12-19] Add "Today" button to CalendarLarge component; implement functionality to reset date to today and pass current month/year to MonthYearScroller
+[2024-12-19] Refactor Calendar components; remove unused navigation options and simplify save functionality
+[2024-12-18] Enhance spinner style in update component; increase scale for better visibility
+[2024-12-18] Update onPressEvent in CalendarLarge component; change calendarId to use event key and add project parameter
+[2024-12-18] Refactor Calendar component to use CustomCalendarEvent type; improve event handling and type safety
+[2024-12-18] Fix formatting in app.config.js; streamline expo-router and expo-contacts configuration
+[2024-12-18] Update dependencies in package.json and yarn.lock; adjust expo and related packages for compatibility
+[2024-12-18] Refactor TabBarIcon component to accept custom icon components for improved flexibility in icon rendering
+[2024-12-17] Enhance layout in TabLayout and Files components; add empty state for file list
+[2024-12-17] Update icon name for JPEG files to use 'file-image-o' for consistency in file representation
+[2024-12-17] Replace NativeButton with TouchableOpacity in editCalendar and note components for improved save functionality and user interaction
+[2024-12-17] Refactor editProject component to use ScrollView; replace save button with header action for improved navigation and functionality
+[2024-12-17] Refactor editPost and editProject components to use ScrollView for improved layout; update userList to handle email case sensitivity and add user selection validation
+[2024-12-16] Replace View with ScrollView in editUser component for improved layout and scrolling functionality
+[2024-12-16] Refactor layout components for improved structure and remove redundant styles; update user edit screen for better save functionality
+[2024-12-16] Remove redundant APK channel configuration from eas.json
+[2024-12-16] Add APP_ENV configuration for development and production environments in eas.json; remove redundant sign-in log in ctx.tsx
+[2024-12-16] Add default display name handling in updateAccountName and log sign-in response
+[2024-12-16] Replace ProjectLayout with editProject component for enhanced project management features
+[2024-12-16] Add editProject component for project management with image upload and archiving features
+[2024-12-16] Update project screen titles for clarity and rename Project component to editProject
+[2024-12-15] Refactor file upload logic to use uriToBlob function for improved clarity and add uriToBlob utility for converting URIs to Blob objects
+[2024-12-15] Add permissions for external storage access in app configuration
+[2024-12-15] Update environment check in app configuration to include staging and apk modes
+[2024-12-15] Update Google Services file path to use environment variable for flexibility
+[2024-12-15] Add Google Services configuration files for development and production environments
+[2024-12-15] Update app configuration to support environment-specific settings and improve splash screen background color
+[2024-12-15] Migrate app configuration from app.json to app.config.js and update Android package handling
+[2024-12-14] Refactor calendar data handling: update functions to use project context and streamline Firestore queries
+[2024-12-14] Refactor project parameter handling: streamline local search parameters and remove unused variables in layout and files components
+[2024-12-14] Add file type icons and improve file size display in Files component
+[2024-12-14] Refactor getFiles function to use onSnapshot for real-time updates and improve file retrieval
+[2024-12-14] Close modal on progress update in AddModal component
+[2024-12-14] Refactor file selection handling: add error handling and improve user feedback for document picker
+[2024-12-14] Enhance file handling: implement file upload and create Firestore entries, update file type to mimeType, and improve UI for file selection
+[2024-12-14] Bump app version to 1.0.186
+[2024-12-13] Add header for predefined files and enhance list item styling
+[2024-12-13] Implement file selection feature with DocumentPicker and enhance UI for predefined files
+[2024-12-13] Add expo-document-picker dependency to package.json
+[2024-12-13] Update TabLayout component to adjust padding for improved layout
+[2024-12-13] Update TabLayout component to improve icon color handling
+[2024-12-13] Refactor TabLayout and AddModal components to enhance button functionality and improve styling
+[2024-12-13] Refactor TabLayout and AddModal components to improve icon rendering and clean up imports
+[2024-12-13] Refactor TabBarIcon component to simplify props and remove unnecessary padding
+[2024-12-13] Remove unused imports from update.tsx
+[2024-12-13] Add loading indicator during update fetch process
+[2024-12-13] Update welcome message to 'Projects' in Home component
+[2024-12-13] Implement AddModal component for adding notes, photos, and calendar events; refactor file retrieval to use project ID from search parameters
+[2024-12-12] Header and project nav
+[2024-12-12] cleanup
+[2024-12-12] files list with demo data
+[2024-12-11] Add save button to Project component: replace header button with a Pressable for improved UI; enhance styles for better visibility
+[2024-12-11] Refactor Project component layout: replace ScrollView with View for improved structure; enhance styles and add console log for project save action
+[2024-12-09] Remove conditional rendering for update component: comment out early return for showUpdate state to allow rendering regardless of its value
+[2024-12-09] Add animation to update button in Update component: implement press in/out animations using Animated API for improved user interaction
+[2024-12-09] Add project state management to ProjectPosts component: implement useState for projectObj and update loading logic; enhance Posts and ProjectPanel components with projectObj prop for improved data handling
+[2024-12-09] Add projectObj prop to Posts and ProjectPanel components: enhance project data handling and improve project state management
+[2024-12-09] Add loading state and projectObj prop to Posts component: enhance project loading experience and pass project details
+[2024-12-09] Add title prop to Posts and ProjectPanel components: update project navigation and enhance project details display
+[2024-12-07] Refactor addNewProject and UserAvatar components: simplify button placement in addNewProject; streamline user avatar rendering logic and styles
+[2024-12-06] Add logging for user updates: include console logs in updateAccountName and SessionProvider for better debugging
+[2024-12-06] Refactor Calendar component: remove MonthYearPicker and related state management; update MonthYearScroller integration for improved month/year selection
+[2024-12-06] Refactor Calendar and MonthYearScroller components: remove unused code and improve month selection logic; add dynamic scrolling based on selected month/year
+[2024-12-06] Add MonthYearScroller component: implement month and year selection UI for Calendar; integrate with CalendarLarge component
+[2024-12-06] Refactor Calendar component: remove redundant month/year selection UI elements for cleaner header display
+[2024-12-05] Enhance Nothing component: add 'Coming soon' message with dynamic text color; update SharePanel component to use dynamic text color for share label
+[2024-12-05] Refactor SharePanel component: enhance button functionality with dynamic icon and label; improve layout and styles for better usability
+[2024-12-05] Add new 'Nothing' components for 'Files' and 'Timeline' tabs; update layout and styles for improved navigation
+[2024-11-23] Refactor Calendar component header: simplify layout and remove unused styles; update react-native-modal-datetime-picker to version 18.0.0
+[2024-11-23] Refactor Home component layout: wrap ScrollView in SafeAreaView for improved UI structure
+[2024-11-23] Remove unused import from Back component
+[2024-11-23] Enhance Back component: add pressable style and improve hitSlop for better touch responsiveness
+[2024-11-23] Remove redundant headerLeft Back component from multiple screens and update package.json to include react-native-big-calendar
+[2024-11-22] remove scrollbar for use where there are 0 projects
+[2024-11-21] Add ignorePatterns for node_modules in ESLint configuration
+[2024-11-21] Fix update text capitalization for consistency
+[2024-11-21] Update app version in About component to reflect new version 7.app
+[2024-11-21] Remove elevation style from update component for improved UI consistency
+[2024-11-21] Update version number in About component to reflect latest app version
+[2024-11-21] Update notification text to indicate additional updates available
+[2024-11-21] Update notification text to indicate multiple updates available
+[2024-11-21] Add app state listener to check for updates when app becomes active
+[2024-11-21] Update notification text to indicate availability of updates
+[2024-11-21] Update version number in About component to reflect latest release
+[2024-11-21] Fix update notification text to include additional punctuation
+[2024-11-21] Fix capitalization in update notification text for consistency
+[2024-11-21] Add effect to show update notification when an update is available
+[2024-11-21] Add state management for update visibility in Update component
+[2024-11-21] Fix capitalization in update text for consistency
+[2024-11-21] Refactor Update component: improve layout and styling for better user experience
+[2024-11-21] Add update component to Home screen for version control and user notifications
+[2024-11-21] Add user avatar and top panel to Home screen for enhanced user experience
+[2024-11-21] Remove white color from welcomeApp style for improved visibility
+[2024-11-20] Refactor image processing: enhance type safety with interfaces and improve compression handling
+[2024-11-20] Refactor API image processing: remove unnecessary promise variable and clean up commented code
+[2024-11-20] Improve error logging and clean up commented code in image processing functions
+[2024-11-20] Enhance image processing: integrate image compression using ImageManipulator for improved performance
+[2024-11-19] favicon update
+[2024-11-19] Refactor tab button styles: adjust border radius for improved design consistency
+[2024-11-19] Enhance scroll behavior: disable scroll indicators in ScrollView components for improved user experience
+[2024-11-19] Refactor Projects component: consolidate avatar rendering and reposition notification badge
+[2024-11-19] Enhance UI and functionality: update welcome message, adjust padding, and improve project archiving logic
+[2024-11-19] Update GitHub Actions to use latest versions of checkout and setup-node
+[2024-11-19] Update app version to 1.0.180 in app.json
+[2024-11-19] Refactor app.json for improved formatting and consistency in assetBundlePatterns and associatedDomains
+[2024-11-19] Refactor image handling in APIimage.ts by removing react-native-compressor dependency and cleaning up commented code
+[2024-11-19] Refactor editUser component to improve code clarity by removing unnecessary comments and simplifying return statements
+[2024-11-19] Refactor update_codepush workflow for improved readability and consistency in deployment steps
+[2024-11-19] Refactor GitHub Actions workflow names for consistency and clarity; remove outdated workflows and add new update workflow for code push and Firebase hosting
+[2024-11-19] Refactor ParsedText component to use react-native-parsed-text and update assetBundlePatterns for better readability
+[2024-11-18] Refactor navigation structure to improve user experience and enhance performance
+[2024-11-18] Remove outdated Android and iOS build workflows and update eas.json for simulator configuration
+[2024-11-18] Update TypeScript configuration to use React Native JSX and enable synthetic default imports
+[2024-11-18] Update application build version display in About component for web and native
+[2024-11-17] Update resourceClass in eas.json to default and adjust timestamps in pubsub-debug.log
+[2024-11-17] Enable new architecture in app.json, update Babel preset formatting, and upgrade @babel/core to version 7.25.2
+[2024-11-17] Update Firebase dependencies to version 21.5.0 and add router configuration in app.json
+[2024-11-17] Add expo-updates dependency and update related packages in package.json and yarn.lock
+[2024-11-17] Update .gitignore, remove expo-updates dependency, and add index.js for app entry point
+[2024-11-17] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-11-17] Add react-native-reanimated plugin to Babel config and update dependencies
+[2024-11-16] Automated Commit on Version Bump in Action workflow
+[2024-11-16] Update react-native-screens dependency to allow minor version upgrades
+[2024-11-16] Disable new architecture in app.json
+[2024-11-16] Update eas.json to set resourceClass for development simulator; remove calendarize dependency from package.json
+[2024-11-16] Refactor Calendar component by removing unused dependencies and event rendering logic; update ParsedText component to use custom View; clean up ProjectUsers component by removing skeleton loading elements.
+[2024-11-16] Remove unused i18n module and related dependencies; delete zoomable view import from viewPost
+[2024-11-16] Add react-native-screens dependency and configure Babel
+[2024-11-16] Enable new architecture in app.json and update package dependencies
+[2024-11-16] Remove Gallery component and update package dependencies
+[2024-11-16] Change Android resourceClass from large to default in eas.json
+[2024-11-16] Remove unused image compression code and dependency from project
+[2024-11-16] expo 52
+[2024-11-12] Remove versionCode from app.json and set releaseStatus to draft in eas.json for Android submit configuration
+[2024-11-12] Remove service account key path from Android production submit configuration
+[2024-11-12] Bump app version and build number to 1.0.162
+[2024-11-12] Remove EAS submit step from Android build workflow
+[2024-11-12] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-11-12] Update build workflows to enable auto-submit and bump app version to 1.0.160
+[2024-11-12] Update build_android_aab.yml
+[2024-11-08] Update eas.json and google-services.json for app versioning and client configuration
+[2024-11-08] Update package name in app.json to follow new naming convention
+[2024-11-08] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-11-08] Bump version to 1.0.153 and update versionCode to 153; streamline assetBundlePatterns and associatedDomains formatting
+[2024-11-08] Automated Commit on Version Bump in Action workflow
+[2024-11-08] Automated Commit on Version Bump in Action workflow
+[2024-11-08] Refactor workflows: Update build APK name and add AAB build workflow; simplify alertPolyfill function
+[2024-11-07] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-11-07] Refactor components: Remove unused imports and streamline demoData function
+[2024-10-18] Automated Commit on Version Bump in Action workflow
+[2024-10-18] Add expo-calendar package to package.json and yarn.lock
+[2024-10-18] Refactor ProjectPanel component: Remove console.log statement and unused function
+[2024-10-18] Refactor addNewProject component and API functions
+[2024-10-14] cleanup
+[2024-10-14] cleanup
+[2024-10-14] header
+[2024-10-14] flatlist header
+[2024-10-14] cleanup
+[2024-10-14] layout
+[2024-10-13] refactor: Update hitSlop for calendar navigation buttons
+[2024-10-13] refactor: Add SharePanel component to Project and ProjectPanel
+[2024-10-13] refactor: Update hitSlop for back button in Back.tsx
+[2024-10-13] refactor: Update add project container style in index.tsx
+[2024-10-13] refactor: Remove babel.config.js file
+[2024-10-13] refactor: Update search input style in userList.tsx
+[2024-09-20] refactor: Update _layout.tsx, userList.tsx, and ProjectPanel.tsx
+[2024-09-20] refactor: Update _layout.tsx and UserAvatar.tsx
+[2024-09-20] refactor: Update _layout.tsx, signIn.tsx, and UserAvatar.tsx
+[2024-09-20] refactor: Update share link and button icons in share.tsx and ProjectPanel.tsx
+[2024-09-20] refactor: Update share link in share.tsx
+[2024-09-20] refactor: Update padding in _layout.tsx and signIn.tsx
+[2024-09-20] refactor: Update app version in app.json
+[2024-09-20] Automated Commit on Version Bump in Action workflow
+[2024-09-20] refactor: Update calendar test snapshots
+[2024-09-20] refactor: Remove unnecessary code in ProjectUsers.tsx and APIproject.ts
+[2024-09-20] refactor: Remove console logs and unused code in signUp.tsx and [project].tsx
+[2024-09-18] refactor: Remove unused code and update About component in signUp.tsx
+[2024-09-18] refactor: Add useState and useEffect hooks to About component in signUp.tsx
+[2024-09-18] refactor: Add About component to signUp.tsx and remove console log in about.web.tsx
+[2024-09-18] refactor: Add logging for anonymous account creation in signIn.tsx and remove console logs in APIuser.ts
+[2024-09-18] refactor: Update APIuser.ts to remove unused code and add type definitions for callback functions
+[2024-09-18] refactor: Update UserList to display loading indicator while fetching data
+[2024-09-16] refactor: Remove unnecessary code and improve development configuration in eas.json
+[2024-09-16] refactor: Update UserList to use 'update' instead of 'pUpdateUsers' in navigation params
+[2024-08-23] refactor: Update APIproject to add user to project and create user if not already exists
+[2024-08-23] refactor: Update CameraComponent to use Expo Camera API for improved functionality
+[2024-08-23] refactor: Update CameraComponent to use Expo Camera API for improved functionality
+[2024-08-23] refactor: Update eas.json to remove unnecessary code and improve development configuration
+[2024-08-23] refactor: Update CameraComponent to use CameraType enum for facing property
+[2024-08-23] refactor: Update CameraComponent to use CameraType enum for facing property
+[2024-08-23] refactor: Update About component to display correct native build version
+[2024-08-15] refactor: Remove unused GoogleService-Info.plist file and update PinchableImage component
+[2024-08-15] refactor: Update eas.json to remove unnecessary code and improve development configuration
+[2024-08-15] refactor: Update eas.json to set PRODUCT_NAME to "Builder"
+[2024-08-15] refactor: Update eas.json to disable iOS simulator in development mode
+[2024-08-15] refactor: Improve PinchableImage component for zooming and panning images
+[2024-08-15] refactor: Remove unused GoogleService-Info.plist file and update PinchableImage component
+[2024-08-15] refactor: Improve PinchableImage component for zooming and panning images in ViewPost
+[2024-08-15] feat: Add PinchableImage component for zooming images in ViewPost
+[2024-08-15] refactor: Update title style in Layout component
+[2024-08-15] fix: Handle error when failing to save image in ViewPost component
+[2024-08-15] fix: Handle error when failing to save image in ViewPost component
+[2024-08-15] fix: Display error message when failing to save image in ViewPost component
+[2024-08-15] refactor: Add Back component to DeleteAccount screen headerLeft options
+[2024-08-15] refactor: Add react-native-root-toast dependency and update layout component
+[2024-08-15] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-08-15] refactor: Add Back component to headerLeft options in relevant screens
+[2024-08-15] Automated Commit on Version Bump in Action workflow
+[2024-08-15] refactor: Update app.json to include expo-contacts for accessing contacts in the project
+[2024-08-15] refactor: Update app version to 1.0.147 and build number to 147
+[2024-08-15] Automated Commit on Version Bump in Action workflow
+[2024-08-15] refactor: Update GoogleService-Info.plist with new client ID and reversed client ID
+[2024-08-14] refactor: Update dependencies and remove unused imports in Projects component
+[2024-08-14] refactor: Add uid property to IPost interface and update relevant components
+[2024-08-13] refactor: Update react-native-big-calendar dependency to version 4.14.0
+[2024-08-13] refactor: Remove unused imports and update dependencies in PostComments component
+[2024-08-13] refactor: Update font size in about.test.tsx.snap
+[2024-08-13] chore: Update react-native-big-calendar dependency to version 4.14.0
+[2024-08-12] refactor: Update ProjectPanel title text style and width
+[2024-08-12] refactor: Remove unused imports and update dependencies in PostComments component
+[2024-08-12] refactor: Remove unused imports and update dependencies in PostComments component
+[2024-08-12] refactor: Remove unused imports and update dependencies in PostComments component
+[2024-08-12] chore: Update build workflow names and descriptions for Android and iOS
+[2024-08-12] chore: Update app version to 1.0.145
+[2024-08-12] refactor: Remove unused imports and update dependencies in PostComments component
+[2024-08-12] Remove console.log statements from APIpost, APIproject, APIuser, and UserContext files
+[2024-08-11] Remove console.log statements from APIpost, APIproject, APIuser, and UserContext files
+[2024-08-11] chore: Update eas.json with "resourceClass" for Android build type
+[2024-08-11] chore: Update eas.json with "resourceClass" for Android build type
+[2024-08-11] chore: Update Share component button style
+[2024-08-11] Automated Commit on Version Bump in Action workflow
+[2024-08-11] chore: Update app version to 1.0.140
+[2024-08-11] chore: Remove share button from Share component
+[2024-08-11] chore: Update project panel to pass project as a parameter to the share route
+[2024-08-11] chore: Update project ID variable name in TabLayout component
+[2024-08-11] chore: Fix null reference error in Projects and APIuser files
+[2024-08-11] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-08-11] Optimize Note component with lazy loading for images
+[2024-08-11] Automated Commit on Version Bump in Action workflow
+[2024-08-11] updates
+[2024-08-11] Automated Commit on Version Bump in Action workflow
+[2024-08-11] Optimize Note component with lazy loading for images
+[2024-08-11] chore: Update app version to 1.0.133
+[2024-08-11] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-08-11] feat: Add anonymous flag to user and project
+[2024-08-10] Automated Commit on Version Bump in Action workflow
+[2024-08-10] ```text chore: Update app version to 1.0.130
+[2024-08-10] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-08-10] chore: Update expo and expo-dev-client dependencies
+[2024-08-10] Automated Commit on Version Bump in Action workflow
+[2024-08-10] Optimize Note component with lazy loading for images
+[2024-08-10] ```text feat: Remove unnecessary console.log statements and optimize code
+[2024-08-10] feat: Add anonymous flag to user and project
+[2024-08-06] Optimize Note component with lazy loading for images
+[2024-08-06] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-08-06] feat: Optimize Note component with lazy loading for images
+[2024-08-05] cleanup
+[2024-08-05] cleanup
+[2024-08-03] Automated Commit on Version Bump in Action workflow
+[2024-08-03] Automated Commit on Version Bump in Action workflow
+[2024-08-03] feat: Add react-native-qrcode-svg dependency
+[2024-08-01] cleanup
+[2024-07-31] shared data project removal
+[2024-07-29] feat: Update "Add" section in ProjectUsers component
+[2024-07-29] feat: Update "Add" section in ProjectUsers component
+[2024-07-29] feat: Optimize Note component with lazy loading for images
+[2024-07-29] ```text feat: Add private switch to Project component
+[2024-07-29] feat: Update _layout.tsx to use theme provider for light and dark mode
+[2024-07-28] Update About component to display user context and session information
+[2024-07-28] feat: Update About component to display user context and session information
+[2024-07-28] Remove project name styling in [project].tsx and CameraComponent.tsx
+[2024-07-28] feat: Remove project name styling in [project].tsx and CameraComponent.tsx
+[2024-07-27] feat: Add lazy loading for images in Note component
+[2024-07-27] feat: Add project name to "Add Note" option in TabLayout component
+[2024-07-27] feat: Add project name to "Add Note" option in TabLayout component
+[2024-07-27] feat: Add lazy loading for images in Note component
+[2024-07-27] feat: Update project posts page to display project name and optimize performance
+[2024-07-27] feat: Update project posts page to display project name and optimize performance
+[2024-07-27] feat: Update project posts page to display project name and optimize performance
+[2024-07-27] feat: Optimize performance by adding lazy loading for images in Layout component
+[2024-07-27] feat: Update loading text in _layout.tsx
+[2024-07-27] feat: Update expo dependencies to latest versions
+[2024-07-27] feat: Optimize performance by adding lazy loading for images in Layout component
+[2024-07-27] feat: Update loading text in _layout.tsx
+[2024-07-27] feat: Update useStorageState to handle unavailable local storage
+[2024-07-27] ```text feat: Add unstable_settings to _layout.tsx
+[2024-07-27] feat: Optimize performance by updating font size and padding in TabLayout header title
+[2024-07-26] feat: Update Projects component to display post count
+[2024-07-26] feat: Update getPosts function to order posts by timestamp
+[2024-07-26] ```text feat: Optimize performance by updating font size and padding in TabLayout header title
+[2024-07-26] feat: Add Ionicons component to TabLayout header title
+[2024-07-26] feat: Update ProjectPanel component to improve performance
+[2024-07-26] feat: Remove console.log statements
+[2024-07-26] feat: Add support for lazy loading of images in Home component
+[2024-07-26] feat: Add lazy loading for images in Home component
+[2024-07-26] feat: Update user project in projectList.tsx
+[2024-07-26] feat: Update user project in projectList.tsx
+[2024-07-26] feat: Add lazy loading for images and improve loading text
+[2024-07-26] feat: Update root HTML configuration for web pages
+[2024-07-26] feat: Update root HTML configuration for web pages
+[2024-07-26] chore: Remove unused import and whitespace in [project].tsx
+[2024-07-26] feat: Improve page load with lazy loading for images
+[2024-07-26] chore: Update loading text to remove ellipsis
+[2024-07-26] fix: Set session to null on sign in error
+[2024-07-26] fix: Update loading text to remove ellipsis
+[2024-07-26] fix: Fix typo in loading text
+[2024-07-26] feat: Add "View Projects" link to Home page
+[2024-07-26] ctx refactor
+[2024-07-23] chore: Clean up code and remove unused variables
+[2024-07-16] fix comment logic
+[2024-07-15] Refactor addComment function to accept post as an object
+[2024-07-15] cleanup
+[2024-07-15] cleanup
+[2024-07-15] clenup
+[2024-07-15] save buttons
+[2024-07-14] log
+[2024-07-14] log cleanup
+[2024-07-13] cleanup
+[2024-07-13] log display
+[2024-07-13] log display
+[2024-07-13] Logs Screen
+[2024-07-08] feat: Add logging for user sign-in
+[2024-07-06] Automated Commit on Version Bump in Action workflow
+[2024-07-06] ```text feat: Add archiveAllProjects function
+[2024-07-03] feat: Add relative timestamp to project list
+[2024-06-26] Refactor SignIn component to navigate to "/welcome" after successful account creation
+[2024-06-26] Refactor SignIn component to navigate to "/welcome" after successful account creation
+[2024-06-25] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-25] chore: Remove commented code and unused imports
+[2024-06-25] Automated Commit on Version Bump in Action workflow
+[2024-06-21] Refactor SignIn component to handle most recent project
+[2024-06-21] Refactor SignIn component to handle most recent project
+[2024-06-20] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-20] chore: Refactor SignIn component to handle most recent project
+[2024-06-20] Automated Commit on Version Bump in Action workflow
+[2024-06-20] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-20] chore: Update expo dependencies
+[2024-06-11] Automated Commit on Version Bump in Action workflow
+[2024-06-11] chore: Update app.json version to 1.0.120
+[2024-06-11] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-11] chore: Fix camera permission request in CameraComponent
+[2024-06-10] Automated Commit on Version Bump in Action workflow
+[2024-06-10] chore: Update SignIn component styles
+[2024-06-10] update shared data project when null
+[2024-06-10] chore: Refactor CameraComponent to open settings for camera permissions
+[2024-06-10] chore: Update CameraComponent to open settings for camera permissions
+[2024-06-10] chore: Add camera permission instructions to CameraComponent
+[2024-06-10] Update app.json version to 1.0.115
+[2024-06-10] chore: Refactor TabLayout component to handle project creation
+[2024-06-10] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-10] chore: Update callback parameter in addProjectUser function
+[2024-06-10] Automated Commit on Version Bump in Action workflow
+[2024-06-10] Automated Commit on Version Bump in Action workflow
+[2024-06-10] chore: Update app.json version to 1.0.111
+[2024-06-09] chore: Update button style in forgotPassword.tsx
+[2024-06-09] chore: Update app.json version to 1.0.110
+[2024-06-09] chore: Remove console.log statements and update button style in various components
+[2024-06-09] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-09] chore: Update firebase import in APIimage.ts and firebase.ts
+[2024-06-09] Update [project].tsx to fix useState initialization and add pUpdateUsers to local search params
+[2024-06-09] Automated Commit on Version Bump in Action workflow
+[2024-06-09] feat: Add Progress component to CameraComponent
+[2024-06-09] chore: Update project/[project].tsx to remove unused code and add Progress component
+[2024-06-09] chore: Update title to "Edit" in RootLayout component
+[2024-06-09] chore: Update TabLayout component to use sharedDataProject key for pathname
+[2024-06-09] chore: Update AsyncStorage usage and add success message to resetPassword function
+[2024-06-08] fix: Update resetPassword function to display a success message after sending the password reset email
+[2024-06-08] chore: Update build_android_apk_submit.yml to change workflow name to "2. Build Apk Preview"
+[2024-06-08] chore: Update eas.json to set preview channel to production
+[2024-06-07] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-07] chore: Add react-native-modal-datetime-picker dependency
+[2024-06-07] chore: Update editCalendar component to show date picker on iOS
+[2024-06-07] Automated Commit on Version Bump in Action workflow
+[2024-06-07] Automated Commit on Version Bump in Action workflow
+[2024-06-07] chore: Update npm dependencies and expo packages
+[2024-06-06] chore: Update editCalendar component to show date picker on iOS
+[2024-06-06] chore: Refactor editCalendar component and remove unused code
+[2024-06-06] Automated Commit on Version Bump in Action workflow
+[2024-06-06] Update build_simulator_ios.yml
+[2024-06-06] chore: Update workflow name to "Build Apk and Submit"
+[2024-06-06] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-06] chore: Update npm dependencies and expo packages
+[2024-06-04] Automated Commit on Version Bump in Action workflow
+[2024-06-04] chore: Update npm dependencies and add async-storage package
+[2024-06-03] chore: Update EAS build profile to "preview" for Android APK
+[2024-06-03] chore: Update workflow name to "Build Apk and Submit"
+[2024-06-03] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-06-03] chore: Update eas.json to use "apk" instead of "aab" for development channel
+[2024-06-03] Automated Commit on Version Bump in Action workflow
+[2024-06-03] chore: Update dependencies and refactor components
+[2024-06-02] Update app version to 1.0.101
+[2024-06-02] Refactor code and remove unnecessary console.log statements
+[2024-06-02] chore: Update dependencies and refactor components
+[2024-06-01] chore: Update expo-notifications dependency to version 0.28.5
+[2024-05-31] Automated Commit on Version Bump in Action workflow
+[2024-05-31] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-05-31] Automated Commit on Version Bump in Action workflow
+[2024-05-31] chore: Update expo and firebase dependencies
+[2024-05-31] Automated Commit on Version Bump in Action workflow
+[2024-05-31] chore: Update firebase dependencies to latest versions
+[2024-05-31] chore: Refactor Posts component and update useEffect dependencies
+[2024-05-31] chore: Update projectContext and ProjectPanel components
+[2024-05-31] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-05-31] Refactor types.ts to use an array of objects for images in IPost interface
+[2024-05-30] Automated Commit on Version Bump in Action workflow
+[2024-05-28] chore: Update app versionCode to 8 in app.json
+[2024-05-28] chore: Remove redundant code and update styling in forgotPassword.tsx
+[2024-05-28] chore: Remove redundant code and add conditional logic for creating a project in Post component
+[2024-05-28] feat: Add create project button to Post component
+[2024-05-28] chore: Refactor PostComments.tsx component and handle project-specific display logic
+[2024-05-28] chore: Refactor Post.tsx component and add create project button
+[2024-05-24] chore: Update expo dependencies to latest versions
+[2024-05-24] chore: Refactor [project].tsx and Post.tsx components
+[2024-05-20] fix: Correct project name comparison in [project].tsx
+[2024-05-20] chore: Update app name and remove unused font imports
+[2024-05-20] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-05-20] Update camera permissions to allow $(PRODUCT_NAME) to access the camera and add microphone permission. Also, enable audio recording on Android.
+[2024-05-20] Automated Commit on Version Bump in Action workflow
+[2024-05-16] Automated Commit on Version Bump in Action workflow
+[2024-05-16] chore: Update @react-native-community/datetimepicker to version 8.0.1
+[2024-05-16] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-05-16] chore: Update app.json version to 1.0.92
+[2024-05-12] Automated Commit on Version Bump in Action workflow
+[2024-05-12] chore: Update npm dependencies to latest versions
+[2024-05-09] expo 51
+[2024-04-01] Update build profile for Android in eas.json
+[2024-04-01] Add build profiles for generating .apk and auto-increment version
+[2024-04-01] Update versionCode and serviceAccountKeyPath
+[2024-03-30] Add project ID to project title in admin view
+[2024-03-30] Add style to project title in projectListAdmin.tsx
+[2024-03-30] Update app.json and projectList.tsx
+[2024-03-30] Automated Commit on Version Bump in Action workflow
+[2024-03-30] Remove unnecessary code in Posts component
+[2024-03-30] Add console log and update shared data user
+[2024-03-30] Update projectList and authProvider
+[2024-03-30] Refactor project count update logic in Posts component
+[2024-03-30] Add project ID to project title in project list
+[2024-03-28] Update build number in app.json
+[2024-03-28] Update app.json
+[2024-03-28] Update app.json and projectListAdmin.tsx
+[2024-03-28] Automated Commit on Version Bump in Action workflow
+[2024-03-28] Fix ScrollView indentation and add console.log statement in Posts component
+[2024-03-21] Update dependencies in package.json and yarn.lock
+[2024-03-19] Update firebase dependencies to latest versions
+[2024-03-18] Update Node version to 20.x in GitHub workflows
+[2024-03-18] Update dependencies in package.json
+[2024-02-22] Add project title logging and replace navigation method
+[2024-02-22] Fix capitalization of "SIGN In" button label and add console logs for debugging
+[2024-02-18] Remove console.log statements and update updateUserProjectCount function
+[2024-02-18] Fix router.push to router.navigate in multiple files
+[2024-02-18] Remove unused imports and console logs
+[2024-02-18] Add Android build command and update Expo dependencies
+[2024-02-09] Refactor user initialization in [project].tsx and _layout.tsx
+[2024-02-09] Refactor project variable assignment in welcome page
+[2024-02-08] Add useAuth hook and highlight current user in userList
+[2024-02-08] Add "me" indicator for logged-in user in ProjectUsers component
+[2024-02-08] Update user list styling and project access subtitle
+[2024-02-07] Update dependencies and remove unused camera component
+[2024-02-06] Update layout and about components
+[2024-02-05] Update SDU version in About component
+[2024-02-05] Update app version and error handling in sign-in
+[2024-02-05] Update about.tsx and pubsub-debug.log
+[2024-02-05] Enable Firebase Emulator in development environment
+[2024-02-05] Fix project retrieval bug and add developer info
+[2024-02-04] Update project and Firebase dependencies
+[2024-01-28] Add useAuth and router imports, update dbProject value
+[2024-01-25] Refactor imports and remove unused code
+[2024-01-24] update auth create user
+[2024-01-24] Add deleteUser function and update DeleteAccount component
+[2024-01-22] Fix casing of pathname in createAccount.tsx and authProvider.tsx
+[2024-01-22] Remove unnecessary console.log statements and fix error handling
+[2024-01-20] Add dependencies and fix formatting issues
+[2024-01-20] Update setting name in user component
+[2024-01-20] Update app version and asset bundle patterns
+[2024-01-20] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-01-20] Update dependencies in package.json and babel.config.js
+[2024-01-19] Automated Commit on Version Bump in Action workflow
+[2024-01-19] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-01-19] Remove unused dependencies and update Expo packages
+[2024-01-15] Automated Commit on Version Bump in Action workflow
+[2024-01-15] Update app.json and package.json
+[2024-01-13] Add url, title, and subject to ShareItem
+[2024-01-13] Update deployment workflow name
+[2024-01-13] Remove Firebase Hosting workflows
+[2024-01-13] Add Share functionality to Footer component
+[2024-01-13] Update icons in Footer component
+[2024-01-13] Update Content-Type header value in firebase.json
+[2024-01-13] Add Content-Type header for apple-app-site-association
+[2024-01-13] Remove sentry.properties files and update apple-app-site-association
+[2024-01-13] Add headers to firebase.json
+[2024-01-13] Automated Commit on Version Bump in Action workflow
+[2024-01-13] Refactor assetBundlePatterns in app.json
+[2024-01-13] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-01-13] Update app.json with assetBundlePatterns and buildNumber
+[2024-01-13] Automated Commit on Version Bump in Action workflow
+[2024-01-13] Update assetBundlePatterns and associatedDomains in app.json
+[2024-01-13] Update app version and build number in app.json
+[2024-01-13] Fix bug in login functionality
+[2024-01-13] Refactor app.json and [project].tsx files
+[2024-01-12] Add Open Graph meta tags
+[2024-01-12] Update og:image URL in [project].tsx
+[2024-01-12] Remove unused import and fix import statement
+[2024-01-12] Add Head component and update project screen
+[2024-01-12] Remove console.log statements
+[2024-01-12] Refactor user profile UI
+[2024-01-12] Remove unused imports and add project field to IUser interface
+[2024-01-12] Update theme and header styles
+[2024-01-12] Add missing imports and remove unused imports
+[2024-01-12] Update dependencies in package.json
+[2024-01-12] Refactor TabLayout component
+[2024-01-12] Refactor splitOnFirst function to handle edge cases
+[2024-01-12] Refactor project edit screen layout
+[2024-01-12] Refactor deployment workflow for Firebase Hosting
+[2024-01-12] Add firebase tools installation step
+[2024-01-12] Add FIREBASE_CLI_PREVIEWS environment variable
+[2024-01-12] Fix npm deploy-hosting command in workflow
+[2024-01-12] Update Firebase Hosting deployment workflow
+[2024-01-12] Update Firebase.json to use rewrites for all routes
+[2024-01-12] Update import paths in code
+[2024-01-12] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2024-01-12] Update app.json and APIproject.ts
+[2024-01-12] Update app.json and APIproject.ts, remove console logs and emulator connections
+[2024-01-11] Automated Commit on Version Bump in Action workflow
+[2024-01-11] Add useCamera2Api flag to camera component
+[2024-01-11] Refactor code to improve performance and readability
+[2024-01-11] Update dependencies in package.json
+[2024-01-11] Remove header transparency and update background color
+[2024-01-11] Refactor project screen layout and styles
+[2024-01-11] Add project field to IProject interface and update project name in TabLayout
+[2024-01-10] Refactor project creation route
+[2024-01-10] Refactor APIpost and firebase.web modules, update projectList and signIn components
+[2024-01-09] Add redirect to "(tabs)" after successful login
+[2024-01-09] Fix bug in login functionality
+[2024-01-09] Update .gitignore file
+[2024-01-09] Update archived status in getProjects function
+[2024-01-09] Update app.json, sComponent.tsx, editPost.tsx, package.json, env.ts, firebase.ts, firebase.json, and firebase.web.ts
+[2024-01-07] Refactor image rendering in Post component
+[2024-01-07] Update Ionicons names in user and post components
+[2024-01-06] Refactor post author check and add notification
+[2024-01-06] Add uploadBytes function to firebase storage
+[2024-01-06] Update app names and remove unused code
+[2024-01-05] Update dependencies in package.json and yarn.lock
+[2024-01-05] Remove unused ImageZoom import
+[2024-01-05] Update dependencies in package.json and yarn.lock
+[2024-01-05] Refactor camera component to enable autofocus
+[2024-01-05] Update app.json and package.json
+[2024-01-05] Automated Commit on Version Bump in Action workflow
+[2024-01-05] Add zoom functionality to viewPost and Post components
+[2024-01-05] Update components Masonry and Post
+[2024-01-05] Add Masonry component to Posts
+[2024-01-04] Automated Commit on Version Bump in Action workflow
+[2024-01-04] flashlist
+[2024-01-02] Update app.json version to 1.0.77 and simplify assetBundlePatterns
+[2024-01-02] Automated Commit on Version Bump in Action workflow
+[2024-01-02] Add pressable functionality to update component
+[2024-01-02] Update dependencies and fix bugs
+[2024-01-02] Update fonts and dependencies
+[2024-01-01] Update Posts component to use FlatList from react-native-gesture-handler
+[2024-01-01] Update dependencies and import statement in firebase.ts to support web and native
+[2024-01-01] Remove console.log statements and update dependencies
+[2023-12-31] Refactor error message handling and update styles
+[2023-12-31] Fix type annotation in errorMessage function
+[2023-12-31] Add error message function to handle authentication errors
+[2023-12-31] Add animated welcome text to sign-in screen
+[2023-12-31] Remove unused variable uid
+[2023-12-30] Refactor getProjectUsers function to filter users based on idList
+[2023-12-30] Add mock functions for Firebase in unit tests
+[2023-12-30] Fix network error and update Firebase mocks
+[2023-12-27] Refactor imports and remove unused variables
+[2023-12-24] Add slogan to sign-in screen
+[2023-12-24] Refactor sign-in container styles
+[2023-12-24] Update login button width in signIn.tsx
+[2023-12-24] Remove unused import and state
+[2023-12-24] Add showSignIn state and conditional rendering for sign in form
+[2023-12-24] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-12-24] Remove console.log and use router.replace for redirect
+[2023-12-24] Automated Commit on Version Bump in Action workflow
+[2023-12-24] Update app version to 1.0.75
+[2023-12-24] Merge pull request #24 from simoncar/auth
+[2023-12-24] huge udpate to the way authentication works
+[2023-12-22] Refactor authProvider.tsx to fix indentation and remove unused code
+[2023-12-22] Add expo-secure-store package and implement authentication flow
+[2023-12-22] Automated Commit on Version Bump in Action workflow
+[2023-12-22] Update app.json version and build number
+[2023-12-22] Add types for IProject in addPost.tsx and remove unused import in authProvider.tsx
+[2023-12-21] Refactor APIpost functions and add missing parameters
+[2023-12-21] Add missing useEffect dependency and update post state in Note component
+[2023-12-20] Disable swipe functionality in CalendarLarge component
+[2023-12-20] Update runTypeMessage in editUser function
+[2023-12-20] Refactor dots component to remove unused imports and optimize rendering
+[2023-12-20] Remove unused code
+[2023-12-20] Add activeImage state to Post component and update Dots component
+[2023-12-20] Update react-native-reanimated-carousel version
+[2023-12-20] delete calendar events
+[2023-12-20] Update calendar event color and name, and fix comment display bug
+[2023-12-20] Fix timestamp formatting in Footer component
+[2023-12-20] Update eslint rules and remove unused imports in Footer component
+[2023-12-20] Add color to Note title and strike through Share and Edit actions
+[2023-12-20] Refactor code and add delete functionality
+[2023-12-20] Add footer actions and toggle functionality
+[2023-12-20] Add ellipsis icon to Footer component
+[2023-12-20] date of post formatting
+[2023-12-19] Update app.json version to 1.0.72 and simplify assetBundlePatterns
+[2023-12-19] Automated Commit on Version Bump in Action workflow
+[2023-12-19] Update build number to 70 in app.json
+[2023-12-19] Refactor camera component to enable autofocus
+[2023-12-19] Update Colors and APIuser modules
+[2023-12-19] Refactor styles in Post component
+[2023-12-19] Add color scheme support to Post component
+[2023-12-19] Add multiline and numberOfLines props to Note component, and adjust fontSize and padding in Post component
+[2023-12-19] Update title text style in editCalendar component
+[2023-12-19] Refactor project title rendering in projectListAdmin.tsx
+[2023-12-19] fix up calendar
+[2023-12-19] Add inactive tab color to tab bar
+[2023-12-19] Refactor code and add project user
+[2023-12-19] Refactor project archiving functionality
+[2023-12-19] Fix font size in notificationTextHeader
+[2023-12-19] Remove redundant code in signIn.tsx
+[2023-12-19] Add notification header and update error messages
+[2023-12-19] Refactor user.tsx: Update styling and text in aboutContainer
+[2023-12-19] Update error message and display update status
+[2023-12-19] Add async function to fetch and run updates
+[2023-12-19] Refactor console log messages and remove unused styles
+[2023-12-18] Remove console.log statement and update react-native-big-calendar version
+[2023-12-18] Update user.tsx and metro.config.js
+[2023-12-17] Refactor SelectLanguage component and update language handling
+[2023-12-17] Add useEffect hook and useLocalSearchParams in SelectLanguage component
+[2023-12-17] Update icon in editUser component
+[2023-12-17] Add expo-updates configuration and implement update functionality
+[2023-12-17] Refactor code to improve performance and readability
+[2023-12-17] Add animation and color changes to camera button
+[2023-12-17] Update app version to 1.0.71
+[2023-12-17] Refactor APIimage.ts to use TypeScript type annotations
+[2023-12-17] take photo code
+[2023-12-17] Refactor processItemAsync function in APIimage.ts
+[2023-12-17] Refactor camera component and update flipCamera function
+[2023-12-17] Fix router.push to router.replace in ModalScreen component and enable Firestore offline persistence
+[2023-12-17] Refactor user profile page and add getUser function
+[2023-12-17] fix image encoding for routing
+[2023-12-17] expo 50 and router changes and lots of fixes
+[2023-12-15] Refactor addProject function and addProjectUser function
+[2023-12-14] Add headerBackTitle to screen options
+[2023-12-14] Update app version to 1.0.69
+[2023-12-14] colors
+[2023-12-14]  update colors
+[2023-12-14] Fix comment display issue and remove Firebase emulator code
+[2023-12-13] Automated Commit on Version Bump in Action workflow
+[2023-12-13] Merge pull request #23 from simoncar/expo-50
+[2023-12-13] Update dependencies and remove unused code
+[2023-12-13] Remove sentry-expo dependency
+[2023-12-13] Update dependencies based on beta Release notes
+[2023-12-13] Add cameraRef and takePhoto function Update camera buttons styling
+[2023-12-11] Update app.json version to 1.0.68 and simplify assetBundlePatterns
+[2023-12-11] Automated Commit on Version Bump in Action workflow
+[2023-12-02] Fix loading state type in projectList.tsx and update condition in ProjectPanel.tsx
+[2023-12-01] Remove red circle from project list item
+[2023-11-29] Fix styling issues in projectList and projectListAdmin components
+[2023-11-29] Increase font size in ParsedText component
+[2023-11-29] Fix APIpost import and function names
+[2023-11-29] Add coverage directory to .gitignore and fix typo in Note component
+[2023-11-25] work on add note
+[2023-11-23] cleanup width
+[2023-11-23] Add "Add Note" option to TabLayout and update camera screen UI
+[2023-11-19] Update dependencies in package.json
+[2023-11-19] build actions
+[2023-11-19] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-11-19] github action of development build
+[2023-11-18] Automated Commit on Version Bump in Action workflow
+[2023-11-18] camera
+[2023-11-17] cleanup
+[2023-11-13] cleanup
+[2023-11-06] Update viewPost component with new image zoom functionality
+[2023-11-06] Refactor viewPost component
+[2023-11-06] Update navigation options in _layout.tsx and Post.tsx with zoom
+[2023-11-06] Fix comment input action state in PostComments component
+[2023-11-06] Fix comment input styling and set default action to true.
+[2023-11-06] Update app.json and authProvider.tsx
+[2023-11-02] bubbles
+[2023-11-02] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-11-02] comment blocks
+[2023-11-02] Automated Commit on Version Bump in Action workflow
+[2023-11-02] pinch zoom
+[2023-11-02] cleanup
+[2023-11-02] language
+[2023-10-30] Automated Commit on Version Bump in Action workflow
+[2023-10-30] language
+[2023-10-30] cleanup
+[2023-10-30] avatar icon on user list page
+[2023-10-30] signIn
+[2023-10-30] error mapping
+[2023-10-30] show login chars
+[2023-10-26] version =bump
+[2023-10-25] add image updates
+[2023-10-24] cleanup
+[2023-10-23] react native version
+[2023-10-23] Merge pull request #22 from simoncar/crashlytics
+[2023-10-23] version bump
+[2023-10-23] working on sourcemaps
+[2023-10-22] Automated Commit on Version Bump in Action workflow
+[2023-10-22] version
+[2023-10-22] remove crashlytics
+[2023-10-22] event
+[2023-10-22] version
+[2023-10-22] version
+[2023-10-22] sentry init
+[2023-10-22] release
+[2023-10-22] version
+[2023-10-22] Merge branch 'crashlytics' of https://github.com/simoncar/bottletree into crashlytics
+[2023-10-22] demo crash
+[2023-10-22] Automated Commit on Version Bump in Action workflow
+[2023-10-22] sentry
+[2023-10-20] config
+[2023-10-20] crash
+[2023-10-20] Automated Commit on Version Bump in Action workflow
+[2023-10-20] version bump
+[2023-10-20] null checks
+[2023-10-19] null check
+[2023-10-19] post counts
+[2023-10-19] email displau
+[2023-10-19] admin mode
+[2023-10-19] cleanup login
+[2023-10-19] cleanup user list
+[2023-10-17] demo
+[2023-10-17] emulator updates
+[2023-10-16] more counts
+[2023-10-16] counts
+[2023-10-16] color update
+[2023-10-16] working on counter updates
+[2023-10-16] remove spell check from email
+[2023-10-16] version bump
+[2023-10-16] fix profile bug
+[2023-10-16] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-10-16] fix person icon
+[2023-10-16] Automated Commit on Version Bump in Action workflow
+[2023-10-16] version bump
+[2023-10-15] filter admin mode
+[2023-10-15] cleanup
+[2023-10-15] supervisor mode
+[2023-10-15] fix demo data bug
+[2023-10-13] offline fixes
+[2023-10-09] permissions
+[2023-10-09] admin access
+[2023-10-09] profile image folders
+[2023-10-08] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-10-08] version bump
+[2023-10-07] Automated Commit on Version Bump in Action workflow
+[2023-10-07] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-10-07] compress
+[2023-10-07] Automated Commit on Version Bump in Action workflow
+[2023-10-07] version
+[2023-10-07] version bump
+[2023-10-07] calendar bug
+[2023-10-07] version bumps
+[2023-10-07] remove js firebase
+[2023-10-06] version bump
+[2023-10-06] move to offline firebase
+[2023-10-02] logging
+[2023-10-02] fix logging
+[2023-10-02] Merge pull request #21 from simoncar/native-firebase
+[2023-10-02] version bump
+[2023-10-02] Automated Commit on Version Bump in Action workflow
+[2023-10-02] native firebase inc offline support
+[2023-09-30] version bump
+[2023-09-30] Automated Commit on Version Bump in Action workflow
+[2023-09-29] pst name
+[2023-09-29] skeleton
+[2023-09-29] skeleton
+[2023-09-29] fix close row
+[2023-09-29] update user list
+[2023-09-29] add user to project
+[2023-09-29] fix profile icon
+[2023-09-29] icon cleanup
+[2023-09-29] red update dot
+[2023-09-29] update post counts
+[2023-09-29] comment titles
+[2023-09-26] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-09-26] version bump
+[2023-09-26] Automated Commit on Version Bump in Action workflow
+[2023-09-26] cleanup
+[2023-09-26] calendar navigation
+[2023-09-23] cleanup
+[2023-09-16] editing events
+[2023-09-14] bug fix
+[2023-09-14] user profile page cleanup
+[2023-09-14] dont send messages to yourself
+[2023-09-14] notification title
+[2023-09-14] duplication bug
+[2023-09-14] version bump
+[2023-09-13] cleanup
+[2023-09-11] calendar
+[2023-09-06] colors
+[2023-09-06] big cleanup
+[2023-09-06] colors
+[2023-09-06] layout and theme
+[2023-09-06] cleanup
+[2023-09-06] calendar months
+[2023-09-05] Automated Commit on Version Bump in Action workflow
+[2023-09-05] version bump
+[2023-09-05] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-09-05] mjs
+[2023-09-05] trying to fix mjs issue
+[2023-09-05] mjs
+[2023-09-05] Create LICENSE
+[2023-09-04] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-09-04] misc
+[2023-09-04] Automated Commit on Version Bump in Action workflow
+[2023-09-04] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-09-04] metro
+[2023-09-03] Automated Commit on Version Bump in Action workflow
+[2023-09-03] Automated Commit on Version Bump in Action workflow
+[2023-09-03] hmmm
+[2023-09-03] calendarize
+[2023-09-03] calendar display
+[2023-09-03] Automated Commit on Version Bump in Action workflow
+[2023-09-03] version bump
+[2023-09-02] button
+[2023-09-02] big calendar
+[2023-08-31] scale images
+[2023-08-31] layout of large images
+[2023-08-30] keyboard layout
+[2023-08-29] version bump
+[2023-08-29] event color
+[2023-08-26] format date
+[2023-08-26] android image
+[2023-08-26] show date time of comments
+[2023-08-24] KeyboardAwareFlatList
+[2023-08-24] notifications
+[2023-08-24] notification
+[2023-08-24] display push token
+[2023-08-20] delete
+[2023-08-20] user list
+[2023-08-20] key for shorlist
+[2023-08-19] notifications
+[2023-08-19] profile page layout
+[2023-08-19] title
+[2023-08-19] project access list
+[2023-08-19] demo data
+[2023-08-19] demo data
+[2023-08-19] demo data
+[2023-08-19] demo data
+[2023-08-17] comments
+[2023-08-17] comment
+[2023-08-17] version bump
+[2023-08-17] mels navigation suggestion
+[2023-08-15] version bump
+[2023-08-15] post comments
+[2023-08-15] comments
+[2023-08-15] post title and body
+[2023-08-15] push notification test
+[2023-08-13] add functions
+[2023-08-12] layout ratio
+[2023-08-12] update comments
+[2023-08-12] version bump
+[2023-08-12] cleanup
+[2023-08-12] comments
+[2023-08-12] cleanup
+[2023-08-12] ratio bug
+[2023-08-12] initial list
+[2023-08-12] log token to db
+[2023-08-12] comments layout
+[2023-08-12] startup logic
+[2023-08-12] version fix
+[2023-08-12] startup notifications
+[2023-08-11] height
+[2023-08-11] typescript
+[2023-08-11] calendar scrollview
+[2023-08-11] multiline comments
+[2023-08-09] version bump
+[2023-08-09] starting push notifications
+[2023-08-09] remove emulator
+[2023-08-07] fix user image upload bug
+[2023-08-07] fix bug in project image update
+[2023-08-04] cleanup
+[2023-08-03] aspect ratio of photos
+[2023-08-02] cleanup
+[2023-08-02] layout
+[2023-08-02] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-08-02] archive project
+[2023-08-01] Automated Commit on Version Bump in Action workflow
+[2023-08-01] project archiving partial
+[2023-08-01] auth debugging
+[2023-08-01] filter calendar
+[2023-08-01] delete
+[2023-08-01] cleanup
+[2023-08-01] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-08-01] calendar cleanup
+[2023-07-29] Automated Commit on Version Bump in Action workflow
+[2023-07-29] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-07-29] carousel or single image
+[2023-07-29] Automated Commit on Version Bump in Action workflow
+[2023-07-29] multiple photos on one post
+[2023-07-29] image uploading
+[2023-07-29] add post
+[2023-07-28] loging routing (still not 100 percent working)
+[2023-07-28] add post button
+[2023-07-28] fix image selection
+[2023-07-28] button cleanup
+[2023-07-28] auth routing
+[2023-07-28] package updates
+[2023-07-28] cleanup buttons
+[2023-07-27] text error cleanup
+[2023-07-27] login
+[2023-07-26] location part 0.1
+[2023-07-26] dark mode dots
+[2023-07-26] testing 3
+[2023-07-26] actions
+[2023-07-26] tweak
+[2023-07-26] calendar layout
+[2023-07-25] cleanup
+[2023-07-25] Automated Commit on Version Bump in Action workflow
+[2023-07-25] version
+[2023-07-25] update permissions
+[2023-07-25] eas update
+[2023-07-25] scroll list project
+[2023-07-25] eslint rule
+[2023-07-25] Update app.json
+[2023-07-24] Update update_codepush.yml
+[2023-07-24] ci: version bump to 1.2.0
+[2023-07-24] Update update_codepush.yml
+[2023-07-24] ci: version bump to 1.1.0
+[2023-07-24] Update update_codepush.yml
+[2023-07-24] import module fix
+[2023-07-24] cleanup
+[2023-07-24] cleanup
+[2023-07-24] cleanup
+[2023-07-24] cleanup
+[2023-07-24] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-07-24] project filter calendar
+[2023-07-21] Update update_codepush.yml
+[2023-07-21] Update update_codepush.yml
+[2023-07-21] Update build_submit.yml
+[2023-07-21] Update update_codepush.yml
+[2023-07-21] Update and rename update.yml to update_codepush.yml
+[2023-07-21] Update and rename eas-build.yml to build_submit.yml
+[2023-07-21] Update update.yml
+[2023-07-21] add submit
+[2023-07-21] ci setup
+[2023-07-21] Merge pull request #6 from simoncar/production
+[2023-07-21] Create eas-build.yml
+[2023-07-21] Update eas.json
+[2023-07-21] Merge pull request #5 from simoncar/main
+[2023-07-21] Create update.yml
+[2023-07-20] login
+[2023-07-19] format text
+[2023-07-19] show project on calendar
+[2023-07-19] calendar delete
+[2023-07-19] delete calendar event
+[2023-07-19] Merge pull request #4 from simoncar/expo-49-try-2
+[2023-07-19] router updates
+[2023-07-19] font loading
+[2023-07-19] cleanup packages
+[2023-07-19] bump packages expo install fix
+[2023-07-19] update expo 90
+[2023-07-19] space
+[2023-07-18] cleanup
+[2023-07-18] update user
+[2023-07-18] fix the dots
+[2023-07-18] save bug
+[2023-07-18] version bump
+[2023-07-18] Calendar Colors
+[2023-07-18] calendar update support
+[2023-07-17] emulator
+[2023-07-16] save without timezones
+[2023-07-13] colors
+[2023-07-13] colors
+[2023-07-13] colors
+[2023-07-13] colors and layout
+[2023-07-13] add event
+[2023-07-13] add button
+[2023-07-12] calendar fixes
+[2023-07-12] version bump
+[2023-07-12] calendar dark mode
+[2023-07-11] time display
+[2023-07-10] loading calendar from firestore
+[2023-07-10] calendar updates
+[2023-07-09] add calendar event
+[2023-07-08] calendar
+[2023-07-08] calendar
+[2023-07-05] Archived projects
+[2023-07-05] project users
+[2023-07-05] parsed post image
+[2023-07-05] cleanup
+[2023-07-05] update the way comments are entered
+[2023-07-05] Link colors
+[2023-07-05] Save comments to do with a post
+[2023-07-05] Add a comment
+[2023-07-04] comment input
+[2023-07-04] cleanup
+[2023-07-04] comments
+[2023-07-04] cleanup
+[2023-07-04] cleanup
+[2023-07-04] cleanup
+[2023-07-04] Post comments
+[2023-07-04] comments
+[2023-07-04] comments
+[2023-07-04] cleanup
+[2023-07-04] layout of project projectList
+[2023-07-04] cleanup
+[2023-07-03] archive project
+[2023-07-03] Button component
+[2023-07-03] update project
+[2023-07-03] update project photo
+[2023-07-03] update image
+[2023-07-02] expo bump
+[2023-07-02] TS cleanup
+[2023-07-02] typescript cleanup
+[2023-07-02] fix edit bug
+[2023-06-28] image upload
+[2023-06-28] profile image upload
+[2023-06-28] Create account logic update
+[2023-06-28] percist auth
+[2023-06-28] move image upload into API
+[2023-06-28] fix routing
+[2023-06-28] web cleanup
+[2023-06-28] cleanup
+[2023-06-27] auth cleanup json
+[2023-06-27] login logout auth
+[2023-06-26] restructure auth and api
+[2023-06-26] cleanup
+[2023-06-26] cleanup project provider and context
+[2023-06-26] username context
+[2023-06-25] login and user profile
+[2023-06-24] profile photo
+[2023-06-24] profile icon
+[2023-06-24] cleanup
+[2023-06-24] cleanup
+[2023-06-23] auth
+[2023-06-23] account actions
+[2023-06-23] create account
+[2023-06-23] create account
+[2023-06-23] forgot password
+[2023-06-23] login button
+[2023-06-23] login screen
+[2023-06-22] photo edit
+[2023-06-22] cleanup
+[2023-06-22] cleanup delete button
+[2023-06-21] delete post
+[2023-06-21] auth asyncStorage
+[2023-06-21] auth flows
+[2023-06-21] Post Layout
+[2023-06-21] Login Screen
+[2023-06-20] bump version
+[2023-06-20] upload progress
+[2023-06-20] add first Post
+[2023-06-20] access list
+[2023-06-20] edit project
+[2023-06-20] update project to DB
+[2023-06-20] cleanup
+[2023-06-20] layout
+[2023-06-20] post time
+[2023-06-20] cleanup
+[2023-06-20] cleanup
+[2023-06-20] proilfe screen
+[2023-06-20] Theming
+[2023-06-20] push notifications
+[2023-06-20] bump version
+[2023-06-20] fix dark mode color
+[2023-06-20] access list
+[2023-06-20] Project users
+[2023-06-20] edit Project
+[2023-06-20] project chevron
+[2023-06-20] eslint cleanup
+[2023-06-19] cleanup
+[2023-06-19] project icon
+[2023-06-19] add content
+[2023-06-19] Add project
+[2023-06-19] image dimensions
+[2023-06-19] delete are you sure
+[2023-06-19] cleanup
+[2023-06-19] caption
+[2023-06-19] cleanup
+[2023-06-19] Remember last project
+[2023-06-19] border layout
+[2023-06-19] calendar color dark mode
+[2023-06-18] cleanup and colors
+[2023-06-18] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-06-18] Delete firestore-debug.log
+[2023-06-18] Delete firebase-debug.log
+[2023-06-18] cleanup
+[2023-06-18] cleanup
+[2023-06-18] edit
+[2023-06-18] emulator
+[2023-06-18] edit
+[2023-06-18] pressable edit
+[2023-06-18] cleanup
+[2023-06-18] version bump
+[2023-06-17] upload progress
+[2023-06-17] upload save route
+[2023-06-17] fox carousell
+[2023-06-17] image display
+[2023-06-17] get posts in order
+[2023-06-17] imageUpload
+[2023-06-17] context update
+[2023-06-17] setup project context
+[2023-06-16] tabs
+[2023-06-16] posts to firebase
+[2023-06-15] cleanup
+[2023-06-15] cleanup
+[2023-06-15] image upload
+[2023-06-14] build bump
+[2023-06-13] add project
+[2023-06-13] select projects
+[2023-06-12] projects
+[2023-06-12] project icon
+[2023-06-12] firebase debug
+[2023-06-11] update
+[2023-06-11] cleanup projects
+[2023-06-11] projects list
+[2023-06-10] projects
+[2023-06-10] modal
+[2023-06-10] display
+[2023-06-10] calendar
+[2023-06-10] calendar component
+[2023-06-10] update component
+[2023-06-09] update panel
+[2023-06-08] version
+[2023-06-08] name change
+[2023-06-07] cleanup
+[2023-06-07] comments
+[2023-06-07] color
+[2023-06-07] update hammer
+[2023-06-07] eas submit
+[2023-06-07] Header
+[2023-06-07] eas setup
+[2023-06-01] update reame
+[2023-06-01] ignore firebase logs
+[2023-06-01] Merge branch 'main' of https://github.com/simoncar/bottletree
+[2023-06-01] workspace
+[2023-06-01] Create README.md
+[2023-05-30] modal
+[2023-05-30] avatar
+[2023-05-30] cleanup keys
+[2023-05-30] image carousel
+[2023-05-30] firebase setup
+[2023-05-30] default photos
+[2023-05-30] icon update
+[2023-05-30] Initial commit
