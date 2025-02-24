@@ -8,6 +8,10 @@ import {
   Modal,
   TextInput,
   Button,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Platform,
+  Keyboard,
 } from "react-native";
 import { Text } from "@/components/Themed";
 import { addTask, editTask, getTasks } from "@/lib/APItasks";
@@ -248,6 +252,13 @@ export default function Tasks() {
           </View>
         </TouchableOpacity>
       </Modal>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={{ flex: 1 }}>{/* Your existing content */}</View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </View>
   );
 }

@@ -67,7 +67,7 @@ const UserList = () => {
 
   const saveDone = (id) => {
     console.log("saveDone: ", id);
-    router.navigate({
+    router.back({
       pathname: "/project/[project]",
       params: {
         update: id,
