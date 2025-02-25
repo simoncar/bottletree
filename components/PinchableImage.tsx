@@ -9,6 +9,7 @@ import { Image as ExpoImage } from "expo-image";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  withSpring,
 } from "react-native-reanimated";
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(ExpoImage);
@@ -27,11 +28,15 @@ const PinchableImage = ({ source }: { source: string }) => {
     })
     .onUpdate((e) => {
       scale.value = savedScale.value * e.scale;
+      console.log("scale.value: ", scale.value);
     });
 
   const panGesture = Gesture.Pan()
+
     .maxPointers(2)
     .onStart(() => {
+      console.log("panGesture start");
+
       savedPositionX.value = positionX.value;
       savedPositionY.value = positionY.value;
     })
@@ -44,19 +49,23 @@ const PinchableImage = ({ source }: { source: string }) => {
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: positionX.value },
-      { translateY: positionY.value },
-      { scale: scale.value },
+      { scale: withSpring(scale.value) },
+      { translateX: withSpring(positionX.value) },
+      { translateY: withSpring(positionY.value) },
     ],
   }));
 
   return (
     <GestureDetector gesture={composed}>
-      <AnimatedExpoImage
-        source={source}
-        style={[styles.image, animatedStyle]}
-        resizeMode="contain"
-      />
+      <Animated.View style={animatedStyle as any}>
+        <AnimatedExpoImage
+          source={source}
+          style={[styles.image, animatedStyle]}
+          resizeMode="contain"
+          transition={1000}
+          contentFit="contain"
+        />
+      </Animated.View>
     </GestureDetector>
   );
 };
