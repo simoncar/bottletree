@@ -41,36 +41,32 @@ const PinchableImage = ({ source }: { source: string }) => {
     });
 
   const composed = Gesture.Simultaneous(pinchGesture, panGesture);
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: positionX.value as number },
-      { translateY: positionY.value as number },
-      { scale: scale.value as number },
-    ] as const,
+      { translateX: positionX.value },
+      { translateY: positionY.value },
+      { scale: scale.value },
+    ],
   }));
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <GestureDetector gesture={composed}>
-        <AnimatedExpoImage
-          source={source}
-          style={[styles.image, animatedStyle]}
-          contentFit="contain"
-        />
-      </GestureDetector>
-    </GestureHandlerRootView>
+    <GestureDetector gesture={composed}>
+      <AnimatedExpoImage
+        source={source}
+        style={[styles.image, animatedStyle]}
+        resizeMode="contain"
+      />
+    </GestureDetector>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
-    justifyContent: "center",
   },
   image: {
-    height: Dimensions.get("window").height - 200,
-    width: Dimensions.get("window").width,
+    height: "100%",
   },
 });
 
