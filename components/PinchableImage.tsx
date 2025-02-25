@@ -43,10 +43,10 @@ const PinchableImage = ({ source }: { source: string }) => {
   const composed = Gesture.Simultaneous(pinchGesture, panGesture);
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: positionX.value },
-      { translateY: positionY.value },
-      { scale: scale.value },
-    ],
+      { translateX: positionX.value as number },
+      { translateY: positionY.value as number },
+      { scale: scale.value as number },
+    ] as const,
   }));
 
   return (
