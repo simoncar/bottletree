@@ -18,6 +18,11 @@ const PinchableImage = ({ source }: { source: string }) => {
   const savedPositionX = useSharedValue(0);
   const savedPositionY = useSharedValue(0);
 
+  function clamp(value: number, min: number, max: number) {
+    "worklet";
+    return Math.max(min, Math.min(value, max));
+  }
+
   const pinchGesture = Gesture.Pinch()
     .onStart(() => {
       savedScale.value = scale.value;

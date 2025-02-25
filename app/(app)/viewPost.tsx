@@ -18,10 +18,12 @@ import PinchableImage from "@/components/PinchableImage";
 
 type ViewParam = {
   image: string;
+  width: number;
+  height: number;
 };
 
 const ViewPost = () => {
-  const { image } = useLocalSearchParams<ViewParam>();
+  const { image, width, height } = useLocalSearchParams<ViewParam>();
   const colorScheme = useColorScheme();
 
   const downloadImage = async () => {
@@ -89,7 +91,7 @@ const ViewPost = () => {
       />
       {image && (
         <View style={{ flex: 1 }}>
-          <PinchableImage source={image} />
+          <PinchableImage source={image} width={width} height={height} />
         </View>
       )}
     </View>

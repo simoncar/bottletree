@@ -41,6 +41,8 @@ const Post = (props) => {
                     pathname: "/viewPost",
                     params: {
                       image: encodeURIComponent(im.url),
+                      width: width,
+                      height: width * ratio,
                     },
                   });
                 }}>
