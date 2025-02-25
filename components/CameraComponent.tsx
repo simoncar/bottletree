@@ -138,7 +138,13 @@ export default function CameraComponent() {
       const options = { quality: 0.7 };
       const photo = await cameraRef.current.takePictureAsync(options);
 
-      addImageFromPhoto(photo, "project", progressCallback, completedCallback);
+      addImageFromPhoto(
+        photo,
+        "project",
+        local.project,
+        progressCallback,
+        completedCallback,
+      );
     }
 
     setBackgroundColor("#3498db");

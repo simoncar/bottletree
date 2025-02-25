@@ -60,12 +60,14 @@ export const addImageFromCameraRoll = async (
 export const addImageFromPhoto = async (
   photo: any,
   folder: string,
+  project: string,
   progressCallback: (progress: any) => void,
   completedCallback: { (sourceDownloadURL: any): void; (arg0: unknown): void },
 ) => {
   try {
     const processedResults = await processItemAsync(
       folder,
+      project,
       photo,
       progressCallback,
     );
@@ -85,6 +87,9 @@ async function processItemAsync(
   let compressedImage;
 
   try {
+    console.log("processItemAsync: ", asset);
+    console.log("processItemAsync: ", asset.uri);
+
     if (IS_WEB_PLATFORM) {
       // TODO: for some reason this is not working on web, results in a larger file size and PNG?
       compressedImage = asset;
