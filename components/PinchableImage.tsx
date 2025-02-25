@@ -1,10 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
-import {
-  GestureDetector,
-  GestureHandlerRootView,
-  Gesture,
-} from "react-native-gesture-handler";
+import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import { Image as ExpoImage } from "expo-image";
 import Animated, {
   useSharedValue,
