@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
   overall: {
     backgroundColor: "#010101",
     flex: 1,
-    height: Dimensions.get("window").height - 200,
   },
 });
 
