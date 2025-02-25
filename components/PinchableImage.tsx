@@ -18,26 +18,18 @@ const PinchableImage = ({ source }: { source: string }) => {
   const savedPositionX = useSharedValue(0);
   const savedPositionY = useSharedValue(0);
 
-  function clamp(value: number, min: number, max: number) {
-    "worklet";
-    return Math.max(min, Math.min(value, max));
-  }
-
   const pinchGesture = Gesture.Pinch()
     .onStart(() => {
       savedScale.value = scale.value;
     })
     .onUpdate((e) => {
       scale.value = Math.max(1, savedScale.value * e.scale);
-      console.log("scale.value: ", scale.value);
     });
 
   const panGesture = Gesture.Pan()
 
     .maxPointers(2)
     .onStart(() => {
-      console.log("panGesture start");
-
       savedPositionX.value = positionX.value;
       savedPositionY.value = positionY.value;
     })
