@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const { logger } = require("firebase-functions");
 const { onRequest } = require("firebase-functions/v2/https");
-const { onDocumentCreated } = require("firebase-functions/v2/firestore");
+const { onDocumentCreated, onDocumentWritten } = require("firebase-functions/v2/firestore");
 const { initializeApp } = require("firebase-admin/app");
 const { getFirestore } = require("firebase-admin/firestore");
 
@@ -98,29 +98,78 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 });
 
 
-exports.onDocumentCreated_post = onDocumentCreated("/projects/{projectId}/posts/{postId}", async (event) => {
-	const timestamp = event.data.data().timestamp;
-	const projectId = event.data.projectId;
+exports.onDocumentCreated_post = onDocumentWritten("/projects/{projectId}/posts/{postId}", async (event) => {
+	const projectId = event.params.projectId;
 
 	if (!projectId || projectId === "demo") {
-		console.log('Project ID not specified or Demo Project. Exiting function.');
+		console.log('Project ID not specified or Demo Project. Exiting function: ', projectId);
+		console.log('Event params: ', event.params);
 		return;
 	}
 
-	console.log('timestamp: ', timestamp);
 	console.log('projectId: ', event.params.projectId);
 
-
-	const coll = getFirestore().collection("projects").doc(event.params.projectId).collection("posts");
-	const snapshot = await coll.count().get();
-	console.log('count of posts for project Id : ', snapshot.data().count);
+	const collPosts = getFirestore().collection("projects").doc(event.params.projectId).collection("posts");
+	const snapshotPosts = await collPosts.count().get();
+	console.log('count of posts for project Id : ', snapshotPosts.data().count);
 
 	const writeResult = await getFirestore()
 		.collection("projects")
 		.doc(event.params.projectId)
-		.set({ postCount: snapshot.data().count }, { merge: true });
+		.set({
+			postCount: snapshotPosts.data().count,
+		}, { merge: true });
 
 }
 );
 
+exports.onDocumentCreated_task = onDocumentWritten("/projects/{projectId}/tasks/{postId}", async (event) => {
+	const projectId = event.params.projectId;
+
+	if (!projectId || projectId === "demo") {
+		console.log('Project ID not specified or Demo Project. Exiting function: ', projectId);
+		console.log('Event params: ', event.params);
+		return;
+	}
+
+	console.log('projectId: ', event.params.projectId);
+
+	const collTasks = getFirestore().collection("projects").doc(event.params.projectId).collection("tasks").where("completed", "==", false);
+	const snapshotTasks = await collTasks.count().get();
+	console.log('count of tasks for project Id : ', snapshotTasks.data().count);
+
+	const writeResult = await getFirestore()
+		.collection("projects")
+		.doc(event.params.projectId)
+		.set({
+			taskCount: snapshotTasks.data().count,
+		}, { merge: true });
+
+}
+);
+exports.onDocumentCreated_file = onDocumentWritten("/projects/{projectId}/files/{postId}", async (event) => {
+	const projectId = event.params.projectId;
+
+	if (!projectId || projectId === "demo") {
+		console.log('Project ID not specified or Demo Project. Exiting function: ', projectId);
+		console.log('Event params: ', event.params);
+		return;
+	}
+
+	console.log('projectId: ', event.params.projectId);
+
+	const collFiles = getFirestore().collection("projects").doc(event.params.projectId).collection("files")
+	const snapshotFiles = await collFiles.count().get();
+	console.log('count of files for project Id : ', snapshotFiles.data().count);
+
+
+	const writeResult = await getFirestore()
+		.collection("projects")
+		.doc(event.params.projectId)
+		.set({
+			fileCount: snapshotFiles.data().count
+		}, { merge: true });
+
+}
+);
 
