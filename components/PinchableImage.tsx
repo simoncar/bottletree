@@ -23,7 +23,7 @@ const PinchableImage = ({ source }: { source: string }) => {
       savedScale.value = scale.value;
     })
     .onUpdate((e) => {
-      scale.value = savedScale.value * e.scale;
+      scale.value = Math.max(1, savedScale.value * e.scale);
       console.log("scale.value: ", scale.value);
     });
 
