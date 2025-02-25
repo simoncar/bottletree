@@ -255,6 +255,7 @@ const styles = StyleSheet.create({
   project: {
     fontSize: 18,
     marginBottom: 5,
+    width: 210,
   },
   projectArchived: {
     color: "grey",
