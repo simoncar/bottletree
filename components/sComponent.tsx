@@ -1,5 +1,10 @@
 import React from "react";
-import { StyleSheet, Text as RNText, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text as RNText,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export function Text(props) {
   const { style, ...rest } = props;
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   defaultStyle: {
-    fontFamily: "SegoeUI",
+    fontFamily: "Nunito_400Regular",
     fontSize: 17,
   },
   submitButtonStyle: {
