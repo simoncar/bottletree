@@ -1,11 +1,9 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
 import { View, StyleSheet } from "react-native";
-import { useFonts } from "expo-font";
 import {
   useNavigationContainerRef,
   useLocalSearchParams,
@@ -33,6 +31,13 @@ import { UserContext } from "@/lib/UserContext";
 import { getUser } from "@/lib/APIuser";
 import { auth, db, firestore } from "@/lib/firebase";
 import { RootSiblingParent } from "react-native-root-siblings";
+import {
+  useFonts,
+  Nunito_200ExtraLight,
+  Nunito_300Light,
+  Nunito_400Regular,
+  Nunito_700Bold,
+} from "@expo-google-fonts/nunito";
 
 type SearchParams = {
   posts: string;
@@ -51,20 +56,7 @@ export default function Layout() {
   const [appLoading, setAppLoading] = useState(true);
   const currentPath = usePathname();
   const segments = useSegments();
-
-  const [fontsLoaded, error] = useFonts({
-    //SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-    // FuturaBold: require("../assets/fonts/FuturaBold.otf"),
-    ...FontAwesome.font,
-  });
-
   const colorScheme = useColorScheme();
-
-  useEffect(() => {
-    console.log("/(app)/_layout.tsx");
-    console.log("Layout: A path :", currentPath);
-    console.log("Layout: A segments :", segments);
-  }, []);
 
   const myLightTheme = {
     ...DefaultTheme,
@@ -82,9 +74,12 @@ export default function Layout() {
     },
   };
 
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+  const [fontsLoaded] = useFonts({
+    Nunito_200ExtraLight,
+    Nunito_300Light,
+    Nunito_400Regular,
+    Nunito_700Bold,
+  });
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -111,12 +106,11 @@ export default function Layout() {
 
   useEffect(() => {
     if (fontsLoaded) {
+      SplashScreen.hideAsync(); // Hide splash screen when fonts are ready
     }
   }, [fontsLoaded]);
 
   if (isAuthLoading) {
-    console.log("Layout: isAuthLoading Initial Loading...");
-
     return (
       <ThemeProvider
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
@@ -128,20 +122,7 @@ export default function Layout() {
     );
   }
 
-  const saveDone = (id) => {
-    router.replace({
-      pathname: "/[posts]",
-      params: {
-        posts: posts,
-      },
-    });
-  };
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  if (appLoading == false) {
+  if (appLoading == false && fontsLoaded) {
     SplashScreen.hideAsync();
 
     if (!session) {

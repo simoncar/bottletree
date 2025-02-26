@@ -107,7 +107,9 @@ exports.onDocumentCreated_post = onDocumentWritten("/projects/{projectId}/posts/
 		return;
 	}
 
+	console.log('timestamp: ', timestamp);
 	console.log('projectId: ', event.params.projectId);
+
 
 	const collPosts = getFirestore().collection("projects").doc(event.params.projectId).collection("posts");
 	const snapshotPosts = await collPosts.count().get();
