@@ -51,6 +51,7 @@ export async function editTask(
   project: string,
   taskId: string,
   updatedTask: Partial<ITask>,
+  callback: any,
 ) {
   const taskRef = firestore()
     .collection("projects")
@@ -62,4 +63,5 @@ export async function editTask(
     ...updatedTask,
     modified: firestore.Timestamp.now(),
   });
+  callback(taskId);
 }

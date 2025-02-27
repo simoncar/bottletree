@@ -19,7 +19,7 @@ import { addTask, editTask, getTasks } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -70,11 +70,17 @@ export default function Tasks() {
     return groupedTasks;
   };
 
+  const saveDone = () => {
+    console.log("save Done");
+  };
+
   const groupedTasks = groupTasksByCompletion(tasks);
 
   const handleTaskPress = (task: ITask) => {
-    // Handle file selection
-    console.log("Task selected:", task);
+    router.navigate({
+      pathname: "/task",
+      params: { task: JSON.stringify(task) },
+    });
   };
 
   const handleAddTaskPress = () => {
@@ -92,7 +98,7 @@ export default function Tasks() {
       ...task,
       completed: !task.completed,
     };
-    editTask(project, task.key, updatedTask)
+    editTask(project, task.key, updatedTask, saveDone)
       .then(() => {
         if (!task.completed) {
           Toast.show({
@@ -172,13 +178,15 @@ export default function Tasks() {
   const renderSectionHeader = (title: string, section: string) => (
     <TouchableOpacity
       style={styles.sectionHeader}
-      onPress={() => toggleSection(section)}>
+      onPress={() => section !== "incomplete" && toggleSection(section)}>
       <Text style={styles.sectionHeaderText}>{title}</Text>
-      <AntDesign
-        name={collapsedSections[section] ? "down" : "up"}
-        size={24}
-        color={Colors[colorScheme ?? "light"].text}
-      />
+      {section !== "incomplete" && (
+        <AntDesign
+          name={collapsedSections[section] ? "down" : "up"}
+          size={24}
+          color={Colors[colorScheme ?? "light"].text}
+        />
+      )}
     </TouchableOpacity>
   );
 
@@ -240,6 +248,7 @@ export default function Tasks() {
               )}
             </>
           )}
+          <View style={{ height: 200 }} />
         </ScrollView>
       )}
 
@@ -289,7 +298,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   addButtonText: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     paddingRight: 10,
   },
@@ -318,11 +327,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   taskName: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "500",
   },
   taskDetails: {
-    fontSize: 14,
     color: "#666",
     marginTop: 4,
   },
@@ -336,6 +344,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
+    borderColor: "lightgrey",
+    borderRadius: 10,
+    borderWidth: 1,
+    width: 200,
+    alignSelf: "center",
   },
   modalContainer: {
     flex: 1,

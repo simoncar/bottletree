@@ -277,6 +277,12 @@ export default function Layout() {
                 title: "Logs",
               }}
             />
+            <Stack.Screen
+              name="task"
+              options={{
+                title: "Task",
+              }}
+            />
           </Stack>
         </ProjectProvider>
       </ActionSheetProvider>
