@@ -194,8 +194,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   welcomeApp: {
-    fontSize: 38,
-    fontWeight: "bold",
+    fontSize: 40,
     marginBottom: 20,
   },
 });
