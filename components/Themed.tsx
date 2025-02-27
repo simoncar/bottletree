@@ -46,7 +46,12 @@ export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
+  return (
+    <DefaultText
+      style={[{ color }, styles.defaultStyle, style]}
+      {...otherProps}
+    />
+  );
 }
 
 export function View(props: ViewProps) {
@@ -69,7 +74,7 @@ export function TextInput(props: TextInputProps) {
 
   return (
     <DefaultTextInput
-      style={[{ color }, style]}
+      style={[{ color }, styles.defaultStyle, style]}
       placeholderTextColor={colorPlaceholder}
       {...otherProps}
     />
@@ -83,7 +88,12 @@ export function Button(props: ButtonProps) {
   return (
     <View style={styles.button}>
       <TouchableOpacity
-        style={[{ color }, style, { borderWidth: 0, elevation: 0 }]}
+        style={[
+          { color },
+          styles.defaultStyle,
+          style,
+          { borderWidth: 0, elevation: 0 },
+        ]}
         {...otherProps}
       />
       <Text style={styles.loginText}>{props.text}</Text>
@@ -96,7 +106,12 @@ export function ParsedText(props: ParsedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
   return (
-    <ParsedTextUnthemed textColor={color} linkColor={color} {...otherProps} />
+    <ParsedTextUnthemed
+      textColor={color}
+      linkColor={color}
+      style={styles.defaultStyle}
+      {...otherProps}
+    />
   );
 }
 
@@ -109,5 +124,8 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white",
+  },
+  defaultStyle: {
+    fontFamily: "Nunito_700Bold",
   },
 });

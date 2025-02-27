@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 
-export function Text(props) {
+function Text(props) {
   const { style, ...rest } = props;
 
   return (

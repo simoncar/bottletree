@@ -64,7 +64,7 @@ export default function SignIn() {
         }}
       />
 
-      <Text style={styles.welcomeApp}>Builder</Text>
+      <Text style={styles.welcomeApp}>One Build</Text>
       <View style={styles.updateContainer}>
         <Update />
       </View>

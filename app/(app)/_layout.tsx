@@ -37,7 +37,13 @@ import {
   Nunito_300Light,
   Nunito_400Regular,
   Nunito_700Bold,
+  Nunito_800ExtraBold_Italic,
 } from "@expo-google-fonts/nunito";
+
+import {
+  MontserratSubrayada_400Regular,
+  MontserratSubrayada_700Bold,
+} from "@expo-google-fonts/montserrat-subrayada";
 
 type SearchParams = {
   posts: string;
@@ -79,6 +85,9 @@ export default function Layout() {
     Nunito_300Light,
     Nunito_400Regular,
     Nunito_700Bold,
+    Nunito_800ExtraBold_Italic,
+    MontserratSubrayada_700Bold,
+    MontserratSubrayada_400Regular,
   });
 
   useEffect(() => {

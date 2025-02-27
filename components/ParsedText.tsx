@@ -3,7 +3,7 @@ import * as Linking from "expo-linking";
 import ParsedText from "react-native-parsed-text";
 
 export const ParsedTextUnthemed = (props) => {
-  const { text, textColor, linkColor } = props;
+  const { text, textColor, linkColor, style } = props;
 
   const handleOpenWithLinking = (sURL: string) => {
     Linking.openURL(sURL);
@@ -34,6 +34,7 @@ export const ParsedTextUnthemed = (props) => {
   return (
     <ParsedText
       style={{
+        ...style,
         color: textColor,
         fontSize: 16,
       }}
