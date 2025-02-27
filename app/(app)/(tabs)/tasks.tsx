@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
+  ScrollView,
 } from "react-native";
 import { Text } from "@/components/Themed";
 import { addTask, editTask, getTasks } from "@/lib/APItasks";
@@ -156,7 +157,13 @@ export default function Tasks() {
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.taskInfo} onPress={() => onPress(task)}>
-          <Text style={styles.taskName}>{task.task}</Text>
+          <Text
+            style={[
+              styles.taskName,
+              task.completed && { textDecorationLine: "line-through" },
+            ]}>
+            {task.task}
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -193,7 +200,9 @@ export default function Tasks() {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}>
           {groupedTasks.incomplete.length > 0 && (
             <>
               {renderSectionHeader(`Tasks`, "incomplete")}
@@ -202,6 +211,8 @@ export default function Tasks() {
                   data={groupedTasks.incomplete}
                   keyExtractor={(item) => item.key.toString()}
                   renderItem={renderItem}
+                  scrollEnabled={false}
+                  nestedScrollEnabled={true}
                   ItemSeparatorComponent={() => (
                     <View style={styles.separator} />
                   )}
@@ -220,6 +231,8 @@ export default function Tasks() {
                   data={groupedTasks.completed}
                   keyExtractor={(item) => item.key.toString()}
                   renderItem={renderItem}
+                  scrollEnabled={false}
+                  nestedScrollEnabled={true}
                   ItemSeparatorComponent={() => (
                     <View style={styles.separator} />
                   )}
@@ -227,7 +240,7 @@ export default function Tasks() {
               )}
             </>
           )}
-        </>
+        </ScrollView>
       )}
 
       <Modal
