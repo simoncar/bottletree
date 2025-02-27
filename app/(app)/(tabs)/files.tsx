@@ -7,6 +7,7 @@ import {
   View,
   Linking,
   Pressable,
+  Alert,
 } from "react-native";
 import { Text } from "@/components/Themed";
 import { deleteFile, getFiles } from "@/lib/APIfiles";
@@ -176,8 +177,30 @@ export default function Files() {
             onPress={() => {
               // deleteProjectUser(project, data, deleteDone);
               console.log("delete file");
-              deleteFile(project, file.key, deleteDone);
-              row[file.key].close();
+              Alert.alert(
+                "Delete File",
+                "Are you sure you want to delete this file?",
+                [
+                  {
+                    text: "Cancel",
+                    style: "cancel",
+                  },
+                  {
+                    text: "Delete",
+                    onPress: () => {
+                      deleteFile(project, file.key, deleteDone);
+                      row[file.key].close();
+                      Toast.show({
+                        type: "success",
+                        text1: "File Deleted",
+                        position: "bottom",
+                      });
+                    },
+                    style: "destructive",
+                  },
+                ],
+                { cancelable: true },
+              );
             }}>
             <AntDesign name="delete" size={25} color={"white"} />
             <Text style={{ color: "white" }}>Delete</Text>
@@ -288,15 +311,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   addButtonText: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     paddingRight: 10,
   },
   predefinedFile: {
-    fontSize: 16,
+    fontSize: 20,
   },
   predefinedFileHeader: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     paddingBottom: 8,
     paddingTop: 40,
@@ -327,7 +350,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   fileName: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "500",
   },
   fileDetails: {
@@ -345,5 +368,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
+    borderColor: "lightgrey",
+    borderRadius: 10,
+    borderWidth: 1,
+    width: 200,
+    alignSelf: "center",
   },
 });
