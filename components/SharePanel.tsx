@@ -54,7 +54,9 @@ const IconButton = (props) => {
             style={[
               styles.shareText,
               { color: Colors[colorScheme ?? "light"].text },
-            ]}>
+            ]}
+            numberOfLines={1}
+            ellipsizeMode="tail">
             {label}
           </Text>
         </View>
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   shareText: {
-    fontSize: 16,
+    fontSize: 15,
   },
 });
 
