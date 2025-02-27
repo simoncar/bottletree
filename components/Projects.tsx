@@ -90,7 +90,7 @@ export const Projects = ({ session, archived }: Props) => {
       return (
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
-          <Text style={styles.projectId}>
+          <Text style={styles.projectCount}>
             {data.postCount > 0 ? `Posts ${data.postCount}` : ""}
             {data.postCount > 0 && data.fileCount > 0 ? " · " : ""}
             {data.fileCount > 0 ? `Files ${data.fileCount}` : ""}
@@ -268,9 +268,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-  projectId: {
+  projectCount: {
     color: "grey",
-    fontSize: 14,
+    fontSize: 13,
   },
   projectTitle: {
     width: 250,
