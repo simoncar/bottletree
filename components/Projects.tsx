@@ -91,7 +91,13 @@ export const Projects = ({ session, archived }: Props) => {
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
           <Text style={styles.projectId}>
-            {data.postCount > 0 ? `Posts: ${data.postCount}` : ""}
+            {data.postCount > 0 ? `Posts ${data.postCount}` : ""}
+            {data.postCount > 0 && data.fileCount > 0 ? " · " : ""}
+            {data.fileCount > 0 ? `Files ${data.fileCount}` : ""}
+            {(data.postCount > 0 || data.fileCount > 0) && data.taskCount > 0
+              ? " · "
+              : ""}
+            {data.taskCount > 0 ? `Tasks ${data.taskCount}` : ""}
           </Text>
         </View>
       );

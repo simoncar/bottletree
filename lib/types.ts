@@ -28,7 +28,9 @@ export interface IProject {
   title: string;
   icon: string;
   archived?: boolean;
-  postCount: number;
+  postCount?: number;
+  taskCount?: number;
+  fileCount?: number;
   timestamp?: Timestamp;
   private: boolean;
   created?: Timestamp;
