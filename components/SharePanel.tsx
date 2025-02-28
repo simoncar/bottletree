@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
   },
   shareText: {
     fontSize: 15,
+    fontFamily: "Inter_100",
   },
 });
 
