@@ -3,7 +3,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import {
   useNavigationContainerRef,
   useLocalSearchParams,
@@ -126,7 +126,7 @@ export default function Layout() {
         value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Initial Loading... </Text>
+          <ActivityIndicator />
         </View>
       </ThemeProvider>
     );
