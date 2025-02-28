@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { Posts } from "@/components/Posts";
 import { View, Text } from "@/components/Themed";
@@ -41,7 +41,7 @@ export default function ProjectPosts() {
   if (!projectObj) {
     return (
       <View style={styles.container}>
-        <Text>Loading</Text>
+        <ActivityIndicator />
       </View>
     );
   } else {

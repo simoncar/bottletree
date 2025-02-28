@@ -21,7 +21,7 @@ type ProjectProp = {
 
 const IconButton = (props) => {
   const colorScheme = useColorScheme();
-  const { project, pathname, icon, label } = props;
+  const { project, pathname, icon, label, count } = props;
   const router = useRouter();
 
   return (
@@ -49,6 +49,11 @@ const IconButton = (props) => {
               style={styles.icon}
               size={28}
             />
+            {count > 0 && (
+              <View style={styles.badgeContainer}>
+                <Text style={styles.badgeText}>{count}</Text>
+              </View>
+            )}
           </View>
           <Text
             style={[
@@ -75,6 +80,7 @@ export const SharePanel = (props) => {
           pathname="/calendar"
           icon="calendar-today"
           label="calendar"
+          count={0}
         />
       )}
       {buttons.includes("files") && (
@@ -83,6 +89,7 @@ export const SharePanel = (props) => {
           pathname="/files"
           icon="file-present"
           label="files"
+          count={project.fileCount}
         />
       )}
       {buttons.includes("tasks") && (
@@ -91,6 +98,7 @@ export const SharePanel = (props) => {
           pathname="/tasks"
           icon="add-task"
           label="tasks"
+          count={project.taskCount}
         />
       )}
       {buttons.includes("share") && (
@@ -99,6 +107,7 @@ export const SharePanel = (props) => {
           pathname="/share"
           icon="share"
           label="share"
+          count={0}
         />
       )}
       {buttons.includes("settings") && (
@@ -107,6 +116,7 @@ export const SharePanel = (props) => {
           pathname="/project/[project]"
           icon="settings"
           label="settings"
+          count={0}
         />
       )}
     </View>
@@ -116,6 +126,20 @@ export const SharePanel = (props) => {
 const styles = StyleSheet.create({
   buttonContainer: {
     padding: 5,
+  },
+  badgeContainer: {
+    position: "absolute",
+    top: -10,
+    right: -25,
+    backgroundColor: "gray",
+    borderRadius: 100,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    zIndex: 1,
+  },
+  badgeText: {
+    color: "white",
+    fontSize: 10,
   },
   container: {
     flexDirection: "row",

@@ -71,7 +71,6 @@ export const MonthYearScroller: React.FC<Props> = ({
 
   useEffect(() => {
     // Once we know the item width, scroll to currentIndex
-    console.log("useEffect: ", currentIndex);
 
     if (itemWidth && currentIndex >= 0) {
       scrollRef.current?.scrollTo({

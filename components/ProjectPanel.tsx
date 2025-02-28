@@ -38,6 +38,8 @@ const ProjectPanel = (props: ProjectProp) => {
     icon: "",
     archived: false,
     postCount: 0,
+    fileCount: 0,
+    taskCount: 0,
     private: false,
   });
 
