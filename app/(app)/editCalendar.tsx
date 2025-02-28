@@ -84,13 +84,16 @@ export default function editCalendar() {
       });
     } else {
       console.log("calendarId is undefined");
-      setDateBegin(new Date(clickDate || ""));
-      const clickDateObj = new Date(clickDate || "");
+
+      const today = new Date();
+      const clickDateObj = new Date(clickDate || today);
       clickDateObj.setHours(9, 0, 0, 0);
+      setDateBegin(clickDateObj);
       setDateBeginTime(clickDateObj);
-      setDateEnd(new Date(clickDate || ""));
-      const clickDateEndTime = new Date(clickDate || "");
+
+      const clickDateEndTime = new Date(clickDate || today);
       clickDateEndTime.setHours(17, 0, 0, 0);
+      setDateEnd(clickDateEndTime);
       setDateEndTime(clickDateEndTime);
     }
 
