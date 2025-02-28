@@ -18,7 +18,7 @@ type Props = {
 const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   const defaultComment = "Add a comment...";
   const [comments, setComments] = useState([]);
-  const [text, setComment] = useState(defaultComment);
+  const [text, setComment] = useState("");
   const { user } = useContext(UserContext);
   const [saved, setSaved] = useState(false);
   const colorScheme = useColorScheme();
@@ -44,7 +44,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
 
   const saveDone = (comment: IComment) => {
     setSaved(true);
-    setComment(defaultComment);
+    setComment("");
   };
 
   const save = () => {
@@ -68,45 +68,33 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   };
 
   const renderInput = () => {
-    if (commentShow) {
-      return (
-        <View style={styles.inputBubble}>
-          <TextInput
-            style={styles.commentInput}
-            placeholder={defaultComment}
-            onChangeText={(text) => {
-              setComment(text);
-              setCommentShow(true);
-            }}
-            value={text}
-            //autoFocus
-            multiline
-          />
-          <Pressable
-            style={styles.inputAction}
-            hitSlop={10}
-            onPress={() => {
-              save();
-            }}>
-            <MaterialIcons name="send" size={25} color="#2196F3" />
-          </Pressable>
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.inputBubble}>
-          <Text
-            style={styles.commentInputPlaceholder}
-            onPress={() => {
-              setCommentShow(true);
-              setComment(null);
-            }}>
-            {text}
-          </Text>
-          <View style={styles.inputAction}></View>
-        </View>
-      );
-    }
+    return (
+      <View style={styles.inputBubble}>
+        <TextInput
+          style={styles.commentInput}
+          placeholder={defaultComment}
+          onFocus={() => {
+            // setCommentShow(true);
+            console.log("onFocus");
+          }}
+          onChangeText={(text) => {
+            setComment(text);
+            setCommentShow(true);
+          }}
+          value={text}
+          //autoFocus
+          multiline
+        />
+        <Pressable
+          style={styles.inputAction}
+          hitSlop={10}
+          onPress={() => {
+            save();
+          }}>
+          <MaterialIcons name="send" size={25} color="#2196F3" />
+        </Pressable>
+      </View>
+    );
   };
 
   const renderBubble = (item: IComment) => {
