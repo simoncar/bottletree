@@ -83,8 +83,6 @@ export default function editCalendar() {
         }
       });
     } else {
-      console.log("calendarId is undefined");
-
       const today = new Date();
       const clickDateObj = new Date(clickDate || today);
       clickDateObj.setHours(9, 0, 0, 0);

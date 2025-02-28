@@ -27,10 +27,11 @@ import Toast from "react-native-toast-message";
 
 type SearchParams = {
   project: string; //project ID
+  mode?: string; //mode
 };
 
 export default function Tasks() {
-  const { project } = useLocalSearchParams<SearchParams>();
+  const { project, mode } = useLocalSearchParams<SearchParams>();
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
@@ -49,6 +50,12 @@ export default function Tasks() {
       setTasks(() => [...retrievedTasks]);
       setLoading(false);
     });
+    if (mode == "add") {
+      setModalVisible(true);
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
   }, []);
 
   const groupTasksByCompletion = (tasks: ITask[]) => {

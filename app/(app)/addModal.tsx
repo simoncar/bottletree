@@ -203,6 +203,25 @@ const AddModal = ({
           <Pressable
             style={styles.option}
             onPress={() => {
+              //onClose();
+              onClose();
+              router.navigate({
+                pathname: "/tasks",
+                params: {
+                  mode: "add",
+                },
+              });
+            }}>
+            <Text style={styles.optionText}>Add Task</Text>
+            <MaterialIcons
+              name="add-task"
+              size={24}
+              color={Colors[colorScheme ?? "light"].textDisabledColor}
+            />
+          </Pressable>
+          <Pressable
+            style={styles.option}
+            onPress={() => {
               onClose();
               router.navigate({
                 pathname: "/project/add",
