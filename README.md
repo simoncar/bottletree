@@ -1,6 +1,10 @@
 # bottletree
 
-npx expo start
+
+///////////////////////////////////////////
+npx expo install expo@latest --fix
+npx sentry-expo-upload-sourcemaps dist
+
 firebase emulators:start
 
 eas build -p ios --profile development
@@ -45,3 +49,8 @@ DSN: https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry
 npx sentry-expo-upload-sourcemaps dist
 
 git log --pretty=format:"[%ad] %s" --date=short > commit_messages.txt 
+
+///////////////////////////////////////////
+npx expo install expo@latest --fix
+npx sentry-expo-upload-sourcemaps dist
+

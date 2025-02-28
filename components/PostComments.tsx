@@ -79,7 +79,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
               setCommentShow(true);
             }}
             value={text}
-            autoFocus
+            //autoFocus
             multiline
           />
           <Pressable
