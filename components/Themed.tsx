@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   defaultStyle: {
-    fontFamily: "Nunito_700Bold",
+    fontFamily: "Inter_400Regular",
   },
 });

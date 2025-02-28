@@ -33,17 +33,16 @@ import { auth, db, firestore } from "@/lib/firebase";
 import { RootSiblingParent } from "react-native-root-siblings";
 import {
   useFonts,
-  Nunito_200ExtraLight,
-  Nunito_300Light,
-  Nunito_400Regular,
-  Nunito_700Bold,
-  Nunito_800ExtraBold_Italic,
-} from "@expo-google-fonts/nunito";
-
-import {
-  MontserratSubrayada_400Regular,
-  MontserratSubrayada_700Bold,
-} from "@expo-google-fonts/montserrat-subrayada";
+  Inter_100Thin,
+  Inter_200ExtraLight,
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_800ExtraBold,
+  Inter_900Black,
+} from "@expo-google-fonts/inter";
 
 type SearchParams = {
   posts: string;
@@ -81,13 +80,15 @@ export default function Layout() {
   };
 
   const [fontsLoaded] = useFonts({
-    Nunito_200ExtraLight,
-    Nunito_300Light,
-    Nunito_400Regular,
-    Nunito_700Bold,
-    Nunito_800ExtraBold_Italic,
-    MontserratSubrayada_700Bold,
-    MontserratSubrayada_400Regular,
+    Inter_100Thin,
+    Inter_200ExtraLight,
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold,
+    Inter_900Black,
   });
 
   useEffect(() => {

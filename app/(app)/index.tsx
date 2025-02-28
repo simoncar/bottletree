@@ -196,5 +196,6 @@ const styles = StyleSheet.create({
   welcomeApp: {
     fontSize: 40,
     marginBottom: 20,
+    fontFamily: "Inter_700Bold",
   },
 });
