@@ -938,16 +938,6 @@
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/inter/-/inter-0.2.3.tgz#82bf7224bb76fc6614a00393a9e9ee4d6dd09dcb"
   integrity sha512-iHK9FI+dnE45X5c2Z5hSFwNH4zUWethizpbv3XUn0FIGw5jwvzriENz0a6wCdkI4/d+1QkurnHo5XHti7TbNJA==
 
-"@expo-google-fonts/montserrat-subrayada@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@expo-google-fonts/montserrat-subrayada/-/montserrat-subrayada-0.2.3.tgz#6f1e6efebc03a74d61488c5ed848e1989df1f076"
-  integrity sha512-U7TCSmILpLeCQqj2mF2jvl/DIuZ9sAqTbuBdb/fvhi06aCaEz8pdjtRgwYwlRKjolqdwW9XTFnNrq+Q1/YOqYA==
-
-"@expo-google-fonts/nunito@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@expo-google-fonts/nunito/-/nunito-0.2.3.tgz#d226372ab582bc285873a61382d619c17abd5c19"
-  integrity sha512-z+Bx3IuT0t3jguoMxiyWuC7pW3wDVNHgYko/G9V23QhR/yDSjEsT+Kx+VGDT/hu9TXSxw3CtpQ5MFHikqSVDYw==
-
 "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@expo/bunyan/-/bunyan-4.0.0.tgz"
