@@ -33,7 +33,6 @@ export default function TaskScreen() {
           headerRight: () => (
             <TouchableOpacity
               onPressIn={() => {
-                console.log("save");
                 save();
               }}>
               <Text>Done</Text>

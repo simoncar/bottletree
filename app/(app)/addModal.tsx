@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   optionText: {
-    fontSize: 18,
+    fontSize: 14,
     textAlign: "right",
     flex: 1,
     marginRight: 10,

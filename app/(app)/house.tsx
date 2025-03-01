@@ -17,9 +17,6 @@ export default function House() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>One Build</Text>
-      <Text style={styles.textSub}>
-        Where Every Step of Building Comes to Life.
-      </Text>
 
       <View style={styles.qrcode}>
         <QRCode size={200} ecl="L" value={`https://otbapps.com`} />
@@ -43,6 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
+    paddingTop: 100,
   },
   qrcode: {
     alignItems: "center",
@@ -56,6 +54,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
+    paddingBottom: 20,
   },
   link: {
     fontSize: 24,
