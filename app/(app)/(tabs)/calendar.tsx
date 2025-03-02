@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
   },
   calendarEventText: {
     color: "white",
+    fontSize: 12,
   },
   headerTitle: {
     fontSize: 24,
