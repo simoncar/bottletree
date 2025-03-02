@@ -94,7 +94,9 @@ export default function Home() {
       <View style={styles.containerFloatingButton}>
         <FloatingButton
           title="Add Project"
-          icon={<AntDesign name="addfile" size={28} color="#ffffff" />}
+          icon={
+            <FontAwesome6 name="house-circle-check" size={28} color="#ffffff" />
+          }
           onPress={handleAddPress}
         />
       </View>
