@@ -215,7 +215,7 @@ export default function Tasks() {
           showsVerticalScrollIndicator={false}>
           {groupedTasks.incomplete.length > 0 && (
             <>
-              {renderSectionHeader(`Tasks`, "incomplete")}
+              {renderSectionHeader(``, "incomplete")}
               {!collapsedSections.incomplete && (
                 <FlatList
                   data={groupedTasks.incomplete}
