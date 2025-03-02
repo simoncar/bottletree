@@ -24,6 +24,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
+import { FloatingButton } from "@/components/FloatingButton";
 
 type SearchParams = {
   project: string; //project ID
@@ -203,14 +204,11 @@ export default function Tasks() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.addTask} onPress={handleAddTaskPress}>
-        <Text style={styles.addButtonText}>Add Task</Text>
-        <MaterialIcons
-          name="add-task"
-          size={24}
-          color={Colors[colorScheme ?? "light"].textDisabledColor}
-        />
-      </TouchableOpacity>
+      <FloatingButton
+        title="Add Task"
+        icon={<MaterialIcons name="add-task" size={28} color="#ffffff" />}
+        onPress={handleAddTaskPress}
+      />
 
       {loading ? (
         <View

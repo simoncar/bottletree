@@ -299,7 +299,11 @@ export default function Files() {
           contentContainerStyle={{ paddingBottom: 16 }}
         />
       )}
-      <FloatingButton title={"Add File"} onPress={handleAddFilePress} />
+      <FloatingButton
+        title="Add File"
+        icon={<AntDesign name="addfile" size={28} color="#ffffff" />}
+        onPress={handleAddFilePress}
+      />
     </View>
   );
 }

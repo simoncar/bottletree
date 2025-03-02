@@ -6,17 +6,19 @@ type FloatingButtonProps = {
   onPress: () => void;
   title?: string;
   style?: ViewStyle;
+  icon?: JSX.Element;
 };
 
 export function FloatingButton({
   onPress,
   title = "Add File",
   style,
+  icon,
 }: FloatingButtonProps) {
   return (
     <TouchableOpacity style={[styles.floatingButton, style]} onPress={onPress}>
-      <AntDesign name="addfile" size={28} color="#ffffff" />
-      <Text style={styles.floatingButtonText}>{title}</Text>
+      {icon ? icon : <AntDesign name="addfile" size={28} color="#ffffff" />}
+      {title ? <Text style={styles.floatingButtonText}>{title}</Text> : null}
     </TouchableOpacity>
   );
 }
