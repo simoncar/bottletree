@@ -204,12 +204,6 @@ export default function Tasks() {
 
   return (
     <View style={styles.container}>
-      <FloatingButton
-        title="Add Task"
-        icon={<MaterialIcons name="add-task" size={28} color="#ffffff" />}
-        onPress={handleAddTaskPress}
-      />
-
       {loading ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -257,6 +251,11 @@ export default function Tasks() {
             </>
           )}
           <View style={{ height: 200 }} />
+          <FloatingButton
+            title="Add Task"
+            icon={<MaterialIcons name="add-task" size={28} color="#ffffff" />}
+            onPress={handleAddTaskPress}
+          />
         </ScrollView>
       )}
 
@@ -297,7 +296,6 @@ export default function Tasks() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
   },
   addButton: {
     padding: 12,
