@@ -54,9 +54,9 @@ export default function Home() {
 
         {/* Center AAA */}
         <View style={styles.topPanelCenter}>
-          <Logo style={{ fontSize: 25 }}>One</Logo>
+          <Logo style={{ fontSize: 30 }}>One</Logo>
           <Text style={{ fontSize: 25 }}> </Text>
-          <Logo style={{ fontSize: 25 }}>Build</Logo>
+          <Logo style={{ fontSize: 30 }}>Build</Logo>
         </View>
 
         <View style={styles.topPanelRight}>
