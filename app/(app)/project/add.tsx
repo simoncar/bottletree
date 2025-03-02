@@ -90,7 +90,6 @@ export default function addNewProject() {
 const styles = StyleSheet.create({
   input: {
     fontSize: 22,
-    fontWeight: "bold",
     height: 140,
     margin: 12,
     padding: 10,

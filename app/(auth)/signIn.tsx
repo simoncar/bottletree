@@ -243,7 +243,6 @@ const styles = StyleSheet.create({
   welcomeApp: {
     color: "#9D5BD0",
     fontSize: 45,
-    fontWeight: "bold",
     marginTop: 80,
     marginBottom: 40,
   },

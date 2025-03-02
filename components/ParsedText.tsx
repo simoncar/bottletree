@@ -76,7 +76,6 @@ export const ParsedTextUnthemed = (props) => {
         {
           pattern: /#(\w+)/,
           style: {
-            fontWeight: "bold",
           },
           renderText: renderName,
         },

@@ -482,6 +482,5 @@ const styles = StyleSheet.create({
   title: { flex: 1, justifyContent: "flex-start" },
   titleText: {
     fontSize: 22,
-    fontWeight: "bold",
   },
 });

@@ -56,7 +56,6 @@ export default function CalendarLarge() {
     typography: {
       moreLabel: {
         fontSize: 10,
-        fontWeight: "normal",
       },
     },
     eventCellOverlappings: "#d0c161",

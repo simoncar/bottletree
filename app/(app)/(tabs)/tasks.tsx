@@ -309,7 +309,6 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     fontSize: 20,
-    fontWeight: "bold",
     paddingRight: 10,
   },
   predefinedTask: {
@@ -317,7 +316,6 @@ const styles = StyleSheet.create({
   },
   predefinedTaskHeader: {
     fontSize: 16,
-    fontWeight: "bold",
     paddingBottom: 8,
     paddingTop: 40,
   },
@@ -338,7 +336,6 @@ const styles = StyleSheet.create({
   },
   taskName: {
     fontSize: 20,
-    fontWeight: "500",
   },
   taskDetails: {
     color: "#666",
@@ -389,6 +386,5 @@ const styles = StyleSheet.create({
   },
   sectionHeaderText: {
     fontSize: 18,
-    fontWeight: "bold",
   },
 });

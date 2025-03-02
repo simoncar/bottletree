@@ -200,7 +200,6 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 33,
-    fontWeight: "bold",
     paddingLeft: 5,
   },
   tabButton: {

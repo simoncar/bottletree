@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 30,
-    fontWeight: "bold",
     width: 275,
   },
 });

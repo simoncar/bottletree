@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
   },
   shareButton: {
     fontSize: 20,
-    fontWeight: "bold",
   },
 
   shareInstructions: {

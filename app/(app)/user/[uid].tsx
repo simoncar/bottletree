@@ -382,7 +382,6 @@ const styles = StyleSheet.create({
   },
   project: {
     fontSize: 25,
-    fontWeight: "bold",
     padding: 10,
     textAlign: "center",
   },

@@ -369,7 +369,6 @@ const styles = StyleSheet.create({
 
   project: {
     fontSize: 25,
-    fontWeight: "bold",
     padding: 10,
     textAlign: "center",
   },
@@ -406,7 +405,6 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "600",
     textAlign: "center",
   },
   animatedView: {

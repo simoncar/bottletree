@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   },
   deleteText: {
     color: "white",
-    fontWeight: "bold",
     paddingTop: 5,
   },
 });

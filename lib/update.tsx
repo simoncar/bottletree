@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
   },
   updateText: {
     fontSize: 16,
-    fontWeight: "500",
     marginBottom: 4,
   },
   spinner: {

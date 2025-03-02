@@ -312,7 +312,6 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     fontSize: 20,
-    fontWeight: "bold",
     paddingRight: 10,
   },
   predefinedFile: {
@@ -320,7 +319,6 @@ const styles = StyleSheet.create({
   },
   predefinedFileHeader: {
     fontSize: 20,
-    fontWeight: "bold",
     paddingBottom: 8,
     paddingTop: 40,
   },
@@ -351,7 +349,6 @@ const styles = StyleSheet.create({
   },
   fileName: {
     fontSize: 20,
-    fontWeight: "500",
   },
   fileDetails: {
     fontSize: 14,

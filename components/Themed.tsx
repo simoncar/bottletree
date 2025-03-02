@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
   defaultStyle: {
-    fontFamily: "Inter_400Regular",
+    fontFamily: "Inter_500Medium",
   },
 });
