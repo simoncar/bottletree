@@ -27,6 +27,7 @@ import Reanimated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 import { FloatingButton } from "@/components/FloatingButton";
+import { setPostFile } from "@/lib/APIpost";
 
 type SearchParams = {
   project: string; //project ID
@@ -47,6 +48,9 @@ export default function Files() {
       setLoading(false);
     });
   }, []);
+  const saveDone = () => {
+    console.log("Save done");
+  };
 
   const handleFilePress = (file: IFile) => {
     // Handle file selection
@@ -73,6 +77,7 @@ export default function Files() {
           position: "bottom",
         });
         uploadFilesAndCreateEntries(result, project);
+       
       } else {
         console.log("Document picker was canceled");
       }
