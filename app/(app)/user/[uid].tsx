@@ -300,11 +300,6 @@ export default function editUser() {
           </View>
         </View>
       </TouchableOpacity>
-
-      <View style={styles.aboutContainer}>
-        <Update />
-        <About />
-      </View>
     </ScrollView>
   );
 }
