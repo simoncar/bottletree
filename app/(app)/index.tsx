@@ -19,26 +19,19 @@ import { UserAvatar } from "@/components/UserAvatar";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Update } from "@/lib/update";
 import Toast from "react-native-toast-message";
+import { FloatingButton } from "@/components/FloatingButton";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function Home() {
   const colorScheme = useColorScheme();
   const { session, signOut } = useSession();
   const { user, setUser } = useContext(UserContext);
 
-  function renderAddProject() {
-    return (
-      <View style={styles.containerAdd}>
-        <Link
-          href={{
-            pathname: "/project/add",
-          }}>
-          <View style={styles.createBtn}>
-            <Text style={styles.createText}>+ Create Project</Text>
-          </View>
-        </Link>
-      </View>
-    );
-  }
+  const handleAddPress = async () => {
+    router.navigate({
+      pathname: "/project/add",
+    });
+  };
 
   function renderTopPanel() {
     return (
@@ -98,7 +91,15 @@ export default function Home() {
 
   return (
     <SafeAreaView>
+      <View style={styles.containerFloatingButton}>
+        <FloatingButton
+          title="Add Project"
+          icon={<AntDesign name="addfile" size={28} color="#ffffff" />}
+          onPress={handleAddPress}
+        />
+      </View>
       {renderTopPanel()}
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
@@ -127,7 +128,6 @@ export default function Home() {
           </Pressable>
 
           <Projects session={session as string} archived={true} />
-          {renderAddProject()}
           <View style={styles.bigGap} />
           {renderLogout()}
           <About />
@@ -208,5 +208,11 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginBottom: 20,
     fontFamily: "Inter_700Bold",
+  },
+  containerFloatingButton: {
+    position: "absolute",
+    bottom: 80,
+    right: 10,
+    width: 150,
   },
 });
