@@ -64,7 +64,7 @@ export default function Files() {
         multiple: true,
       });
 
-      if (result.type != "cancel") {
+      if (result.canceled != true) {
         console.log("Selected files:", result);
         Toast.show({
           type: "success",
