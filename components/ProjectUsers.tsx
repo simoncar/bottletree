@@ -16,6 +16,8 @@ import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { FloatingButton } from "./FloatingButton";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const ProjectUsers = (props: any) => {
   const { project, update } = useLocalSearchParams<{
@@ -53,32 +55,16 @@ export const ProjectUsers = (props: any) => {
     getProjectUsers(project, projectUsersRead);
   };
 
-  function renderHeader(data: any) {
-    return (
-      <Pressable
-        style={styles.outerView}
-        onPress={() => {
-          router.navigate({
-            pathname: "/userList",
-            params: {
-              project: project,
-            },
-          });
-        }}>
-        <View style={styles.avatar}>
-          <AntDesign
-            name="adduser"
-            size={25}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </View>
-        <View>
-          <Text style={styles.name}>{data.displayName || ""}</Text>
-          <Text style={styles.nameSubtitle}>{data.subTitle || ""}</Text>
-        </View>
-      </Pressable>
-    );
-  }
+  const handleAddPress = () => {
+    router.navigate({
+      pathname: "/userList",
+      params: {
+        project: project,
+      },
+    });
+  };
+
+  function renderHeader(data: any) {}
 
   function renderRow(data: any, index: number) {
     let me = "";
@@ -161,28 +147,35 @@ export const ProjectUsers = (props: any) => {
     prevOpenedRow = row[index];
   };
 
+  <AntDesign
+    name="adduser"
+    size={25}
+    color={Colors[colorScheme ?? "light"].text}
+  />;
+
   return (
     <View>
-      <View>
-        {renderHeader({
-          key: "header",
-          displayName: "Add People to Project",
-          subTitle: "",
-        })}
+      <View style={styles.containerFloatingButton}>
+        <FloatingButton
+          title="Add People"
+          icon={<AntDesign name="adduser" size={28} color="#ffffff" />}
+          onPress={handleAddPress}
+        />
       </View>
-
-      <View>
-        {loading === true && <View>{renderSkeletonRow()}</View>}
-        {loading === false && (
-          <View>
-            <ShortList
-              key={projectUsers.uid}
-              data={projectUsers}
-              renderItem={renderRow}
-            />
-          </View>
-        )}
-      </View>
+      <ScrollView>
+        <View>
+          {loading === true && <View>{renderSkeletonRow()}</View>}
+          {loading === false && (
+            <View>
+              <ShortList
+                key={projectUsers.uid}
+                data={projectUsers}
+                renderItem={renderRow}
+              />
+            </View>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -241,4 +234,10 @@ const styles = StyleSheet.create({
   },
 
   skeletonSpace: { padding: 10 },
+  containerFloatingButton: {
+    position: "absolute",
+    bottom: 80,
+    right: 10,
+    width: 150,
+  },
 });
