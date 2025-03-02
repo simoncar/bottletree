@@ -255,6 +255,8 @@ export default function Files() {
 
   return (
     <View style={styles.container}>
+      {/* Remove or comment out the old "Add File" button */}
+      {/* 
       <TouchableOpacity style={styles.addFile} onPress={handleAddFilePress}>
         <Text style={styles.addButtonText}>Add File</Text>
         <AntDesign
@@ -263,12 +265,13 @@ export default function Files() {
           color={Colors[colorScheme ?? "light"].textDisabledColor}
         />
       </TouchableOpacity>
+      */}
 
       {loading ? (
         <ActivityIndicator />
       ) : (
         <FlatList
-          style={{ flex: 1 }} // Added this line
+          style={{ flex: 1 }}
           data={files}
           keyExtractor={(item) => item.key}
           renderItem={renderItem}
@@ -295,6 +298,14 @@ export default function Files() {
           contentContainerStyle={{ paddingBottom: 16 }}
         />
       )}
+
+      {/* New floating button in bottom-right */}
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={handleAddFilePress}>
+        <AntDesign name="addfile" size={28} color="#ffffff" />
+        <Text style={styles.floatingButtonText}>Add File</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -370,5 +381,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 200,
     alignSelf: "center",
+  },
+  floatingButton: {
+    position: "absolute",
+    bottom: 30,
+    right: 30,
+    backgroundColor: "grey",
+    width: 150,
+    height: 60,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  floatingButtonText: {
+    color: "#ffffff",
+    fontSize: 20,
+    marginLeft: 10,
   },
 });
