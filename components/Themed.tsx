@@ -54,6 +54,15 @@ export function Text(props: TextProps) {
   );
 }
 
+export function Logo(props: TextProps) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+
+  return (
+    <DefaultText style={[{ color }, styles.logoStyle, style]} {...otherProps} />
+  );
+}
+
 export function View(props: ViewProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   // const backgroundColor = useThemeColor(
@@ -127,5 +136,8 @@ const styles = StyleSheet.create({
   },
   defaultStyle: {
     fontFamily: "Inter_500Medium",
+  },
+  logoStyle: {
+    fontFamily: "MontserratSubrayada_700Bold",
   },
 });

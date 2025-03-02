@@ -44,6 +44,11 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 
+import {
+  MontserratSubrayada_400Regular,
+  MontserratSubrayada_700Bold,
+} from "@expo-google-fonts/montserrat-subrayada";
+
 type SearchParams = {
   posts: string;
 };
@@ -89,6 +94,8 @@ export default function Layout() {
     Inter_700Bold,
     Inter_800ExtraBold,
     Inter_900Black,
+    MontserratSubrayada_400Regular,
+    MontserratSubrayada_700Bold,
   });
 
   useEffect(() => {

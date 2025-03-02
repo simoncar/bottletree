@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useSession } from "@/lib/ctx";
 import { router, Link, Stack } from "expo-router";
-import { Text, View } from "@/components/Themed";
+import { Text, View, Logo } from "@/components/Themed";
 import { UserContext } from "@/lib/UserContext";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
@@ -48,9 +48,7 @@ export default function Home() {
             onPress={() =>
               router.navigate({
                 pathname: "/house",
-                params: {
-                  post: "",
-                },
+                params: { post: "" },
               })
             }>
             <FontAwesome6
@@ -60,6 +58,14 @@ export default function Home() {
             />
           </Pressable>
         </View>
+
+        {/* Center AAA */}
+        <View style={styles.topPanelCenter}>
+          <Logo style={{ fontSize: 25 }}>One</Logo>
+          <Text style={{ fontSize: 25 }}> </Text>
+          <Logo style={{ fontSize: 25 }}>Build</Logo>
+        </View>
+
         <View style={styles.topPanelRight}>
           <UserAvatar uid={user?.uid} photoURL={user?.photoURL} user={user} />
         </View>
@@ -176,19 +182,24 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   topPanel: {
+    flexDirection: "row",
     alignItems: "center",
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: "row",
-    justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
   topPanelLeft: {
+    alignItems: "flex-start",
+  },
+  topPanelCenter: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   topPanelRight: {
-    marginLeft: 16,
+    alignItems: "flex-end",
   },
   updateContainer: {
     paddingHorizontal: 16,
