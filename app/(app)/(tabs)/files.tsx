@@ -26,6 +26,7 @@ import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { FloatingButton } from "@/components/FloatingButton";
 
 type SearchParams = {
   project: string; //project ID
@@ -298,14 +299,7 @@ export default function Files() {
           contentContainerStyle={{ paddingBottom: 16 }}
         />
       )}
-
-      {/* New floating button in bottom-right */}
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={handleAddFilePress}>
-        <AntDesign name="addfile" size={28} color="#ffffff" />
-        <Text style={styles.floatingButtonText}>Add File</Text>
-      </TouchableOpacity>
+      <FloatingButton title={"Add File"} onPress={handleAddFilePress} />
     </View>
   );
 }
