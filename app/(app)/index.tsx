@@ -21,6 +21,7 @@ import { Update } from "@/lib/update";
 import Toast from "react-native-toast-message";
 import { FloatingButton } from "@/components/FloatingButton";
 import { AntDesign } from "@expo/vector-icons";
+import { SaveFormat } from "expo-image-manipulator";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -91,49 +92,55 @@ export default function Home() {
 
   return (
     <View style={styles.overall}>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-      />
-      <View style={styles.containerFloatingButton}>
-        <FloatingButton
-          title="Add Project"
-          icon={
-            <FontAwesome6 name="house-circle-check" size={28} color="#ffffff" />
-          }
-          onPress={handleAddPress}
+      <SafeAreaView>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
         />
-      </View>
-      {renderTopPanel()}
-
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}>
-        <View style={styles.updateContainer}>
-          <Update />
+        <View style={styles.containerFloatingButton}>
+          <FloatingButton
+            title="Add Project"
+            icon={
+              <FontAwesome6
+                name="house-circle-check"
+                size={28}
+                color="#ffffff"
+              />
+            }
+            onPress={handleAddPress}
+          />
         </View>
-        <View style={styles.container}>
-          <Pressable
-            onPress={() => {
-              //   Toast.show("Projects", {
-              //     duration: Toast.durations.LONG,
-              //     position: Toast.positions.TOP,
-              //   });
+        {renderTopPanel()}
 
-              console.log("Projects");
-            }}>
-            <View style={styles.instructions}>
-              <Text style={styles.welcomeApp}>Projects</Text>
-            </View>
-          </Pressable>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
+          <View style={styles.updateContainer}>
+            <Update />
+          </View>
+          <View style={styles.container}>
+            <Pressable
+              onPress={() => {
+                //   Toast.show("Projects", {
+                //     duration: Toast.durations.LONG,
+                //     position: Toast.positions.TOP,
+                //   });
 
-          <Projects session={session as string} archived={true} />
-          <View style={styles.bigGap} />
-          {renderLogout()}
-          <About />
-        </View>
-      </ScrollView>
+                console.log("Projects");
+              }}>
+              <View style={styles.instructions}>
+                <Text style={styles.welcomeApp}>Projects</Text>
+              </View>
+            </Pressable>
+
+            <Projects session={session as string} archived={true} />
+            <View style={styles.bigGap} />
+            {renderLogout()}
+            <About />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
