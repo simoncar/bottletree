@@ -90,7 +90,12 @@ export default function Home() {
   }
 
   return (
-    <SafeAreaView>
+    <View style={styles.overall}>
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+      />
       <View style={styles.containerFloatingButton}>
         <FloatingButton
           title="Add Project"
@@ -105,12 +110,6 @@ export default function Home() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-        />
-
         <View style={styles.updateContainer}>
           <Update />
         </View>
@@ -135,7 +134,7 @@ export default function Home() {
           <About />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -146,7 +145,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-    paddingHorizontal: 10,
+  },
+  overall: {
+    flex: 1,
   },
 
   containerAdd: {
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
   },
   containerFloatingButton: {
     position: "absolute",
-    bottom: 80,
+    bottom: 20,
     right: 10,
     width: 150,
   },
