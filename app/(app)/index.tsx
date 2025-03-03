@@ -53,7 +53,6 @@ export default function Home() {
           </Pressable>
         </View>
 
-        {/* Center AAA */}
         <View style={styles.topPanelCenter}>
           <Logo style={{ fontSize: 30 }}>One</Logo>
           <Text style={{ fontSize: 25 }}> </Text>
