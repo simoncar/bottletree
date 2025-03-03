@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   },
   containerFloatingButton: {
     position: "absolute",
-    bottom: 20,
+    bottom: 80,
     right: 10,
     width: 150,
   },
