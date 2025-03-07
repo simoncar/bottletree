@@ -77,7 +77,6 @@ export default function Files() {
           position: "bottom",
         });
         uploadFilesAndCreateEntries(result, project);
-       
       } else {
         console.log("Document picker was canceled");
       }
@@ -282,6 +281,8 @@ export default function Files() {
           keyExtractor={(item) => item.key}
           renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ListFooterComponent={() => <View />}
+          ListFooterComponentStyle={{ marginBottom: 100 }}
           ListEmptyComponent={() => (
             <View>
               <Text style={{ textAlign: "center", padding: 16 }}>

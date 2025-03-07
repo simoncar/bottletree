@@ -25,6 +25,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
 import { FloatingButton } from "@/components/FloatingButton";
+import { ShortList } from "@/components/sComponent";
 
 type SearchParams = {
   project: string; //project ID
@@ -131,7 +132,6 @@ export default function Tasks() {
       task: newTaskName,
       projectId: project,
       completed: false,
-      // Add other necessary fields here
     };
 
     addTask(project, newTask)
@@ -198,12 +198,17 @@ export default function Tasks() {
     </TouchableOpacity>
   );
 
-  const renderItem = ({ item }: { item: ITask }) => (
-    <TaskItem task={item} onPress={handleTaskPress} />
+  const renderItem = (item: ITask) => (
+    <TaskItem task={item} onPress={handleTaskPress} key={item.key} />
   );
 
   return (
     <View style={styles.container}>
+      <FloatingButton
+        title="Add Task"
+        icon={<MaterialIcons name="add-task" size={28} color="#ffffff" />}
+        onPress={handleAddTaskPress}
+      />
       {loading ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -217,15 +222,9 @@ export default function Tasks() {
             <>
               {renderSectionHeader(``, "incomplete")}
               {!collapsedSections.incomplete && (
-                <FlatList
+                <ShortList
                   data={groupedTasks.incomplete}
-                  keyExtractor={(item) => item.key.toString()}
                   renderItem={renderItem}
-                  scrollEnabled={false}
-                  nestedScrollEnabled={true}
-                  ItemSeparatorComponent={() => (
-                    <View style={styles.separator} />
-                  )}
                 />
               )}
             </>
@@ -237,25 +236,14 @@ export default function Tasks() {
                 "completed",
               )}
               {!collapsedSections.completed && (
-                <FlatList
+                <ShortList
                   data={groupedTasks.completed}
-                  keyExtractor={(item) => item.key.toString()}
                   renderItem={renderItem}
-                  scrollEnabled={false}
-                  nestedScrollEnabled={true}
-                  ItemSeparatorComponent={() => (
-                    <View style={styles.separator} />
-                  )}
                 />
               )}
             </>
           )}
           <View style={{ height: 200 }} />
-          <FloatingButton
-            title="Add Task"
-            icon={<MaterialIcons name="add-task" size={28} color="#ffffff" />}
-            onPress={handleAddTaskPress}
-          />
         </ScrollView>
       )}
 

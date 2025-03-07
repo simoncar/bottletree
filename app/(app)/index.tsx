@@ -121,11 +121,6 @@ export default function Home() {
           <View style={styles.container}>
             <Pressable
               onPress={() => {
-                //   Toast.show("Projects", {
-                //     duration: Toast.durations.LONG,
-                //     position: Toast.positions.TOP,
-                //   });
-
                 console.log("Projects");
               }}>
               <View style={styles.instructions}>
