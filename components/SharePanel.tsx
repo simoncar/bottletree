@@ -32,7 +32,6 @@ const IconButton = (props) => {
           { backgroundColor: Colors[colorScheme ?? "light"].postBackground },
         ]}
         onPress={() => {
-          console.log("IconButton: ", pathname, project);
           router.navigate({
             pathname: pathname,
             params: {
