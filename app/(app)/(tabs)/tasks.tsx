@@ -222,15 +222,34 @@ export default function Tasks() {
             <>
               {renderSectionHeader(``, "incomplete")}
               {!collapsedSections.incomplete && (
-                <ShortList
-                  data={groupedTasks.incomplete}
-                  renderItem={renderItem}
-                />
+                <View
+                  style={[
+                    styles.postView,
+                    {
+                      backgroundColor:
+                        Colors[colorScheme ?? "light"].postBackground,
+                      borderColor:
+                        Colors[colorScheme ?? "light"].postBackground,
+                    },
+                  ]}>
+                  <ShortList
+                    data={groupedTasks.incomplete}
+                    renderItem={renderItem}
+                  />
+                </View>
               )}
             </>
           )}
           {groupedTasks.completed.length > 0 && (
-            <>
+            <View
+              style={[
+                styles.postView,
+                {
+                  backgroundColor:
+                    Colors[colorScheme ?? "light"].postBackground,
+                  borderColor: Colors[colorScheme ?? "light"].postBackground,
+                },
+              ]}>
               {renderSectionHeader(
                 `Completed (${groupedTasks.completed.length})`,
                 "completed",
@@ -241,7 +260,7 @@ export default function Tasks() {
                   renderItem={renderItem}
                 />
               )}
-            </>
+            </View>
           )}
           <View style={{ height: 200 }} />
         </ScrollView>
@@ -360,6 +379,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     fontSize: 20,
     borderRadius: 12,
+  },
+
+  postView: {
+    borderRadius: 10,
+    borderWidth: 10,
+    flex: 1,
+    marginBottom: 5,
+    marginHorizontal: 5,
+    marginTop: 5,
   },
   sectionHeader: {
     flexDirection: "row",

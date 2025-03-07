@@ -267,35 +267,44 @@ export default function Files() {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList
-          style={{ flex: 1 }}
-          data={files}
-          keyExtractor={(item) => item.key}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-          ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={{ marginBottom: 100 }}
-          ListEmptyComponent={() => (
-            <View>
-              <Text style={{ textAlign: "center", padding: 16 }}>
-                No files found
-              </Text>
-              <Text style={styles.predefinedFileHeader}>
-                Examples of files to add:
-              </Text>
-              <FlatList
-                data={predefinedFiles}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <Text style={styles.predefinedFile}>
-                    {"\u2022"} {item}
-                  </Text>
-                )}
-              />
-            </View>
-          )}
-          contentContainerStyle={{ paddingBottom: 16 }}
-        />
+        <View
+          style={[
+            styles.postView,
+            {
+              backgroundColor: Colors[colorScheme ?? "light"].postBackground,
+              borderColor: Colors[colorScheme ?? "light"].postBackground,
+            },
+          ]}>
+          <FlatList
+            style={{ flex: 1 }}
+            data={files}
+            keyExtractor={(item) => item.key}
+            renderItem={renderItem}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            ListFooterComponent={() => <View />}
+            ListFooterComponentStyle={{ marginBottom: 100 }}
+            ListEmptyComponent={() => (
+              <View>
+                <Text style={{ textAlign: "center", padding: 16 }}>
+                  No files found
+                </Text>
+                <Text style={styles.predefinedFileHeader}>
+                  Examples of files to add:
+                </Text>
+                <FlatList
+                  data={predefinedFiles}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <Text style={styles.predefinedFile}>
+                      {"\u2022"} {item}
+                    </Text>
+                  )}
+                />
+              </View>
+            )}
+            contentContainerStyle={{ paddingBottom: 16 }}
+          />
+        </View>
       )}
       <FloatingButton
         title="Add File"
@@ -323,6 +332,15 @@ const styles = StyleSheet.create({
   },
   predefinedFile: {
     fontSize: 20,
+  },
+
+  postView: {
+    borderRadius: 10,
+    borderWidth: 10,
+    flex: 1,
+    marginBottom: 5,
+    marginHorizontal: 5,
+    marginTop: 5,
   },
   predefinedFileHeader: {
     fontSize: 20,
