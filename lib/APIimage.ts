@@ -136,7 +136,7 @@ async function processItemAsync(
             .put(blob)
             .then(() => {
               storageRef.getDownloadURL().then((downloadURL) => {
-                console.log("File available at", downloadURL);
+                console.log("File available at (WEB)", downloadURL);
                 console.log("dimensions", asset.height, asset.width);
                 const ratio = asset.height / asset.width;
                 resolve(ratio + "*" + downloadURL);

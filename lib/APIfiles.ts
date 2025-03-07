@@ -1,4 +1,4 @@
-import { storage, firestore } from "@/lib/firebase";
+import { db, storage, firestore } from "@/lib/firebase"; // or "@/lib/firebase.web"
 import { IFile } from "./types";
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
@@ -21,7 +21,7 @@ export function deleteFile(
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    const docRef = firestore()
+    const docRef = db
       .collection("projects")
       .doc(projectId)
       .collection("files")
@@ -40,7 +40,7 @@ export function deleteFile(
 export async function getFiles(project: string, callback: filesRead) {
   const files: IFile[] = [];
 
-  const q = firestore()
+  const q = db
     .collection("projects")
     .doc(project)
     .collection("files")
@@ -75,8 +75,7 @@ export async function uploadFilesAndCreateEntries(
     return;
   }
 
-  const storageRef = storage().ref();
-  const projectFilesRef = firestore()
+  const projectFilesRef = db
     .collection("projects")
     .doc(projectId)
     .collection("files");
@@ -84,16 +83,20 @@ export async function uploadFilesAndCreateEntries(
   for (const file of filesJson.assets) {
     try {
       const UUID = Crypto.randomUUID();
-      // Upload file to Firebase Storage
-      const fileRef = storageRef.child(`project/${projectId}/files/${UUID}`);
-      const response = await uriToBlob(file.uri);
-      const blob = await response;
+
+      // Convert URI to Blob
+      const blob = await uriToBlob(file.uri);
+
+      // Storage reference
+      const fileRef = storage.child(`project/${projectId}/files/${UUID}`);
+
+      // Upload the Blob
       await fileRef.put(blob);
 
-      // Get the download URL
+      // Download URL
       const downloadURL = await fileRef.getDownloadURL();
 
-      // Create an entry in Firestore
+      // Create Firestore entry
       const fileEntry: IFile = {
         key: UUID,
         filename: file.name,
@@ -102,7 +105,7 @@ export async function uploadFilesAndCreateEntries(
         bytes: file.size,
         created: firestore.Timestamp.now(),
         modified: firestore.Timestamp.now(),
-        projectId: projectId,
+        projectId,
       };
 
       await projectFilesRef.add(fileEntry);
@@ -118,25 +121,15 @@ export function uriToBlob(uri: string): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
 
-    // If successful -> return with blob
     xhr.onload = function () {
       resolve(xhr.response);
     };
-
-    // reject on error
     xhr.onerror = function () {
       reject(new Error("uriToBlob failed"));
     };
 
-    // Set the response type to 'blob' - this means the server's response
-    // will be accessed as a binary object
     xhr.responseType = "blob";
-
-    // Initialize the request. The third argument set to 'true' denotes
-    // that the request is asynchronous
     xhr.open("GET", uri, true);
-
-    // Send the request. The 'null' argument means that no body content is given for the request
     xhr.send(null);
   });
 }
