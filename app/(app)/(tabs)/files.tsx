@@ -105,7 +105,7 @@ export default function Files() {
       case "image/jpeg":
         return "file-image-o";
       case "image/png":
-        return "file-image";
+        return "file-image-o";
       case "application/msword":
         return "file-word-o";
       case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
@@ -118,6 +118,10 @@ export default function Files() {
         return "file-powerpoint-o";
       case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
         return "file-powerpoint-o";
+      case "application/zip":
+        return "file-archive-o";
+      case "application/x-zip-compressed":
+        return "file-archive-o";
       default:
         return "file-o";
     }
@@ -260,18 +264,6 @@ export default function Files() {
 
   return (
     <View style={styles.container}>
-      {/* Remove or comment out the old "Add File" button */}
-      {/* 
-      <TouchableOpacity style={styles.addFile} onPress={handleAddFilePress}>
-        <Text style={styles.addButtonText}>Add File</Text>
-        <AntDesign
-          name="addfile"
-          size={24}
-          color={Colors[colorScheme ?? "light"].textDisabledColor}
-        />
-      </TouchableOpacity>
-      */}
-
       {loading ? (
         <ActivityIndicator />
       ) : (
