@@ -16,6 +16,6 @@ if (!Device.isDevice) {
   //   storage().useEmulator("127.0.0.1", 9199);
 }
 
-const uploadBytes = null; // uploadBytes only available in web version (firebase.web.ts)
+const uploadBytes = null;
 
 export { firebase, db, storage, auth, firestore, uploadBytes };

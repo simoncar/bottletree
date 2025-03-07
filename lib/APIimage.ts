@@ -130,14 +130,18 @@ async function processItemAsync(
 
       if (IS_WEB_PLATFORM) {
         getBlobFromUri(imageUri).then((blob) => {
-          uploadBytes(storageRef, blob).then(() => {
-            storageRef.getDownloadURL().then((downloadURL) => {
-              console.log("File available at", downloadURL);
-              console.log("dimensions", asset.height, asset.width);
-              const ratio = asset.height / asset.width;
-              resolve(ratio + "*" + downloadURL);
+          firebase
+            .storage()
+            .ref(storageRef.fullPath)
+            .put(blob)
+            .then(() => {
+              storageRef.getDownloadURL().then((downloadURL) => {
+                console.log("File available at", downloadURL);
+                console.log("dimensions", asset.height, asset.width);
+                const ratio = asset.height / asset.width;
+                resolve(ratio + "*" + downloadURL);
+              });
             });
-          });
         });
       } else {
         const uploadTask = storageRef.putFile(imageUri);

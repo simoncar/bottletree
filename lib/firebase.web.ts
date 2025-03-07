@@ -1,4 +1,3 @@
-import storage, { uploadBytes } from "firebase/storage";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -20,5 +19,7 @@ const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth;
 const db = firebase.firestore();
 const firestore = firebase.firestore;
+const storage = firebase.storage().ref();
+const uploadBytes = null;
 
 export { firebase, db, storage, auth, firestore, uploadBytes };
