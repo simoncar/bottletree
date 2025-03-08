@@ -5,12 +5,13 @@ import { Stack, router } from "expo-router";
 import { deleteUser } from "@/lib/APIuser";
 import { Text, View } from "@/components/Themed";
 import { UserContext } from "@/lib/UserContext";
-import { Back } from "@/components/Back";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");
   const { deleteAccount } = useSession();
   const { user, setUser } = useContext(UserContext);
+  const { t } = useTranslation();
 
   const deleteAccountCallback = (error: any) => {
     if (error == null) {
@@ -33,16 +34,16 @@ export default function DeleteAccount() {
 
   const onDelete = () => {
     Alert.alert(
-      "Delete Account",
-      "Are you sure?",
+      t("deleteAccount"),
+      t("areYouSure"),
       [
         {
-          text: "Cancel",
+          text: t("cancel"),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: "Yes",
+          text: t("yes"),
           onPress: () => {
             deleteUser(user?.uid, deleteUserCallback);
             deleteAccount(deleteAccountCallback);
@@ -57,16 +58,16 @@ export default function DeleteAccount() {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Delete Account",
+          title: t("deleteAccount"),
         }}
       />
 
       <View style={styles.instructions}>
         <Text style={styles.text}>
-          Are you sure you want to delete your account?
+          {t("areYouSureYouWantToDeleteYourAccount")}
         </Text>
         <Text style={styles.text}>
-          If you change your mind, you will not be able to undo this.
+          {t("ifYouChangeYourMindYouWillNotBeAbleToUndoThis")}.
         </Text>
         <Text style={styles.error}>{errorMessage}</Text>
       </View>
@@ -76,7 +77,7 @@ export default function DeleteAccount() {
           onDelete();
         }}
         style={styles.button}>
-        <Text style={styles.buttonText}>YES, Delete my account</Text>
+        <Text style={styles.buttonText}>{t('yesDeleteMyAccount')}</Text>
       </TouchableOpacity>
     </View>
   );

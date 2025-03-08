@@ -63,5 +63,10 @@
   "monthShortSep": "Sep",
   "monthShortOct": "Oct",
   "monthShortNov": "Nov",
-  "monthShortDec": "Dec"
+  "monthShortDec": "Dec",
+  "areYouSure": "Are you sure?",
+  "yes": "Yes",
+  "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account?",
+  "ifYouChangeYourMindYouWillNotBeAbleToUndoThis": "If you change your mind, you will not be able to undo this",
+  "yesDeleteMyAccount": "YES, Delete my account"
 }
