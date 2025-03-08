@@ -30,7 +30,6 @@ const ProjectList = () => {
   };
 
   useEffect(() => {
-
     getProjects(user.uid, true, projectsRead);
   }, []);
 

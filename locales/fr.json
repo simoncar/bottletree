@@ -49,5 +49,6 @@
   "error": "Erreur",
   "order": "Commande",
   "date": "Date",
-  "time": "Temps"
+  "time": "Temps",
+  "addProject": "Ajouter un projet"
 }

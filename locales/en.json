@@ -49,5 +49,7 @@
   "error": "Error",
   "order": "Order",
   "date": "Date",
-  "time": "Time"
+  "time": "Time",
+  "addProject": "Add Project",
+  "projects": "Projects"
 }

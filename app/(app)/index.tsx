@@ -22,11 +22,13 @@ import Toast from "react-native-toast-message";
 import { FloatingButton } from "@/components/FloatingButton";
 import { AntDesign } from "@expo/vector-icons";
 import { SaveFormat } from "expo-image-manipulator";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const colorScheme = useColorScheme();
   const { session, signOut } = useSession();
   const { user, setUser } = useContext(UserContext);
+  const { t } = useTranslation();
 
   const handleAddPress = async () => {
     router.navigate({
@@ -99,7 +101,7 @@ export default function Home() {
         />
         <View style={styles.containerFloatingButton}>
           <FloatingButton
-            title="Add Project"
+            title={t("addProject")}
             icon={
               <FontAwesome6
                 name="house-circle-check"
@@ -124,7 +126,7 @@ export default function Home() {
                 console.log("Projects");
               }}>
               <View style={styles.instructions}>
-                <Text style={styles.welcomeApp}>Projects</Text>
+                <Text style={styles.welcomeApp}>{t("projects")}</Text>
               </View>
             </Pressable>
 

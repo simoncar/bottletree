@@ -49,5 +49,9 @@
   "error": "Error",
   "order": "Orden",
   "date": "Fecha",
-  "time": "Tiempo"
+  "time": "Tiempo",
+  "update-available": "Actualización disponible",
+  "update-click-install": "Haga clic para instalar",
+  "addProject": "Nuevo Proyecto",
+  "projects": "Proyectos"
 }
