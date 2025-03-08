@@ -46,5 +46,9 @@
   "addFile": "Agregar archivo",
   "areYouSureYouWantToDeleteThisFile": "¿Estás seguro de que quieres eliminar este archivo?",
   "deleteFile": "Eliminar archivo",
-  "fileDeleted": "Archivo eliminado"
+  "fileDeleted": "Archivo eliminado",
+  "takePhoto": "Tomar foto",
+  "addFromCameraRoll": "Agregar desde la galería",
+  "addCalendarEvent": "Agregar evento al calendario",
+  "createNewProject": "Crear nuevo proyecto"
 }

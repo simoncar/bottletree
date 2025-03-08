@@ -17,6 +17,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Text } from "@/components/Themed";
 import * as DocumentPicker from "expo-document-picker";
 import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
+import { useTranslation } from "react-i18next";
 
 type OptionsModalProps = {
   visible: boolean;
@@ -34,6 +35,7 @@ const AddModal = ({
   user,
 }: OptionsModalProps) => {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
   const pickImage = async () => {
     const multiple = true;
 
@@ -130,7 +132,7 @@ const AddModal = ({
               });
               onClose();
             }}>
-            <Text style={styles.optionText}>Add Note</Text>
+            <Text style={styles.optionText}>{t("addNote")}</Text>
             <FontAwesome
               name="sticky-note-o"
               size={24}
@@ -149,7 +151,7 @@ const AddModal = ({
                 },
               });
             }}>
-            <Text style={styles.optionText}>Take Photo</Text>
+            <Text style={styles.optionText}>{t("takePhoto")}</Text>
             <FontAwesome
               name="camera"
               size={24}
@@ -162,7 +164,7 @@ const AddModal = ({
               //onClose();
               pickImage();
             }}>
-            <Text style={styles.optionText}>Add from Camera Roll</Text>
+            <Text style={styles.optionText}>{t("addFromCameraRoll")}</Text>
             <MaterialIcons
               name="camera-roll"
               size={24}
@@ -180,7 +182,7 @@ const AddModal = ({
                 },
               });
             }}>
-            <Text style={styles.optionText}>Add Calendar Event</Text>
+            <Text style={styles.optionText}>{t("addCalendarEvent")}</Text>
             <MaterialIcons
               name="event"
               size={24}
@@ -193,7 +195,7 @@ const AddModal = ({
               //onClose();
               handleAddFilePress();
             }}>
-            <Text style={styles.optionText}>Add File</Text>
+            <Text style={styles.optionText}>{t("addFile")}</Text>
             <AntDesign
               name="addfile"
               size={24}
@@ -212,7 +214,7 @@ const AddModal = ({
                 },
               });
             }}>
-            <Text style={styles.optionText}>Add Task</Text>
+            <Text style={styles.optionText}>{t('addTask')}</Text>
             <MaterialIcons
               name="add-task"
               size={24}
@@ -227,7 +229,7 @@ const AddModal = ({
                 pathname: "/project/add",
               });
             }}>
-            <Text style={styles.optionText}>Create New Project</Text>
+            <Text style={styles.optionText}>{t('createNewProject')}</Text>
             <MaterialIcons
               name="add-business"
               size={24}

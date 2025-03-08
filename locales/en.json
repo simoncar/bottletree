@@ -46,5 +46,9 @@
   "addFile": "Add File",
   "areYouSureYouWantToDeleteThisFile": "Are you sure you want to delete this file?",
   "deleteFile": "Delete File",
-  "fileDeleted": "File Deleted"
+  "fileDeleted": "File Deleted",
+  "takePhoto": "Take Photo",
+  "addFromCameraRoll": "Add from Camera Roll",
+  "addCalendarEvent": "Add Calendar Event",
+  "createNewProject": "Create New Project"
 }
