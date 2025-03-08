@@ -15,6 +15,9 @@ import { useNavigation, Stack } from "expo-router";
 import { useLocalSearchParams, router } from "expo-router";
 import { CustomCalendarEvent } from "@/lib/types";
 import { demoDataForDemoProject } from "@/lib/demoProject";
+import * as Localization from "expo-localization";
+import "dayjs/locale/es";
+import "dayjs/locale/en";
 
 import {
   Calendar,
@@ -160,7 +163,7 @@ export default function CalendarLarge() {
               onPressIn={() => {
                 goToday();
               }}>
-              <Text style={{ paddingRight: 5 }}>{t('today')}</Text>
+              <Text style={{ paddingRight: 5 }}>{t("today")}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -190,6 +193,7 @@ export default function CalendarLarge() {
         eventMinHeightForMonthView={25}
         maxVisibleEventCount={10}
         swipeEnabled={false}
+        locale={Localization.getLocales()[0]?.languageCode || "en"}
       />
     </ScrollView>
   );

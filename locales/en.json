@@ -51,5 +51,17 @@
   "addFromCameraRoll": "Add from Camera Roll",
   "addCalendarEvent": "Add Calendar Event",
   "createNewProject": "Create New Project",
-  "today": "Today"
+  "today": "Today",
+  "monthShortJan": "Jan",
+  "monthShortFeb": "Feb",
+  "monthShortMar": "Mar",
+  "monthShortApr": "Apr",
+  "monthShortMay": "May",
+  "monthShortJun": "Jun",
+  "monthShortJul": "Jul",
+  "monthShortAug": "Aug",
+  "monthShortSep": "Sep",
+  "monthShortOct": "Oct",
+  "monthShortNov": "Nov",
+  "monthShortDec": "Dec"
 }

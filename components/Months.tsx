@@ -7,21 +7,7 @@ import {
   StyleSheet,
   LayoutChangeEvent,
 } from "react-native";
-
-const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+import { useTranslation } from "react-i18next";
 
 type Props = {
   initialYear?: number;
@@ -41,6 +27,22 @@ export const MonthYearScroller: React.FC<Props> = ({
   );
   const [selectedYear, setSelectedYear] = useState(initialYear);
   const scrollRef = useRef<ScrollView>(null);
+  const { t } = useTranslation();
+
+  const MONTHS = [
+    t("monthShortJan"),
+    t("monthShortFeb"),
+    t("monthShortMar"),
+    t("monthShortApr"),
+    t("monthShortMay"),
+    t("monthShortJun"),
+    t("monthShortJul"),
+    t("monthShortAug"),
+    t("monthShortSep"),
+    t("monthShortOct"),
+    t("monthShortNov"),
+    t("monthShortDec"),
+  ];
 
   const allYears = [];
   for (let y = initialYear - range; y <= initialYear + range; y++) {

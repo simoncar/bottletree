@@ -51,5 +51,17 @@
   "addFromCameraRoll": "Agregar desde la galería",
   "addCalendarEvent": "Agregar evento al calendario",
   "createNewProject": "Crear nuevo proyecto",
-  "today": "Hoy"
+  "today": "Hoy",
+  "monthShortJan": "Ene",
+  "monthShortFeb": "Feb",
+  "monthShortMar": "Mar",
+  "monthShortApr": "Abr",
+  "monthShortMay": "May",
+  "monthShortJun": "Jun",
+  "monthShortJul": "Jul",
+  "monthShortAug": "Ago",
+  "monthShortSep": "Sep",
+  "monthShortOct": "Oct",
+  "monthShortNov": "Nov",
+  "monthShortDec": "Dic"
 }
