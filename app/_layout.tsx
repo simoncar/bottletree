@@ -11,6 +11,8 @@ import { UserContext } from "@/lib/UserContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Platform } from "react-native";
 import Toast from "react-native-toast-message";
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/lib/i18n";
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
@@ -44,14 +46,16 @@ function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SessionProvider>
-        <UserProvider>
-          <RootSiblingParent>
-            <Slot />
-            <Toast />
-          </RootSiblingParent>
-        </UserProvider>
-      </SessionProvider>
+      <I18nextProvider i18n={i18n}>
+        <SessionProvider>
+          <UserProvider>
+            <RootSiblingParent>
+              <Slot />
+              <Toast />
+            </RootSiblingParent>
+          </UserProvider>
+        </SessionProvider>
+      </I18nextProvider>
     </GestureHandlerRootView>
   );
 }

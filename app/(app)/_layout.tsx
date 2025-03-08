@@ -44,6 +44,8 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 
+import i18n from "@/lib/i18n";
+
 import {
   MontserratSubrayada_400Regular,
   MontserratSubrayada_700Bold,

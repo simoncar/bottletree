@@ -14,6 +14,8 @@ import * as Updates from "expo-updates";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
 import Toast from "react-native-root-toast";
+import i18n from "@/lib/i18n";
+import { useTranslation } from "react-i18next";
 
 export const Update = () => {
   const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
@@ -21,6 +23,7 @@ export const Update = () => {
   const colorScheme = useColorScheme();
   const [showUpdate, setShowUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   // Create animation value
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -121,8 +124,8 @@ export const Update = () => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.updateText}>Update available</Text>
-          <Text style={styles.installText}>Click to install</Text>
+          <Text style={styles.updateText}>{t("updateAvailable")}</Text>
+          <Text style={styles.installText}>{t("updateClickInstall")}</Text>
         </View>
         {loading && <ActivityIndicator style={styles.spinner} />}
       </Pressable>
