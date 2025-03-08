@@ -32,5 +32,6 @@
   "on": "Activado",
   "off": "Desactivado",
   "yourName": "Tu nombre",
-  "done": "Hecho"
+  "done": "Hecho",
+  "save": "Guardar"
 }
