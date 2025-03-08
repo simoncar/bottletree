@@ -23,5 +23,14 @@
   "addEvent": "Add Event",
   "project": "Project",
   "edit": "Edit",
-  "language": "Language"
+  "language": "Language",
+  "contacts": "Contacts",
+  "administration": "Administration",
+  "home": "Home",
+  "deleteAccount": "Delete Account",
+  "notifications": "Notifications",
+  "on": "On",
+  "off": "Off",
+  "yourName": "Your Name",
+  "done": "Done"
 }

@@ -192,7 +192,7 @@ export default function Layout() {
             <Stack.Screen
               name="index"
               options={{
-                title: "Home",
+                title: t('home'),
                 headerShown: true,
               }}
             />
@@ -200,33 +200,33 @@ export default function Layout() {
               name="projectList"
               options={{
                 presentation: "modal",
-                title: "Projects",
+                title: t("projects"),
               }}
             />
             <Stack.Screen
               name="share"
               options={{
                 presentation: "modal",
-                title: "Share",
+                title: t("share"),
               }}
             />
             <Stack.Screen
               name="projectListAdmin"
               options={{
-                title: "Administration",
+                title: t("administration"),
               }}
             />
             <Stack.Screen
               name="userList"
               options={{
                 presentation: "modal",
-                title: "Contacts",
+                title: t("contacts"),
               }}
             />
             <Stack.Screen
               name="language"
               options={{
-                title: t('language'),
+                title: t("language"),
               }}
             />
             <Stack.Screen

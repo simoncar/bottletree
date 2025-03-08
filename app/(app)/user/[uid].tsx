@@ -32,6 +32,7 @@ import { demoData } from "@/lib/demoData";
 
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
+import { useTranslation } from "react-i18next";
 
 export default function editUser() {
   const { session, signOut } = useSession();
@@ -40,6 +41,7 @@ export default function editUser() {
 
   const { showActionSheetWithOptions } = useActionSheet();
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
@@ -182,7 +184,7 @@ export default function editUser() {
                 console.log("save");
                 save();
               }}>
-              <Text>Done</Text>
+              <Text>{t('done')}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -196,7 +198,7 @@ export default function editUser() {
             <TextInput
               style={styles.project}
               onChangeText={(text) => setUser({ ...user, displayName: text })}
-              placeholder={"Your Name"}
+              placeholder={t('yourName')}
               value={user.displayName}
             />
           </View>
@@ -216,7 +218,7 @@ export default function editUser() {
                 color={Colors[colorScheme ?? "light"].text}
               />
               <Text style={styles.settingName}>
-                Notifications {user.notifications ? "On" : "Off"}
+                {t("notifications")} {user.notifications ? t("on") : t("off")}
               </Text>
             </View>
             <View style={styles.rightChevron}></View>
@@ -237,7 +239,7 @@ export default function editUser() {
               size={25}
               color={Colors[colorScheme ?? "light"].text}
             />
-            <Text style={styles.settingName}>Log Out</Text>
+            <Text style={styles.settingName}>{t("logOut")}</Text>
           </View>
           <View style={styles.rightChevron}></View>
         </TouchableOpacity>
@@ -289,7 +291,7 @@ export default function editUser() {
               size={25}
               color={Colors[colorScheme ?? "light"].text}
             />
-            <Text style={styles.settingName}>Delete Account</Text>
+            <Text style={styles.settingName}>{t("deleteAccount")}</Text>
           </View>
           <View style={styles.rightChevron}>
             <FontAwesome5
