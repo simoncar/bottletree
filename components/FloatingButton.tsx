@@ -15,8 +15,13 @@ export function FloatingButton({
   style,
   icon,
 }: FloatingButtonProps) {
+  // Calculate button width based on translation string length
+  const buttonWidth = Math.min(200, Math.max(180, title.length * 10 + 60));
+
   return (
-    <TouchableOpacity style={[styles.floatingButton, style]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.floatingButton, style, { width: buttonWidth }]}
+      onPress={onPress}>
       {icon ? icon : <AntDesign name="addfile" size={28} color="#ffffff" />}
       {title ? <Text style={styles.floatingButtonText}>{title}</Text> : null}
     </TouchableOpacity>

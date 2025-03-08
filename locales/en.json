@@ -51,5 +51,9 @@
   "date": "Date",
   "time": "Time",
   "addProject": "Add Project",
-  "projects": "Projects"
+  "projects": "Projects",
+  "logOut": "Log Out",
+  "addTask": "Add Task",
+  "newTaskPlaceholderText": "New Task",
+  "completed": "Completed"
 }

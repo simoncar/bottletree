@@ -26,6 +26,7 @@ import { AntDesign } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
 import { FloatingButton } from "@/components/FloatingButton";
 import { ShortList } from "@/components/sComponent";
+import { useTranslation } from "react-i18next";
 
 type SearchParams = {
   project: string; //project ID
@@ -40,6 +41,7 @@ export default function Tasks() {
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [newTaskName, setNewTaskName] = useState<string>("");
   const inputRef = useRef<TextInput>(null);
+  const { t } = useTranslation();
   const [collapsedSections, setCollapsedSections] = useState<{
     [key: string]: boolean;
   }>({
@@ -205,7 +207,7 @@ export default function Tasks() {
   return (
     <View style={styles.container}>
       <FloatingButton
-        title="Add Task"
+        title={t("addTask")}
         icon={<MaterialIcons name="add-task" size={28} color="#ffffff" />}
         onPress={handleAddTaskPress}
       />
@@ -251,7 +253,7 @@ export default function Tasks() {
                 },
               ]}>
               {renderSectionHeader(
-                `Completed (${groupedTasks.completed.length})`,
+                `${t("completed")} (${groupedTasks.completed.length})`,
                 "completed",
               )}
               {!collapsedSections.completed && (
@@ -284,12 +286,12 @@ export default function Tasks() {
                   <TextInput
                     ref={inputRef}
                     style={[styles.input]}
-                    placeholder="New Task"
+                    placeholder={t("newTaskPlaceholderText")}
                     value={newTaskName}
                     onChangeText={setNewTaskName}
                     multiline
                   />
-                  <Button title="Save" onPress={handleSaveTask} />
+                  <Button title={t("save")} onPress={handleSaveTask} />
                 </View>
               </TouchableOpacity>
             </View>

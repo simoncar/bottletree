@@ -5,6 +5,7 @@ import {
   useColorScheme,
   ScrollView,
   Pressable,
+  useWindowDimensions,
 } from "react-native";
 import { useSession } from "@/lib/ctx";
 import { router, Link, Stack } from "expo-router";
@@ -29,6 +30,7 @@ export default function Home() {
   const { session, signOut } = useSession();
   const { user, setUser } = useContext(UserContext);
   const { t } = useTranslation();
+  const { width: windowWidth } = useWindowDimensions();
 
   const handleAddPress = async () => {
     router.navigate({
@@ -84,7 +86,7 @@ export default function Home() {
               size={25}
               color={Colors[colorScheme ?? "light"].text}
             />
-            <Text style={styles.settingName}>Log Out</Text>
+            <Text style={styles.settingName}>{t("logOut")}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -219,6 +221,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 80,
     right: 10,
-    width: 150,
   },
 });

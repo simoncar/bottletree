@@ -33,8 +33,8 @@
   "photoTake": "Tomar foto",
   "photoChoose": "Escoge una foto",
   "profile": "Perfil",
-  "save": "Ahorrar",
-  "saved": "Salvado",
+  "save": "Guardar",
+  "saved": "Guardado",
   "search": "Buscar",
   "searchUsers": "Buscar usuarios",
   "send": "Enviar",
@@ -53,5 +53,9 @@
   "update-available": "Actualización disponible",
   "update-click-install": "Haga clic para instalar",
   "addProject": "Nuevo Proyecto",
-  "projects": "Proyectos"
+  "projects": "Proyectos",
+  "logOut": "Finalizar la sesión",
+  "addTask": "Agregar tarea",
+  "newTaskPlaceholderText": "Nueva tarea",
+  "completed": "Completado"
 }
