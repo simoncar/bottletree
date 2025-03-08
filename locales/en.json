@@ -50,5 +50,6 @@
   "takePhoto": "Take Photo",
   "addFromCameraRoll": "Add from Camera Roll",
   "addCalendarEvent": "Add Calendar Event",
-  "createNewProject": "Create New Project"
+  "createNewProject": "Create New Project",
+  "today": "Today"
 }

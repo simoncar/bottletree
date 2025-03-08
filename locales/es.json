@@ -50,5 +50,6 @@
   "takePhoto": "Tomar foto",
   "addFromCameraRoll": "Agregar desde la galería",
   "addCalendarEvent": "Agregar evento al calendario",
-  "createNewProject": "Crear nuevo proyecto"
+  "createNewProject": "Crear nuevo proyecto",
+  "today": "Hoy"
 }

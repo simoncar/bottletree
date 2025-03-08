@@ -24,6 +24,7 @@ import {
 
 import { ScrollView } from "react-native-gesture-handler";
 import { MonthYearScroller } from "@/components/Months";
+import { useTranslation } from "react-i18next";
 
 type SearchParams = {
   project: string; //project ID
@@ -36,6 +37,7 @@ export default function CalendarLarge() {
   const colorScheme = useColorScheme();
   const { height } = Dimensions.get("window");
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   const darkTheme = {
     palette: {
@@ -158,7 +160,7 @@ export default function CalendarLarge() {
               onPressIn={() => {
                 goToday();
               }}>
-              <Text style={{ paddingRight: 5 }}>Today</Text>
+              <Text style={{ paddingRight: 5 }}>{t('today')}</Text>
             </TouchableOpacity>
           ),
         }}
