@@ -113,7 +113,7 @@ export default function editUser() {
   const openActionSheet = async () => {
     console.log("openActionSheet");
 
-    const options = ["Pick from Camera Roll", "Delete", "Cancel"];
+    const options = [t('pickFromCameraRoll'), t('delete'), t('cancel')];
     const destructiveButtonIndex = options.length - 2;
     const cancelButtonIndex = options.length - 1;
     showActionSheetWithOptions(

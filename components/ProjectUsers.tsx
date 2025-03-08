@@ -16,6 +16,7 @@ import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 export const ProjectUsers = (props: any) => {
   const { project, update } = useLocalSearchParams<{
@@ -27,6 +28,7 @@ export const ProjectUsers = (props: any) => {
   const [projectUsers, setProjectUsers] = useState("");
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
+  const { t } = useTranslation();
 
   let prevOpenedRow;
   const row: Array<any> = [];
@@ -166,7 +168,7 @@ export const ProjectUsers = (props: any) => {
       <View>
         {renderHeader({
           key: "header",
-          displayName: "Add People to Project",
+          displayName: t("addPeopleToProject"),
           subTitle: "",
         })}
       </View>

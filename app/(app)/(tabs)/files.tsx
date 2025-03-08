@@ -28,6 +28,7 @@ import Reanimated, {
 } from "react-native-reanimated";
 import { FloatingButton } from "@/components/FloatingButton";
 import { setPostFile } from "@/lib/APIpost";
+import { useTranslation } from "react-i18next";
 
 type SearchParams = {
   project: string; //project ID
@@ -38,6 +39,7 @@ export default function Files() {
   const [files, setFiles] = useState<IFile[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const row: Array<any> = [];
   let prevOpenedRow;
@@ -187,21 +189,21 @@ export default function Files() {
               // deleteProjectUser(project, data, deleteDone);
               console.log("delete file");
               Alert.alert(
-                "Delete File",
-                "Are you sure you want to delete this file?",
+                t("deleteFile"),
+                t("areYouSureYouWantToDeleteThisFile"),
                 [
                   {
-                    text: "Cancel",
+                    text: t("cancel"),
                     style: "cancel",
                   },
                   {
-                    text: "Delete",
+                    text: t("delete"),
                     onPress: () => {
                       deleteFile(project, file.key, deleteDone);
                       row[file.key].close();
                       Toast.show({
                         type: "success",
-                        text1: "File Deleted",
+                        text1: t("fileDeleted"),
                         position: "bottom",
                       });
                     },
@@ -212,7 +214,7 @@ export default function Files() {
               );
             }}>
             <AntDesign name="delete" size={25} color={"white"} />
-            <Text style={{ color: "white" }}>Delete</Text>
+            <Text style={{ color: "white" }}>{t("delete")}</Text>
           </Pressable>
         </Reanimated.View>
       );
@@ -307,7 +309,7 @@ export default function Files() {
         </View>
       )}
       <FloatingButton
-        title="Add File"
+        title={t("addFile")}
         icon={<AntDesign name="addfile" size={28} color="#ffffff" />}
         onPress={handleAddFilePress}
       />

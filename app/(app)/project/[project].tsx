@@ -28,11 +28,12 @@ import { IProject } from "@/lib/types";
 import { Back } from "@/components/Back";
 import SharePanel from "@/components/SharePanel";
 import { About } from "@/lib/about";
+import { useTranslation } from "react-i18next";
 
 export default function editProject() {
   const [updateUsers, setUpdateUsers] = useState("");
   const [progress, setProgress] = useState(0);
-
+  const { t } = useTranslation();
   const local = useLocalSearchParams<{
     project: string;
     pUpdateUsers: string;
@@ -113,7 +114,7 @@ export default function editProject() {
   };
 
   const openActionSheet = async () => {
-    const options = ["Pick from Camera Roll", "Delete", "Cancel"];
+    const options = [t("pickFromCameraRoll"), t("delete"), t("cancel")];
     const destructiveButtonIndex = options.length - 2;
     const cancelButtonIndex = options.length - 1;
 
@@ -161,29 +162,6 @@ export default function editProject() {
     );
   };
 
-  const PrivateSelector = (
-    <View style={styles.outerView}>
-      <View style={styles.innerView}>
-        <View style={styles.avatar}>
-          <Ionicons
-            name="share-social"
-            size={25}
-            color={Colors[colorScheme ?? "light"].text}
-          />
-        </View>
-        <View>
-          <Text style={styles.private}>Private</Text>
-        </View>
-      </View>
-      <View style={styles.rightChevron}>
-        <Switch
-          value={project.private}
-          onValueChange={(value) => setProject({ ...project, private: value })}
-        />
-      </View>
-    </View>
-  );
-
   return (
     <ScrollView>
       <Stack.Screen
@@ -194,7 +172,7 @@ export default function editProject() {
                 console.log("save");
                 updateProject(project, saveDone);
               }}>
-              <Text>Done</Text>
+              <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -210,13 +188,13 @@ export default function editProject() {
               <TextInput
                 style={styles.project}
                 onChangeText={(text) => setProject({ ...project, title: text })}
-                placeholder={"Project Title"}
+                placeholder={t("projectTitle")}
                 value={project.title}
               />
             </View>
             <View style={styles.archiveBox}>
               <Text style={styles.archiveMessage}>
-                {project.archived == true ? "Project Archived" : ""}
+                {project.archived == true ? t("projectArchived") : ""}
               </Text>
             </View>
           </View>
@@ -233,8 +211,8 @@ export default function editProject() {
             <View>
               <Text style={styles.archiveName}>
                 {project.archived == true
-                  ? "Unarchive Project"
-                  : "Archive Project"}
+                  ? t("unarchiveProject")
+                  : t("archiveProject")}
               </Text>
             </View>
           </Pressable>
@@ -248,7 +226,7 @@ export default function editProject() {
                 />
               </View>
               <View>
-                <Text style={styles.archiveName}>Delete Project</Text>
+                <Text style={styles.archiveName}>{t("deleteProject")}</Text>
               </View>
             </Pressable>
           ) : null}

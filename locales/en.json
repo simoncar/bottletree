@@ -33,5 +33,18 @@
   "off": "Off",
   "yourName": "Your Name",
   "done": "Done",
-  "save": "Save"
+  "save": "Save",
+  "addPeopleToProject": "Add People to Project",
+  "projectTitle": "Project Title",
+  "projectArchived": "Project Archived",
+  "archiveProject": "Archive Project",
+  "unarchiveProject": "Unarchive Project",
+  "deleteProject": "Delete Project",
+  "pickFromCameraRoll": "Pick from Camera Roll",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "addFile": "Add File",
+  "areYouSureYouWantToDeleteThisFile": "Are you sure you want to delete this file?",
+  "deleteFile": "Delete File",
+  "fileDeleted": "File Deleted"
 }

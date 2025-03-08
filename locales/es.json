@@ -33,5 +33,18 @@
   "off": "Desactivado",
   "yourName": "Tu nombre",
   "done": "Hecho",
-  "save": "Guardar"
+  "save": "Guardar",
+  "addPeopleToProject": "Agregar personas al proyecto",
+  "projectTitle": "Título del proyecto",
+  "projectArchived": "Proyecto archivado",
+  "archiveProject": "Archivar proyecto",
+  "unarchiveProject": "Desarchivar proyecto",
+  "deleteProject": "Eliminar proyecto",
+  "pickFromCameraRoll": "Seleccionar de la galería",
+  "delete": "Eliminar",
+  "cancel": "Cancelar",
+  "addFile": "Agregar archivo",
+  "areYouSureYouWantToDeleteThisFile": "¿Estás seguro de que quieres eliminar este archivo?",
+  "deleteFile": "Eliminar archivo",
+  "fileDeleted": "Archivo eliminado"
 }
