@@ -14,6 +14,7 @@ import { Back } from "@/components/Back";
 import { UserContext } from "@/lib/UserContext";
 import AddModal from "@/app/(app)/addModal";
 import { StatusBar } from "expo-status-bar";
+import { useTranslation } from "react-i18next";
 
 function TabBarIcon({
   name,
@@ -51,6 +52,7 @@ export default function TabLayout() {
   const { isAuthLoading } = useSession();
   const { posts: project } = useLocalSearchParams<SearchParams>();
   const [modalVisible, setModalVisible] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     console.log("/(app)/(tabs)/_layout.tsx");
@@ -105,7 +107,7 @@ export default function TabLayout() {
             },
           }}
           options={{
-            title: "Projects",
+            title: t("projects"),
             headerRight: () => (
               <View style={styles.topPanelRight}>
                 <UserAvatar
@@ -121,7 +123,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="calendar"
           options={{
-            title: "Calendar",
+            title: t("calendar"),
 
             tabBarIcon: ({ color }) => (
               <TabBarIcon
@@ -137,7 +139,7 @@ export default function TabLayout() {
           name="files"
           initialParams={{ project: project }}
           options={{
-            title: "Files",
+            title: t("files"),
             tabBarIcon: ({ color }) => (
               <TabBarIcon
                 name="file-present"
@@ -151,7 +153,7 @@ export default function TabLayout() {
           name="tasks"
           initialParams={{ project: project }}
           options={{
-            title: "Tasks",
+            title: t("tasks"),
             tabBarIcon: ({ color }) => (
               <TabBarIcon
                 name="add-task"
@@ -165,8 +167,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="nothing"
           options={{
-            title: "Add",
-
+            title: t("add"),
             tabBarButton: (props) => (
               <Pressable
                 onPress={() => {

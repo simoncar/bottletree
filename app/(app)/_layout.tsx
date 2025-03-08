@@ -45,6 +45,7 @@ import {
 } from "@expo-google-fonts/inter";
 
 import i18n from "@/lib/i18n";
+import { useTranslation } from "react-i18next";
 
 import {
   MontserratSubrayada_400Regular,
@@ -69,6 +70,7 @@ export default function Layout() {
   const currentPath = usePathname();
   const segments = useSegments();
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const myLightTheme = {
     ...DefaultTheme,
@@ -224,13 +226,13 @@ export default function Layout() {
             <Stack.Screen
               name="language"
               options={{
-                title: "Language",
+                title: t('language'),
               }}
             />
             <Stack.Screen
               name="editPost"
               options={{
-                title: "Edit",
+                title: t("edit"),
               }}
             />
             <Stack.Screen
@@ -242,55 +244,55 @@ export default function Layout() {
             <Stack.Screen
               name="project/[project]"
               options={{
-                title: "Project Details",
+                title: t("project"),
               }}
             />
             <Stack.Screen
               name="project/add"
               options={{
-                title: "Add Project",
+                title: t("addProject"),
               }}
             />
             <Stack.Screen
               name="editCalendar"
               options={{
-                title: "Add Event",
+                title: t("addEvent"),
               }}
             />
             <Stack.Screen
               name="user/[uid]"
               options={{
-                title: "User",
+                title: t("user"),
               }}
             />
             <Stack.Screen
               name="camera"
               options={{
-                title: "Camera",
+                title: t("camera"),
               }}
             />
             <Stack.Screen
               name="house"
               options={{
-                title: "About",
+                title: t("about"),
               }}
             />
             <Stack.Screen
               name="note"
               options={{
-                title: "Add Note",
+                title: t("addNote"),
               }}
             />
             <Stack.Screen
               name="log"
               options={{
-                title: "Logs",
+                title: t("logs"),
               }}
             />
             <Stack.Screen
               name="task"
               options={{
-                title: "Task",
+                title: t("task"),
               }}
             />
           </Stack>

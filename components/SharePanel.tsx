@@ -11,6 +11,7 @@ import { useRouter } from "expo-router";
 import { Text } from "@/components/Themed";
 import { IProject } from "@/lib/types";
 import Colors from "@/constants/Colors";
+import { useTranslation } from "react-i18next";
 
 type ProjectProp = {
   project: IProject;
@@ -70,6 +71,7 @@ const IconButton = (props) => {
 };
 export const SharePanel = (props) => {
   const { project, buttons } = props;
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
@@ -78,7 +80,7 @@ export const SharePanel = (props) => {
           project={project}
           pathname="/calendar"
           icon="calendar-today"
-          label="calendar"
+          label={t("calendar")}
           count={0}
         />
       )}
@@ -87,7 +89,7 @@ export const SharePanel = (props) => {
           project={project}
           pathname="/files"
           icon="file-present"
-          label="files"
+          label={t("files")}
           count={project.fileCount}
         />
       )}
@@ -96,7 +98,7 @@ export const SharePanel = (props) => {
           project={project}
           pathname="/tasks"
           icon="add-task"
-          label="tasks"
+          label={t("tasks")}
           count={project.taskCount}
         />
       )}
@@ -105,7 +107,7 @@ export const SharePanel = (props) => {
           project={project}
           pathname="/share"
           icon="share"
-          label="share"
+          label={t("share")}
           count={0}
         />
       )}
@@ -114,7 +116,7 @@ export const SharePanel = (props) => {
           project={project}
           pathname="/project/[project]"
           icon="settings"
-          label="settings"
+          label={t("settings")}
           count={0}
         />
       )}

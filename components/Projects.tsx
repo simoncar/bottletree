@@ -15,6 +15,7 @@ import { IProject } from "@/lib/types";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { UserContext } from "@/lib/UserContext";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   session: string;
@@ -30,6 +31,7 @@ export const Projects = ({ session, archived }: Props) => {
   const [showArchived, setShowArchived] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const projectsRead = (projectsDB: IProject[]) => {
     //loop through the projectsDB and split the array into two arrays based on the archived flag
@@ -91,13 +93,13 @@ export const Projects = ({ session, archived }: Props) => {
         <View>
           <Text style={styles.project}>{data.title || ""}</Text>
           <Text style={styles.projectCount}>
-            {data.postCount > 0 ? `Posts ${data.postCount}` : ""}
+            {data.postCount > 0 ? `${t("posts")} ${data.postCount}` : ""}
             {data.postCount > 0 && data.fileCount > 0 ? " · " : ""}
-            {data.fileCount > 0 ? `Files ${data.fileCount}` : ""}
+            {data.fileCount > 0 ? `${t("files")} ${data.fileCount}` : ""}
             {(data.postCount > 0 || data.fileCount > 0) && data.taskCount > 0
               ? " · "
               : ""}
-            {data.taskCount > 0 ? `Tasks ${data.taskCount}` : ""}
+            {data.taskCount > 0 ? `${t("tasks")} ${data.taskCount}` : ""}
           </Text>
         </View>
       );
