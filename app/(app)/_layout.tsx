@@ -31,6 +31,8 @@ import { UserContext } from "@/lib/UserContext";
 import { getUser } from "@/lib/APIuser";
 import { auth, db, firestore } from "@/lib/firebase";
 import { RootSiblingParent } from "react-native-root-siblings";
+import * as Localization from "expo-localization";
+
 import {
   useFonts,
   Inter_100Thin,
@@ -45,6 +47,10 @@ import {
 } from "@expo-google-fonts/inter";
 
 import i18n from "@/lib/i18n";
+import "dayjs/locale/es";
+import "dayjs/locale/en";
+import dayjs from "dayjs";
+
 import { useTranslation } from "react-i18next";
 
 import {
@@ -71,6 +77,8 @@ export default function Layout() {
   const segments = useSegments();
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
+
+  dayjs.locale(Localization.getLocales()[0]?.languageCode || "en");
 
   const myLightTheme = {
     ...DefaultTheme,
@@ -192,7 +200,7 @@ export default function Layout() {
             <Stack.Screen
               name="index"
               options={{
-                title: t('home'),
+                title: t("home"),
                 headerShown: true,
               }}
             />

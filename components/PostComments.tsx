@@ -7,6 +7,7 @@ import Colors from "@/constants/Colors";
 import { IComment } from "@/lib/types";
 import { firestore } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   project: string;
@@ -16,7 +17,8 @@ type Props = {
 };
 
 const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
-  const defaultComment = "Add a comment...";
+  const { t } = useTranslation();
+  const defaultComment = t("addAComment");
   const [comments, setComments] = useState([]);
   const [text, setComment] = useState("");
   const { user } = useContext(UserContext);

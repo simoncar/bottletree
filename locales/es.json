@@ -95,5 +95,7 @@
   "cameraNeedPermission": "La aplicación necesita permiso para acceder a la cámara",
   "cameraPermissionOpenSettings": "Abrir configuración para habilitar permisos de cámara",
   "copy": "Copiar",
-  "shareDescription": "Permitir que cualquier persona con el enlace vea este proyecto"
+  "shareDescription": "Permitir que cualquier persona con el enlace vea este proyecto",
+  "addAComment": "Agregar un comentario...",
+  "comment": "Comentario"
 }

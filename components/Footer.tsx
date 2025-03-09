@@ -10,6 +10,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { deletePost } from "@/lib/APIpost";
 import alert from "@/lib/alert";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   project: string;
@@ -20,6 +21,7 @@ type Props = {
 
 const Footer = ({ post, setCommentShow }: Props) => {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
   const [footer, setFooter] = useState<boolean>(false);
 
   const saveDone = () => {
@@ -86,7 +88,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
                 openEdit();
               }}>
               <View style={styles.actionRow}>
-                <Text style={styles.actionLeftText}>Edit</Text>
+                <Text style={styles.actionLeftText}>{t("edit")}</Text>
 
                 <Ionicons
                   style={[
@@ -104,7 +106,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
                 askComment();
               }}>
               <View style={styles.actionRow}>
-                <Text style={styles.actionLeftText}>Comment</Text>
+                <Text style={styles.actionLeftText}>{t("comment")}</Text>
                 <MaterialIcons
                   name="send"
                   style={[
@@ -122,7 +124,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
               }}>
               <View style={styles.actionRow}>
                 <Text style={[styles.actionLeftText, { color: "red" }]}>
-                  Delete
+                  {t("delete")}
                 </Text>
                 <Ionicons
                   style={[styles.actionRightIcon, { color: "red" }]}
