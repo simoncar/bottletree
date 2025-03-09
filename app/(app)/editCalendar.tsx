@@ -19,7 +19,7 @@ import {
 } from "@/lib/APIcalendar";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import * as Localization from "expo-localization";
 import Colors from "@/constants/Colors";
 import { ICalendarEvent, IProject } from "@/lib/types";
 import { Image } from "expo-image";
@@ -71,6 +71,7 @@ export default function editCalendar() {
   const [dateOrTime, setDateOrTime] = useState<DateorTime>("date");
   const [pickerValue, setPickerValue] = useState<Date>(new Date());
   const [displayMode, setDisplayMode] = useState<DisplayMode>("inline");
+  const locale = Localization.getLocales()[0]?.languageCode || "en";
 
   useEffect(() => {
     if (calendarId != undefined) {
@@ -137,12 +138,12 @@ export default function editCalendar() {
       t("areYouSure"),
       [
         {
-          text: t('cancel'),
+          text: t("cancel"),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: t('delete'),
+          text: t("delete"),
           onPress: () => {
             deleteCalendarEvent(project, calendarEvent, deleteDone);
           },
@@ -216,7 +217,7 @@ export default function editCalendar() {
             />
           </View>
           <View>
-            <Text style={styles.actionTitle}>{t('delete')}</Text>
+            <Text style={styles.actionTitle}>{t("delete")}</Text>
           </View>
         </Pressable>
       );
@@ -268,7 +269,7 @@ export default function editCalendar() {
                 console.log("save");
                 save();
               }}>
-              <Text>{t('done')}</Text>
+              <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -285,19 +286,48 @@ export default function editCalendar() {
             display={displayMode}
           />
 
-          <View style={styles.avatar}></View>
+          <View style={styles.avatar}>
+            <Pressable
+              onPress={() => {
+                console.log("color press:");
+                setShowColor(!showColor);
+              }}>
+              <View style={styles.itemView}>
+                <View style={styles.avatar}>
+                  <View
+                    style={[
+                      styles.colorAvatar,
+                      { backgroundColor: calendarEvent.color },
+                    ]}
+                  />
+                </View>
+                <View style={styles.title}>
+                  <Text style={styles.actionTitle}>
+                    {calendarEvent.colorName}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.line}></View>
+            </Pressable>
+          </View>
           <View style={styles.title}>
             <TextInput
               style={styles.titleText}
               onChangeText={(text) =>
                 setCalendarEvent({ ...calendarEvent, title: text })
               }
-              placeholder={t('addTitle')}
+              placeholder={t("addTitle")}
               value={calendarEvent.title}
               autoFocus={true}
             />
           </View>
         </View>
+        {showColor && (
+          <View style={styles.itemViewRow}>
+            <ColorRow onPress={handleSelectColor} />
+          </View>
+        )}
 
         <View style={styles.itemView}>
           <View style={styles.avatar}></View>
@@ -306,10 +336,10 @@ export default function editCalendar() {
             <Pressable
               onPress={() => showDatePicker("dateBegin", "date", dateBegin)}>
               <Text style={styles.textDate}>
-                {dateBegin.toLocaleDateString("en-US", {
+                {dateBegin.toLocaleDateString(locale, {
                   weekday: "short",
                   day: "numeric",
-                  month: "long",
+                  month: "short",
                   year: "numeric",
                 })}
               </Text>
@@ -321,10 +351,11 @@ export default function editCalendar() {
                 showDatePicker("dateBeginTime", "time", dateBeginTime)
               }>
               <Text style={styles.textDate}>
-                {dateBeginTime.toLocaleString("en-US", {
+                {dateBeginTime.toLocaleString(locale, {
                   hour: "numeric",
                   minute: "numeric",
                   hour12: true,
+                  timeStyle: "short",
                 })}
               </Text>
             </Pressable>
@@ -336,10 +367,10 @@ export default function editCalendar() {
             <Pressable
               onPress={() => showDatePicker("dateEnd", "date", dateEnd)}>
               <Text style={styles.textDate}>
-                {dateEnd.toLocaleDateString("en-US", {
+                {dateEnd.toLocaleDateString(locale, {
                   weekday: "short",
                   day: "numeric",
-                  month: "long",
+                  month: "short",
                   year: "numeric",
                 })}
               </Text>
@@ -351,10 +382,11 @@ export default function editCalendar() {
                 showDatePicker("dateEndTime", "time", dateEndTime)
               }>
               <Text style={styles.textDate}>
-                {dateEndTime.toLocaleString("en-US", {
+                {dateEndTime.toLocaleString(locale, {
                   hour: "numeric",
                   minute: "numeric",
                   hour12: true,
+                  timeStyle: "short",
                 })}
               </Text>
             </Pressable>
@@ -373,7 +405,7 @@ export default function editCalendar() {
             onChangeText={(description) =>
               setCalendarEvent({ ...calendarEvent, description: description })
             }
-            placeholder={t('addDescription')}
+            placeholder={t("addDescription")}
             value={calendarEvent.description}
             multiline
             numberOfLines={6}
@@ -393,34 +425,9 @@ export default function editCalendar() {
             </Text>
           </View>
         </View>
-        <Pressable
-          onPress={() => {
-            console.log("color press:");
-            setShowColor(!showColor);
-          }}>
-          <View style={styles.itemView}>
-            <View style={styles.avatar}>
-              <View
-                style={[
-                  styles.colorAvatar,
-                  { backgroundColor: calendarEvent.color },
-                ]}
-              />
-            </View>
-            <View style={styles.title}>
-              <Text style={styles.actionTitle}>{calendarEvent.colorName}</Text>
-            </View>
-          </View>
-          {showColor && (
-            <View style={styles.itemViewRow}>
-              <ColorRow onPress={handleSelectColor} />
-            </View>
-          )}
-          <View style={styles.line}></View>
 
-          {renderDelete()}
-          <View style={styles.bottom}></View>
-        </Pressable>
+        {renderDelete()}
+        <View style={styles.bottom}></View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -430,7 +437,12 @@ const styles = StyleSheet.create({
   actionTitle: {
     fontSize: 20,
   },
-  avatar: { alignItems: "center", justifyContent: "flex-start", width: 48 },
+  avatar: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+    width: 48,
+    marginRight: 8,
+  },
   bottom: { paddingBottom: 500 },
   colorAvatar: {
     borderRadius: 35 / 2,
