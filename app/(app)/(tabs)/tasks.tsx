@@ -114,8 +114,8 @@ export default function Tasks() {
         if (!task.completed) {
           Toast.show({
             type: "success",
-            text1: t('taskComplete'),
-            text2: t('taskHasBeenSetToComplete'),
+            text1: t("taskComplete"),
+            text2: t("taskHasBeenSetToComplete"),
             position: "bottom",
           });
         }
@@ -185,20 +185,21 @@ export default function Tasks() {
     );
   };
 
-  const renderSectionHeader = (title: string, section: string) => (
-    <TouchableOpacity
-      style={styles.sectionHeader}
-      onPress={() => section !== "incomplete" && toggleSection(section)}>
-      <Text style={styles.sectionHeaderText}>{title}</Text>
-      {section !== "incomplete" && (
+  const renderSectionHeader = (title: string, section: string) => {
+    if (section === "incomplete") return null;
+    return (
+      <TouchableOpacity
+        style={styles.sectionHeader}
+        onPress={() => toggleSection(section)}>
+        <Text style={styles.sectionHeaderText}>{title}</Text>
         <AntDesign
           name={collapsedSections[section] ? "down" : "up"}
           size={24}
           color={Colors[colorScheme ?? "light"].text}
         />
-      )}
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  };
 
   const renderItem = (item: ITask) => (
     <TaskItem task={item} onPress={handleTaskPress} key={item.key} />
@@ -305,6 +306,7 @@ export default function Tasks() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16,
   },
   addButton: {
     padding: 12,

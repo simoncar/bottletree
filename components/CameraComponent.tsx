@@ -19,6 +19,7 @@ import Progress from "@/components/Progress";
 import * as Linking from "expo-linking";
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
+import { useTranslation } from "react-i18next";
 
 export default function CameraComponent() {
   const [facing, setFacing] = useState<CameraType>("back");
@@ -31,6 +32,7 @@ export default function CameraComponent() {
   const [backgroundInnerColor, setBackgroundInnerColor] = useState("white");
   const cameraRef = useRef<any>(null);
   const [progress, setProgress] = useState(0);
+  const { t } = useTranslation();
 
   const local = useLocalSearchParams<{
     project: string;
@@ -55,14 +57,14 @@ export default function CameraComponent() {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          We need your permission to show the camera so you can take photos.
+          {t('cameraNeedPermission')}
         </Text>
         <Pressable
           onPress={() => {
             openSettings();
           }}>
           <Text style={styles.text}>
-            Open settings to enable camera permissions.
+            {t('cameraPermissionOpenSettings')}
           </Text>
         </Pressable>
       </View>

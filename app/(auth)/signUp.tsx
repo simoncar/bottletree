@@ -15,6 +15,7 @@ import { addLog } from "@/lib/APIlog";
 import { About } from "@/lib/about";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
+import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -26,6 +27,7 @@ export default function SignIn() {
   const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
   const oldUid = auth().currentUser?.uid;
+  const { t } = useTranslation();
 
   const signUpCallback = async (user, error) => {
     if (error == "SignUp Success") {
@@ -87,7 +89,7 @@ export default function SignIn() {
             signUp(name, email, password, signUpCallback);
           }}
           style={styles.button}>
-          <Text style={styles.loginText}>Create Account</Text>
+          <Text style={styles.loginText}>{t("signInCreateAccount")}</Text>
         </TouchableOpacity>
       );
     }
@@ -95,13 +97,13 @@ export default function SignIn() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: "Create Account" }} />
+      <Stack.Screen options={{ title: t("signInCreateAccount") }} />
 
       <View style={styles.inputView}>
         <TextInput
           style={styles.textInput}
           inputMode="text"
-          placeholder="Name"
+          placeholder={t("yourName")}
           autoCorrect={false}
           autoFocus
           autoComplete="name"
@@ -115,7 +117,7 @@ export default function SignIn() {
           keyboardType="email-address"
           inputMode="email"
           autoCapitalize="none"
-          placeholder="Email"
+          placeholder={t("email")}
           autoComplete="email"
           spellCheck={false}
           textContentType="emailAddress"
@@ -125,7 +127,7 @@ export default function SignIn() {
       <View style={styles.inputView}>
         <TextInput
           style={styles.textInput}
-          placeholder="Password"
+          placeholder={t("password")}
           secureTextEntry={secureEntry}
           autoComplete="password"
           textContentType="password"

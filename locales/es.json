@@ -90,5 +90,10 @@
   "signInCreateANewAccount": "Crear una nueva cuenta",
   "slogan": "Administración de proyectos para constructores",
   "email": "Correo electrónico",
-  "password": "Contraseña"
+  "password": "Contraseña",
+  "signInCreateAccount": "Crear cuenta",
+  "cameraNeedPermission": "La aplicación necesita permiso para acceder a la cámara",
+  "cameraPermissionOpenSettings": "Abrir configuración para habilitar permisos de cámara",
+  "copy": "Copiar",
+  "shareDescription": "Permitir que cualquier persona con el enlace vea este proyecto"
 }

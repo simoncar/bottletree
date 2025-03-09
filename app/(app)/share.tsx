@@ -13,6 +13,7 @@ import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
 import { useLocalSearchParams } from "expo-router";
 import * as Clipboard from "expo-clipboard";
+import { useTranslation } from "react-i18next";
 
 type ShareParams = {
   project: string;
@@ -23,6 +24,7 @@ const ShareLink = () => {
   const { project, title } = useLocalSearchParams<ShareParams>();
   const colorScheme = useColorScheme();
   const [copiedText, setCopiedText] = React.useState("");
+  const { t } = useTranslation();
 
   const CopyLinkButton = () => {
     return (
@@ -35,7 +37,7 @@ const ShareLink = () => {
           Clipboard.setStringAsync("https://b.otbapps.com/" + project);
         }}>
         <FontAwesome6 name="copy" color="#999999" style={styles.avatarIcon} />
-        <Text style={styles.shareButton}>Copy</Text>
+        <Text style={styles.shareButton}>{t("copy")}</Text>
       </TouchableOpacity>
     );
   };
@@ -53,10 +55,10 @@ const ShareLink = () => {
               {
                 message: title + "\n\n" + "https://b.otbapps.com/" + project,
                 url: "https://b.otbapps.com/" + project,
-                title: "Share project",
+                title: t("share"),
               },
               {
-                dialogTitle: "Share project",
+                dialogTitle: t("share"),
                 subject: title,
               },
             );
@@ -74,7 +76,7 @@ const ShareLink = () => {
           }
         }}>
         <FontAwesome6 name="share" color="#999999" style={styles.avatarIcon} />
-        <Text style={styles.shareButton}>Share</Text>
+        <Text style={styles.shareButton}>{t("share")}</Text>
       </TouchableOpacity>
     );
   };
@@ -86,18 +88,27 @@ const ShareLink = () => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       <View style={styles.shareInstructions}>
-        <Text style={styles.shareText}>
-          Let anybody with the link see this project
-        </Text>
+        <Text style={styles.shareText}>{t("shareDescription")}</Text>
         <View style={styles.shareLink}>
           <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
         </View>
-        <CopyLinkButton />
-        <ShareLinkButton />
+        <View style={styles.buttonRow}>
+          <CopyLinkButton />
+          <ShareLinkButton />
+        </View>
       </View>
-
-      <View style={styles.qrcode}>
-        <QRCode size={200} ecl="L" value={`https://b.otbapps.com/${project}`} />
+      <View
+        style={[
+          styles.qrcodeContainer,
+          { borderColor: Colors[colorScheme ?? "light"].text },
+        ]}>
+        <View style={styles.qrcode}>
+          <QRCode
+            size={200}
+            ecl="L"
+            value={`https://b.otbapps.com/${project}`}
+          />
+        </View>
       </View>
     </View>
   );
@@ -108,6 +119,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 5,
     paddingRight: 10,
+  },
+  qrcodeContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+    padding: 10,
+    borderWidth: 10,
+    backgroundColor: "white",
   },
   buttonStyle: {
     alignItems: "center",
@@ -120,13 +139,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 8,
     textAlign: "center",
-    width: 150,
+    width: 160,
   },
   container: {
+    flex: 1,
     alignItems: "center",
-    paddingBottom: 15,
-    paddingHorizontal: 15,
-    paddingTop: 25,
+    padding: 16,
   },
   qrcode: {
     alignItems: "center",
@@ -140,7 +158,6 @@ const styles = StyleSheet.create({
   },
 
   shareInstructions: {
-    alignItems: "center",
     paddingBottom: 25,
     paddingTop: 25,
   },
@@ -151,6 +168,12 @@ const styles = StyleSheet.create({
   },
   shareText: {
     fontSize: 20,
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 20,
   },
 });
 

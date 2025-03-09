@@ -244,8 +244,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 40,
+    marginHorizontal: 20,
     marginTop: 80,
-    padding: 10,
   },
   textInput: {
     alignItems: "flex-start",

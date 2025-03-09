@@ -90,5 +90,10 @@
   "signInCreateANewAccount": "Create a new account",
   "slogan": "Project Management for Builders",
   "email": "Email",
-  "password": "Password"
+  "password": "Password",
+  "signInCreateAccount": "Create Account",
+  "cameraNeedPermission": "We need your permission to show the camera so you can take photos.",
+  "cameraPermissionOpenSettings": "Open settings to enable camera permissions.",
+  "copy": "Copy",
+  "shareDescription": "Let anybody with the link see this project"
 }

@@ -11,7 +11,7 @@ type FloatingButtonProps = {
 
 export function FloatingButton({
   onPress,
-  title = "Add File",
+  title = "",
   style,
   icon,
 }: FloatingButtonProps) {

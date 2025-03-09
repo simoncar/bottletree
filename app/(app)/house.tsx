@@ -7,7 +7,7 @@ import {
   Platform,
   Pressable,
 } from "react-native";
-import { Text, View } from "@/components/Themed";
+import { Logo, Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
 import { About } from "@/lib/about";
@@ -19,7 +19,11 @@ export default function House() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>One Build</Text>
+      <View style={styles.topPanelCenter}>
+        <Logo style={{ fontSize: 40 }}>One</Logo>
+        <Text style={{ fontSize: 35 }}> </Text>
+        <Logo style={{ fontSize: 40 }}>Build</Logo>
+      </View>
 
       <View
         style={[
@@ -50,6 +54,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     paddingTop: 100,
+  },
+  topPanelCenter: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+    marginBottom: 30,
   },
   qrcode: {
     alignItems: "center",
