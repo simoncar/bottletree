@@ -272,7 +272,8 @@ const styles = StyleSheet.create({
   },
   projectCount: {
     color: "grey",
-	  fontSize: 13,
+    fontSize: 13,
+    width: 210,
   },
   projectTitle: {
     width: 250,

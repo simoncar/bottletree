@@ -68,5 +68,16 @@
   "yes": "Yes",
   "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account?",
   "ifYouChangeYourMindYouWillNotBeAbleToUndoThis": "If you change your mind, you will not be able to undo this",
-  "yesDeleteMyAccount": "YES, Delete my account"
+  "yesDeleteMyAccount": "YES, Delete my account",
+  "taskComplete": "Task Complete",
+  "taskHasBeenSetToComplete": "Task has been set to Complete",
+  "writeProjectName": "Write Project Name...",
+  "next": "Next",
+  "saving": "Saving...",
+  "addTitle": "Add title",
+  "addDescription": "Add description",
+  "downloading": "Downloading...",
+  "failed": "Failed",
+  "shareTheAppWithYourFriends": "Share the app with your friends",
+  "findOutMore": "Find out more"
 }

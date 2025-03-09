@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 
   button: {
     borderRadius: 12,
-    width: 80,
+    width: 86,
     height: 80,
 
     borderWidth: StyleSheet.hairlineWidth,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   shareText: {
-    fontSize: 15,
+    fontSize: 14,
   },
 });
 

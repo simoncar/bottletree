@@ -11,10 +11,12 @@ import { editTask } from "@/lib/APItasks";
 import Colors from "@/constants/Colors";
 import { ITask } from "@/lib/types";
 import { Text, TextInput, View } from "@/components/Themed";
+import { useTranslation } from "react-i18next";
 
 export default function TaskScreen() {
   const { task } = useLocalSearchParams<{ task: string }>();
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
   const [taskObj, setTask] = useState<ITask>(JSON.parse(task || "{}"));
 
   const saveDone = () => {
@@ -35,7 +37,7 @@ export default function TaskScreen() {
               onPressIn={() => {
                 save();
               }}>
-              <Text>Done</Text>
+              <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -47,7 +49,7 @@ export default function TaskScreen() {
               styles.label,
               { color: Colors[colorScheme ?? "light"].textDisabledColor },
             ]}>
-            Task
+            {t("task")}
           </Text>
           <TextInput
             style={[
@@ -55,7 +57,7 @@ export default function TaskScreen() {
               { color: Colors[colorScheme ?? "light"].textField },
             ]}
             onChangeText={(title) => setTask({ ...taskObj, task: title })}
-            placeholder={"Task"}
+            placeholder={t("task")}
             value={taskObj.task}
             autoFocus={true}
             multiline={true}

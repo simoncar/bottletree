@@ -11,22 +11,31 @@ import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import QRCode from "react-native-qrcode-svg";
 import { About } from "@/lib/about";
+import { useTranslation } from "react-i18next";
 
 export default function House() {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>One Build</Text>
 
-      <View style={styles.qrcode}>
-        <QRCode size={200} ecl="L" value={`https://otbapps.com`} />
+      <View
+        style={[
+          styles.qrcodeContainer,
+          { borderColor: Colors[colorScheme ?? "light"].text },
+        ]}>
+        <View style={styles.qrcode}>
+          <QRCode size={200} ecl="L" value={`https://otbapps.com`} />
+        </View>
       </View>
-      <Text style={styles.textSub}>Share the app with your friends</Text>
+      <Text style={styles.textSub}>{t("shareTheAppWithYourFriends")}</Text>
       <View>
         <Pressable
           style={styles.button}
           onPress={() => Linking.openURL("https://otbapps.com")}>
-          <Text style={styles.buttonText}>Find out more</Text>
+          <Text style={styles.buttonText}>{t("findOutMore")}</Text>
         </Pressable>
       </View>
 
@@ -87,5 +96,13 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: "white",
+  },
+  qrcodeContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+    padding: 10,
+    borderWidth: 10,
+    backgroundColor: "white",
   },
 });

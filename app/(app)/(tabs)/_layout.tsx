@@ -2,12 +2,15 @@ import { Tabs, useLocalSearchParams, router } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useContext, useEffect, useState } from "react";
-import { Pressable, useColorScheme, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  useColorScheme,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
-import { IPost } from "@/lib/types";
-import { useActionSheet } from "@expo/react-native-action-sheet";
-import { addPostImage } from "@/lib/APIpost";
 import { useSession } from "@/lib/ctx";
 import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
@@ -59,7 +62,11 @@ export default function TabLayout() {
   }, []);
 
   if (isAuthLoading) {
-    return <Text>Loading</Text>;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   const handleOptionSelect = (option: string) => {

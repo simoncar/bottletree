@@ -232,7 +232,7 @@ export default function editProject() {
           ) : null}
 
           <View style={styles.diagBox}>
-            <Text style={styles.projectId}>Project ID: {project.key}</Text>
+            <Text style={styles.projectId}>{project.key}</Text>
             <About />
           </View>
         </View>

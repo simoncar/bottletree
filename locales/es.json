@@ -68,5 +68,16 @@
   "yes": "Sí",
   "areYouSureYouWantToDeleteYourAccount": "¿Estás seguro de que quieres eliminar tu cuenta?",
   "ifYouChangeYourMindYouWillNotBeAbleToUndoThis": "Si cambias de opinión, no podrás deshacer esto.",
-  "yesDeleteMyAccount": "Sí, eliminar mi cuenta"
+  "yesDeleteMyAccount": "Sí, eliminar mi cuenta",
+  "taskComplete": "Tarea completada",
+  "taskHasBeenSetToComplete": "La tarea se ha completado",
+  "writeProjectName": "Escribe el nombre del proyecto...",
+  "next": "Siguiente",
+  "saving": "Guardando...",
+  "addTitle": "Agregar título",
+  "addDescription": "Agregar descripción",
+  "downloading": "Descargando...",
+  "failed": "Falló",
+  "shareTheAppWithYourFriends": "Comparte la aplicación con tus amigos",
+  "findOutMore": "Descubre más"
 }

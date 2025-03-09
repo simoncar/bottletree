@@ -114,8 +114,8 @@ export default function Tasks() {
         if (!task.completed) {
           Toast.show({
             type: "success",
-            text1: "Task Complete",
-            text2: "Task has been set to Complete",
+            text1: t('taskComplete'),
+            text2: t('taskHasBeenSetToComplete'),
             position: "bottom",
           });
         }

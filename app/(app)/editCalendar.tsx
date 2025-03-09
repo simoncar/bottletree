@@ -27,7 +27,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ColorRow } from "@/components/ColorRow";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { getProject } from "@/lib/APIproject";
-import { Back } from "@/components/Back";
+import { useTranslation } from "react-i18next";
 
 type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
 type DateorTime = "date" | "time";
@@ -39,6 +39,7 @@ type CalendarParams = {
 };
 export default function editCalendar() {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
   const { calendarId, project, clickDate } =
     useLocalSearchParams<CalendarParams>();
   const [calendarEvent, setCalendarEvent] = useState<ICalendarEvent>({
@@ -132,16 +133,16 @@ export default function editCalendar() {
 
   const doDelete = () => {
     Alert.alert(
-      "Delete",
-      "Are you sure?",
+      t("delete"),
+      t("areYouSure"),
       [
         {
-          text: "Cancel",
+          text: t('cancel'),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: "Delete",
+          text: t('delete'),
           onPress: () => {
             deleteCalendarEvent(project, calendarEvent, deleteDone);
           },
@@ -215,7 +216,7 @@ export default function editCalendar() {
             />
           </View>
           <View>
-            <Text style={styles.actionTitle}>Delete</Text>
+            <Text style={styles.actionTitle}>{t('delete')}</Text>
           </View>
         </Pressable>
       );
@@ -267,7 +268,7 @@ export default function editCalendar() {
                 console.log("save");
                 save();
               }}>
-              <Text>Done</Text>
+              <Text>{t('done')}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -291,7 +292,7 @@ export default function editCalendar() {
               onChangeText={(text) =>
                 setCalendarEvent({ ...calendarEvent, title: text })
               }
-              placeholder={"Add title"}
+              placeholder={t('addTitle')}
               value={calendarEvent.title}
               autoFocus={true}
             />
@@ -372,7 +373,7 @@ export default function editCalendar() {
             onChangeText={(description) =>
               setCalendarEvent({ ...calendarEvent, description: description })
             }
-            placeholder={"Add description"}
+            placeholder={t('addDescription')}
             value={calendarEvent.description}
             multiline
             numberOfLines={6}

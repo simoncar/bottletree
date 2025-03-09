@@ -7,14 +7,13 @@ import {
   Pressable,
 } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { Image } from "expo-image";
-import { Back } from "@/components/Back";
 import { Feather } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
 import Toast from "react-native-root-toast";
 import PinchableImage from "@/components/PinchableImage";
+import { useTranslation } from "react-i18next";
 
 type ViewParam = {
   image: string;
@@ -25,6 +24,7 @@ type ViewParam = {
 const ViewPost = () => {
   const { image, width, height } = useLocalSearchParams<ViewParam>();
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const downloadImage = async () => {
     try {
@@ -33,7 +33,7 @@ const ViewPost = () => {
         image,
         FileSystem.documentDirectory + "image.tmp",
       );
-      Toast.show("Downloading...", {
+      Toast.show(t("downloading"), {
         duration: Toast.durations.SHORT,
       });
 
@@ -59,12 +59,12 @@ const ViewPost = () => {
 
       await MediaLibrary.saveToLibraryAsync(newUri);
 
-      Toast.show("Download complete", {
+      Toast.show(t("completed"), {
         duration: Toast.durations.SHORT,
       });
     } catch (error) {
       console.error("Error downloading or saving image", error);
-      Toast.show("Failed to save image: " + error, {
+      Toast.show(t('failed') + ":" + error, {
         duration: Toast.durations.SHORT,
       });
     }

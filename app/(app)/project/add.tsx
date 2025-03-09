@@ -8,12 +8,14 @@ import { IProject, IUser } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 import { About } from "@/lib/about";
+import { useTranslation } from "react-i18next";
 
 export default function addNewProject() {
   const { user } = useContext(UserContext);
   const { session } = useSession();
   const [text, onChangeText] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const { t } = useTranslation();
 
   let loggedInUser: IUser = user;
 
@@ -64,13 +66,13 @@ export default function addNewProject() {
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangeText(text)}
-        placeholder={"Write Project Name..."}
+        placeholder={t('writeProjectName')}
         value={text}
         autoFocus={true}
         multiline
       />
       <Button
-        title={isSaving ? "Saving..." : "Next"}
+        title={isSaving ? t('saving') : t('next')}
         onPress={async () => {
           if (isSaving) return;
           setIsSaving(true);
