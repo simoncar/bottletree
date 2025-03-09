@@ -6,13 +6,14 @@ import {
   Pressable,
 } from "react-native";
 import { Stack, router } from "expo-router";
-import { Text, View, TextInput } from "@/components/Themed";
+import { Text, View, TextInput, Logo } from "@/components/Themed";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Colors from "@/constants/Colors";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import { useSession } from "@/lib/ctx";
 import { About } from "@/lib/about";
 import { Update } from "@/lib/update";
+import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
   const { signIn } = useSession();
@@ -24,19 +25,20 @@ export default function SignIn() {
   const colorScheme = useColorScheme();
   const welcomeMarginTop = useSharedValue(100);
   const welcomeFontSize = useSharedValue(50);
+  const { t } = useTranslation();
 
   const errorMessage = (errorCode: string) => {
     switch (errorCode) {
       case "auth/invalid-email":
-        return "Invalid email address format.";
+        return t("signIninvalidEmailAddressFormat");
       case "auth/invalid-credential":
-        return "Invalid email or password. Check your login details and try again or create an account.";
+        return t("signIninvalidEmailOrPasswordCheck");
       case "auth/user-disabled":
-        return "User account has been disabled.";
+        return t("signInUserAccountHasBeenDisabled");
       case "auth/user-not-found":
-        return "User account not found.";
+        return t("signInUserAccountNotFound");
       case "auth/wrong-password":
-        return "Incorrect password.";
+        return t("signInIncorrectPassword");
       default:
         return errorCode;
     }
@@ -64,7 +66,11 @@ export default function SignIn() {
         }}
       />
 
-      <Text style={styles.welcomeApp}>One Build</Text>
+      <View style={styles.topPanelCenter}>
+        <Logo style={{ fontSize: 40 }}>One</Logo>
+        <Text style={{ fontSize: 35 }}> </Text>
+        <Logo style={{ fontSize: 40 }}>Build</Logo>
+      </View>
       <View style={styles.updateContainer}>
         <Update />
       </View>
@@ -76,7 +82,7 @@ export default function SignIn() {
               style={styles.textInput}
               keyboardType="email-address"
               inputMode="email"
-              placeholder="Email"
+              placeholder={t("email")}
               autoCapitalize="none"
               autoFocus
               autoComplete="email"
@@ -87,7 +93,7 @@ export default function SignIn() {
           <View style={styles.inputView}>
             <TextInput
               style={styles.textInput}
-              placeholder="Password"
+              placeholder={t("password")}
               secureTextEntry={secureEntry}
               onChangeText={(password) => {
                 setPassword(password);
@@ -110,7 +116,7 @@ export default function SignIn() {
           </View>
 
           <TouchableOpacity onPress={handleSignIn} style={styles.button}>
-            <Text style={styles.loginText}>Sign in</Text>
+            <Text style={styles.loginText}>{t("signIn")}</Text>
           </TouchableOpacity>
           <Pressable
             key={"forgotPassword"}
@@ -122,7 +128,9 @@ export default function SignIn() {
                 },
               });
             }}>
-            <Text style={styles.forgotPassword}>Forgot password?</Text>
+            <Text style={styles.forgotPassword}>
+              {t("signInForgotPassword")}
+            </Text>
           </Pressable>
         </View>
       )}
@@ -136,7 +144,7 @@ export default function SignIn() {
             welcomeFontSize.value = welcomeFontSize.value - 50;
             setShowSignIn(true);
           }}>
-          <Text style={styles.createText}>Sign in</Text>
+          <Text style={styles.createText}>{t("signIn")}</Text>
         </TouchableOpacity>
       )}
       <TouchableOpacity
@@ -150,13 +158,12 @@ export default function SignIn() {
             },
           });
         }}>
-        <Text style={styles.createText}>Create a new account</Text>
+        <Text style={styles.createText}>{t("signInCreateANewAccount")}</Text>
       </TouchableOpacity>
 
       {!showSignIn && (
         <View style={styles.sloganView}>
-          <Text style={styles.sloganText}>The ultimate app</Text>
-          <Text style={styles.sloganText}>for modern house builders</Text>
+          <Text style={styles.sloganText}>{t("slogan")}</Text>
         </View>
       )}
 
@@ -201,6 +208,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: "80%",
   },
+  topPanelCenter: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 80,
+  },
   loginText: {
     fontSize: 18,
     color: "white",
@@ -225,12 +238,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     justifyContent: "center",
     marginBottom: 10,
+    textAlign: "center",
   },
   sloganView: {
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 40,
     marginTop: 80,
+    padding: 10,
   },
   textInput: {
     alignItems: "flex-start",

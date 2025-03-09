@@ -79,5 +79,16 @@
   "downloading": "Descargando...",
   "failed": "Falló",
   "shareTheAppWithYourFriends": "Comparte la aplicación con tus amigos",
-  "findOutMore": "Descubre más"
+  "findOutMore": "Descubre más",
+  "signIninvalidEmailAddressFormat": "Formato de dirección de correo electrónico no válido",
+  "signIninvalidEmailOrPasswordCheck": "Correo electrónico o contraseña incorrectos. Por favor, verifique sus credenciales e inténtelo de nuevo.",
+  "signInUserAccountHasBeenDisabled": "La cuenta de usuario ha sido deshab1litada.",
+  "signInUserAccountNotFound": "Usuario no encontrado",
+  "signInIncorrectPassword": "Contraseña incorrecta",
+  "signIn": "Iniciar sesión",
+  "signInForgotPassword": "¿Olvidaste tu contraseña?",
+  "signInCreateANewAccount": "Crear una nueva cuenta",
+  "slogan": "Administración de proyectos para constructores",
+  "email": "Correo electrónico",
+  "password": "Contraseña"
 }

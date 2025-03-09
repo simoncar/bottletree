@@ -79,5 +79,16 @@
   "downloading": "Downloading...",
   "failed": "Failed",
   "shareTheAppWithYourFriends": "Share the app with your friends",
-  "findOutMore": "Find out more"
+  "findOutMore": "Find out more",
+  "signIninvalidEmailAddressFormat": "Invalid email address format.",
+  "signIninvalidEmailOrPasswordCheck": "Invalid email or password. Check your login details and try again or create an account.",
+  "signInUserAccountHasBeenDisabled": "User account has been disabled.",
+  "signInUserAccountNotFound": "User account not found.",
+  "signInIncorrectPassword": "Incorrect password.",
+  "signIn": "Sign in",
+  "signInForgotPassword": "Forgot password?",
+  "signInCreateANewAccount": "Create a new account",
+  "slogan": "Project Management for Builders",
+  "email": "Email",
+  "password": "Password"
 }
