@@ -72,13 +72,14 @@ export default function Files() {
 
       if (result.canceled != true) {
         console.log("Selected files:", result);
+
+        uploadFilesAndCreateEntries(result, project);
         Toast.show({
           type: "success",
           text1: "File Adding",
           text2: "Your file is being added to the project",
           position: "bottom",
         });
-        uploadFilesAndCreateEntries(result, project);
       } else {
         console.log("Document picker was canceled");
       }

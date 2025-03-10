@@ -2,6 +2,7 @@ import { db, storage, firestore } from "@/lib/firebase"; // or "@/lib/firebase.w
 import { IFile } from "./types";
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
+import { Platform } from "react-native";
 
 type FileData = {
   mimeType: string;
@@ -88,10 +89,23 @@ export async function uploadFilesAndCreateEntries(
       const blob = await uriToBlob(file.uri);
 
       // Storage reference
-      const fileRef = storage.child(`project/${projectId}/files/${UUID}`);
+      let fileRef;
+      if (Platform.OS === "web") {
+        fileRef = storage.child(`project/${projectId}/files/${UUID}`);
+      } else {
+        fileRef = storage().ref(`project/${projectId}/files/${UUID}`);
+      }
 
       // Upload the Blob
-      await fileRef.put(blob);
+      try {
+        await fileRef.put(blob);
+      } catch (error) {
+        if (error.code === "storage/unauthorized") {
+          console.error("User does not have permission to access the object");
+        } else {
+          throw error;
+        }
+      }
 
       // Download URL
       const downloadURL = await fileRef.getDownloadURL();

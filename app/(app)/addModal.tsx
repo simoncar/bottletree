@@ -93,7 +93,7 @@ const AddModal = ({
       console.log("handleAddFilePress2");
 
       if (result.type != "cancel") {
-        console.log("Selected files:", result);
+        console.log("Selected files (modal):", result);
         uploadFilesAndCreateEntries(result, project);
         onClose();
       } else {
@@ -214,7 +214,7 @@ const AddModal = ({
                 },
               });
             }}>
-            <Text style={styles.optionText}>{t('addTask')}</Text>
+            <Text style={styles.optionText}>{t("addTask")}</Text>
             <MaterialIcons
               name="add-task"
               size={24}
@@ -229,7 +229,7 @@ const AddModal = ({
                 pathname: "/project/add",
               });
             }}>
-            <Text style={styles.optionText}>{t('createNewProject')}</Text>
+            <Text style={styles.optionText}>{t("createNewProject")}</Text>
             <MaterialIcons
               name="add-business"
               size={24}

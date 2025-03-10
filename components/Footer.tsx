@@ -47,16 +47,16 @@ const Footer = ({ post, setCommentShow }: Props) => {
     setFooter(!footer);
 
     alert(
-      "Delete",
-      "Are you sure?",
+      t("delete"),
+      t("areYouSure"),
       [
         {
-          text: "Cancel",
+          text: t("cancel"),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
-          text: "Delete",
+          text: t("delete"),
           onPress: () => {
             deletePost(post, saveDone);
           },
