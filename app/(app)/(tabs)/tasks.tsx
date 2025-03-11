@@ -90,35 +90,34 @@ export default function Tasks() {
   const toggleComplete = (task: ITask) => {
     // Toggle the task completion status
     console.log("Task completed:", task);
-    //call updateTask API
-    const updatedTask: ITask = {
-      ...task,
-      completed: !task.completed,
-    };
-    editTask(project, task.key, updatedTask, saveDone)
-      .then(() => {
-        if (!task.completed) {
-          //   setTasksIncomplete((prevTasks) =>
-          //     prevTasks.filter((t) => t.key !== task.key),
-          //   );
-          //   setTasksComplete((prevTasks) => [...prevTasks, updatedTask]);
-          Toast.show({
-            type: "success",
-            text1: t("taskComplete"),
-            text2: t("taskHasBeenSetToComplete"),
-            position: "bottom",
-          });
-        } else {
-          //   setTasksComplete((prevTasks) =>
-          //     prevTasks.filter((t) => t.key !== task.key),
-          //   );
-          //   setTasksIncomplete((prevTasks) => [...prevTasks, updatedTask]);
-        }
-        console.log("Task updated successfully");
-      })
-      .catch((error) => {
-        console.error("Error updating task:", error);
-      });
+    // Temporarily set the task as completed for animation
+    const tempTask = { ...task, completed: true };
+    setTasksIncomplete((prevTasks) =>
+      prevTasks.map((t) => (t.key === task.key ? tempTask : t)),
+    );
+
+    setTimeout(() => {
+      // Call updateTask API after a small delay
+      const updatedTask: ITask = {
+        ...task,
+        completed: !task.completed,
+      };
+      editTask(project, task.key, updatedTask, saveDone)
+        .then(() => {
+          if (!task.completed) {
+            Toast.show({
+              type: "success",
+              text1: t("taskComplete"),
+              text2: t("taskHasBeenSetToComplete"),
+              position: "bottom",
+            });
+          }
+          console.log("Task updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating task:", error);
+        });
+    }, 500); // Delay for 500ms
   };
 
   const handleSaveTask = () => {
