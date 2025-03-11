@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
@@ -73,7 +73,7 @@ export default function SignInAnonymously() {
 
   return (
     <View style={styles.container}>
-      <Text>SignIn Loading... </Text>
+      <ActivityIndicator />
     </View>
   );
 }
