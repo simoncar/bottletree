@@ -109,7 +109,7 @@ const ShareLink = () => {
         </View>
       </View>
       <View style={styles.shareLink}>
-        <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
+        <Text style={styles.shareURL}>https://b.otbapps.com/{project}</Text>
       </View>
     </View>
   );
@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingTop: 25,
   },
-  shareText: {
-    fontSize: 14,
+  shareURL: {
+    fontSize: 12,
   },
   instructions: {
     fontSize: 18,
@@ -177,7 +177,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    paddingHorizontal: 5,
     paddingTop: 20,
   },
 });
