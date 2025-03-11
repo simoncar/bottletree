@@ -88,10 +88,8 @@ const ShareLink = () => {
         { backgroundColor: Colors[colorScheme ?? "light"].background },
       ]}>
       <View style={styles.shareInstructions}>
-        <Text style={styles.shareText}>{t("shareDescription")}</Text>
-        <View style={styles.shareLink}>
-          <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
-        </View>
+        <Text style={styles.instructions}>{t("shareDescription")}</Text>
+
         <View style={styles.buttonRow}>
           <CopyLinkButton />
           <ShareLinkButton />
@@ -109,6 +107,9 @@ const ShareLink = () => {
             value={`https://b.otbapps.com/${project}`}
           />
         </View>
+      </View>
+      <View style={styles.shareLink}>
+        <Text style={styles.shareText}>https://b.otbapps.com/{project}</Text>
       </View>
     </View>
   );
@@ -167,13 +168,17 @@ const styles = StyleSheet.create({
     paddingTop: 25,
   },
   shareText: {
-    fontSize: 20,
+    fontSize: 14,
+  },
+  instructions: {
+    fontSize: 18,
   },
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
     paddingHorizontal: 5,
+    paddingTop: 20,
   },
 });
 
