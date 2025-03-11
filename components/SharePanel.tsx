@@ -126,7 +126,7 @@ export const SharePanel = (props) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 5,
+    padding: 1,
   },
   badgeContainer: {
     position: "absolute",
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 
   button: {
     borderRadius: 12,
-    width: 84,
+    width: 81,
     height: 80,
 
     borderWidth: StyleSheet.hairlineWidth,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   shareText: {
-    fontSize: 14,
+    fontSize: 13,
   },
 });
 
