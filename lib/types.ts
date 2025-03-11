@@ -125,6 +125,7 @@ export interface ITask {
   completed: boolean;
   created?: Timestamp;
   modified?: Timestamp;
+  order?: number;
 }
 
 export interface CustomCalendarEvent extends ICalendarEventBase {

@@ -15,7 +15,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Text } from "@/components/Themed";
-import { addTask, editTask, getTasks } from "@/lib/APItasks";
+import { addTask, editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
@@ -153,10 +153,11 @@ export default function Tasks() {
   type TaskItemProps = {
     task: ITask;
     drag: () => void;
+    isActive: boolean;
     onPress: (task: ITask) => void;
   };
 
-  const TaskItem = ({ task, drag, onPress }: TaskItemProps) => {
+  const TaskItem = ({ task, drag, isActive, onPress }: TaskItemProps) => {
     return (
       <View style={styles.taskItem}>
         <TouchableOpacity
@@ -170,6 +171,7 @@ export default function Tasks() {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.taskInfo}
+          disabled={isActive}
           onLongPress={drag}
           onPress={() => onPress(task)}>
           <Text
@@ -208,6 +210,7 @@ export default function Tasks() {
     <TaskItem
       task={item}
       drag={drag}
+      isActive={isActive}
       onPress={handleTaskPress}
       key={item.key}
     />
@@ -249,8 +252,8 @@ export default function Tasks() {
                       renderItem={renderItem}
                       keyExtractor={(item) => item.key}
                       onDragEnd={({ data }) => {
-                        console.log("onDragEnd", data);
                         setTasksIncomplete(data);
+                        setTaskOrder(project, data);
                       }}
                     />
                     {/* <ShortList

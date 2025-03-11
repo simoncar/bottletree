@@ -1,5 +1,6 @@
 import { firestore } from "@/lib/firebase";
 import { ITask } from "./types";
+import { orderBy } from "@react-native-firebase/firestore";
 
 type tasksRead = (tasks: ITask[]) => void;
 
@@ -18,6 +19,7 @@ export async function getTasks(project: string, callback: tasksRead) {
         completed: doc.data().completed,
         created: doc.data().created,
         modified: doc.data().modified,
+        order: doc.data().order ?? 1,
       };
 
       if (existingTaskIndex !== -1) {
@@ -26,7 +28,7 @@ export async function getTasks(project: string, callback: tasksRead) {
         tasks.push(taskData);
       }
     });
-
+    tasks.sort((a, b) => a.order - b.order);
     callback(tasks);
   });
   return () => unsubscribe();
@@ -64,4 +66,29 @@ export async function editTask(
     modified: firestore.Timestamp.now(),
   });
   callback(taskId);
+}
+
+export async function updateTasks(project: string, tasks: ITask[]) {
+  const batch = firestore().batch();
+  const q = firestore().collection("projects").doc(project).collection("tasks");
+
+  tasks.forEach((task) => {
+    const taskRef = q.doc(task.key);
+    batch.update(taskRef, task);
+  });
+
+  await batch.commit();
+}
+
+//accept a list of tasks in an object, loop through in the object order and set the orde field
+export async function setTaskOrder(project: string, tasks: ITask[]) {
+  const batch = firestore().batch();
+  const q = firestore().collection("projects").doc(project).collection("tasks");
+
+  tasks.forEach((task, index) => {
+    const taskRef = q.doc(task.key);
+    batch.update(taskRef, { order: index });
+  });
+
+  await batch.commit();
 }
