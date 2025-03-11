@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     marginTop: 80,
+    paddingBottom: 20,
   },
   loginText: {
     fontSize: 18,

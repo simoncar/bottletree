@@ -12,7 +12,6 @@ import * as Contacts from "expo-contacts";
 import { sortContactsByName } from "@/lib/sort";
 import Loading from "@/app/(app)/loading";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import Toast from "react-native-root-toast";
 
 const UserList = () => {
   const { project } = useLocalSearchParams<{

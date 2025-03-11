@@ -1,6 +1,5 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-
 import React from "react";
 import {
   StyleSheet,
@@ -14,6 +13,7 @@ import QRCode from "react-native-qrcode-svg";
 import { useLocalSearchParams } from "expo-router";
 import * as Clipboard from "expo-clipboard";
 import { useTranslation } from "react-i18next";
+import ShareLinkButton from "@/components/ShareLinkButton"; // Import the new component
 
 type ShareParams = {
   project: string;
@@ -42,45 +42,6 @@ const ShareLink = () => {
     );
   };
 
-  const ShareLinkButton = () => {
-    return (
-      <TouchableOpacity
-        style={[
-          styles.buttonStyle,
-          { borderColor: Colors[colorScheme ?? "light"].text },
-        ]}
-        onPress={async () => {
-          try {
-            const result = await Share.share(
-              {
-                message: title + "\n\n" + "https://b.otbapps.com/" + project,
-                url: "https://b.otbapps.com/" + project,
-                title: t("share"),
-              },
-              {
-                dialogTitle: t("share"),
-                subject: title,
-              },
-            );
-            if (result.action === Share.sharedAction) {
-              if (result.activityType) {
-                // shared with activity type of result.activityType
-              } else {
-                // shared
-              }
-            } else if (result.action === Share.dismissedAction) {
-              // dismissed
-            }
-          } catch (error: any) {
-            console.log("Share Error: ", error.message);
-          }
-        }}>
-        <FontAwesome6 name="share" color="#999999" style={styles.avatarIcon} />
-        <Text style={styles.shareButton}>{t("share")}</Text>
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <View
       style={[
@@ -92,7 +53,7 @@ const ShareLink = () => {
 
         <View style={styles.buttonRow}>
           <CopyLinkButton />
-          <ShareLinkButton />
+          <ShareLinkButton project={project} title={title} />
         </View>
       </View>
       <View

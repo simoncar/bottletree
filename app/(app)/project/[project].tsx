@@ -29,6 +29,7 @@ import { Back } from "@/components/Back";
 import SharePanel from "@/components/SharePanel";
 import { About } from "@/lib/about";
 import { useTranslation } from "react-i18next";
+import ShareLinkButton from "@/components/ShareLinkButton";
 
 export default function editProject() {
   const [updateUsers, setUpdateUsers] = useState("");
@@ -192,13 +193,17 @@ export default function editProject() {
                 value={project.title}
               />
             </View>
-            <View style={styles.archiveBox}>
-              <Text style={styles.archiveMessage}>
-                {project.archived == true ? t("projectArchived") : ""}
-              </Text>
-            </View>
+            {project.archived && (
+              <View style={styles.archiveBox}>
+                <Text style={styles.archiveMessage}>
+                  {t("projectArchived")}
+                </Text>
+              </View>
+            )}
           </View>
-
+          <View style={styles.shareBox}>
+            <ShareLinkButton project={project.key} title={project.title} />
+          </View>
           <ProjectUsers project={local.project} updateUsers={updateUsers} />
           <Pressable style={styles.actionRow} onPress={toggleArchive}>
             <View style={styles.avatar}>
@@ -247,6 +252,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     width: "85%",
+  },
+  shareBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
   },
   button: {},
   archiveMessage: {
