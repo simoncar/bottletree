@@ -12,6 +12,7 @@ import Colors from "@/constants/Colors";
 import { IFile } from "@/lib/types";
 import { Text, TextInput, View } from "@/components/Themed";
 import { useTranslation } from "react-i18next";
+import OpenFileButton from "@/components/OpenFileButton";
 
 export default function FileScreen() {
   const { file } = useLocalSearchParams<{ file: string }>();
@@ -50,7 +51,6 @@ export default function FileScreen() {
           ]}>
           {t("file")}
         </Text>
-
         <Text
           style={[
             styles.label,
@@ -65,6 +65,7 @@ export default function FileScreen() {
           ]}>
           {fileObj.url}
         </Text>
+        <OpenFileButton url={fileObj.url} />
       </View>
     </SafeAreaView>
   );
