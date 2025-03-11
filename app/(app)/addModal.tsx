@@ -49,10 +49,6 @@ const AddModal = ({
     );
   };
 
-  useEffect(() => {
-    console.log("Modal visibility changed:", visible);
-  }, [visible]);
-
   const progressCallback = (progress: number) => {
     console.log("progressCallback", progress);
     onClose();

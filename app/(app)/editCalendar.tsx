@@ -259,6 +259,9 @@ export default function editCalendar() {
     }
   };
 
+  console.log("editCalendar.tsx:", dateBeginTime);
+  console.log("Current state of calendarEvent:", calendarEvent);
+
   return (
     <SafeAreaView>
       <Stack.Screen
@@ -300,11 +303,6 @@ export default function editCalendar() {
                       { backgroundColor: calendarEvent.color },
                     ]}
                   />
-                </View>
-                <View style={styles.title}>
-                  <Text style={styles.actionTitle}>
-                    {calendarEvent.colorName}
-                  </Text>
                 </View>
               </View>
 
@@ -352,8 +350,6 @@ export default function editCalendar() {
               }>
               <Text style={styles.textDate}>
                 {dateBeginTime.toLocaleString(locale, {
-                  hour: "numeric",
-                  minute: "numeric",
                   hour12: true,
                   timeStyle: "short",
                 })}
@@ -383,8 +379,6 @@ export default function editCalendar() {
               }>
               <Text style={styles.textDate}>
                 {dateEndTime.toLocaleString(locale, {
-                  hour: "numeric",
-                  minute: "numeric",
                   hour12: true,
                   timeStyle: "short",
                 })}
