@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginHorizontal: 10,
   },
+  outerView: {},
   innerView: {
     alignItems: "center",
     flex: 1,
