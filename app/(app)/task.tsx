@@ -43,34 +43,31 @@ export default function TaskScreen() {
         }}
       />
       <View style={styles.container}>
-        <View style={styles.title}>
-          <Text
-            style={[
-              styles.label,
-              { color: Colors[colorScheme ?? "light"].textDisabledColor },
-            ]}>
-            {t("task")}
-          </Text>
-          <TextInput
-            style={[
-              styles.titleText,
-              { color: Colors[colorScheme ?? "light"].textField },
-            ]}
-            onChangeText={(title) => setTask({ ...taskObj, task: title })}
-            placeholder={t("task")}
-            value={taskObj.task}
-            autoFocus={true}
-            multiline={true}
-            numberOfLines={10}
-          />
-        </View>
+        <Text
+          style={[
+            styles.label,
+            { color: Colors[colorScheme ?? "light"].textDisabledColor },
+          ]}>
+          {t("task")}
+        </Text>
+        <TextInput
+          style={[
+            styles.titleText,
+            { color: Colors[colorScheme ?? "light"].textField },
+          ]}
+          onChangeText={(title) => setTask({ ...taskObj, task: title })}
+          placeholder={t("task")}
+          value={taskObj.task}
+          autoFocus={true}
+          multiline={true}
+          numberOfLines={10}
+        />
       </View>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
   },
   option: {
@@ -92,7 +89,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "lightgrey",
-    marginBottom: 5,
+    marginBottom: 10,
     paddingLeft: 5,
   },
   titleText: {
@@ -103,5 +100,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     height: 100,
     backgroundColor: "white",
+    textAlignVertical: "top",
   },
 });
