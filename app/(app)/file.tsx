@@ -9,22 +9,23 @@ import {
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { editTask } from "@/lib/APItasks";
 import Colors from "@/constants/Colors";
-import { ITask } from "@/lib/types";
+import { IFile } from "@/lib/types";
 import { Text, TextInput, View } from "@/components/Themed";
 import { useTranslation } from "react-i18next";
 
-export default function TaskScreen() {
-  const { task } = useLocalSearchParams<{ task: string }>();
+export default function FileScreen() {
+  const { file } = useLocalSearchParams<{ file: string }>();
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
-  const [taskObj, setTask] = useState<ITask>(JSON.parse(task || "{}"));
+  const [fileObj, setFile] = useState<IFile>(JSON.parse(file || "{}"));
 
   const saveDone = () => {
     router.back();
   };
 
   const save = () => {
-    editTask(taskObj.projectId, taskObj.key, taskObj, saveDone);
+    console.log("save updated file :", fileObj);
+    // editFile(fileObj.projectId, fileObj.key, fileObj, saveDone);
   };
 
   return (
@@ -47,20 +48,23 @@ export default function TaskScreen() {
             styles.label,
             { color: Colors[colorScheme ?? "light"].textDisabledColor },
           ]}>
-          {t("task")}
+          {t("file")}
         </Text>
-        <TextInput
+
+        <Text
           style={[
-            styles.titleText,
-            { color: Colors[colorScheme ?? "light"].textField },
-          ]}
-          onChangeText={(title) => setTask({ ...taskObj, task: title })}
-          placeholder={t("task")}
-          value={taskObj.task}
-          autoFocus={true}
-          multiline={true}
-          numberOfLines={10}
-        />
+            styles.label,
+            { color: Colors[colorScheme ?? "light"].textDisabledColor },
+          ]}>
+          {fileObj.filename}
+        </Text>
+        <Text
+          style={[
+            styles.label,
+            { color: Colors[colorScheme ?? "light"].textDisabledColor },
+          ]}>
+          {fileObj.url}
+        </Text>
       </View>
     </SafeAreaView>
   );

@@ -56,11 +56,14 @@ export default function Files() {
   };
 
   const handleFilePress = (file: IFile) => {
-    // Handle file selection
-    console.log("File selected:", file);
-    Linking.openURL(file.url).catch((err) =>
-      console.error("Failed to open file URL:", err),
-    );
+    router.push({
+      pathname: "/file",
+      params: { file: JSON.stringify(file) },
+    });
+    // console.log("File selected:", file);
+    // Linking.openURL(file.url).catch((err) =>
+    //   console.error("Failed to open file URL:", err),
+    // );
   };
 
   const handleAddFilePress = async () => {

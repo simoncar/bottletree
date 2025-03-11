@@ -313,6 +313,12 @@ export default function Layout() {
                 title: t("task"),
               }}
             />
+            <Stack.Screen
+              name="file"
+              options={{
+                title: t("file"),
+              }}
+            />
           </Stack>
         </ProjectProvider>
       </ActionSheetProvider>
