@@ -36,7 +36,8 @@ type SearchParams = {
 
 export default function Tasks() {
   const { project, mode } = useLocalSearchParams<SearchParams>();
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [tasksIncomplete, setTasksIncomplete] = useState<ITask[]>([]);
+  const [tasksComplete, setTasksComplete] = useState<ITask[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
@@ -52,7 +53,12 @@ export default function Tasks() {
 
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
-      setTasks(() => [...retrievedTasks]);
+      const incompleteTasks = retrievedTasks.filter((task) => !task.completed);
+      const completeTasks = retrievedTasks.filter((task) => task.completed);
+      setTasksIncomplete(incompleteTasks);
+      setTasksComplete(completeTasks);
+      console.log("retrievedTasks", retrievedTasks);
+
       setLoading(false);
     });
     if (mode == "add") {
@@ -63,30 +69,9 @@ export default function Tasks() {
     }
   }, []);
 
-  const groupTasksByCompletion = (tasks: ITask[]) => {
-    const groupedTasks = tasks.reduce(
-      (acc, task) => {
-        if (task.completed) {
-          acc.completed.push(task);
-        } else {
-          acc.incomplete.push(task);
-        }
-        return acc;
-      },
-      { incomplete: [], completed: [] } as {
-        incomplete: ITask[];
-        completed: ITask[];
-      },
-    );
-
-    return groupedTasks;
-  };
-
   const saveDone = () => {
     console.log("save Done");
   };
-
-  const groupedTasks = groupTasksByCompletion(tasks);
 
   const handleTaskPress = (task: ITask) => {
     router.navigate({
@@ -113,12 +98,21 @@ export default function Tasks() {
     editTask(project, task.key, updatedTask, saveDone)
       .then(() => {
         if (!task.completed) {
+          //   setTasksIncomplete((prevTasks) =>
+          //     prevTasks.filter((t) => t.key !== task.key),
+          //   );
+          //   setTasksComplete((prevTasks) => [...prevTasks, updatedTask]);
           Toast.show({
             type: "success",
             text1: t("taskComplete"),
             text2: t("taskHasBeenSetToComplete"),
             position: "bottom",
           });
+        } else {
+          //   setTasksComplete((prevTasks) =>
+          //     prevTasks.filter((t) => t.key !== task.key),
+          //   );
+          //   setTasksIncomplete((prevTasks) => [...prevTasks, updatedTask]);
         }
         console.log("Task updated successfully");
       })
@@ -139,7 +133,7 @@ export default function Tasks() {
 
     addTask(project, newTask)
       .then(() => {
-        // setTasks((prevTasks) => [...prevTasks, { ...newTask }]);
+        setTasksIncomplete((prevTasks) => [...prevTasks, newTask]);
         console.log("Task added successfully");
       })
       .catch((error) => {
@@ -233,20 +227,10 @@ export default function Tasks() {
         </View>
       ) : (
         <View>
-          {/*
-          <DraggableFlatList
-            data={groupedTasks.incomplete}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.key}
-            onDragEnd={({ data }) => {
-              console.log("onDragEnd", data);
-            }}
-					  />
-					  */}
           <ScrollView
             contentContainerStyle={{ flexGrow: 1 }}
             showsVerticalScrollIndicator={false}>
-            {groupedTasks.incomplete.length > 0 && (
+            {tasksIncomplete.length > 0 && (
               <>
                 {renderSectionHeader(``, "incomplete")}
                 {!collapsedSections.incomplete && (
@@ -260,15 +244,24 @@ export default function Tasks() {
                           Colors[colorScheme ?? "light"].postBackground,
                       },
                     ]}>
-                    <ShortList
-                      data={groupedTasks.incomplete}
-                      renderItem={renderItemShortlist}
+                    <DraggableFlatList
+                      data={tasksIncomplete}
+                      renderItem={renderItem}
+                      keyExtractor={(item) => item.key}
+                      onDragEnd={({ data }) => {
+                        console.log("onDragEnd", data);
+                        setTasksIncomplete(data);
+                      }}
                     />
+                    {/* <ShortList
+                      data={tasksIncomplete}
+                      renderItem={renderItemShortlist}
+                    /> */}
                   </View>
                 )}
               </>
             )}
-            {groupedTasks.completed.length > 0 && (
+            {tasksComplete.length > 0 && (
               <View
                 style={[
                   styles.postView,
@@ -279,12 +272,12 @@ export default function Tasks() {
                   },
                 ]}>
                 {renderSectionHeader(
-                  `${t("completed")} (${groupedTasks.completed.length})`,
+                  `${t("completed")} (${tasksComplete.length})`,
                   "completed",
                 )}
                 {!collapsedSections.completed && (
                   <ShortList
-                    data={groupedTasks.completed}
+                    data={tasksComplete}
                     renderItem={renderItemShortlist}
                   />
                 )}
