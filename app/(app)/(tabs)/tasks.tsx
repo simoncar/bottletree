@@ -129,6 +129,7 @@ export default function Tasks() {
       task: newTaskName,
       projectId: project,
       completed: false,
+      order: 0,
     };
 
     addTask(project, newTask)
