@@ -139,6 +139,10 @@ export default function Layout() {
     }
   }, [fontsLoaded]);
 
+  const saveDone = (id) => {
+    console.log("saveDone auth from _layout: ", id);
+  };
+
   if (isAuthLoading) {
     return (
       <ThemeProvider
@@ -153,6 +157,12 @@ export default function Layout() {
 
   if (appLoading == false && fontsLoaded) {
     SplashScreen.hideAsync();
+
+    if (session) {
+      if (posts) {
+        addProjectUser(posts, user, saveDone);
+      }
+    }
 
     if (!session) {
       if (posts) {
