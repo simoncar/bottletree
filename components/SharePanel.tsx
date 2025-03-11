@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 
   button: {
     borderRadius: 12,
-    width: 86,
+    width: 84,
     height: 80,
 
     borderWidth: StyleSheet.hairlineWidth,
