@@ -70,29 +70,6 @@ export default function Home() {
     );
   }
 
-  function renderLogout() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          key={"signOut"}
-          onPress={() => {
-            signOut();
-            setUser(null);
-            router.replace("/signIn");
-          }}>
-          <View style={styles.logout}>
-            <MaterialIcons
-              name="logout"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-            <Text style={styles.settingName}>{t("logOut")}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.overall}>
       <SafeAreaView>
@@ -134,7 +111,6 @@ export default function Home() {
 
             <Projects session={session as string} archived={true} />
             <View style={styles.bigGap} />
-            {renderLogout()}
             <About />
           </View>
         </ScrollView>

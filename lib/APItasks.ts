@@ -80,7 +80,6 @@ export async function updateTasks(project: string, tasks: ITask[]) {
   await batch.commit();
 }
 
-//accept a list of tasks in an object, loop through in the object order and set the orde field
 export async function setTaskOrder(project: string, tasks: ITask[]) {
   const batch = firestore().batch();
   const q = firestore().collection("projects").doc(project).collection("tasks");
