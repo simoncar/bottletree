@@ -27,6 +27,7 @@ import Toast from "react-native-toast-message";
 import { FloatingButton } from "@/components/FloatingButton";
 import { ShortList } from "@/components/sComponent";
 import { useTranslation } from "react-i18next";
+import DraggableFlatList from "react-native-draggable-flatlist";
 
 type SearchParams = {
   project: string; //project ID
@@ -157,10 +158,11 @@ export default function Tasks() {
 
   type TaskItemProps = {
     task: ITask;
+    drag: () => void;
     onPress: (task: ITask) => void;
   };
 
-  const TaskItem = ({ task, onPress }: TaskItemProps) => {
+  const TaskItem = ({ task, drag, onPress }: TaskItemProps) => {
     return (
       <View style={styles.taskItem}>
         <TouchableOpacity
@@ -172,7 +174,10 @@ export default function Tasks() {
             color={Colors[colorScheme ?? "light"].text}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.taskInfo} onPress={() => onPress(task)}>
+        <TouchableOpacity
+          style={styles.taskInfo}
+          onLongPress={drag}
+          onPress={() => onPress(task)}>
           <Text
             style={[
               styles.taskName,
@@ -201,8 +206,17 @@ export default function Tasks() {
     );
   };
 
-  const renderItem = (item: ITask) => (
+  const renderItemShortlist = (item: ITask) => (
     <TaskItem task={item} onPress={handleTaskPress} key={item.key} />
+  );
+
+  const renderItem = ({ item, drag, isActive }) => (
+    <TaskItem
+      task={item}
+      drag={drag}
+      onPress={handleTaskPress}
+      key={item.key}
+    />
   );
 
   return (
@@ -218,55 +232,67 @@ export default function Tasks() {
           <ActivityIndicator />
         </View>
       ) : (
-        <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
-          showsVerticalScrollIndicator={false}>
-          {groupedTasks.incomplete.length > 0 && (
-            <>
-              {renderSectionHeader(``, "incomplete")}
-              {!collapsedSections.incomplete && (
-                <View
-                  style={[
-                    styles.postView,
-                    {
-                      backgroundColor:
-                        Colors[colorScheme ?? "light"].postBackground,
-                      borderColor:
-                        Colors[colorScheme ?? "light"].postBackground,
-                    },
-                  ]}>
+        <View>
+          {/*
+          <DraggableFlatList
+            data={groupedTasks.incomplete}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.key}
+            onDragEnd={({ data }) => {
+              console.log("onDragEnd", data);
+            }}
+					  />
+					  */}
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            showsVerticalScrollIndicator={false}>
+            {groupedTasks.incomplete.length > 0 && (
+              <>
+                {renderSectionHeader(``, "incomplete")}
+                {!collapsedSections.incomplete && (
+                  <View
+                    style={[
+                      styles.postView,
+                      {
+                        backgroundColor:
+                          Colors[colorScheme ?? "light"].postBackground,
+                        borderColor:
+                          Colors[colorScheme ?? "light"].postBackground,
+                      },
+                    ]}>
+                    <ShortList
+                      data={groupedTasks.incomplete}
+                      renderItem={renderItemShortlist}
+                    />
+                  </View>
+                )}
+              </>
+            )}
+            {groupedTasks.completed.length > 0 && (
+              <View
+                style={[
+                  styles.postView,
+                  {
+                    backgroundColor:
+                      Colors[colorScheme ?? "light"].postBackground,
+                    borderColor: Colors[colorScheme ?? "light"].postBackground,
+                  },
+                ]}>
+                {renderSectionHeader(
+                  `${t("completed")} (${groupedTasks.completed.length})`,
+                  "completed",
+                )}
+                {!collapsedSections.completed && (
                   <ShortList
-                    data={groupedTasks.incomplete}
-                    renderItem={renderItem}
+                    data={groupedTasks.completed}
+                    renderItem={renderItemShortlist}
                   />
-                </View>
-              )}
-            </>
-          )}
-          {groupedTasks.completed.length > 0 && (
-            <View
-              style={[
-                styles.postView,
-                {
-                  backgroundColor:
-                    Colors[colorScheme ?? "light"].postBackground,
-                  borderColor: Colors[colorScheme ?? "light"].postBackground,
-                },
-              ]}>
-              {renderSectionHeader(
-                `${t("completed")} (${groupedTasks.completed.length})`,
-                "completed",
-              )}
-              {!collapsedSections.completed && (
-                <ShortList
-                  data={groupedTasks.completed}
-                  renderItem={renderItem}
-                />
-              )}
-            </View>
-          )}
-          <View style={{ height: 200 }} />
-        </ScrollView>
+                )}
+              </View>
+            )}
+            <View style={{ height: 200 }} />
+          </ScrollView>
+        </View>
       )}
 
       <Modal
