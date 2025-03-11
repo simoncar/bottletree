@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 8,
     textAlign: "center",
-    width: 160,
+    width: 170,
   },
   container: {
     flex: 1,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
   },
 });
 
