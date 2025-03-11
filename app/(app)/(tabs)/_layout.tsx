@@ -194,13 +194,15 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      <AddModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onOptionSelect={handleOptionSelect}
-        project={project}
-        user={user}
-      />
+      <View style={{ zIndex: 9999 }}>
+        <AddModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          onOptionSelect={handleOptionSelect}
+          project={project}
+          user={user}
+        />
+      </View>
     </View>
   );
 }

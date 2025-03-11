@@ -18,6 +18,7 @@ import { Text } from "@/components/Themed";
 import * as DocumentPicker from "expo-document-picker";
 import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 type OptionsModalProps = {
   visible: boolean;
@@ -47,6 +48,10 @@ const AddModal = ({
       completedCallback,
     );
   };
+
+  useEffect(() => {
+    console.log("Modal visibility changed:", visible);
+  }, [visible]);
 
   const progressCallback = (progress: number) => {
     console.log("progressCallback", progress);
@@ -108,6 +113,7 @@ const AddModal = ({
 
   return (
     <Modal
+      style={styles.modalOverallContainer}
       transparent={true}
       animationType="fade"
       visible={visible}
@@ -257,7 +263,13 @@ const AddModal = ({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
+    zIndex: 1000,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  modalOverallContainer: {
+    flex: 1,
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },

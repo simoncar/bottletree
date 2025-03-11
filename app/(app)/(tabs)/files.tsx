@@ -29,6 +29,7 @@ import Reanimated, {
 import { FloatingButton } from "@/components/FloatingButton";
 import { setPostFile } from "@/lib/APIpost";
 import { useTranslation } from "react-i18next";
+import { ShortList } from "@/components/sComponent";
 
 type SearchParams = {
   project: string; //project ID
@@ -183,9 +184,10 @@ export default function Files() {
       });
 
       return (
-        <Reanimated.View style={styleAnimation}>
+        <Reanimated.View key={file.key} style={styleAnimation}>
           <Pressable
             style={styles.rightDeleteBox}
+            key={file.key}
             onPress={() => {
               // deleteProjectUser(project, data, deleteDone);
               console.log("delete file");
@@ -261,6 +263,10 @@ export default function Files() {
     return date.toLocaleDateString();
   }
 
+  const renderItemShortlist = (item: IFile) => (
+    <FileItem file={item} onPress={handleFilePress} />
+  );
+
   const renderItem = ({ item }: { item: IFile }) => (
     <FileItem file={item} onPress={handleFilePress} />
   );
@@ -278,6 +284,9 @@ export default function Files() {
               borderColor: Colors[colorScheme ?? "light"].postBackground,
             },
           ]}>
+          {/*
+          <ShortList data={files} renderItem={renderItem} />
+         */}
           <FlatList
             style={{ flex: 1 }}
             data={files}
