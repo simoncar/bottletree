@@ -15,6 +15,7 @@ export async function getTasks(project: string, callback: tasksRead) {
       const taskData = {
         key: doc.id,
         task: doc.data().task,
+        description: doc.data().description,
         projectId: doc.data().projectId,
         completed: doc.data().completed,
         created: doc.data().created,

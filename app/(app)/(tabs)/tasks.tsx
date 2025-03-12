@@ -13,7 +13,6 @@ import {
   Platform,
   Keyboard,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { Text } from "@/components/Themed";
 import { addTask, editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
@@ -184,6 +183,14 @@ export default function Tasks() {
             ]}>
             {task.task}
           </Text>
+          {task.description ? (
+            <Text
+              style={styles.taskDescription}
+              numberOfLines={2}
+              ellipsizeMode="tail">
+              {task.description}
+            </Text>
+          ) : null}
         </TouchableOpacity>
       </View>
     );
@@ -256,7 +263,6 @@ export default function Tasks() {
                         setTasksIncomplete(data);
                         setTaskOrder(project, data);
                       }}
-                      simultaneousHandlers={scrollViewRef}
                     />
                     {/* <ShortList
                       data={tasksIncomplete}
@@ -368,9 +374,9 @@ const styles = StyleSheet.create({
   taskName: {
     fontSize: 20,
   },
-  taskDetails: {
+  taskDescription: {
     color: "#666",
-    marginTop: 4,
+    marginTop: 2,
   },
   separator: {
     height: StyleSheet.hairlineWidth,

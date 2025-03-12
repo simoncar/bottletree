@@ -12,6 +12,7 @@ import Colors from "@/constants/Colors";
 import { ITask } from "@/lib/types";
 import { Text, TextInput, View } from "@/components/Themed";
 import { useTranslation } from "react-i18next";
+import Feather from "@expo/vector-icons/Feather";
 
 export default function TaskScreen() {
   const { task } = useLocalSearchParams<{ task: string }>();
@@ -42,25 +43,40 @@ export default function TaskScreen() {
         }}
       />
       <View style={styles.container}>
-        <Text
-          style={[
-            styles.label,
-            { color: Colors[colorScheme ?? "light"].textDisabledColor },
-          ]}>
-          {t("task")}
-        </Text>
-        <TextInput
-          style={[
-            styles.titleText,
-            { color: Colors[colorScheme ?? "light"].textField },
-          ]}
-          onChangeText={(title) => setTask({ ...taskObj, task: title })}
-          placeholder={t("task")}
-          value={taskObj.task}
-          autoFocus={true}
-          multiline={true}
-          numberOfLines={10}
-        />
+        <View style={[styles.itemView, styles.line]}>
+          <View style={styles.avatar}></View>
+          <View style={styles.itemMain}>
+            <TextInput
+              style={styles.titleText}
+              onChangeText={(title) => setTask({ ...taskObj, task: title })}
+              placeholder={t("task")}
+              value={taskObj.task}
+              autoFocus={true}
+              multiline={true}
+              numberOfLines={10}
+            />
+          </View>
+        </View>
+        <View style={[styles.itemView, styles.line]}>
+          <View style={styles.avatar}>
+            <Feather
+              name="align-left"
+              size={25}
+              color={Colors[colorScheme ?? "light"].textPlaceholder}
+            />
+          </View>
+          <TextInput
+            style={styles.textDescription}
+            onChangeText={(description) =>
+              setTask({ ...taskObj, description: description })
+            }
+            placeholder={t("addDescription")}
+            value={taskObj.description}
+            multiline
+            numberOfLines={10}
+            autoCapitalize="none"
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -69,12 +85,28 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
+  avatar: {
+    justifyContent: "flex-start",
+    width: 20,
+    marginRight: 8,
+  },
+  titleText: {
+    fontSize: 22,
+  },
   option: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
     width: "100%",
+  },
+  textDescription: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingVertical: 8,
+    padding: 8,
+    width: "90%",
   },
   optionText: {
     fontSize: 18,
@@ -91,15 +123,22 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingLeft: 5,
   },
-  titleText: {
-    borderWidth: 1,
-    borderColor: "lightgrey",
-    borderRadius: 10,
-    padding: 10,
-    fontSize: 25,
-    height: 100,
-    minHeight: 100,
-    backgroundColor: "white",
-    textAlignVertical: "top",
+  itemMain: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingVertical: 8,
+    padding: 8,
+  },
+
+  itemView: {
+    alignItems: "center",
+    flexDirection: "row",
+    paddingVertical: 8,
+    padding: 8,
+  },
+  line: {
+    borderBottomColor: "#CED0CE",
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });

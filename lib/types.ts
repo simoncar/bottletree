@@ -121,6 +121,7 @@ export interface IFile {
 export interface ITask {
   key?: string;
   task: string;
+  description?: string;
   projectId: string;
   completed: boolean;
   created?: Timestamp;

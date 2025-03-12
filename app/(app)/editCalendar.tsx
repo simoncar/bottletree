@@ -269,7 +269,6 @@ export default function editCalendar() {
           headerRight: () => (
             <TouchableOpacity
               onPressIn={() => {
-                console.log("save");
                 save();
               }}>
               <Text>{t("done")}</Text>
