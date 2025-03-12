@@ -12,8 +12,8 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
-  ScrollView,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { Text } from "@/components/Themed";
 import { addTask, editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
@@ -27,7 +27,10 @@ import Toast from "react-native-toast-message";
 import { FloatingButton } from "@/components/FloatingButton";
 import { ShortList } from "@/components/sComponent";
 import { useTranslation } from "react-i18next";
-import DraggableFlatList from "react-native-draggable-flatlist";
+import {
+  NestableScrollContainer,
+  NestableDraggableFlatList,
+} from "react-native-draggable-flatlist";
 
 type SearchParams = {
   project: string; //project ID
@@ -50,6 +53,7 @@ export default function Tasks() {
     incomplete: false,
     completed: true,
   });
+  const scrollViewRef = useRef(null);
 
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
@@ -57,7 +61,6 @@ export default function Tasks() {
       const completeTasks = retrievedTasks.filter((task) => task.completed);
       setTasksIncomplete(incompleteTasks);
       setTasksComplete(completeTasks);
-      console.log("retrievedTasks", retrievedTasks);
 
       setLoading(false);
     });
@@ -133,7 +136,7 @@ export default function Tasks() {
 
     addTask(project, newTask)
       .then(() => {
-        setTasksIncomplete((prevTasks) => [...prevTasks, newTask]);
+        //setTasksIncomplete((prevTasks) => [...prevTasks, newTask]);
         console.log("Task added successfully");
       })
       .catch((error) => {
@@ -230,9 +233,7 @@ export default function Tasks() {
         </View>
       ) : (
         <View>
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1 }}
-            showsVerticalScrollIndicator={false}>
+          <NestableScrollContainer>
             {tasksIncomplete.length > 0 && (
               <>
                 {renderSectionHeader(``, "incomplete")}
@@ -247,7 +248,7 @@ export default function Tasks() {
                           Colors[colorScheme ?? "light"].postBackground,
                       },
                     ]}>
-                    <DraggableFlatList
+                    <NestableDraggableFlatList
                       data={tasksIncomplete}
                       renderItem={renderItem}
                       keyExtractor={(item) => item.key}
@@ -255,6 +256,7 @@ export default function Tasks() {
                         setTasksIncomplete(data);
                         setTaskOrder(project, data);
                       }}
+                      simultaneousHandlers={scrollViewRef}
                     />
                     {/* <ShortList
                       data={tasksIncomplete}
@@ -287,7 +289,7 @@ export default function Tasks() {
               </View>
             )}
             <View style={{ height: 200 }} />
-          </ScrollView>
+          </NestableScrollContainer>
         </View>
       )}
 
