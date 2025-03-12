@@ -14,8 +14,8 @@ export async function getTasks(project: string, callback: tasksRead) {
       const existingTaskIndex = tasks.findIndex((t) => t.key === doc.id);
       const taskData = {
         key: doc.id,
-        task: doc.data().task,
-        description: doc.data().description,
+        task: doc.data().task ?? "",
+        description: doc.data().description ?? "",
         projectId: doc.data().projectId,
         completed: doc.data().completed,
         created: doc.data().created,
