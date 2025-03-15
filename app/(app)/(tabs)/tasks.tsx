@@ -24,8 +24,8 @@ import {
 import Toast from "react-native-toast-message";
 
 type SearchParams = {
-  project: string; //project ID
-  mode?: string; //mode
+  project: string;
+  mode?: string;
 };
 
 export default function Tasks() {
