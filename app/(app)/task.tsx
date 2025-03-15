@@ -7,7 +7,7 @@ import {
   useColorScheme,
 } from "react-native";
 import { router, Stack, useLocalSearchParams } from "expo-router";
-import { editTask } from "@/lib/APItasks";
+import { addTask, editTask } from "@/lib/APItasks";
 import Colors from "@/constants/Colors";
 import { ITask } from "@/lib/types";
 import { Text, TextInput, View } from "@/components/Themed";
@@ -25,7 +25,11 @@ export default function TaskScreen() {
   };
 
   const save = () => {
-    editTask(taskObj.projectId, taskObj.key, taskObj, saveDone);
+	if (!taskObj.key) {
+	  addTask(taskObj.projectId, taskObj, saveDone);
+	} else {
+	  editTask(taskObj.projectId, taskObj.key, taskObj, saveDone);
+	}
   };
 
   return (

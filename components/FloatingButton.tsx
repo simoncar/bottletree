@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    zIndex: 1000,
+    zIndex: 10,
   },
   floatingButtonText: {
     color: "#ffffff",

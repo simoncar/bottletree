@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Colors from "@/constants/Colors";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
-import { IPost, IUser } from "@/lib/types";
+import { IPost, ITask, IUser } from "@/lib/types";
 import { router } from "expo-router";
 import { addPostImage } from "@/lib/APIpost";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -209,11 +209,17 @@ const AddModal = ({
             onPress={() => {
               //onClose();
               onClose();
+              const newTask: ITask = {
+                key: "",
+                task: "",
+                projectId: project,
+                completed: false,
+                order: 0,
+              };
+
               router.navigate({
-                pathname: "/tasks",
-                params: {
-                  mode: "add",
-                },
+                pathname: "/task",
+                params: { task: JSON.stringify(newTask) },
               });
             }}>
             <Text style={styles.optionText}>{t("addTask")}</Text>

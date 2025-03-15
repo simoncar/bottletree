@@ -1,20 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
   ActivityIndicator,
-  FlatList,
   StyleSheet,
   TouchableOpacity,
   View,
-  Modal,
   TextInput,
-  Button,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Platform,
-  Keyboard,
 } from "react-native";
 import { Text } from "@/components/Themed";
-import { addTask, editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
+import { editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
@@ -42,8 +35,6 @@ export default function Tasks() {
   const [tasksComplete, setTasksComplete] = useState<ITask[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
-  const [isModalVisible, setModalVisible] = useState<boolean>(false);
-  const [newTaskName, setNewTaskName] = useState<string>("");
   const inputRef = useRef<TextInput>(null);
   const { t } = useTranslation();
   const [collapsedSections, setCollapsedSections] = useState<{
@@ -52,7 +43,6 @@ export default function Tasks() {
     incomplete: false,
     completed: true,
   });
-  const scrollViewRef = useRef(null);
 
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
@@ -63,12 +53,6 @@ export default function Tasks() {
 
       setLoading(false);
     });
-    if (mode == "add") {
-      setModalVisible(true);
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
-    }
   }, []);
 
   const saveDone = () => {
@@ -83,10 +67,18 @@ export default function Tasks() {
   };
 
   const handleAddTaskPress = () => {
-    setModalVisible(true);
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 100);
+    const newTask: ITask = {
+      key: "",
+      task: "",
+      projectId: project,
+      completed: false,
+      order: 0,
+    };
+
+    router.navigate({
+      pathname: "/task",
+      params: { task: JSON.stringify(newTask) },
+    });
   };
 
   const toggleComplete = (task: ITask) => {
@@ -112,6 +104,7 @@ export default function Tasks() {
               text1: t("taskComplete"),
               text2: t("taskHasBeenSetToComplete"),
               position: "bottom",
+              visibilityTime: 1000,
             });
           }
           console.log("Task updated successfully");
@@ -120,29 +113,6 @@ export default function Tasks() {
           console.error("Error updating task:", error);
         });
     }, 500); // Delay for 500ms
-  };
-
-  const handleSaveTask = () => {
-    // Save the new task
-    console.log("New task name:", newTaskName);
-    //call addTask API
-    const newTask: ITask = {
-      task: newTaskName,
-      projectId: project,
-      completed: false,
-      order: 0,
-    };
-
-    addTask(project, newTask)
-      .then(() => {
-        //setTasksIncomplete((prevTasks) => [...prevTasks, newTask]);
-        console.log("Task added successfully");
-      })
-      .catch((error) => {
-        console.error("Error adding task:", error);
-      });
-    setModalVisible(false);
-    setNewTaskName("");
   };
 
   const toggleSection = (section: string) => {
@@ -213,7 +183,15 @@ export default function Tasks() {
   };
 
   const renderItemShortlist = (item: ITask) => (
-    <TaskItem task={item} onPress={handleTaskPress} key={item.key} />
+    <TaskItem
+      task={item}
+      onPress={handleTaskPress}
+      key={item.key}
+      drag={function (): void {
+        console.log("dragging");
+      }}
+      isActive={false}
+    />
   );
 
   const renderItem = ({ item, drag, isActive }) => (
@@ -264,10 +242,6 @@ export default function Tasks() {
                         setTaskOrder(project, data);
                       }}
                     />
-                    {/* <ShortList
-                      data={tasksIncomplete}
-                      renderItem={renderItemShortlist}
-                    /> */}
                   </View>
                 )}
               </>
@@ -298,37 +272,6 @@ export default function Tasks() {
           </NestableScrollContainer>
         </View>
       )}
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isModalVisible}
-        onRequestClose={() => setModalVisible(false)}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1 }}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={{ flex: 1 }}>
-              <TouchableOpacity
-                style={styles.modalContainer}
-                activeOpacity={1}
-                onPressOut={() => setModalVisible(false)}>
-                <View style={styles.modalContent}>
-                  <TextInput
-                    ref={inputRef}
-                    style={[styles.input]}
-                    placeholder={t("newTaskPlaceholderText")}
-                    value={newTaskName}
-                    onChangeText={setNewTaskName}
-                    multiline
-                  />
-                  <Button title={t("save")} onPress={handleSaveTask} />
-                </View>
-              </TouchableOpacity>
-            </View>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
-      </Modal>
     </View>
   );
 }
@@ -337,6 +280,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+  keyboardView: {
+    flex: 1,
+    zIndex: 1000,
   },
   addButton: {
     padding: 12,
@@ -395,15 +342,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   modalContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "green",
   },
   modalContent: {
     backgroundColor: "white",
     padding: 16,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    borderRadius: 16,
   },
   input: {
     height: 80,

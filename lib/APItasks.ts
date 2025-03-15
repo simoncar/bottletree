@@ -34,7 +34,7 @@ export async function getTasks(project: string, callback: tasksRead) {
   });
   return () => unsubscribe();
 }
-export async function addTask(project: string, task: ITask) {
+export async function addTask(project: string, task: ITask, callback: any) {
   const taskRef = firestore()
     .collection("projects")
     .doc(project)
@@ -47,7 +47,7 @@ export async function addTask(project: string, task: ITask) {
     modified: firestore.Timestamp.now(),
   });
 
-  return taskRef.id;
+  callback(taskRef.id);
 }
 
 export async function editTask(
