@@ -1,18 +1,18 @@
 // TypeScript
+import { Text, TextInput, View } from "@/components/Themed";
+import Colors from "@/constants/Colors";
+import { addTask, editTask } from "@/lib/APItasks";
+import { ITask } from "@/lib/types";
+import Feather from "@expo/vector-icons/Feather";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   SafeAreaView,
-  TouchableOpacity,
   StyleSheet,
+  TouchableOpacity,
   useColorScheme,
 } from "react-native";
-import { router, Stack, useLocalSearchParams } from "expo-router";
-import { addTask, editTask } from "@/lib/APItasks";
-import Colors from "@/constants/Colors";
-import { ITask } from "@/lib/types";
-import { Text, TextInput, View } from "@/components/Themed";
-import { useTranslation } from "react-i18next";
-import Feather from "@expo/vector-icons/Feather";
 
 export default function TaskScreen() {
   const { task } = useLocalSearchParams<{ task: string }>();
@@ -25,11 +25,11 @@ export default function TaskScreen() {
   };
 
   const save = () => {
-	if (!taskObj.key) {
-	  addTask(taskObj.projectId, taskObj, saveDone);
-	} else {
-	  editTask(taskObj.projectId, taskObj.key, taskObj, saveDone);
-	}
+    if (!taskObj.key) {
+      addTask(taskObj.projectId, taskObj, saveDone);
+    } else {
+      editTask(taskObj.projectId, taskObj.key, taskObj, saveDone);
+    }
   };
 
   return (
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 22,
   },
+
   option: {
     flexDirection: "row",
     alignItems: "center",

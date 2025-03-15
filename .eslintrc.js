@@ -41,5 +41,6 @@ module.exports = {
 		"react-native/no-single-element-style-arrays": 2,
 		"react-native/sort-styles": ["error", "asc", { "ignoreClassNames": false, "ignoreStyleProperties": false }],
 		"ignorePatterns": ["node_modules/"],
+		"sort-keys": ["error", "asc", { "caseSensitive": false, "natural": true }]
 	}
 };

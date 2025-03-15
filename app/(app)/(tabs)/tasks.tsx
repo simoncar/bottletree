@@ -1,28 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
+import { FloatingButton } from "@/components/FloatingButton";
+import { ShortList } from "@/components/sComponent";
+import { Text } from "@/components/Themed";
+import Colors from "@/constants/Colors";
+import { editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
+import { ITask } from "@/lib/types";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   StyleSheet,
-  TouchableOpacity,
-  View,
   TextInput,
+  TouchableOpacity,
+  useColorScheme,
+  View,
 } from "react-native";
-import { Text } from "@/components/Themed";
-import { editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
-import { ITask } from "@/lib/types";
-import Colors from "@/constants/Colors";
-import { useColorScheme } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import Toast from "react-native-toast-message";
-import { FloatingButton } from "@/components/FloatingButton";
-import { ShortList } from "@/components/sComponent";
-import { useTranslation } from "react-i18next";
 import {
-  NestableScrollContainer,
   NestableDraggableFlatList,
+  NestableScrollContainer,
 } from "react-native-draggable-flatlist";
+import Toast from "react-native-toast-message";
 
 type SearchParams = {
   project: string; //project ID
