@@ -1,24 +1,23 @@
-import React from "react";
-import {
-  Modal,
-  View,
-  StyleSheet,
-  Pressable,
-  useColorScheme,
-} from "react-native";
+import { Text } from "@/components/Themed";
 import Colors from "@/constants/Colors";
+import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
-import { IPost, ITask, IUser } from "@/lib/types";
-import { router } from "expo-router";
 import { addPostImage } from "@/lib/APIpost";
+import { IPost, ITask, IUser } from "@/lib/types";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { Text } from "@/components/Themed";
 import * as DocumentPicker from "expo-document-picker";
-import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
+import { router } from "expo-router";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from "react-native";
 
 type OptionsModalProps = {
   visible: boolean;

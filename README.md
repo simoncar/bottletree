@@ -41,6 +41,9 @@ npx expo install --fix
 sudo lsof -i :5000
 sudo kill -9 PID
 
+npx expo-doctor
+
+
 TODO:
 Org Slug: simon-co
 project name: bottletree
