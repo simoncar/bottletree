@@ -3175,7 +3175,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^29.7.0":
+"@types/jest@^29.5.2":
   version "29.5.14"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.5.14.tgz#2b910912fa1d6856cadcd0c1f95af7df1d6049e5"
   integrity sha512-ZN+4sdnLUbo8EVvVc2ao0GFW6oVrQRPn4K2lglySj7APvSrgzxHiNNK99us4WDMi57xxA2yggblIAMNhXOotLQ==
@@ -9833,7 +9833,7 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-style-order@^0.3.0:
+prettier-plugin-style-order@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/prettier-plugin-style-order/-/prettier-plugin-style-order-0.2.2.tgz#cef2b6af3cfbeb52c821717daff4d8c0c824c012"
   integrity sha512-4rASdHONhHLNX0arKqEvjGOEAbkSZE3+GQPSaS8mf3en/spjeN0le5fV1yKltWwQeM4UPn7CkKzeD97a4Az/6w==
