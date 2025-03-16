@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  Pressable,
-} from "react-native";
-import { Stack, router } from "expo-router";
-import { Text, View, TextInput, Logo } from "@/components/Themed";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { Button } from "@/components/Button";
+import { Logo, Text, TextInput, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
-import { useSession } from "@/lib/ctx";
 import { About } from "@/lib/about";
+import { useSession } from "@/lib/ctx";
 import { Update } from "@/lib/update";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Stack, router } from "expo-router";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import { useSharedValue } from "react-native-reanimated";
 
 export default function SignIn() {
   const { signIn } = useSession();
@@ -115,9 +111,7 @@ export default function SignIn() {
             </Text>
           </View>
 
-          <TouchableOpacity onPress={handleSignIn} style={styles.button}>
-            <Text style={styles.loginText}>{t("signIn")}</Text>
-          </TouchableOpacity>
+          <Button onPress={handleSignIn} label={t("signIn")} />
           <Pressable
             key={"forgotPassword"}
             onPress={() => {
@@ -136,20 +130,15 @@ export default function SignIn() {
       )}
 
       {!showSignIn && (
-        <TouchableOpacity
-          key={"signIn"}
-          style={[styles.button, { marginBottom: 30 }]}
+        <Button
           onPress={() => {
-            welcomeMarginTop.value = withSpring(welcomeMarginTop.value - 50);
-            welcomeFontSize.value = welcomeFontSize.value - 50;
             setShowSignIn(true);
-          }}>
-          <Text style={styles.createText}>{t("signIn")}</Text>
-        </TouchableOpacity>
+          }}
+          label={t("signIn")}
+        />
       )}
-      <TouchableOpacity
-        key={"signUp"}
-        style={styles.button}
+
+      <Button
         onPress={() => {
           router.navigate({
             pathname: "/signUp",
@@ -157,9 +146,9 @@ export default function SignIn() {
               email: email,
             },
           });
-        }}>
-        <Text style={styles.createText}>{t("signInCreateANewAccount")}</Text>
-      </TouchableOpacity>
+        }}
+        label={t("signInCreateANewAccount")}
+      />
 
       {!showSignIn && (
         <View style={styles.sloganView}>
@@ -175,7 +164,7 @@ export default function SignIn() {
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
-    backgroundColor: "#9D5BD0",
+    backgroundColor: "#F9D96B",
     borderRadius: 10,
     height: 50,
     justifyContent: "center",

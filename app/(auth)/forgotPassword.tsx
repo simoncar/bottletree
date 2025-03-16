@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { StyleSheet, Button, TouchableOpacity } from "react-native";
+import { Button } from "@/components/Button";
+import { Text, TextInput, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
 import { Stack } from "expo-router";
-import { Text, View, TextInput } from "@/components/Themed";
+import { t } from "i18next";
+import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -44,14 +46,13 @@ export default function SignIn() {
           {errorMessage}
         </Text>
       </View>
-
-      <TouchableOpacity
+      <Button
         onPress={async () => {
           resetPassword(email, resetError);
         }}
-        style={styles.button}>
-        <Text style={styles.loginText}>Send Reset Link</Text>
-      </TouchableOpacity>
+        label={t("signInReset")}
+      />
+
       <View>
         <Text style={styles.resetDetail}>
           We will email you a password reset link.

@@ -1,21 +1,17 @@
-import React, { useState, useContext } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Pressable,
-  useColorScheme,
-} from "react-native";
-import { useSession } from "@/lib/ctx";
-import { Stack, router } from "expo-router";
-import { Text, View, TextInput } from "@/components/Themed";
-import { updateAccountName, mergeUser } from "@/lib/APIuser";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { Button } from "@/components/Button";
+import { Text, TextInput, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import { addLog } from "@/lib/APIlog";
 import { About } from "@/lib/about";
+import { addLog } from "@/lib/APIlog";
+import { mergeUser, updateAccountName } from "@/lib/APIuser";
+import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Stack, router } from "expo-router";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Pressable, StyleSheet, useColorScheme } from "react-native";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -84,13 +80,12 @@ export default function SignIn() {
       return;
     } else {
       return (
-        <TouchableOpacity
+        <Button
           onPress={async () => {
             signUp(name, email, password, signUpCallback);
           }}
-          style={styles.button}>
-          <Text style={styles.loginText}>{t("signInCreateAccount")}</Text>
-        </TouchableOpacity>
+          label={t("signInCreateAccount")}
+        />
       );
     }
   };

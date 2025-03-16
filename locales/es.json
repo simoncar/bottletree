@@ -90,6 +90,9 @@
   "signIn": "Iniciar sesión",
   "signInForgotPassword": "¿Olvidaste tu contraseña?",
   "signInCreateANewAccount": "Crear una nueva cuenta",
+  
+  "signInReset": "Enviar enlace de restablecimiento",
+
   "slogan": "Administración de proyectos para constructores",
   "email": "Correo electrónico",
   "password": "Contraseña",

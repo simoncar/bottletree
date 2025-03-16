@@ -43,6 +43,9 @@ sudo kill -9 PID
 
 npx expo-doctor
 
+#F9D96B
+
+
 
 TODO:
 Org Slug: simon-co
