@@ -4,18 +4,18 @@
  */
 
 import {
-  TextInput as DefaultTextInput,
-  Text as DefaultText,
-  useColorScheme,
-  View as DefaultView,
   Button as DefaultButton,
+  Text as DefaultText,
+  TextInput as DefaultTextInput,
+  View as DefaultView,
   StyleSheet,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 
+import { ParsedTextUnthemed } from "@/components/ParsedText";
 import Colors from "@/constants/Colors";
 import React from "react";
-import { ParsedTextUnthemed } from "@/components/ParsedText";
 
 export function useThemeColor(
   props: { light?: string; dark?: string },

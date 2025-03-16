@@ -31,7 +31,7 @@ export default {
     textField: "#000",
     orangeButtonIcon: "#000",
     textPlaceholder: "#ccc",
-    background: "#2F203C",
+    background: "#101411",
     tint: "#5D5CE7",
     tintInactive: "#5d6f7c",
     calendarPanel: "#2f95dc",
