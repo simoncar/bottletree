@@ -1,17 +1,11 @@
-import React from "react";
-import {
-  Image,
-  Linking,
-  StyleSheet,
-  useColorScheme,
-  Platform,
-  Pressable,
-} from "react-native";
+import { Button } from "@/components/Button";
 import { Logo, Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import QRCode from "react-native-qrcode-svg";
 import { About } from "@/lib/about";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { Linking, StyleSheet, useColorScheme } from "react-native";
+import QRCode from "react-native-qrcode-svg";
 
 export default function House() {
   const colorScheme = useColorScheme();
@@ -36,11 +30,10 @@ export default function House() {
       </View>
       <Text style={styles.textSub}>{t("shareTheAppWithYourFriends")}</Text>
       <View>
-        <Pressable
-          style={styles.button}
-          onPress={() => Linking.openURL("https://otbapps.com")}>
-          <Text style={styles.buttonText}>{t("findOutMore")}</Text>
-        </Pressable>
+        <Button
+          onPress={() => Linking.openURL("https://otbapps.com")}
+          label={t("findOutMore")}
+        />
       </View>
 
       <About />
