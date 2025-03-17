@@ -185,7 +185,7 @@ export const Projects = ({ session, archived }: Props) => {
                 onPress={() => setShowArchived(!showArchived)}
                 style={styles.collapsibleHeader}>
                 <Text style={styles.collapsibleHeaderText}>
-                  Archived Projects
+                  {t('archivedProjects')}
                 </Text>
                 <MaterialIcons
                   name={

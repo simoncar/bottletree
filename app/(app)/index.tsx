@@ -87,10 +87,7 @@ export default function Home() {
           />
         </View>
         {renderTopPanel()}
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}>
+        <ScrollView>
           <View style={styles.updateContainer}>
             <Update />
           </View>
@@ -174,6 +171,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginBottom: 20,
     fontFamily: "Inter_700Bold",
+    width: "100%",
   },
   containerFloatingButton: {
     position: "absolute",

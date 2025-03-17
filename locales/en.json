@@ -101,5 +101,6 @@
   "shareDescription": "Let anybody with the link see this project",
   "addAComment": "Add a comment...",
   "comment": "Comment",
-  "noFilesFound": "No files found"
+  "noFilesFound": "No files found",
+  "archivedProjects": "Archived Projects"
 }

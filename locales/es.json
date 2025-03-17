@@ -103,5 +103,6 @@
   "shareDescription": "Permitir que cualquier persona con el enlace vea este proyecto",
   "addAComment": "Agregar un comentario...",
   "comment": "Comentario",
-  "noFilesFound": "No se encontraron archivos"
+  "noFilesFound": "No se encontraron archivos",
+  "archivedProjects": "Proyectos Archivados"
 }

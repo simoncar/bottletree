@@ -1,6 +1,6 @@
+import { createUser } from "./APIuser";
 import { db, firestore } from "./firebase";
 import { IProject, IUser } from "./types";
-import { createUser } from "./APIuser";
 
 type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
@@ -56,13 +56,32 @@ export function getProjects(
     return;
   }
 
+  projectsDemo[0] = {
+    project: "demo",
+    key: "demo",
+    title: "Demo Project",
+    icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/project%2Fdemo%2Fimages%2Fd0dd21df-e9fd-4d8f-a41a-b58deba7259c?alt=media&token=b9b74300-99aa-42b0-a069-676c5f6d62a1",
+    archived: false,
+    postCount: 0,
+    fileCount: 0,
+    taskCount: 0,
+    timestamp: firestore.Timestamp.now(),
+    private: false,
+    created: firestore.Timestamp.now(),
+    star: false,
+  };
+
   const query = db.collectionGroup("accessList").where("uid", "==", uid);
 
   query.onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       projectList.indexOf(doc.data().projectId) === -1
         ? projectList.push(doc.data().projectId)
-        : console.log("This item already exists", Date());
+        : console.log(
+            "This item already exists:",
+            doc.data().projectId,
+            Date(),
+          );
     });
 
     const q = db.collection("projects");
@@ -107,6 +126,12 @@ export function getProjects(
             }
           }
         }
+        //if demo project, set the counts
+        if (doc.id === "demo") {
+          projectsDemo[0].postCount = doc.data().postCount ?? 0;
+          projectsDemo[0].taskCount = doc.data().taskCount ?? 0;
+          projectsDemo[0].fileCount = doc.data().fileCount ?? 0;
+        }
       });
 
       projects.forEach((project) => {
@@ -128,20 +153,6 @@ export function getProjects(
       projectsArchived.sort((a, b) => {
         return b.timestamp?.seconds - a.timestamp?.seconds;
       });
-      projectsDemo[0] = {
-        project: "demo",
-        key: "demo",
-        title: "Demo Project",
-        icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/project%2Fdemo%2Fimages%2Fd0dd21df-e9fd-4d8f-a41a-b58deba7259c?alt=media&token=b9b74300-99aa-42b0-a069-676c5f6d62a1",
-        archived: false,
-        postCount: 0,
-        fileCount: 0,
-        taskCount: 0,
-        timestamp: firestore.Timestamp.now(),
-        private: false,
-        created: firestore.Timestamp.now(),
-        star: false,
-      };
 
       const allProjects = [...projects, ...projectsArchived];
       if (!allProjects.some((project) => project.key === "demo")) {
