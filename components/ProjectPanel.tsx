@@ -1,32 +1,25 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import {
-  Pressable,
-  Share,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 
-import Colors from "@/constants/Colors";
-import { Text } from "@/components/Themed";
-import { getUserProjectCount } from "@/lib/APIuser";
-import { IUser, IProject } from "@/lib/types";
-import { useSession } from "@/lib/ctx";
-import { getProject } from "@/lib/APIproject";
 import SharePanel from "@/components/SharePanel";
+import { Text } from "@/components/Themed";
+import { getProject } from "@/lib/APIproject";
+import { getUserProjectCount } from "@/lib/APIuser";
+import { useSession } from "@/lib/ctx";
+import { IProject, IUser } from "@/lib/types";
 
 type ProjectProp = {
   project: string;
   title: string;
+  icon: string;
   projectObj: IProject;
 };
 
 const ProjectPanel = (props: ProjectProp) => {
-  const { project, title, projectObj: projectObjProps } = props;
+  const { project, title, icon, projectObj: projectObjProps } = props;
   const colorScheme = useColorScheme();
   const router = useRouter();
   const { session } = useSession();
@@ -35,7 +28,7 @@ const ProjectPanel = (props: ProjectProp) => {
     project: "",
     key: "",
     title: title,
-    icon: "",
+    icon: icon || "",
     archived: false,
     postCount: 0,
     fileCount: 0,

@@ -1,23 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
 import { View } from "@/components/Themed";
 import { getPosts } from "@/lib/APIpost";
 import { updateUserProjectCount } from "@/lib/APIuser";
-import { IPost, IProject } from "@/lib/types";
-import Post from "./Post";
-import ProjectPanel from "./ProjectPanel";
-import { useSession } from "@/lib/ctx";
-import { FlatList } from "react-native-gesture-handler";
 import { UserContext } from "@/lib/UserContext";
 import { About } from "@/lib/about";
+import { useSession } from "@/lib/ctx";
+import { IPost, IProject } from "@/lib/types";
+import React, { useContext, useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import Post from "./Post";
+import ProjectPanel from "./ProjectPanel";
 
 type Props = {
   project: string;
   title: string;
+  icon: string;
   projectObj: IProject;
 };
 
-export const Posts = ({ project, title, projectObj }: Props) => {
+export const Posts = ({ project, title, icon, projectObj }: Props) => {
   const { session } = useSession();
   const { user } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
@@ -47,7 +48,12 @@ export const Posts = ({ project, title, projectObj }: Props) => {
   const renderHeader = () => {
     return (
       <View>
-        <ProjectPanel project={project} title={title} projectObj={projectObj} />
+        <ProjectPanel
+          project={project}
+          title={title}
+          icon={icon}
+          projectObj={projectObj}
+        />
       </View>
     );
   };

@@ -1,25 +1,26 @@
-import React, { useEffect, useContext, useState } from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
-import { useLocalSearchParams, router } from "expo-router";
 import { Posts } from "@/components/Posts";
-import { View, Text } from "@/components/Themed";
-import { UserContext } from "@/lib/UserContext";
+import { View } from "@/components/Themed";
 import { getProject } from "@/lib/APIproject";
 import { IProject } from "@/lib/types";
+import { UserContext } from "@/lib/UserContext";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet } from "react-native";
 
 type SearchParams = {
   posts: string; //project ID
   title: string;
+  icon: string;
 };
 
 export default function ProjectPosts() {
-  const { posts: project, title } = useLocalSearchParams<SearchParams>();
+  const { posts: project, title, icon } = useLocalSearchParams<SearchParams>();
   const { user, setUser } = useContext(UserContext);
   const [projectObj, setProject] = useState<IProject>({
     project: "",
     key: "",
     title: title,
-    icon: "",
+    icon: icon || "",
     archived: false,
     postCount: 0,
     private: false,
@@ -50,6 +51,7 @@ export default function ProjectPosts() {
         <Posts
           project={project as string}
           title={title as string}
+          icon={icon as string}
           projectObj={projectObj}
         />
       </View>

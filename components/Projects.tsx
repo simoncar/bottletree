@@ -1,21 +1,16 @@
-import { Image } from "expo-image";
-import { router, useFocusEffect } from "expo-router";
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  ScrollView,
-} from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { getProjects, setStar } from "@/lib/APIproject";
 import { IProject } from "@/lib/types";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { UserContext } from "@/lib/UserContext";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Image } from "expo-image";
+import { router, useFocusEffect } from "expo-router";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 
 type Props = {
   session: string;
@@ -131,6 +126,7 @@ export const Projects = ({ session, archived }: Props) => {
               params: {
                 posts: data.key,
                 title: data.title,
+                icon: data.icon,
               },
             });
           }}>

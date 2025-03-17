@@ -1,22 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, Pressable, useColorScheme } from "react-native";
-import { View, Text } from "./Themed";
-import { getProjectUsers } from "@/lib/APIproject";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { ShortList } from "@/components/sComponent";
-import { Image } from "expo-image";
 import Colors from "@/constants/Colors";
-import { router, useLocalSearchParams } from "expo-router";
-import { deleteProjectUser } from "@/lib/APIproject";
-import { LinearGradient } from "expo-linear-gradient";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import { deleteProjectUser, getProjectUsers } from "@/lib/APIproject";
 import { UserContext } from "@/lib/UserContext";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Image } from "expo-image";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
+import { Text, View } from "./Themed";
 
 export const ProjectUsers = (props: any) => {
   const { project, update } = useLocalSearchParams<{
@@ -201,7 +199,7 @@ const styles = StyleSheet.create({
 
   email: {
     color: "#888",
-    fontSize: 20,
+    fontSize: 18,
     paddingLeft: 20,
   },
   name: {
