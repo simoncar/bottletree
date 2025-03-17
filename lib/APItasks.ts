@@ -1,4 +1,3 @@
-import task from "@/app/(app)/task";
 import { firestore } from "@/lib/firebase";
 import { ITask } from "./types";
 
@@ -97,11 +96,10 @@ export async function setTaskOrder(project: string, tasks: ITask[]) {
   await batch.commit();
 }
 
-//create a function to clean a task by removing leading and trailing spaces from the task name and the task description
 export function cleanTask(task: ITask): ITask {
   return {
     ...task,
     task: task.task.trim(),
-    description: task.description?.trim(),
+    description: task.description?.trim() || "",
   };
 }
