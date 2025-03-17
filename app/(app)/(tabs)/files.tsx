@@ -1,35 +1,36 @@
-import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Linking,
-  Pressable,
-  Alert,
-} from "react-native";
+import { FloatingButton } from "@/components/FloatingButton";
 import { Text } from "@/components/Themed";
-import { deleteFile, getFiles } from "@/lib/APIfiles";
-import { IFile } from "@/lib/types";
 import Colors from "@/constants/Colors";
-import { useColorScheme } from "react-native";
-import { Timestamp } from "firebase/firestore";
-import { useLocalSearchParams, router } from "expo-router";
-import * as DocumentPicker from "expo-document-picker";
-import { uploadFilesAndCreateEntries } from "@/lib/APIfiles";
+import {
+  deleteFile,
+  getFiles,
+  uploadFilesAndCreateEntries,
+} from "@/lib/APIfiles";
+import { IFile } from "@/lib/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import Toast from "react-native-toast-message";
+import * as DocumentPicker from "expo-document-picker";
+import { useLocalSearchParams } from "expo-router";
+import { Timestamp } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Linking,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { FloatingButton } from "@/components/FloatingButton";
-import { setPostFile } from "@/lib/APIpost";
-import { useTranslation } from "react-i18next";
-import { ShortList } from "@/components/sComponent";
+import Toast from "react-native-toast-message";
 
 type SearchParams = {
   project: string; //project ID
@@ -300,9 +301,7 @@ export default function Files() {
             ListFooterComponentStyle={{ marginBottom: 100 }}
             ListEmptyComponent={() => (
               <View>
-                <Text style={{ textAlign: "center", padding: 16 }}>
-                  No files found
-                </Text>
+                <Text style={styles.noFiles}>{t('noFilesFound')}</Text>
                 <Text style={styles.predefinedFileHeader}>
                   Examples of files to add:
                 </Text>
@@ -361,6 +360,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingBottom: 8,
     paddingTop: 40,
+  },
+  noFiles: {
+    fontSize: 20,
+    textAlign: "center",
+    padding: 16,
   },
   rightDeleteBox: {
     alignContent: "center",

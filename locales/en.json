@@ -100,5 +100,6 @@
   "copy": "Copy",
   "shareDescription": "Let anybody with the link see this project",
   "addAComment": "Add a comment...",
-  "comment": "Comment"
+  "comment": "Comment",
+  "noFilesFound": "No files found"
 }

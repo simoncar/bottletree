@@ -90,7 +90,7 @@
   "signIn": "Iniciar sesión",
   "signInForgotPassword": "¿Olvidaste tu contraseña?",
   "signInCreateANewAccount": "Crear una nueva cuenta",
-  
+
   "signInReset": "Enviar enlace de restablecimiento",
 
   "slogan": "Administración de proyectos para constructores",
@@ -102,5 +102,6 @@
   "copy": "Copiar",
   "shareDescription": "Permitir que cualquier persona con el enlace vea este proyecto",
   "addAComment": "Agregar un comentario...",
-  "comment": "Comentario"
+  "comment": "Comentario",
+  "noFilesFound": "No se encontraron archivos"
 }
