@@ -101,8 +101,8 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 exports.onDocumentCreated_post = onDocumentWritten("/projects/{projectId}/posts/{postId}", async (event) => {
 	const projectId = event.params.projectId;
 
-	if (!projectId || projectId === "demo") {
-		console.log('Project ID not specified or Demo Project. Exiting function: ', projectId);
+	if (!projectId) {
+		console.log('Project ID not specified. Exiting function: ', projectId);
 		console.log('Event params: ', event.params);
 		return;
 	}
@@ -128,8 +128,8 @@ exports.onDocumentCreated_post = onDocumentWritten("/projects/{projectId}/posts/
 exports.onDocumentCreated_task = onDocumentWritten("/projects/{projectId}/tasks/{postId}", async (event) => {
 	const projectId = event.params.projectId;
 
-	if (!projectId || projectId === "demo") {
-		console.log('Project ID not specified or Demo Project. Exiting function: ', projectId);
+	if (!projectId) {
+		console.log('Project ID not specified. Exiting function: ', projectId);
 		console.log('Event params: ', event.params);
 		return;
 	}
@@ -152,8 +152,8 @@ exports.onDocumentCreated_task = onDocumentWritten("/projects/{projectId}/tasks/
 exports.onDocumentCreated_file = onDocumentWritten("/projects/{projectId}/files/{postId}", async (event) => {
 	const projectId = event.params.projectId;
 
-	if (!projectId || projectId === "demo") {
-		console.log('Project ID not specified or Demo Project. Exiting function: ', projectId);
+	if (!projectId) {
+		console.log('Project ID not specified. Exiting function: ', projectId);
 		console.log('Event params: ', event.params);
 		return;
 	}
