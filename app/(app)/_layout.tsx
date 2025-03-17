@@ -1,40 +1,32 @@
+import Colors from "@/constants/Colors";
+import { addProjectUser } from "@/lib/APIproject";
+import { getUser } from "@/lib/APIuser";
+import { useSession } from "@/lib/ctx";
+import ProjectProvider from "@/lib/projectProvider";
+import { UserContext } from "@/lib/UserContext";
+import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
+import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import * as Localization from "expo-localization";
 import {
-  useNavigationContainerRef,
+  Redirect,
+  Stack,
   useLocalSearchParams,
+  useNavigationContainerRef,
   usePathname,
   useSegments,
-  Stack,
-  Redirect,
-  router,
 } from "expo-router";
-import React, { useEffect, useContext, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { useColorScheme } from "react-native";
-import ProjectProvider from "@/lib/projectProvider";
-import { useSession } from "@/lib/ctx";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
-import Colors from "@/constants/Colors";
-import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
-import { Text } from "@/components/Themed";
-import { Back } from "@/components/Back";
 import { StatusBar } from "expo-status-bar";
-import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-import { addProjectUser } from "@/lib/APIproject";
-import { UserContext } from "@/lib/UserContext";
-import { getUser } from "@/lib/APIuser";
-import { auth, db, firestore } from "@/lib/firebase";
-import { RootSiblingParent } from "react-native-root-siblings";
-import * as Localization from "expo-localization";
+import React, { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, useColorScheme, View } from "react-native";
 
 import {
-  useFonts,
   Inter_100Thin,
   Inter_200ExtraLight,
   Inter_300Light,
@@ -44,12 +36,12 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
   Inter_900Black,
+  useFonts,
 } from "@expo-google-fonts/inter";
 
-import i18n from "@/lib/i18n";
-import "dayjs/locale/es";
-import "dayjs/locale/en";
 import dayjs from "dayjs";
+import "dayjs/locale/en";
+import "dayjs/locale/es";
 
 import { useTranslation } from "react-i18next";
 
@@ -63,6 +55,8 @@ type SearchParams = {
 };
 
 SplashScreen.preventAutoHideAsync();
+
+globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
 
 export default function Layout() {
   const { posts } = useLocalSearchParams<SearchParams>();

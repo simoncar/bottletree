@@ -1,13 +1,12 @@
 {
   "folders": [
     {
-      "path": "."
-    }
+      "path": ".",
+    },
   ],
   "settings": {
-    "eslint.validate": [],
     "github-actions.workflows.pinned.workflows": [
-      "dynamic/github-code-scanning/codeql"
+      "dynamic/github-code-scanning/codeql",
     ],
     "saveEditorLayout.list": [
       {
@@ -16,285 +15,285 @@
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APINotification.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/SharePanel.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/share.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/_layout.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/ProjectPanel.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/(tabs)/[posts].tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/Posts.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/Post.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/viewPost.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/types.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APItasks.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/_layout.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/house.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/about.web.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/Back.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/index.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/addModal.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/Projects.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/anonymous/signIn.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/project/[project].tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APIpost.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app.config.js",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/functions/index.js",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/.gitignore",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/firebase.json",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/package.json",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/user/[uid].tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/editCalendar.tsx",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/firebase.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/firebase.web.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APIcalendar.ts",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/README.md",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/babel.config.js",
             "column": 1,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/editPost.tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/(tabs)/tasks.tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/(tabs)/calendar.tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/projectList.tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/Projects.tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/user/[uid].tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app.config.js",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/demoProject.ts",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/ProjectPanel.tsx",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APIcalendar.ts",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APItasks.ts",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APIpost.ts",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/functions/index.js",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/README.md",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/functions/package.json",
             "column": 2,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/(tabs)/calendar.tsx",
             "column": 3,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/app/(app)/index.tsx",
             "column": 3,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/components/Projects.tsx",
             "column": 3,
-            "pinned": false
+            "pinned": false,
           },
           {
             "fsPath": "/Users/simon/code/bottletree/lib/APIproject.ts",
             "column": 3,
-            "pinned": false
-          }
+            "pinned": false,
+          },
         ],
         "layout": {
           "orientation": 0,
           "groups": [
             {
-              "size": 616
+              "size": 616,
             },
             {
-              "size": 1248
+              "size": 1248,
             },
             {
-              "size": 547
-            }
-          ]
-        }
-      }
+              "size": 547,
+            },
+          ],
+        },
+      },
     ],
     "i18n-ally.localesPaths": [
       "locales",
       "ios/Pods/RCT-Folly/folly/lang",
-      "ios/Pods/boost/boost/predef/language"
+      "ios/Pods/boost/boost/predef/language",
     ],
-    "i18n-ally.keystyle": "flat"
-  }
+    "i18n-ally.keystyle": "flat",
+  },
 }

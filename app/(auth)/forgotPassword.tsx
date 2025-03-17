@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button";
+import { ButtonYellow } from "@/components/Button";
 import { Text, TextInput, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
 import { Stack } from "expo-router";
@@ -46,7 +46,7 @@ export default function SignIn() {
           {errorMessage}
         </Text>
       </View>
-      <Button
+      <ButtonYellow
         onPress={async () => {
           resetPassword(email, resetError);
         }}
@@ -63,15 +63,6 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 10,
-    width: 300,
-  },
   container: {
     alignItems: "center",
     flex: 1,
@@ -114,5 +105,8 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 10,
     padding: 10,
+  },
+  aaaaa: {
+    fontSize: 20,
   },
 });

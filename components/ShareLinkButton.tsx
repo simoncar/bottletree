@@ -1,10 +1,14 @@
-import React from "react";
-import { TouchableOpacity, Share } from "react-native";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Text } from "@/components/Themed";
-import { useTranslation } from "react-i18next";
 import Colors from "@/constants/Colors";
-import { StyleSheet, useColorScheme } from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import {
+  Share,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+} from "react-native";
 
 type ShareLinkButtonProps = {
   project: string;
@@ -59,8 +63,7 @@ const ShareLinkButton: React.FC<ShareLinkButtonProps> = ({
 const styles = StyleSheet.create({
   avatarIcon: {
     fontSize: 20,
-    paddingLeft: 5,
-    paddingRight: 10,
+    marginRight: 8,
   },
   buttonStyle: {
     alignItems: "center",
@@ -69,6 +72,7 @@ const styles = StyleSheet.create({
     color: "#4267B2",
     flexDirection: "row",
     fontSize: 16,
+    justifyContent: "center",
     marginBottom: 20,
     marginTop: 10,
     padding: 8,

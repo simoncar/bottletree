@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button";
+import { ButtonYellow } from "@/components/Button";
 import { Logo, Text, TextInput, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
@@ -111,7 +111,7 @@ export default function SignIn() {
             </Text>
           </View>
 
-          <Button onPress={handleSignIn} label={t("signIn")} />
+          <ButtonYellow onPress={handleSignIn} label={t("signIn")} />
           <Pressable
             key={"forgotPassword"}
             onPress={() => {
@@ -130,7 +130,7 @@ export default function SignIn() {
       )}
 
       {!showSignIn && (
-        <Button
+        <ButtonYellow
           onPress={() => {
             setShowSignIn(true);
           }}
@@ -138,7 +138,7 @@ export default function SignIn() {
         />
       )}
 
-      <Button
+      <ButtonYellow
         onPress={() => {
           router.navigate({
             pathname: "/signUp",

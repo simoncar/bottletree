@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
-import { StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { useSession } from "@/lib/ctx";
-import { Stack, router } from "expo-router";
-import { deleteUser } from "@/lib/APIuser";
+import { ButtonYellow } from "@/components/Button";
 import { Text, View } from "@/components/Themed";
+import { deleteUser } from "@/lib/APIuser";
+import { useSession } from "@/lib/ctx";
 import { UserContext } from "@/lib/UserContext";
+import { Stack, router } from "expo-router";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Alert, StyleSheet } from "react-native";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -72,29 +73,17 @@ export default function DeleteAccount() {
         <Text style={styles.error}>{errorMessage}</Text>
       </View>
 
-      <TouchableOpacity
+      <ButtonYellow
         onPress={async () => {
           onDelete();
         }}
-        style={styles.button}>
-        <Text style={styles.buttonText}>{t('yesDeleteMyAccount')}</Text>
-      </TouchableOpacity>
+        label={t("yesDeleteMyAccount")}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 40,
-    marginTop: 50,
-    width: 300,
-  },
-
   buttonText: {
     color: "white",
     fontSize: 18,

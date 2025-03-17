@@ -1,0 +1,47 @@
+const { FlatCompat } = require("@eslint/eslintrc");
+import js from "@eslint/js";
+import typescript from "@typescript-eslint/eslint-plugin";
+import react from "eslint-plugin-react";
+import reactNative from "eslint-plugin-react-native";
+
+const compat = new FlatCompat();
+
+module.exports = [
+	js.configs.recommended,
+	react.configs.recommended,
+	reactNative.configs.all,
+	typescript.configs.recommended,
+	{
+		"files": ["**/*.{js,jsx,ts,tsx}"],
+		"languageOptions": {
+			"ecmaVersion": 2021,
+			"sourceType": "module",
+			"parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"ecmaFeatures": {
+					"jsx": true
+				}
+			}
+		},
+		"plugins": {
+			"react": require("eslint-plugin-react"),
+			"react-native": require("eslint-plugin-react-native"),
+			"@typescript-eslint": require("@typescript-eslint/eslint-plugin")
+		},
+		"rules": {
+			"linebreak-style": ["error", "unix"],
+			"quotes": ["error", "double"],
+			"react-native/no-unused-styles": 1,
+			"react-native/split-platform-components": 2,
+			"@typescript-eslint/no-explicit-any": "off",
+			"react-native/no-inline-styles": 2,
+			"react-native/no-color-literals": 0,
+			"react-native/no-raw-text": 2,
+			"react-native/no-single-element-style-arrays": 2,
+			"sort-keys": ["error", "asc", { "caseSensitive": false, "natural": true }]
+		}
+	},
+	...compat.extends("eslint:recommended"),
+	...compat.extends("plugin:react/recommended"),
+	...compat.extends("plugin:@typescript-eslint/recommended")
+];

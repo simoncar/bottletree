@@ -1,19 +1,13 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import React from "react";
-import {
-  StyleSheet,
-  useColorScheme,
-  TouchableOpacity,
-  Share,
-} from "react-native";
+import ShareLinkButton from "@/components/ShareLinkButton"; // Import the new component
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import QRCode from "react-native-qrcode-svg";
-import { useLocalSearchParams } from "expo-router";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import * as Clipboard from "expo-clipboard";
+import { useLocalSearchParams } from "expo-router";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import ShareLinkButton from "@/components/ShareLinkButton"; // Import the new component
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
+import QRCode from "react-native-qrcode-svg";
 
 type ShareParams = {
   project: string;
@@ -79,8 +73,7 @@ const ShareLink = () => {
 const styles = StyleSheet.create({
   avatarIcon: {
     fontSize: 20,
-    paddingLeft: 5,
-    paddingRight: 10,
+    marginRight: 8,
   },
   qrcodeContainer: {
     alignItems: "center",
@@ -97,6 +90,7 @@ const styles = StyleSheet.create({
     color: "#4267B2",
     flexDirection: "row",
     fontSize: 16,
+    justifyContent: "center",
     marginBottom: 20,
     marginTop: 10,
     padding: 8,

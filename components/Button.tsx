@@ -6,10 +6,10 @@ interface SignInButtonProps {
   label: string;
 }
 
-export function Button({ onPress, label }: SignInButtonProps) {
+export function ButtonYellow({ onPress, label }: SignInButtonProps) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Text style={styles.loginText}>{label}</Text>
+      <Text style={styles.textLabel}>{label}</Text>
     </TouchableOpacity>
   );
 }
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: 300,
   },
-  loginText: {
+  textLabel: {
     fontSize: 18,
     color: "black",
   },

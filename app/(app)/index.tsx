@@ -1,29 +1,24 @@
-import React, { useContext } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  ScrollView,
-  Pressable,
-  useWindowDimensions,
-} from "react-native";
-import { useSession } from "@/lib/ctx";
-import { router, Link, Stack } from "expo-router";
-import { Text, View, Logo } from "@/components/Themed";
-import { UserContext } from "@/lib/UserContext";
+import { FloatingButton } from "@/components/FloatingButton";
+import { Projects } from "@/components/Projects";
+import { Logo, Text, View } from "@/components/Themed";
+import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Projects } from "@/components/Projects";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { UserAvatar } from "@/components/UserAvatar";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { useSession } from "@/lib/ctx";
 import { Update } from "@/lib/update";
-import Toast from "react-native-toast-message";
-import { FloatingButton } from "@/components/FloatingButton";
-import { AntDesign } from "@expo/vector-icons";
-import { SaveFormat } from "expo-image-manipulator";
+import { UserContext } from "@/lib/UserContext";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { router, Stack } from "expo-router";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  useColorScheme,
+  useWindowDimensions,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -135,19 +130,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     paddingTop: 40,
-  },
-  createBtn: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 40,
-    width: 200,
-  },
-  createText: {
-    color: "white",
-    fontSize: 18,
   },
 
   instructions: {

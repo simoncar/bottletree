@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button";
+import { ButtonYellow } from "@/components/Button";
 import { Text, TextInput, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
@@ -80,7 +80,7 @@ export default function SignIn() {
       return;
     } else {
       return (
-        <Button
+        <ButtonYellow
           onPress={async () => {
             signUp(name, email, password, signUpCallback);
           }}
@@ -162,15 +162,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
     paddingTop: 50,
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 10,
-    width: 300,
-  },
+
   container: {
     alignItems: "center",
     flex: 1,

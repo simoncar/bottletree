@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
-import { Link } from "expo-router";
 import * as Application from "expo-application";
+import { Link } from "expo-router";
+import React, { useContext } from "react";
+import { StyleSheet } from "react-native";
 
 export const About = () => {
   const { user } = useContext(UserContext);
@@ -41,15 +41,15 @@ export const About = () => {
 };
 
 const styles = StyleSheet.create({
+  version: {
+    color: "grey",
+    fontSize: 10,
+  },
   aboutContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 50,
     marginTop: 1000,
     marginBottom: 100,
-  },
-  version: {
-    color: "grey",
-    fontSize: 10,
   },
 });

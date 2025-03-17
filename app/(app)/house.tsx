@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button";
+import { ButtonYellow } from "@/components/Button";
 import { Logo, Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { About } from "@/lib/about";
@@ -30,7 +30,7 @@ export default function House() {
       </View>
       <Text style={styles.textSub}>{t("shareTheAppWithYourFriends")}</Text>
       <View>
-        <Button
+        <ButtonYellow
           onPress={() => Linking.openURL("https://otbapps.com")}
           label={t("findOutMore")}
         />
@@ -86,21 +86,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 8, // Optional: Adds rounded corners
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#9D5BD0",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 10,
-    width: 300,
-    color: "white",
-    textAlign: "center",
-  },
-  buttonText: {
-    fontSize: 18,
-    color: "white",
-  },
+
   qrcodeContainer: {
     alignItems: "center",
     justifyContent: "center",
