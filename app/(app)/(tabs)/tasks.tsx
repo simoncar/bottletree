@@ -224,7 +224,7 @@ export default function Tasks() {
                 {!collapsedSections.incomplete && (
                   <View
                     style={[
-                      styles.postView,
+                      styles.taskView,
                       {
                         backgroundColor:
                           Colors[colorScheme ?? "light"].postBackground,
@@ -248,7 +248,7 @@ export default function Tasks() {
             {tasksComplete.length > 0 && (
               <View
                 style={[
-                  styles.postView,
+                  styles.taskView,
                   {
                     backgroundColor:
                       Colors[colorScheme ?? "light"].postBackground,
@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
 
-  postView: {
+  taskView: {
     borderRadius: 10,
     borderWidth: 10,
     flex: 1,

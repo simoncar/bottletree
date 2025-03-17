@@ -49,17 +49,15 @@ export default function TaskScreen() {
       <View style={styles.container}>
         <View style={[styles.itemView, styles.line]}>
           <View style={styles.avatar}></View>
-          <View style={styles.itemMain}>
-            <TextInput
-              style={styles.titleText}
-              onChangeText={(title) => setTask({ ...taskObj, task: title })}
-              placeholder={t("task")}
-              value={taskObj.task}
-              autoFocus={true}
-              multiline={true}
-              numberOfLines={10}
-            />
-          </View>
+          <TextInput
+            style={styles.titleText}
+            onChangeText={(title) => setTask({ ...taskObj, task: title })}
+            placeholder={t("task")}
+            value={taskObj.task}
+            autoFocus={true}
+            multiline={true}
+            numberOfLines={10}
+          />
         </View>
         <View style={[styles.itemView, styles.line]}>
           <View style={styles.avatar}>
@@ -96,6 +94,12 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 22,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingVertical: 8,
+    padding: 8,
+    width: "90%",
   },
 
   option: {

@@ -1,6 +1,6 @@
+import task from "@/app/(app)/task";
 import { firestore } from "@/lib/firebase";
 import { ITask } from "./types";
-import { orderBy } from "@react-native-firebase/firestore";
 
 type tasksRead = (tasks: ITask[]) => void;
 
@@ -41,6 +41,8 @@ export async function addTask(project: string, task: ITask, callback: any) {
     .collection("tasks")
     .doc();
 
+  task = cleanTask(task as ITask);
+
   await taskRef.set({
     ...task,
     created: firestore.Timestamp.now(),
@@ -61,6 +63,8 @@ export async function editTask(
     .doc(project)
     .collection("tasks")
     .doc(taskId);
+
+  updatedTask = cleanTask(updatedTask as ITask);
 
   await taskRef.update({
     ...updatedTask,
@@ -91,4 +95,13 @@ export async function setTaskOrder(project: string, tasks: ITask[]) {
   });
 
   await batch.commit();
+}
+
+//create a function to clean a task by removing leading and trailing spaces from the task name and the task description
+export function cleanTask(task: ITask): ITask {
+  return {
+    ...task,
+    task: task.task.trim(),
+    description: task.description?.trim(),
+  };
 }
