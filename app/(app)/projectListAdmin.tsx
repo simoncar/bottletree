@@ -1,28 +1,22 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Image } from "expo-image";
-import { Link, router, useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState, useContext } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  useColorScheme,
-  Alert,
-} from "react-native";
 import { ShortList } from "@/components/sComponent";
 import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import {
-  getAllProjects,
-  addProjectUserAll,
-  archiveAllProjects,
-} from "@/lib/APIproject";
-import { IProject } from "@/lib/types";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useSession } from "@/lib/ctx";
-import { useProject } from "@/lib/projectProvider";
-import { UserContext } from "@/lib/UserContext";
+import { archiveAllProjects, getAllProjects } from "@/lib/APIproject";
 import { updateAllUsersEmailToLowerCase } from "@/lib/APIuser";
+import { useProject } from "@/lib/projectProvider";
+import { IProject } from "@/lib/types";
+import { UserContext } from "@/lib/UserContext";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Image } from "expo-image";
+import { Link, router, useLocalSearchParams } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+} from "react-native";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -58,27 +52,6 @@ const ModalScreen = (props) => {
     Alert.alert("Operation Complete");
   };
 
-  const askAddAll = () => {
-    Alert.alert(
-      "Add Me to All Projects",
-      "Are you sure?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Add",
-          onPress: () => {
-            addProjectUserAll(user, saveDoneAll);
-          },
-        },
-      ],
-      { cancelable: false },
-    );
-  };
-
   const askArchiveAll = () => {
     Alert.alert(
       "Archive All Projects",
@@ -99,33 +72,6 @@ const ModalScreen = (props) => {
       { cancelable: false },
     );
   };
-
-  function renderAll() {
-    return (
-      <View style={styles.adminAll}>
-        <TouchableOpacity
-          key={"addAll"}
-          onPress={() => {
-            askAddAll();
-          }}>
-          <Text
-            style={[
-              styles.project,
-              { color: Colors[colorScheme ?? "light"].background },
-            ]}>
-            Add Me to All Projects
-          </Text>
-          <Text
-            style={[
-              styles.project,
-              { color: Colors[colorScheme ?? "light"].background },
-            ]}>
-            (Makes testing easier)
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
 
   function renderLog() {
     return (
@@ -284,7 +230,6 @@ const ModalScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
-        <View>{renderAll()}</View>
         <View>{renderArchiveAll()}</View>
         <View>{renderLog()}</View>
         {loading === false && (
