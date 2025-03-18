@@ -1,6 +1,6 @@
 import Colors from "@/constants/Colors";
 import { addProjectUser } from "@/lib/APIproject";
-import { getUser } from "@/lib/APIuser";
+import { getUser, updateUserLastLogin } from "@/lib/APIuser";
 import { useSession } from "@/lib/ctx";
 import ProjectProvider from "@/lib/projectProvider";
 import { UserContext } from "@/lib/UserContext";
@@ -111,6 +111,7 @@ export default function Layout() {
         const userData = await getUser(session);
         if (userData) {
           setUser(userData);
+          updateUserLastLogin(userData.uid); // Update last login timestamp
         }
       } catch (error) {
         console.error("Error loading user data:", error);

@@ -61,6 +61,7 @@ export interface IUser {
   anonymous: boolean;
   notifications?: boolean;
   created?: Timestamp;
+  lastLogin?: Timestamp;
 }
 
 export interface IComment {

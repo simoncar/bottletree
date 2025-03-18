@@ -326,7 +326,6 @@ export async function updateAllUsersEmailToLowerCase() {
   }
 }
 
-// a function that accepts a user ID and a pushToken and updates the user's pushToken in the database
 export const updateUserPushToken = (uid: string, pushToken: string) => {
   if (uid === null || pushToken == undefined) {
     return;
@@ -346,5 +345,28 @@ export const updateUserPushToken = (uid: string, pushToken: string) => {
     })
     .catch((error) => {
       console.log("Error updating user's pushToken:", error);
+    });
+};
+
+//function to set the user lastLogin timestamp
+export const updateUserLastLogin = (uid: string) => {
+  if (uid === null) {
+    return;
+  }
+
+  firestore()
+    .collection("users")
+    .doc(uid)
+    .set(
+      {
+        lastLogin: firestore.Timestamp.now(),
+      },
+      { merge: true },
+    )
+    .then(() => {
+      console.log("User's lastLogin updated successfully!");
+    })
+    .catch((error) => {
+      console.log("Error updating user's lastLogin:", error);
     });
 };
