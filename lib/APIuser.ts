@@ -325,3 +325,26 @@ export async function updateAllUsersEmailToLowerCase() {
     console.error("Error updating user emails:", error);
   }
 }
+
+// a function that accepts a user ID and a pushToken and updates the user's pushToken in the database
+export const updateUserPushToken = (uid: string, pushToken: string) => {
+  if (uid === null || pushToken == undefined) {
+    return;
+  }
+
+  firestore()
+    .collection("users")
+    .doc(uid)
+    .set(
+      {
+        pushToken: pushToken,
+      },
+      { merge: true },
+    )
+    .then(() => {
+      console.log("User's pushToken updated successfully!");
+    })
+    .catch((error) => {
+      console.log("Error updating user's pushToken:", error);
+    });
+};

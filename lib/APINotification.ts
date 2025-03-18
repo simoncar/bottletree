@@ -1,9 +1,10 @@
-import { auth, firestore } from "./firebase";
-import { IPushToken, IUser } from "./types";
-import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
-import { Platform } from "react-native";
 import Constants from "expo-constants";
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
+import { Platform } from "react-native";
+import { updateUserPushToken } from "./APIuser";
+import { auth, firestore } from "./firebase";
+import { IPushToken } from "./types";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -36,6 +37,10 @@ export function setToken(
           { merge: true },
         )
         .then((docRef) => {
+          // Call updateUserPushToken after saving the token
+          if (auth().currentUser?.uid) {
+            updateUserPushToken(auth().currentUser.uid, token.pushToken);
+          }
           callback(token.key);
         });
     } catch (e) {
