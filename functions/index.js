@@ -35,8 +35,8 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 	console.log('Getting Access List for project Id : ', projectId);
 
 
-	//for each user in the accessList, retrieve the token from the tokens collection where the token uid matches the accessList uid
-	accessList.forEach(async (accessDoc) => {
+
+	await Promise.all(accessList.docs.map(async (accessDoc) => {
 		const token = await getFirestore().collection("users").where("uid", "==", accessDoc.data().uid).get();
 		console.log('Getting Token for user Id : ', accessDoc.data().uid);
 
@@ -52,7 +52,7 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 					to: pushToken,
 					title: title,
 					sound: "default",
-					body: pushToken,
+					body: body,
 					data: {
 						uid: tokenDoc.data().uid,
 						project: projectId
@@ -60,44 +60,44 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 				});
 			}
 		});
+	}));
 
-		if (notifications.length > 0) {
-			console.log('Sending Notifications to expo servers : ', notifications);
+	if (notifications.length > 0) {
+		console.log('Sending Notifications to expo servers : ', notifications);
 
-			const response = await fetch("https://exp.host/--/api/v2/push/send", {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					'Accept-encoding': 'gzip, deflate',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(notifications),
-			});
+		const response = await fetch("https://exp.host/--/api/v2/push/send", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				'Accept-encoding': 'gzip, deflate',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(notifications),
+		});
 
-			await event.data.ref.set({ notifications: notifications }, { merge: true })
+		await event.data.ref.set({ notifications: notifications }, { merge: true })
 
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
-
-			const data = await response.json();
-
-			if (data.data[0].status === "error") {
-				const message = data.data[0]
-				return event.data.ref.set({ complete: true, response: message }, { merge: true });
-
-			}
-			if (data.data[0].status === "ok") {
-				const message = data;
-				return event.data.ref.set({ complete: true, response: message }, { merge: true });
-
-			}
-
-		} else {
-			return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-	});
+
+		const data = await response.json();
+
+		if (data.data[0].status === "error") {
+			const message = data.data[0]
+			return event.data.ref.set({ complete: true, response: message }, { merge: true });
+
+		}
+		if (data.data[0].status === "ok") {
+			const message = data;
+			return event.data.ref.set({ complete: true, response: message }, { merge: true });
+
+		}
+
+	} else {
+		return event.data.ref.set({ complete: true, response: "no notifications to send" }, { merge: true });
+	}
 
 });
 
