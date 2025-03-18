@@ -32,22 +32,21 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 	//for the specified project, retrieve all the users in the accessList collection under the project
 	const accessList = await getFirestore().collection("projects").doc(projectId).collection("accessList").get();
-	console.log('Getting Access List for project Id : ', projectId);
+	console.log('Getting Access List for project Id : ', projectId, accessList);
 
 
 
 	await Promise.all(accessList.docs.map(async (accessDoc) => {
-		const token = await getFirestore().collection("users").where("uid", "==", accessDoc.data().uid).get();
+		const tokenDoc = await getFirestore().collection("users").doc(accessDoc.data().uid).get();
 		console.log('Getting Token for user Id : ', accessDoc.data().uid);
 
-		token.forEach((tokenDoc) => {
-			//create a notification object and push it to the notifications array
+		if (tokenDoc.exists) {
 			const pushToken = tokenDoc.data().pushToken;
 
 			console.log('Token : ', pushToken);
 			console.log('Token UID : ', tokenDoc.data().uid);
 
-			if (pushToken && pushToken.trim() !== "") {
+			if (pushToken && pushToken.trim() !== "" && tokenDoc.data().uid !== uid) {
 				notifications.push({
 					to: pushToken,
 					title: title,
@@ -59,7 +58,7 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 					},
 				});
 			}
-		});
+		}
 	}));
 
 	if (notifications.length > 0) {
