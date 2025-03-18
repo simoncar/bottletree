@@ -37,24 +37,28 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 
 	//for each user in the accessList, retrieve the token from the tokens collection where the token uid matches the accessList uid
 	accessList.forEach(async (accessDoc) => {
-		const token = await getFirestore().collection("tokens").where("uid", "==", accessDoc.data().uid).get();
+		const token = await getFirestore().collection("users").where("uid", "==", accessDoc.data().uid).get();
 		console.log('Getting Token for user Id : ', accessDoc.data().uid);
 
 		token.forEach((tokenDoc) => {
 			//create a notification object and push it to the notifications array
-			console.log('Token : ', tokenDoc.data().pushToken);
+			const pushToken = tokenDoc.data().pushToken;
+
+			console.log('Token : ', pushToken);
 			console.log('Token UID : ', tokenDoc.data().uid);
 
-			notifications.push({
-				to: tokenDoc.data().pushToken,
-				title: title,
-				sound: "default",
-				body: tokenDoc.data().pushToken,
-				data: {
-					uid: tokenDoc.data().uid,
-					project: projectId
-				},
-			});
+			if (pushToken && pushToken.trim() !== "") {
+				notifications.push({
+					to: pushToken,
+					title: title,
+					sound: "default",
+					body: pushToken,
+					data: {
+						uid: tokenDoc.data().uid,
+						project: projectId
+					},
+				});
+			}
 		});
 
 		if (notifications.length > 0) {
