@@ -1,5 +1,6 @@
 import { auth, db, firestore } from "@/lib/firebase";
 import * as Crypto from "expo-crypto";
+import * as Device from "expo-device";
 import { IUser } from "./types";
 
 export async function getUser(uid: string) {
@@ -328,6 +329,11 @@ export async function updateAllUsersEmailToLowerCase() {
 
 export const updateUserPushToken = (uid: string, pushToken: string) => {
   if (uid === null || pushToken == undefined || pushToken === "") {
+    return;
+  }
+
+  if (!Device.isDevice) {
+    console.log("Not a device, pushToken update skipped.");
     return;
   }
 
