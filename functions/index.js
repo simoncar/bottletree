@@ -49,7 +49,7 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 				to: tokenDoc.data().pushToken,
 				title: title,
 				sound: "default",
-				body: body,
+				body: tokenDoc.data().pushToken,
 				data: {
 					uid: tokenDoc.data().uid,
 					project: projectId

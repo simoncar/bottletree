@@ -1,6 +1,6 @@
 import { auth, db, firestore } from "@/lib/firebase";
-import { IUser } from "./types";
 import * as Crypto from "expo-crypto";
+import { IUser } from "./types";
 
 export async function getUser(uid: string) {
   const q = firestore().collection("users").doc(uid);
@@ -26,6 +26,7 @@ export async function getUser(uid: string) {
       postCount: doc.data()?.postCount,
       anonymous: auth().currentUser?.isAnonymous,
       notifications: doc.data()?.notifications ?? false,
+      pushToken: doc.data()?.pushToken || "",
     };
 
     return user;
@@ -45,6 +46,7 @@ export async function getUser(uid: string) {
       project: "",
       anonymous: auth().currentUser.isAnonymous,
       created: firestore.Timestamp.now(),
+      pushToken: "",
     });
 
     return newUser;
@@ -240,6 +242,7 @@ export async function getUsers(callback: usersRead) {
       language: doc.data().language,
       project: doc.data().project,
       anonymous: doc.data().isAnonymous ?? false,
+      pushToken: doc.data().pushToken || "",
     });
   });
 
@@ -269,6 +272,7 @@ export async function getUserProjectCount(
         language: doc.data()?.language,
         project: doc.data()?.project,
         anonymous: auth().currentUser.isAnonymous,
+        pushToken: doc.data()?.pushToken || "",
       };
 
       callback(user);
