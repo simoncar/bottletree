@@ -35,6 +35,7 @@ export const About = () => {
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth().currentUser?.uid}</Text>
         <Text style={styles.version}>Project - {user.project}</Text>
+        <Text style={styles.version}>Push - {user.pushToken}</Text>
       </View>
     );
   }
@@ -50,6 +51,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 50,
     marginTop: 1000,
-    marginBottom: 100,
+    marginBottom: 200,
   },
 });
