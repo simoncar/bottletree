@@ -327,7 +327,7 @@ export async function updateAllUsersEmailToLowerCase() {
 }
 
 export const updateUserPushToken = (uid: string, pushToken: string) => {
-  if (uid === null || pushToken == undefined) {
+  if (uid === null || pushToken == undefined || pushToken === "") {
     return;
   }
 
