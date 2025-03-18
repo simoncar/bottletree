@@ -95,8 +95,8 @@ export async function setPostNote(post: IPost, callback: any) {
       console.log("Post Document written with ID: ", post.key);
       db.collection("notifications")
         .add({
-          title: post.author,
-          body: "New Note Added",
+          title: post.author?.substring(0, 300) || "",
+          body: post.caption?.substring(0, 300) || "",
           timestamp: firestore.Timestamp.now(),
           projectId: post.projectId,
           uid: post.uid || "",
@@ -304,13 +304,15 @@ export async function addComment(
         if (doc.exists) {
           const projectData = doc.data();
 
-          firestore().collection("notifications").add({
-            title: comment.displayName,
-            body: comment.comment,
-            timestamp: firestore.Timestamp.now(),
-            uid: comment.uid,
-            projectId: project,
-          });
+          firestore()
+            .collection("notifications")
+            .add({
+              title: comment.displayName?.substring(0, 300) || "",
+              body: comment.comment?.substring(0, 300) || "",
+              timestamp: firestore.Timestamp.now(),
+              uid: comment.uid,
+              projectId: project,
+            });
 
           callback({ ...comment, ...newData });
         } else {
