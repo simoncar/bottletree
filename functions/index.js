@@ -54,7 +54,8 @@ exports.onDocumentCreated_notifications = onDocumentCreated("/notifications/{doc
 					body: body,
 					data: {
 						uid: tokenDoc.data().uid,
-						project: projectId
+						project: projectId,
+						url: "/" + projectId
 					},
 				});
 			}
