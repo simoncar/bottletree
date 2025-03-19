@@ -60,7 +60,41 @@ SplashScreen.preventAutoHideAsync();
 
 globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
 
+function useNotificationObserver() {
+  useEffect(() => {
+    let isMounted = true;
+
+    function redirect(notification: Notifications.Notification) {
+      const url = notification.request.content.data?.url;
+      if (url) {
+        console.log("Inbound Notification Redirecting to: ", url);
+
+        router.push(url);
+      }
+    }
+
+    Notifications.getLastNotificationResponseAsync().then((response) => {
+      if (!isMounted || !response?.notification) {
+        return;
+      }
+      redirect(response?.notification);
+    });
+
+    const subscription = Notifications.addNotificationResponseReceivedListener(
+      (response) => {
+        redirect(response.notification);
+      },
+    );
+
+    return () => {
+      isMounted = false;
+      subscription.remove();
+    };
+  }, []);
+}
+
 export default function Layout() {
+  useNotificationObserver(); // Ensure this hook is always called
   const { posts } = useLocalSearchParams<SearchParams>();
   const localParams = useLocalSearchParams();
   useAsyncStorageDevTools();
@@ -105,38 +139,6 @@ export default function Layout() {
     MontserratSubrayada_400Regular,
     MontserratSubrayada_700Bold,
   });
-
-  function useNotificationObserver() {
-    useEffect(() => {
-      let isMounted = true;
-
-      function redirect(notification: Notifications.Notification) {
-        const url = notification.request.content.data?.url;
-        if (url) {
-          console.log("Inbound Notification Redirecting to: ", url);
-
-          router.push(url);
-        }
-      }
-
-      Notifications.getLastNotificationResponseAsync().then((response) => {
-        if (!isMounted || !response?.notification) {
-          return;
-        }
-        redirect(response?.notification);
-      });
-
-      const subscription =
-        Notifications.addNotificationResponseReceivedListener((response) => {
-          redirect(response.notification);
-        });
-
-      return () => {
-        isMounted = false;
-        subscription.remove();
-      };
-    }, []);
-  }
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -218,8 +220,6 @@ export default function Layout() {
       }
     }
   }
-
-  useNotificationObserver();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? myDarkTheme : myLightTheme}>
