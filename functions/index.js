@@ -111,7 +111,6 @@ exports.onDocumentCreated_post = onDocumentWritten("/projects/{projectId}/posts/
 		return;
 	}
 
-	console.log('timestamp: ', timestamp);
 	console.log('projectId: ', event.params.projectId);
 
 

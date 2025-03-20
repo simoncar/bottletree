@@ -24,6 +24,7 @@ export const Projects = ({ session, archived }: Props) => {
   );
   const [loading, setLoading] = useState<boolean>(true);
   const [showArchived, setShowArchived] = useState<boolean>(false);
+  const [triggerUpdate, setTriggerUpdate] = useState<boolean>(false); // New state variable
   const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
@@ -106,12 +107,31 @@ export const Projects = ({ session, archived }: Props) => {
       );
     }
   }
+  function updateUserPostCount(
+    user: any,
+    projectKey: string,
+    postCount: number,
+  ) {
+    if (!user || !projectKey) return;
+
+    const updatedPostCount = {
+      ...user.postCount,
+      [projectKey]: postCount,
+    };
+
+    setUser({
+      ...user,
+      project: projectKey,
+      postCount: updatedPostCount,
+    });
+  }
 
   function renderRow(data: IProject) {
     const icon = data.icon;
 
-    const postCountUser = findValueByKey(user?.postCount, data.key);
+    let postCountUser = findValueByKey(user?.postCount, data.key); // This will re-execute on state change
     const postCountDelta = data.postCount - postCountUser;
+    console.log("postCountDelta:", data.postCount, postCountUser);
 
     return (
       <View key={data.key} style={styles.outerView}>
@@ -119,7 +139,9 @@ export const Projects = ({ session, archived }: Props) => {
           key={data.key}
           style={styles.innerView}
           onPress={() => {
-            setUser({ ...user, project: data.key });
+            updateUserPostCount(user, data.key, data.postCount);
+
+            setTriggerUpdate((prev) => !prev); // Trigger re-render
 
             router.navigate({
               pathname: "/[posts]",
@@ -185,7 +207,7 @@ export const Projects = ({ session, archived }: Props) => {
                 onPress={() => setShowArchived(!showArchived)}
                 style={styles.collapsibleHeader}>
                 <Text style={styles.collapsibleHeaderText}>
-                  {t('archivedProjects')}
+                  {t("archivedProjects")}
                 </Text>
                 <MaterialIcons
                   name={

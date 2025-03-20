@@ -94,7 +94,7 @@ const AddModal = ({
 
       if (result.type != "cancel") {
         console.log("Selected files (modal):", result);
-        uploadFilesAndCreateEntries(result, project);
+        uploadFilesAndCreateEntries(result, project, user);
         onClose();
       } else {
         console.log("Document picker was canceled");

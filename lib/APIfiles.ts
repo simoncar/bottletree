@@ -1,8 +1,9 @@
-import { db, storage, firestore } from "@/lib/firebase"; // or "@/lib/firebase.web"
-import { IFile } from "./types";
+import { db, firestore, storage } from "@/lib/firebase"; // or "@/lib/firebase.web"
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
 import { Platform } from "react-native";
+import { setPostFile } from "./APIpost";
+import { IFile, IPost, IUser } from "./types";
 
 type FileData = {
   mimeType: string;
@@ -70,6 +71,7 @@ export async function getFiles(project: string, callback: filesRead) {
 export async function uploadFilesAndCreateEntries(
   filesJson: DocumentPicker.DocumentPickerResult,
   projectId: string,
+  user: IUser,
 ) {
   if (filesJson.canceled) {
     console.log("File selection was canceled.");
@@ -123,6 +125,19 @@ export async function uploadFilesAndCreateEntries(
       };
 
       await projectFilesRef.add(fileEntry);
+      const post: IPost = {
+        key: UUID,
+        caption: `File uploaded: ${file.name}`,
+        projectId,
+        author: user.displayName,
+        uid: user.uid,
+        timestamp: firestore.Timestamp.now(),
+        ratio: 1,
+      };
+
+      setPostFile(post, (postId) => {
+        console.log(`Post created with ID: ${postId}`);
+      });
 
       console.log(`File ${file.name} uploaded and entry created in Firestore.`);
     } catch (error) {

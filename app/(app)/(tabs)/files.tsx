@@ -7,12 +7,13 @@ import {
   uploadFilesAndCreateEntries,
 } from "@/lib/APIfiles";
 import { IFile } from "@/lib/types";
+import { UserContext } from "@/lib/UserContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as DocumentPicker from "expo-document-picker";
 import { useLocalSearchParams } from "expo-router";
 import { Timestamp } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
@@ -42,6 +43,7 @@ export default function Files() {
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
+  const { user, setUser } = useContext(UserContext);
 
   const row: Array<any> = [];
   let prevOpenedRow;
@@ -78,7 +80,7 @@ export default function Files() {
       if (result.canceled != true) {
         console.log("Selected files:", result);
 
-        uploadFilesAndCreateEntries(result, project);
+        uploadFilesAndCreateEntries(result, project, user);
         Toast.show({
           type: "success",
           text1: "File Adding",
@@ -301,7 +303,7 @@ export default function Files() {
             ListFooterComponentStyle={{ marginBottom: 100 }}
             ListEmptyComponent={() => (
               <View>
-                <Text style={styles.noFiles}>{t('noFilesFound')}</Text>
+                <Text style={styles.noFiles}>{t("noFilesFound")}</Text>
                 <Text style={styles.predefinedFileHeader}>
                   Examples of files to add:
                 </Text>
