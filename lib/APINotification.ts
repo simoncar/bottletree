@@ -175,3 +175,51 @@ export async function registerForPushNotificationsAsync_old() {
   }
   return token;
 }
+
+export async function syncUserPushTokens() {
+  try {
+    const tokensSnapshot = await firestore().collection("tokens").get();
+    if (tokensSnapshot.empty) {
+      console.log("No tokens found in the tokens collection.");
+      return;
+    }
+
+    tokensSnapshot.forEach(async (doc) => {
+      const tokenData = doc.data();
+      const uid = tokenData.uid;
+      const pushToken = tokenData.pushToken;
+
+      if (!uid) {
+        console.warn(`Token with ID ${doc.id} has no associated UID.`);
+        return;
+      }
+
+      const userRef = firestore().collection("users").doc(uid);
+      const userDoc = await userRef.get();
+
+      if (!userDoc.exists) {
+        console.warn(`No user found with UID ${uid}.`);
+        return;
+      }
+
+      const userData = userDoc.data();
+      if (userData?.pushToken) {
+        console.warn(`User with UID ${uid} already has a pushToken set.`);
+        return;
+      }
+
+      if (uid && pushToken) {
+        await userRef.update({
+          pushToken,
+          notifications: true,
+        });
+        console.log(
+          `User push token synced successfully for UID ${uid}.`,
+          pushToken,
+        );
+      }
+    });
+  } catch (error) {
+    console.error("Error syncing user push tokens: ", error);
+  }
+}
