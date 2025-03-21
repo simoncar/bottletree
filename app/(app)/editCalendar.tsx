@@ -1,33 +1,32 @@
-import { Stack, useLocalSearchParams, router } from "expo-router";
-import React, { useState, useEffect } from "react";
+import { firestore } from "@/lib/firebase";
+import { router, Stack, useLocalSearchParams } from "expo-router";
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
+  Pressable,
   SafeAreaView,
   StyleSheet,
-  Button as NativeButton,
-  useColorScheme,
-  Pressable,
-  Alert,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
-import { firestore } from "@/lib/firebase";
 
+import { ColorRow } from "@/components/ColorRow";
 import { Text, TextInput, View } from "@/components/Themed";
+import Colors from "@/constants/Colors";
 import {
+  deleteCalendarEvent,
   getCalendarEvent,
   saveCalendarEvent,
-  deleteCalendarEvent,
 } from "@/lib/APIcalendar";
+import { getProject } from "@/lib/APIproject";
+import { ICalendarEvent, IProject } from "@/lib/types";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import * as Localization from "expo-localization";
-import Colors from "@/constants/Colors";
-import { ICalendarEvent, IProject } from "@/lib/types";
 import { Image } from "expo-image";
-import { ScrollView } from "react-native-gesture-handler";
-import { ColorRow } from "@/components/ColorRow";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { getProject } from "@/lib/APIproject";
+import * as Localization from "expo-localization";
 import { useTranslation } from "react-i18next";
+import { ScrollView } from "react-native-gesture-handler";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
 type DateorTime = "date" | "time";

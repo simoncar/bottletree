@@ -166,7 +166,12 @@ export function deleteCalendarEvent(
   });
 }
 
-export async function syncWithExpoCalendar(
+async function getDefaultCalendarSource() {
+  const defaultCalendar = await Calendar.getDefaultCalendarAsync();
+  return defaultCalendar.source;
+}
+
+export async function syncWithDeviceCalendar(
   project: string,
   callback: (message: string) => void,
 ) {
@@ -187,17 +192,17 @@ export async function syncWithExpoCalendar(
     if (!calendarId) {
       const defaultCalendarSource =
         Platform.OS === "ios"
-          ? await Calendar.getDefaultCalendarSourceAsync()
-          : { isLocalAccount: true, name: "Expo Calendar" };
+          ? await getDefaultCalendarSource()
+          : { isLocalAccount: true, name: "One Build" };
 
       const newCalendarId = await Calendar.createCalendarAsync({
         title: "One Buid",
-        color: "#30A7E2",
+        color: "#F9D96B",
         entityType: Calendar.EntityTypes.EVENT,
         sourceId: defaultCalendarSource.id,
         source: defaultCalendarSource,
         name: "One Buid",
-        ownerAccount: "personal",
+        ownerAccount: "One Buid",
         accessLevel: Calendar.CalendarAccessLevel.OWNER,
       });
 
@@ -227,44 +232,47 @@ export async function syncWithExpoCalendar(
     // Fetch all events from the "One Buid" calendar
     const expoEvents = await Calendar.getEventsAsync(
       [calendarId],
-      new Date(0),
-      new Date(8640000000000000),
+      new Date("1970-01-01T00:00:00.000Z"),
+      new Date("9999-12-31T23:59:59.999Z"),
     );
 
     // Sync events: Add, update, or delete as necessary
     const firestoreEventMap = new Map(firestoreEvents.map((e) => [e.key, e]));
     const expoEventMap = new Map(expoEvents.map((e) => [e.id, e]));
 
+    for (const [id, event] of expoEventMap) {
+      console.log(
+        `Expo Event ID: ${id}, Title: ${event.title}, Notes: ${event.notes}`,
+      );
+    }
     // Add or update events
     for (const event of firestoreEvents) {
       const matchingEvent = Array.from(expoEventMap.values()).find(
         (e) => e.notes === event.key,
       );
+      console.log("Event:", event.title, event.key);
+      console.log("matchingEvent S:", event.dateBegin.toDate().toISOString());
+      console.log("matchingEvent E:", event.dateEnd.toDate().toISOString());
 
       if (matchingEvent) {
         // Update event if necessary
-        if (
-          matchingEvent.title !== event.title ||
-          matchingEvent.startDate !== event.dateBegin.toDate().toISOString() ||
-          matchingEvent.endDate !== event.dateEnd.toDate().toISOString() ||
-          matchingEvent.notes !== event.key
-        ) {
+        if (matchingEvent.notes == event.key) {
+          console.log("matchingEvent:", event.title, event.key);
           await Calendar.updateEventAsync(matchingEvent.id, {
             title: event.title,
-            startDate: event.dateBegin.toDate(),
-            endDate: event.dateEnd.toDate(),
+            startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
+            endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
             notes: event.key,
-            description: event.description,
           });
         }
       } else {
         // Add new event
+        console.log("createEvent:", event.title, event.key);
         await Calendar.createEventAsync(calendarId, {
           title: event.title,
-          startDate: event.dateBegin.toDate(),
-          endDate: event.dateEnd.toDate(),
+          startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
+          endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
           notes: event.key,
-          description: event.description,
         });
       }
     }

@@ -1,11 +1,157 @@
+import { ButtonYellow } from "@/components/Button";
+import { firestore } from "@/lib/firebase";
+import { ICalendarEvent } from "@/lib/types";
+import * as Calendar from "expo-calendar";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
+
+type SyncParams = {
+  project: string;
+};
 
 export default function CalendarSync() {
+  const { project } = useLocalSearchParams<SyncParams>();
+
+  async function getDefaultCalendarSource() {
+    const defaultCalendar = await Calendar.getDefaultCalendarAsync();
+    return defaultCalendar.source;
+  }
+
+  async function syncWithDeviceCalendar(
+    project: string,
+    callback: (message: string) => void,
+  ) {
+    try {
+      // Request calendar permissions
+      const { status } = await Calendar.requestCalendarPermissionsAsync();
+      if (status !== "granted") {
+        callback("Permission to access calendar was denied");
+        return;
+      }
+
+      // Check if the "One Buid" calendar exists, if not, create it
+      const calendars = await Calendar.getCalendarsAsync(
+        Calendar.EntityTypes.EVENT,
+      );
+      let calendarId = calendars.find((cal) => cal.title === "One Buid")?.id;
+
+      if (!calendarId) {
+        const defaultCalendarSource =
+          Platform.OS === "ios"
+            ? await getDefaultCalendarSource()
+            : { isLocalAccount: true, name: "One Build" };
+
+        const newCalendarId = await Calendar.createCalendarAsync({
+          title: "One Buid",
+          color: "#F9D96B",
+          entityType: Calendar.EntityTypes.EVENT,
+          sourceId: defaultCalendarSource.id,
+          source: defaultCalendarSource,
+          name: "One Buid",
+          ownerAccount: "One Buid",
+          accessLevel: Calendar.CalendarAccessLevel.OWNER,
+        });
+
+        calendarId = newCalendarId;
+      }
+
+      // Fetch all items from Firestore
+      const q = firestore()
+        .collection("projects")
+        .doc(project)
+        .collection("calendar");
+
+      const querySnapshot = await q.get();
+      const firestoreEvents: ICalendarEvent[] = [];
+      querySnapshot.forEach((doc) => {
+        firestoreEvents.push({
+          key: doc.id,
+          dateBegin: doc.data().dateBegin,
+          dateEnd: doc.data().dateEnd,
+          title: doc.data().title,
+          description: doc.data().description,
+          color: doc.data().color,
+          uid: doc.data().uid,
+        });
+      });
+
+      // Fetch all events from the "One Buid" calendar
+
+      const expoEvents = await Calendar.getEventsAsync(
+        [calendarId],
+        new Date(new Date().setDate(new Date().getDate() - 100)),
+        new Date(new Date().setDate(new Date().getDate() + 100)),
+      );
+
+      console.log("BBBBB:", calendarId, expoEvents);
+
+      // Sync events: Add, update, or delete as necessary
+      const firestoreEventMap = new Map(firestoreEvents.map((e) => [e.key, e]));
+      const expoEventMap = new Map(expoEvents.map((e) => [e.id, e]));
+
+      for (const [id, event] of expoEventMap) {
+        console.log(
+          `Expo Event ID: ${id}, Title: ${event.title}, Notes: ${event.notes}`,
+        );
+      }
+      // Add or update events
+      for (const event of firestoreEvents) {
+        const matchingEvent = Array.from(expoEventMap.values()).find(
+          (e) => e.notes === event.key,
+        );
+        console.log("Event:", event.title, event.key);
+        console.log("matchingEvent S:", event.dateBegin.toDate().toISOString());
+        console.log("matchingEvent E:", event.dateEnd.toDate().toISOString());
+
+        if (matchingEvent) {
+          // Update event if necessary
+          if (matchingEvent.notes == event.key) {
+            console.log("matchingEvent:", event.title, event.key);
+            await Calendar.updateEventAsync(matchingEvent.id, {
+              title: event.title,
+              startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
+              endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
+              notes: event.key,
+            });
+          }
+        } else {
+          // Add new event
+          console.log("createEvent:", event.title, event.key);
+          await Calendar.createEventAsync(calendarId, {
+            title: event.title,
+            startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
+            endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
+            notes: event.key,
+          });
+        }
+      }
+
+      // Delete events that are no longer in Firestore
+      for (const event of expoEvents) {
+        if (!firestoreEventMap.has(event.notes)) {
+          await Calendar.deleteEventAsync(event.id);
+        }
+      }
+
+      callback("Calendar synced successfully");
+    } catch (error) {
+      console.error("Error syncing calendar:", error);
+      callback("Error syncing calendar");
+    }
+  }
+
+  function handleSync() {
+    syncWithDeviceCalendar(project, (message) => {
+      console.log(message);
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Calendar Sync Screen</Text>
       <Text style={styles.text}>(experimental)</Text>
+      <ButtonYellow onPress={handleSync} label={"Sync Calendar"} />
     </View>
   );
 }

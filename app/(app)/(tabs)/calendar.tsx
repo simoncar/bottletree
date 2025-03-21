@@ -9,21 +9,19 @@ import dayjs from "dayjs";
 import "dayjs/locale/en";
 import "dayjs/locale/es";
 import * as Localization from "expo-localization";
-import
-	{
-		router,
-		Stack,
-		useLocalSearchParams,
-		useNavigation,
-	} from "expo-router";
+import {
+  router,
+  Stack,
+  useLocalSearchParams,
+  useNavigation,
+} from "expo-router";
 import React, { useEffect, useState } from "react";
-import
-	{
-		Dimensions,
-		StyleSheet,
-		TouchableOpacity,
-		useColorScheme,
-	} from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+} from "react-native";
 
 import { Calendar } from "react-native-big-calendar";
 
@@ -164,10 +162,17 @@ export default function CalendarLarge() {
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableOpacity
                 onPressIn={() => {
-                  router.push("/calendarSync");
+                  router.push({
+                    pathname: "/calendarSync",
+                    params: { project: project },
+                  });
                 }}
                 style={{ paddingRight: 10 }}>
-                <FontAwesome5 name="sync-alt" size={16}  color={Colors[colorScheme ?? "light"].text} />
+                <FontAwesome5
+                  name="sync-alt"
+                  size={16}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 onPressIn={() => {

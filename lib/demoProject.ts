@@ -1,5 +1,4 @@
-import { db, firestore, auth } from "./firebase";
-import { IUser } from "./types";
+import { db, firestore } from "./firebase";
 
 export const demoData2 = async () => {
   //console.log("Skip demo data");
@@ -72,8 +71,8 @@ export const demoDataForDemoProject = async () => {
         data: createCalendarEntry("Costings", "", -15, -15, "#30A7E2", "Blue"),
       },
       {
-        docId: "demo11111",
-        data: createCalendarEntry("Plans", "", -8, -10, "#49B382", "Grass"),
+        docId: "demo11111Plans",
+        data: createCalendarEntry("Plans", "", -8, -6, "#49B382", "Grass"),
       },
       {
         docId: "demo22222",
