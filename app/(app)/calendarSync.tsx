@@ -137,7 +137,7 @@ export default function CalendarSync() {
       setErrorMessage("Calendar synced successfully");
       callback("Calendar synced successfully");
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage(error.message);
       console.error("Error syncing calendar:", error);
       callback("Error syncing calendar");
     }
