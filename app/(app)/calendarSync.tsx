@@ -90,29 +90,25 @@ export default function CalendarSync() {
       const firestoreEventMap = new Map(firestoreEvents.map((e) => [e.key, e]));
       const expoEventMap = new Map(expoEvents.map((e) => [e.id, e]));
 
-      for (const [id, event] of expoEventMap) {
-        console.log(
-          `Expo Event ID: ${id}, Title: ${event.title}, Notes: ${event.notes}`,
-        );
-      }
       // Add or update events
       for (const event of firestoreEvents) {
         const matchingEvent = Array.from(expoEventMap.values()).find(
-          (e) => e.notes === event.key,
+          (e) => e.notes === "OneBuildID:" + project + "/" + event.key,
         );
-        console.log("Event:", event.title, event.key);
-        console.log("matchingEvent S:", event.dateBegin.toDate().toISOString());
-        console.log("matchingEvent E:", event.dateEnd.toDate().toISOString());
 
         if (matchingEvent) {
           // Update event if necessary
-          if (matchingEvent.notes == event.key) {
+          if (
+            matchingEvent.notes ==
+            "OneBuildID:" + project + "/" + event.key
+          ) {
             console.log("matchingEvent:", event.title, event.key);
+
             await Calendar.updateEventAsync(matchingEvent.id, {
               title: event.title,
               startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
               endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
-              notes: event.key,
+              notes: "OneBuildID:" + project + "/" + event.key,
             });
           }
         } else {
@@ -122,15 +118,19 @@ export default function CalendarSync() {
             title: event.title,
             startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
             endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
-            notes: event.key,
+            notes: "OneBuildID:" + project + "/" + event.key,
           });
         }
       }
 
       // Delete events that are no longer in Firestore
       for (const event of expoEvents) {
-        if (!firestoreEventMap.has(event.notes)) {
-          await Calendar.deleteEventAsync(event.id);
+        if (event.notes?.startsWith("OneBuildID:" + project + "/")) {
+          const eventKey = event.notes?.split("/")[1];
+          if (eventKey && !firestoreEventMap.has(eventKey)) {
+            console.log("Delete Event:", event.title, event.notes);
+            await Calendar.deleteEventAsync(event.id);
+          }
         }
       }
 
@@ -165,5 +165,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: "#333",
+    marginBottom: 20,
   },
 });
