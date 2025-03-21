@@ -1,17 +1,17 @@
+import Footer from "@/components/Footer";
+import { Text } from "@/components/Themed";
+import Colors from "@/constants/Colors";
+import { Image } from "expo-image";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   Dimensions,
-  StyleSheet,
   Pressable,
+  StyleSheet,
   useColorScheme,
   View,
 } from "react-native";
-import { router } from "expo-router";
-import { Image } from "expo-image";
-import { Text } from "@/components/Themed";
 import Comments from "./PostComments";
-import Footer from "@/components/Footer";
-import Colors from "@/constants/Colors";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
@@ -62,6 +62,24 @@ const Post = (props) => {
     );
   }
 
+  function renderFile(post) {
+    return (
+      <Pressable
+        onPress={() => {
+          router.navigate({
+            pathname: "/files",
+            params: { file: post.file },
+          });
+        }}>
+        <Text style={styles.comment}>{post.caption}</Text>
+      </Pressable>
+    );
+  }
+
+  function renderCaption(caption) {
+    return <Text style={styles.comment}>{caption}</Text>;
+  }
+
   return (
     <View
       style={[
@@ -74,7 +92,7 @@ const Post = (props) => {
       {renderImage()}
 
       <View style={styles.commentView}>
-        <Text style={styles.comment}>{caption}</Text>
+        {post.file ? renderFile(post) : renderCaption(caption)}
 
         <Comments
           project={post.projectId}
@@ -103,6 +121,7 @@ const styles = StyleSheet.create({
   commentView: {
     backgroundColor: "transparent",
   },
+  caption: { fontSize: 20 },
 
   postView: {
     borderRadius: 10,

@@ -24,6 +24,7 @@ export async function getPost(
         ratio: doc.data()?.ratio,
         timestamp: doc.data()?.timestamp,
         linkURL: doc.data()?.linkURL,
+        file: doc.data()?.file || "",
       };
       callback(post);
     } else {
@@ -130,6 +131,7 @@ export async function setPostFile(post: IPost, callback: any) {
       caption: post.caption,
       timestamp: firestore.Timestamp.now(),
       uid: post.uid,
+      file: post.file,
     })
     .then(() => {
       console.log("Post Document written with ID: ", post.key);
@@ -248,6 +250,7 @@ export async function getPosts(
         caption: doc.data().caption,
         linkURL: doc.data().linkURL ?? "",
         uid: doc.data().uid ?? "",
+        file: doc.data().file ?? "",
       });
     });
 

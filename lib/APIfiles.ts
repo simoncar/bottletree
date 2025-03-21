@@ -127,12 +127,13 @@ export async function uploadFilesAndCreateEntries(
       await projectFilesRef.add(fileEntry);
       const post: IPost = {
         key: UUID,
-        caption: `File uploaded: ${file.name}`,
+        caption: `${file.name}`,
         projectId,
         author: user.displayName,
         uid: user.uid,
         timestamp: firestore.Timestamp.now(),
         ratio: 1,
+        file: UUID,
       };
 
       setPostFile(post, (postId) => {

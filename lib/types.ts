@@ -20,6 +20,7 @@ export interface IPost {
   ratio: number;
   comments?: IComment[];
   linkURL?: string;
+  file?: string;
 }
 
 export interface IProject {
