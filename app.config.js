@@ -109,6 +109,12 @@ module.exports = ({ config }) => {
 					}
 				],
 				[
+					"expo-calendar",
+					{
+						"calendarPermission": "Allow $(PRODUCT_NAME) to access your calendar to put events from projects you create into your calendar."
+					}
+				],
+				[
 					"@sentry/react-native/expo",
 					{
 						"organization": "simon-co",

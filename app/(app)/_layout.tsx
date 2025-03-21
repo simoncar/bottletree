@@ -351,6 +351,12 @@ export default function Layout() {
                 title: t("file"),
               }}
             />
+            <Stack.Screen
+              name="calendarSync"
+              options={{
+                title: t("calendarSync"),
+              }}
+            />
           </Stack>
         </ProjectProvider>
       </ActionSheetProvider>

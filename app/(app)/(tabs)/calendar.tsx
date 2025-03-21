@@ -1,33 +1,35 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-  Pressable,
-  Dimensions,
-} from "react-native";
-import { getItemsBigCalendar } from "@/lib/APIcalendar";
-import { View, Text } from "@/components/Themed";
+import { Text, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import dayjs from "dayjs";
-import { useNavigation, Stack } from "expo-router";
-import { useLocalSearchParams, router } from "expo-router";
-import { CustomCalendarEvent } from "@/lib/types";
+import { getItemsBigCalendar } from "@/lib/APIcalendar";
 import { demoDataForDemoProject } from "@/lib/demoProject";
-import * as Localization from "expo-localization";
-import "dayjs/locale/es";
+import { CustomCalendarEvent } from "@/lib/types";
+import { FontAwesome5 } from "@expo/vector-icons";
+import dayjs from "dayjs";
 import "dayjs/locale/en";
+import "dayjs/locale/es";
+import * as Localization from "expo-localization";
+import
+	{
+		router,
+		Stack,
+		useLocalSearchParams,
+		useNavigation,
+	} from "expo-router";
+import React, { useEffect, useState } from "react";
+import
+	{
+		Dimensions,
+		StyleSheet,
+		TouchableOpacity,
+		useColorScheme,
+	} from "react-native";
 
-import {
-  Calendar,
-  ICalendarEventBase,
-  CalendarTouchableOpacityProps,
-} from "react-native-big-calendar";
+import { Calendar } from "react-native-big-calendar";
 
-import { ScrollView } from "react-native-gesture-handler";
 import { MonthYearScroller } from "@/components/Months";
 import { useTranslation } from "react-i18next";
+import { ScrollView } from "react-native-gesture-handler";
 
 type SearchParams = {
   project: string; //project ID
@@ -159,12 +161,21 @@ export default function CalendarLarge() {
       <Stack.Screen
         options={{
           headerRight: () => (
-            <TouchableOpacity
-              onPressIn={() => {
-                goToday();
-              }}>
-              <Text style={{ paddingRight: 5 }}>{t("today")}</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <TouchableOpacity
+                onPressIn={() => {
+                  router.push("/calendarSync");
+                }}
+                style={{ paddingRight: 10 }}>
+                <FontAwesome5 name="sync-alt" size={16}  color={Colors[colorScheme ?? "light"].text} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPressIn={() => {
+                  goToday();
+                }}>
+                <Text style={{ paddingRight: 5 }}>{t("today")}</Text>
+              </TouchableOpacity>
+            </View>
           ),
         }}
       />

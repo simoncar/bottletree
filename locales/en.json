@@ -102,5 +102,6 @@
   "addAComment": "Add a comment...",
   "comment": "Comment",
   "noFilesFound": "No files found",
-  "archivedProjects": "Archived Projects"
+  "archivedProjects": "Archived Projects",
+  "calendarSync": "Calendar Sync"
 }

@@ -104,5 +104,6 @@
   "addAComment": "Agregar un comentario...",
   "comment": "Comentario",
   "noFilesFound": "No se encontraron archivos",
-  "archivedProjects": "Proyectos Archivados"
+  "archivedProjects": "Proyectos Archivados",
+  "calendarSync": "Sincronización de Calendario"
 }
