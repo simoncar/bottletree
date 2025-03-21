@@ -12,6 +12,7 @@ type SyncParams = {
 
 export default function CalendarSync() {
   const { project } = useLocalSearchParams<SyncParams>();
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   async function getDefaultCalendarSource() {
     const defaultCalendar = await Calendar.getDefaultCalendarAsync();
@@ -136,6 +137,7 @@ export default function CalendarSync() {
 
       callback("Calendar synced successfully");
     } catch (error) {
+      setErrorMessage(error);
       console.error("Error syncing calendar:", error);
       callback("Error syncing calendar");
     }
@@ -152,6 +154,7 @@ export default function CalendarSync() {
       <Text style={styles.text}>Calendar Sync Screen</Text>
       <Text style={styles.text}>(experimental)</Text>
       <ButtonYellow onPress={handleSync} label={"Sync Calendar"} />
+      <Text style={styles.text}>{errorMessage}</Text>
     </View>
   );
 }
