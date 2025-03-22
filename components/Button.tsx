@@ -17,7 +17,7 @@ export function ButtonYellow({ onPress, label }: SignInButtonProps) {
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
-    backgroundColor: "#F9D96B",
+    backgroundColor: "#f97316",
     borderRadius: 10,
     height: 50,
     justifyContent: "center",

@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, FlatList, useColorScheme, Pressable } from "react-native";
-import { View, Text, TextInput, ParsedText } from "./Themed";
-import { addComment, getComments } from "@/lib/APIpost";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Colors from "@/constants/Colors";
-import { IComment } from "@/lib/types";
+import { addComment, getComments } from "@/lib/APIpost";
 import { firestore } from "@/lib/firebase";
+import { IComment } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
+import { ParsedText, TextInput, View } from "./Themed";
 
 type Props = {
   project: string;
@@ -93,7 +93,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
           onPress={() => {
             save();
           }}>
-          <MaterialIcons name="send" size={25} color="#2196F3" />
+          <MaterialIcons name="send" size={25} color="#f97316" />
         </Pressable>
       </View>
     );
