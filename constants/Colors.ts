@@ -24,7 +24,7 @@ export default {
     bubbleTextColorMe: "#fff",
     bubbleTextColorOther: "#000",
     postBackground: "#fff",
-    button: "##f97316",
+    button: "#f97316",
   },
   dark: {
     text: "#fff",
@@ -51,7 +51,7 @@ export default {
     bubbleTextColorMe: "#fff",
     bubbleTextColorOther: "#fff",
     postBackground: "#373544",
-    button: "##f97316",
+    button: "#f97316",
   },
 };
 

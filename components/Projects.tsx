@@ -183,7 +183,7 @@ export const Projects = ({ session, archived }: Props) => {
               name={data.star ? "star" : "star-o"}
               size={24}
               color={
-                data.star ? Colors[colorScheme ?? "light"].text : "lightgrey"
+                data.star ? Colors[colorScheme ?? "light"].button : "lightgrey"
               }
             />
           </TouchableOpacity>

@@ -145,7 +145,7 @@ export default function Files() {
         <FontAwesome
           name={iconName}
           size={24}
-          color={Colors[colorScheme ?? "light"].text}
+          color={Colors[colorScheme ?? "light"].button}
         />
       </View>
     );

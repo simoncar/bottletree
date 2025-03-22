@@ -16,7 +16,13 @@ export default function House() {
       <View style={styles.topPanelCenter}>
         <Logo style={{ fontSize: 40 }}>One</Logo>
         <Text style={{ fontSize: 35 }}> </Text>
-        <Logo style={{ fontSize: 40 }}>Build</Logo>
+        <Logo
+          style={{
+            fontSize: 40,
+            borderColor: Colors[colorScheme ?? "light"].button,
+          }}>
+          Build
+        </Logo>
       </View>
 
       <View

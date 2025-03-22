@@ -137,7 +137,7 @@ export default function Tasks() {
           <FontAwesome
             name={task.completed ? "check-circle" : "circle-thin"}
             size={24}
-            color={Colors[colorScheme ?? "light"].text}
+            color={Colors[colorScheme ?? "light"].button}
           />
         </TouchableOpacity>
         <TouchableOpacity

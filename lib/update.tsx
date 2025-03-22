@@ -1,21 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import { Text } from "@/components/Themed";
+import Colors from "@/constants/Colors";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import * as Updates from "expo-updates";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
-  StyleSheet,
-  Pressable,
-  useColorScheme,
+  ActivityIndicator,
+  Animated,
   AppState,
   AppStateStatus,
-  Animated,
+  Pressable,
+  StyleSheet,
+  useColorScheme,
   View,
-  ActivityIndicator,
 } from "react-native";
-import { Text } from "@/components/Themed";
-import * as Updates from "expo-updates";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Colors from "@/constants/Colors";
-import Toast from "react-native-root-toast";
-import i18n from "@/lib/i18n";
-import { useTranslation } from "react-i18next";
 
 export const Update = () => {
   const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
@@ -120,7 +118,7 @@ export const Update = () => {
           <MaterialIcons
             name="celebration"
             size={24}
-            color={Colors[colorScheme ?? "light"].text}
+            color={Colors[colorScheme ?? "light"].button}
           />
         </View>
         <View style={styles.textContainer}>
