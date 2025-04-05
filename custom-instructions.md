@@ -28,6 +28,7 @@ You can append these to refine responses:
 Rules:
 
 - add changes that you made in a changelog.md
+- Give feedback on the existing code quality if the quality is not good
 
 ## Tests
 
