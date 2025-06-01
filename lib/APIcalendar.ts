@@ -144,14 +144,8 @@ export async function saveCalendarEvent(
 
     const dataToSave = {
       // Convert Date objects back to Firestore Timestamps if they are not already
-      dateBegin:
-        calendarEvent.dateBegin instanceof Date
-          ? Timestamp.fromDate(calendarEvent.dateBegin)
-          : calendarEvent.dateBegin,
-      dateEnd:
-        calendarEvent.dateEnd instanceof Date
-          ? Timestamp.fromDate(calendarEvent.dateEnd)
-          : calendarEvent.dateEnd,
+      dateBegin: calendarEvent.dateBegin,
+      dateEnd: calendarEvent.dateEnd,
       description: calendarEvent.description,
       projectId: project,
       title: calendarEvent.title,
@@ -296,14 +290,8 @@ export async function syncWithDeviceCalendar(
       const eventData = docSnap.data();
       firestoreEvents.push({
         key: docSnap.id,
-        dateBegin:
-          eventData.dateBegin instanceof Timestamp
-            ? eventData.dateBegin.toDate()
-            : new Date(),
-        dateEnd:
-          eventData.dateEnd instanceof Timestamp
-            ? eventData.dateEnd.toDate()
-            : new Date(),
+        dateBegin: eventData.dateBegin,
+        dateEnd: eventData.dateEnd,
         title: eventData.title,
         description: eventData.description,
         color: eventData.color,
