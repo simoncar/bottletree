@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  StyleSheet,
   Text as RNText,
+  StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -33,8 +33,8 @@ export function Button(props) {
 
 export function ShortList(props) {
   const { navigation } = props; //keep this?  can't remember why
-	const features = props.data ? props.data : [];
-	
+  const features = props.data ? props.data : [];
+
   return (
     <View>
       {features.map((el, index) => {
