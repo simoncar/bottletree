@@ -21,7 +21,6 @@ module.exports = defineConfig([
 			"react-native/no-color-literals": 0,
 			"react-native/no-raw-text": 2,
 			"react-native/no-single-element-style-arrays": 2,
-			"sort-keys": ["warn", "asc", { "caseSensitive": false, "natural": true }],
 			"@typescript-eslint/explicit-function-return-type": "warn"
 		},
 	}
