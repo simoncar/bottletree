@@ -85,7 +85,7 @@
     "react-dom": "19.0.0",
     "react-i18next": "^15.4.1",
     "react-native": "0.79.2",
-    "react-native-big-calendar": "^4.17.1",
+    "react-native-big-calendar": "^4.18.3",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-modal-datetime-picker": "^18.0.0",
