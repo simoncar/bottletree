@@ -2459,29 +2459,29 @@
   resolved "https://registry.npmjs.org/@react-native-community/eslint-plugin/-/eslint-plugin-1.3.0.tgz"
   integrity sha512-+zDZ20NUnSWghj7Ku5aFphMzuM9JulqCW+aPXT6IfIXFbb8tzYTTOSeRFOtuekJ99ibW2fUCSsjuKNlwDIbHFg==
 
-"@react-native-firebase/app@^21.12.0":
-  version "21.12.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-21.12.0.tgz#6239c10d53885c40c6a5318ba055aa16f1499aaf"
-  integrity sha512-zMaXtFnnxRU3aa43msPXv25mJUVKQtGwn0TBl4mcPnj4Dr3rz3QHXZtkk3OAj7Q5J7BoNnedjyAVU2HxEK0/Wg==
+"@react-native-firebase/app@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-22.2.0.tgz#8bcc5f82b2c7c09737072df7ed24d0bf042ba842"
+  integrity sha512-zw7KRo1nZwj9+ED6SHgl5/ioRqcA8RwqBuiGWx5Nrr4JrhbLpaihfPuDsGcn0LvEO5knVrhZvQP1fgzLjRsUgw==
   dependencies:
     firebase "11.3.1"
 
-"@react-native-firebase/auth@^21.12.0":
-  version "21.12.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-21.12.0.tgz#3f99ac1e99b0c944ee1fd687f19cc2a1d2026f48"
-  integrity sha512-1z3NsdHv03fby49dEalHE4HRTqWA09d27TV6nLBKm27fdL7rIcD12Ymylb8Mdq+DNwHZOza7WwLdMIj4cqdmHQ==
+"@react-native-firebase/auth@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-22.2.0.tgz#1011a0b4c0bda1e5a173d71d444aceaa78e1eb51"
+  integrity sha512-RnuZVisa9a/ey9nyeBHUDkMNwoHLRuvDCjGwC/qgj/ygyEAjOTV4zqZ/OHSVOhQO/UwU4L0tYdxwT2EQorhgDA==
   dependencies:
     plist "^3.1.0"
 
-"@react-native-firebase/firestore@^21.12.0":
-  version "21.12.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-21.12.0.tgz#01cb9ab10ba9a60054d331d47c92538c8429186d"
-  integrity sha512-HOaCk8nntV+a1VoVjgjv7lIfR0uajGP7ZaQtEic2lEafaYuGr8plNmvIw+PLomSka8x+Nzs9zYYObjJ9QTs+aA==
+"@react-native-firebase/firestore@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-22.2.0.tgz#ebae0e455641f0639d7ec8985df59d9e6d823b22"
+  integrity sha512-SO6U9u2B4sDuu+R5o7XxtB7Yvf860tZU6yNQNtdlIeXCtf8Sj67OrQbJcPBX7TJftTmuzDd2gzxaOMwAOLsdDw==
 
-"@react-native-firebase/storage@^21.12.0":
-  version "21.12.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-21.12.0.tgz#7fc017cc9aa76bdcfeda4550db8794880b2e63b8"
-  integrity sha512-LXmStca5DBjg2bSLzBVo7PstdQ1lfYOYo5oKkJwrTZA46jJIktj38jLhGS9HIMhEzy0KWKXmpDHCzEXMzXSqFw==
+"@react-native-firebase/storage@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-22.2.0.tgz#2eb631d2c47282d32181d7621985bbcb1405446a"
+  integrity sha512-l+J3UdmXK0Q6iE8Xs+GENCOnhVyc3DTFfE0x7/k2h4+TBDCph2pDBfpdxf7n0NqdAV1C/5wxCzeMEzgMngMSkQ==
 
 "@react-native/assets-registry@0.79.2":
   version "0.79.2"
