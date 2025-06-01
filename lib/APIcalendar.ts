@@ -1,6 +1,18 @@
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc, // For Firestore server timestamps
+  FirestoreError,
+  getDoc,
+  onSnapshot,
+  serverTimestamp,
+  setDoc,
+  Timestamp, // Import Timestamp for type checking and creation
+} from "@react-native-firebase/firestore";
 import * as Calendar from "expo-calendar";
 import { Platform } from "react-native";
-import { firestore } from "./firebase";
+import { db } from "./firebase"; // Assuming 'db' is your modular Firestore instance
 import { ICalendarEvent } from "./types";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
@@ -16,44 +28,67 @@ export async function getItemsBigCalendar(
   project: string,
   callback: itemsRead,
 ) {
-  const q = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("calendar");
+  const calendarCollectionRef = collection(
+    doc(collection(db, "projects"), project),
+    "calendar",
+  );
+  console.log("getItemsBigCalendar (modular)");
 
-  const unsubscribe = q.onSnapshot((querySnapshot) => {
-    const calendarEvents: ICalendarEvent[] = [];
+  const unsubscribe = onSnapshot(
+    calendarCollectionRef,
+    (querySnapshot) => {
+      // Type for querySnapshot is inferred
+      const calendarEvents: ICalendarEvent[] = [];
 
-    querySnapshot.docChanges().forEach((change) => {
-      if (change.type === "added") {
-        //console.log("New event: ", change.doc.data());
-      }
-      if (change.type === "modified") {
-        //console.log("Modified event: ", change.doc.data());
-      }
-      if (change.type === "removed") {
-        //console.log("Removed event: ", change.doc.data());
-      }
-    });
+      querySnapshot.docChanges().forEach((change) => {
+        // Type for change is inferred
+        if (change.type === "added") {
+          //console.log("New event: ", change.doc.data());
+        }
+        if (change.type === "modified") {
+          //console.log("Modified event: ", change.doc.data());
+        }
+        if (change.type === "removed") {
+          //console.log("Removed event: ", change.doc.data());
+        }
+      });
 
-    querySnapshot.forEach((doc) => {
-      const data = {
-        key: doc.id,
-        start: doc.data().dateBegin.toDate(),
-        end: doc.data().dateEnd.toDate(),
-        title: doc.data().title,
-        color: translateColor(doc.data().color),
-        colorName: doc.data().colorName,
-        description: doc.data().description,
-        projectId: doc.data().projectId,
-        uid: doc.data().uid,
-      };
+      querySnapshot.forEach((documentSnapshot) => {
+        const eventData = documentSnapshot.data();
+        const startDate =
+          eventData.dateBegin instanceof Timestamp
+            ? eventData.dateBegin.toDate()
+            : new Date();
+        const endDate =
+          eventData.dateEnd instanceof Timestamp
+            ? eventData.dateEnd.toDate()
+            : new Date();
 
-      calendarEvents.push(data);
-    });
+        const data: ICalendarEvent = {
+          key: documentSnapshot.id,
+          start: startDate,
+          end: endDate,
+          title: eventData.title,
+          color: translateColor(eventData.color),
+          colorName: eventData.colorName,
+          description: eventData.description,
+          projectId: eventData.projectId,
+          uid: eventData.uid,
+        };
 
-    callback(calendarEvents);
-  });
+        calendarEvents.push(data);
+      });
+
+      callback(calendarEvents);
+    },
+    (error: FirestoreError) => {
+      console.error(
+        "Error in getItemsBigCalendar onSnapshot listener: ",
+        error,
+      );
+      callback([]); // Call with empty array on error
+    },
+  );
 
   return () => unsubscribe();
 }
@@ -62,113 +97,129 @@ export async function getItemsBigCalendar(
 export async function getCalendarEvent(
   project: string,
   calendarId: string,
-  callback: {
-    (calendarEvent: ICalendarEvent): void;
-    (arg0: ICalendarEvent): void;
-  },
+  callback: (calendarEvent: ICalendarEvent | null) => void, // Allow null if not found
 ) {
-  const q = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("calendar")
-    .doc(calendarId);
+  const calendarDocRef = doc(db, "projects", project, "calendar", calendarId);
 
-  q.get().then((doc) => {
-    if (doc.exists) {
+  try {
+    const docSnap = await getDoc(calendarDocRef);
+    if (docSnap.exists()) {
+      const eventData = docSnap.data();
       const calendarEvent: ICalendarEvent = {
-        key: doc.id,
-        dateBegin: doc.data().dateBegin,
-        dateEnd: doc.data().dateEnd,
-        color: doc.data().color,
-        colorName: doc.data().colorName,
-        description: doc.data().description,
-        projectId: doc.data().projectId,
-        title: doc.data().title,
-        uid: doc.data().uid,
+        key: docSnap.id,
+        // Assuming dateBegin and dateEnd are stored as Firestore Timestamps
+        dateBegin:
+          eventData.dateBegin instanceof Timestamp
+            ? eventData.dateBegin.toDate()
+            : new Date(),
+        dateEnd:
+          eventData.dateEnd instanceof Timestamp
+            ? eventData.dateEnd.toDate()
+            : new Date(),
+        color: eventData.color,
+        colorName: eventData.colorName,
+        description: eventData.description,
+        projectId: eventData.projectId,
+        title: eventData.title,
+        uid: eventData.uid,
       };
-
       callback(calendarEvent);
     } else {
       console.log("No such calendarId:", calendarId);
+      callback(null);
     }
-  });
-
-  return () => q;
+  } catch (error) {
+    console.error("Error getting calendar event: ", error);
+    callback(null);
+  }
 }
 
-export function saveCalendarEvent(
+export async function saveCalendarEvent(
   project: string,
   calendarEvent: ICalendarEvent,
-  callback: { (id: string): void; (arg0: string): void },
+  callback: (id: string | null) => void, // Allow null on error
 ) {
   try {
-    console.log("save CalendarEvent FBJS", project, calendarEvent);
+    console.log("save CalendarEvent Modular", project, calendarEvent);
+    const projectCalendarCollectionRef = collection(
+      db,
+      "projects",
+      project,
+      "calendar",
+    );
+
+    const dataToSave = {
+      // Convert Date objects back to Firestore Timestamps if they are not already
+      dateBegin:
+        calendarEvent.dateBegin instanceof Date
+          ? Timestamp.fromDate(calendarEvent.dateBegin)
+          : calendarEvent.dateBegin,
+      dateEnd:
+        calendarEvent.dateEnd instanceof Date
+          ? Timestamp.fromDate(calendarEvent.dateEnd)
+          : calendarEvent.dateEnd,
+      description: calendarEvent.description,
+      projectId: project,
+      title: calendarEvent.title,
+      uid: calendarEvent.uid,
+      color: calendarEvent.color ? calendarEvent.color : "#30A7E2",
+      colorName: calendarEvent.colorName ? calendarEvent.colorName : "Blue",
+      timestamp: serverTimestamp(), // Use serverTimestamp for consistency
+    };
 
     if (calendarEvent.key == undefined) {
-      firestore()
-        .collection("projects")
-        .doc(project)
-        .collection("calendar")
-        .add({
-          dateBegin: calendarEvent.dateBegin,
-          dateEnd: calendarEvent.dateEnd,
-          description: calendarEvent.description,
-          projectId: project,
-          title: calendarEvent.title,
-          uid: calendarEvent.uid,
-          color: calendarEvent.color ? calendarEvent.color : "#30A7E2",
-          colorName: calendarEvent.colorName ? calendarEvent.colorName : "Blue",
-          timestamp: firestore.Timestamp.now(),
-        })
-        .then((docRef) => {
-          callback(docRef.id);
-        });
+      const docRef = await addDoc(projectCalendarCollectionRef, dataToSave);
+      callback(docRef.id);
     } else {
-      firestore()
-        .collection("projects")
-        .doc(project)
-        .collection("calendar")
-        .doc(calendarEvent.key)
-        .set({
-          dateBegin: calendarEvent.dateBegin,
-          dateEnd: calendarEvent.dateEnd,
-          description: calendarEvent.description,
-          projectId: project,
-          title: calendarEvent.title,
-          uid: calendarEvent.uid,
-          color: calendarEvent.color ? calendarEvent.color : "#30A7E2",
-          colorName: calendarEvent.colorName ? calendarEvent.colorName : "Blue",
-          timestamp: firestore.Timestamp.now(),
-        })
-        .then((docRef) => {
-          callback(calendarEvent.key);
-        });
+      const eventDocRef = doc(projectCalendarCollectionRef, calendarEvent.key);
+      await setDoc(eventDocRef, dataToSave);
+      callback(calendarEvent.key);
     }
   } catch (e) {
-    console.error("Error adding calendar event: ", e);
+    console.error("Error adding/updating calendar event: ", e);
+    callback(null);
   }
-
-  return;
 }
 
-export function deleteCalendarEvent(
+type deleteDone = (id: string | null) => void; // Allow null on error or if key is missing
+
+export async function deleteCalendarEvent(
   project: string,
   calendarEvent: ICalendarEvent,
   callback: deleteDone,
 ) {
-  const calRef = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("calendar")
-    .doc(calendarEvent.key);
-  calRef.delete().then(() => {
+  if (!calendarEvent.key) {
+    console.error("Cannot delete event without a key");
+    callback(null);
+    return;
+  }
+  const calRef = doc(db, "projects", project, "calendar", calendarEvent.key);
+  try {
+    await deleteDoc(calRef);
     callback(calendarEvent.key);
-  });
+  } catch (error) {
+    console.error("Error deleting calendar event: ", error);
+    callback(null);
+  }
 }
 
-async function getDefaultCalendarSource() {
-  const defaultCalendar = await Calendar.getDefaultCalendarAsync();
-  return defaultCalendar.source;
+async function getDefaultCalendarSource(): Promise<
+  Calendar.Source | { isLocalAccount: boolean; name: string; type?: string }
+> {
+  const calendars = await Calendar.getCalendarsAsync(
+    Calendar.EntityTypes.EVENT,
+  );
+  const defaultCalendar =
+    calendars.find((cal) => cal.isPrimary) || calendars[0];
+  if (defaultCalendar?.source) {
+    return defaultCalendar.source;
+  }
+  // Fallback for Android if source is not readily available or for a more generic approach
+  return {
+    isLocalAccount: true,
+    name: "One Build",
+    type: Platform.OS === "ios" ? Calendar.SourceType.LOCAL : undefined,
+  };
 }
 
 export async function syncWithDeviceCalendar(
@@ -176,117 +227,144 @@ export async function syncWithDeviceCalendar(
   callback: (message: string) => void,
 ) {
   try {
-    // Request calendar permissions
     const { status } = await Calendar.requestCalendarPermissionsAsync();
     if (status !== "granted") {
       callback("Permission to access calendar was denied");
       return;
     }
 
-    // Check if the "One Buid" calendar exists, if not, create it
     const calendars = await Calendar.getCalendarsAsync(
       Calendar.EntityTypes.EVENT,
     );
     let calendarId = calendars.find((cal) => cal.title === "One Buid")?.id;
 
     if (!calendarId) {
-      const defaultCalendarSource =
-        Platform.OS === "ios"
-          ? await getDefaultCalendarSource()
-          : { isLocalAccount: true, name: "One Build" };
-
-      const newCalendarId = await Calendar.createCalendarAsync({
+      const defaultSource = await getDefaultCalendarSource();
+      const calendarDetails: Calendar.CalendarCreateParams = {
         title: "One Buid",
         color: "#F9D96B",
         entityType: Calendar.EntityTypes.EVENT,
-        sourceId: defaultCalendarSource.id,
-        source: defaultCalendarSource,
-        name: "One Buid",
-        ownerAccount: "One Buid",
+        name: "One Buid Calendar",
+        ownerAccount: "local",
         accessLevel: Calendar.CalendarAccessLevel.OWNER,
-      });
+      };
 
-      calendarId = newCalendarId;
+      if (
+        Platform.OS === "ios" &&
+        defaultSource.type === Calendar.SourceType.LOCAL
+      ) {
+        calendarDetails.sourceId = defaultSource.id;
+      } else if (Platform.OS === "android") {
+        // For Android, sourceId is not always required or might need specific handling
+        // If defaultSource has an id, use it, otherwise Expo might handle it.
+        if ("id" in defaultSource && defaultSource.id) {
+          calendarDetails.sourceId = defaultSource.id;
+        } else {
+          // For local accounts on Android, name and type might be sufficient
+          // or Expo handles source creation implicitly.
+          // Ensure `name` in `defaultSource` is what you expect for the source.
+          calendarDetails.source = defaultSource as Calendar.Source; // Cast if confident about structure
+        }
+      }
+      if (
+        !calendarDetails.source &&
+        !calendarDetails.sourceId &&
+        Platform.OS === "ios"
+      ) {
+        // Fallback for iOS if sourceId couldn't be determined but is required
+        const localSources = await Calendar.getSourcesAsync();
+        const localSource = localSources.find(
+          (s) =>
+            s.type === Calendar.SourceType.LOCAL ||
+            s.type === Calendar.SourceType.BIRTHDAYS,
+        ); // Birthdays often a local source
+        if (localSource) calendarDetails.sourceId = localSource.id;
+        else {
+          console.warn(
+            "Could not find a local source for iOS calendar creation.",
+          );
+          // Potentially fallback to creating without explicit sourceId if API allows
+        }
+      }
+
+      calendarId = await Calendar.createCalendarAsync(calendarDetails);
     }
 
-    // Fetch all items from Firestore
-    const q = firestore()
-      .collection("projects")
-      .doc(project)
-      .collection("calendar");
-
-    const querySnapshot = await q.get();
+    const projectCalendarCollectionRef = collection(
+      db,
+      "projects",
+      project,
+      "calendar",
+    );
+    const querySnapshot = await getDocs(projectCalendarCollectionRef); // Changed from q.get()
     const firestoreEvents: ICalendarEvent[] = [];
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((docSnap) => {
+      const eventData = docSnap.data();
       firestoreEvents.push({
-        key: doc.id,
-        dateBegin: doc.data().dateBegin,
-        dateEnd: doc.data().dateEnd,
-        title: doc.data().title,
-        description: doc.data().description,
-        color: doc.data().color,
-        uid: doc.data().uid,
+        key: docSnap.id,
+        dateBegin:
+          eventData.dateBegin instanceof Timestamp
+            ? eventData.dateBegin.toDate()
+            : new Date(),
+        dateEnd:
+          eventData.dateEnd instanceof Timestamp
+            ? eventData.dateEnd.toDate()
+            : new Date(),
+        title: eventData.title,
+        description: eventData.description,
+        color: eventData.color,
+        uid: eventData.uid,
       });
     });
 
-    // Fetch all events from the "One Buid" calendar
+    if (!calendarId) {
+      callback("Failed to get or create a device calendar ID.");
+      return;
+    }
     const expoEvents = await Calendar.getEventsAsync(
       [calendarId],
       new Date("1970-01-01T00:00:00.000Z"),
       new Date("9999-12-31T23:59:59.999Z"),
     );
 
-    // Sync events: Add, update, or delete as necessary
     const firestoreEventMap = new Map(firestoreEvents.map((e) => [e.key, e]));
-    const expoEventMap = new Map(expoEvents.map((e) => [e.id, e]));
 
-    for (const [id, event] of expoEventMap) {
-      console.log(
-        `Expo Event ID: ${id}, Title: ${event.title}, Notes: ${event.notes}`,
-      );
-    }
-    // Add or update events
     for (const event of firestoreEvents) {
-      const matchingEvent = Array.from(expoEventMap.values()).find(
-        (e) => e.notes === event.key,
-      );
-      console.log("Event:", event.title, event.key);
-      console.log("matchingEvent S:", event.dateBegin.toDate().toISOString());
-      console.log("matchingEvent E:", event.dateEnd.toDate().toISOString());
+      const matchingEvent = expoEvents.find((e) => e.notes === event.key);
+
+      const eventDetails: Partial<Calendar.Event> = {
+        title: event.title,
+        startDate: event.dateBegin, // expo-calendar expects Date objects
+        endDate: event.dateEnd, // expo-calendar expects Date objects
+        notes: event.key,
+      };
 
       if (matchingEvent) {
-        // Update event if necessary
-        if (matchingEvent.notes == event.key) {
-          console.log("matchingEvent:", event.title, event.key);
-          await Calendar.updateEventAsync(matchingEvent.id, {
-            title: event.title,
-            startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
-            endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
-            notes: event.key,
-          });
+        if (matchingEvent.notes === event.key) {
+          // Ensure it's the correct event to update
+          await Calendar.updateEventAsync(matchingEvent.id!, eventDetails); // Add ! for id as it should exist
         }
       } else {
-        // Add new event
-        console.log("createEvent:", event.title, event.key);
-        await Calendar.createEventAsync(calendarId, {
-          title: event.title,
-          startDate: event.dateBegin.toDate().toISOString(), // Ensure proper date format
-          endDate: event.dateEnd.toDate().toISOString(), // Ensure proper date format
-          notes: event.key,
-        });
+        if (calendarId)
+          await Calendar.createEventAsync(
+            calendarId,
+            eventDetails as Calendar.Event,
+          ); // Cast as Event, ensure all required fields are present
       }
     }
 
-    // Delete events that are no longer in Firestore
-    for (const event of expoEvents) {
-      if (!firestoreEventMap.has(event.notes)) {
-        await Calendar.deleteEventAsync(event.id);
+    for (const expoEvent of expoEvents) {
+      if (expoEvent.notes && !firestoreEventMap.has(expoEvent.notes)) {
+        await Calendar.deleteEventAsync(expoEvent.id!);
       }
     }
 
     callback("Calendar synced successfully");
   } catch (error) {
     console.error("Error syncing calendar:", error);
-    callback("Error syncing calendar");
+    callback(
+      "Error syncing calendar: " +
+        (error instanceof Error ? error.message : String(error)),
+    );
   }
 }
