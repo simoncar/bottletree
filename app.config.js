@@ -10,6 +10,7 @@ module.exports = ({ config }) => {
 			icon: "./assets/images/icon.png",
 			scheme: "bottletree",
 			userInterfaceStyle: "automatic",
+			owner: "simoncar",
 			newArchEnabled: true,
 			splash: {
 				image: "./assets/images/splash.png",
