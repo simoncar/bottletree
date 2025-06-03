@@ -54,7 +54,7 @@ type SearchParams = {
 
 SplashScreen.preventAutoHideAsync();
 
-globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
+globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = false;
 
 function useNotificationObserver() {
   useEffect(() => {
