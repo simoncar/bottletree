@@ -1,3 +1,6 @@
+globalThis.RNFB_MODULAR_DEPRECATION_STRICT_MODE === true;
+//globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
+
 import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
@@ -18,4 +21,4 @@ if (!Device.isDevice) {
 
 const uploadBytes = null;
 
-export { firebase, db, storage, auth, firestore, uploadBytes };
+export { auth, db, firebase, firestore, storage, uploadBytes };
