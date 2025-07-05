@@ -41,7 +41,7 @@ export async function getProject(
 
   return () => unsubscribe();
 }
-export function getProjects(
+export async function getProjects(
   uid: string,
   archived: boolean,
   callback: projectsRead,
@@ -71,10 +71,11 @@ export function getProjects(
     star: false,
   };
 
-  const query = db.collectionGroup("accessList").where("uid", "==", uid);
+  try {
+    const query = db.collectionGroup("accessList").where("uid", "==", uid);
+    const accessListSnapshot = await query.get();
 
-  query.onSnapshot((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
+    accessListSnapshot.forEach((doc) => {
       projectList.indexOf(doc.data().projectId) === -1
         ? projectList.push(doc.data().projectId)
         : console.log(
@@ -85,20 +86,36 @@ export function getProjects(
     });
 
     const q = db.collection("projects");
+    const projectsSnapshot = await q.get();
 
-    q.onSnapshot((projectsSnapshot) => {
-      projects.length = 0; // Clear the array
-      projectsArchived.length = 0; // Clear the array
+    projects.length = 0; // Clear the array
+    projectsArchived.length = 0; // Clear the array
 
-      projectsSnapshot.forEach((doc) => {
-        if (projectList.includes(doc.id) && doc.id !== "demo") {
-          if (!doc.data().archived) {
-            projects.push({
+    projectsSnapshot.forEach((doc) => {
+      if (projectList.includes(doc.id) && doc.id !== "demo") {
+        if (!doc.data().archived) {
+          projects.push({
+            project: doc.id,
+            key: doc.id,
+            title: doc.data().title || "Untitled",
+            icon: doc.data().icon,
+            archived: false,
+            postCount: doc.data().postCount ?? 0,
+            taskCount: doc.data().taskCount ?? 0,
+            fileCount: doc.data().fileCount ?? 0,
+            timestamp: doc.data().timestamp,
+            private: doc.data().private || false,
+            created: doc.data().created || doc.data().timestamp,
+            star: doc.data().star || false,
+          });
+        } else {
+          if (archived) {
+            projectsArchived.push({
               project: doc.id,
               key: doc.id,
               title: doc.data().title || "Untitled",
               icon: doc.data().icon,
-              archived: false,
+              archived: true,
               postCount: doc.data().postCount ?? 0,
               taskCount: doc.data().taskCount ?? 0,
               fileCount: doc.data().fileCount ?? 0,
@@ -107,60 +124,46 @@ export function getProjects(
               created: doc.data().created || doc.data().timestamp,
               star: doc.data().star || false,
             });
-          } else {
-            if (archived) {
-              projectsArchived.push({
-                project: doc.id,
-                key: doc.id,
-                title: doc.data().title || "Untitled",
-                icon: doc.data().icon,
-                archived: true,
-                postCount: doc.data().postCount ?? 0,
-                taskCount: doc.data().taskCount ?? 0,
-                fileCount: doc.data().fileCount ?? 0,
-                timestamp: doc.data().timestamp,
-                private: doc.data().private || false,
-                created: doc.data().created || doc.data().timestamp,
-                star: doc.data().star || false,
-              });
-            }
           }
         }
-        //if demo project, set the counts
-        if (doc.id === "demo") {
-          projectsDemo[0].postCount = doc.data().postCount ?? 0;
-          projectsDemo[0].taskCount = doc.data().taskCount ?? 0;
-          projectsDemo[0].fileCount = doc.data().fileCount ?? 0;
-        }
-      });
-
-      projects.forEach((project) => {
-        if (!project.timestamp) {
-          project.timestamp = new firestore.Timestamp(631152000, 0);
-        }
-        if (!project.created) {
-          project.created = project.timestamp;
-        }
-      });
-
-      projects.sort((a, b) => {
-        if (a.star === b.star) {
-          return b.timestamp?.seconds - a.timestamp?.seconds;
-        }
-        return a.star ? -1 : 1;
-      });
-
-      projectsArchived.sort((a, b) => {
-        return b.timestamp?.seconds - a.timestamp?.seconds;
-      });
-
-      const allProjects = [...projects, ...projectsArchived];
-      if (!allProjects.some((project) => project.key === "demo")) {
-        allProjects.push(...projectsDemo);
       }
-      callback(allProjects);
+      //if demo project, set the counts
+      if (doc.id === "demo") {
+        projectsDemo[0].postCount = doc.data().postCount ?? 0;
+        projectsDemo[0].taskCount = doc.data().taskCount ?? 0;
+        projectsDemo[0].fileCount = doc.data().fileCount ?? 0;
+      }
     });
-  });
+
+    projects.forEach((project) => {
+      if (!project.timestamp) {
+        project.timestamp = new firestore.Timestamp(631152000, 0);
+      }
+      if (!project.created) {
+        project.created = project.timestamp;
+      }
+    });
+
+    projects.sort((a, b) => {
+      if (a.star === b.star) {
+        return b.timestamp?.seconds - a.timestamp?.seconds;
+      }
+      return a.star ? -1 : 1;
+    });
+
+    projectsArchived.sort((a, b) => {
+      return b.timestamp?.seconds - a.timestamp?.seconds;
+    });
+
+    const allProjects = [...projects, ...projectsArchived];
+    if (!allProjects.some((project) => project.key === "demo")) {
+      allProjects.push(...projectsDemo);
+    }
+    callback(allProjects);
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    callback([]);
+  }
 }
 
 export async function getAllProjects(callback: projectsRead) {

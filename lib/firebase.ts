@@ -1,5 +1,5 @@
 globalThis.RNFB_MODULAR_DEPRECATION_STRICT_MODE === true;
-//globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
+globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
 
 import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
