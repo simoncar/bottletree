@@ -3,11 +3,13 @@ globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
 
 import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
+import firestore, { getFirestore } from "@react-native-firebase/firestore";
+
 import storage from "@react-native-firebase/storage";
 import * as Device from "expo-device";
 
 const db = firestore();
+const dbm = getFirestore();
 
 console.log("__DEV__: ", __DEV__);
 
@@ -21,4 +23,4 @@ if (!Device.isDevice) {
 
 const uploadBytes = null;
 
-export { auth, db, firebase, firestore, storage, uploadBytes };
+export { auth, db, dbm, firebase, firestore, storage, uploadBytes };

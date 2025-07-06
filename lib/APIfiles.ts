@@ -1,4 +1,11 @@
-import { db, firestore, storage } from "@/lib/firebase"; // or "@/lib/firebase.web"
+import { db, dbm, firestore, storage } from "@/lib/firebase"; // or "@/lib/firebase.web"
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "@react-native-firebase/firestore";
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
 import { Platform } from "react-native";
@@ -40,31 +47,32 @@ export function deleteFile(
 }
 
 export async function getFiles(project: string, callback: filesRead) {
-  const files: IFile[] = [];
+  const filesRef = collection(
+    doc(collection(dbm, "projects"), project),
+    "files",
+  );
+  const q = query(filesRef, orderBy("modified", "desc"));
 
-  const q = db
-    .collection("projects")
-    .doc(project)
-    .collection("files")
-    .orderBy("modified", "desc");
-
-  const unsubscribe = q.onSnapshot((querySnapshot) => {
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const files: IFile[] = [];
-    querySnapshot?.forEach((doc) => {
+
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
       files.push({
-        key: doc.id,
-        filename: doc.data().filename,
-        url: doc.data().url,
-        mimeType: doc.data().mimeType,
-        bytes: doc.data().bytes,
-        created: doc.data().created,
-        modified: doc.data().modified,
-        projectId: doc.data().projectId,
+        key: docSnap.id,
+        filename: data.filename,
+        url: data.url,
+        mimeType: data.mimeType,
+        bytes: data.bytes,
+        created: data.created,
+        modified: data.modified,
+        projectId: data.projectId,
       });
     });
 
     callback(files);
   });
+
   return () => unsubscribe();
 }
 

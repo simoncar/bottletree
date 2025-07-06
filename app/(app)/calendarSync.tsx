@@ -1,6 +1,7 @@
 import { ButtonYellow } from "@/components/Button";
-import { firestore } from "@/lib/firebase";
+import { dbm } from "@/lib/firebase";
 import { ICalendarEvent } from "@/lib/types";
+import { collection, doc, getDocs } from "@react-native-firebase/firestore";
 import * as Calendar from "expo-calendar";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
@@ -58,12 +59,19 @@ export default function CalendarSync() {
       }
 
       // Fetch all items from Firestore
-      const q = firestore()
-        .collection("projects")
-        .doc(project)
-        .collection("calendar");
+      //   const q = firestore()
+      //     .collection("projects")
+      //     .doc(project)
+      //     .collection("calendar");
 
-      const querySnapshot = await q.get();
+      const calendarCollectionRef = collection(
+        doc(collection(dbm, "projects"), project),
+        "calendar",
+      );
+
+      console.log("syncWithDeviceCalendar (modular)");
+
+      const querySnapshot = await getDocs(calendarCollectionRef);
       const firestoreEvents: ICalendarEvent[] = [];
       querySnapshot.forEach((doc) => {
         firestoreEvents.push({
@@ -84,8 +92,6 @@ export default function CalendarSync() {
         new Date(new Date().setDate(new Date().getDate() - 100)),
         new Date(new Date().setDate(new Date().getDate() + 100)),
       );
-
-      console.log("BBBBB:", calendarId, expoEvents);
 
       // Sync events: Add, update, or delete as necessary
       const firestoreEventMap = new Map(firestoreEvents.map((e) => [e.key, e]));
