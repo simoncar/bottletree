@@ -1,12 +1,13 @@
+import { doc, onSnapshot } from "@react-native-firebase/firestore";
 import { createUser } from "./APIuser";
-import { db, firestore } from "./firebase";
+import { db, dbm, firestore } from "./firebase";
 import { IProject, IUser } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
 const stockHouseIcon =
   "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2Fhouse.png?alt=media&token=d49c7085-03f3-4115-ab17-21683d33ff07";
 
-export async function getProject(
+export function getProject(
   project: string,
   callback: { (project: IProject): void; (arg0: IProject): void },
 ) {
@@ -15,25 +16,26 @@ export async function getProject(
     return;
   }
 
-  const q = db.collection("projects").doc(project);
+  const projectRef = doc(dbm, "projects", project);
 
-  const unsubscribe = q.onSnapshot((doc) => {
-    if (!doc.exists) {
+  const unsubscribe = onSnapshot(projectRef, (docSnap) => {
+    if (!docSnap.exists()) {
       console.log("No such project:", project);
       callback(null);
       return;
     }
+    const data = docSnap.data();
     const returnProject: IProject = {
-      project: doc.id,
-      key: doc.id,
-      title: doc.data().title || "Untitled",
-      icon: doc.data().icon,
-      archived: doc.data().archived,
-      postCount: doc.data().postCount ?? 0,
-      taskCount: doc.data().taskCount ?? 0,
-      fileCount: doc.data().fileCount ?? 0,
-      private: doc.data().private || false,
-      timestamp: doc.data().timestamp,
+      project: docSnap.id,
+      key: docSnap.id,
+      title: data.title || "Untitled",
+      icon: data.icon,
+      archived: data.archived,
+      postCount: data.postCount ?? 0,
+      taskCount: data.taskCount ?? 0,
+      fileCount: data.fileCount ?? 0,
+      private: data.private || false,
+      timestamp: data.timestamp,
     };
 
     callback(returnProject);
