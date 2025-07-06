@@ -1,4 +1,10 @@
-import { doc, onSnapshot } from "@react-native-firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  updateDoc,
+} from "@react-native-firebase/firestore";
 import { createUser } from "./APIuser";
 import { db, dbm, firestore } from "./firebase";
 import { IProject, IUser } from "./types";
@@ -167,46 +173,45 @@ export async function getProjects(
     callback([]);
   }
 }
+// Modular Firestore API version
 
 export async function getAllProjects(callback: projectsRead) {
   const projects: IProject[] = [];
   const projectsArchived: IProject[] = [];
 
-  const q = db.collection("projects"); //.orderBy("timestamp", "desc");
+  const q = collection(dbm, "projects");
+  const projectsSnapshot = await getDocs(q);
 
-  const projectsSnapshot = await q.get();
-
-  projectsSnapshot.forEach((doc) => {
-    if (!doc.data().archived) {
+  projectsSnapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    if (!data.archived) {
       projects.push({
-        project: doc.id,
-        key: doc.id,
-        title: doc.data().title || "Untitled",
-        icon: doc.data().icon,
+        project: docSnap.id,
+        key: docSnap.id,
+        title: data.title || "Untitled",
+        icon: data.icon,
         archived: false,
-        postCount: doc.data().postCount ?? 0,
-        taskCount: doc.data().taskCount ?? 0,
-        fileCount: doc.data().fileCount ?? 0,
-        private: doc.data().private || false,
+        postCount: data.postCount ?? 0,
+        taskCount: data.taskCount ?? 0,
+        fileCount: data.fileCount ?? 0,
+        private: data.private || false,
       });
     } else {
       projectsArchived.push({
-        project: doc.id,
-        key: doc.id,
-        title: doc.data().title || "Untitled",
-        icon: doc.data().icon,
+        project: docSnap.id,
+        key: docSnap.id,
+        title: data.title || "Untitled",
+        icon: data.icon,
         archived: true,
-        postCount: doc.data().postCount ?? 0,
-        taskCount: doc.data().taskCount ?? 0,
-        fileCount: doc.data().fileCount ?? 0,
-        private: doc.data().private || false,
+        postCount: data.postCount ?? 0,
+        taskCount: data.taskCount ?? 0,
+        fileCount: data.fileCount ?? 0,
+        private: data.private || false,
       });
     }
   });
 
   callback([...projects, ...projectsArchived]);
-
-  return;
 }
 
 export async function getProjectUsers(
@@ -268,33 +273,28 @@ export async function setStar(
     console.error("Error setting star property: ", e);
   }
 }
+export async function updateProject(project: IProject, callback: any) {
+  const ref = doc(dbm, "projects", project.key);
 
-export function updateProject(project: IProject, callback: any) {
-  const ref = db.collection("projects").doc(project.key);
+  await updateDoc(ref, {
+    title: project.title,
+    icon: project?.icon ?? stockHouseIcon,
+    archived: project?.archived ?? false,
+    private: project?.private || false,
+    timestamp: firestore.Timestamp.now(),
+  });
 
-  ref
-    .update({
-      title: project.title,
-      icon: project?.icon ?? stockHouseIcon,
-      archived: project?.archived ?? false,
-      private: project?.private || false,
-      timestamp: firestore.Timestamp.now(),
-    })
-    .then(() => {
-      callback(project.key);
-    });
+  callback(project.key);
 }
 
-export function updateProjectTimestamp(project: IProject, callback: any) {
-  const ref = db.collection("projects").doc(project.key);
+export async function updateProjectTimestamp(project: IProject, callback: any) {
+  const ref = doc(dbm, "projects", project.key);
 
-  ref
-    .update({
-      timestamp: firestore.Timestamp.now(),
-    })
-    .then(() => {
-      callback(project.key);
-    });
+  await updateDoc(ref, {
+    timestamp: firestore.Timestamp.now(),
+  });
+
+  callback(project.key);
 }
 
 export function addProject(
