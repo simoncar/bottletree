@@ -1,34 +1,46 @@
-import { db, firestore } from "./firebase";
-import { ILog } from "./types";
-import * as Device from "expo-device";
 import * as Application from "expo-application";
+import * as Device from "expo-device";
+import { dbm } from "./firebase";
+import { ILog } from "./types";
 
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  Timestamp,
+} from "@react-native-firebase/firestore";
+
+// Update getLogs to use modular API
 export async function getLogs(callback: logsRead) {
   const logs: ILog[] = [];
-
-  const q = firestore().collection("logs").orderBy("timestamp", "desc");
-
-  const logSnapshot = await q.get();
+  const logsQuery = query(
+    collection(dbm, "logs"),
+    orderBy("timestamp", "desc"),
+  );
+  const logSnapshot = await getDocs(logsQuery);
 
   logSnapshot.forEach((doc) => {
+    const data = doc.data();
     logs.push({
       key: doc.id,
-      timestamp: doc.data().timestamp,
-      loglevel: doc.data().loglevel,
-      message: doc.data().message,
-      user: doc.data().user,
-      device: doc.data().device,
-      version: doc.data().version,
-      email: doc.data().email,
+      timestamp: data.timestamp,
+      loglevel: data.loglevel,
+      message: data.message,
+      user: data.user,
+      device: data.device,
+      version: data.version,
+      email: data.email,
     });
   });
 
   callback(logs);
 }
 
-export function addLog(log: ILog) {
-  // add to the passed in log object the current timestamp and details about the user device
-  log.timestamp = firestore.Timestamp.now();
+// Update addLog to use modular API
+export async function addLog(log: ILog) {
+  log.timestamp = Timestamp.now();
   log.device =
     Device.manufacturer +
     " > " +
@@ -40,16 +52,9 @@ export function addLog(log: ILog) {
   log.version = Application.nativeApplicationVersion;
 
   try {
-    firestore()
-      .collection("logs")
-      .add(log)
-      .then((docRef) => {
-        console.log("Log written with ID: ", docRef.id);
-        return;
-      });
+    const docRef = await addDoc(collection(dbm, "logs"), log);
+    console.log("Log written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding log: ", e);
   }
-
-  return;
 }
