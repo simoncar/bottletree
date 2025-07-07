@@ -23,29 +23,26 @@ type FilesJson = {
   assets: FileData[];
   canceled: boolean;
 };
-
-export function deleteFile(
+export async function deleteFile(
   projectId: string,
   key: string,
-  callback: { (id: string): void; (arg0: string): void },
+  callback: (id: string) => void,
 ) {
   try {
-    const docRef = db
-      .collection("projects")
-      .doc(projectId)
-      .collection("files")
-      .doc(key);
+    const docRef = doc(
+      collection(doc(collection(dbm, "projects"), projectId), "files"),
+      key,
+    );
 
-    docRef.delete().then(() => {
-      callback(key);
+    await dbm.runTransaction(async (transaction) => {
+      transaction.delete(docRef);
     });
+
+    callback(key);
   } catch (e) {
-    console.error("Error deleting user from project: ", e);
+    console.error("Error deleting file from project: ", e);
   }
-
-  return;
 }
-
 export async function getFiles(project: string, callback: filesRead) {
   const filesRef = collection(
     doc(collection(dbm, "projects"), project),
@@ -73,7 +70,7 @@ export async function getFiles(project: string, callback: filesRead) {
     callback(files);
   });
 
-  return () => unsubscribe();
+  return unsubscribe;
 }
 
 export async function uploadFilesAndCreateEntries(
