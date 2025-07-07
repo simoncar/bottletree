@@ -1,4 +1,13 @@
-import { firestore } from "@/lib/firebase";
+import { dbm } from "@/lib/firebase";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  writeBatch,
+} from "@react-native-firebase/firestore";
 import { ITask } from "./types";
 
 type tasksRead = (tasks: ITask[]) => void;
@@ -6,49 +15,49 @@ type tasksRead = (tasks: ITask[]) => void;
 export async function getTasks(project: string, callback: tasksRead) {
   const tasks: ITask[] = [];
 
-  const q = firestore().collection("projects").doc(project).collection("tasks");
+  const tasksCollection = collection(
+    doc(collection(dbm, "projects"), project),
+    "tasks",
+  );
 
-  const unsubscribe = q.onSnapshot((querySnapshot) => {
-    querySnapshot?.forEach((doc) => {
-      const existingTaskIndex = tasks.findIndex((t) => t.key === doc.id);
+  const unsubscribe = onSnapshot(tasksCollection, (querySnapshot) => {
+    tasks.length = 0; // Clear the array
+    querySnapshot?.forEach((docSnap) => {
+      const data = docSnap.data();
       const taskData = {
-        key: doc.id,
-        task: doc.data().task ?? "",
-        description: doc.data().description ?? "",
-        projectId: doc.data().projectId,
-        completed: doc.data().completed,
-        created: doc.data().created,
-        modified: doc.data().modified,
-        order: doc.data().order ?? 1,
+        key: docSnap.id,
+        task: data.task ?? "",
+        description: data.description ?? "",
+        projectId: data.projectId,
+        completed: data.completed,
+        created: data.created,
+        modified: data.modified,
+        order: data.order ?? 1,
       };
-
-      if (existingTaskIndex !== -1) {
-        tasks[existingTaskIndex] = taskData;
-      } else {
-        tasks.push(taskData);
-      }
+      tasks.push(taskData);
     });
     tasks.sort((a, b) => a.order - b.order);
     callback(tasks);
   });
   return () => unsubscribe();
 }
+
 export async function addTask(project: string, task: ITask, callback: any) {
-  const taskRef = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("tasks")
-    .doc();
+  const tasksCollection = collection(
+    doc(collection(dbm, "projects"), project),
+    "tasks",
+  );
+  const taskDocRef = doc(tasksCollection);
 
   task = cleanTask(task as ITask);
 
-  await taskRef.set({
+  await setDoc(taskDocRef, {
     ...task,
-    created: firestore.Timestamp.now(),
-    modified: firestore.Timestamp.now(),
+    created: serverTimestamp(),
+    modified: serverTimestamp(),
   });
 
-  callback(taskRef.id);
+  callback(taskDocRef.id);
 }
 
 export async function editTask(
@@ -57,27 +66,29 @@ export async function editTask(
   updatedTask: Partial<ITask>,
   callback: any,
 ) {
-  const taskRef = firestore()
-    .collection("projects")
-    .doc(project)
-    .collection("tasks")
-    .doc(taskId);
+  const taskRef = doc(
+    collection(doc(collection(dbm, "projects"), project), "tasks"),
+    taskId,
+  );
 
   updatedTask = cleanTask(updatedTask as ITask);
 
-  await taskRef.update({
+  await updateDoc(taskRef, {
     ...updatedTask,
-    modified: firestore.Timestamp.now(),
+    modified: serverTimestamp(),
   });
   callback(taskId);
 }
 
 export async function updateTasks(project: string, tasks: ITask[]) {
-  const batch = firestore().batch();
-  const q = firestore().collection("projects").doc(project).collection("tasks");
+  const batch = writeBatch(dbm);
+  const tasksCollection = collection(
+    doc(collection(dbm, "projects"), project),
+    "tasks",
+  );
 
   tasks.forEach((task) => {
-    const taskRef = q.doc(task.key);
+    const taskRef = doc(tasksCollection, task.key);
     batch.update(taskRef, task);
   });
 
@@ -85,11 +96,14 @@ export async function updateTasks(project: string, tasks: ITask[]) {
 }
 
 export async function setTaskOrder(project: string, tasks: ITask[]) {
-  const batch = firestore().batch();
-  const q = firestore().collection("projects").doc(project).collection("tasks");
+  const batch = writeBatch(dbm);
+  const tasksCollection = collection(
+    doc(collection(dbm, "projects"), project),
+    "tasks",
+  );
 
   tasks.forEach((task, index) => {
-    const taskRef = q.doc(task.key);
+    const taskRef = doc(tasksCollection, task.key);
     batch.update(taskRef, { order: index });
   });
 
