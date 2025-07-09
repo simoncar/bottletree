@@ -1,4 +1,11 @@
-import { db, firestore } from "./firebase";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "@react-native-firebase/firestore";
+import { db, dbm, firestore } from "./firebase";
 import { IComment, IPost } from "./types";
 
 export async function getPost(
@@ -34,86 +41,66 @@ export async function getPost(
 }
 
 export async function addPostImage(post: IPost, callback: any) {
-  db.collection("projects")
-    .doc(post.projectId)
-    .collection("posts")
-    .add({
-      author: post.author,
-      avatar:
-        "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA..",
-      images: post.images,
-      ratio: Number(post.ratio),
-      timestamp: firestore.Timestamp.now(),
+  try {
+    const postRef = await addDoc(
+      collection(dbm, "projects", post.projectId, "posts"),
+      {
+        author: post.author,
+        avatar:
+          "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA..",
+        images: post.images,
+        ratio: Number(post.ratio),
+        timestamp: serverTimestamp(),
+        uid: post.uid || "",
+      },
+    );
+    console.log("Post Document written with ID: ", postRef.id);
+    console.log(
+      "******* SENDING NOTIFICATION ******* :",
+      post.author.substring(0, 5),
+    );
+
+    const notificationRef = await addDoc(collection(db, "notifications"), {
+      title: post.author,
+      body: "New Image Added",
+      timestamp: serverTimestamp(),
+      projectId: post.projectId,
       uid: post.uid || "",
-    })
-    .then((docRef) => {
-      console.log("Post Document written with ID: ", docRef.id);
-      console.log(
-        "******* SENDING NOTIFICATION ******* :",
-        post.author.substring(0, 5),
-      );
-
-      db.collection("notifications")
-        .add({
-          title: post.author,
-          body: "New Image Added",
-          timestamp: firestore.Timestamp.now(),
-          projectId: post.projectId,
-          uid: post.uid || "",
-        })
-        .then((docRef) => {
-          console.log("Notification Document written with ID: ", docRef.id);
-          callback(docRef.id);
-        })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
     });
-
-  return;
+    console.log("Notification Document written with ID: ", notificationRef.id);
+    callback(notificationRef.id);
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
 }
 
 export async function setPostNote(post: IPost, callback: any) {
-  const note = db
-    .collection("projects")
-    .doc(post.projectId)
-    .collection("posts")
-    .doc(post.key);
+  try {
+    const noteRef = doc(dbm, "projects", post.projectId, "posts", post.key);
 
-  note
-    .set({
+    await setDoc(noteRef, {
       author: post.author,
       avatar:
         "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FScreenshot%202023-05-30%20at%202.47.44%20PM.png?alt=media&token=30888878-15e6-4395-b3d4-53ae17758e33&_gl=1*pyfxsn*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ1MDg3Ni44LjEuMTY4NTQ1MDkxMS4wLjAuMA..",
       caption: post.caption,
-      timestamp: firestore.Timestamp.now(),
+      timestamp: serverTimestamp(),
       uid: post.uid || "",
-    })
-    .then(() => {
-      console.log("Post Document written with ID: ", post.key);
-      db.collection("notifications")
-        .add({
-          title: post.author?.substring(0, 300) || "",
-          body: post.caption?.substring(0, 300) || "",
-          timestamp: firestore.Timestamp.now(),
-          projectId: post.projectId,
-          uid: post.uid || "",
-        })
-        .then((docRef) => {
-          callback(docRef.id);
-        })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
     });
 
-  return;
+    console.log("Post Document written with ID: ", post.key);
+
+    const notificationRef = await addDoc(collection(dbm, "notifications"), {
+      title: post.author?.substring(0, 300) || "",
+      body: post.caption?.substring(0, 300) || "",
+      timestamp: serverTimestamp(),
+      projectId: post.projectId,
+      uid: post.uid || "",
+    });
+
+    callback(notificationRef.id);
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
 }
 
 export async function setPostFile(post: IPost, callback: any) {
