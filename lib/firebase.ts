@@ -5,7 +5,7 @@ import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
 import firestore, { getFirestore } from "@react-native-firebase/firestore";
 
-import storage from "@react-native-firebase/storage";
+
 import * as Device from "expo-device";
 
 const db = firestore();
@@ -23,4 +23,4 @@ if (!Device.isDevice) {
 
 const uploadBytes = null;
 
-export { auth, db, dbm, firebase, firestore, storage, uploadBytes };
+export { auth, db, dbm, firebase, firestore,  uploadBytes };

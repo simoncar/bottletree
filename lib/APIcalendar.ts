@@ -12,7 +12,7 @@ import {
 } from "@react-native-firebase/firestore";
 import * as Calendar from "expo-calendar";
 import { Platform } from "react-native";
-import { db } from "./firebase"; // Assuming 'db' is your modular Firestore instance
+import { db, dbm } from "./firebase"; // Assuming 'db' is your modular Firestore instance
 import { ICalendarEvent } from "./types";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
@@ -136,7 +136,7 @@ export async function saveCalendarEvent(
   try {
     console.log("save CalendarEvent Modular", project, calendarEvent);
     const projectCalendarCollectionRef = collection(
-      db,
+      dbm,
       "projects",
       project,
       "calendar",

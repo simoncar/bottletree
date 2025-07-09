@@ -1,11 +1,21 @@
-import { db, dbm, firestore, storage } from "@/lib/firebase"; // or "@/lib/firebase.web"
+import { db, dbm, firestore } from "@/lib/firebase"; // or "@/lib/firebase.web"
 import {
+  addDoc,
   collection,
   doc,
   onSnapshot,
   orderBy,
   query,
+  serverTimestamp,
 } from "@react-native-firebase/firestore";
+
+// import {
+//   getDownloadURL,
+//   getStorage,
+//   ref as storageRef,
+// } from "@react-native-firebase/storage";
+import storage, { getDownloadURL } from "@react-native-firebase/storage";
+
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
 import { Platform } from "react-native";
@@ -23,6 +33,7 @@ type FilesJson = {
   assets: FileData[];
   canceled: boolean;
 };
+
 export async function deleteFile(
   projectId: string,
   key: string,
@@ -73,7 +84,7 @@ export async function getFiles(project: string, callback: filesRead) {
   return unsubscribe;
 }
 
-export async function uploadFilesAndCreateEntries(
+export async function uploadFilesAndCreateEntries_old(
   filesJson: DocumentPicker.DocumentPickerResult,
   projectId: string,
   user: IUser,
@@ -137,6 +148,77 @@ export async function uploadFilesAndCreateEntries(
         author: user.displayName,
         uid: user.uid,
         timestamp: firestore.Timestamp.now(),
+        ratio: 1,
+        file: UUID,
+      };
+
+      setPostFile(post, (postId) => {
+        console.log(`Post created with ID: ${postId}`);
+      });
+
+      console.log(`File ${file.name} uploaded and entry created in Firestore.`);
+    } catch (error) {
+      console.error(`Error uploading file ${file.name}:`, error);
+    }
+  }
+}
+
+export async function uploadFilesAndCreateEntries(
+  filesJson: DocumentPicker.DocumentPickerResult,
+  projectId: string,
+  user: IUser,
+) {
+  if (filesJson.canceled) {
+    console.log("File selection was canceled.");
+    return;
+  }
+
+  const projectFilesRef = collection(doc(dbm, "projects", projectId), "files");
+  console.log("uploadFilesAndCreateEntries - modular:", filesJson);
+
+  for (const file of filesJson.assets) {
+    try {
+      const UUID = Crypto.randomUUID();
+      //const blob = await uriToBlob(file.uri);
+
+      const filePath = `project/${projectId}/files/${UUID}`;
+      const fileStorageRef = storage().ref(filePath);
+
+      try {
+        console.log("AAA111- fileStorageRef.putFile");
+        await fileStorageRef.putFile(file.uri);
+        console.log("AAA222- fileStorageRef.putFile");
+        //await uploadBytes(fileStorageRef, blob);
+      } catch (error: any) {
+        if (error.code === "storage/unauthorized") {
+          console.error("User does not have permission to access the object");
+        } else {
+          throw error;
+        }
+      }
+
+      const downloadURL = await getDownloadURL(fileStorageRef);
+
+      const fileEntry: IFile = {
+        key: UUID,
+        filename: file.name,
+        url: downloadURL,
+        mimeType: file.mimeType,
+        bytes: file.size,
+        created: serverTimestamp(),
+        modified: serverTimestamp(),
+        projectId,
+      };
+
+      await addDoc(projectFilesRef, fileEntry);
+
+      const post: IPost = {
+        key: UUID,
+        caption: `${file.name}`,
+        projectId,
+        author: user.displayName,
+        uid: user.uid,
+        timestamp: serverTimestamp(),
         ratio: 1,
         file: UUID,
       };

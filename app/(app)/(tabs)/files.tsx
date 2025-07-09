@@ -180,7 +180,7 @@ export default function Files() {
   };
 
   const FileItem = ({ file, onPress }: FileItemProps) => {
-    const formattedDate = formatDate(file.modified);
+    const formattedDate = formatDate(file.modified ?? Timestamp.now());
 
     function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
       const styleAnimation = useAnimatedStyle(() => {
