@@ -1,4 +1,7 @@
-import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
+import {
+  FieldValue,
+  FirebaseFirestoreTypes,
+} from "@react-native-firebase/firestore";
 import { ICalendarEventBase } from "react-native-big-calendar";
 
 export type CollectionReference = FirebaseFirestoreTypes.CollectionReference;
@@ -16,7 +19,7 @@ export interface IPost {
     ratio: number;
     url: string;
   }[];
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | FieldValue;
   ratio: number;
   comments?: IComment[];
   linkURL?: string;
@@ -32,9 +35,9 @@ export interface IProject {
   postCount?: number;
   taskCount?: number;
   fileCount?: number;
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | FieldValue;
   private: boolean;
-  created?: Timestamp;
+  created?: Timestamp | FieldValue;
   star?: boolean;
 }
 
@@ -42,7 +45,7 @@ export interface ILog {
   loglevel: string;
   message: string;
   key?: string;
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | FieldValue;
   user?: string;
   email?: string;
   device?: string;
@@ -61,15 +64,15 @@ export interface IUser {
   project: string;
   anonymous: boolean;
   notifications?: boolean;
-  created?: Timestamp;
-  lastLogin?: Timestamp;
+  created?: Timestamp | FieldValue;
+  lastLogin?: Timestamp | FieldValue;
 }
 
 export interface IComment {
   key?: string;
   comment: string;
   displayName: string;
-  timestamp: Timestamp;
+  timestamp: Timestamp | FieldValue;
   uid: string;
 }
 
@@ -78,7 +81,7 @@ export interface IPushToken {
   pushToken: string;
   uid?: string;
   displayName?: string;
-  timestamp?: Timestamp;
+  timestamp?: Timestamp | FieldValue;
 }
 
 export interface IShareItem {
@@ -90,8 +93,8 @@ export interface IShareItem {
 
 export interface ICalendarEvent {
   key?: string;
-  dateBegin?: Timestamp;
-  dateEnd?: Timestamp;
+  dateBegin?: Timestamp | FieldValue;
+  dateEnd?: Timestamp | FieldValue;
   start?: Date;
   end?: Date;
   color?: string;
@@ -115,8 +118,8 @@ export interface IFile {
   mimeType: string;
   bytes: number;
   projectId: string;
-  created: Timestamp;
-  modified: Timestamp;
+  created: Timestamp | FieldValue;
+  modified: Timestamp | FieldValue;
 }
 
 //type to store tasks
@@ -126,8 +129,8 @@ export interface ITask {
   description?: string;
   projectId: string;
   completed: boolean;
-  created?: Timestamp;
-  modified?: Timestamp;
+  created?: Timestamp | FieldValue;
+  modified?: Timestamp | FieldValue;
   order?: number;
 }
 
