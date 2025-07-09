@@ -105,9 +105,7 @@ export async function uploadFilesAndCreateEntries(
       const fileStorageRef = storage().ref(filePath);
 
       try {
-        console.log("AAA111- fileStorageRef.putFile");
         await fileStorageRef.putFile(file.uri);
-        console.log("AAA222- fileStorageRef.putFile");
         //await uploadBytes(fileStorageRef, blob);
       } catch (error: any) {
         if (error.code === "storage/unauthorized") {
