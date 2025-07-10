@@ -5,6 +5,7 @@ import {
   doc, // For Firestore server timestamps
   FirestoreError,
   getDoc,
+  getDocs,
   onSnapshot,
   serverTimestamp,
   setDoc,
@@ -12,7 +13,7 @@ import {
 } from "@react-native-firebase/firestore";
 import * as Calendar from "expo-calendar";
 import { Platform } from "react-native";
-import { db, dbm } from "./firebase"; // Assuming 'db' is your modular Firestore instance
+import { dbm } from "./firebase"; // Assuming 'db' is your modular Firestore instance
 import { ICalendarEvent } from "./types";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;
@@ -28,14 +29,11 @@ export async function getItemsBigCalendar(
   project: string,
   callback: itemsRead,
 ) {
-  const calendarCollectionRef = collection(
-    doc(collection(db, "projects"), project),
-    "calendar",
-  );
+  const ref = collection(doc(collection(dbm, "projects"), project), "calendar");
   console.log("getItemsBigCalendar (modular)");
 
   const unsubscribe = onSnapshot(
-    calendarCollectionRef,
+    ref,
     (querySnapshot) => {
       // Type for querySnapshot is inferred
       const calendarEvents: ICalendarEvent[] = [];
@@ -99,7 +97,7 @@ export async function getCalendarEvent(
   calendarId: string,
   callback: (calendarEvent: ICalendarEvent | null) => void, // Allow null if not found
 ) {
-  const calendarDocRef = doc(db, "projects", project, "calendar", calendarId);
+  const calendarDocRef = doc(dbm, "projects", project, "calendar", calendarId);
 
   try {
     const docSnap = await getDoc(calendarDocRef);
@@ -181,7 +179,7 @@ export async function deleteCalendarEvent(
     callback(null);
     return;
   }
-  const calRef = doc(db, "projects", project, "calendar", calendarEvent.key);
+  const calRef = doc(dbm, "projects", project, "calendar", calendarEvent.key);
   try {
     await deleteDoc(calRef);
     callback(calendarEvent.key);
@@ -279,7 +277,7 @@ export async function syncWithDeviceCalendar(
     }
 
     const projectCalendarCollectionRef = collection(
-      db,
+      dbm,
       "projects",
       project,
       "calendar",
