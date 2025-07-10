@@ -8,14 +8,7 @@ import {
   query,
   serverTimestamp,
 } from "@react-native-firebase/firestore";
-
-// import {
-//   getDownloadURL,
-//   getStorage,
-//   ref as storageRef,
-// } from "@react-native-firebase/storage";
 import storage, { getDownloadURL } from "@react-native-firebase/storage";
-
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";
 import { setPostFile } from "./APIpost";

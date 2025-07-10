@@ -295,5 +295,6 @@
       "ios/Pods/boost/boost/predef/language",
     ],
     "i18n-ally.keystyle": "flat",
+    "editor.wordWrap": "off",
   },
 }
