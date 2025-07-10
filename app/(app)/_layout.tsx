@@ -21,7 +21,12 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, useColorScheme, View } from "react-native";
+import {
+  ActivityIndicator,
+  Platform,
+  useColorScheme,
+  View,
+} from "react-native";
 
 import {
   Inter_100Thin,
@@ -54,7 +59,6 @@ type SearchParams = {
 
 SplashScreen.preventAutoHideAsync();
 
-
 function useNotificationObserver() {
   useEffect(() => {
     let isMounted = true;
@@ -67,13 +71,14 @@ function useNotificationObserver() {
         router.push(url);
       }
     }
-
-    Notifications.getLastNotificationResponseAsync().then((response) => {
-      if (!isMounted || !response?.notification) {
-        return;
-      }
-      redirect(response?.notification);
-    });
+    if (Platform.OS !== "web") {
+      Notifications.getLastNotificationResponseAsync().then((response) => {
+        if (!isMounted || !response?.notification) {
+          return;
+        }
+        redirect(response?.notification);
+      });
+    }
 
     const subscription = Notifications.addNotificationResponseReceivedListener(
       (response) => {
@@ -90,6 +95,7 @@ function useNotificationObserver() {
 
 export default function Layout() {
   useNotificationObserver(); // Ensure this hook is always called
+
   const { posts } = useLocalSearchParams<SearchParams>();
   const localParams = useLocalSearchParams();
   useAsyncStorageDevTools();
@@ -221,7 +227,8 @@ export default function Layout() {
             headerStyle: {
               backgroundColor: Colors[colorScheme ?? "light"].background,
             },
-          }}>
+          }}
+        >
           <Stack.Screen
             name="(tabs)"
             options={{

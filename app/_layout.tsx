@@ -1,18 +1,15 @@
-import React, { useEffect, useContext } from "react";
-import { Slot, useNavigationContainerRef } from "expo-router";
-import { SessionProvider } from "@/lib/ctx";
-import { RootSiblingParent } from "react-native-root-siblings";
+import { SessionProvider, useSession } from "@/lib/ctx";
+import i18n from "@/lib/i18n";
+import { UserContext, UserProvider } from "@/lib/UserContext";
 import * as Sentry from "@sentry/react-native";
 import { isRunningInExpoGo } from "expo";
-import { auth, db, firestore } from "@/lib/firebase";
-import { useSession } from "@/lib/ctx";
-import { UserProvider } from "@/lib/UserContext";
-import { UserContext } from "@/lib/UserContext";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Platform } from "react-native";
-import Toast from "react-native-toast-message";
+import { Slot, useNavigationContainerRef } from "expo-router";
+import React, { useContext, useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
-import i18n from "@/lib/i18n";
+import { Platform } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { RootSiblingParent } from "react-native-root-siblings";
+import Toast from "react-native-toast-message";
 
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
