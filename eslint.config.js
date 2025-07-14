@@ -21,7 +21,8 @@ module.exports = defineConfig([
 			"react-native/no-color-literals": 0,
 			"react-native/no-raw-text": 2,
 			"react-native/no-single-element-style-arrays": 2,
-			"@typescript-eslint/explicit-function-return-type": "warn"
+			"@typescript-eslint/explicit-function-return-type": "warn",
+			"@typescript-eslint/no-unused-vars": "off"
 		},
 	}
 ]);

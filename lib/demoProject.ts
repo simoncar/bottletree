@@ -1,19 +1,16 @@
-import { db, firestore } from "./firebase";
+import { doc, setDoc, Timestamp } from "@react-native-firebase/firestore";
+import { dbm } from "./firebase";
 
 export const demoData2 = async () => {
   //console.log("Skip demo data");
 };
 
-const setCalendarData = async (docId: string, data: any) => {
-  await db
-    .collection("projects")
-    .doc("demo")
-    .collection("calendar")
-    .doc(docId)
-    .set(data, { merge: true });
+export const setCalendarData = async (docId: string, data: any) => {
+  const calendarDocRef = doc(dbm, "projects/demo/calendar", docId);
+  await setDoc(calendarDocRef, data, { merge: true });
 };
 
-const createCalendarEntry = (
+export const createCalendarEntry = (
   title: string,
   description: string,
   daysFromTodayBegin: number,
@@ -30,8 +27,8 @@ const createCalendarEntry = (
   return {
     description,
     title,
-    dateBegin: firestore.Timestamp.fromDate(dateBegin),
-    dateEnd: firestore.Timestamp.fromDate(dateEnd),
+    dateBegin: Timestamp.fromDate(dateBegin),
+    dateEnd: Timestamp.fromDate(dateEnd),
     uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
     projectId: "demo",
     color,

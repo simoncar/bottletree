@@ -1,12 +1,16 @@
 import {
   collection,
+  collectionGroup,
+  deleteDoc,
   doc,
   getDocs,
   onSnapshot,
+  setDoc,
+  Timestamp,
   updateDoc,
 } from "@react-native-firebase/firestore";
 import { createUser } from "./APIuser";
-import { db, dbm, firestore } from "./firebase";
+import { dbm } from "./firebase";
 import { IProject, IUser } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
@@ -21,6 +25,7 @@ export function getProject(
     callback(null);
     return;
   }
+  console.log("getProject project:", project);
 
   const projectRef = doc(dbm, "projects", project);
 
@@ -73,79 +78,86 @@ export async function getProjects(
     postCount: 0,
     fileCount: 0,
     taskCount: 0,
-    timestamp: firestore.Timestamp.now(),
+    timestamp: Timestamp.now(),
     private: false,
-    created: firestore.Timestamp.now(),
+    created: Timestamp.now(),
     star: false,
   };
 
   try {
-    const query = db.collectionGroup("accessList").where("uid", "==", uid);
-    const accessListSnapshot = await query.get();
+    const query = collection(dbm, "projects");
+    const accessListQuery = collection(dbm, "projects");
+    // Use collectionGroup for "accessList"
+    const accessListGroupQuery = collectionGroup(dbm, "accessList").where(
+      "uid",
+      "==",
+      uid,
+    );
+    const accessListSnapshot = await getDocs(accessListGroupQuery);
 
-    accessListSnapshot.forEach((doc) => {
-      projectList.indexOf(doc.data().projectId) === -1
-        ? projectList.push(doc.data().projectId)
-        : console.log(
-            "This item already exists:",
-            doc.data().projectId,
-            Date(),
-          );
+    accessListSnapshot.forEach((docSnap) => {
+      const projectId = docSnap.data().projectId;
+      if (!projectList.includes(projectId)) {
+        projectList.push(projectId);
+      } else {
+        console.log("This item already exists:", projectId, Date());
+      }
     });
 
-    const q = db.collection("projects");
-    const projectsSnapshot = await q.get();
+    const q = collection(dbm, "projects");
+    const projectsSnapshot = await getDocs(q);
 
     projects.length = 0; // Clear the array
     projectsArchived.length = 0; // Clear the array
 
-    projectsSnapshot.forEach((doc) => {
-      if (projectList.includes(doc.id) && doc.id !== "demo") {
-        if (!doc.data().archived) {
+    projectsSnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (projectList.includes(docSnap.id) && docSnap.id !== "demo") {
+        if (!data.archived) {
           projects.push({
-            project: doc.id,
-            key: doc.id,
-            title: doc.data().title || "Untitled",
-            icon: doc.data().icon,
+            project: docSnap.id,
+            key: docSnap.id,
+            title: data.title || "Untitled",
+            icon: data.icon,
             archived: false,
-            postCount: doc.data().postCount ?? 0,
-            taskCount: doc.data().taskCount ?? 0,
-            fileCount: doc.data().fileCount ?? 0,
-            timestamp: doc.data().timestamp,
-            private: doc.data().private || false,
-            created: doc.data().created || doc.data().timestamp,
-            star: doc.data().star || false,
+            postCount: data.postCount ?? 0,
+            taskCount: data.taskCount ?? 0,
+            fileCount: data.fileCount ?? 0,
+            timestamp: data.timestamp,
+            private: data.private || false,
+            created: data.created || data.timestamp,
+            star: data.star || false,
           });
         } else {
           if (archived) {
             projectsArchived.push({
-              project: doc.id,
-              key: doc.id,
-              title: doc.data().title || "Untitled",
-              icon: doc.data().icon,
+              project: docSnap.id,
+              key: docSnap.id,
+              title: data.title || "Untitled",
+              icon: data.icon,
               archived: true,
-              postCount: doc.data().postCount ?? 0,
-              taskCount: doc.data().taskCount ?? 0,
-              fileCount: doc.data().fileCount ?? 0,
-              timestamp: doc.data().timestamp,
-              private: doc.data().private || false,
-              created: doc.data().created || doc.data().timestamp,
-              star: doc.data().star || false,
+              postCount: data.postCount ?? 0,
+              taskCount: data.taskCount ?? 0,
+              fileCount: data.fileCount ?? 0,
+              timestamp: data.timestamp,
+              private: data.private || false,
+              created: data.created || data.timestamp,
+              star: data.star || false,
             });
           }
         }
       }
       //if demo project, set the counts
-      if (doc.id === "demo") {
-        projectsDemo[0].postCount = doc.data().postCount ?? 0;
-        projectsDemo[0].taskCount = doc.data().taskCount ?? 0;
-        projectsDemo[0].fileCount = doc.data().fileCount ?? 0;
+      if (docSnap.id === "demo") {
+        projectsDemo[0].postCount = data.postCount ?? 0;
+        projectsDemo[0].taskCount = data.taskCount ?? 0;
+        projectsDemo[0].fileCount = data.fileCount ?? 0;
       }
     });
 
     projects.forEach((project) => {
       if (!project.timestamp) {
-        project.timestamp = new firestore.Timestamp(631152000, 0);
+        project.timestamp = new Timestamp(631152000, 0);
       }
       if (!project.created) {
         project.created = project.timestamp;
@@ -169,11 +181,10 @@ export async function getProjects(
     }
     callback(allProjects);
   } catch (error) {
-    console.error("Error fetching projects:", error);
+    console.error("Error fetching projects 24:", error);
     callback([]);
   }
 }
-// Modular Firestore API version
 
 export async function getAllProjects(callback: projectsRead) {
   const projects: IProject[] = [];
@@ -218,31 +229,30 @@ export async function getProjectUsers(
   projectId: string,
   callback: { (projectUsersDB: any): void; (arg0: IUser[]): void },
 ) {
-  const q1 = db.collection("projects").doc(projectId).collection("accessList");
-
-  const idSnapshot = await q1.get();
+  const accessListRef = collection(dbm, "projects", projectId, "accessList");
+  const accessListSnapshot = await getDocs(accessListRef);
   const idList: string[] = [];
-  idSnapshot.forEach((doc) => {
-    idList.push(doc.data().uid);
+  accessListSnapshot.forEach((docSnap) => {
+    idList.push(docSnap.data().uid);
   });
 
   const userList: IUser[] = [];
 
   if (idList.length > 0) {
-    const q2 = db.collection("users");
+    const usersRef = collection(dbm, "users");
+    const usersSnapshot = await getDocs(usersRef);
 
-    const usersSnapshot = await q2.get();
-
-    usersSnapshot.forEach((doc) => {
-      if (idList.includes(doc.id)) {
-        if (!doc.data().anonymous) {
+    usersSnapshot.forEach((docSnap) => {
+      if (idList.includes(docSnap.id)) {
+        const data = docSnap.data();
+        if (!data.anonymous) {
           userList.push({
-            uid: doc.id,
-            displayName: doc.data().displayName,
-            email: doc.data().email,
-            photoURL: doc.data().photoURL,
+            uid: docSnap.id,
+            displayName: data.displayName,
+            email: data.email,
+            photoURL: data.photoURL,
             project: projectId,
-            anonymous: doc.data().anonymous ? true : false,
+            anonymous: !!data.anonymous,
           });
         }
       }
@@ -251,17 +261,18 @@ export async function getProjectUsers(
 
   callback(userList);
 }
+
 export async function setStar(
   projectId: string,
   star: boolean,
   callback?: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    const ref = db.collection("projects").doc(projectId);
+    const ref = doc(dbm, "projects", projectId);
 
-    await ref.update({
+    await updateDoc(ref, {
       star: star,
-      timestamp: firestore.Timestamp.now(),
+      timestamp: Timestamp.now(),
     });
 
     if (callback) {
@@ -273,6 +284,7 @@ export async function setStar(
     console.error("Error setting star property: ", e);
   }
 }
+
 export async function updateProject(project: IProject, callback: any) {
   const ref = doc(dbm, "projects", project.key);
 
@@ -281,7 +293,7 @@ export async function updateProject(project: IProject, callback: any) {
     icon: project?.icon ?? stockHouseIcon,
     archived: project?.archived ?? false,
     private: project?.private || false,
-    timestamp: firestore.Timestamp.now(),
+    timestamp: Timestamp.now(),
   });
 
   callback(project.key);
@@ -291,13 +303,12 @@ export async function updateProjectTimestamp(project: IProject, callback: any) {
   const ref = doc(dbm, "projects", project.key);
 
   await updateDoc(ref, {
-    timestamp: firestore.Timestamp.now(),
+    timestamp: Timestamp.now(),
   });
 
   callback(project.key);
 }
-
-export function addProject(
+export async function addProject(
   project: IProject,
   user: IUser,
   callback: { (id: string): void; (arg0: string): void },
@@ -306,30 +317,27 @@ export function addProject(
     const projectId = generateProjectReference();
     console.log("Adding project: ", projectId, project, user);
 
-    //TODO: check the project refernce is not already in use (unlikely)
+    // TODO: check the project reference is not already in use (unlikely)
 
-    db.collection("projects")
-      .doc(projectId)
-      .set({
-        title: project.title,
-        icon: stockHouseIcon,
-        timestamp: firestore.Timestamp.now(),
-        archived: false,
-        postCount: 0,
-        fileCount: 0,
-        taskCount: 0,
-        private: project?.private || false,
-        created: firestore.Timestamp.now(),
-      })
-      .then(() => {
-        console.log("Project written with ID: ", projectId);
-        callback(projectId);
-      });
+    const projectRef = doc(dbm, "projects", projectId);
+
+    await setDoc(projectRef, {
+      title: project.title,
+      icon: stockHouseIcon,
+      timestamp: Timestamp.now(),
+      archived: false,
+      postCount: 0,
+      fileCount: 0,
+      taskCount: 0,
+      private: project?.private || false,
+      created: Timestamp.now(),
+    });
+
+    console.log("Project written with ID: ", projectId);
+    callback(projectId);
   } catch (e) {
     console.error("Error adding project: ", e);
   }
-
-  return;
 }
 
 //function to retrieve all projects from firebase and then add the user to the accessList for each project
@@ -362,21 +370,17 @@ export function archiveAllProjects(callback: any) {
 //this will be useful for cleaning up old projects that have been abandoned
 //this function should also delete all posts and comments associated with the project
 //this function should also delete all users from the accessList for the project
-
-export function deleteProject(project: IProject, callback: any) {
+export async function deleteProject(project: IProject, callback: any) {
   try {
-    const ref = db.collection("projects").doc(project.key);
+    const projectRef = doc(dbm, "projects", project.key);
 
-    ref.delete().then(() => {
-      callback(project.key);
-    });
+    await deleteDoc(projectRef);
+
+    callback(project.key);
   } catch (e) {
     console.error("Error deleting project: ", e);
   }
-
-  return;
 }
-
 export async function addProjectUser(
   projectId: string,
   user: IUser,
@@ -389,53 +393,51 @@ export async function addProjectUser(
   console.log("Adding user to project (After): ", projectId, user);
 
   try {
-    db.collection("projects")
-      .doc(projectId)
-      .collection("accessList")
-      .doc(user.uid)
-      .set(
-        {
-          uid: user.uid,
-          displayName: user.displayName,
-          timestamp: firestore.Timestamp.now(),
-          projectId: projectId,
-        },
-        { merge: true },
-      )
-      .then(() => {
-        if (callback) {
-          callback(projectId);
-        } else {
-          console.log("Callback not provided.");
-        }
-      });
+    const accessListRef = doc(
+      dbm,
+      "projects",
+      projectId,
+      "accessList",
+      user.uid,
+    );
+    await setDoc(
+      accessListRef,
+      {
+        uid: user.uid,
+        displayName: user.displayName,
+        timestamp: Timestamp.now(),
+        projectId: projectId,
+      },
+      { merge: true },
+    );
+    if (callback) {
+      callback(projectId);
+    } else {
+      console.log("Callback not provided.");
+    }
   } catch (e) {
     console.error("Error adding user to project: ", e);
   }
-
-  return;
 }
 
-export function deleteProjectUser(
+export async function deleteProjectUser(
   projectId: string,
   user: IUser,
   callback: { (id: string): void; (arg0: string): void },
 ) {
   try {
-    const docRef = db
-      .collection("projects")
-      .doc(projectId)
-      .collection("accessList")
-      .doc(user.uid);
-
-    docRef.delete().then(() => {
-      callback(user.uid);
-    });
+    const accessListRef = doc(
+      dbm,
+      "projects",
+      projectId,
+      "accessList",
+      user.uid,
+    );
+    await deleteDoc(accessListRef);
+    callback(user.uid);
   } catch (e) {
     console.error("Error deleting user from project: ", e);
   }
-
-  return;
 }
 
 const generateProjectReference = (): string => {

@@ -1,33 +1,45 @@
-import { auth, db, firestore } from "@/lib/firebase";
-import * as Crypto from "expo-crypto";
+import { auth, dbm, firestore, updateProfile } from "@/lib/firebase";
+import {
+  collection,
+  collectionGroup,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from "@react-native-firebase/firestore";
 import * as Device from "expo-device";
 import { IUser } from "./types";
 
 export async function getUser(uid: string) {
-  const q = firestore().collection("users").doc(uid);
-  const doc = await q.get();
+  const userDocRef = doc(dbm, "users", uid);
+  const docSnap = await getDoc(userDocRef);
 
-  if (!auth().currentUser) {
+  if (!auth.currentUser) {
     console.log(
       "getUser: no current auth() user, perhaps it was deleted: ",
-      auth().currentUser,
+      auth.currentUser,
     );
     return null;
   }
 
-  if (doc.exists) {
+  if (docSnap.exists()) {
+    const data = docSnap.data();
     const user: IUser = {
-      key: doc.id,
-      uid: doc.id,
-      displayName: doc.data()?.displayName,
-      email: doc.data()?.email?.toLowerCase(),
-      photoURL: doc.data()?.photoURL,
-      language: doc.data()?.language,
-      project: doc.data().project,
-      postCount: doc.data()?.postCount,
-      anonymous: auth().currentUser?.isAnonymous,
-      notifications: doc.data()?.notifications ?? false,
-      pushToken: doc.data()?.pushToken || "",
+      key: docSnap.id,
+      uid: docSnap.id,
+      displayName: data?.displayName,
+      email: data?.email?.toLowerCase(),
+      photoURL: data?.photoURL,
+      language: data?.language,
+      project: data?.project,
+      postCount: data?.postCount,
+      anonymous: auth.currentUser?.isAnonymous,
+      notifications: data?.notifications ?? false,
+      pushToken: data?.pushToken || "",
     };
 
     return user;
@@ -36,19 +48,21 @@ export async function getUser(uid: string) {
       "firestore user NOT found:",
       "creating user",
       uid,
-      auth().currentUser,
+      auth.currentUser,
     );
-    const newUser = await createUser({
+    const newUser: IUser = {
       uid: uid,
-      displayName: auth().currentUser.displayName || "anonymous",
-      email: auth().currentUser.email?.toLowerCase() || "anonymous",
+      displayName: auth.currentUser.displayName || "anonymous",
+      email: auth.currentUser.email?.toLowerCase() || "anonymous",
       photoURL: "",
       language: "en",
       project: "",
-      anonymous: auth().currentUser.isAnonymous,
-      created: firestore.Timestamp.now(),
+      anonymous: auth.currentUser.isAnonymous,
+      created: serverTimestamp(),
       pushToken: "",
-    });
+    };
+
+    await setDoc(userDocRef, newUser);
 
     return newUser;
   }
@@ -56,56 +70,57 @@ export async function getUser(uid: string) {
 
 export async function deleteUser(
   uid: string,
-  callback: { (user: IUser): void; (arg0: IUser): void },
+  callback: (user: IUser | null) => void,
 ) {
-  const q = firestore().collection("users").doc(uid);
+  const userDocRef = doc(dbm, "users", uid);
 
-  q.delete()
-    .then(() => {
-      callback(null);
-    })
-    .catch((error) => {
-      console.error("Error removing user: ", error);
-      callback(null);
-    });
+  try {
+    await deleteDoc(userDocRef);
+    callback(null);
+  } catch (error) {
+    console.error("Error removing user: ", error);
+    callback(null);
+  }
 
-  return () => q;
+  return () => userDocRef;
 }
-
 export async function createUser(user: IUser) {
   if (!user) {
     return null;
   }
 
-  const usersCollection = firestore().collection("users");
+  const usersCollectionRef = collection(dbm, "users");
 
   let querySnapshot;
 
   console.log("createUser >>>>:", user);
 
   if (user.email != undefined && user.email !== "") {
-    querySnapshot = await usersCollection
-      .where("email", "==", user.email.toLowerCase())
-      .get();
+    const q = query(
+      usersCollectionRef,
+      where("email", "==", user.email.toLowerCase()),
+    );
+    querySnapshot = await getDocs(q);
   } else {
-    querySnapshot = await usersCollection.where("uid", "==", user.uid).get();
+    const q = query(usersCollectionRef, where("uid", "==", user.uid));
+    querySnapshot = await getDocs(q);
   }
 
   if (!querySnapshot.empty) {
+    const docSnap = querySnapshot.docs[0];
     console.log("User already exists with email:", user.email);
-    user.key = querySnapshot.docs[0].id;
-    user.uid = querySnapshot.docs[0].id;
-    user.displayName = querySnapshot.docs[0].data().displayName;
-    user.photoURL = querySnapshot.docs[0].data().photoURL;
+    user.key = docSnap.id;
+    user.uid = docSnap.id;
+    user.displayName = docSnap.data().displayName;
+    user.photoURL = docSnap.data().photoURL;
     user.anonymous = false;
-    user.created = querySnapshot.docs[0].data().created;
+    user.created = docSnap.data().created;
     return user;
   } else {
     try {
-      const UUID = Crypto.randomUUID();
-      const userDoc = usersCollection.doc(user.uid);
-      user.created = firestore.Timestamp.now();
-      await userDoc.set(user);
+      user.created = serverTimestamp();
+      const userDocRef = doc(usersCollectionRef, user.uid);
+      await setDoc(userDocRef, user);
       console.log("User created successfully:", user.uid);
       return user;
     } catch (error) {
@@ -114,136 +129,134 @@ export async function createUser(user: IUser) {
     }
   }
 }
+// Modular API version
 
+// Update user document with merge, removing undefined fields
 export async function updateUser(user: IUser) {
+  // Remove undefined fields
   Object.keys(user).forEach((key) => {
     if (user[key] === undefined) {
       delete user[key];
     }
   });
-  const usersCollection = firestore().collection("users");
-  const userDoc = usersCollection.doc(user.uid);
-  await userDoc.set(user, { merge: true });
+  const userDocRef = doc(dbm, "users", user.uid);
+  await setDoc(userDocRef, user, { merge: true });
 }
+
+// Update account displayName and sync to Firestore
 export async function updateAccountName(uid: string, displayName: string) {
-  const docRef1 = firestore().collection("users").doc(uid);
-  const user = auth().currentUser;
+  const user = auth.currentUser;
 
   console.log("updateAccountName:", user, uid, displayName);
-  if (displayName == undefined || displayName == null) {
-    displayName = user.displayName;
+
+  if (!displayName) {
+    displayName = user?.displayName || "";
   }
 
   try {
-    await user.updateProfile({
-      displayName: displayName,
-    });
-
-    const doc = await docRef1.get();
-    const updateData: any = {
-      displayName: displayName,
-      email: auth().currentUser.email
-        ? auth().currentUser.email.toLocaleLowerCase()
-        : "",
-      photoURL: auth().currentUser.photoURL ? auth().currentUser.photoURL : "",
-      anonymous: auth().currentUser.isAnonymous,
-    };
-
-    if (!doc.exists) {
-      updateData.created = firestore.Timestamp.now();
+    if (user) {
+      await updateProfile(user, { displayName });
     }
 
-    await docRef1.set(updateData, { merge: true });
+    const userDocRef = doc(dbm, "users", uid);
+    const docSnap = await getDoc(userDocRef);
+
+    const updateData: any = {
+      displayName,
+      email: user?.email ? user.email.toLowerCase() : "",
+      photoURL: user?.photoURL || "",
+      anonymous: user?.isAnonymous,
+    };
+
+    if (!docSnap.exists()) {
+      updateData.created = new Date();
+    }
+
+    await setDoc(userDocRef, updateData, { merge: true });
   } catch (error) {
     console.log("updateAccountName update ERROR ", error);
   }
 }
-
-export const updateUserProjectCount = (uid: string, project: string) => {
-  if (uid === null || project == undefined) {
+export const updateUserProjectCount = async (uid: string, project: string) => {
+  if (!uid || !project) {
     return;
   }
 
-  const docRef = firestore().collection("projects").doc(project);
+  const projectDocRef = doc(dbm, "projects", project);
+  const userDocRef = doc(dbm, "users", uid);
+
   let count = 0;
-  docRef
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        if (typeof doc.data().postCount === "number") {
-          count = doc.data().postCount;
-        }
-      }
-    })
-    .then(() => {
-      firestore()
-        .collection("users")
-        .doc(uid)
-        .set(
-          {
-            project: project,
-            postCount: {
-              [project]: count,
-            },
-          },
-          { merge: true },
-        )
-        .then(() => {
-          //console.log("User's project count updated successfully!");
-        })
-        .catch((error) => {
-          console.log("Error updating user's project count:", error);
-        });
-    });
-};
+  const projectDocSnap = await getDoc(projectDocRef);
 
-export const updateAccountPhotoURL = (photoURL: string) => {
-  const a = auth().currentUser;
-  if (a) {
-    const docRef1 = firestore().collection("users").doc(a?.uid);
+  if (projectDocSnap.exists()) {
+    const data = projectDocSnap.data();
+    if (typeof data.postCount === "number") {
+      count = data.postCount;
+    }
+  }
 
-    const user = auth().currentUser;
-
-    user
-      .updateProfile({
-        photoURL: photoURL,
-      })
-      .then(() => {
-        docRef1.set(
-          {
-            photoURL: photoURL,
-            email: auth().currentUser.email.toLocaleLowerCase(),
-            displayName: auth().currentUser.displayName,
-          },
-          { merge: true },
-        );
-      })
-      .catch((error) => {
-        console.log("updateAccountPhotoURL update ERROR ", error);
-      });
+  try {
+    await setDoc(
+      userDocRef,
+      {
+        project: project,
+        postCount: {
+          [project]: count,
+        },
+      },
+      { merge: true },
+    );
+    //console.log("User's project count updated successfully!");
+  } catch (error) {
+    console.log("Error updating user's project count:", error);
   }
 };
+
+export async function updateAccountPhotoURL(photoURL: string) {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  try {
+    await updateProfile(user, { photoURL });
+
+    const userDocRef = doc(dbm, "users", user.uid);
+
+    await setDoc(
+      userDocRef,
+      {
+        photoURL,
+        email: user.email?.toLowerCase() || "",
+        displayName: user.displayName || "",
+      },
+      { merge: true },
+    );
+  } catch (error) {
+    console.log("updateAccountPhotoURL update ERROR ", error);
+  }
+}
 
 type usersRead = (users: IUser[]) => void;
 
 export async function getUsers(callback: usersRead) {
   const users: IUser[] = [];
 
-  const q = firestore().collection("users").orderBy("displayName", "asc");
+  const usersCollectionRef = collection(dbm, "users");
+  const q = query(usersCollectionRef /* You can add orderBy here if needed */);
 
-  const usersSnapshot = await q.get();
+  const usersSnapshot = await getDocs(q);
 
-  usersSnapshot.forEach((doc) => {
+  usersSnapshot.forEach((docSnap) => {
+    const data = docSnap.data();
     users.push({
-      key: doc.id,
-      uid: doc.id,
-      displayName: doc.data().displayName,
-      email: doc.data().email.toLowerCase(),
-      photoURL: doc.data().photoURL,
-      language: doc.data().language,
-      project: doc.data().project,
-      anonymous: doc.data().isAnonymous ?? false,
-      pushToken: doc.data().pushToken || "",
+      key: docSnap.id,
+      uid: docSnap.id,
+      displayName: data.displayName,
+      email: data.email?.toLowerCase(),
+      photoURL: data.photoURL,
+      language: data.language,
+      project: data.project,
+      anonymous: data.isAnonymous ?? false,
+      pushToken: data.pushToken || "",
     });
   });
 
@@ -251,37 +264,37 @@ export async function getUsers(callback: usersRead) {
 }
 
 type userProjectCountRead = (user: IUser) => void;
-
 export async function getUserProjectCount(
   uid: string,
   callback: userProjectCountRead,
 ) {
-  let user: IUser;
+  const userDocRef = doc(dbm, "users", uid);
+  const docSnap = await getDoc(userDocRef);
 
-  firestore()
-    .collection("users")
-    .doc(uid)
-    .get()
-    .then((doc) => {
-      user = {
-        key: doc.id,
-        uid: doc.id,
-        displayName: doc.data()?.displayName,
-        email: doc.data()?.email?.toLowerCase(),
-        photoURL: doc.data()?.photoURL,
-        postCount: doc.data()?.postCount,
-        language: doc.data()?.language,
-        project: doc.data()?.project,
-        anonymous: auth().currentUser.isAnonymous,
-        pushToken: doc.data()?.pushToken || "",
-      };
+  if (!docSnap.exists()) {
+    callback(null as any);
+    return;
+  }
 
-      callback(user);
-    });
+  const data = docSnap.data();
+  const user: IUser = {
+    key: docSnap.id,
+    uid: docSnap.id,
+    displayName: data?.displayName,
+    email: data?.email?.toLowerCase(),
+    photoURL: data?.photoURL,
+    postCount: data?.postCount,
+    language: data?.language,
+    project: data?.project,
+    anonymous: auth.currentUser?.isAnonymous,
+    pushToken: data?.pushToken || "",
+  };
+
+  callback(user);
 }
 
 //create an export function that accepts an old user and an a new user then it looks for all the records in the project accessList collection for the old user and updates them to the new user
-export const mergeUser = (oldUid: string, newUser: IUser) => {
+export const mergeUser_old = (oldUid: string, newUser: IUser) => {
   console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
   if (!oldUid || !newUser || !newUser.uid) {
     console.log("Invalid oldUid or newUser");
@@ -303,17 +316,57 @@ export const mergeUser = (oldUid: string, newUser: IUser) => {
     });
   });
 };
+// Export function to merge user accessList records using Firebase Modular API
 
+export const mergeUser = async (oldUid: string, newUser: IUser) => {
+  console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
+  if (!oldUid || !newUser || !newUser.uid) {
+    console.log("Invalid oldUid or newUser");
+    return;
+  }
+
+  // Query all accessList records for the old user
+  const accessListQuery = query(
+    collectionGroup(dbm, "accessList"),
+    where("uid", "==", oldUid),
+  );
+  const querySnapshot = await getDocs(accessListQuery);
+
+  for (const docSnap of querySnapshot.docs) {
+    const data = docSnap.data();
+    const projectId = data.projectId;
+    if (!projectId) continue;
+
+    const accessListDocRef = doc(
+      dbm,
+      "projects",
+      projectId,
+      "accessList",
+      newUser.uid,
+    );
+
+    await setDoc(
+      accessListDocRef,
+      {
+        displayName: newUser.displayName || "",
+        projectId: projectId,
+        timestamp: serverTimestamp(),
+        uid: newUser.uid,
+      },
+      { merge: true },
+    );
+  }
+};
 export async function updateAllUsersEmailToLowerCase() {
-  const usersCollection = firestore().collection("users");
-  const snapshot = await usersCollection.get();
+  const usersCollectionRef = collection(dbm, "users");
+  const snapshot = await getDocs(usersCollectionRef);
 
   const batch = firestore().batch();
 
-  snapshot.forEach((doc) => {
-    const userData = doc.data();
+  snapshot.forEach((docSnap) => {
+    const userData = docSnap.data();
     if (userData.email) {
-      batch.update(doc.ref, {
+      batch.update(docSnap.ref, {
         email: userData.email.toLowerCase(),
       });
     }
@@ -327,8 +380,8 @@ export async function updateAllUsersEmailToLowerCase() {
   }
 }
 
-export const updateUserPushToken = (uid: string, pushToken: string) => {
-  if (uid === null || pushToken == undefined || pushToken === "") {
+export const updateUserPushToken = async (uid: string, pushToken: string) => {
+  if (!uid || !pushToken) {
     return;
   }
 
@@ -337,42 +390,33 @@ export const updateUserPushToken = (uid: string, pushToken: string) => {
     return;
   }
 
-  firestore()
-    .collection("users")
-    .doc(uid)
-    .set(
-      {
-        pushToken: pushToken,
-      },
-      { merge: true },
-    )
-    .then(() => {
-      console.log("User's pushToken updated successfully!");
-    })
-    .catch((error) => {
-      console.log("Error updating user's pushToken:", error);
-    });
-};
+  const userDocRef = doc(dbm, "users", uid);
 
-//function to set the user lastLogin timestamp
-export const updateUserLastLogin = (uid: string) => {
-  if (uid === null) {
+  try {
+    await setDoc(userDocRef, { pushToken }, { merge: true });
+    console.log("User's pushToken updated successfully!");
+  } catch (error) {
+    console.log("Error updating user's pushToken:", error);
+  }
+};
+// Function to set the user's lastLogin timestamp using Modular API
+export const updateUserLastLogin = async (uid: string) => {
+  if (!uid) {
     return;
   }
 
-  firestore()
-    .collection("users")
-    .doc(uid)
-    .set(
+  const userDocRef = doc(dbm, "users", uid);
+
+  try {
+    await setDoc(
+      userDocRef,
       {
-        lastLogin: firestore.Timestamp.now(),
+        lastLogin: serverTimestamp(),
       },
       { merge: true },
-    )
-    .then(() => {
-      console.log("User's lastLogin updated successfully!");
-    })
-    .catch((error) => {
-      console.log("Error updating user's lastLogin:", error);
-    });
+    );
+    console.log("User's lastLogin updated successfully!");
+  } catch (error) {
+    console.log("Error updating user's lastLogin:", error);
+  }
 };

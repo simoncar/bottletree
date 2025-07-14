@@ -1,14 +1,12 @@
-globalThis.RNFB_MODULAR_DEPRECATION_STRICT_MODE === true;
-globalThis.RNFB_SILENCE_MODULAR_DEPRECATION_WARNINGS = true;
-
 import firebase from "@react-native-firebase/app";
-import auth from "@react-native-firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "@react-native-firebase/auth";
 import firestore, { getFirestore } from "@react-native-firebase/firestore";
-
-
 import * as Device from "expo-device";
 
-const db = firestore();
 const dbm = getFirestore();
 
 console.log("__DEV__: ", __DEV__);
@@ -22,5 +20,14 @@ if (!Device.isDevice) {
 }
 
 const uploadBytes = null;
+const auth = getAuth();
 
-export { auth, db, dbm, firebase, firestore,  uploadBytes };
+export {
+  auth,
+  dbm,
+  firebase,
+  firestore,
+  signInWithEmailAndPassword,
+  updateProfile,
+  uploadBytes,
+};

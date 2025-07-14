@@ -1,9 +1,9 @@
+import { updateAccountName, updateUser } from "@/lib/APIuser";
+import { auth, firestore, signInWithEmailAndPassword } from "@/lib/firebase";
+import { IUser } from "@/lib/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext } from "react";
 import { useStorageState } from "./useStorageState";
-import { auth, firestore } from "@/lib/firebase";
-import { IUser } from "@/lib/types";
-import { updateAccountName, updateUser } from "@/lib/APIuser";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
   session?: string | null;
@@ -68,7 +68,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const response = await auth().signInWithEmailAndPassword(email, password);
+      const response = await signInWithEmailAndPassword(auth, email, password);
       setSession(response.user.uid);
       //updateAccountName(response.user.uid, "");
 
@@ -176,7 +176,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
         signIn,
         signUp,
         signOut,
-      }}>
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
