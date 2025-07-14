@@ -72,6 +72,10 @@ export const Projects = ({ session, archived }: Props) => {
     }, []),
   );
 
+  const setStarDone = () => {
+    getProjects(session, archived, projectsRead);
+  };
+
   function findValueByKey(
     obj: Record<string, number>,
     keyToFind: string,
@@ -178,7 +182,7 @@ export const Projects = ({ session, archived }: Props) => {
         {data.key !== "demo" && (
           <TouchableOpacity
             onPress={() => {
-              setStar(data.key, !data.star);
+              setStar(data.key, !data.star, setStarDone);
             }}
           >
             <FontAwesome

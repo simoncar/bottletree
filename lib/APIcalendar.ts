@@ -129,7 +129,6 @@ export async function saveCalendarEvent(
   callback: (id: string | null) => void, // Allow null on error
 ) {
   try {
-    console.log("save CalendarEvent Modular 222", project, calendarEvent);
     const projectCalendarCollectionRef = collection(
       dbm,
       "projects",
