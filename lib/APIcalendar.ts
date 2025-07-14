@@ -9,7 +9,6 @@ import {
   onSnapshot,
   serverTimestamp,
   setDoc,
-  Timestamp, // Import Timestamp for type checking and creation
 } from "@react-native-firebase/firestore";
 import * as Calendar from "expo-calendar";
 import { Platform } from "react-native";
@@ -53,14 +52,12 @@ export async function getItemsBigCalendar(
 
       querySnapshot.forEach((documentSnapshot) => {
         const eventData = documentSnapshot.data();
-        const startDate =
-          eventData.dateBegin instanceof Timestamp
-            ? eventData.dateBegin.toDate()
-            : new Date();
-        const endDate =
-          eventData.dateEnd instanceof Timestamp
-            ? eventData.dateEnd.toDate()
-            : new Date();
+        const startDate = eventData.dateBegin
+          ? eventData.dateBegin.toDate()
+          : new Date();
+        const endDate = eventData.dateEnd
+          ? eventData.dateEnd.toDate()
+          : new Date();
 
         const data: ICalendarEvent = {
           key: documentSnapshot.id,
@@ -132,7 +129,7 @@ export async function saveCalendarEvent(
   callback: (id: string | null) => void, // Allow null on error
 ) {
   try {
-    console.log("save CalendarEvent Modular", project, calendarEvent);
+    console.log("save CalendarEvent Modular 222", project, calendarEvent);
     const projectCalendarCollectionRef = collection(
       dbm,
       "projects",
@@ -150,7 +147,7 @@ export async function saveCalendarEvent(
       uid: calendarEvent.uid,
       color: calendarEvent.color ? calendarEvent.color : "#30A7E2",
       colorName: calendarEvent.colorName ? calendarEvent.colorName : "Blue",
-      timestamp: serverTimestamp(), // Use serverTimestamp for consistency
+      timestamp: serverTimestamp(), // Add a timestamp for creation or modification,
     };
 
     if (calendarEvent.key == undefined) {
