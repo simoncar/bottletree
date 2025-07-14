@@ -1,5 +1,7 @@
 import firebase from "@react-native-firebase/app";
 import {
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   getAuth,
   signInWithEmailAndPassword,
   updateProfile,
@@ -24,7 +26,9 @@ const auth = getAuth();
 
 export {
   auth,
+  createUserWithEmailAndPassword,
   dbm,
+  fetchSignInMethodsForEmail,
   firebase,
   firestore,
   signInWithEmailAndPassword,

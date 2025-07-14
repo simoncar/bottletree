@@ -131,7 +131,7 @@ export const Projects = ({ session, archived }: Props) => {
 
     let postCountUser = findValueByKey(user?.postCount, data.key); // This will re-execute on state change
     const postCountDelta = data.postCount - postCountUser;
-    console.log("postCountDelta:", data.postCount, postCountUser);
+    //console.log("postCountDelta:", data.postCount, postCountUser);
 
     return (
       <View key={data.key} style={styles.outerView}>
@@ -151,7 +151,8 @@ export const Projects = ({ session, archived }: Props) => {
                 icon: data.icon,
               },
             });
-          }}>
+          }}
+        >
           <View style={styles.avatar}>
             <View style={styles.imageContainer}>
               {icon ? (
@@ -178,7 +179,8 @@ export const Projects = ({ session, archived }: Props) => {
           <TouchableOpacity
             onPress={() => {
               setStar(data.key, !data.star);
-            }}>
+            }}
+          >
             <FontAwesome
               name={data.star ? "star" : "star-o"}
               size={24}
@@ -197,7 +199,8 @@ export const Projects = ({ session, archived }: Props) => {
       style={[
         styles.container,
         { backgroundColor: Colors[colorScheme ?? "light"].background },
-      ]}>
+      ]}
+    >
       {loading === false && (
         <View>
           <ShortList data={projects} renderItem={renderRow} />
@@ -205,7 +208,8 @@ export const Projects = ({ session, archived }: Props) => {
             <View>
               <TouchableOpacity
                 onPress={() => setShowArchived(!showArchived)}
-                style={styles.collapsibleHeader}>
+                style={styles.collapsibleHeader}
+              >
                 <Text style={styles.collapsibleHeaderText}>
                   {t("archivedProjects")}
                 </Text>
