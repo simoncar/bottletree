@@ -6,6 +6,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  runTransaction,
   serverTimestamp,
 } from "@react-native-firebase/firestore";
 import storage, { getDownloadURL } from "@react-native-firebase/storage";
@@ -37,7 +38,7 @@ export async function deleteFile(
       key,
     );
 
-    await dbm.runTransaction(async (transaction) => {
+    await runTransaction(dbm, async (transaction) => {
       transaction.delete(docRef);
     });
 
