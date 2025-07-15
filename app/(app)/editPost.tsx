@@ -16,6 +16,7 @@ import { getPost, updatePost } from "@/lib/APIpost";
 import { IPost } from "@/lib/types";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Toast from "react-native-toast-message";
 
 export default function EditPost() {
   const colorScheme = useColorScheme();
@@ -48,6 +49,12 @@ export default function EditPost() {
 
   const progressCallback = (progress: number) => {
     console.log("progressCallback", progress);
+    Toast.show({
+      type: "success",
+      text1: "Uploading : " + progress + "%",
+      text2: "Your image is being uploaded",
+      position: "bottom",
+    });
   };
 
   const pickImage = async () => {
@@ -75,6 +82,11 @@ export default function EditPost() {
 
     setPost({ ...post, images: sourceDownloadURLarray });
     updatePost(post, saveComplete);
+    Toast.show({
+      type: "success",
+      text1: "Complete",
+      position: "bottom",
+    });
   };
 
   return (
@@ -86,7 +98,8 @@ export default function EditPost() {
               onPressIn={() => {
                 console.log("save");
                 save();
-              }}>
+              }}
+            >
               <Text>Done</Text>
             </TouchableOpacity>
           ),
@@ -99,7 +112,8 @@ export default function EditPost() {
               style={[
                 styles.label,
                 { color: Colors[colorScheme ?? "light"].textDisabledColor },
-              ]}>
+              ]}
+            >
               Title
             </Text>
             <TextInput
@@ -120,7 +134,8 @@ export default function EditPost() {
               style={[
                 styles.label,
                 { color: Colors[colorScheme ?? "light"].textDisabledColor },
-              ]}>
+              ]}
+            >
               External Link
             </Text>
             <TextInput
@@ -140,7 +155,8 @@ export default function EditPost() {
             onPress={() => {
               //onClose();
               pickImage();
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>Change Photos</Text>
             <MaterialIcons
               name="camera-roll"
