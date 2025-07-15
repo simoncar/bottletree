@@ -310,7 +310,7 @@ export const mergeUser_old = (oldUid: string, newUser: IUser) => {
         .add({
           displayName: newUser?.displayName || "",
           projectId: doc.data().projectId,
-          timestamp: firestore.Timestamp.now(),
+          timestamp: serverTimestamp(),
           uid: newUser.uid,
         });
     });
