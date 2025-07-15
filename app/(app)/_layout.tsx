@@ -7,6 +7,11 @@ import { UserContext } from "@/lib/UserContext";
 import { useAsyncStorageDevTools } from "@dev-plugins/async-storage";
 import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 
 import * as Localization from "expo-localization";
 import {
@@ -20,7 +25,7 @@ import {
 } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Platform,
@@ -65,10 +70,12 @@ function useNotificationObserver() {
 
     function redirect(notification: Notifications.Notification) {
       const url = notification.request.content.data?.url;
-      if (url) {
+      // First, check if url is a non-empty string
+      if (typeof url === "string" && url) {
         console.log("Inbound Notification Redirecting to: ", url);
 
-        router.push(url);
+        // Then, assert the type to satisfy router.push
+        router.push(url as `/${string}`);
       }
     }
     if (Platform.OS !== "web") {
@@ -111,21 +118,22 @@ export default function Layout() {
 
   dayjs.locale(Localization.getLocales()[0]?.languageCode || "en");
 
-  //   const myLightTheme = {
-  //     ...DefaultTheme,
-  //     colors: {
-  //       ...DefaultTheme.colors,
-  //       background: Colors[colorScheme ?? "light"].background,
-  //     },
-  //   };
+  const navigationTheme = useMemo(() => {
+    const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
+    const appColors = Colors[colorScheme ?? "light"];
 
-  //   const myDarkTheme = {
-  //     ...DarkTheme,
-  //     colors: {
-  //       ...DarkTheme.colors,
-  //       background: Colors[colorScheme ?? "light"].background,
-  //     },
-  //   };
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary: appColors.tint,
+        background: appColors.background,
+        card: appColors.postBackground,
+        text: appColors.text,
+        border: appColors.tintInactive,
+      },
+    };
+  }, [colorScheme]);
 
   const [fontsLoaded] = useFonts({
     Inter_100Thin,
@@ -219,143 +227,149 @@ export default function Layout() {
   }
 
   return (
-    <ActionSheetProvider>
-      <ProjectProvider>
-        <StatusBar style="auto" />
-        <Stack
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: Colors[colorScheme ?? "light"].background,
-            },
-          }}
-        >
-          <Stack.Screen
-            name="(tabs)"
-            options={{
-              title: "",
-              headerShown: false,
+    <ThemeProvider value={navigationTheme}>
+      <ActionSheetProvider>
+        <ProjectProvider>
+          <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+          <Stack
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: navigationTheme.colors.card,
+              },
+              headerTintColor: navigationTheme.colors.primary,
+              headerTitleStyle: {
+                color: navigationTheme.colors.text,
+              },
             }}
-          />
-          <Stack.Screen
-            name="index"
-            options={{
-              title: t("home"),
-              headerShown: true,
-            }}
-          />
-          <Stack.Screen
-            name="projectList"
-            options={{
-              presentation: "modal",
-              title: t("projects"),
-            }}
-          />
-          <Stack.Screen
-            name="share"
-            options={{
-              presentation: "modal",
-              title: t("share"),
-            }}
-          />
-          <Stack.Screen
-            name="projectListAdmin"
-            options={{
-              title: t("administration"),
-            }}
-          />
-          <Stack.Screen
-            name="userList"
-            options={{
-              presentation: "modal",
-              title: t("contacts"),
-            }}
-          />
-          <Stack.Screen
-            name="language"
-            options={{
-              title: t("language"),
-            }}
-          />
-          <Stack.Screen
-            name="editPost"
-            options={{
-              title: t("edit"),
-            }}
-          />
-          <Stack.Screen
-            name="viewPost"
-            options={{
-              title: "",
-            }}
-          />
-          <Stack.Screen
-            name="project/[project]"
-            options={{
-              title: t("project"),
-            }}
-          />
-          <Stack.Screen
-            name="project/add"
-            options={{
-              title: t("addProject"),
-            }}
-          />
-          <Stack.Screen
-            name="editCalendar"
-            options={{
-              title: t("addEvent"),
-            }}
-          />
-          <Stack.Screen
-            name="user/[uid]"
-            options={{
-              title: t("user"),
-            }}
-          />
-          <Stack.Screen
-            name="camera"
-            options={{
-              title: t("camera"),
-            }}
-          />
-          <Stack.Screen
-            name="house"
-            options={{
-              title: t("about"),
-            }}
-          />
-          <Stack.Screen
-            name="note"
-            options={{
-              title: t("addNote"),
-            }}
-          />
-          <Stack.Screen
-            name="log"
-            options={{
-              title: t("logs"),
-            }}
-          />
-          <Stack.Screen
-            name="task"
-            options={{
-              title: t("task"),
-            }}
-          />
-          <Stack.Screen
-            name="file"
-            options={{
-              title: t("file"),
-            }}
-          />
-          <Stack.Screen
-            name="calendarSync"
-            options={{
-              title: t("calendarSync"),
-            }}
-          />
-        </Stack>
-      </ProjectProvider>
-    </ActionSheetProvider>
+          >
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                title: "",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="index"
+              options={{
+                title: t("home"),
+                headerShown: true,
+              }}
+            />
+            <Stack.Screen
+              name="projectList"
+              options={{
+                presentation: "modal",
+                title: t("projects"),
+              }}
+            />
+            <Stack.Screen
+              name="share"
+              options={{
+                presentation: "modal",
+                title: t("share"),
+              }}
+            />
+            <Stack.Screen
+              name="projectListAdmin"
+              options={{
+                title: t("administration"),
+              }}
+            />
+            <Stack.Screen
+              name="userList"
+              options={{
+                presentation: "modal",
+                title: t("contacts"),
+              }}
+            />
+            <Stack.Screen
+              name="language"
+              options={{
+                title: t("language"),
+              }}
+            />
+            <Stack.Screen
+              name="editPost"
+              options={{
+                title: t("edit"),
+              }}
+            />
+            <Stack.Screen
+              name="viewPost"
+              options={{
+                title: "",
+              }}
+            />
+            <Stack.Screen
+              name="project/[project]"
+              options={{
+                title: t("project"),
+              }}
+            />
+            <Stack.Screen
+              name="project/add"
+              options={{
+                title: t("addProject"),
+              }}
+            />
+            <Stack.Screen
+              name="editCalendar"
+              options={{
+                title: t("addEvent"),
+              }}
+            />
+            <Stack.Screen
+              name="user/[uid]"
+              options={{
+                title: t("user"),
+              }}
+            />
+            <Stack.Screen
+              name="camera"
+              options={{
+                title: t("camera"),
+              }}
+            />
+            <Stack.Screen
+              name="house"
+              options={{
+                title: t("about"),
+              }}
+            />
+            <Stack.Screen
+              name="note"
+              options={{
+                title: t("addNote"),
+              }}
+            />
+            <Stack.Screen
+              name="log"
+              options={{
+                title: t("logs"),
+              }}
+            />
+            <Stack.Screen
+              name="task"
+              options={{
+                title: t("task"),
+              }}
+            />
+            <Stack.Screen
+              name="file"
+              options={{
+                title: t("file"),
+              }}
+            />
+            <Stack.Screen
+              name="calendarSync"
+              options={{
+                title: t("calendarSync"),
+              }}
+            />
+          </Stack>
+        </ProjectProvider>
+      </ActionSheetProvider>
+    </ThemeProvider>
   );
 }
