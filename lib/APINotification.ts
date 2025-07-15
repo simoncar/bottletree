@@ -5,6 +5,19 @@ import { Platform } from "react-native";
 import { updateUserPushToken } from "./APIuser";
 import { auth, firestore } from "./firebase";
 import { IPushToken } from "./types";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+} from "@react-native-firebase/firestore";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -32,7 +45,7 @@ export function setToken(
             pushToken: token.pushToken,
             uid: auth().currentUser?.uid,
             displayName: auth().currentUser?.displayName,
-            timestamp: firestore.Timestamp.now(),
+            timestamp: serverTimestamp(),
           },
           { merge: true },
         )

@@ -4,6 +4,19 @@ import { IUser } from "@/lib/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext } from "react";
 import { useStorageState } from "./useStorageState";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+} from "@react-native-firebase/firestore";
 
 interface AuthContextType {
   session?: string | null;
@@ -103,7 +116,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         photoURL: convertToString(""),
         project: "",
         anonymous: auth().currentUser.isAnonymous,
-        created: firestore.Timestamp.now(),
+        created: serverTimestamp(),
       };
 
       console.log("signUp user: ", user);

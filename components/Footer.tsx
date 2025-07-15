@@ -25,7 +25,7 @@ const Footer = ({ post, setCommentShow }: Props) => {
   const [footer, setFooter] = useState<boolean>(false);
 
   const saveDone = () => {
-    console.log("saveDone");
+    console.log("saveDone footer: delete ");
   };
 
   const askComment = () => {
@@ -86,7 +86,8 @@ const Footer = ({ post, setCommentShow }: Props) => {
               onPress={() => {
                 setFooter(!footer);
                 openEdit();
-              }}>
+              }}
+            >
               <View style={styles.actionRow}>
                 <Text style={styles.actionLeftText}>{t("edit")}</Text>
 
@@ -104,7 +105,8 @@ const Footer = ({ post, setCommentShow }: Props) => {
             <Pressable
               onPress={() => {
                 askComment();
-              }}>
+              }}
+            >
               <View style={styles.actionRow}>
                 <Text style={styles.actionLeftText}>{t("comment")}</Text>
                 <MaterialIcons
@@ -121,7 +123,8 @@ const Footer = ({ post, setCommentShow }: Props) => {
             <Pressable
               onPress={() => {
                 askDelete();
-              }}>
+              }}
+            >
               <View style={styles.actionRow}>
                 <Text style={[styles.actionLeftText, { color: "red" }]}>
                   {t("delete")}

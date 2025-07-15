@@ -1,4 +1,9 @@
-import { doc, setDoc, Timestamp } from "@react-native-firebase/firestore";
+import {
+  doc,
+  setDoc,
+  Timestamp,
+  serverTimestamp,
+} from "@react-native-firebase/firestore";
 
 import {
   auth,
@@ -94,7 +99,7 @@ export const demoData = async () => {
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FwhiteHouse.jpeg?alt=media&token=0e4f6f2d-2840-4fc3-9dac-9e3db41e6eb7",
         archived: false,
         postCount: 109,
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
       },
       { merge: true },
     );
@@ -104,7 +109,7 @@ export const demoData = async () => {
       {
         author: "John Doe",
         avatar: "https://",
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
         images: [
           "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202307%2F36442255-2444-4043-AFA8-57E171FC0559?alt=media&token=ff922597-1dec-4822-abd0-83750e40a865",
         ],
@@ -119,7 +124,7 @@ export const demoData = async () => {
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
         archived: false,
         postCount: 7,
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
       },
       { merge: true },
     );
@@ -129,7 +134,7 @@ export const demoData = async () => {
       {
         author: "John Doe",
         avatar: "https://",
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
         images: [
           "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202307%2F199D1629-236B-4A78-B2C6-D1C0A1689E8B?alt=media&token=a16d1ecc-dd20-4b99-a077-5cbb446d2a05",
           "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.05.53%20PM.png?alt=media&token=b776cb08-fc7e-4ac6-b01b-e2ff47920c76&_gl=1*cz9bbf*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQzMy4wLjAuMA..",
@@ -145,8 +150,8 @@ export const demoData = async () => {
         key: "file1111",
         filename: "House Plans version 1",
         url: "https://file.location/filename.txt",
-        created: Timestamp.now(),
-        modified: Timestamp.now(),
+        created: serverTimestamp(),
+        modified: serverTimestamp(),
         mimeType: "application/pdf",
         bytes: 5242880,
         projectId: "project7rovira",
@@ -160,8 +165,8 @@ export const demoData = async () => {
         key: "file1111",
         filename: "Bathroom Plans",
         url: "https://file.location/filename.txt",
-        created: Timestamp.now(),
-        modified: Timestamp.now(),
+        created: serverTimestamp(),
+        modified: serverTimestamp(),
         mimeType: "application/pdf",
         bytes: 6242880,
         projectId: "project7rovira",
@@ -175,8 +180,8 @@ export const demoData = async () => {
         key: "file1111",
         filename: "Certificate of Occupancy",
         url: "https://file.location/filename.txt",
-        created: Timestamp.now(),
-        modified: Timestamp.now(),
+        created: serverTimestamp(),
+        modified: serverTimestamp(),
         mimeType: "application/pdf",
         bytes: 6242880,
         projectId: "project7rovira",
@@ -191,7 +196,7 @@ export const demoData = async () => {
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
         archived: false,
         postCount: 7,
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
       },
       { merge: true },
     );
@@ -201,7 +206,7 @@ export const demoData = async () => {
       {
         author: "John Doe",
         avatar: "https://",
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
         images: [
           "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/posts%2F202307%2F199D1629-236B-4A78-B2C6-D1C0A1689E8B?alt=media&token=a16d1ecc-dd20-4b99-a077-5cbb446d2a05",
           "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Froof%2FScreenshot%202023-05-30%20at%202.05.53%20PM.png?alt=media&token=b776cb08-fc7e-4ac6-b01b-e2ff47920c76&_gl=1*cz9bbf*_ga*MTc3ODA4OTA3Ni4xNjg0MTQ0OTY0*_ga_CW55HF8NVT*MTY4NTQ0ODAzMC43LjEuMTY4NTQ0ODQzMy4wLjAuMA..",
@@ -233,7 +238,7 @@ export const demoData = async () => {
       {
         displayName: "Demo User",
         pushToken: "ExponentPushToken[vtgZnrL-rx5viXmTI19u0u]",
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
         uid: users[0].uid,
       },
       { merge: true },
@@ -244,7 +249,7 @@ export const demoData = async () => {
       {
         displayName: "Demo User iPad",
         pushToken: "ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]",
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
         uid: users[0].uid,
       },
       { merge: true },
@@ -294,7 +299,7 @@ async function newProjectUser(projectId: string, user: IUser) {
       uid: user.uid,
       displayName: user.displayName,
       projectId: projectId,
-      timestamp: Timestamp.now(),
+      timestamp: serverTimestamp(),
     },
     { merge: true },
   );

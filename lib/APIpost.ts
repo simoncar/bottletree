@@ -270,7 +270,14 @@ export async function addComment(
       post,
       "comments",
     );
-    const docRef = await addDoc(commentsCollection, comment);
+
+    // Ensure the timestamp is set on the server using the modular API
+    const commentData = {
+      ...comment,
+      timestamp: serverTimestamp(),
+    };
+
+    const docRef = await addDoc(commentsCollection, commentData);
     const newData = { key: docRef.id };
 
     const projectDocRef = doc(dbm, "projects", project);

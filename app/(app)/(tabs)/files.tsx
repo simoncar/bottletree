@@ -12,7 +12,6 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as DocumentPicker from "expo-document-picker";
 import { useLocalSearchParams } from "expo-router";
-import { Timestamp } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -32,6 +31,19 @@ import Reanimated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 import Toast from "react-native-toast-message";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+} from "@react-native-firebase/firestore";
 
 type SearchParams = {
   project: string; //project ID
@@ -165,7 +177,8 @@ export default function Files() {
         onPress={() => {
           //deleteProjectUser(project, data, deleteDone);
           row[index].close();
-        }}>
+        }}
+      >
         <AntDesign name="delete" size={25} color={"white"} />
         <Text style={{ color: "white" }}>Delete</Text>
       </Pressable>
@@ -180,7 +193,7 @@ export default function Files() {
   };
 
   const FileItem = ({ file, onPress }: FileItemProps) => {
-    const formattedDate = formatDate(file.modified ?? Timestamp.now());
+    const formattedDate = formatDate(file.modified ?? serverTimestamp());
 
     function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
       const styleAnimation = useAnimatedStyle(() => {
@@ -221,7 +234,8 @@ export default function Files() {
                 ],
                 { cancelable: true },
               );
-            }}>
+            }}
+          >
             <AntDesign name="delete" size={25} color={"white"} />
             <Text style={{ color: "white" }}>{t("delete")}</Text>
           </Pressable>
@@ -236,7 +250,8 @@ export default function Files() {
         rightThreshold={40}
         friction={2}
         onSwipeableOpen={() => closeRow(file.key)}
-        ref={(ref) => (row[file.key] = ref)}>
+        ref={(ref) => (row[file.key] = ref)}
+      >
         <TouchableOpacity style={styles.fileItem} onPress={() => onPress(file)}>
           <FileIcon file={file} />
           <View style={styles.fileInfo}>
@@ -289,7 +304,8 @@ export default function Files() {
               backgroundColor: Colors[colorScheme ?? "light"].postBackground,
               borderColor: Colors[colorScheme ?? "light"].postBackground,
             },
-          ]}>
+          ]}
+        >
           {/*
           <ShortList data={files} renderItem={renderItem} />
          */}

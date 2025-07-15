@@ -8,6 +8,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
 import { ParsedText, TextInput, View } from "./Themed";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+} from "@react-native-firebase/firestore";
 
 type Props = {
   project: string;
@@ -54,7 +67,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     const comment: IComment = {
       comment: text,
       displayName: user.displayName,
-      timestamp: firestore.Timestamp.now(),
+      timestamp: serverTimestamp(),
       uid: user.uid,
     };
 
@@ -77,7 +90,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
           placeholder={defaultComment}
           onFocus={() => {
             // setCommentShow(true);
-            console.log("onFocus");
+            console.log("onFocus renderInput PostComment");
           }}
           onChangeText={(text) => {
             setComment(text);
@@ -92,7 +105,8 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
           hitSlop={10}
           onPress={() => {
             save();
-          }}>
+          }}
+        >
           <MaterialIcons name="send" size={25} color="#f97316" />
         </Pressable>
       </View>
@@ -114,7 +128,8 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
         style={[
           styles.commentBubble,
           { backgroundColor: bubbleBackgroundColor },
-        ]}>
+        ]}
+      >
         <ParsedText
           selectable
           lightColor={bubbbleTextColor}

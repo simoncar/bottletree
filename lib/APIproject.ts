@@ -6,8 +6,9 @@ import {
   getDocs,
   onSnapshot,
   setDoc,
-  Timestamp,
+  serverTimestamp,
   updateDoc,
+  Timestamp,
 } from "@react-native-firebase/firestore";
 import { createUser } from "./APIuser";
 import { dbm } from "./firebase";
@@ -78,9 +79,9 @@ export async function getProjects(
     postCount: 0,
     fileCount: 0,
     taskCount: 0,
-    timestamp: Timestamp.now(),
+    timestamp: serverTimestamp(),
     private: false,
-    created: Timestamp.now(),
+    created: serverTimestamp(),
     star: false,
   };
 
@@ -157,7 +158,7 @@ export async function getProjects(
 
     projects.forEach((project) => {
       if (!project.timestamp) {
-        project.timestamp = new Timestamp(631152000, 0);
+        project.timestamp = serverTimestamp();
       }
       if (!project.created) {
         project.created = project.timestamp;
@@ -272,7 +273,7 @@ export async function setStar(
 
     await updateDoc(ref, {
       star: star,
-      timestamp: Timestamp.now(),
+      timestamp: serverTimestamp(),
     });
 
     if (callback) {
@@ -293,7 +294,7 @@ export async function updateProject(project: IProject, callback: any) {
     icon: project?.icon ?? stockHouseIcon,
     archived: project?.archived ?? false,
     private: project?.private || false,
-    timestamp: Timestamp.now(),
+    timestamp: serverTimestamp(),
   });
 
   callback(project.key);
@@ -303,7 +304,7 @@ export async function updateProjectTimestamp(project: IProject, callback: any) {
   const ref = doc(dbm, "projects", project.key);
 
   await updateDoc(ref, {
-    timestamp: Timestamp.now(),
+    timestamp: serverTimestamp(),
   });
 
   callback(project.key);
@@ -324,13 +325,13 @@ export async function addProject(
     await setDoc(projectRef, {
       title: project.title,
       icon: stockHouseIcon,
-      timestamp: Timestamp.now(),
+      timestamp: serverTimestamp(),
       archived: false,
       postCount: 0,
       fileCount: 0,
       taskCount: 0,
       private: project?.private || false,
-      created: Timestamp.now(),
+      created: serverTimestamp(),
     });
 
     console.log("Project written with ID: ", projectId);
@@ -405,7 +406,7 @@ export async function addProjectUser(
       {
         uid: user.uid,
         displayName: user.displayName,
-        timestamp: Timestamp.now(),
+        timestamp: serverTimestamp(),
         projectId: projectId,
       },
       { merge: true },

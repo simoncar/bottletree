@@ -9,7 +9,7 @@ import {
   getDocs,
   orderBy,
   query,
-  Timestamp,
+  serverTimestamp,
 } from "@react-native-firebase/firestore";
 
 // Update getLogs to use modular API
@@ -40,7 +40,7 @@ export async function getLogs(callback: logsRead) {
 
 // Update addLog to use modular API
 export async function addLog(log: ILog) {
-  log.timestamp = Timestamp.now();
+  log.timestamp = serverTimestamp();
   log.device =
     Device.manufacturer +
     " > " +
