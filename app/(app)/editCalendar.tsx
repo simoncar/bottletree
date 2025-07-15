@@ -201,7 +201,7 @@ export default function editCalendar() {
   };
 
   const renderDelete = () => {
-    if (calendarEvent.key == undefined) {
+    if (calendarEvent.key == undefined || calendarEvent.key === "") {
       return null;
     } else {
       return (
