@@ -126,9 +126,7 @@ export default function editCalendar() {
   };
 
   const deleteDone = () => {
-    router.navigate({
-      pathname: "/calendar",
-    });
+    router.back();
   };
 
   const doDelete = () => {
@@ -269,7 +267,8 @@ export default function editCalendar() {
             <TouchableOpacity
               onPressIn={() => {
                 save();
-              }}>
+              }}
+            >
               <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
@@ -292,7 +291,8 @@ export default function editCalendar() {
               onPress={() => {
                 console.log("color press:");
                 setShowColor(!showColor);
-              }}>
+              }}
+            >
               <View style={styles.itemView}>
                 <View style={styles.avatar}>
                   <View
@@ -330,7 +330,8 @@ export default function editCalendar() {
           <View style={styles.date}>
             <View style={{ flexDirection: "row", alignItems: "center" }}></View>
             <Pressable
-              onPress={() => showDatePicker("dateBegin", "date", dateBegin)}>
+              onPress={() => showDatePicker("dateBegin", "date", dateBegin)}
+            >
               <Text style={styles.textDate}>
                 {dateBegin.toLocaleDateString(locale, {
                   weekday: "short",
@@ -345,7 +346,8 @@ export default function editCalendar() {
             <Pressable
               onPress={() =>
                 showDatePicker("dateBeginTime", "time", dateBeginTime)
-              }>
+              }
+            >
               <Text style={styles.textDate}>
                 {dateBeginTime.toLocaleString(locale, {
                   hour12: true,
@@ -359,7 +361,8 @@ export default function editCalendar() {
           <View style={styles.avatar}></View>
           <View style={styles.date}>
             <Pressable
-              onPress={() => showDatePicker("dateEnd", "date", dateEnd)}>
+              onPress={() => showDatePicker("dateEnd", "date", dateEnd)}
+            >
               <Text style={styles.textDate}>
                 {dateEnd.toLocaleDateString(locale, {
                   weekday: "short",
@@ -372,9 +375,8 @@ export default function editCalendar() {
           </View>
           <View style={styles.right}>
             <Pressable
-              onPress={() =>
-                showDatePicker("dateEndTime", "time", dateEndTime)
-              }>
+              onPress={() => showDatePicker("dateEndTime", "time", dateEndTime)}
+            >
               <Text style={styles.textDate}>
                 {dateEndTime.toLocaleString(locale, {
                   hour12: true,
@@ -412,7 +414,8 @@ export default function editCalendar() {
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
-              style={styles.actionTitle}>
+              style={styles.actionTitle}
+            >
               {projectObj.title}
             </Text>
           </View>
