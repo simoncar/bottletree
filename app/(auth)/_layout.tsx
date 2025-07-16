@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Stack } from "expo-router";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 
 import { Back } from "@/components/Back";
 import { StatusBar } from "expo-status-bar";
@@ -10,8 +15,25 @@ import { UserProvider } from "@/lib/UserContext";
 export default function Layout() {
   const colorScheme = useColorScheme();
 
+  const navigationTheme = useMemo(() => {
+    const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
+    const appColors = Colors[colorScheme ?? "light"];
+
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary: appColors.tint,
+        background: appColors.background,
+        card: appColors.postBackground,
+        text: appColors.text,
+        border: appColors.tintInactive,
+      },
+    };
+  }, [colorScheme]);
 
   return (
+    <ThemeProvider value={navigationTheme}>
       <UserProvider>
         <StatusBar style="auto" />
         <Stack
@@ -21,7 +43,8 @@ export default function Layout() {
             },
             headerBackTitle: "",
             navigationBarColor: Colors[colorScheme ?? "light"].background,
-          }}>
+          }}
+        >
           <Stack.Screen
             name="signIn"
             options={{
@@ -42,5 +65,6 @@ export default function Layout() {
           />
         </Stack>
       </UserProvider>
+    </ThemeProvider>
   );
 }
