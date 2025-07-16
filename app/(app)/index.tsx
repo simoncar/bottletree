@@ -43,7 +43,8 @@ export default function Home() {
                 pathname: "/house",
                 params: { post: "" },
               })
-            }>
+            }
+          >
             <FontAwesome6
               name="hammer"
               size={24}
@@ -95,7 +96,8 @@ export default function Home() {
             <Pressable
               onPress={() => {
                 console.log("Projects");
-              }}>
+              }}
+            >
               <View style={styles.instructions}>
                 <Text style={styles.welcomeApp}>{t("projects")}</Text>
               </View>
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
   },
 
   instructions: {
-    alignItems: "flex-start",
+    alignItems: "center",
     paddingTop: 20,
   },
   logout: {
@@ -171,7 +173,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginBottom: 20,
     fontFamily: "Inter_700Bold",
-    width: "100%",
+    width: 300,
+    textAlign: "center",
   },
   containerFloatingButton: {
     position: "absolute",
