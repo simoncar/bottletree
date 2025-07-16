@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
 
   instructions: {
     alignItems: "center",
-    paddingTop: 20,
+    paddingTop: 0,
   },
   logout: {
     alignItems: "center",
@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    paddingTop: 10,
   },
   topPanelRight: {
     alignItems: "flex-end",
