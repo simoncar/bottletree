@@ -64,7 +64,7 @@ export function Logo(props: TextProps) {
 }
 
 export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+  const { style, lightColor, darkColor } = props;
   // const backgroundColor = useThemeColor(
   //   { light: lightColor, dark: darkColor },
   //   "background",
