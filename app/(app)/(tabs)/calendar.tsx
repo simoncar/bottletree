@@ -42,11 +42,11 @@ export default function CalendarLarge() {
   const navigation = useNavigation();
   const { t } = useTranslation();
 
-  const darkTheme = {
+  const calendarTheme = {
     palette: {
       primary: {
-        main: "#007bff",
-        contrastText: Colors[colorScheme ?? "light"].bigCalendarContrastText,
+        main: Colors[colorScheme ?? "light"].tint,
+        contrastText: Colors[colorScheme ?? "light"].background,
       },
       moreLabel: Colors[colorScheme ?? "light"].text,
       nowIndicator: "#d06184",
@@ -110,7 +110,8 @@ export default function CalendarLarge() {
     return (
       <TouchableOpacity {...restProps}>
         <View
-          style={[styles.calendarEvent, { backgroundColor: typedEvent.color }]}>
+          style={[styles.calendarEvent, { backgroundColor: typedEvent.color }]}
+        >
           <Text style={styles.calendarEventText}>{typedEvent.title}</Text>
         </View>
       </TouchableOpacity>
@@ -167,7 +168,8 @@ export default function CalendarLarge() {
                     params: { project: project },
                   });
                 }}
-                style={{ paddingRight: 10 }}>
+                style={{ paddingRight: 10 }}
+              >
                 <FontAwesome5
                   name="sync-alt"
                   size={16}
@@ -177,7 +179,8 @@ export default function CalendarLarge() {
               <TouchableOpacity
                 onPressIn={() => {
                   goToday();
-                }}>
+                }}
+              >
                 <Text style={{ paddingRight: 5 }}>{t("today")}</Text>
               </TouchableOpacity>
             </View>
@@ -198,7 +201,7 @@ export default function CalendarLarge() {
         mode="month"
         renderEvent={renderEvent}
         // @ts-ignore
-        theme={darkTheme}
+        theme={calendarTheme}
         eventCellStyle={styles.calendarCellStyle}
         // @ts-ignore
         date={calendarDate}

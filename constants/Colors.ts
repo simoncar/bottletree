@@ -43,7 +43,7 @@ export default {
     dotsActive: "#3265cb",
     bigCalendarBoxes: "#2d4150",
     bigCalendarDayNumberInactive: "#e9f0fd",
-    bigCalendarActive: "#3265cb",
+    bigCalendarActive: "#cb3256",
     bigCalendarContrastText: "#fff",
     skeletonBackground: "#2d4150",
     bubbleBackgroundColorMe: "#057EFD",
