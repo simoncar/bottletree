@@ -47,7 +47,7 @@ export async function deleteFile(
     console.error("Error deleting file from project: ", e);
   }
 }
-export async function getFiles(project: string, callback: filesRead) {
+export async function getFiles(project: string, callback) {
   const filesRef = collection(
     doc(collection(dbm, "projects"), project),
     "files",
