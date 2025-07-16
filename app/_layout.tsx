@@ -12,6 +12,10 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import Toast from "react-native-toast-message";
 
 
+const navigationIntegration = Sentry.reactNavigationIntegration({
+  enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
+});
+
 if (!__DEV__ && (Platform.OS === "android" || Platform.OS === "ios")) {
   Sentry.init({
     dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry.io/4506092928827392",
@@ -24,10 +28,6 @@ if (!__DEV__ && (Platform.OS === "android" || Platform.OS === "ios")) {
     enableNativeFramesTracking: !isRunningInExpoGo(), // Tracks slow and frozen frames in the application
   });
 }
-
-const navigationIntegration = Sentry.reactNavigationIntegration({
-  enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
-});
 
 
 console.log("/app/_layout.tsx , setup sentry and navigationIntegration");
