@@ -102,7 +102,6 @@ export async function getCalendarEvent(
       const eventData = docSnap.data();
       const calendarEvent: ICalendarEvent = {
         key: docSnap.id,
-        // Assuming dateBegin and dateEnd are stored as Firestore Timestamps
         dateBegin: eventData.dateBegin,
         dateEnd: eventData.dateEnd,
         color: eventData.color,

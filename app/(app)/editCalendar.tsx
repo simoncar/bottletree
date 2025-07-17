@@ -1,4 +1,14 @@
-import { firestore } from "@/lib/firebase";
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  runTransaction,
+  serverTimestamp,
+  Timestamp,
+} from "@react-native-firebase/firestore";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
@@ -27,6 +37,7 @@ import * as Localization from "expo-localization";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { t } from "i18next";
 
 type DisplayMode = "calendar" | "spinner" | "inline" | "compact" | "clock";
 type DateorTime = "date" | "time";
@@ -113,13 +124,12 @@ export default function editCalendar() {
 
     d1.setHours(dateBeginTime.getHours(), dateBeginTime.getMinutes(), 0, 0);
     d2.setHours(dateEndTime.getHours(), dateEndTime.getMinutes(), 0, 0);
-
     saveCalendarEvent(
       project,
       {
         ...calendarEvent,
-        dateBegin: firestore.Timestamp.fromDate(d1),
-        dateEnd: firestore.Timestamp.fromDate(d2),
+        dateBegin: Timestamp.fromDate(d1),
+        dateEnd: Timestamp.fromDate(d2),
       },
       saveDone,
     );
@@ -156,14 +166,14 @@ export default function editCalendar() {
     setDateBegin(currentDate);
     setCalendarEvent({
       ...calendarEvent,
-      dateBegin: firestore.Timestamp.fromDate(currentDate),
+      dateBegin: Timestamp.fromDate(currentDate),
     });
 
     if (selectedDate > dateEnd) {
       setDateEnd(currentDate);
       setCalendarEvent({
         ...calendarEvent,
-        dateEnd: firestore.Timestamp.fromDate(currentDate),
+        dateEnd: Timestamp.fromDate(currentDate),
       });
     }
     hideDatePicker();
@@ -179,13 +189,13 @@ export default function editCalendar() {
     setDateEnd(currentDate);
     setCalendarEvent({
       ...calendarEvent,
-      dateEnd: firestore.Timestamp.fromDate(currentDate),
+      dateEnd: Timestamp.fromDate(currentDate),
     });
     if (currentDate < dateBegin) {
       setDateBegin(currentDate);
       setCalendarEvent({
         ...calendarEvent,
-        dateBegin: firestore.Timestamp.fromDate(currentDate),
+        dateBegin: Timestamp.fromDate(currentDate),
       });
     }
   };

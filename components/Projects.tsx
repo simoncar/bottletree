@@ -66,9 +66,7 @@ export const Projects = ({ session, archived }: Props) => {
       getProjects(session, archived, projectsRead);
 
       // Return function is invoked whenever the route gets out of focus.
-      return () => {
-        console.log("This route is now unfocused.");
-      };
+      return () => {};
     }, []),
   );
 
