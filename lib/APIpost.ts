@@ -13,6 +13,7 @@ import {
 } from "@react-native-firebase/firestore";
 import { dbm } from "./firebase";
 import { IComment, IPost } from "./types";
+import { parseImages } from "@/lib/util";
 
 export async function getPost(
   project: string,
@@ -155,43 +156,8 @@ export async function deletePost(post: IPost, callback: any) {
   callback(post.key);
 }
 
-function containsAsteriskBeforeHttp(str) {
-  const httpIndex = str.indexOf("http");
-  if (httpIndex === -1) {
-    return false; // "http" not found in the string
-  }
 
-  const substringBeforeHttp = str.substring(0, httpIndex);
-  return substringBeforeHttp.includes("*");
-}
 
-function splitOnFirst(str, character) {
-  const index = str.indexOf(character);
-
-  if (index === -1) {
-    return [str]; // The character is not found, return the original string in an array
-  }
-
-  return [str.substring(0, index), str.substring(index + 1)];
-}
-
-export function parseImages(images: string[]) {
-  const parsedImages: { ratio: number; url: string }[] = [];
-
-  if (images === undefined || images.length === 0) {
-    return [];
-  }
-  images.forEach((image) => {
-    if (containsAsteriskBeforeHttp(image)) {
-      const parts = splitOnFirst(image, "*");
-      parsedImages.push({ ratio: Number(parts[0]), url: parts[1] });
-    } else {
-      parsedImages.push({ ratio: 1, url: image });
-    }
-  });
-
-  return parsedImages;
-}
 
 export async function getPosts(
   project: string | null | undefined,

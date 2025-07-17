@@ -149,9 +149,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "#CED0CE",
     borderRadius: 12,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     flexDirection: "row",
     paddingHorizontal: 14,
+    paddingVertical: 5,
   },
   updateContainer: {
     padding: 30,

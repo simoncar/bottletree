@@ -1,5 +1,11 @@
 import firebase, { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+  updateProfile,
+} from "firebase/auth";
 import "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -29,5 +35,8 @@ export {
   firestore,
   storage,
   uploadBytes,
+  updateProfile,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
 };

@@ -28,7 +28,7 @@ export default function EditPost() {
       getPost(local?.projectId || "", local?.postId || "", (post) => {
         if (post) {
           setPost(post);
-          console.log("post", post);
+          console.log("Edit Post", post);
         }
       });
     }
@@ -96,7 +96,6 @@ export default function EditPost() {
           headerRight: () => (
             <TouchableOpacity
               onPressIn={() => {
-                console.log("save");
                 save();
               }}
             >
