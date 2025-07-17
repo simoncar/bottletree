@@ -13,18 +13,16 @@ import { ITask } from "./types";
 type tasksRead = (tasks: ITask[]) => void;
 
 export async function getTasks(project: string, callback: tasksRead) {
-  const tasks: ITask[] = [];
-
   const tasksCollection = collection(
     doc(collection(dbm, "projects"), project),
     "tasks",
   );
 
   const unsubscribe = onSnapshot(tasksCollection, (querySnapshot) => {
-    tasks.length = 0; // Clear the array
+    const allTasks: ITask[] = [];
     querySnapshot?.forEach((docSnap) => {
       const data = docSnap.data();
-      const taskData = {
+      allTasks.push({
         key: docSnap.id,
         task: data.task ?? "",
         description: data.description ?? "",
@@ -33,11 +31,24 @@ export async function getTasks(project: string, callback: tasksRead) {
         created: data.created,
         modified: data.modified,
         order: data.order ?? 1,
-      };
-      tasks.push(taskData);
+      });
     });
-    tasks.sort((a, b) => a.order - b.order);
-    callback(tasks);
+
+    const incompleteTasks = allTasks.filter((task) => !task.completed);
+    const completedTasks = allTasks.filter((task) => task.completed);
+
+    // Sort incomplete tasks by order
+    incompleteTasks.sort((a, b) => a.order - b.order);
+
+    // Sort completed tasks by modified date, descending
+    completedTasks.sort((a, b) => {
+      if (a.modified && b.modified) {
+        return b.modified.toMillis() - a.modified.toMillis();
+      }
+      return 0;
+    });
+
+    callback([...incompleteTasks, ...completedTasks]);
   });
   return () => unsubscribe();
 }
