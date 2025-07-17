@@ -121,7 +121,8 @@ export default function SignIn() {
                   email: email,
                 },
               });
-            }}>
+            }}
+          >
             <Text style={styles.forgotPassword}>
               {t("signInForgotPassword")}
             </Text>
