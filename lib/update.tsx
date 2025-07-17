@@ -113,7 +113,8 @@ export const Update = () => {
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         onPress={fetchandRunUpdatesAsync}
-        style={styles.updateButton}>
+        style={styles.updateButton}
+      >
         <View style={styles.iconContainer}>
           <MaterialIcons
             name="celebration"
@@ -150,20 +151,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
-    paddingHorizontal: 16,
-    padding: 8,
-    width: "100%",
+    paddingHorizontal: 14,
   },
   updateContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 12,
-    paddingBottom: 20,
-    width: "100%",
+    padding: 30,
   },
   updateText: {
     fontSize: 16,
-    marginBottom: 4,
   },
   spinner: {
     marginLeft: 10,

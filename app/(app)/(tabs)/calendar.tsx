@@ -44,12 +44,6 @@ export default function CalendarLarge() {
 
   const calendarTheme = {
     palette: {
-      primary: {
-        main: Colors[colorScheme ?? "light"].tint,
-        contrastText: Colors[colorScheme ?? "light"].background,
-      },
-      moreLabel: Colors[colorScheme ?? "light"].text,
-      nowIndicator: "#d06184",
       gray: {
         "100": "#333",
         "200": Colors[colorScheme ?? "light"].bigCalendarBoxes, //boxes around days
@@ -58,12 +52,6 @@ export default function CalendarLarge() {
         "800": Colors[colorScheme ?? "light"].bigCalendarDayNumberInactive, // day nuumber
       },
     },
-    typography: {
-      moreLabel: {
-        fontSize: 10,
-      },
-    },
-    eventCellOverlappings: "#d0c161",
   };
 
   const itemsRead = (calendarItemsDB) => {

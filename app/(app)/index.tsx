@@ -89,9 +89,7 @@ export default function Home() {
         </View>
         {renderTopPanel()}
         <ScrollView>
-          <View style={styles.updateContainer}>
-            <Update />
-          </View>
+          <Update />
           <View style={styles.container}>
             <Pressable
               onPress={() => {
@@ -167,9 +165,7 @@ const styles = StyleSheet.create({
   topPanelRight: {
     alignItems: "flex-end",
   },
-  updateContainer: {
-    paddingHorizontal: 16,
-  },
+  updateContainer: {},
   welcomeApp: {
     fontSize: 40,
     marginBottom: 20,
