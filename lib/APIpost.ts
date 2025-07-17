@@ -32,7 +32,7 @@ export async function getPost(
         projectTitle: data?.projectTitle,
         caption: data?.caption,
         author: data?.author,
-        images: data?.images,
+        images: parseImages(data?.images) ?? [],
         ratio: data?.ratio,
         timestamp: data?.timestamp,
         linkURL: data?.linkURL,
@@ -155,9 +155,6 @@ export async function deletePost(post: IPost, callback: any) {
   await deleteDoc(postRef);
   callback(post.key);
 }
-
-
-
 
 export async function getPosts(
   project: string | null | undefined,

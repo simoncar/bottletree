@@ -17,6 +17,7 @@ import { IPost } from "@/lib/types";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Toast from "react-native-toast-message";
+import { ImageGrid } from "@/components/Image";
 
 export default function EditPost() {
   const colorScheme = useColorScheme();
@@ -149,6 +150,9 @@ export default function EditPost() {
               numberOfLines={10}
             />
           </View>
+
+          <ImageGrid imageUrls={post.images} />
+
           <Pressable
             style={styles.option}
             onPress={() => {

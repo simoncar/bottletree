@@ -36,6 +36,18 @@ export function parseImages(images: string[]) {
   if (images === undefined || images.length === 0) {
     return [];
   }
+
+  //firstly check if the images are already parsed
+  if (
+    images[0] &&
+    typeof images[0] === "object" &&
+    "ratio" in images[0] &&
+    "url" in images[0]
+  ) {
+    return images; // Already parsed - this is the new format
+  }
+
+  //support for old format with asterisk before http
   images.forEach((image) => {
     if (containsAsteriskBeforeHttp(image)) {
       const parts = splitOnFirst(image, "*");
