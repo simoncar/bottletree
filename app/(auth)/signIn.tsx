@@ -173,7 +173,8 @@ const styles = StyleSheet.create({
     width: 300,
   },
   updateContainer: {
-    paddingHorizontal: 16,
+    width: "80%",
+    marginBottom: 20,
   },
   container: {
     alignItems: "center",
