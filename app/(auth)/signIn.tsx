@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
   },
   updateContainer: {
     width: "80%",
-    marginBottom: 20,
   },
   container: {
     alignItems: "center",
@@ -196,7 +195,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flexDirection: "row",
     height: 45,
-    marginBottom: 20,
+    marginBottom: 10,
     width: "80%",
   },
   topPanelCenter: {
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     marginTop: 80,
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   loginText: {
     fontSize: 18,
@@ -218,9 +217,8 @@ const styles = StyleSheet.create({
 
   notificationView: {
     alignItems: "center",
-    borderRadius: 5,
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: 5,
     width: "80%",
   },
   signInContainer: {
