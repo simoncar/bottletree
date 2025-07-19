@@ -52,7 +52,10 @@ export const addImageFromCameraRoll = async (
       const processedResults = await Promise.all(promises);
       completedCallback(processedResults);
     } catch (error) {
-      console.error("Error occurred during processing:", error);
+      console.error(
+        "Error occurred during processing addImageFromCameraRoll:",
+        error,
+      );
     }
   }
 };
@@ -139,7 +142,7 @@ async function processItemAsync(
                 console.log("File available at (WEB)", downloadURL);
                 console.log("dimensions", asset.height, asset.width);
                 const ratio = asset.height / asset.width;
-                resolve(ratio + "*" + downloadURL);
+                resolve({ ratio: ratio, url: downloadURL });
               });
             });
         });
@@ -175,7 +178,7 @@ async function processItemAsync(
               console.log("File available at", downloadURL);
               console.log("dimensions", asset.height, asset.width);
               const ratio = asset.height / asset.width;
-              resolve(ratio + "*" + downloadURL);
+              resolve({ ratio: ratio, url: downloadURL });
             });
           },
         );

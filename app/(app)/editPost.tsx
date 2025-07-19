@@ -71,14 +71,14 @@ export default function EditPost() {
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
-    let ratio = 0.66666;
-    sourceDownloadURLarray.map((element) => {
-      const myArray = element.split("*");
-      if (myArray[0] > ratio) {
-        ratio = myArray[0];
-      }
+    console.log("completedCallback", sourceDownloadURLarray);
 
-      return myArray;
+    //firstly check if the images are already parsed into an array with each element having a ratio and a URL.  if the ratio is not set, set it to 0.666
+    sourceDownloadURLarray.forEach((element) => {
+      if (!element.ratio) {
+        element.ratio = 0.666;
+      }
+      return sourceDownloadURLarray;
     });
 
     setPost({ ...post, images: sourceDownloadURLarray });
