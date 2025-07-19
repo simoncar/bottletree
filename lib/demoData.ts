@@ -254,39 +254,6 @@ export const demoData = async () => {
       },
       { merge: true },
     );
-
-    await setDoc(
-      doc(dbm, "calendar", "calendar22222222"),
-      {
-        description:
-          "A. Here is the details of the installer https://kitchen.com or give them a call",
-        title: "Install the Kitchen",
-        dateBegin: Timestamp.fromDate(new Date()),
-        dateEnd: Timestamp.fromDate(new Date()),
-        uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-        projectId: "project7rovira",
-      },
-      { merge: true },
-    );
-
-    const date = new Date();
-    date.setDate(date.getDate() + 3);
-    date.setMinutes(50);
-    date.setHours(16);
-
-    await setDoc(
-      doc(dbm, "calendar", "calendar22222222"),
-      {
-        description:
-          "B. Will use quality paint from Bunnings color code Cool Grey (#8D99AE)",
-        title: "Paint the walls",
-        dateBegin: Timestamp.fromDate(new Date()),
-        dateEnd: Timestamp.fromDate(date),
-        uid: "3whGasgLCJbo3NUMt19dE8D6DmV2",
-        projectId: "project106joli",
-      },
-      { merge: true },
-    );
   } catch (e) {
     console.error("Error adding document: ", e);
   }
