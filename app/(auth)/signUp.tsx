@@ -22,7 +22,7 @@ export default function SignIn() {
   const { signUp } = useSession();
   const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
-  const oldUid = auth().currentUser?.uid;
+  const oldUid = auth.currentUser?.uid;
   const { t } = useTranslation();
 
   const signUpCallback = async (user, error) => {
