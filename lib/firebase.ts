@@ -5,6 +5,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   updateProfile,
+  signInAnonymously,
+	sendPasswordResetEmail,
+  signOut,	
 } from "@react-native-firebase/auth";
 import firestore, { getFirestore } from "@react-native-firebase/firestore";
 import * as Device from "expo-device";
@@ -37,6 +40,7 @@ if (!Device.isDevice) {
 export {
   auth,
   createUserWithEmailAndPassword,
+  signInAnonymously,
   dbm,
   fetchSignInMethodsForEmail,
   firebase,
@@ -44,4 +48,6 @@ export {
   signInWithEmailAndPassword,
   updateProfile,
   uploadBytes,
+  sendPasswordResetEmail,
+  signOut,
 };

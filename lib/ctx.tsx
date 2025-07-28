@@ -1,5 +1,13 @@
 import { updateAccountName, updateUser } from "@/lib/APIuser";
-import { auth, firestore, signInWithEmailAndPassword } from "@/lib/firebase";
+import {
+  auth,
+  firestore,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInAnonymously,
+  sendPasswordResetEmail,
+  signOut as firebaseSignOut,
+} from "@/lib/firebase";
 import { IUser } from "@/lib/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext } from "react";
@@ -59,11 +67,11 @@ export function useSession() {
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isAuthLoading, session], setSession] = useStorageState("session");
 
-  const signInAnonymously = async (
+  const handleSignInAnonymously = async (
     callback: (session, message: string) => void,
   ) => {
     try {
-      const response = await auth().signInAnonymously();
+      const response = await signInAnonymously(auth);
       await setSession(response.user.uid);
       updateAccountName(response.user.uid, "");
       console.log(
@@ -102,7 +110,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
     console.log("signUp email: ", email);
 
     try {
-      const response = await auth().createUserWithEmailAndPassword(
+      const response = await createUserWithEmailAndPassword(
+        auth,
         email,
         password,
       );
@@ -110,12 +119,12 @@ export function SessionProvider(props: React.PropsWithChildren) {
       setSession(response.user.uid);
 
       const user: IUser = {
-        uid: auth().currentUser.uid,
+        uid: auth.currentUser.uid,
         email: email,
         displayName: convertToString(name),
         photoURL: convertToString(""),
         project: "",
-        anonymous: auth().currentUser.isAnonymous,
+        anonymous: auth.currentUser.isAnonymous,
         created: serverTimestamp(),
       };
 
@@ -134,8 +143,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const signOut = async () => {
     try {
       setSession(null);
-      if (auth().currentUser) {
-        await auth().signOut();
+      if (auth.currentUser) {
+        await firebaseSignOut(auth);
       }
       await AsyncStorage.clear();
       console.log("AsyncStorage cleared");
@@ -145,8 +154,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
   };
 
   const resetPassword = (screenEmail: string, callback: any) => {
-    auth()
-      .sendPasswordResetEmail(screenEmail)
+    sendPasswordResetEmail(auth, screenEmail)
       .then(() => callback("Password reset email sent.  Check your inbox."))
       .catch((error) => {
         const errorMessage = error.message;
@@ -157,7 +165,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
   };
 
   const deleteAccount = async (callback: any) => {
-    const user = auth().currentUser;
+    const user = auth.currentUser;
 
     user
       .delete()
@@ -185,7 +193,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         session,
         resetPassword,
         deleteAccount,
-        signInAnonymously,
+        signInAnonymously: handleSignInAnonymously,
         signIn,
         signUp,
         signOut,

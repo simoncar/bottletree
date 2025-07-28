@@ -69,9 +69,11 @@ export default function editProject() {
     if (project.archived) {
       router.push("/");
     } else {
-      router.back();
+      router.push({
+        pathname: "/[posts]",
+        params: { posts: project.key },
+      });
     }
-    router.back();
   };
 
   const toggleArchive = () => {
@@ -144,7 +146,8 @@ export default function editProject() {
         <TouchableOpacity
           onPress={() => {
             openActionSheet();
-          }}>
+          }}
+        >
           {project.icon ? (
             <Image style={styles.profilePhoto} source={project.icon} />
           ) : (
@@ -170,9 +173,10 @@ export default function editProject() {
           headerRight: () => (
             <TouchableOpacity
               onPressIn={() => {
-                console.log("save");
+                console.log("save headerRight [project]", project);
                 updateProject(project, saveDone);
-              }}>
+              }}
+            >
               <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),

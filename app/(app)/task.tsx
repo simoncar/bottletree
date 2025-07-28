@@ -40,7 +40,8 @@ export default function TaskScreen() {
             <TouchableOpacity
               onPressIn={() => {
                 save();
-              }}>
+              }}
+            >
               <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
@@ -55,8 +56,9 @@ export default function TaskScreen() {
             placeholder={t("task")}
             value={taskObj.task}
             autoFocus={true}
-            multiline={true}
-            numberOfLines={10}
+            onSubmitEditing={save}
+            blurOnSubmit={true}
+            returnKeyType="done"
           />
         </View>
         <View style={[styles.itemView, styles.line]}>

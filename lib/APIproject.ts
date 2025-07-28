@@ -288,6 +288,7 @@ export async function setStar(
 
 export async function updateProject(project: IProject, callback: any) {
   const ref = doc(dbm, "projects", project.key);
+  console.log("updateProject Begin - ref: ", ref, project);
 
   await updateDoc(ref, {
     title: project.title,
@@ -296,6 +297,8 @@ export async function updateProject(project: IProject, callback: any) {
     private: project?.private || false,
     timestamp: serverTimestamp(),
   });
+
+  console.log("updateProject End - ref: ", ref, project);
 
   callback(project.key);
 }
