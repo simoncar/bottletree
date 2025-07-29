@@ -84,16 +84,15 @@ export default function EditProject() {
   };
 
   const completedCallback = (sourceDownloadURLarray) => {
-    let ratio = 0.66666;
-    const downloadURLarray = sourceDownloadURLarray.map((element) => {
-      const myArray = element.split("*");
-      if (myArray[0] > ratio) {
-        ratio = myArray[0];
+    //firstly check if the images are already parsed into an array with each element having a ratio and a URL.  if the ratio is not set, set it to 0.666
+    sourceDownloadURLarray.forEach((element) => {
+      if (!element.ratio) {
+        element.ratio = 0.666;
       }
-      return myArray[1];
+      return sourceDownloadURLarray;
     });
 
-    setProject({ ...project, icon: downloadURLarray[0] });
+    setProject({ ...project, icon: sourceDownloadURLarray[0].url });
     setProgress(0);
   };
 
