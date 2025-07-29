@@ -34,7 +34,7 @@ import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 import { useTranslation } from "react-i18next";
 
-export default function editUser() {
+export default function EditUser() {
   const { session, signOut } = useSession();
   const { user, setUser } = useContext(UserContext);
   const [progress, setProgress] = useState(0);
