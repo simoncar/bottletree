@@ -22,7 +22,18 @@ module.exports = defineConfig([
 			"react-native/no-raw-text": 2,
 			"react-native/no-single-element-style-arrays": 2,
 			"@typescript-eslint/explicit-function-return-type": "warn",
-			"@typescript-eslint/no-unused-vars": "off"
+			"@typescript-eslint/no-unused-vars": "off",
+			// Import sorting
+			'import/order': ['error', {
+			'groups': ['builtin', 'external', 'internal'],
+			'pathGroups': [
+				{ pattern: 'react', group: 'external', position: 'before' },
+				{ pattern: 'expo**', group: 'external', position: 'before' },
+			],
+			'pathGroupsExcludedImportTypes': ['react'],
+			'newlines-between': 'always',
+			'alphabetize': { order: 'asc', caseInsensitive: true },
+			}],
 		},
 	}
 ]);
