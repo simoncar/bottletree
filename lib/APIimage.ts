@@ -80,12 +80,17 @@ export const addImageFromPhoto = async (
   }
 };
 
+interface ProcessedImageResult {
+  ratio: number;
+  url: string;
+}
+
 async function processItemAsync(
   folder: string,
   project: string,
   asset: ImageAsset,
   progressCallback: ProgressCallback,
-): Promise<string> {
+): Promise<ProcessedImageResult> {
   let imageUri = asset.uri;
   let compressedImage;
 
@@ -192,7 +197,6 @@ async function processItemAsync(
 
 function getStorageRef(folder: string, project: string) {
   const UUID = Crypto.randomUUID();
-  const d = new Date();
 
   const fileName = folder + "/" + project + "/images/" + UUID;
 
