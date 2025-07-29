@@ -64,9 +64,10 @@ export default function Note() {
           headerRight: () => (
             <TouchableOpacity
               onPressIn={() => {
-                console.log("save");
+                console.log("save note, touchableOpacity, header right");
                 save();
-              }}>
+              }}
+            >
               <Text>Done</Text>
             </TouchableOpacity>
           ),

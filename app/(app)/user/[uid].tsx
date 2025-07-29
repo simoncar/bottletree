@@ -46,7 +46,7 @@ export default function editUser() {
   const admins = ["simon@simon.co", "eddymitchell133@gmail.com"];
 
   const save = () => {
-    console.log("save");
+    console.log("save [uid]");
 
     updateAccountName(session, user.displayName);
     router.back();
@@ -113,7 +113,7 @@ export default function editUser() {
   const openActionSheet = async () => {
     console.log("openActionSheet");
 
-    const options = [t('pickFromCameraRoll'), t('delete'), t('cancel')];
+    const options = [t("pickFromCameraRoll"), t("delete"), t("cancel")];
     const destructiveButtonIndex = options.length - 2;
     const cancelButtonIndex = options.length - 1;
     showActionSheetWithOptions(
@@ -146,7 +146,8 @@ export default function editUser() {
         <TouchableOpacity
           onPress={() => {
             openActionSheet();
-          }}>
+          }}
+        >
           {user.photoURL ? (
             <Image style={styles.profilePhoto} source={user.photoURL} />
           ) : (
@@ -181,10 +182,11 @@ export default function editUser() {
           headerRight: () => (
             <TouchableOpacity
               onPressIn={() => {
-                console.log("save");
+                console.log("save , [uid], touchableOpacity");
                 save();
-              }}>
-              <Text>{t('done')}</Text>
+              }}
+            >
+              <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
         }}
@@ -198,7 +200,7 @@ export default function editUser() {
             <TextInput
               style={styles.project}
               onChangeText={(text) => setUser({ ...user, displayName: text })}
-              placeholder={t('yourName')}
+              placeholder={t("yourName")}
               value={user.displayName}
             />
           </View>
@@ -232,7 +234,8 @@ export default function editUser() {
             signOut();
             setUser(null);
             router.replace("/signIn");
-          }}>
+          }}
+        >
           <View style={styles.leftContent}>
             <MaterialIcons
               name="logout"
@@ -283,7 +286,8 @@ export default function editUser() {
           router.navigate({
             pathname: "/deleteAccount",
           })
-        }>
+        }
+      >
         <View style={styles.outerView}>
           <View style={styles.leftContent}>
             <FontAwesome5
