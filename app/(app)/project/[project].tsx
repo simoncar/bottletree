@@ -31,7 +31,7 @@ import { About } from "@/lib/about";
 import { useTranslation } from "react-i18next";
 import ShareLinkButton from "@/components/ShareLinkButton";
 
-export default function editProject() {
+export default function EditProject() {
   const [updateUsers, setUpdateUsers] = useState("");
   const [progress, setProgress] = useState(0);
   const { t } = useTranslation();

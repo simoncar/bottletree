@@ -6,13 +6,15 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signInAnonymously,
-	sendPasswordResetEmail,
-  signOut,	
+  sendPasswordResetEmail,
+  signOut,
+  connectAuthEmulator,
 } from "@react-native-firebase/auth";
-import firestore, { getFirestore } from "@react-native-firebase/firestore";
+import firestore, {
+  getFirestore,
+  connectFirestoreEmulator,
+} from "@react-native-firebase/firestore";
 import * as Device from "expo-device";
-import { connectFirestoreEmulator } from "@react-native-firebase/firestore";
-import { connectAuthEmulator } from "@react-native-firebase/auth";
 import {
   getStorage,
   connectStorageEmulator,
