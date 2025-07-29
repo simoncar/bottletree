@@ -16,8 +16,7 @@ import {
 } from "react-native";
 
 export const Update = () => {
-  const { currentlyRunning, isUpdateAvailable, isUpdatePending } =
-    Updates.useUpdates();
+  const { isUpdateAvailable, isUpdatePending } = Updates.useUpdates();
   const colorScheme = useColorScheme();
   const [showUpdate, setShowUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -41,11 +40,6 @@ export const Update = () => {
       useNativeDriver: true,
     }).start();
   };
-
-  // Show whether or not we are running embedded code or an update
-  const runTypeMessage = currentlyRunning.isEmbeddedLaunch
-    ? "Running code from Appp Store build"
-    : "Check for updates";
 
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
