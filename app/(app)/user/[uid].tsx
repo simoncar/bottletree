@@ -53,18 +53,16 @@ export default function EditUser() {
   };
 
   const completedCallback = (sourceDownloadURLarray: any[]) => {
-    let ratio = 0.66666;
-    const downloadURLarray = sourceDownloadURLarray.map((element) => {
-      const myArray = element.split("*");
-      if (myArray[0] > ratio) {
-        ratio = myArray[0];
+    //firstly check if the images are already parsed into an array with each element having a ratio and a URL.  if the ratio is not set, set it to 0.666
+    sourceDownloadURLarray.forEach((element) => {
+      if (!element.ratio) {
+        element.ratio = 0.666;
       }
-
-      return myArray[1];
+      return sourceDownloadURLarray;
     });
 
-    setUser({ ...user, photoURL: downloadURLarray[0] });
-    updateAccountPhotoURL(downloadURLarray[0]);
+    setUser({ ...user, photoURL: sourceDownloadURLarray[0].url });
+    updateAccountPhotoURL(sourceDownloadURLarray[0].url);
     setProgress(0);
   };
 
