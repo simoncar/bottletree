@@ -3,7 +3,6 @@ import {
   StyleSheet,
   useColorScheme,
   TouchableOpacity,
-  Button,
   View,
 } from "react-native";
 import Progress from "@/components/Progress";
@@ -23,15 +22,12 @@ import {
   updateAccountPhotoURL,
   updateUser,
 } from "@/lib/APIuser";
-import { About } from "@/lib/about";
-import { Update } from "@/lib/update";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { addImageFromCameraRoll } from "@/lib/APIimage";
 import { ScrollView } from "react-native-gesture-handler";
 import { demoData } from "@/lib/demoData";
 
 import { UserContext } from "@/lib/UserContext";
-import { Back } from "@/components/Back";
 import { useTranslation } from "react-i18next";
 
 export default function EditUser() {

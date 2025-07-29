@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Stack } from "expo-router";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "react-native";
@@ -8,7 +8,6 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 
-import { Back } from "@/components/Back";
 import { StatusBar } from "expo-status-bar";
 import { UserProvider } from "@/lib/UserContext";
 

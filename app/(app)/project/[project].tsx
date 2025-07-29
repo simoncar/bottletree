@@ -4,18 +4,12 @@ import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
-  Button,
   useColorScheme,
   Pressable,
-  Switch,
 } from "react-native";
 import { Text, TextInput, View } from "@/components/Themed";
 import Progress from "@/components/Progress";
-import {
-  updateProject,
-  getProject,
-  updateProjectTimestamp,
-} from "@/lib/APIproject";
+import { updateProject, getProject } from "@/lib/APIproject";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -25,8 +19,6 @@ import Colors from "@/constants/Colors";
 import { ProjectUsers } from "@/components/ProjectUsers";
 import { ScrollView } from "react-native-gesture-handler";
 import { IProject } from "@/lib/types";
-import { Back } from "@/components/Back";
-import SharePanel from "@/components/SharePanel";
 import { About } from "@/lib/about";
 import { useTranslation } from "react-i18next";
 import ShareLinkButton from "@/components/ShareLinkButton";
@@ -219,13 +211,13 @@ export default function EditProject() {
             </View>
             <View>
               <Text style={styles.archiveName}>
-                {project.archived == true
+                {project.archived === true
                   ? t("unarchiveProject")
                   : t("archiveProject")}
               </Text>
             </View>
           </Pressable>
-          {project.archived == true ? (
+          {project.archived === true ? (
             <Pressable style={styles.actionRow} onPress={deleteProject}>
               <View style={styles.avatar}>
                 <Ionicons
