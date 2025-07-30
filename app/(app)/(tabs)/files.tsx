@@ -43,6 +43,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  Timestamp,
 } from "@react-native-firebase/firestore";
 
 type SearchParams = {
@@ -193,7 +194,9 @@ export default function Files() {
   };
 
   const FileItem = ({ file, onPress }: FileItemProps) => {
-    const formattedDate = formatDate(file.modified ?? serverTimestamp());
+    const formattedDate = file.modified
+      ? formatDate(file.modified)
+      : t("justNow");
 
     function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
       const styleAnimation = useAnimatedStyle(() => {
@@ -279,9 +282,14 @@ export default function Files() {
     return `${size.toFixed(2)} PB`;
   }
 
-  function formatDate(timestamp: Timestamp) {
-    const date = timestamp.toDate();
-    return date.toLocaleDateString();
+  function formatDate(timestamp: Timestamp | any) {
+    // Check if timestamp has toDate (is a Timestamp)
+    if (timestamp && typeof timestamp.toDate === "function") {
+      const date = timestamp.toDate();
+      return date.toLocaleDateString();
+    }
+    // If it's not a Timestamp (e.g., FieldValue), return a fallback
+    return "";
   }
 
   const renderItemShortlist = (item: IFile) => (

@@ -7,6 +7,27 @@ module.exports = defineConfig([
   expoConfig,
   eslintPluginPrettierRecommended,
   {
-    ignores: ["dist/*"],
+    ignores: [
+      // Node
+      "node_modules/",
+      "npm-debug.log*",
+      "yarn-debug.log*",
+      "yarn-error.log*",
+
+      // Expo
+      ".expo/",
+      ".expo-shared/",
+
+      // Build
+      "dist/",
+      "build/",
+      "web-build/",
+      "android/",
+      "ios/",
+
+      // Misc
+      "coverage/",
+      ".env*",
+    ],
   },
 ]);

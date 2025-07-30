@@ -17,6 +17,8 @@ import {
   TouchableOpacity,
   useColorScheme,
 } from "react-native";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
 
 const ModalScreen = (props) => {
   const { page } = useLocalSearchParams<{
@@ -50,6 +52,17 @@ const ModalScreen = (props) => {
   const saveDoneAll = () => {
     console.log("saveDoneAll - push to home");
     Alert.alert("Operation Complete");
+  };
+
+  const saveFile = async () => {
+    const fileUri = FileSystem.documentDirectory + "test.txt";
+    await FileSystem.writeAsStringAsync(fileUri, "Hello, world!");
+
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(fileUri);
+    } else {
+      console.warn("Sharing not available");
+    }
   };
 
   const askArchiveAll = () => {
@@ -91,7 +104,8 @@ const ModalScreen = (props) => {
               <Text
                 numberOfLines={2}
                 ellipsizeMode="tail"
-                style={styles.project}>
+                style={styles.project}
+              >
                 View Log
               </Text>
               <Text style={styles.projectId}>{""}</Text>
@@ -111,19 +125,22 @@ const ModalScreen = (props) => {
           key={"archiveAll"}
           onPress={() => {
             askArchiveAll();
-          }}>
+          }}
+        >
           <Text
             style={[
               styles.project,
               { color: Colors[colorScheme ?? "light"].background },
-            ]}>
+            ]}
+          >
             Archive All Projects with 0 Posts
           </Text>
           <Text
             style={[
               styles.project,
               { color: Colors[colorScheme ?? "light"].background },
-            ]}>
+            ]}
+          >
             (Data Cleanup)
           </Text>
         </TouchableOpacity>
@@ -131,30 +148,33 @@ const ModalScreen = (props) => {
     );
   }
 
-  function renderLowercase() {
+  function renderSaveFile() {
     if (!__DEV__) {
       return null;
     }
     return (
       <View style={styles.adminAllArchive}>
         <TouchableOpacity
-          key={"archiveAll"}
+          key={"saveFile"}
           onPress={() => {
-            updateAllUsersEmailToLowerCase();
-          }}>
+            saveFile();
+          }}
+        >
           <Text
             style={[
               styles.project,
               { color: Colors[colorScheme ?? "light"].background },
-            ]}>
-            Lowercase
+            ]}
+          >
+            Save File
           </Text>
           <Text
             style={[
               styles.project,
               { color: Colors[colorScheme ?? "light"].background },
-            ]}>
-            (Data Cleanup)
+            ]}
+          >
+            (save a text file to device)
           </Text>
         </TouchableOpacity>
       </View>
@@ -176,7 +196,8 @@ const ModalScreen = (props) => {
         <Text
           numberOfLines={2}
           ellipsizeMode="tail"
-          style={styles.projectArchived}>
+          style={styles.projectArchived}
+        >
           {data.title || ""} (Archived)
         </Text>
       );
@@ -207,7 +228,8 @@ const ModalScreen = (props) => {
                 archived: data.archived,
               },
             });
-          }}>
+          }}
+        >
           <View style={styles.avatar}>
             {icon ? (
               <Image style={styles.avatarFace} source={data.icon} />
@@ -231,6 +253,7 @@ const ModalScreen = (props) => {
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
         <View>{renderArchiveAll()}</View>
+        <View>{renderSaveFile()}</View>
         <View>{renderLog()}</View>
         {loading === false && (
           <View>
