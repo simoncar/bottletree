@@ -31,20 +31,7 @@ import Reanimated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 import Toast from "react-native-toast-message";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-  serverTimestamp,
-  setDoc,
-  Timestamp,
-} from "@react-native-firebase/firestore";
+import { Timestamp } from "@react-native-firebase/firestore";
 
 type SearchParams = {
   project: string; //project ID
@@ -67,9 +54,6 @@ export default function Files() {
       setLoading(false);
     });
   }, []);
-  const saveDone = () => {
-    console.log("Save done");
-  };
 
   const handleFilePress = (file: IFile) => {
     // router.push({
