@@ -74,12 +74,12 @@ export default function Files() {
         multiple: true,
       });
 
-      if (result.canceled != true) {
+      if (result.canceled !== true) {
         console.log("Selected files:", result);
 
         uploadFilesAndCreateEntries(result, project, user);
         Toast.show({
-          type: "success",
+          type: "info",
           text1: "File Adding",
           text2: "Your file is being added to the project",
           position: "bottom",
