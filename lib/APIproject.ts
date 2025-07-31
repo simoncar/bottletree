@@ -86,8 +86,8 @@ export async function getProjects(
   };
 
   try {
-    const query = collection(dbm, "projects");
-    const accessListQuery = collection(dbm, "projects");
+    //const query = collection(dbm, "projects");
+    //const accessListQuery = collection(dbm, "projects");
     // Use collectionGroup for "accessList"
     const accessListGroupQuery = collectionGroup(dbm, "accessList").where(
       "uid",

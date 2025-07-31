@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Pressable,
+  useColorScheme,
 } from "react-native";
 import { Text } from "@/components/Themed";
-import { useColorScheme } from "react-native";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import Colors from "@/constants/Colors";
 import { getPost, updatePost } from "@/lib/APIpost";

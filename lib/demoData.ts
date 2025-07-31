@@ -190,9 +190,9 @@ export const demoData = async () => {
     );
 
     await setDoc(
-      doc(dbm, "projects", "welcome"),
+      doc(dbm, "projects", "demo"),
       {
-        title: "Welcome Project",
+        title: "Demo",
         icon: "https://firebasestorage.googleapis.com/v0/b/builder-403d5.appspot.com/o/demo%2Fprofile%2FroviraSmall.jpg?alt=media&token=a9d67e04-7bef-475b-88f8-4a1f35117ddc",
         archived: false,
         postCount: 7,
@@ -202,7 +202,7 @@ export const demoData = async () => {
     );
 
     await setDoc(
-      doc(dbm, "projects/welcome/posts/welcomePost"),
+      doc(dbm, "projects/demo/posts/welcomePost"),
       {
         author: "John Doe",
         avatar: "https://",
@@ -221,10 +221,10 @@ export const demoData = async () => {
     await newProjectUser("project7rovira", users[2]);
     await newProjectUser("project7rovira", users[5]);
 
-    await newProjectUser("welcome", users[0]);
-    await newProjectUser("welcome", users[1]);
-    await newProjectUser("welcome", users[2]);
-    await newProjectUser("welcome", users[5]);
+    await newProjectUser("demo", users[0]);
+    await newProjectUser("demo", users[1]);
+    await newProjectUser("demo", users[2]);
+    await newProjectUser("demo", users[5]);
 
     await newProjectUser("project106joli", users[0]);
     await newProjectUser("project106joli", users[1]);

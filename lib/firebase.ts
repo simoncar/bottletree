@@ -27,14 +27,14 @@ const auth = getAuth();
 console.log("__DEV__: ", __DEV__);
 
 if (!Device.isDevice) {
-  //   console.log("Connecting to Firebase Emulator");
-  //   // Firestore modular API
-  //   connectFirestoreEmulator(dbm, "127.0.0.1", 8080);
-  //   // Auth modular API
-  //   connectAuthEmulator(auth, "http://localhost:9099");
-  //   // Storage modular API
-  //   const storage = getStorage();
-  //   connectStorageEmulator(storage, "127.0.0.1", 9199);
+  console.log("Connecting to Firebase Emulator");
+  // Firestore modular API
+  connectFirestoreEmulator(dbm, "127.0.0.1", 8080);
+  // Auth modular API
+  connectAuthEmulator(auth, "http://localhost:9099");
+  // Storage modular API
+  const storage = getStorage();
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
 }
 
 export {
