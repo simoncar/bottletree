@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Pressable,
-  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   useColorScheme,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ColorRow } from "@/components/ColorRow";
 import { Text, TextInput, View } from "@/components/Themed";

@@ -7,12 +7,8 @@ import Feather from "@expo/vector-icons/Feather";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TaskScreen() {
   const { task } = useLocalSearchParams<{ task: string }>();

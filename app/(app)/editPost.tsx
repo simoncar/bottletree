@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
   View,
   TextInput,
@@ -9,6 +8,7 @@ import {
   Pressable,
   useColorScheme,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "@/components/Themed";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import Colors from "@/constants/Colors";

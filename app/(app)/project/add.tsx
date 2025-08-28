@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Button, SafeAreaView } from "react-native";
+import { StyleSheet, Button } from "react-native";
 import { router, Stack } from "expo-router";
 import { TextInput } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
@@ -9,6 +9,7 @@ import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
 import { About } from "@/lib/about";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function addNewProject() {
   const { user } = useContext(UserContext);
@@ -66,13 +67,13 @@ export default function addNewProject() {
       <TextInput
         style={styles.input}
         onChangeText={(text) => onChangeText(text)}
-        placeholder={t('writeProjectName')}
+        placeholder={t("writeProjectName")}
         value={text}
         autoFocus={true}
         multiline
       />
       <Button
-        title={isSaving ? t('saving') : t('next')}
+        title={isSaving ? t("saving") : t("next")}
         onPress={async () => {
           if (isSaving) return;
           setIsSaving(true);
