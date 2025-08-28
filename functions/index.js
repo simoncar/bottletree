@@ -222,3 +222,55 @@ exports.onDocumentCreated_file = onDocumentWritten(
       );
   },
 );
+
+exports.updateAllowedUsers = onRequest(async (req, res) => {
+  try {
+    const db = getFirestore();
+    const projectsSnapshot = await db.collection("projects").get();
+
+    const updates = [];
+
+    for (const projectDoc of projectsSnapshot.docs) {
+      const projectId = projectDoc.id;
+      console.log(`Processing project: ${projectId}`);
+
+      const accessListSnapshot = await db
+        .collection("projects")
+        .doc(projectId)
+        .collection("accessList")
+        .get();
+
+      const allowedUsers = accessListSnapshot.docs
+        .map((doc) => doc.data().uid)
+        .filter((uid) => uid); // Filter out any null/undefined uids
+
+      if (allowedUsers.length > 0) {
+        updates.push(
+          db.collection("projects").doc(projectId).update({
+            allowedUsers: allowedUsers,
+          }),
+        );
+        console.log(
+          `Updating project ${projectId} with allowedUsers: ${allowedUsers}`,
+        );
+      } else {
+        console.log(`No accessList found for project ${projectId}, skipping.`);
+      }
+    }
+
+    await Promise.all(updates);
+    console.log(`Migration completed. Updated ${updates.length} projects.`);
+
+    res.json({
+      success: true,
+      message: `Migration completed. Updated ${updates.length} projects.`,
+    });
+  } catch (error) {
+    console.error("Error during migration:", error);
+    res.status(500).json({
+      success: false,
+      message: "Migration failed.",
+      error: error.message,
+    });
+  }
+});

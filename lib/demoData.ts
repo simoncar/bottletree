@@ -90,10 +90,12 @@ export const demoData = async () => {
   ];
 
   for (let i = 0; i < users.length; i++) {
-    users[i].uid = await createUser(users[i]);
+    //users[i].uid = await createUser(users[i]);
   }
 
   try {
+    console.log("Current user:", auth.currentUser?.uid);
+
     await setDoc(
       doc(dbm, "projects", "project106joli"),
       {
@@ -102,6 +104,8 @@ export const demoData = async () => {
         archived: false,
         postCount: 109,
         timestamp: serverTimestamp(),
+        owner: auth.currentUser?.uid,
+        allowedUsers: [auth.currentUser?.uid],
       },
       { merge: true },
     );
@@ -127,6 +131,8 @@ export const demoData = async () => {
         archived: false,
         postCount: 7,
         timestamp: serverTimestamp(),
+        owner: auth.currentUser?.uid,
+        allowedUsers: [auth.currentUser?.uid],
       },
       { merge: true },
     );
@@ -199,8 +205,8 @@ export const demoData = async () => {
         archived: false,
         postCount: 7,
         timestamp: serverTimestamp(),
-        allowedUsers: [users[0].uid, users[1].uid, users[2].uid, users[5].uid],
-        owner: users[0].uid,
+        allowedUsers: [auth.currentUser?.uid],
+        owner: auth.currentUser?.uid,
       },
       { merge: true },
     );
@@ -220,22 +226,25 @@ export const demoData = async () => {
       { merge: true },
     );
 
-    await newProjectUser("project7rovira", users[0]);
-    await newProjectUser("project7rovira", users[1]);
-    await newProjectUser("project7rovira", users[2]);
-    await newProjectUser("project7rovira", users[5]);
+    // await newProjectUser("project7rovira", users[0]);
+    // await newProjectUser("project7rovira", users[1]);
+    // await newProjectUser("project7rovira", users[2]);
+    // await newProjectUser("project7rovira", users[5]);
+    // await newProjectUser("project7rovira", users[5]);
 
-    await newProjectUser("demo", users[0]);
-    await newProjectUser("demo", users[1]);
-    await newProjectUser("demo", users[2]);
-    await newProjectUser("demo", users[5]);
+    // await newProjectUser("demo", users[0]);
+    // await newProjectUser("demo", users[1]);
+    // await newProjectUser("demo", users[2]);
+    // await newProjectUser("demo", users[5]);
+    // await newProjectUser("demo", users[5]);
 
-    await newProjectUser("project106joli", users[0]);
-    await newProjectUser("project106joli", users[1]);
-    await newProjectUser("project106joli", users[2]);
-    await newProjectUser("project106joli", users[3]);
-    await newProjectUser("project106joli", users[4]);
-    await newProjectUser("project106joli", users[5]);
+    // await newProjectUser("project106joli", users[0]);
+    // await newProjectUser("project106joli", users[1]);
+    // await newProjectUser("project106joli", users[2]);
+    // await newProjectUser("project106joli", users[3]);
+    // await newProjectUser("project106joli", users[4]);
+    // await newProjectUser("project106joli", users[5]);
+    // await newProjectUser("project106joli", users[5]);
 
     await setDoc(
       doc(dbm, "tokens", "vtgZnrL-rx5viXmTI19u0u"),
@@ -243,7 +252,7 @@ export const demoData = async () => {
         displayName: "Demo User",
         pushToken: "ExponentPushToken[vtgZnrL-rx5viXmTI19u0u]",
         timestamp: serverTimestamp(),
-        uid: users[0].uid,
+        uid: auth.currentUser?.uid,
       },
       { merge: true },
     );
@@ -254,12 +263,12 @@ export const demoData = async () => {
         displayName: "Demo User iPad",
         pushToken: "ExponentPushToken[z-50OyGeRPth6nxZSWk_A4]",
         timestamp: serverTimestamp(),
-        uid: users[0].uid,
+        uid: auth.currentUser?.uid,
       },
       { merge: true },
     );
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error("Error adding document (from demo data ): ", e);
   }
 };
 
@@ -279,6 +288,9 @@ async function newProjectUser(projectId: string, user: IUser) {
   const projectRef = doc(dbm, "projects", projectId);
   await updateDoc(projectRef, {
     allowedUsers: arrayUnion(user.uid),
+  });
+  await updateDoc(projectRef, {
+    allowedUsers: arrayUnion(auth.currentUser?.uid),
   });
 }
 

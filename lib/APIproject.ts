@@ -313,3 +313,30 @@ const generateProjectReference = (): string => {
   }
   return code.toLocaleLowerCase();
 };
+
+//create an export function called getProjectUsers that accepts a project ID and a callback function of the users for the project
+export const getProjectUsers = (
+  projectId: string,
+  callback: (users: IUser[]) => void,
+) => {
+  const users: IUser[] = []; // This will hold the users for the project
+
+  // Fetch users from the database (mocked here as an example)
+  const fetchUsers = async () => {
+    try {
+      const querySnapshot = await getDocs(
+        collection(dbm, "projects", projectId, "accessList"),
+      );
+      querySnapshot.forEach((doc) => {
+        const user = doc.data() as IUser;
+        users.push(user);
+      });
+      callback(users);
+    } catch (error) {
+      console.error("Error fetching project users:", error);
+      callback([]);
+    }
+  };
+
+  fetchUsers();
+};
