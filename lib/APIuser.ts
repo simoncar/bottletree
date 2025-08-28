@@ -87,6 +87,7 @@ export async function deleteUser(
 
   return () => userDocRef;
 }
+
 export async function createUser(user: IUser) {
   if (!user) {
     return null;
@@ -94,43 +95,43 @@ export async function createUser(user: IUser) {
 
   const usersCollectionRef = collection(dbm, "users");
 
-  let querySnapshot;
+  //   let querySnapshot;
 
   console.log("createUser >>>>:", user);
 
-  if (user.email !== undefined && user.email !== "") {
-    const q = query(
-      usersCollectionRef,
-      where("email", "==", user.email.toLowerCase()),
-    );
-    querySnapshot = await getDocs(q);
-  } else {
-    const q = query(usersCollectionRef, where("uid", "==", user.uid));
-    querySnapshot = await getDocs(q);
-  }
+  //   if (user.email !== undefined && user.email !== "") {
+  //     const q = query(
+  //       usersCollectionRef,
+  //       where("email", "==", user.email.toLowerCase()),
+  //     );
+  //     querySnapshot = await getDocs(q);
+  //   } else {
+  //     const q = query(usersCollectionRef, where("uid", "==", user.uid));
+  //     querySnapshot = await getDocs(q);
+  //   }
 
-  if (!querySnapshot.empty) {
-    const docSnap = querySnapshot.docs[0];
-    console.log("User already exists with email:", user.email);
-    user.key = docSnap.id;
-    user.uid = docSnap.id;
-    user.displayName = docSnap.data().displayName;
-    user.photoURL = docSnap.data().photoURL;
-    user.anonymous = false;
-    user.created = docSnap.data().created;
+  //   if (!querySnapshot.empty) {
+  //     const docSnap = querySnapshot.docs[0];
+  //     console.log("User already exists with email:", user.email);
+  //     user.key = docSnap.id;
+  //     user.uid = docSnap.id;
+  //     user.displayName = docSnap.data().displayName;
+  //     user.photoURL = docSnap.data().photoURL;
+  //     user.anonymous = false;
+  //     user.created = docSnap.data().created;
+  //     return user;
+  //   } else {
+  try {
+    user.created = serverTimestamp();
+    const userDocRef = doc(usersCollectionRef, user.uid);
+    await setDoc(userDocRef, user);
+    console.log("User created successfully:", user.uid);
     return user;
-  } else {
-    try {
-      user.created = serverTimestamp();
-      const userDocRef = doc(usersCollectionRef, user.uid);
-      await setDoc(userDocRef, user);
-      console.log("User created successfully:", user.uid);
-      return user;
-    } catch (error) {
-      console.error("Error creating user:", error);
-      return null;
-    }
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return null;
   }
+  // }
 }
 // Modular API version
 
