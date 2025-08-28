@@ -5,19 +5,27 @@ service cloud.firestore {
     match /logs/{document=**} {
       allow read, write: if request.auth.uid != null;
     }
-    match /projects/{document=**} {
-       allow read, list, write: if request.auth.uid != null;
+    match /projects/{projectId} {
+      allow read, list: if request.auth.uid in resource.data.allowedUsers;
+      allow write: if request.auth.uid in resource.data.allowedUsers;
     }
-	match /{path=**}/accessList/{docId} {
-		allow read, list: if request.auth.uid == resource.data.uid;
-	}
-    match /users/{userId}{
-     allow read, list, write: if request.auth.uid == userId;
+	match /projects/demo {
+      allow read, list, write: if request.auth.uid != null
+    }
+    match /projects/{projectId}/{path=**} {
+      allow read, write: if request.auth.uid in get(/databases/$(database)/documents/projects/$(projectId)).data.allowedUsers;
+    }
+    match /{path=**}/accessList/{docId} {
+      allow read, list: if request.auth.uid == resource.data.uid;
+      allow write: if request.auth.uid in get(/databases/$(database)/documents/$(path)).data.allowedUsers;
+    }
+    match /users/{userId} {
+      allow read, list, write: if request.auth.uid == userId;
     }
     match /tokens/{document=**} {
       allow read, write: if request.auth.uid != null;
     }
-	match /notifications/{document=**} {
+    match /notifications/{document=**} {
       allow read, write: if request.auth.uid != null;
     }
   }

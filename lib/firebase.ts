@@ -27,6 +27,7 @@ const auth = getAuth();
 console.log("__DEV__: ", __DEV__);
 
 if (!Device.isDevice) {
+  dbm.clearPersistence();
   console.log("Connecting to Firebase Emulator");
   // Firestore modular API
   connectFirestoreEmulator(dbm, "127.0.0.1", 8080);

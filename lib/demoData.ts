@@ -3,6 +3,8 @@ import {
   setDoc,
   Timestamp,
   serverTimestamp,
+  arrayUnion,
+  updateDoc,
 } from "@react-native-firebase/firestore";
 
 import {
@@ -197,6 +199,8 @@ export const demoData = async () => {
         archived: false,
         postCount: 7,
         timestamp: serverTimestamp(),
+        allowedUsers: [users[0].uid, users[1].uid, users[2].uid, users[5].uid],
+        owner: users[0].uid,
       },
       { merge: true },
     );
@@ -260,7 +264,7 @@ export const demoData = async () => {
 };
 
 async function newProjectUser(projectId: string, user: IUser) {
-  return await setDoc(
+  await setDoc(
     doc(dbm, "projects", projectId, "accessList", user.uid),
     {
       uid: user.uid,
@@ -270,6 +274,12 @@ async function newProjectUser(projectId: string, user: IUser) {
     },
     { merge: true },
   );
+
+  // Sync allowedUsers
+  const projectRef = doc(dbm, "projects", projectId);
+  await updateDoc(projectRef, {
+    allowedUsers: arrayUnion(user.uid),
+  });
 }
 
 async function createUser(user: IUser) {

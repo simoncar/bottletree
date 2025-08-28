@@ -1,5 +1,7 @@
 import { auth, dbm, firestore, updateProfile } from "@/lib/firebase";
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
   collectionGroup,
   deleteDoc,
@@ -9,6 +11,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from "@react-native-firebase/firestore";
 import * as Device from "expo-device";
@@ -317,15 +320,13 @@ export const mergeUser_old = (oldUid: string, newUser: IUser) => {
   });
 };
 // Export function to merge user accessList records using Firebase Modular API
-
 export const mergeUser = async (oldUid: string, newUser: IUser) => {
-  console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
+  console.log("merge user const: oldUser:", oldUid, "newUser:", newUser);
   if (!oldUid || !newUser || !newUser.uid) {
     console.log("Invalid oldUid or newUser");
     return;
   }
 
-  // Query all accessList records for the old user
   const accessListQuery = query(
     collectionGroup(dbm, "accessList"),
     where("uid", "==", oldUid),
@@ -355,8 +356,18 @@ export const mergeUser = async (oldUid: string, newUser: IUser) => {
       },
       { merge: true },
     );
+
+    // Sync allowedUsers
+    const projectRef = doc(dbm, "projects", projectId);
+    await updateDoc(projectRef, {
+      allowedUsers: arrayRemove(oldUid),
+    });
+    await updateDoc(projectRef, {
+      allowedUsers: arrayUnion(newUser.uid),
+    });
   }
 };
+
 export async function updateAllUsersEmailToLowerCase() {
   const usersCollectionRef = collection(dbm, "users");
   const snapshot = await getDocs(usersCollectionRef);
