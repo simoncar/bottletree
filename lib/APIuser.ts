@@ -95,7 +95,7 @@ export async function createUser(user: IUser) {
 
   console.log("createUser >>>>:", user);
 
-  if (user.email != undefined && user.email !== "") {
+  if (user.email !== undefined && user.email !== "") {
     const q = query(
       usersCollectionRef,
       where("email", "==", user.email.toLowerCase()),
