@@ -39,6 +39,8 @@ export interface IProject {
   private: boolean;
   created?: Timestamp | FieldValue;
   star?: boolean;
+  allowedUsers?: string[];
+  owner?: string;
 }
 
 export interface ILog {

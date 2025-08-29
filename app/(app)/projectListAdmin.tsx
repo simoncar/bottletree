@@ -36,8 +36,8 @@ const ModalScreen = (props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = getAllProjects(projectsRead);
-    unsubscribe;
+    // const unsubscribe = getAllProjects(projectsRead);
+    // unsubscribe;
     return () => {
       // unsubscribe;
     };

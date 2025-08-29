@@ -1,11 +1,7 @@
 // TypeScript
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  TouchableOpacity,
-  StyleSheet,
-  useColorScheme,
-} from "react-native";
+import { TouchableOpacity, StyleSheet, useColorScheme } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { editTask } from "@/lib/APItasks";
 import Colors from "@/constants/Colors";
@@ -37,7 +33,8 @@ export default function FileScreen() {
             <TouchableOpacity
               onPressIn={() => {
                 save();
-              }}>
+              }}
+            >
               <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
@@ -48,21 +45,24 @@ export default function FileScreen() {
           style={[
             styles.label,
             { color: Colors[colorScheme ?? "light"].textDisabledColor },
-          ]}>
+          ]}
+        >
           {t("file")}
         </Text>
         <Text
           style={[
             styles.label,
             { color: Colors[colorScheme ?? "light"].textDisabledColor },
-          ]}>
+          ]}
+        >
           {fileObj.filename}
         </Text>
         <Text
           style={[
             styles.label,
             { color: Colors[colorScheme ?? "light"].textDisabledColor },
-          ]}>
+          ]}
+        >
           {fileObj.url}
         </Text>
         <OpenFileButton url={fileObj.url} />

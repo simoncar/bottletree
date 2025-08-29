@@ -1,6 +1,5 @@
 # bottletree
 
-
 ///////////////////////////////////////////
 npx expo install expo@latest --fix
 npx sentry-expo-upload-sourcemaps dist
@@ -18,6 +17,8 @@ eas update --branch production --message "Updating the app"
 
 npx expo start --offline
 npx expo start --dev-client
+npx expo start --host localhost -c
+
 yarn test
 
 ------ development build -------
@@ -45,8 +46,6 @@ npx expo-doctor
 
 #F9D96B
 
-
-
 TODO:
 Org Slug: simon-co
 project name: bottletree
@@ -54,9 +53,8 @@ DSN: https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry
 
 npx sentry-expo-upload-sourcemaps dist
 
-git log --pretty=format:"[%ad] %s" --date=short > commit_messages.txt 
+git log --pretty=format:"[%ad] %s" --date=short > commit_messages.txt
 
 ///////////////////////////////////////////
 npx expo install expo@latest --fix
 npx sentry-expo-upload-sourcemaps dist
-

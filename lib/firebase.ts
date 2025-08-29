@@ -13,6 +13,7 @@ import {
 import firestore, {
   getFirestore,
   connectFirestoreEmulator,
+  clearIndexedDbPersistence,
 } from "@react-native-firebase/firestore";
 import * as Device from "expo-device";
 import {
@@ -27,6 +28,7 @@ const auth = getAuth();
 console.log("__DEV__: ", __DEV__);
 
 if (!Device.isDevice) {
+  clearIndexedDbPersistence(dbm);
   console.log("Connecting to Firebase Emulator");
   // Firestore modular API
   connectFirestoreEmulator(dbm, "127.0.0.1", 8080);

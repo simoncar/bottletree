@@ -1,5 +1,7 @@
 import { auth, dbm, firestore, updateProfile } from "@/lib/firebase";
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
   collectionGroup,
   deleteDoc,
@@ -9,6 +11,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from "@react-native-firebase/firestore";
 import * as Device from "expo-device";
@@ -84,6 +87,7 @@ export async function deleteUser(
 
   return () => userDocRef;
 }
+
 export async function createUser(user: IUser) {
   if (!user) {
     return null;
@@ -91,43 +95,43 @@ export async function createUser(user: IUser) {
 
   const usersCollectionRef = collection(dbm, "users");
 
-  let querySnapshot;
+  //   let querySnapshot;
 
   console.log("createUser >>>>:", user);
 
-  if (user.email != undefined && user.email !== "") {
-    const q = query(
-      usersCollectionRef,
-      where("email", "==", user.email.toLowerCase()),
-    );
-    querySnapshot = await getDocs(q);
-  } else {
-    const q = query(usersCollectionRef, where("uid", "==", user.uid));
-    querySnapshot = await getDocs(q);
-  }
+  //   if (user.email !== undefined && user.email !== "") {
+  //     const q = query(
+  //       usersCollectionRef,
+  //       where("email", "==", user.email.toLowerCase()),
+  //     );
+  //     querySnapshot = await getDocs(q);
+  //   } else {
+  //     const q = query(usersCollectionRef, where("uid", "==", user.uid));
+  //     querySnapshot = await getDocs(q);
+  //   }
 
-  if (!querySnapshot.empty) {
-    const docSnap = querySnapshot.docs[0];
-    console.log("User already exists with email:", user.email);
-    user.key = docSnap.id;
-    user.uid = docSnap.id;
-    user.displayName = docSnap.data().displayName;
-    user.photoURL = docSnap.data().photoURL;
-    user.anonymous = false;
-    user.created = docSnap.data().created;
+  //   if (!querySnapshot.empty) {
+  //     const docSnap = querySnapshot.docs[0];
+  //     console.log("User already exists with email:", user.email);
+  //     user.key = docSnap.id;
+  //     user.uid = docSnap.id;
+  //     user.displayName = docSnap.data().displayName;
+  //     user.photoURL = docSnap.data().photoURL;
+  //     user.anonymous = false;
+  //     user.created = docSnap.data().created;
+  //     return user;
+  //   } else {
+  try {
+    user.created = serverTimestamp();
+    const userDocRef = doc(usersCollectionRef, user.uid);
+    await setDoc(userDocRef, user);
+    console.log("User created successfully:", user.uid);
     return user;
-  } else {
-    try {
-      user.created = serverTimestamp();
-      const userDocRef = doc(usersCollectionRef, user.uid);
-      await setDoc(userDocRef, user);
-      console.log("User created successfully:", user.uid);
-      return user;
-    } catch (error) {
-      console.error("Error creating user:", error);
-      return null;
-    }
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return null;
   }
+  // }
 }
 // Modular API version
 
@@ -317,15 +321,13 @@ export const mergeUser_old = (oldUid: string, newUser: IUser) => {
   });
 };
 // Export function to merge user accessList records using Firebase Modular API
-
 export const mergeUser = async (oldUid: string, newUser: IUser) => {
-  console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
+  console.log("merge user const: oldUser:", oldUid, "newUser:", newUser);
   if (!oldUid || !newUser || !newUser.uid) {
     console.log("Invalid oldUid or newUser");
     return;
   }
 
-  // Query all accessList records for the old user
   const accessListQuery = query(
     collectionGroup(dbm, "accessList"),
     where("uid", "==", oldUid),
@@ -355,8 +357,18 @@ export const mergeUser = async (oldUid: string, newUser: IUser) => {
       },
       { merge: true },
     );
+
+    // Sync allowedUsers
+    const projectRef = doc(dbm, "projects", projectId);
+    await updateDoc(projectRef, {
+      allowedUsers: arrayRemove(oldUid),
+    });
+    await updateDoc(projectRef, {
+      allowedUsers: arrayUnion(newUser.uid),
+    });
   }
 };
+
 export async function updateAllUsersEmailToLowerCase() {
   const usersCollectionRef = collection(dbm, "users");
   const snapshot = await getDocs(usersCollectionRef);

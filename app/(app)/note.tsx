@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
-  SafeAreaView,
   TextInput,
   Button as NativeButton,
   useColorScheme,
   TouchableOpacity,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View } from "@/components/Themed";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import { IPost } from "@/lib/types";
