@@ -303,6 +303,29 @@ export async function updateProject(project: IProject, callback: any) {
   callback(project.key);
 }
 
+export async function setStar(
+  projectId: string,
+  star: boolean,
+  callback?: { (id: string): void; (arg0: string): void },
+) {
+  try {
+    const ref = doc(dbm, "projects", projectId);
+
+    await updateDoc(ref, {
+      star: star,
+      timestamp: serverTimestamp(),
+    });
+
+    if (callback) {
+      callback(projectId);
+    } else {
+      console.log("Callback not provided.");
+    }
+  } catch (e) {
+    console.error("Error setting star property: ", e);
+  }
+}
+
 const generateProjectReference = (): string => {
   const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // remove ambiguous characters such as Il1O0 to avoid confusion in printed documents
 
