@@ -100,7 +100,8 @@ export default function TabLayout() {
               <Back />
             </View>
           ),
-        }}>
+        }}
+      >
         <Tabs.Screen
           name="[posts]"
           listeners={{
@@ -179,7 +180,8 @@ export default function TabLayout() {
               <Pressable
                 onPress={() => {
                   setModalVisible(true);
-                }}>
+                }}
+              >
                 <FontAwesome5
                   size={40}
                   style={{
@@ -224,8 +226,8 @@ const styles = StyleSheet.create({
     paddingLeft: 1,
   },
   topPanelRight: {
-    padding: 6,
-    paddingBottom: 20,
+    paddingRight: 6,
+    paddingBottom: 0,
   },
   back: {
     paddingLeft: 10,
