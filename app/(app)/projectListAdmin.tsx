@@ -252,8 +252,8 @@ const ModalScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.projectList}>
-        <View>{renderArchiveAll()}</View>
-        <View>{renderSaveFile()}</View>
+        {/* <View>{renderArchiveAll()}</View>
+		<View>{renderSaveFile()}</View> */}
         <View>{renderLog()}</View>
         {loading === false && (
           <View>

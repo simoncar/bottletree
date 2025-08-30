@@ -29,7 +29,8 @@ const LogScreen = () => {
     return (
       <View
         key={data.key}
-        style={[styles.outerView, { backgroundColor: backgroundColor }]}>
+        style={[styles.outerView, { backgroundColor: backgroundColor }]}
+      >
         <View style={styles.avatar}>
           <View style={styles.avatarFace}>
             <Ionicons
@@ -47,6 +48,7 @@ const LogScreen = () => {
           <Text style={styles.messageSmall}>
             {getRelativeTime(data.timestamp?.toDate()?.getTime() ?? 0)}
           </Text>
+          <Text style={styles.messageSmall}>{data.uid || ""}</Text>
           <Text style={styles.messageSmall}>{data.version || ""}</Text>
           <Text style={styles.messageSmall}>{data.device || ""}</Text>
         </View>

@@ -7,10 +7,12 @@ import { Stack, router } from "expo-router";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { signOut } from "@react-native-firebase/auth";
 
 export default function DeleteAccount() {
   const [errorMessage, setErrorMessage] = useState("");
-  const { deleteAccount } = useSession();
+  const { deleteAccount, signOut } = useSession();
   const { user, setUser } = useContext(UserContext);
   const { t } = useTranslation();
 
@@ -47,6 +49,9 @@ export default function DeleteAccount() {
           text: t("yes"),
           onPress: () => {
             deleteUser(user?.uid, deleteUserCallback);
+            setUser(null);
+            signOut();
+            AsyncStorage.clear();
             deleteAccount(deleteAccountCallback);
           },
         },

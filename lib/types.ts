@@ -48,7 +48,7 @@ export interface ILog {
   message: string;
   key?: string;
   timestamp?: Timestamp | FieldValue;
-  user?: string;
+  uid?: string;
   email?: string;
   device?: string;
   version?: string;

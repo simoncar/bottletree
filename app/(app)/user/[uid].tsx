@@ -225,8 +225,9 @@ export default function EditUser() {
         <TouchableOpacity
           key={"signOut"}
           onPress={() => {
-            signOut();
             setUser(null);
+            signOut();
+
             router.replace("/signIn");
           }}
         >

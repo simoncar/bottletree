@@ -19,6 +19,8 @@ const UserProvider = (props: React.PropsWithChildren) => {
   const [isUserSet, setIsUserSet] = useState(false);
 
   useEffect(() => {
+    console.log("UserContext - useEffect:", session, user?.uid);
+
     const fetchData = async () => {
       try {
         if (!session || isUserSet) return;

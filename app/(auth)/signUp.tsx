@@ -36,7 +36,7 @@ export default function SignIn() {
       addLog({
         loglevel: "INFO",
         message: "Create Account Success",
-        user: user.uid,
+        uid: user.uid,
         email: user.email,
       });
       router.navigate("/");
