@@ -297,29 +297,6 @@ export async function getUserProjectCount(
   callback(user);
 }
 
-//create an export function that accepts an old user and an a new user then it looks for all the records in the project accessList collection for the old user and updates them to the new user
-export const mergeUser_old = (oldUid: string, newUser: IUser) => {
-  console.log("merge user const : oldUser:", oldUid, "newUser:", newUser);
-  if (!oldUid || !newUser || !newUser.uid) {
-    console.log("Invalid oldUid or newUser");
-    return;
-  }
-  const q = db.collectionGroup("accessList").where("uid", "==", oldUid);
-
-  q.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      db.collection("projects")
-        .doc(doc.data().projectId)
-        .collection("accessList")
-        .add({
-          displayName: newUser?.displayName || "",
-          projectId: doc.data().projectId,
-          timestamp: serverTimestamp(),
-          uid: newUser.uid,
-        });
-    });
-  });
-};
 // Export function to merge user accessList records using Firebase Modular API
 export const mergeUser = async (oldUid: string, newUser: IUser) => {
   console.log("merge user const: oldUser:", oldUid, "newUser:", newUser);
