@@ -65,7 +65,10 @@ export const addImageFromPhoto = async (
   folder: string,
   project: string,
   progressCallback: (progress: any) => void,
-  completedCallback: { (sourceDownloadURL: any): void; (arg0: unknown): void },
+  completedCallback: {
+    (sourceDownloadURL: any): void;
+    (arg0: unknown[]): void;
+  },
 ) => {
   try {
     const processedResults = await processItemAsync(
@@ -74,6 +77,8 @@ export const addImageFromPhoto = async (
       photo,
       progressCallback,
     );
+    console.log("Processed results>>>:", processedResults);
+
     completedCallback(processedResults);
   } catch (error) {
     console.error("Error occurred during processing addImageFromPhoto:", error);

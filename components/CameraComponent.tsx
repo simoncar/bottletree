@@ -85,16 +85,10 @@ export default function CameraComponent() {
     });
   };
 
-  const completedCallback = (sourceDownloadURLarray) => {
-    console.log("Completed callback:", sourceDownloadURLarray);
+  const completedCallback = (sourceDownloadURLobject) => {
+    console.log("Completed callback:", sourceDownloadURLobject);
 
-    sourceDownloadURLarray.forEach((element) => {
-      if (!element.ratio) {
-        element.ratio = 0.666;
-      }
-      return sourceDownloadURLarray;
-    });
-    const downloadURL = sourceDownloadURLarray[1]; // For example, creating a new array with each element doubled.
+    const downloadURL = sourceDownloadURLobject.url; // For example, creating a new array with each element doubled.
 
     //setImage(null);
 
@@ -104,7 +98,7 @@ export default function CameraComponent() {
       projectId: local.project,
       projectTitle: local.project,
       author: user.displayName,
-      images: [downloadURL],
+      images: [{ url: downloadURL, ratio: 0.666 }],
     };
 
     console.log("Camera add post: ", post);

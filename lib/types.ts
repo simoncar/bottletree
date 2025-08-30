@@ -20,7 +20,7 @@ export interface IPost {
     url: string;
   }[];
   timestamp?: Timestamp | FieldValue;
-  ratio: number;
+  ratio?: number;
   comments?: IComment[];
   linkURL?: string;
   file?: string;
