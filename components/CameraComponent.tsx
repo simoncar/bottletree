@@ -77,12 +77,7 @@ export default function CameraComponent() {
   };
 
   const saveDone = () => {
-    router.navigate({
-      pathname: "/[project]",
-      params: {
-        project: local.project,
-      },
-    });
+    router.dismiss();
   };
 
   const completedCallback = (sourceDownloadURLobject) => {
