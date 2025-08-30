@@ -297,4 +297,18 @@
     "i18n-ally.keystyle": "flat",
     "editor.wordWrap": "off",
   },
+  "launch": {
+    "configurations": [
+      {
+        "name": "Radon Config Name Simon",
+        "type": "radon-ide",
+        "request": "launch",
+        "appRoot": "./",
+        "env": {},
+        "ios": {},
+        "android": {},
+        "usePrebuild": true,
+      },
+    ],
+  },
 }

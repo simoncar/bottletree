@@ -5,9 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "react-native-ide",
+      "type": "radon-ide",
       "request": "launch",
-      "name": "React Native IDE panel",
+      "name": "Application name",
+      "appRoot": "./",
+      "env": {},
       "ios": {
         "configuration": "Debug"
       },
