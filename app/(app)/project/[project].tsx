@@ -72,6 +72,7 @@ export default function EditProject() {
     const updatedProject = { ...project, archived: !project.archived };
     setProject(updatedProject);
     updateProject(updatedProject, saveDone);
+    router.dismiss();
   };
 
   const deleteProject = () => {
