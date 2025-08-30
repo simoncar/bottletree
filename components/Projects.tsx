@@ -55,9 +55,9 @@ export const Projects = ({ session, archived }: Props) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    getProjects(session, archived, projectsRead);
-  }, []);
+  //   useEffect(() => {
+  //     getProjects(session, archived, projectsRead);
+  //   }, [session]);
 
   useFocusEffect(
     // Callback should be wrapped in `React.useCallback` to avoid running the effect too often.
@@ -67,7 +67,7 @@ export const Projects = ({ session, archived }: Props) => {
 
       // Return function is invoked whenever the route gets out of focus.
       return () => {};
-    }, []),
+    }, [session]), // Added triggerUpdate and user to dependencies
   );
 
   const setStarDone = () => {

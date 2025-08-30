@@ -29,6 +29,7 @@ export default function ProjectPosts() {
   console.log("/(app)/(tabs)/[posts].tsx");
 
   useEffect(() => {
+    console.log("Fetching useEffect  project data...");
     getProject(project, (pObj) => {
       if (pObj) {
         setProject(pObj);
@@ -37,7 +38,7 @@ export default function ProjectPosts() {
         router.replace("/signIn");
       }
     });
-  }, [project, setUser, user]);
+  }, [project]);
 
   if (!projectObj) {
     return (
