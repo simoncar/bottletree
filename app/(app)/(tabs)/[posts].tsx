@@ -37,7 +37,7 @@ export default function ProjectPosts() {
         router.replace("/signIn");
       }
     });
-  }, []);
+  }, [project, setUser, user]);
 
   if (!projectObj) {
     return (
