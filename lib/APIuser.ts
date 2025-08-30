@@ -123,6 +123,14 @@ export async function createUser(user: IUser) {
   //   } else {
   try {
     user.created = serverTimestamp();
+
+    // Remove undefined properties from user object
+    Object.keys(user).forEach((key) => {
+      if (user[key] === undefined) {
+        delete user[key];
+      }
+    });
+
     const userDocRef = doc(usersCollectionRef, user.uid);
     await setDoc(userDocRef, user);
     console.log("User created successfully:", user.uid);
