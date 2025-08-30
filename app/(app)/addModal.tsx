@@ -59,13 +59,11 @@ const AddModal = ({
 
   const completedCallback = (sourceDownloadURLarray) => {
     let ratio = 0.66666;
-    sourceDownloadURLarray.map((element) => {
-      const myArray = element.split("*");
-      if (myArray[0] > ratio) {
-        ratio = myArray[0];
+    sourceDownloadURLarray.forEach((element) => {
+      if (!element.ratio) {
+        element.ratio = 0.666;
       }
-
-      return myArray;
+      return sourceDownloadURLarray;
     });
 
     const post: IPost = {
@@ -112,7 +110,8 @@ const AddModal = ({
       transparent={true}
       animationType="fade"
       visible={visible}
-      onRequestClose={onClose}>
+      onRequestClose={onClose}
+    >
       <View style={styles.overlay}>
         <View
           style={[
@@ -120,7 +119,8 @@ const AddModal = ({
             {
               backgroundColor: Colors[colorScheme ?? "light"].postBackground,
             },
-          ]}>
+          ]}
+        >
           <Pressable
             style={styles.option}
             onPress={() => {
@@ -132,7 +132,8 @@ const AddModal = ({
                 },
               });
               onClose();
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("addNote")}</Text>
             <FontAwesome
               name="sticky-note-o"
@@ -151,7 +152,8 @@ const AddModal = ({
                   post: "",
                 },
               });
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("takePhoto")}</Text>
             <FontAwesome
               name="camera"
@@ -164,7 +166,8 @@ const AddModal = ({
             onPress={() => {
               //onClose();
               pickImage();
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("addFromCameraRoll")}</Text>
             <MaterialIcons
               name="camera-roll"
@@ -182,7 +185,8 @@ const AddModal = ({
                   project: project,
                 },
               });
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("addCalendarEvent")}</Text>
             <MaterialIcons
               name="event"
@@ -195,7 +199,8 @@ const AddModal = ({
             onPress={() => {
               //onClose();
               handleAddFilePress();
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("addFile")}</Text>
             <AntDesign
               name="addfile"
@@ -220,7 +225,8 @@ const AddModal = ({
                 pathname: "/task",
                 params: { task: JSON.stringify(newTask) },
               });
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("addTask")}</Text>
             <MaterialIcons
               name="add-task"
@@ -235,7 +241,8 @@ const AddModal = ({
               router.navigate({
                 pathname: "/project/add",
               });
-            }}>
+            }}
+          >
             <Text style={styles.optionText}>{t("createNewProject")}</Text>
             <MaterialIcons
               name="add-business"
@@ -247,7 +254,8 @@ const AddModal = ({
             style={styles.option}
             onPress={() => {
               onClose();
-            }}>
+            }}
+          >
             <Text style={styles.optionTextDisabled}></Text>
             <AntDesign
               name="close"

@@ -12,6 +12,7 @@ import * as Contacts from "expo-contacts";
 import { sortContactsByName } from "@/lib/sort";
 import Loading from "@/app/(app)/loading";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { auth } from "@/lib/firebase";
 
 const UserList = () => {
   const { project } = useLocalSearchParams<{
@@ -44,6 +45,7 @@ const UserList = () => {
             return {
               key: contact.id,
               uid: contact.id,
+              createdByUid: auth.currentUser.uid,
               displayName: contact?.name || "",
               email: contact.emails?.[0]?.email.toLowerCase() || "",
               photoURL: null,
@@ -100,12 +102,14 @@ const UserList = () => {
     return (
       <View
         key={data.uid}
-        style={[styles.outerView, { backgroundColor: backgroundColor }]}>
+        style={[styles.outerView, { backgroundColor: backgroundColor }]}
+      >
         <TouchableOpacity
           style={styles.innerView}
           onPress={() => {
             handleUserSelection(data);
-          }}>
+          }}
+        >
           <View style={styles.avatar}>
             {data.photoURL ? (
               <Image style={styles.avatarFace} source={data.photoURL} />

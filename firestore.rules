@@ -22,13 +22,17 @@ service cloud.firestore {
       allow write: if request.auth.uid in get(/databases/$(database)/documents/$(path)).data.allowedUsers;
     }
     match /users/{userId} {
-      allow read, create, list, write: if request.auth != null;     
+	  allow create: if request.auth != null; 
+      allow read, list, write: if request.auth.uid == resource.data.uid;   
+	  allow read, list, write: if request.auth.uid == resource.data.createdByUid;   
     }
     match /tokens/{document=**} {
-      allow read, write: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+	  allow read, write: if request.auth.uid == resource.data.uid;   
     }
     match /notifications/{document=**} {
-      allow read, write: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+	  allow read: if request.auth.uid == resource.data.uid;   
     }
   }
 }

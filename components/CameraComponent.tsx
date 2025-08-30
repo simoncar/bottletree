@@ -56,16 +56,13 @@ export default function CameraComponent() {
     requestPermission();
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>
-          {t('cameraNeedPermission')}
-        </Text>
+        <Text style={styles.text}>{t("cameraNeedPermission")}</Text>
         <Pressable
           onPress={() => {
             openSettings();
-          }}>
-          <Text style={styles.text}>
-            {t('cameraPermissionOpenSettings')}
-          </Text>
+          }}
+        >
+          <Text style={styles.text}>{t("cameraPermissionOpenSettings")}</Text>
         </Pressable>
       </View>
     );
@@ -88,13 +85,16 @@ export default function CameraComponent() {
     });
   };
 
-  const completedCallback = (sourceDownloadURL) => {
-    let ratio = 0.66666;
-    const myArray = sourceDownloadURL.split("*");
-    if (myArray[0] > ratio) {
-      ratio = myArray[0];
-    }
-    const downloadURL = myArray[1]; // For example, creating a new array with each element doubled.
+  const completedCallback = (sourceDownloadURLarray) => {
+    console.log("Completed callback:", sourceDownloadURLarray);
+
+    sourceDownloadURLarray.forEach((element) => {
+      if (!element.ratio) {
+        element.ratio = 0.666;
+      }
+      return sourceDownloadURLarray;
+    });
+    const downloadURL = sourceDownloadURLarray[1]; // For example, creating a new array with each element doubled.
 
     //setImage(null);
 
@@ -105,7 +105,6 @@ export default function CameraComponent() {
       projectTitle: local.project,
       author: user.displayName,
       images: [downloadURL],
-      ratio: ratio,
     };
 
     console.log("Camera add post: ", post);
@@ -173,7 +172,8 @@ export default function CameraComponent() {
             <TouchableOpacity
               onPressIn={handlePressIn}
               onPressOut={takePicture}
-              activeOpacity={1}>
+              activeOpacity={1}
+            >
               <Animated.View style={[styles.circleOuter, animatedStyle]}>
                 <View style={styles.circleMiddle}>
                   <View style={[styles.circleInner, animatedInnerStyle]}></View>
@@ -184,7 +184,8 @@ export default function CameraComponent() {
           <View style={styles.a}>
             <TouchableOpacity
               style={styles.flipCamera}
-              onPress={toggleCameraFacing}>
+              onPress={toggleCameraFacing}
+            >
               <Ionicons
                 name="camera-reverse-outline"
                 size={45}
