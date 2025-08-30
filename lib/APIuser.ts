@@ -124,6 +124,10 @@ export async function createUser(user: IUser) {
   try {
     user.created = serverTimestamp();
 
+    if (!user.language) {
+      user.language = "en";
+    }
+
     // Remove undefined properties from user object
     Object.keys(user).forEach((key) => {
       if (user[key] === undefined) {
