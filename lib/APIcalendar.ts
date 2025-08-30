@@ -24,10 +24,7 @@ const translateColor = (color: string) => {
     return color;
   }
 };
-export async function getItemsBigCalendar(
-  project: string,
-  callback: itemsRead,
-) {
+export function getItemsBigCalendar(project: string, callback: itemsRead) {
   const ref = collection(doc(collection(dbm, "projects"), project), "calendar");
   console.log("getItemsBigCalendar (modular)");
 
@@ -37,42 +34,44 @@ export async function getItemsBigCalendar(
       // Type for querySnapshot is inferred
       const calendarEvents: ICalendarEvent[] = [];
 
-      querySnapshot.docChanges().forEach((change) => {
-        // Type for change is inferred
-        if (change.type === "added") {
-          //console.log("New event: ", change.doc.data());
-        }
-        if (change.type === "modified") {
-          //console.log("Modified event: ", change.doc.data());
-        }
-        if (change.type === "removed") {
-          //console.log("Removed event: ", change.doc.data());
-        }
-      });
+      if (querySnapshot) {
+        querySnapshot.docChanges().forEach((change) => {
+          // Type for change is inferred
+          if (change.type === "added") {
+            //console.log("New event: ", change.doc.data());
+          }
+          if (change.type === "modified") {
+            //console.log("Modified event: ", change.doc.data());
+          }
+          if (change.type === "removed") {
+            //console.log("Removed event: ", change.doc.data());
+          }
+        });
 
-      querySnapshot.forEach((documentSnapshot) => {
-        const eventData = documentSnapshot.data();
-        const startDate = eventData.dateBegin
-          ? eventData.dateBegin.toDate()
-          : new Date();
-        const endDate = eventData.dateEnd
-          ? eventData.dateEnd.toDate()
-          : new Date();
+        querySnapshot.forEach((documentSnapshot) => {
+          const eventData = documentSnapshot.data();
+          const startDate = eventData.dateBegin
+            ? eventData.dateBegin.toDate()
+            : new Date();
+          const endDate = eventData.dateEnd
+            ? eventData.dateEnd.toDate()
+            : new Date();
 
-        const data: ICalendarEvent = {
-          key: documentSnapshot.id,
-          start: startDate,
-          end: endDate,
-          title: eventData.title,
-          color: translateColor(eventData.color),
-          colorName: eventData.colorName,
-          description: eventData.description,
-          projectId: eventData.projectId,
-          uid: eventData.uid,
-        };
+          const data: ICalendarEvent = {
+            key: documentSnapshot.id,
+            start: startDate,
+            end: endDate,
+            title: eventData.title,
+            color: translateColor(eventData.color),
+            colorName: eventData.colorName,
+            description: eventData.description,
+            projectId: eventData.projectId,
+            uid: eventData.uid,
+          };
 
-        calendarEvents.push(data);
-      });
+          calendarEvents.push(data);
+        });
+      }
 
       callback(calendarEvents);
     },
@@ -85,7 +84,7 @@ export async function getItemsBigCalendar(
     },
   );
 
-  return () => unsubscribe();
+  return () => unsubscribe;
 }
 
 // export method to get 1 item from the calendar collection based on the key

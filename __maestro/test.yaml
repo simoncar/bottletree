@@ -1,0 +1,7 @@
+appId: com.simoncar.bottletree
+---
+- launchApp
+- tapOn: "Email"
+- inputText: "test@example.com"
+- tapOn: "Next"
+- assertVisible: "Enter Password"

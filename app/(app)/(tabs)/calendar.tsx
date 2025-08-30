@@ -12,10 +12,11 @@ import * as Localization from "expo-localization";
 import {
   router,
   Stack,
+  useFocusEffect,
   useLocalSearchParams,
   useNavigation,
 } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -28,6 +29,7 @@ import { Calendar } from "react-native-big-calendar";
 import { MonthYearScroller } from "@/components/Months";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
+import { UserContext } from "@/lib/UserContext";
 
 type SearchParams = {
   project: string; //project ID
@@ -39,8 +41,8 @@ export default function CalendarLarge() {
   const [calendarDate, setDate] = useState(dayjs());
   const colorScheme = useColorScheme();
   const { height } = Dimensions.get("window");
-  const navigation = useNavigation();
   const { t } = useTranslation();
+  const { user } = useContext(UserContext);
 
   const calendarTheme = {
     palette: {
@@ -58,17 +60,20 @@ export default function CalendarLarge() {
     setItems(calendarItemsDB);
   };
 
-  useEffect(() => {
-    //if the project = 'demo' then update demo data
-    demoDataForDemoProject();
+  useFocusEffect(
+    useCallback(() => {
+      if (!user) return; // Skip if no user (prevents listener setup on sign-out)
 
-    const unsubscribe = getItemsBigCalendar(project, itemsRead);
-    return () => {
-      unsubscribe;
-    };
-  }, []);
+      //if the project = 'demo' then update demo data
+      if (project === "demo") demoDataForDemoProject();
 
-  useEffect(() => {}, [calendarDate]);
+      const unsubscribe = getItemsBigCalendar(project, itemsRead);
+      return () => {
+        console.log("Unsubscribing from calendar updates");
+        unsubscribe(); // Properly call unsubscribe to clear listener on unmount or dependency change
+      };
+    }, [project, user]), // Add 'user' as dependency to re-run on sign-in/sign-out
+  );
 
   const onChangeDate = ([start, end]) => {
     //setDate(start);

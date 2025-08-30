@@ -11,8 +11,8 @@ import { UserContext } from "@/lib/UserContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as DocumentPicker from "expo-document-picker";
-import { useLocalSearchParams } from "expo-router";
-import React, { useContext, useEffect, useState } from "react";
+import { useLocalSearchParams, useFocusEffect } from "expo-router";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
@@ -48,12 +48,16 @@ export default function Files() {
   const row: Array<any> = [];
   let prevOpenedRow;
 
-  useEffect(() => {
-    getFiles(project, (retrievedFiles) => {
-      setFiles(retrievedFiles);
-      setLoading(false);
-    });
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const unsubscribe = getFiles(project, (retrievedFiles) => {
+        setFiles(retrievedFiles);
+        setLoading(false);
+      });
+
+      return () => unsubscribe; // Cleanup: Unsubscribe from Firestore listener on blur/unmount
+    }, [project]), // Added 'project' as dependency to re-run when it changes
+  );
 
   const handleFilePress = (file: IFile) => {
     // router.push({

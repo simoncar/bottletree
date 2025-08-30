@@ -57,19 +57,21 @@ export async function getFiles(project: string, callback) {
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const files: IFile[] = [];
 
-    querySnapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-      files.push({
-        key: docSnap.id,
-        filename: data.filename,
-        url: data.url,
-        mimeType: data.mimeType,
-        bytes: data.bytes,
-        created: data.created,
-        modified: data.modified,
-        projectId: data.projectId,
+    if (querySnapshot) {
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        files.push({
+          key: docSnap.id,
+          filename: data.filename,
+          url: data.url,
+          mimeType: data.mimeType,
+          bytes: data.bytes,
+          created: data.created,
+          modified: data.modified,
+          projectId: data.projectId,
+        });
       });
-    });
+    }
 
     callback(files);
   });

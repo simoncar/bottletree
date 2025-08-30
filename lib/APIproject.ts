@@ -34,6 +34,10 @@ export function getProject(
   const projectRef = doc(dbm, "projects", project);
 
   const unsubscribe = onSnapshot(projectRef, (docSnap) => {
+    if (!docSnap) {
+      callback(null);
+      return;
+    }
     if (!docSnap.exists()) {
       console.log("No such project:", project);
       callback(null);
