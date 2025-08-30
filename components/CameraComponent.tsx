@@ -88,9 +88,7 @@ export default function CameraComponent() {
   const completedCallback = (sourceDownloadURLobject) => {
     console.log("Completed callback:", sourceDownloadURLobject);
 
-    const downloadURL = sourceDownloadURLobject.url; // For example, creating a new array with each element doubled.
-
-    //setImage(null);
+    const downloadURL = sourceDownloadURLobject.url;
 
     const post: IPost = {
       key: "",
