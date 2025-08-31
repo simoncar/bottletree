@@ -305,7 +305,10 @@
         "request": "launch",
         "appRoot": "./",
         "env": {},
-        "ios": {},
+        "ios": {
+          "scheme": "OneBuild",
+        },
+        "isExpo": true,
         "android": {},
         "usePrebuild": true,
       },
