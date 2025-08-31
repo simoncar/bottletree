@@ -19,7 +19,6 @@ import { View, Text } from "@/components/Themed";
 import Progress from "@/components/Progress";
 import * as Linking from "expo-linking";
 import { UserContext } from "@/lib/UserContext";
-import { Back } from "@/components/Back";
 import { useTranslation } from "react-i18next";
 
 export default function CameraComponent() {

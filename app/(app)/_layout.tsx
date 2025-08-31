@@ -57,6 +57,7 @@ import {
   MontserratSubrayada_400Regular,
   MontserratSubrayada_700Bold,
 } from "@expo-google-fonts/montserrat-subrayada";
+import { Back } from "@/components/Back";
 
 type SearchParams = {
   posts: string;
@@ -240,6 +241,11 @@ export default function Layout() {
               headerTitleStyle: {
                 color: navigationTheme.colors.text,
               },
+              headerLeft: () => (
+                <View>
+                  <Back />
+                </View>
+              ),
             }}
           >
             <Stack.Screen
