@@ -64,7 +64,8 @@ export const ProjectUsers = (props: any) => {
               project: project,
             },
           });
-        }}>
+        }}
+      >
         <View style={styles.avatar}>
           <AntDesign
             name="adduser"
@@ -74,7 +75,6 @@ export const ProjectUsers = (props: any) => {
         </View>
         <View>
           <Text style={styles.name}>{data.displayName || ""}</Text>
-          <Text style={styles.nameSubtitle}>{data.subTitle || ""}</Text>
         </View>
       </Pressable>
     );
@@ -100,7 +100,8 @@ export const ProjectUsers = (props: any) => {
             onPress={() => {
               deleteProjectUser(project, data, deleteDone);
               row[index].close();
-            }}>
+            }}
+          >
             <AntDesign name="delete" size={25} color={"white"} />
             <Text style={{ color: "white" }}>Delete</Text>
           </Pressable>
@@ -115,7 +116,8 @@ export const ProjectUsers = (props: any) => {
         rightThreshold={40}
         friction={2}
         onSwipeableOpen={() => closeRow(index)}
-        ref={(ref) => (row[index] = ref)}>
+        ref={(ref) => (row[index] = ref)}
+      >
         <View key={data.uid} style={styles.outerView}>
           <View style={styles.avatar}>
             {data.photoURL ? (

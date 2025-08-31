@@ -124,8 +124,14 @@ export default function SignIn() {
           style={styles.textInput}
           placeholder={t("password")}
           secureTextEntry={secureEntry}
-          autoComplete="password"
-          textContentType="password"
+          autoCapitalize="none"
+          autoComplete="current-password"
+          autoCorrect={false}
+          spellCheck={false}
+          keyboardType="default"
+          returnKeyType="done"
+          accessibilityLabel={t("password")}
+          importantForAutofill="yes"
           onChangeText={(password) => {
             setPassword(password);
             setErrorMessage("");

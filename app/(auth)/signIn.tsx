@@ -91,6 +91,14 @@ export default function SignIn() {
               style={styles.textInput}
               placeholder={t("password")}
               secureTextEntry={secureEntry}
+              autoCapitalize="none"
+              autoComplete="current-password"
+              autoCorrect={false}
+              spellCheck={false}
+              keyboardType="default"
+              returnKeyType="done"
+              accessibilityLabel={t("password")}
+              importantForAutofill="yes"
               onChangeText={(password) => {
                 setPassword(password);
                 setNotification("");
@@ -202,7 +210,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    marginTop: 80,
+    marginTop: 60,
     paddingBottom: 10,
   },
   loginText: {
@@ -211,7 +219,7 @@ const styles = StyleSheet.create({
   },
   notificationText: {
     color: "red",
-    fontSize: 18,
+    fontSize: 14,
     textAlign: "center",
   },
 
