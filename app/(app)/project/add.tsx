@@ -6,7 +6,6 @@ import { useSession } from "@/lib/ctx";
 import { addProject, addProjectUser } from "@/lib/APIproject";
 import { IProject, IUser } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
-import { Back } from "@/components/Back";
 import { About } from "@/lib/about";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";

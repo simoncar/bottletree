@@ -5,12 +5,13 @@ import {
   onSnapshot,
   serverTimestamp,
   setDoc,
-  getDoc,
+  getDocs,
   updateDoc,
   writeBatch,
+  query,
+  orderBy,
 } from "@react-native-firebase/firestore";
 import { ITask } from "./types";
-import { getDocs, query, orderBy } from "@react-native-firebase/firestore";
 
 type tasksRead = (tasks: ITask[]) => void;
 
