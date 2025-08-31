@@ -80,6 +80,7 @@ export default function CameraComponent() {
 
   const saveDone = () => {
     setCapturedPhotoUri(null); // Reset after upload
+    setProgress(0);
     router.dismiss();
   };
 
@@ -100,7 +101,7 @@ export default function CameraComponent() {
     console.log("Camera add post: ", post);
 
     addPostImage(post, saveDone);
-    setProgress(0);
+    // setProgress(0);
   };
 
   const handlePressIn = () => {
@@ -164,7 +165,6 @@ export default function CameraComponent() {
             source={{ uri: capturedPhotoUri }}
             style={styles.capturedImage}
           />
-          <Text style={styles.uploadingText}>{t("uploadingPhoto")}</Text>
         </View>
       ) : (
         // Show camera view if no photo captured
