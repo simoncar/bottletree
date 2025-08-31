@@ -195,7 +195,8 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 1,
     flexDirection: "row",
-    height: 40,
+    height: 50,
+    marginTop: 10,
     marginBottom: 10,
     marginHorizontal: 10,
   },
@@ -212,7 +213,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   searchInput: {
-    fontSize: 18,
+    fontSize: 20,
+    paddingHorizontal: 10,
   },
   userList: {
     paddingBottom: 50,
