@@ -79,6 +79,7 @@ export default function CameraComponent() {
   };
 
   const saveDone = () => {
+    setCapturedPhotoUri(null); // Reset after upload
     router.dismiss();
   };
 
@@ -100,7 +101,6 @@ export default function CameraComponent() {
 
     addPostImage(post, saveDone);
     setProgress(0);
-    setCapturedPhotoUri(null); // Reset after upload
   };
 
   const handlePressIn = () => {
