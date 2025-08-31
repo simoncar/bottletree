@@ -59,12 +59,10 @@ export default function EditProject() {
 
   const saveDone = (id: string) => {
     if (project.archived) {
+      router.dismiss();
       router.push("/");
     } else {
-      router.push({
-        pathname: "/[posts]",
-        params: { posts: project.key },
-      });
+      router.dismiss();
     }
   };
 
