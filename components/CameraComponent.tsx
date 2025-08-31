@@ -7,6 +7,7 @@ import {
   useColorScheme,
   Animated,
   Easing,
+  Image,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Colors from "@/constants/Colors";
@@ -24,6 +25,7 @@ import { useTranslation } from "react-i18next";
 export default function CameraComponent() {
   const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
+  const [capturedPhotoUri, setCapturedPhotoUri] = useState<string | null>(null); // New state for captured photo URI
 
   const colorScheme = useColorScheme();
   const { user } = useContext(UserContext);
@@ -98,6 +100,7 @@ export default function CameraComponent() {
 
     addPostImage(post, saveDone);
     setProgress(0);
+    setCapturedPhotoUri(null); // Reset after upload
   };
 
   const handlePressIn = () => {
@@ -126,6 +129,8 @@ export default function CameraComponent() {
       const options = { quality: 0.7 };
       const photo = await cameraRef.current.takePictureAsync(options);
 
+      setCapturedPhotoUri(photo.uri); // Set the captured photo URI to display it
+
       addImageFromPhoto(
         photo,
         "project",
@@ -152,36 +157,50 @@ export default function CameraComponent() {
     <View style={styles.container}>
       <Progress progress={progress} />
 
-      <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
-        <View style={styles.buttonRow}>
-          <View style={styles.a}></View>
-          <View style={styles.a}>
-            <TouchableOpacity
-              onPressIn={handlePressIn}
-              onPressOut={takePicture}
-              activeOpacity={1}
-            >
-              <Animated.View style={[styles.circleOuter, animatedStyle]}>
-                <View style={styles.circleMiddle}>
-                  <View style={[styles.circleInner, animatedInnerStyle]}></View>
-                </View>
-              </Animated.View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.a}>
-            <TouchableOpacity
-              style={styles.flipCamera}
-              onPress={toggleCameraFacing}
-            >
-              <Ionicons
-                name="camera-reverse-outline"
-                size={45}
-                color={Colors[colorScheme ?? "light"].textPlaceholder}
-              />
-            </TouchableOpacity>
-          </View>
+      {capturedPhotoUri ? (
+        // Show captured image in a smaller window while uploading
+        <View style={styles.capturedImageContainer}>
+          <Image
+            source={{ uri: capturedPhotoUri }}
+            style={styles.capturedImage}
+          />
+          <Text style={styles.uploadingText}>{t("uploadingPhoto")}</Text>
         </View>
-      </CameraView>
+      ) : (
+        // Show camera view if no photo captured
+        <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
+          <View style={styles.buttonRow}>
+            <View style={styles.a}></View>
+            <View style={styles.a}>
+              <TouchableOpacity
+                onPressIn={handlePressIn}
+                onPressOut={takePicture}
+                activeOpacity={1}
+              >
+                <Animated.View style={[styles.circleOuter, animatedStyle]}>
+                  <View style={styles.circleMiddle}>
+                    <View
+                      style={[styles.circleInner, animatedInnerStyle]}
+                    ></View>
+                  </View>
+                </Animated.View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.a}>
+              <TouchableOpacity
+                style={styles.flipCamera}
+                onPress={toggleCameraFacing}
+              >
+                <Ionicons
+                  name="camera-reverse-outline"
+                  size={45}
+                  color={Colors[colorScheme ?? "light"].textPlaceholder}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </CameraView>
+      )}
     </View>
   );
 }
@@ -201,6 +220,15 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+  },
+  capturedImage: {
+    height: 200,
+    width: 200,
+  },
+  capturedImageContainer: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
   },
   circleInner: {
     backgroundColor: "white",
@@ -238,6 +266,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     paddingBottom: 20,
+    textAlign: "center",
+  },
+  uploadingText: {
+    fontSize: 18,
+    marginTop: 20,
     textAlign: "center",
   },
 });
