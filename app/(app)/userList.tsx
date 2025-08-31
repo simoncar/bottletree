@@ -175,6 +175,9 @@ const UserList = () => {
 
 const styles = StyleSheet.create({
   avatar: {
+    alignItems: "center",
+    height: 50,
+    justifyContent: "center",
     marginRight: 12,
     width: 50,
   },
@@ -210,11 +213,13 @@ const styles = StyleSheet.create({
 
   searchIcon: {
     fontSize: 20,
-    paddingHorizontal: 10,
+    textAlign: "center",
   },
   searchInput: {
     fontSize: 20,
+    height: 50,
     paddingHorizontal: 10,
+    textAlignVertical: "center",
   },
   userList: {
     paddingBottom: 50,
