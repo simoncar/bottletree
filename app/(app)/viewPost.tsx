@@ -5,6 +5,7 @@ import {
   View,
   useColorScheme,
   Pressable,
+  Alert,
 } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Feather } from "@expo/vector-icons";
@@ -62,9 +63,10 @@ const ViewPost = () => {
       Toast.show(t("completed"), {
         duration: Toast.durations.SHORT,
       });
+      Alert.alert(t("completed"));
     } catch (error) {
       console.error("Error downloading or saving image", error);
-      Toast.show(t('failed') + ":" + error, {
+      Toast.show(t("failed") + ":" + error, {
         duration: Toast.durations.SHORT,
       });
     }
@@ -78,7 +80,8 @@ const ViewPost = () => {
             <Pressable
               onPressIn={() => {
                 downloadImage();
-              }}>
+              }}
+            >
               <Feather
                 name="download"
                 size={23}
