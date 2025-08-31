@@ -37,6 +37,8 @@ This is a React Native application built with Expo, using Expo Router for file-b
   const docSnap = await getDoc(docRef);
   ```
 
+  Never use inline imports, always define imports at the top of the file.
+
 - **API Layer**: All Firestore, Storage, and Auth calls should be encapsulated within functions in the `lib/API*.ts` files. Do not perform direct Firebase calls from UI components. This keeps the data logic clean and reusable.
 - **Firestore Queries**: When performing `in` queries, be mindful of the 30-element limit per query. The codebase already contains a chunking pattern for this in `lib/APIproject.ts` which should be reused if necessary.
 

@@ -5,10 +5,12 @@ import {
   onSnapshot,
   serverTimestamp,
   setDoc,
+  getDoc,
   updateDoc,
   writeBatch,
 } from "@react-native-firebase/firestore";
 import { ITask } from "./types";
+import { getDocs, query, orderBy } from "@react-native-firebase/firestore";
 
 type tasksRead = (tasks: ITask[]) => void;
 
@@ -60,10 +62,27 @@ export async function addTask(project: string, task: ITask, callback: any) {
   );
   const taskDocRef = doc(tasksCollection);
 
+  const querySnapshot = await getDocs(
+    query(tasksCollection, orderBy("order", "asc")),
+  );
+
+  const batch = writeBatch(dbm);
+
+  querySnapshot.forEach((docSnap, idx) => {
+    const existingOrder = idx + 1;
+    const taskRef = doc(tasksCollection, docSnap.id);
+    batch.update(taskRef, { order: existingOrder + 1 });
+  });
+
+  // Commit batch updates
+  await batch.commit();
+
+  // Clean and add the new task at order 0
   task = cleanTask(task as ITask);
 
   await setDoc(taskDocRef, {
     ...task,
+    order: 0,
     created: serverTimestamp(),
     modified: serverTimestamp(),
   });
