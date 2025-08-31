@@ -8,20 +8,20 @@ service cloud.firestore {
     }
 
 	match /projects/demo {
-      allow read, list, write: if request.auth.uid != null
+      allow read,  write: if request.auth.uid != null
     }
 	match /projects/demo/{path=**} {
-      allow read, list, write: if request.auth.uid != null
+      allow read,  write: if request.auth.uid != null
     }
 	match /projects/photos/{path=**} {
-      allow read, list: if true
+      allow read : if true
     }
 	 match /projects/photos/posts/{document=**} {
-      allow read, list: if true
+      allow read: if true
     }
 
 	 match /projects/photos/posts/{postId} {
-      allow read, list: if true
+      allow read: if true
     }
 
     match /projects/{projectId}/{path=**} {
@@ -30,20 +30,18 @@ service cloud.firestore {
     }
 	match /projects/{projectId} {
 	    allow create: if request.auth != null;     
-      allow read, list: if request.auth.uid in resource.data.allowedUsers;
+      allow read: if request.auth.uid in resource.data.allowedUsers;
       allow write: if request.auth.uid in resource.data.allowedUsers;
     }
     match /{path=**}/accessList/{docId} {
-      allow read, list: if request.auth.uid == resource.data.uid;
+      allow read: if request.auth.uid == resource.data.uid;
       allow write: if request.auth.uid in get(/databases/$(database)/documents/$(path)).data.allowedUsers;
     }
     match /users/{userId} {
 	    allow create: if request.auth != null; 
         allow read: if request.auth.uid == resource.data.uid; 
-		allow list: if request.auth.uid == resource.data.uid; 
 		allow write: if request.auth.uid == resource.data.uid;   
 	    allow read: if request.auth.uid == resource.data.createdByUid;   
-		allow list: if request.auth.uid == resource.data.createdByUid;   
 		allow write: if request.auth.uid == resource.data.createdByUid;   
     }
     match /tokens/{document=**} {

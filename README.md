@@ -36,6 +36,7 @@ npm install -g firebase-tools
 
 firebase deploy --only functions
 firebase deploy --only functions --project builder-403d5p
+firebase deploy --only firestore:rules
 
 npx expo install --fix
 
