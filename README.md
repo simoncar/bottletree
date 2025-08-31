@@ -59,3 +59,5 @@ git log --pretty=format:"[%ad] %s" --date=short > commit_messages.txt
 ///////////////////////////////////////////
 npx expo install expo@latest --fix
 npx sentry-expo-upload-sourcemaps dist
+
+

@@ -22,20 +22,20 @@ const UserProvider = (props: React.PropsWithChildren) => {
     console.log("UserContext - useEffect:", session, user?.uid);
 
     const fetchData = async () => {
-      try {
-        if (!session || isUserSet) return;
+      // try {
+      if (!session || isUserSet) return;
 
-        const id = user?.uid || session;
+      const id = user?.uid || session;
 
-        const userData = await getUser(id);
+      const userData = await getUser(id);
 
-        if (userData) {
-          setUser(userData);
-          setIsUserSet(true);
-        }
-      } catch (error) {
-        console.error("Error fetching user data inside createContext:", error);
+      if (userData) {
+        setUser(userData);
+        setIsUserSet(true);
       }
+      // } catch (error) {
+      //  console.error("Error fetching user data inside createContext:", error);
+      //}
     };
 
     fetchData();
