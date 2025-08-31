@@ -129,7 +129,7 @@ export default function CameraComponent() {
     if (cameraRef.current) {
       const options = { quality: 0.7 };
       const photo = await cameraRef.current.takePictureAsync(options);
-
+      setProgress(1);
       setCapturedPhotoUri(photo.uri); // Set the captured photo URI to display it
 
       addImageFromPhoto(
