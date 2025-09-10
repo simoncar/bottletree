@@ -18,6 +18,8 @@ import * as Device from "expo-device";
 import { IUser } from "./types";
 
 export async function getUser(uid: string) {
+  console.log("getUser: ", uid);
+
   const userDocRef = doc(dbm, "users", uid);
   const docSnap = await getDoc(userDocRef);
 
