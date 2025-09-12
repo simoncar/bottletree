@@ -48,7 +48,7 @@
     "@react-native-firebase/firestore": "^23.3.1",
     "@react-native-firebase/storage": "^23.3.1",
     "@react-navigation/native": "^7.1.17",
-    "@sentry/react-native": "~6.20.0",
+    "@sentry/react-native": "^7.0.1",
     "dayjs": "^1.11.18",
     "expo": "^54.0.0",
     "expo-application": "~7.0.7",
