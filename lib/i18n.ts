@@ -20,13 +20,13 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: "es",
-    fallbackLng: "es",
+    lng: Localization.getLocales()[0]?.languageCode || "en",
+    fallbackLng: "en",
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
   });
 
 console.log("i18n initialized with language:", i18n.language);
-//lng: Localization.getLocales()[0]?.languageCode || "es",
+//
 export default i18n;
