@@ -8,7 +8,7 @@ module.exports = ({ config }) => {
     expo: {
       name: isDev ? "One Build DEV" : "One Build",
       slug: "bottletree",
-      version: "25.7.290",
+      version: "25.9.310",
       orientation: "default",
       icon: "./assets/images/icon.png",
       scheme: "bottletree",
