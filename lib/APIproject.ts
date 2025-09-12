@@ -108,33 +108,16 @@ export async function getProjects(
     projects.length = 0;
     projectsArchived.length = 0;
 
-    projectsSnapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-      if (!data.archived) {
-        projects.push({
-          project: docSnap.id,
-          key: docSnap.id,
-          title: data.title || "Untitled",
-          icon: data.icon,
-          archived: false,
-          postCount: data.postCount ?? 0,
-          taskCount: data.taskCount ?? 0,
-          fileCount: data.fileCount ?? 0,
-          timestamp: data.timestamp,
-          private: data.private || false,
-          created: data.created || data.timestamp,
-          star: data.star || false,
-          allowedUsers: data.allowedUsers,
-          owner: data.owner,
-        });
-      } else {
-        if (archived) {
-          projectsArchived.push({
+    if (projectsSnapshot) {
+      projectsSnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        if (!data.archived) {
+          projects.push({
             project: docSnap.id,
             key: docSnap.id,
             title: data.title || "Untitled",
             icon: data.icon,
-            archived: true,
+            archived: false,
             postCount: data.postCount ?? 0,
             taskCount: data.taskCount ?? 0,
             fileCount: data.fileCount ?? 0,
@@ -145,16 +128,37 @@ export async function getProjects(
             allowedUsers: data.allowedUsers,
             owner: data.owner,
           });
+        } else {
+          if (archived) {
+            projectsArchived.push({
+              project: docSnap.id,
+              key: docSnap.id,
+              title: data.title || "Untitled",
+              icon: data.icon,
+              archived: true,
+              postCount: data.postCount ?? 0,
+              taskCount: data.taskCount ?? 0,
+              fileCount: data.fileCount ?? 0,
+              timestamp: data.timestamp,
+              private: data.private || false,
+              created: data.created || data.timestamp,
+              star: data.star || false,
+              allowedUsers: data.allowedUsers,
+              owner: data.owner,
+            });
+          }
         }
-      }
-      if (docSnap.id === "demo") {
-        projectsDemo[0].postCount = data.postCount ?? 0;
-        projectsDemo[0].taskCount = data.taskCount ?? 0;
-        projectsDemo[0].fileCount = data.fileCount ?? 0;
-        projectsDemo[0].allowedUsers = data.allowedUsers;
-        projectsDemo[0].owner = data.owner;
-      }
-    });
+        if (docSnap.id === "demo") {
+          projectsDemo[0].postCount = data.postCount ?? 0;
+          projectsDemo[0].taskCount = data.taskCount ?? 0;
+          projectsDemo[0].fileCount = data.fileCount ?? 0;
+          projectsDemo[0].allowedUsers = data.allowedUsers;
+          projectsDemo[0].owner = data.owner;
+        }
+      });
+    } else {
+      console.error("projectsSnapshot is null or does not have forEach method");
+    }
 
     projects.forEach((project) => {
       if (!project.timestamp) {
