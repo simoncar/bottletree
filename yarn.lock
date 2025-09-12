@@ -3050,7 +3050,7 @@
     "@react-navigation/elements" "^2.6.4"
     warn-once "^0.1.1"
 
-"@react-navigation/native@^7.1.17", "@react-navigation/native@^7.1.8":
+"@react-navigation/native@^7.1.8":
   version "7.1.17"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-7.1.17.tgz#88d557c0f5000aa2741e4368c59719526f1394c4"
   integrity sha512-uEcYWi1NV+2Qe1oELfp9b5hTYekqWATv2cuwcOAg5EvsIsUPtzFrKIasgUXLBRGb9P7yR5ifoJ+ug4u6jdqSTQ==
@@ -6479,7 +6479,7 @@ expo-web-browser@~15.0.7:
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-15.0.7.tgz#eb4bc306db75d8c46f549d8a9150945f9436bcfc"
   integrity sha512-eXnfO3FQ2WthTA8uEPNJ7SDRfPaLIU/P2k082HGEYIHAFZMwh2o9Wo+SDVytO3E95TAv1qwhggUjOrczYzxteQ==
 
-expo@54.0.2:
+expo@^54.0.0:
   version "54.0.2"
   resolved "https://registry.yarnpkg.com/expo/-/expo-54.0.2.tgz#5a8f7f9456724936a60c5b1bd789f1cc2401cfc7"
   integrity sha512-0YcsvMuiZlVFVZRdD4PlhwsYrTmcN1qm5b1IRSLIeLZjH6ZnQwBb3KBSnK8WRC9V6EUPSbuLGpNT5AEewrtakQ==
