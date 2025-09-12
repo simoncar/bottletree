@@ -1,5 +1,16 @@
 import { auth, dbm, firestore, updateProfile } from "@/lib/firebase";
-import {
+// Use conditional imports for web vs native environments
+import { Platform } from "react-native";
+
+let firestoreImports: any;
+
+if (Platform.OS === "web") {
+  firestoreImports = require("firebase/firestore");
+} else {
+  firestoreImports = require("@react-native-firebase/firestore");
+}
+
+const {
   arrayRemove,
   arrayUnion,
   collection,
@@ -13,7 +24,7 @@ import {
   setDoc,
   updateDoc,
   where,
-} from "@react-native-firebase/firestore";
+} = firestoreImports;
 import * as Device from "expo-device";
 import { IUser } from "./types";
 

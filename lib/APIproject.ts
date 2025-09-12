@@ -1,4 +1,14 @@
-import {
+import { Platform } from "react-native";
+
+// Use conditional imports for web vs native environments
+let firestoreImports: any;
+if (Platform.OS === "web") {
+  firestoreImports = require("firebase/firestore");
+} else {
+  firestoreImports = require("@react-native-firebase/firestore");
+}
+
+const {
   collection,
   collectionGroup,
   deleteDoc,
@@ -12,7 +22,7 @@ import {
   arrayRemove,
   query,
   where,
-} from "@react-native-firebase/firestore";
+} = firestoreImports;
 import { createUser } from "./APIuser";
 import { dbm } from "./firebase";
 import { IProject, IUser } from "./types";
