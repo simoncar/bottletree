@@ -88,7 +88,7 @@ module.exports = ({ config }) => {
           "expo-build-properties",
           {
             ios: {
-              useFrameworks: "static",
+              useFrameworks: "dynamic",
               buildReactNativeFromSource: true,
             },
           },
