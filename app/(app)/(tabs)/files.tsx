@@ -6,7 +6,7 @@ import {
   getFiles,
   uploadFilesAndCreateEntries,
 } from "@/lib/APIfiles";
-import { IFile } from "@/lib/types";
+import { IFile, Timestamp } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -31,7 +31,6 @@ import Reanimated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 import Toast from "react-native-toast-message";
-import { Timestamp } from "@react-native-firebase/firestore";
 
 type SearchParams = {
   project: string; //project ID

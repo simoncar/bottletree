@@ -1,18 +1,18 @@
+import * as Calendar from "expo-calendar";
+import { Platform } from "react-native";
 import {
+  dbm,
   addDoc,
   collection,
   deleteDoc,
-  doc, // For Firestore server timestamps
+  doc,
   FirestoreError,
   getDoc,
   getDocs,
   onSnapshot,
   serverTimestamp,
   setDoc,
-} from "@react-native-firebase/firestore";
-import * as Calendar from "expo-calendar";
-import { Platform } from "react-native";
-import { dbm } from "./firebase"; // Assuming 'db' is your modular Firestore instance
+} from "./firebase"; // Assuming 'db' is your modular Firestore instance
 import { ICalendarEvent } from "./types";
 
 type itemsRead = (calendarEvents: ICalendarEvent[]) => void;

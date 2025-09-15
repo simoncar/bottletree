@@ -30,8 +30,7 @@ This is a React Native application built with Expo, using Expo Router for file-b
 
   ```typescript
   // Correct (Modular)
-  import { doc, getDoc } from "@react-native-firebase/firestore";
-  import { dbm } from "./firebase";
+  import { dbm, doc, getDoc } from "@/lib/firebase";
 
   const docRef = doc(dbm, "projects", projectId);
   const docSnap = await getDoc(docRef);

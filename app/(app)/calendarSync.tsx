@@ -1,7 +1,7 @@
 import { ButtonYellow } from "@/components/Button";
-import { dbm } from "@/lib/firebase";
+import { dbm, collection, doc, getDocs } from "@/lib/firebase";
 import { ICalendarEvent } from "@/lib/types";
-import { collection, doc, getDocs } from "@react-native-firebase/firestore";
+
 import * as Calendar from "expo-calendar";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";

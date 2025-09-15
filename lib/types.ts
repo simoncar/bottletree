@@ -1,7 +1,4 @@
-import {
-  FieldValue,
-  FirebaseFirestoreTypes,
-} from "@react-native-firebase/firestore";
+import { FieldValue, FirebaseFirestoreTypes } from "@/lib/firebase";
 import { ICalendarEventBase } from "react-native-big-calendar";
 
 export type CollectionReference = FirebaseFirestoreTypes.CollectionReference;

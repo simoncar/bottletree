@@ -1,14 +1,7 @@
 import Colors from "@/constants/Colors";
 import { addComment, getComments } from "@/lib/APIpost";
-import { firestore } from "@/lib/firebase";
-import { IComment } from "@/lib/types";
-import { UserContext } from "@/lib/UserContext";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
-import { ParsedText, TextInput, View } from "./Themed";
 import {
+  firestore,
   addDoc,
   collection,
   deleteDoc,
@@ -20,7 +13,14 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from "@react-native-firebase/firestore";
+} from "@/lib/firebase";
+import { IComment } from "@/lib/types";
+import { UserContext } from "@/lib/UserContext";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FlatList, Pressable, StyleSheet, useColorScheme } from "react-native";
+import { ParsedText, TextInput, View } from "./Themed";
 
 type Props = {
   project: string;

@@ -1,4 +1,4 @@
-import { Timestamp } from "@react-native-firebase/firestore";
+import { Timestamp } from "@/lib/firebase";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {

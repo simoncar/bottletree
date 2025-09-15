@@ -5,7 +5,7 @@ import {
   serverTimestamp,
   arrayUnion,
   updateDoc,
-} from "@react-native-firebase/firestore";
+} from "@/lib/firebase";
 
 import {
   auth,

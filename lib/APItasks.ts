@@ -1,5 +1,5 @@
-import { dbm } from "@/lib/firebase";
 import {
+  dbm,
   collection,
   doc,
   onSnapshot,
@@ -7,10 +7,11 @@ import {
   setDoc,
   getDocs,
   updateDoc,
-  writeBatch,
   query,
   orderBy,
-} from "@react-native-firebase/firestore";
+  writeBatch,
+} from "@/lib/firebase";
+
 import { ITask } from "./types";
 
 type tasksRead = (tasks: ITask[]) => void;

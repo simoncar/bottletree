@@ -3,9 +3,9 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 import { updateUserPushToken } from "./APIuser";
-import { auth, firestore } from "./firebase";
-import { IPushToken } from "./types";
 import {
+  auth,
+  firestore,
   addDoc,
   collection,
   deleteDoc,
@@ -17,7 +17,8 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from "@react-native-firebase/firestore";
+} from "./firebase";
+import { IPushToken } from "./types";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

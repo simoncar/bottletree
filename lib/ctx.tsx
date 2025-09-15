@@ -1,13 +1,5 @@
 import { updateAccountName, updateUser } from "@/lib/APIuser";
-import {
-  auth,
-  firestore,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signInAnonymously,
-  sendPasswordResetEmail,
-  signOut as firebaseSignOut,
-} from "@/lib/firebase";
+
 import { IUser } from "@/lib/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext } from "react";
@@ -24,7 +16,14 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from "@react-native-firebase/firestore";
+  auth,
+  firestore,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInAnonymously,
+  sendPasswordResetEmail,
+  signOut as firebaseSignOut,
+} from "@/lib/firebase";
 
 interface AuthContextType {
   session?: string | null;

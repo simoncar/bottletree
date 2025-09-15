@@ -1,16 +1,15 @@
 import * as Application from "expo-application";
 import * as Device from "expo-device";
-import { dbm } from "./firebase";
-import { ILog } from "./types";
-
 import {
+  dbm,
   addDoc,
   collection,
   getDocs,
   orderBy,
   query,
   serverTimestamp,
-} from "@react-native-firebase/firestore";
+} from "./firebase";
+import { ILog } from "./types";
 
 // Update getLogs to use modular API
 export async function getLogs(callback: logsRead) {

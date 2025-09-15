@@ -6,9 +6,32 @@ import {
   fetchSignInMethodsForEmail,
   updateProfile,
 } from "firebase/auth";
-import "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  collectionGroup,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+  addDoc,
+  onSnapshot,
+  orderBy,
+  FirestoreError,
+  runTransaction,
+  writeBatch,
+  Timestamp,
+  FieldValue,
+  getFirestore,
+} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA-u3kUGycFCQQC5S3r2p2nQAGPRhKiMpE",
@@ -39,4 +62,26 @@ export {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
+  arrayRemove,
+  arrayUnion,
+  collection,
+  collectionGroup,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+  addDoc,
+  onSnapshot,
+  orderBy,
+  FirestoreError,
+  runTransaction,
+  writeBatch,
+  Timestamp,
+  FieldValue,
+  FirebaseFirestoreTypes,
 };

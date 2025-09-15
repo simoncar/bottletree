@@ -1,4 +1,4 @@
-import { doc, setDoc, Timestamp } from "@react-native-firebase/firestore";
+import { doc, setDoc, Timestamp } from "@/lib/firebase";
 import { dbm } from "./firebase";
 
 export const demoData2 = async () => {

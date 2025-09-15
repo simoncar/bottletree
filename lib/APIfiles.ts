@@ -1,5 +1,5 @@
-import { dbm } from "@/lib/firebase"; // or "@/lib/firebase.web"
 import {
+  dbm,
   addDoc,
   collection,
   doc,
@@ -8,7 +8,8 @@ import {
   query,
   runTransaction,
   serverTimestamp,
-} from "@react-native-firebase/firestore";
+} from "@/lib/firebase"; // or "@/lib/firebase.web"
+
 import storage, { getDownloadURL } from "@react-native-firebase/storage";
 import * as Crypto from "expo-crypto";
 import * as DocumentPicker from "expo-document-picker";

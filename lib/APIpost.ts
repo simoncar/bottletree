@@ -1,4 +1,5 @@
 import {
+  dbm,
   addDoc,
   collection,
   deleteDoc,
@@ -10,8 +11,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
-} from "@react-native-firebase/firestore";
-import { dbm } from "./firebase";
+} from "./firebase";
 import { IComment, IPost } from "./types";
 import { parseImages } from "@/lib/util";
 

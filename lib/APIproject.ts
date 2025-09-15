@@ -1,6 +1,8 @@
 import { Platform } from "react-native";
 
+import { createUser } from "./APIuser";
 import {
+  dbm,
   collection,
   collectionGroup,
   deleteDoc,
@@ -14,9 +16,7 @@ import {
   arrayRemove,
   query,
   where,
-} from "@react-native-firebase/firestore";
-import { createUser } from "./APIuser";
-import { dbm } from "./firebase";
+} from "./firebase";
 import { IProject, IUser } from "./types";
 
 type projectsRead = (projects: IProject[]) => void;
