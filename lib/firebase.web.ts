@@ -33,11 +33,6 @@ import {
 import { getStorage } from "firebase/storage";
 import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 
-console.log(
-  "Using web version of Firebase:",
-  process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-);
-
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -48,8 +43,6 @@ const firebaseConfig = {
   measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID,
   databaseURL: process.env.EXPO_PUBLIC_FIREBASE_DATABASE_URL,
 };
-
-console.log("firebaseConfig:", firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 const dbm = getFirestore(app);
