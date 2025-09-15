@@ -203,7 +203,7 @@ const AddModal = ({
           >
             <Text style={styles.optionText}>{t("addFile")}</Text>
             <AntDesign
-              name="addfile"
+              name="file-add"
               size={24}
               color={Colors[colorScheme ?? "light"].text}
             />

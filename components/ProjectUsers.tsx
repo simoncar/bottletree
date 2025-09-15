@@ -68,7 +68,7 @@ export const ProjectUsers = (props: any) => {
       >
         <View style={styles.avatar}>
           <AntDesign
-            name="adduser"
+            name="user-add"
             size={25}
             color={Colors[colorScheme ?? "light"].text}
           />

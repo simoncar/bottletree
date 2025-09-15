@@ -335,7 +335,7 @@ export default function Files() {
       )}
       <FloatingButton
         title={t("addFile")}
-        icon={<AntDesign name="addfile" size={28} color="#ffffff" />}
+        icon={<AntDesign name="file-add" size={28} color="#ffffff" />}
         onPress={handleAddFilePress}
       />
     </View>
