@@ -64,7 +64,8 @@ const ProjectList = () => {
           router.replace({
             pathname: "/project/add",
           });
-        }}>
+        }}
+      >
         <View style={styles.outerView}>
           <View style={styles.innerView}>
             <View style={styles.avatar}>
@@ -133,7 +134,8 @@ const ProjectList = () => {
                 title: data.title,
               },
             });
-          }}>
+          }}
+        >
           <View style={styles.avatar}>
             {icon ? (
               <Image style={styles.avatarFace} source={data.icon} />
@@ -169,7 +171,8 @@ const ProjectList = () => {
                 archived: data.archived,
               },
             });
-          }}>
+          }}
+        >
           <View style={styles.rightChevron}>
             <FontAwesome5
               name="chevron-right"
@@ -187,7 +190,8 @@ const ProjectList = () => {
       style={[
         styles.container,
         { backgroundColor: Colors[colorScheme ?? "light"].background },
-      ]}>
+      ]}
+    >
       <ScrollView style={styles.projectList}>
         <View>{renderAdd()}</View>
         {loading === false && (

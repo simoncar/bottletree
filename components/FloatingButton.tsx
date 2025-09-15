@@ -21,7 +21,8 @@ export function FloatingButton({
   return (
     <TouchableOpacity
       style={[styles.floatingButton, style, { width: buttonWidth }]}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       {icon ? icon : <AntDesign name="addfile" size={28} color="#ffffff" />}
       {title ? <Text style={styles.floatingButtonText}>{title}</Text> : null}
     </TouchableOpacity>
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   },
   floatingButtonText: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: 14,
     marginLeft: 10,
   },
 });
