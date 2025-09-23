@@ -16,6 +16,8 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
+  Platform,
+  FlatList,
 } from "react-native";
 import {
   NestableDraggableFlatList,
@@ -42,6 +44,8 @@ export default function Tasks() {
     incomplete: false,
     completed: true,
   });
+
+  const isWeb = Platform.OS === "web";
 
   useEffect(() => {
     getTasks(project, (retrievedTasks) => {
@@ -208,6 +212,33 @@ export default function Tasks() {
     />
   );
 
+  const renderDraggableList = () => {
+    if (isWeb) {
+      // Fallback to FlatList on web
+      return (
+        <FlatList
+          data={tasksIncomplete}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.key}
+          // Add any FlatList props you need
+        />
+      );
+    } else {
+      // Use draggable list on native
+      return (
+        <NestableDraggableFlatList
+          data={tasksIncomplete}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.key}
+          onDragEnd={({ data }) => {
+            setTasksIncomplete(data);
+            setTaskOrder(project, data);
+          }}
+        />
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
       <FloatingButton
@@ -239,15 +270,7 @@ export default function Tasks() {
                       },
                     ]}
                   >
-                    <NestableDraggableFlatList
-                      data={tasksIncomplete}
-                      renderItem={renderItem}
-                      keyExtractor={(item) => item.key}
-                      onDragEnd={({ data }) => {
-                        setTasksIncomplete(data);
-                        setTaskOrder(project, data);
-                      }}
-                    />
+                    {renderDraggableList()}
                   </View>
                 )}
               </>
