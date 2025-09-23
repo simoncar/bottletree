@@ -86,18 +86,18 @@ export const Update = () => {
     try {
       const update = await Updates.checkForUpdateAsync();
 
-      if (update.isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync({
-          reloadScreenOptions: {
-            backgroundColor: "#fa0000",
-            image: require("@/assets/images/reload.png"),
-            imageResizeMode: "cover",
-            imageFullScreen: true,
-            fade: true,
-          },
-        });
-      }
+      //if (update.isAvailable) {
+      await Updates.fetchUpdateAsync();
+      await Updates.reloadAsync({
+        reloadScreenOptions: {
+          backgroundColor: "#fa0000",
+          image: require("@/assets/images/reload.png"),
+          imageResizeMode: "cover",
+          imageFullScreen: true,
+          fade: true,
+        },
+      });
+      //}
     } catch (error) {
       alert(`Error fetching latest update: ${error}`);
     } finally {
