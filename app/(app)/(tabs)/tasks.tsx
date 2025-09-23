@@ -133,7 +133,8 @@ export default function Tasks() {
       <View style={styles.taskItem}>
         <TouchableOpacity
           style={styles.iconContainer}
-          onPress={() => toggleComplete(task)}>
+          onPress={() => toggleComplete(task)}
+        >
           <FontAwesome
             name={task.completed ? "check-circle" : "circle-thin"}
             size={24}
@@ -144,19 +145,22 @@ export default function Tasks() {
           style={styles.taskInfo}
           disabled={isActive}
           onLongPress={drag}
-          onPress={() => onPress(task)}>
+          onPress={() => onPress(task)}
+        >
           <Text
             style={[
               styles.taskName,
               task.completed && { textDecorationLine: "line-through" },
-            ]}>
+            ]}
+          >
             {task.task}
           </Text>
           {task.description ? (
             <Text
               style={styles.taskDescription}
               numberOfLines={2}
-              ellipsizeMode="tail">
+              ellipsizeMode="tail"
+            >
               {task.description}
             </Text>
           ) : null}
@@ -170,7 +174,8 @@ export default function Tasks() {
     return (
       <TouchableOpacity
         style={styles.sectionHeader}
-        onPress={() => toggleSection(section)}>
+        onPress={() => toggleSection(section)}
+      >
         <Text style={styles.sectionHeaderText}>{title}</Text>
         <AntDesign
           name={collapsedSections[section] ? "down" : "up"}
@@ -212,11 +217,12 @@ export default function Tasks() {
       />
       {loading ? (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
           <ActivityIndicator />
         </View>
       ) : (
-        <View>
+        <View style={{ flex: 1 }}>
           <NestableScrollContainer>
             {tasksIncomplete.length > 0 && (
               <>
@@ -231,7 +237,8 @@ export default function Tasks() {
                         borderColor:
                           Colors[colorScheme ?? "light"].postBackground,
                       },
-                    ]}>
+                    ]}
+                  >
                     <NestableDraggableFlatList
                       data={tasksIncomplete}
                       renderItem={renderItem}
@@ -254,7 +261,8 @@ export default function Tasks() {
                       Colors[colorScheme ?? "light"].postBackground,
                     borderColor: Colors[colorScheme ?? "light"].postBackground,
                   },
-                ]}>
+                ]}
+              >
                 {renderSectionHeader(
                   `${t("completed")} (${tasksComplete.length})`,
                   "completed",
