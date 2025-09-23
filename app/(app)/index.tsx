@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
     <View style={styles.overall}>
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <Stack.Screen
           options={{
             headerShown: false,
@@ -88,24 +88,26 @@ export default function Home() {
           />
         </View>
         {renderTopPanel()}
-        <ScrollView>
-          <Update />
-          <View style={styles.container}>
-            <Pressable
-              onPress={() => {
-                console.log("Projects");
-              }}
-            >
-              <View style={styles.instructions}>
-                <Text style={styles.welcomeApp}>{t("projects")}</Text>
-              </View>
-            </Pressable>
+        <View style={{ flex: 1 }}>
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+            <Update />
+            <View style={styles.container}>
+              <Pressable
+                onPress={() => {
+                  console.log("Projects");
+                }}
+              >
+                <View style={styles.instructions}>
+                  <Text style={styles.welcomeApp}>{t("projects")}</Text>
+                </View>
+              </Pressable>
 
-            <Projects session={session as string} archived={true} />
-            <View style={styles.bigGap} />
-            <About />
-          </View>
-        </ScrollView>
+              <Projects session={session as string} archived={true} />
+              <View style={styles.bigGap} />
+              <About />
+            </View>
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </View>
   );
@@ -177,5 +179,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 80,
     right: 10,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: "flex-start",
   },
 });
