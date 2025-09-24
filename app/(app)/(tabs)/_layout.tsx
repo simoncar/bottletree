@@ -104,18 +104,8 @@ export default function TabLayout() {
       >
         <Tabs.Screen
           name="[posts]"
-          listeners={{
-            tabPress: () => {
-              router.replace({
-                pathname: "/(app)",
-                params: {
-                  page: "",
-                },
-              });
-            },
-          }}
           options={{
-            title: t("projects"),
+            title: t("project"),
             headerRight: () => (
               <View style={styles.topPanelRight}>
                 <UserAvatar
