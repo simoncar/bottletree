@@ -93,7 +93,14 @@ export const Projects = ({ session, archived }: Props) => {
           <Text style={styles.projectCount}>
             {data.postCount > 0 ? `${t("posts")} ${data.postCount}` : ""}
             {data.postCount > 0 && data.fileCount > 0 ? " · " : ""}
-            {data.fileCount > 0 ? `${t("files")} ${data.fileCount}` : ""}
+            {data.fileCount > 0 ? (
+              <>
+                <MaterialIcons name="file-present" color="grey" />{" "}
+                {data.fileCount}
+              </>
+            ) : (
+              ""
+            )}
             {(data.postCount > 0 || data.fileCount > 0) && data.taskCount > 0
               ? " · "
               : ""}
@@ -299,6 +306,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     width: 210,
   },
+
   projectTitle: {
     width: 250,
   },
