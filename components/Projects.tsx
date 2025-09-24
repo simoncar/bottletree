@@ -285,8 +285,7 @@ const styles = StyleSheet.create({
   },
   outerView: {
     alignItems: "center",
-    borderBottomColor: "#CED0CE",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+
     flexDirection: "row",
     paddingVertical: 8,
     width: 350,
