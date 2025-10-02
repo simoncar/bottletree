@@ -7,12 +7,11 @@ import { ITask } from "@/lib/types";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   useColorScheme,
   View,
@@ -36,7 +35,6 @@ export default function Tasks() {
   const [tasksComplete, setTasksComplete] = useState<ITask[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
-  const inputRef = useRef<TextInput>(null);
   const { t } = useTranslation();
   const [collapsedSections, setCollapsedSections] = useState<{
     [key: string]: boolean;
@@ -253,11 +251,10 @@ export default function Tasks() {
           <ActivityIndicator />
         </View>
       ) : (
-        <View style={{ flex: 1 }}>
+        <View>
           <NestableScrollContainer>
             {tasksIncomplete.length > 0 && (
               <>
-                {renderSectionHeader(``, "incomplete")}
                 {!collapsedSections.incomplete && (
                   <View
                     style={[
@@ -308,7 +305,6 @@ export default function Tasks() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
   },
   keyboardView: {
@@ -392,7 +388,6 @@ const styles = StyleSheet.create({
   taskView: {
     borderRadius: 10,
     borderWidth: 10,
-    flex: 1,
     marginBottom: 5,
     marginHorizontal: 5,
     marginTop: 5,

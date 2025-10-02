@@ -1,5 +1,3 @@
-import { Platform } from "react-native";
-
 import { createUser } from "./APIuser";
 import {
   dbm,

@@ -90,7 +90,7 @@ const AddModal = ({
 
       console.log("handleAddFilePress2");
 
-      if (result.type != "cancel") {
+      if (result.type !== "cancel") {
         console.log("Selected files (modal):", result);
         uploadFilesAndCreateEntries(result, project, user);
         onClose();

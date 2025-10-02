@@ -296,6 +296,7 @@
     ],
     "i18n-ally.keystyle": "flat",
     "editor.wordWrap": "off",
+    "i18n-ally.extract.ignored": [" · ", " · ", "*"],
   },
   "launch": {
     "configurations": [

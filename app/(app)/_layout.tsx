@@ -192,7 +192,7 @@ export default function Layout() {
     );
   }
 
-  if (appLoading == false && fontsLoaded) {
+  if (appLoading === false && fontsLoaded) {
     SplashScreen.hideAsync();
 
     if (session) {

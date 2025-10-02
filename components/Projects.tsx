@@ -30,7 +30,6 @@ export const Projects = ({ session, archived }: Props) => {
   const { t } = useTranslation();
 
   const projectsRead = (projectsDB: IProject[]) => {
-    //loop through the projectsDB and split the array into two arrays based on the archived flag
     if (!projectsDB) {
       setProjects([]);
       setProjectsArchive([]);
@@ -78,7 +77,7 @@ export const Projects = ({ session, archived }: Props) => {
     obj: Record<string, number>,
     keyToFind: string,
   ): number {
-    if (obj == undefined) {
+    if (obj === undefined) {
       return 0;
     }
     const value = obj[keyToFind];
