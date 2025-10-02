@@ -255,6 +255,7 @@ export default function Tasks() {
           <NestableScrollContainer>
             {tasksIncomplete.length > 0 && (
               <>
+                {renderSectionHeader(``, "incomplete")}
                 {!collapsedSections.incomplete && (
                   <View
                     style={[
@@ -305,6 +306,7 @@ export default function Tasks() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 16,
   },
   keyboardView: {
