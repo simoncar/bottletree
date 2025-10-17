@@ -20,7 +20,7 @@ firestore-debug.log
 firebase-debug.log
 
 
-
+.firebase/*
 .firebase/hosting.*.cache
 builder-403d5-4f08a6a16867.json
 
