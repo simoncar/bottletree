@@ -2,7 +2,7 @@ import { FloatingButton } from "@/components/FloatingButton";
 import { ShortList } from "@/components/sComponent";
 import { Text } from "@/components/Themed";
 import Colors from "@/constants/Colors";
-import { editTask, getTasks, setTaskOrder } from "@/lib/APItasks";
+import { editTask, getTasks, setTaskOrder, getTasksSQL } from "@/lib/APItasks";
 import { ITask } from "@/lib/types";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -46,7 +46,8 @@ export default function Tasks() {
   const isWeb = Platform.OS === "web";
 
   useEffect(() => {
-    getTasks(project, (retrievedTasks) => {
+    if (!project) return;
+    getTasksSQL(project, (retrievedTasks) => {
       const incompleteTasks = retrievedTasks.filter((task) => !task.completed);
       const completeTasks = retrievedTasks.filter((task) => task.completed);
       setTasksIncomplete(incompleteTasks);
@@ -54,7 +55,7 @@ export default function Tasks() {
 
       setLoading(false);
     });
-  }, []);
+  }, [project]);
 
   const saveDone = () => {
     console.log("save Done");
