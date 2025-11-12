@@ -1,4 +1,4 @@
-import { Tabs, useLocalSearchParams, router } from "expo-router";
+import { Tabs, useLocalSearchParams } from "expo-router";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useContext, useEffect, useState } from "react";
@@ -12,7 +12,6 @@ import {
 import { UserAvatar } from "@/components/UserAvatar";
 import Colors from "@/constants/Colors";
 import { useSession } from "@/lib/ctx";
-import { Text } from "@/components/Themed";
 import { Back } from "@/components/Back";
 import { UserContext } from "@/lib/UserContext";
 import AddModal from "@/app/(app)/addModal";
@@ -28,12 +27,9 @@ function TabBarIcon({
   name: string;
   color: string;
   style?: any;
-  IconComponent?: React.ComponentType<{
-    name: string;
-    color: string;
-    size: number;
-  }>;
+  IconComponent?: React.ComponentType<any>;
 }) {
+  if (!IconComponent) return null;
   return (
     <IconComponent
       size={28}
@@ -122,7 +118,6 @@ export default function TabLayout() {
           name="calendar"
           options={{
             title: t("calendar"),
-
             tabBarIcon: ({ color }) => (
               <TabBarIcon
                 name="calendar"
