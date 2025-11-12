@@ -11,7 +11,7 @@ import {
   orderBy,
   writeBatch,
 } from "@/lib/firebase";
-import * as SQLite from "expo-sqlite";
+
 import { ITask } from "./types";
 
 type tasksRead = (tasks: ITask[]) => void;
@@ -151,115 +151,115 @@ export function cleanTask(task: ITask): ITask {
 }
 
 // SQLite version of getTasks for experimentation
-export async function getTasksSQL(project: string, callback: tasksRead) {
-  try {
-    const dbs = await SQLite.openDatabaseAsync("bottletree.db");
+// export async function getTasksSQL(project: string, callback: tasksRead) {
+//   try {
+//     const dbs = await SQLite.openDatabaseAsync("bottletree.db");
 
-    await dbs.execAsync(`
-      CREATE TABLE IF NOT EXISTS tasks (
-        key TEXT PRIMARY KEY,
-        task TEXT NOT NULL,
-        description TEXT,
-        projectId TEXT,
-        completed INTEGER DEFAULT 0,
-        created INTEGER,
-        modified INTEGER,
-        "order" INTEGER DEFAULT 1
-      );
-    `);
+//     await dbs.execAsync(`
+//       CREATE TABLE IF NOT EXISTS tasks (
+//         key TEXT PRIMARY KEY,
+//         task TEXT NOT NULL,
+//         description TEXT,
+//         projectId TEXT,
+//         completed INTEGER DEFAULT 0,
+//         created INTEGER,
+//         modified INTEGER,
+//         "order" INTEGER DEFAULT 1
+//       );
+//     `);
 
-    await dbs.runAsync("DELETE FROM tasks WHERE projectId = ?", [project]);
+//     await dbs.runAsync("DELETE FROM tasks WHERE projectId = ?", [project]);
 
-    const now = Date.now();
-    const testTasks = [
-      {
-        key: "test-task-1",
-        task: "Test Task 1",
-        description: "This is the first test task",
-        projectId: project,
-        completed: 0,
-        created: now,
-        modified: now,
-        order: 0,
-      },
-      {
-        key: "test-task-2",
-        task: "Test Task 2",
-        description: "This is the second test task",
-        projectId: project,
-        completed: 0,
-        created: now,
-        modified: now,
-        order: 1,
-      },
-      {
-        key: "test-task-3",
-        task: "Test Task 3 (Completed)",
-        description: "This task is already completed",
-        projectId: project,
-        completed: 1,
-        created: now - 86400000, // 1 day ago
-        modified: now - 3600000, // 1 hour ago
-        order: 2,
-      },
-    ];
+//     const now = Date.now();
+//     const testTasks = [
+//       {
+//         key: "test-task-1",
+//         task: "Test Task 1",
+//         description: "This is the first test task",
+//         projectId: project,
+//         completed: 0,
+//         created: now,
+//         modified: now,
+//         order: 0,
+//       },
+//       {
+//         key: "test-task-2",
+//         task: "Test Task 2",
+//         description: "This is the second test task",
+//         projectId: project,
+//         completed: 0,
+//         created: now,
+//         modified: now,
+//         order: 1,
+//       },
+//       {
+//         key: "test-task-3",
+//         task: "Test Task 3 (Completed)",
+//         description: "This task is already completed",
+//         projectId: project,
+//         completed: 1,
+//         created: now - 86400000, // 1 day ago
+//         modified: now - 3600000, // 1 hour ago
+//         order: 2,
+//       },
+//     ];
 
-    for (const testTask of testTasks) {
-      await dbs.runAsync(
-        `INSERT INTO tasks (key, task, description, projectId, completed, created, modified, "order") 
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          testTask.key,
-          testTask.task,
-          testTask.description,
-          testTask.projectId,
-          testTask.completed,
-          testTask.created,
-          testTask.modified,
-          testTask.order,
-        ],
-      );
-    }
+//     for (const testTask of testTasks) {
+//       await dbs.runAsync(
+//         `INSERT INTO tasks (key, task, description, projectId, completed, created, modified, "order")
+//          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+//         [
+//           testTask.key,
+//           testTask.task,
+//           testTask.description,
+//           testTask.projectId,
+//           testTask.completed,
+//           testTask.created,
+//           testTask.modified,
+//           testTask.order,
+//         ],
+//       );
+//     }
 
-    const result = await dbs.getAllAsync<{
-      key: string;
-      task: string;
-      description: string;
-      projectId: string;
-      completed: number;
-      created: number;
-      modified: number;
-      order: number;
-    }>(
-      "SELECT * FROM tasks WHERE projectId = ? ORDER BY completed ASC, 'order' ASC",
-      [project],
-    );
+//     const result = await dbs.getAllAsync<{
+//       key: string;
+//       task: string;
+//       description: string;
+//       projectId: string;
+//       completed: number;
+//       created: number;
+//       modified: number;
+//       order: number;
+//     }>(
+//       "SELECT * FROM tasks WHERE projectId = ? ORDER BY completed ASC, 'order' ASC",
+//       [project],
+//     );
 
-    const tasks: ITask[] = result.map((row) => ({
-      key: row.key,
-      task: row.task,
-      description: row.description ?? "",
-      projectId: row.projectId,
-      completed: Boolean(row.completed),
-      created: {
-        toMillis: () => row.created,
-        toDate: () => new Date(row.created),
-      } as any,
-      modified: {
-        toMillis: () => row.modified,
-        toDate: () => new Date(row.modified),
-      } as any,
-      order: row.order ?? 1,
-    }));
+//     const tasks: ITask[] = result.map((row) => ({
+//       key: row.key,
+//       task: row.task,
+//       description: row.description ?? "",
+//       projectId: row.projectId,
+//       completed: Boolean(row.completed),
+//       created: {
+//         toMillis: () => row.created,
+//         toDate: () => new Date(row.created),
+//       } as any,
+//       modified: {
+//         toMillis: () => row.modified,
+//         toDate: () => new Date(row.modified),
+//       } as any,
+//       order: row.order ?? 1,
+//     }));
 
-    callback(tasks);
+//     callback(tasks);
 
-    return () => {
-      console.log("SQLite: No active listener to unsubscribe");
-    };
-  } catch (error) {
-    console.error("Error in getTasksSQL:", error);
-    callback([]);
-    return () => {};
-  }
-}
+//     return () => {
+//       console.log("SQLite: No active listener to unsubscribe");
+//     };
+//   } catch (error) {
+//     console.error("Error in getTasksSQL:", error);
+//     callback([]);
+//     return () => {};
+//   }
+// }
