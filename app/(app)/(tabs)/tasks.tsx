@@ -47,7 +47,7 @@ export default function Tasks() {
 
   useEffect(() => {
     if (!project) return;
-    getTasksSQL(project, (retrievedTasks) => {
+    getTasks(project, (retrievedTasks) => {
       const incompleteTasks = retrievedTasks.filter((task) => !task.completed);
       const completeTasks = retrievedTasks.filter((task) => task.completed);
       setTasksIncomplete(incompleteTasks);
