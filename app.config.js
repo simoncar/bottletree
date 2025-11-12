@@ -82,6 +82,7 @@ module.exports = ({ config }) => {
         "expo-localization",
         "expo-web-browser",
         "expo-secure-store",
+        "expo-sqlite",
         "@react-native-firebase/app",
         "@react-native-firebase/auth",
         [

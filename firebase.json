@@ -40,7 +40,7 @@
   "hosting": {
     "target": "builder",
     "public": "dist",
-    "ignore": ["firebase.json", "**/.*"],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -55,6 +55,14 @@
             "key": "Content-Type",
             "value": "application/octet-stream"
           }
+        ]
+      },
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+          { "key": "Cross-Origin-Embedder-Policy", "value": "credentialless" },
+          { "key": "Cross-Origin-Resource-Policy", "value": "same-origin" }
         ]
       }
     ],

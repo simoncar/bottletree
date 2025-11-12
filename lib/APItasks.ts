@@ -57,6 +57,47 @@ export async function getTasks(project: string, callback: tasksRead) {
   return () => unsubscribe();
 }
 
+export async function getTasksLocal(project: string, callback: tasksRead) {
+  const tasksCollection = collection(
+    doc(collection(dbm, "projects"), project),
+    "tasks",
+  );
+
+  const unsubscribe = onSnapshot(tasksCollection, (querySnapshot) => {
+    const allTasks: ITask[] = [];
+    querySnapshot?.forEach((docSnap) => {
+      const data = docSnap.data();
+      allTasks.push({
+        key: docSnap.id,
+        task: data.task ?? "",
+        description: data.description ?? "",
+        projectId: data.projectId,
+        completed: data.completed,
+        created: data.created,
+        modified: data.modified,
+        order: data.order ?? 1,
+      });
+    });
+
+    const incompleteTasks = allTasks.filter((task) => !task.completed);
+    const completedTasks = allTasks.filter((task) => task.completed);
+
+    // Sort incomplete tasks by order
+    incompleteTasks.sort((a, b) => a.order - b.order);
+
+    // Sort completed tasks by modified date, descending
+    completedTasks.sort((a, b) => {
+      if (a.modified && b.modified) {
+        return b.modified.toMillis() - a.modified.toMillis();
+      }
+      return 0;
+    });
+
+    callback([...incompleteTasks, ...completedTasks]);
+  });
+  return () => unsubscribe();
+}
+
 export async function addTask(project: string, task: ITask, callback: any) {
   const tasksCollection = collection(
     doc(collection(dbm, "projects"), project),
