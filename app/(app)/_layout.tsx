@@ -20,8 +20,6 @@ import {
   Stack,
   useLocalSearchParams,
   useNavigationContainerRef,
-  usePathname,
-  useSegments,
 } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -105,15 +103,12 @@ export default function Layout() {
   useNotificationObserver(); // Ensure this hook is always called
 
   const { posts } = useLocalSearchParams<SearchParams>();
-  const localParams = useLocalSearchParams();
   useAsyncStorageDevTools();
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(navigationRef);
   const { user, setUser } = useContext(UserContext);
   const { session, isAuthLoading } = useSession();
   const [appLoading, setAppLoading] = useState(true);
-  const currentPath = usePathname();
-  const segments = useSegments();
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
 

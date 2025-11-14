@@ -6,10 +6,9 @@ import { addLog } from "@/lib/APIlog";
 import { mergeUser, updateAccountName } from "@/lib/APIuser";
 import { useSession } from "@/lib/ctx";
 import { auth } from "@/lib/firebase";
-import { UserContext } from "@/lib/UserContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Stack, router } from "expo-router";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, useColorScheme } from "react-native";
 
@@ -20,13 +19,12 @@ export default function SignIn() {
   const [secureEntry, setSecureEntry] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const { signUp } = useSession();
-  const { user, setUser } = useContext(UserContext);
   const colorScheme = useColorScheme();
   const oldUid = auth.currentUser?.uid;
   const { t } = useTranslation();
 
   const signUpCallback = async (user, error) => {
-    if (error == "SignUp Success") {
+    if (error === "SignUp Success") {
       console.log("signUpCallback Success:", user);
 
       updateAccountName(user.uid, user.displayName); //firebease auth update function
@@ -76,7 +74,7 @@ export default function SignIn() {
   };
 
   const renderAction = (errorMessage: string) => {
-    if (errorMessage == "SignUp Success") {
+    if (errorMessage === "SignUp Success") {
       return;
     } else {
       return (
