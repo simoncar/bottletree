@@ -24,7 +24,10 @@ export const About = () => {
             params: { uid: session },
           }}
         >
-          <Text style={styles.version}>Name : {user.displayName}</Text>
+          <Text style={styles.version}>
+            {" "}
+            {t("user")}: {user.displayName}
+          </Text>
         </Link>
         <Text style={styles.version}>
           {t("email")}: {user.email}
@@ -39,7 +42,9 @@ export const About = () => {
         <Text style={styles.version}>User Context - {user.uid}</Text>
         <Text style={styles.version}>CTX - {session}</Text>
         <Text style={styles.version}>Auth - {auth.currentUser?.uid}</Text>
-        <Text style={styles.version}>Project - {user.project}</Text>
+        <Text style={styles.version}>
+          {t("project")} - {user.project}
+        </Text>
         <Text style={styles.version}>Push - {user.pushToken}</Text>
       </View>
     );

@@ -167,7 +167,7 @@ export default function Layout() {
         setAppLoading(false);
       }
     }
-  }, [session, isAuthLoading]);
+  }, [session, isAuthLoading, setUser]);
 
   useEffect(() => {
     if (fontsLoaded) {
