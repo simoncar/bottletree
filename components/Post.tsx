@@ -5,12 +5,11 @@ import { router } from "expo-router";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, useColorScheme, View } from "react-native";
 import Comments from "./PostComments";
-import PostImage from "./Image";
+import { PostImage } from "./Image";
 
 const Post = (props) => {
   const colorScheme = useColorScheme();
   const [commentShow, setCommentShow] = useState(false);
-  const [activeImage, setActiveImage] = useState(0);
   const { post } = props;
 
   const imageUrls = post.images && post.images.map((image) => image);
