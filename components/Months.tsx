@@ -76,7 +76,7 @@ export const MonthYearScroller: React.FC<Props> = ({
         animated: false,
       });
     }
-  }, [itemWidth, currentMonthYear]);
+  }, [itemWidth, currentMonthYear, currentIndex]);
 
   useEffect(() => {
     if (currentMonthYear) {
