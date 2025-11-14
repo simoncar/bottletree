@@ -1,4 +1,3 @@
-import { Back } from "@/components/Back";
 import { Text, TextInput, View } from "@/components/Themed";
 import Colors from "@/constants/Colors";
 import { addTask, editTask } from "@/lib/APItasks";

@@ -17,7 +17,6 @@ type ShareParams = {
 const ShareLink = () => {
   const { project, title } = useLocalSearchParams<ShareParams>();
   const colorScheme = useColorScheme();
-  const [copiedText, setCopiedText] = React.useState("");
   const { t } = useTranslation();
 
   const CopyLinkButton = () => {
@@ -29,7 +28,8 @@ const ShareLink = () => {
         ]}
         onPress={() => {
           Clipboard.setStringAsync("https://b.otbapps.com/" + project);
-        }}>
+        }}
+      >
         <FontAwesome6 name="copy" color="#999999" style={styles.avatarIcon} />
         <Text style={styles.shareButton}>{t("copy")}</Text>
       </TouchableOpacity>
@@ -41,7 +41,8 @@ const ShareLink = () => {
       style={[
         styles.container,
         { backgroundColor: Colors[colorScheme ?? "light"].background },
-      ]}>
+      ]}
+    >
       <View style={styles.shareInstructions}>
         <Text style={styles.instructions}>{t("shareDescription")}</Text>
 
@@ -54,7 +55,8 @@ const ShareLink = () => {
         style={[
           styles.qrcodeContainer,
           { borderColor: Colors[colorScheme ?? "light"].text },
-        ]}>
+        ]}
+      >
         <View style={styles.qrcode}>
           <QRCode
             size={200}

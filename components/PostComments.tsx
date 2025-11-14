@@ -1,19 +1,6 @@
 import Colors from "@/constants/Colors";
 import { addComment, getComments } from "@/lib/APIpost";
-import {
-  firestore,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-  serverTimestamp,
-  setDoc,
-} from "@/lib/firebase";
+import { serverTimestamp } from "@/lib/firebase";
 import { IComment } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -42,22 +29,22 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     getComments(project, post).then((comments) => {
       setComments(comments);
     });
-  }, []);
+  }, [project, post]);
 
   useEffect(() => {
     getComments(project, post).then((comments) => {
       setComments(comments);
       setSaved(false);
     });
-  }, [saved]);
+  }, [project, post, saved]);
 
   useEffect(() => {
-    if (commentShow == true) {
+    if (commentShow === true) {
       setComment(null);
     }
   }, [commentShow]);
 
-  const saveDone = (comment: IComment) => {
+  const saveDone = (comment: IComment | string) => {
     setSaved(true);
     setComment("");
   };
@@ -75,9 +62,6 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   };
 
   const displayName = (displayName: string) => {
-    if (project == "welcome") {
-      return "";
-    }
     const replacedString = displayName.replace(/ /g, " #");
     return "#" + replacedString + " ";
   };
@@ -117,7 +101,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
     let bubbleBackgroundColor =
       Colors[colorScheme ?? "light"].bubbleBackgroundColorOther;
     let bubbbleTextColor = Colors[colorScheme ?? "light"].bubbleTextColorOther;
-    if (item.displayName == user.displayName) {
+    if (item.displayName === user.displayName) {
       bubbleBackgroundColor =
         Colors[colorScheme ?? "light"].bubbleBackgroundColorMe;
       bubbbleTextColor = Colors[colorScheme ?? "light"].bubbleTextColorMe;
@@ -144,8 +128,7 @@ const Comments = ({ project, post, commentShow, setCommentShow }: Props) => {
   return (
     <View style={styles.commentsOverall}>
       <FlatList data={comments} renderItem={({ item }) => renderBubble(item)} />
-
-      {project != "welcome" && renderInput()}
+      {renderInput()}
     </View>
   );
 };
