@@ -13,14 +13,14 @@ type Props = {
   initialYear?: number;
   range?: number; // how many years before and after the initialYear to show
   onSelect?: (monthIndex: number, year: number) => void;
-  currentMonthYear?: { month: number; year: number }; // new prop
+  currentMonthYear?: { month: number; year: number };
 };
 
 export const MonthYearScroller: React.FC<Props> = ({
   initialYear = new Date().getFullYear(),
   range = 5,
   onSelect,
-  currentMonthYear, // new prop
+  currentMonthYear,
 }) => {
   const [selectedMonthIndex, setSelectedMonthIndex] = useState(
     new Date().getMonth(),
@@ -56,13 +56,11 @@ export const MonthYearScroller: React.FC<Props> = ({
     }
   }
 
-  // Find the current index of the selected month/year
   const currentIndex = items.findIndex(
     (item) =>
       item.year === selectedYear && item.monthIndex === selectedMonthIndex,
   );
 
-  // We'll store item width after layout to accurately scroll
   const [itemWidth, setItemWidth] = useState<number | null>(null);
 
   const handleSelect = (item: { year: number; monthIndex: number }) => {
@@ -72,8 +70,6 @@ export const MonthYearScroller: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    // Once we know the item width, scroll to currentIndex
-
     if (itemWidth && currentIndex >= 0) {
       scrollRef.current?.scrollTo({
         x: currentIndex * (itemWidth + 20), // itemWidth + (2 * marginHorizontal=10)
@@ -102,12 +98,14 @@ export const MonthYearScroller: React.FC<Props> = ({
         flexDirection: "row",
         alignItems: "center",
         paddingVertical: 5,
-      }}>
+      }}
+    >
       <ScrollView
         ref={scrollRef}
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContainer}>
+        contentContainerStyle={styles.scrollContainer}
+      >
         {items.map((item, idx) => {
           const isSelected =
             item.monthIndex === selectedMonthIndex &&
@@ -117,16 +115,16 @@ export const MonthYearScroller: React.FC<Props> = ({
               key={`month-${idx}`}
               onPress={() => handleSelect(item)}
               onLayout={idx === 0 ? onItemLayout : undefined}
-              style={[styles.itemContainer, isSelected && styles.selectedItem]}>
+              style={[styles.itemContainer, isSelected && styles.selectedItem]}
+            >
               <Text
-                style={[styles.itemText, isSelected && styles.selectedText]}>
+                style={[styles.itemText, isSelected && styles.selectedText]}
+              >
                 {item.label}
               </Text>
               <Text
-                style={[
-                  styles.itemYearText,
-                  isSelected && styles.selectedText,
-                ]}>
+                style={[styles.itemYearText, isSelected && styles.selectedText]}
+              >
                 {item.year}
               </Text>
             </TouchableOpacity>
