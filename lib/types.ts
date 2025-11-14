@@ -128,8 +128,8 @@ export interface ITask {
   description?: string;
   projectId: string;
   completed: boolean;
-  created?: Timestamp | FieldValue;
-  modified?: Timestamp | FieldValue;
+  created?: Timestamp;
+  modified?: Timestamp;
   order?: number;
 }
 
