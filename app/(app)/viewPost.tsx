@@ -1,7 +1,6 @@
 import React from "react";
 import {
   StyleSheet,
-  Dimensions,
   View,
   useColorScheme,
   Pressable,
