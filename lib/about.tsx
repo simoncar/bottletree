@@ -6,10 +6,12 @@ import * as Application from "expo-application";
 import { Link } from "expo-router";
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
 export const About = () => {
   const { user } = useContext(UserContext);
   const { session } = useSession();
+  const { t } = useTranslation();
 
   if (null == user) {
     return <View />;
@@ -22,9 +24,11 @@ export const About = () => {
             params: { uid: session },
           }}
         >
-          <Text style={styles.version}>Name: {user.displayName}</Text>
+          <Text style={styles.version}>Name : {user.displayName}</Text>
         </Link>
-        <Text style={styles.version}>Email: {user.email}</Text>
+        <Text style={styles.version}>
+          {t("email")}: {user.email}
+        </Text>
         <Text style={styles.version}>
           Anonymous: {auth.currentUser?.isAnonymous}
         </Text>
