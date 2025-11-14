@@ -275,6 +275,23 @@ export default function EditUser() {
         </View>
       )}
 
+      <View style={styles.outerView}>
+        <TouchableOpacity
+          key={"language"}
+          onPress={() => router.navigate("/language")}
+        >
+          <View style={styles.leftContent}>
+            <MaterialCommunityIcons
+              name="translate"
+              size={25}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+            <Text style={styles.settingName}>{t("language")}</Text>
+          </View>
+          <View style={styles.rightChevron}></View>
+        </TouchableOpacity>
+      </View>
+
       <TouchableOpacity
         key={"deleteAccount"}
         onPress={() =>

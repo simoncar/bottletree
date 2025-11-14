@@ -77,13 +77,17 @@ const styles = StyleSheet.create({
     borderBottomColor: "#CED0CE",
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
+    height: 80,
     paddingVertical: 8,
+    padding: 8,
   },
   outerViewLast: {
     alignItems: "center",
     borderBottomColor: "#CED0CE",
     flexDirection: "row",
+    height: 80,
     paddingVertical: 8,
+    padding: 8,
   },
   rightChevron: {
     marginHorizontal: 8,

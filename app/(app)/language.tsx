@@ -6,6 +6,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { IUser } from "@/lib/types";
 import { UserContext } from "@/lib/UserContext";
+import { useTranslation } from "react-i18next";
+import { updateUser } from "@/lib/APIuser";
 
 interface TProps {
   navigation: any;
@@ -13,7 +15,9 @@ interface TProps {
 
 export default function SelectLanguage(props: TProps) {
   let language = "en";
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const { i18n } = useTranslation();
+
   const getStyle = (pass: string) => {
     if (language === pass) {
       return styles.imageStyleCheckOn;
@@ -22,13 +26,12 @@ export default function SelectLanguage(props: TProps) {
     }
   };
 
-  const changeLanguage = (newLanguage: string) => {
-    //setLanguage(newLanguage);
-    //I18n.locale = newLanguage;
-
-    router.navigate({
-      pathname: "/app/user",
-    });
+  const changeLanguage = async (newLanguage: string) => {
+    await i18n.changeLanguage(newLanguage);
+    const updatedUser = { ...user, language: newLanguage };
+    setUser(updatedUser);
+    await updateUser(updatedUser);
+    router.back();
   };
 
   const loggedInUser: IUser = user;
@@ -45,6 +48,12 @@ export default function SelectLanguage(props: TProps) {
           title="English"
           onPress={() => changeLanguage("en")}
           icon={<MaterialCommunityIcons name="check" style={getStyle("en")} />}
+        />
+        <SettingsListItem
+          hasNavArrow={false}
+          title="Español"
+          onPress={() => changeLanguage("es")}
+          icon={<MaterialCommunityIcons name="check" style={getStyle("es")} />}
         />
         <SettingsListItem
           hasNavArrow={false}
@@ -70,12 +79,7 @@ export default function SelectLanguage(props: TProps) {
           onPress={() => changeLanguage("ko")}
           icon={<MaterialCommunityIcons name="check" style={getStyle("ko")} />}
         />
-        <SettingsListItem
-          hasNavArrow={false}
-          title="Español"
-          onPress={() => changeLanguage("es")}
-          icon={<MaterialCommunityIcons name="check" style={getStyle("es")} />}
-        />
+
         <SettingsListItem
           hasNavArrow={false}
           title="Português"
