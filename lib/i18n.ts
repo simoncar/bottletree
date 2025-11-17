@@ -10,9 +10,6 @@ import ja from "@/locales/ja.json";
 import ko from "@/locales/ko.json";
 import id from "@/locales/id.json";
 
-// the translations
-// (tip move them in a JSON file and import them,
-// or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
   en: {
     translation: en,
@@ -50,5 +47,5 @@ i18n.use(initReactI18next).init({
 });
 
 console.log("i18n initialized with language:", i18n.language);
-//
+
 export default i18n;

@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { getUser } from "@/lib/APIuser";
 import { useSession } from "@/lib/ctx";
 import { IUser } from "@/lib/types";
+import i18n from "@/lib/i18n";
 
 interface UserContextType {
   user: IUser | null;
@@ -32,6 +33,12 @@ const UserProvider = (props: React.PropsWithChildren) => {
       if (userData) {
         setUser(userData);
         setIsUserSet(true);
+
+        // Set language from user preference if it exists
+        if (userData.language) {
+          await i18n.changeLanguage(userData.language);
+          console.log("Language set from user preference:", userData.language);
+        }
       }
       // } catch (error) {
       //  console.error("Error fetching user data inside createContext:", error);

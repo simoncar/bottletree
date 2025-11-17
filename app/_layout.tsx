@@ -11,7 +11,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
 import Toast from "react-native-toast-message";
 
-
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
 });
@@ -28,7 +27,6 @@ if (!__DEV__ && (Platform.OS === "android" || Platform.OS === "ios")) {
     enableNativeFramesTracking: !isRunningInExpoGo(), // Tracks slow and frozen frames in the application
   });
 }
-
 
 console.log("/app/_layout.tsx , setup sentry and navigationIntegration");
 
