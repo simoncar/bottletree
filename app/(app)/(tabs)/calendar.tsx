@@ -5,10 +5,7 @@ import { getItemsBigCalendar } from "@/lib/APIcalendar";
 import { demoDataForDemoProject } from "@/lib/demoProject";
 import { CustomCalendarEvent } from "@/lib/types";
 import { FontAwesome5 } from "@expo/vector-icons";
-import dayjs from "dayjs";
-import "dayjs/locale/en";
-import "dayjs/locale/es";
-import * as Localization from "expo-localization";
+import i18n, { dayjs } from "@/lib/i18n";
 import {
   router,
   Stack,
@@ -205,7 +202,7 @@ export default function CalendarLarge() {
         eventMinHeightForMonthView={25}
         maxVisibleEventCount={10}
         swipeEnabled={false}
-        locale={Localization.getLocales()[0]?.languageCode || "en"}
+        locale={i18n.language}
       />
     </ScrollView>
   );
