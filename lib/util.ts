@@ -1,5 +1,4 @@
-import relativeTime from "dayjs/plugin/relativeTime";
-import dayjs from "dayjs";
+import i18n, { dayjs } from "@/lib/i18n";
 
 export function parseLinks(text: string) {
   const urlRegex = /(https?:\/\/(?:www\.)?[^\s]+)/g;
@@ -23,8 +22,18 @@ export function removeFirebaseWord(errorString) {
 
 export function getRelativeTime(timestamp: number) {
   if (timestamp) {
-    dayjs.extend(relativeTime);
-    return dayjs(timestamp).fromNow();
+    // Ensure dayjs uses the current i18n language
+    dayjs.locale(i18n.language);
+    const relativeTime = dayjs(timestamp).fromNow();
+    console.log(
+      "Current i18n language:",
+      i18n.language,
+      "dayjs locale:",
+      dayjs.locale(),
+      "RelativeTime:",
+      relativeTime,
+    );
+    return relativeTime;
   } else {
     return "";
   }
