@@ -19,8 +19,6 @@ export default function SignIn() {
   const [secureEntry, setSecureEntry] = useState(true);
   const [showSignIn, setShowSignIn] = useState(false);
   const colorScheme = useColorScheme();
-  const welcomeMarginTop = useSharedValue(100);
-  const welcomeFontSize = useSharedValue(50);
   const { t } = useTranslation();
 
   const errorMessage = (errorCode: string) => {
@@ -171,15 +169,6 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    backgroundColor: "#F9D96B",
-    borderRadius: 10,
-    height: 50,
-    justifyContent: "center",
-    marginBottom: 10,
-    width: 300,
-  },
   updateContainer: {
     width: "80%",
   },

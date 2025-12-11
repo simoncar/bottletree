@@ -14,6 +14,7 @@ import { setPostNote, getPost } from "@/lib/APIpost";
 import Colors from "@/constants/Colors";
 import { UserContext } from "@/lib/UserContext";
 import { Back } from "@/components/Back";
+import { t } from "i18next";
 
 export default function Note() {
   const local = useLocalSearchParams<{
@@ -50,7 +51,7 @@ export default function Note() {
   };
 
   const save = () => {
-    if (post.key == "") {
+    if (post.key === "") {
       post.key = "post_" + Date.now();
     }
 
@@ -68,7 +69,7 @@ export default function Note() {
                 save();
               }}
             >
-              <Text>Done</Text>
+              <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
         }}

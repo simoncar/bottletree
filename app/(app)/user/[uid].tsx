@@ -288,7 +288,7 @@ export default function EditUser() {
             />
             <Text style={styles.settingName}>{t("language")}</Text>
           </View>
-          <View style={styles.rightChevron}></View>
+          <View style={styles.rightChevron}>≠</View>
         </TouchableOpacity>
       </View>
 

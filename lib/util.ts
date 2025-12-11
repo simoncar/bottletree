@@ -46,7 +46,6 @@ export function parseImages(images: string[]) {
     return [];
   }
 
-  //firstly check if the images are already parsed
   if (
     images[0] &&
     typeof images[0] === "object" &&

@@ -1,12 +1,10 @@
-// TypeScript
 import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router, Stack, useLocalSearchParams } from "expo-router";
-import { editTask } from "@/lib/APItasks";
 import Colors from "@/constants/Colors";
 import { IFile } from "@/lib/types";
-import { Text, TextInput, View } from "@/components/Themed";
+import { Text, View } from "@/components/Themed";
 import { useTranslation } from "react-i18next";
 import OpenFileButton from "@/components/OpenFileButton";
 

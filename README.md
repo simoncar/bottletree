@@ -60,8 +60,7 @@ git log --pretty=format:"[%ad] %s" --date=short > commit_messages.txt
 npx expo install expo@latest --fix
 npx sentry-expo-upload-sourcemaps dist
 
-
- - May result in mixed architectures in rubygems (eg: ffi_c.bundle files may be x86_64 with an arm64 interpreter)
-[INSTALL_PODS] [!] Run "env /usr/bin/arch -arm64 /bin/bash --login" then try again.
-[INSTALL_PODS] [!] React-Core-prebuilt has added 1 script phase. Please inspect befor
-env /usr/bin/arch -arm64 /bin/bash --logi
+- May result in mixed architectures in rubygems (eg: ffi_c.bundle files may be x86_64 with an arm64 interpreter)
+  [INSTALL_PODS] [!] Run "env /usr/bin/arch -arm64 /bin/bash --login" then try again.
+  [INSTALL_PODS] [!] React-Core-prebuilt has added 1 script phase. Please inspect befor
+  env /usr/bin/arch -arm64 /bin/bash --logi

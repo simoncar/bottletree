@@ -18,6 +18,7 @@ import { addImageFromCameraRoll } from "@/lib/APIimage";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Toast from "react-native-toast-message";
 import { ImageGrid } from "@/components/Image";
+import { t } from "i18next";
 
 export default function EditPost() {
   const colorScheme = useColorScheme();
@@ -100,7 +101,7 @@ export default function EditPost() {
                 save();
               }}
             >
-              <Text>Done</Text>
+              <Text>{t("done")}</Text>
             </TouchableOpacity>
           ),
         }}
