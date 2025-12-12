@@ -21,6 +21,10 @@ npx expo start --host localhost -c
 
 yarn test
 
+npm i -g eas-cli
+npx expo install expo@^54.0.0 --fix
+npx expo-doctor@latest
+
 ------ development build -------
 
 npx expo install expo@latest --fix

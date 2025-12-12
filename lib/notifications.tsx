@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useSession } from "@/lib/ctx";
-import { auth } from "@/lib/firebase";
 import { UserContext } from "@/lib/UserContext";
 import { registerForPushNotificationsAsync } from "./APINotification";
 import Constants from "expo-constants";
@@ -26,11 +25,8 @@ export const Notifications = () => {
   } else {
     return (
       <View style={styles.aboutContainer}>
-        <Text style={styles.version}>Notifications</Text>
-        <Text style={styles.version}>
-          Your Expo push token: {expoPushToken}
-        </Text>
-        <Text style={styles.version}>Your Expo project ID: {projectId}</Text>
+        <Text style={styles.version}>{expoPushToken}</Text>
+        <Text style={styles.version}>{projectId}</Text>
       </View>
     );
   }
