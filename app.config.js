@@ -94,20 +94,22 @@ module.exports = ({ config }) => {
             },
           },
         ],
-        "expo-font",
-        {
-          fonts: [
-            "node_modules/@expo-google-fonts/inter/900Black/Inter_900Black.ttf",
-            "node_modules/@expo-google-fonts/inter/200ExtraLight/Inter_200ExtraLight.ttf",
-            "node_modules/@expo-google-fonts/inter/300Light/Inter_300Light.ttf",
-            "node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf",
-            "node_modules/@expo-google-fonts/inter/500Medium/Inter_500Medium.ttf",
-            "node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf",
-            "node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf",
-            "node_modules/@expo-google-fonts/inter/100Thin/Inter_100Thin.ttf",
-            "node_modules/@expo-google-fonts/montserrat-subrayada/MontserratSubrayada_400Regular.ttf",
-          ],
-        },
+        [
+          "expo-font",
+          {
+            fonts: [
+              "node_modules/@expo-google-fonts/inter/900Black/Inter_900Black.ttf",
+              "node_modules/@expo-google-fonts/inter/200ExtraLight/Inter_200ExtraLight.ttf",
+              "node_modules/@expo-google-fonts/inter/300Light/Inter_300Light.ttf",
+              "node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf",
+              "node_modules/@expo-google-fonts/inter/500Medium/Inter_500Medium.ttf",
+              "node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf",
+              "node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf",
+              "node_modules/@expo-google-fonts/inter/100Thin/Inter_100Thin.ttf",
+              "node_modules/@expo-google-fonts/montserrat-subrayada/MontserratSubrayada_400Regular.ttf",
+            ],
+          },
+        ],
         [
           "expo-image-picker",
           {
