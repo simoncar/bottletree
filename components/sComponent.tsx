@@ -24,7 +24,8 @@ export function Button(props) {
       <TouchableOpacity
         style={[styles.submitButtonStyle, style]}
         activeOpacity={0.5}
-        onPress={rest.onPress}>
+        onPress={rest.onPress}
+      >
         <Text style={[styles.defaultStyle, style]}>{rest.title}</Text>
       </TouchableOpacity>
     </View>
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   defaultStyle: {
-    fontFamily: "Nunito_400Regular",
     fontSize: 17,
   },
   submitButtonStyle: {

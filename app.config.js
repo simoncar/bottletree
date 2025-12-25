@@ -109,10 +109,6 @@ module.exports = ({ config }) => {
               "node_modules/@expo-google-fonts/inter/800ExtraBold/Inter_800ExtraBold.ttf",
               "node_modules/@expo-google-fonts/montserrat-subrayada/MontserratSubrayada_400Regular.ttf",
               "node_modules/@expo-google-fonts/montserrat-subrayada/MontserratSubrayada_700Bold.ttf",
-              // Space Mono (used by StyledText)
-              "node_modules/@expo-google-fonts/space-mono/SpaceMono_400Regular.ttf",
-              // Nunito (used by sComponent)
-              "node_modules/@expo-google-fonts/nunito/Nunito_400Regular.ttf",
             ],
           },
         ],
