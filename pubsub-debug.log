@@ -7,3 +7,5 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 Dec 13, 2025 6:43:52 PM com.google.cloud.pubsub.testing.v1.Main main
 INFO: Server started, listening on 8087
+*** shutting down gRPC server since JVM is shutting down
+*** server shut down
