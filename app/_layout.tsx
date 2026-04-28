@@ -1,10 +1,10 @@
-import { SessionProvider, useSession } from "@/lib/ctx";
+import { SessionProvider } from "@/lib/ctx";
 import i18n from "@/lib/i18n";
-import { UserContext, UserProvider } from "@/lib/UserContext";
+import { UserProvider } from "@/lib/UserContext";
 import * as Sentry from "@sentry/react-native";
 import { isRunningInExpoGo } from "expo";
 import { Slot, useNavigationContainerRef } from "expo-router";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -15,7 +15,10 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: !__DEV__ && !isRunningInExpoGo(),
 });
 
-if (!__DEV__ && (Platform.OS === "android" || Platform.OS === "ios")) {
+const isSentryEnabled =
+  !__DEV__ && (Platform.OS === "android" || Platform.OS === "ios");
+
+if (isSentryEnabled) {
   Sentry.init({
     dsn: "https://4cc712a1ef2d35c86d74ca35e9aa8bed@o4505363191955456.ingest.us.sentry.io/4506092928827392",
     debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
@@ -32,11 +35,9 @@ console.log("/app/_layout.tsx , setup sentry and navigationIntegration");
 
 function RootLayout() {
   const ref = useNavigationContainerRef();
-  const { session, isAuthLoading } = useSession();
-  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (ref?.current && !__DEV__) {
+    if (ref?.current && isSentryEnabled) {
       navigationIntegration.registerNavigationContainer(ref);
     }
   }, [ref]);
@@ -57,4 +58,4 @@ function RootLayout() {
   );
 }
 
-export default Sentry.wrap(RootLayout);
+export default isSentryEnabled ? Sentry.wrap(RootLayout) : RootLayout;

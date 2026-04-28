@@ -8,7 +8,7 @@ module.exports = ({ config }) => {
     expo: {
       name: isDev ? "One Build DEV" : "One Build",
       slug: "bottletree",
-      version: "25.11.502",
+      version: "55.1.1",
       orientation: "default",
       icon: "./assets/images/icon.png",
       scheme: "bottletree",
@@ -83,6 +83,10 @@ module.exports = ({ config }) => {
         "expo-web-browser",
         "expo-secure-store",
         "expo-sqlite",
+        "@react-native-community/datetimepicker",
+        "@sentry/react-native",
+        "expo-image",
+        "expo-sharing",
         "@react-native-firebase/app",
         "@react-native-firebase/auth",
         [
