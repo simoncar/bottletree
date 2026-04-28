@@ -8,7 +8,7 @@ module.exports = ({ config }) => {
     expo: {
       name: isDev ? "One Build DEV" : "One Build",
       slug: "bottletree",
-      version: "55.1.1",
+      version: "55.2.1",
       orientation: "default",
       icon: "./assets/images/icon.png",
       scheme: "bottletree",
@@ -38,7 +38,11 @@ module.exports = ({ config }) => {
         },
         edgeToEdgeEnabled: true,
         package: process.env.ANDROID_PACKAGE || "co.simon.bottletree",
-        permissions: ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
+        blockedPermissions: [
+          "android.permission.READ_MEDIA_AUDIO",
+          "android.permission.READ_MEDIA_IMAGES",
+          "android.permission.READ_MEDIA_VIDEO",
+        ],
         intentFilters: [
           {
             action: "VIEW",
