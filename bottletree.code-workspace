@@ -290,10 +290,14 @@
       },
     ],
     "i18n-ally.localesPaths": [
-      "locales",
-      "ios/Pods/RCT-Folly/folly/lang",
-      "ios/Pods/boost/boost/predef/language",
-    ],
+		"locales",
+		"ios/Pods/RCT-Folly/folly/lang",
+		"ios/Pods/boost/boost/predef/language",
+		"ios/Pods/ReactNativeDependencies/Headers/folly/lang",
+		"ios/Pods/Headers/Private/ReactNativeDependencies/folly/lang",
+		"ios/Pods/Headers/Public/ReactNativeDependencies/folly/lang",
+		"ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/Headers/folly/lang"
+	],
     "i18n-ally.keystyle": "flat",
     "editor.wordWrap": "off",
     "i18n-ally.extract.ignored": [" · ", " · ", "*"],

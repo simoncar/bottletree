@@ -77,6 +77,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginRight: 8,
   },
+  avatarIcon2: {
+    fontSize: 20,
+    marginRight: 8,
+  },
   qrcodeContainer: {
     alignItems: "center",
     justifyContent: "center",

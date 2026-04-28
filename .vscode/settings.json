@@ -1,3 +1,4 @@
 {
-  "eslint.rules.customizations": []
+  "eslint.rules.customizations": [],
+  "i18n-ally.localesPaths": ""
 }

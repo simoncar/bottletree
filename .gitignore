@@ -23,6 +23,8 @@ coverage/**/*
 firestore-debug.log
 firebase-debug.log
 builder-403d5-4f08a6a16867.json
+firestore-export-directory/
+pubsub-debug.log
 
 # Native / signing
 *.jks
@@ -46,3 +48,4 @@ builder-403d5-4f08a6a16867.json
 # Platform folders
 android/
 ios/
+
