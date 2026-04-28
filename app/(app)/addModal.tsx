@@ -124,26 +124,6 @@ const AddModal = ({
           <Pressable
             style={styles.option}
             onPress={() => {
-              router.navigate({
-                pathname: "/note",
-                params: {
-                  project: project,
-                  post: "",
-                },
-              });
-              onClose();
-            }}
-          >
-            <Text style={styles.optionText}>{t("addNote")}</Text>
-            <FontAwesome
-              name="sticky-note-o"
-              size={24}
-              color={Colors[colorScheme ?? "light"].text}
-            />
-          </Pressable>
-          <Pressable
-            style={styles.option}
-            onPress={() => {
               onClose();
               router.navigate({
                 pathname: "/camera",
@@ -171,6 +151,26 @@ const AddModal = ({
             <Text style={styles.optionText}>{t("addFromCameraRoll")}</Text>
             <MaterialIcons
               name="camera-roll"
+              size={24}
+              color={Colors[colorScheme ?? "light"].text}
+            />
+          </Pressable>{" "}
+          <Pressable
+            style={styles.option}
+            onPress={() => {
+              router.navigate({
+                pathname: "/note",
+                params: {
+                  project: project,
+                  post: "",
+                },
+              });
+              onClose();
+            }}
+          >
+            <Text style={styles.optionText}>{t("addNote")}</Text>
+            <FontAwesome
+              name="sticky-note-o"
               size={24}
               color={Colors[colorScheme ?? "light"].text}
             />
